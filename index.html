@@ -241,6 +241,7 @@ button:active{transform:scale(.97)}
 .tag .ti{margin-right:3px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 .card:not(.explain) .xp{display:none!important}
+.jr-q{font-size:1.25rem;font-weight:700;line-height:1.35}.jr-done{font-weight:700;color:var(--calm)}#jrIn{width:100%}
 .qbtn{flex:none;width:26px;height:26px;padding:0;border-radius:50%;font-size:.8rem;font-weight:700;color:var(--muted);display:inline-grid;place-items:center;margin-left:2px}
 .card.explain .qbtn{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .brand{font-family:var(--display);font-size:1rem;color:var(--calm);display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
@@ -280,6 +281,11 @@ button:active{transform:scale(.97)}
     <div class="card now" id="nowCard"></div>
     <div class="row" style="gap:10px"><button class="scroll-btn" id="caughtBtn" style="flex:1;min-width:150px">📱 I caught myself scrolling</button><button class="scroll-btn" id="restBtn" style="flex:1;min-width:150px;border-color:var(--calm);background:var(--calm-soft)">😴 I'm tired / resting</button></div>
     <div class="card" id="planNowCard"></div>
+    <div class="card" id="jrCard">
+      <h2><span class="h2i" aria-hidden="true">🌙</span>Today's reflection</h2>
+      <p class="small muted">One question a day. Muhasaba the way al-Muhasibi and al-Ghazali taught it: set your intention in the morning, check yourself at midday, take account at night. Want more? Tap "+ Another one" anytime. Questions adapted from @rawia.journey.</p>
+      <div style="display:flex;flex-direction:column;gap:10px" id="jrBody"></div>
+    </div>
     <div class="card coach" id="coachCard">
       <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">🧭</span>Coach</h2><div class="seg" role="group" aria-label="Coach style"><button data-style="firm">Firm</button><button data-style="strict">Strict</button></div></div>
       <p class="muted small xp" id="coachIntro"></p>
@@ -926,7 +932,7 @@ $('rewardForm').onsubmit=e=>{e.preventDefault();const t=$('rewardText').value.tr
   S.rewards.push({id:uid(),text:t,cost:c});S.rewards.sort((a,b)=>a.cost-b.cost);$('rewardText').value='';$('rewardCost').value='';save();render()};
 $('resetBtn').onclick=()=>{$('resetConfirm').hidden=false};
 $('resetNo').onclick=()=>{$('resetConfirm').hidden=true};
-$('resetYes').onclick=()=>{const keep=S.reasons,kp=S.plan,kc=S.checkins;S=seed();S.reasons=keep||[];S.plan=kp;S.planDone={};S.checkins=kc||[];S.reasonIx=0;S.earned=0;S.tasks=[];S.examples=false;save();$('resetConfirm').hidden=true;render();toast('Fresh start.')};
+$('resetYes').onclick=()=>{const keep=S.reasons,kp=S.plan,kc=S.checkins,kj=S.journal;S=seed();S.reasons=keep||[];S.plan=kp;S.planDone={};S.checkins=kc||[];S.journal=kj||[];S.reasonIx=0;S.earned=0;S.tasks=[];S.examples=false;save();$('resetConfirm').hidden=true;render();toast('Fresh start.')};
 
 /* ---------- plan: the coach's sample week ---------- */
 const TYPES={focus:['Focus','#E3962A'],life:['Life','#2B8577'],faith:['Salah','#8B6FD6'],rest:['Rest','#4F86E8'],transition:['Transition','#8796A6']};
@@ -1512,6 +1518,37 @@ function renderMindMap(){
   box.querySelectorAll('[data-mm]').forEach(b=>b.onclick=()=>{mmTopic=b.dataset.mm;renderMindMap()});
 }
 
+/* ---------- daily reflection: one question a day ---------- */
+if(!S.journal)S.journal=[];
+const JQ={
+  am:[['Niyyah','What am I doing today, and why?'],['Stay away','What will I stay away from today?'],['Nafs','Where will my nafs try to trick me today?'],['Postponed','Which good deed do I keep postponing? When today?'],['Secret','One deed today only for Allah, in secret. Which one?'],['Unseen','If no one ever saw it, would I still do it?'],['Test','What might test me today, and what will I do then?']],
+  mid:[['Check','Why am I doing what I\'m doing right now?'],['Still?','Is my intention still the one from this morning?'],['Unseen','Would I do this the same way if nobody could see?']],
+  pm:[['Promise','Did I keep this morning\'s promise?','Yes|Partly|No'],['Shukr','Where did I do well today?'],['Istighfar','Where did I fall short today?'],['Excuse','What excuse did my nafs give me today? What do I say back?'],['Tomorrow','One thing I\'ll do differently tomorrow.'],['Make it right','How will I make up for today\'s slip?'],['Duty','Which duty to Allah or to people did I neglect?'],['Seen','Did I do anything today to be seen or praised?'],['Dua','One dua for tomorrow.'],['Grateful','One thing I\'m grateful for tonight.']]};
+const JR={extra:0};
+function jSlot(){const h=new Date().getHours();return h<12?'am':h<17?'mid':'pm'}
+function jToday(){return S.journal.filter(j=>j.d===dkey())}
+function jPick(k){const slot=jSlot(),day=Math.floor(Date.now()/864e5),rot=a=>a.map((_,i)=>a[(day+i)%a.length]);
+  const order=slot==='am'?['am','mid','pm']:slot==='mid'?['mid','am','pm']:['pm','mid','am'];
+  const list=order.flatMap(o=>rot(JQ[o]));return list[k%list.length]}
+function renderJournal(){
+  const box=$('jrBody');if(!box)return;if(!S.journal)S.journal=[];const done=jToday();
+  const showQ=!done.length||JR.extra>0;
+  const q=jPick(done.length);
+  const am=S.journal.find(j=>j.d===dkey()&&j.slot==='am');
+  box.innerHTML=(done.length?`<p class="jr-done">✓ ${done.length===1?'Done for today.':done.length+' today.'}</p>`:'')+
+    (showQ?`<p class="label">${esc(q[0])}</p><p class="jr-q">${esc(q[1])}</p>
+      ${jSlot()==='pm'&&am&&q[0]==='Promise'?`<p class="small muted">This morning: “${esc(am.a)}”</p>`:''}
+      ${q[2]?`<div class="row" id="jrOpts">${q[2].split('|').map(o=>`<button class="chip" data-jo="${o}">${o}</button>`).join('')}</div>`:''}
+      <textarea id="jrIn" rows="2" placeholder="One line is enough" aria-label="Your answer"></textarea>
+      <button class="btn-main" id="jrSave" style="align-self:flex-start">Save (+2)</button>`
+    :`<button class="small" id="jrMore" style="align-self:flex-start">+ Another one</button>`)+
+    (S.journal.length?`<details><summary class="small">Past reflections (${S.journal.length})</summary><ul class="wins">${S.journal.slice(0,30).map(j=>`<li><span><b>${esc(j.q)}</b><br>${esc(j.a)}</span><time>${new Date(j.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</time></li>`).join('')}</ul></details>`:'');
+  let pick='';
+  box.querySelectorAll('[data-jo]').forEach(b=>b.onclick=()=>{pick=b.dataset.jo;box.querySelectorAll('[data-jo]').forEach(x=>x.style.background=x===b?'var(--calm-soft)':'');$('jrIn').focus()});
+  if($('jrSave'))$('jrSave').onclick=()=>{const t=$('jrIn').value.trim(),a=[pick,t].filter(Boolean).join(': ');if(!a){$('jrIn').focus();return}
+    S.journal.unshift({d:dkey(),slot:jSlot(),q:q[1],a,at:Date.now()});S.journal=S.journal.slice(0,365);JR.extra=0;award(2,'Reflected: '+q[0]);save();renderJournal();toast('Written. That\'s muhasaba.')};
+  if($('jrMore'))$('jrMore').onclick=()=>{JR.extra=1;renderJournal();$('jrIn')&&$('jrIn').focus()};
+}
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
   const xs=card.querySelectorAll(':scope > .xp, :scope > p.muted.small:not([id]), :scope > .coach-note, :scope > ul.tips, :scope > p.small:not([id]), :scope > p.label + p.small');
@@ -1663,7 +1700,7 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();if(!T.running)drawTimer()}
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Strict coach on.':'Firm coach on.')});
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();
 })();
