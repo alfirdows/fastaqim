@@ -50,7 +50,7 @@ input[type=text],input[type=number]{width:100%;min-width:0;padding:.7rem .9rem;b
 header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .sparks{display:flex;align-items:center;gap:6px;background:var(--accent-soft);border-radius:999px;padding:.35rem .8rem;font-weight:700;font-variant-numeric:tabular-nums}
 .sparks svg{width:18px;height:18px;fill:var(--accent)}
-nav{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+nav{display:grid;grid-template-columns:repeat(8,1fr);gap:2px;background:var(--surface);border:1.5px solid var(--line);border-radius:999px;padding:4px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
 nav button{border:0;padding:.55rem .3rem;font-size:.92rem;background:transparent;color:var(--muted)}
 nav button[aria-selected=true]{background:var(--ink);color:var(--bg)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
@@ -248,9 +248,70 @@ button:active{transform:scale(.97)}
 .brand .ar{font-size:1.15rem;line-height:1.2}
 @media (max-width:440px){h1{font-size:1.55rem}.now .step{font-size:1.4rem}.stats{gap:6px}.stat b{font-size:1.3rem}nav button{font-size:.76rem;padding:.55rem .1rem}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+#landing{position:fixed;inset:0;z-index:50;overflow:auto;background:radial-gradient(120% 70% at 10% 0%,var(--accent-soft),transparent 60%),radial-gradient(100% 60% at 100% 100%,var(--calm-soft),transparent 60%),var(--bg)}
+.ld{max-width:640px;margin:0 auto;padding:48px 22px 60px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px}
+.ld-brand{font-weight:800;letter-spacing:.02em;font-size:1.1rem}.ld-brand .ar{color:var(--calm);margin-left:6px}
+.ld-h{font-size:clamp(2.1rem,7vw,3.3rem);line-height:1.05;margin:6px 0 0}.ld-h span{color:var(--calm)}
+.ld-sub{font-size:1.1rem;color:var(--muted);max-width:30ch}
+.ld-go{font-size:1.15rem;padding:1rem 2rem;box-shadow:0 10px 30px -10px var(--accent)}
+.ld-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;margin-top:8px}
+.ld-t{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:700;font-size:.95rem;animation:ldin .5s both;animation-delay:var(--d)}
+.ld-t b{font-size:1.8rem}
+@media (min-width:560px){.ld-grid{grid-template-columns:repeat(4,1fr)}}
+@keyframes ldin{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.ld-quote{font-weight:700;font-size:1.05rem;padding:14px 18px;border-left:4px solid var(--accent);background:var(--surface);border-radius:12px;text-align:left}
+.due{font-size:.75rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--calm-soft);color:var(--calm);white-space:nowrap}.due.late{background:var(--accent-soft);color:var(--accent-ink)}
+.cal-week{display:flex;flex-direction:column;gap:6px}
+.cal-day{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:10px 12px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-weight:400}
+.cal-day.today{border-color:var(--calm);background:var(--calm-soft)}
+.cal-day .dn{min-width:3.2rem;font-weight:800;line-height:1.1}.cal-day .dn small{display:block;font-weight:600;color:var(--muted)}
+.cal-day .its{display:flex;flex-wrap:wrap;gap:4px;flex:1}
+.cal-it{font-size:.8rem;padding:2px 8px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}.cal-it.m{background:var(--accent-soft)}.cal-it.g{background:var(--calm-soft)}.cal-it.d{text-decoration:line-through;opacity:.6}
+.cal-month{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.cal-month .h{font-size:.7rem;text-align:center;color:var(--muted);font-weight:700}
+.cal-cell{aspect-ratio:1;padding:4px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:space-between;font-size:.85rem;font-weight:700;min-width:0}
+.cal-cell.out{opacity:.35}.cal-cell.today{border:2px solid var(--calm);background:var(--calm-soft)}
+.cal-cell .dots{display:flex;gap:2px;flex-wrap:wrap;justify-content:center}.cal-cell .dots i{width:6px;height:6px;border-radius:50%;background:var(--calm)}.cal-cell .dots i.m{background:var(--accent)}.cal-cell .dots i.g{background:var(--ink)}
+.cal-nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.big3 div{background:var(--bg);border-radius:14px;padding:12px 4px}.big3 b{display:block;font-size:1.35rem}.big3 .pos{color:var(--calm)}.big3 .neg{color:#C2402E}
+.bar{height:10px;border-radius:99px;background:var(--line);overflow:hidden}.bar i{display:block;height:100%;background:var(--calm);border-radius:99px}.bar i.over{background:#C2402E}
+.catrow{display:grid;grid-template-columns:1fr auto;gap:4px 10px;align-items:center;width:100%;text-align:left;background:none;border:0;padding:6px 0;font-weight:400}
+.catrow .bar{grid-column:1/-1}
+.mrow{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);width:100%;text-align:left;background:none;border-radius:0;border-left:0;border-right:0;border-top:0;font-weight:400}
+.mrow .amt{font-weight:800;white-space:nowrap}.mrow .amt.in{color:var(--calm)}
+.goalc{border:1.5px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.goalc h3{margin:0;font-size:1.1rem}.goalc.won{border-color:var(--calm);background:var(--calm-soft)}
+.hrow{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.hrow .t{flex:1;font-size:.92rem}.hrow time{font-size:.75rem;color:var(--muted);white-space:nowrap}
+.sortcard{background:linear-gradient(135deg,var(--accent-soft),var(--surface) 60%)}
+.sp-sec{display:flex;flex-direction:column;gap:6px;width:100%;text-align:left}.sp-it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}.sp-it span{flex:1}
+@media (max-width:640px){nav{display:flex!important;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav button{flex:0 0 auto;min-width:62px}}
+.ld-auth{width:100%;max-width:360px;display:flex;flex-direction:column;gap:8px}
+.ld-auth input{width:100%}
+.ld-auth .row{justify-content:center}
 </style>
 
 <canvas id="confetti"></canvas>
+<div id="landing" hidden>
+  <div class="ld">
+    <p class="ld-brand">Fastaqim <span class="ar" lang="ar">فَاسْتَقِمْ</span></p>
+    <h1 class="ld-h">Your whole life,<br><span>one calm plan.</span></h1>
+    <p class="ld-sub">Built for adults with ADHD. Write it messy. Fastaqim sorts it, schedules it, and gets you started.</p>
+    <div id="ldAuth" class="ld-auth"></div>
+    <div class="ld-grid">
+      <div class="ld-t" style="--d:0s"><b>✨</b><span>Messy list in, schedule out</span></div>
+      <div class="ld-t" style="--d:.06s"><b>🚀</b><span>Start anything in 2 minutes</span></div>
+      <div class="ld-t" style="--d:.12s"><b>📅</b><span>Day, week and month</span></div>
+      <div class="ld-t" style="--d:.18s"><b>💰</b><span>Budget, income, expenses</span></div>
+      <div class="ld-t" style="--d:.24s"><b>🎯</b><span>Short and long-term goals</span></div>
+      <div class="ld-t" style="--d:.30s"><b>🕌</b><span>Days built around salah</span></div>
+      <div class="ld-t" style="--d:.36s"><b>🌙</b><span>One reflection a day</span></div>
+      <div class="ld-t" style="--d:.42s"><b>🕘</b><span>Every edit saved with history</span></div>
+    </div>
+    <div class="ld-quote"><p>“Starting is the hard part. So that's the part we make tiny.”</p></div>
+    <p class="small muted ld-note" id="ldNote">Your data is private to your account.</p>
+  </div>
+</div>
 <div class="wrap">
   <header>
     <div>
@@ -268,10 +329,12 @@ button:active{transform:scale(.97)}
   <nav role="tablist" aria-label="Sections">
     <button role="tab" data-tab="now" aria-selected="true"><span class="ni" aria-hidden="true">🚀</span>Now</button>
     <button role="tab" data-tab="plan" aria-selected="false"><span class="ni" aria-hidden="true">🗓️</span>Plan</button>
-    <button role="tab" data-tab="today" aria-selected="false"><span class="ni" aria-hidden="true">✅</span>Today</button>
+    <button role="tab" data-tab="today" aria-selected="false"><span class="ni" aria-hidden="true">✅</span>To-do</button>
+    <button role="tab" data-tab="money" aria-selected="false"><span class="ni" aria-hidden="true">💰</span>Money</button>
+    <button role="tab" data-tab="goals" aria-selected="false"><span class="ni" aria-hidden="true">🎯</span>Goals</button>
     <button role="tab" data-tab="focus" aria-selected="false"><span class="ni" aria-hidden="true">⏱️</span>Focus</button>
     <button role="tab" data-tab="enjoy" aria-selected="false"><span class="ni" aria-hidden="true">🎨</span>Enjoy</button>
-    <button role="tab" data-tab="wins" aria-selected="false"><span class="ni" aria-hidden="true">🏆</span>Rewards</button>
+    <button role="tab" data-tab="wins" aria-selected="false"><span class="ni" aria-hidden="true">🏆</span>Me</button>
   </nav>
 
   <!-- NOW -->
@@ -281,13 +344,19 @@ button:active{transform:scale(.97)}
     <div class="card now" id="nowCard"></div>
     <div class="row" style="gap:10px"><button class="scroll-btn" id="caughtBtn" style="flex:1;min-width:150px">📱 I caught myself scrolling</button><button class="scroll-btn" id="restBtn" style="flex:1;min-width:150px;border-color:var(--calm);background:var(--calm-soft)">😴 I'm tired / resting</button></div>
     <div class="card" id="planNowCard"></div>
+    <div class="card sortcard" id="sortCard">
+      <h2><span class="h2i" aria-hidden="true">✨</span>Write it messy. I'll sort it.</h2>
+      <p class="small muted">To-dos, bills, income, goals, all in one list, in any order. You'll see the sorted version before anything is added: to-dos go on your calendar with small steps, money goes to your budget, goals to Goals.</p>
+      <textarea id="sortIn" rows="4" placeholder="pay rent 800 on the 1st&#10;finish session notes tomorrow&#10;salary 2400&#10;call mom&#10;memorise al-mulk this year"></textarea>
+      <button class="btn-main" id="sortGo" style="align-self:flex-start">✨ Sort it for me</button>
+    </div>
     <div class="card" id="jrCard">
       <h2><span class="h2i" aria-hidden="true">🌙</span>Today's reflection</h2>
       <p class="small muted">One question a day. Muhasaba the way al-Muhasibi and al-Ghazali taught it: set your intention in the morning, check yourself at midday, take account at night. Want more? Tap "+ Another one" anytime. Questions adapted from @rawia.journey.</p>
       <div style="display:flex;flex-direction:column;gap:10px" id="jrBody"></div>
     </div>
     <div class="card coach" id="coachCard">
-      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">🧭</span>Coach</h2><div class="seg" role="group" aria-label="Coach style"><button data-style="firm">Firm</button><button data-style="strict">Strict</button></div></div>
+      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">🧭</span>Coach</h2><div class="seg" role="group" aria-label="Coach style"><button data-style="strict">Brief</button><button data-style="firm">Explain</button></div></div>
       <p class="muted small xp" id="coachIntro"></p>
       <div class="chat" id="chat" aria-live="polite"></div>
       <div class="row" id="coachBtns"></div>
@@ -319,6 +388,10 @@ button:active{transform:scale(.97)}
 
   <!-- PLAN -->
   <section id="tab-plan" class="wrap" style="gap:20px" hidden>
+    <div class="card" id="calCard">
+      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📅</span>Calendar</h2><div class="seg" role="group" aria-label="View"><button data-cv="week">Week</button><button data-cv="month">Month</button></div></div>
+      <div id="calBody"></div>
+    </div>
     <div class="card">
       <details id="coachNotes">
         <summary>Coach's notes: where we're starting</summary>
@@ -461,6 +534,33 @@ button:active{transform:scale(.97)}
     </div>
   </section>
 
+  <!-- MONEY -->
+  <section id="tab-money" class="wrap" style="gap:20px" hidden>
+    <div class="card" id="monSum"></div>
+    <form class="card" id="monForm">
+      <h2><span class="h2i" aria-hidden="true">➕</span>Add money in or out</h2>
+      <div class="seg" role="group" aria-label="Type" id="monKind"><button type="button" data-mk="expense" aria-pressed="true">💸 Spent</button><button type="button" data-mk="income" aria-pressed="false">💰 Got</button></div>
+      <div class="inline-form"><input type="number" id="monAmt" placeholder="Amount" min="0" step="0.01" inputmode="decimal" aria-label="Amount" style="max-width:130px"><input type="text" id="monWhat" placeholder="What for" aria-label="What for"></div>
+      <div class="inline-form"><select id="monCat" aria-label="Category"></select><input type="date" id="monDate" aria-label="Date"></div>
+      <label class="row small" style="gap:8px"><input type="checkbox" id="monRec"> Repeats every month</label>
+      <button class="btn-main" type="submit" style="align-self:flex-start">Add</button>
+    </form>
+    <div class="card"><h2><span class="h2i" aria-hidden="true">🧾</span>This month</h2><div id="monList"></div></div>
+  </section>
+
+  <!-- GOALS -->
+  <section id="tab-goals" class="wrap" style="gap:20px" hidden>
+    <form class="card" id="goalForm">
+      <h2><span class="h2i" aria-hidden="true">🎯</span>New goal</h2>
+      <p class="small muted">Short-term: the next 3 months. Long-term: bigger and further out. Every goal gets broken into steps, and the next step can go straight onto today's list.</p>
+      <input type="text" id="goalTitle" placeholder="e.g. Memorise Surah Al-Mulk" aria-label="Goal">
+      <div class="inline-form"><div class="seg" role="group" aria-label="Term" id="goalTerm"><button type="button" data-gt="short" aria-pressed="true">Short-term</button><button type="button" data-gt="long" aria-pressed="false">Long-term</button></div><input type="date" id="goalBy" aria-label="By when (optional)"></div>
+      <button class="btn-main" type="submit" style="align-self:flex-start">Add goal</button>
+    </form>
+    <div class="card"><h2><span class="h2i" aria-hidden="true">🏃</span>Short-term</h2><div id="goalsShort" class="wrap" style="gap:12px"></div></div>
+    <div class="card"><h2><span class="h2i" aria-hidden="true">🏔️</span>Long-term</h2><div id="goalsLong" class="wrap" style="gap:12px"></div></div>
+  </section>
+
   <!-- FOCUS -->
   <section id="tab-focus" hidden>
     <div class="card timer">
@@ -528,12 +628,19 @@ button:active{transform:scale(.97)}
         <p class="small muted" style="margin-top:12px">This is a self-help tool, not medical advice. Keep talking with your doctor about what's working.</p>
       </details>
     </div>
+    <div class="card" id="histCard">
+      <h2><span class="h2i" aria-hidden="true">🕘</span>Edit history</h2>
+      <p class="small muted">Every add, edit, tick and delete in To-do, Money and Goals is kept here. Tap Restore to bring back how something was before.</p>
+      <div class="row" id="histF"></div>
+      <div id="histList"></div>
+    </div>
+    <div class="card" id="acctBox"></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
     <button class="btn-ghost small" id="resetBtn" style="align-self:center">Reset everything</button>
     <div class="note" id="resetConfirm" hidden>
-      <p style="margin-bottom:10px">This deletes all tasks, sparks and wins on this device. Your schedule, check-ins and reasons stay. Are you sure?</p>
+      <p style="margin-bottom:10px">This deletes all tasks, sparks and wins. Your schedule, money, goals, history, check-ins and reasons stay. Are you sure?</p>
       <div class="row"><button id="resetYes">Yes, delete it all</button><button class="btn-calm" id="resetNo">Keep my stuff</button></div>
     </div>
   </section>
@@ -629,7 +736,7 @@ function chime(){if(S&&S.calm)return;try{actx=actx||new (window.AudioContext||wi
 /* ---------- tabs ---------- */
 function show(tab){
   document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===tab));
-  ['now','plan','today','focus','enjoy','wins'].forEach(t=>$('tab-'+t).hidden=t!==tab);
+  ['now','plan','today','money','goals','focus','enjoy','wins'].forEach(t=>$('tab-'+t).hidden=t!==tab);
   render();window.scrollTo({top:0});
 }
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.tab));
@@ -652,7 +759,7 @@ function renderHeader(){
   const L=lvl();$('levelText').textContent='Level '+L.n+' · '+L.left+' to next';$('xpBar').style.width=L.pct+'%';
   const h=new Date().getHours();
   $('dateLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
-  const nm=S.name?', '+S.name:'';$('hello').textContent=strict()?'Bismillah'+nm+'. Hard work today is your ticket.':(h<12?'Good morning':h<18?'Hi':'Good evening')+nm+'. One small thing at a time.';
+  const nm=S.name?', '+S.name:'';$('hello').textContent=strict()?'Bismillah'+nm+'. One step at a time.':(h<12?'Good morning':h<18?'Hi':'Good evening')+nm+'. One small thing at a time.';
 }
 
 let shrinking=false;
@@ -662,7 +769,7 @@ function renderNow(){
     <form class="inline-form" id="quickAdd"><input type="text" id="quickInput" placeholder="One thing..." aria-label="New task"><button class="btn-calm" type="submit">Add</button></form>`;
     $('quickAdd').onsubmit=e=>{e.preventDefault();const v=$('quickInput').value.trim();if(!v)return;S.tasks.push({id:uid(),title:v,top:true,done:false,steps:[]});save();render()};return}
   const s=nextStep(t),stepText=s?s.text:t.title,doneN=t.steps.filter(x=>x.done).length,pct=t.steps.length?Math.round(doneN/t.steps.length*100):0;
-  c.innerHTML=`<p class="label">${strict()?'No negotiating. Just this.':'Right now, just this'}</p>
+  c.innerHTML=`<p class="label">${strict()?'Just this':'Right now, just this'}</p>
     <p class="step">${esc(stepText)}</p>
     <p class="muted small">Part of: <b>${esc(t.title)}</b>${t.steps.length?` · ${doneN} of ${t.steps.length} steps done`:''}</p>
     ${t.steps.length?`<div class="progress" aria-hidden="true"><i style="width:${pct}%"></i></div>`:''}
@@ -677,7 +784,7 @@ function renderNow(){
       <div class="row" id="shrinkChips"></div>
       <form class="inline-form" id="shrinkForm"><input type="text" id="shrinkInput" placeholder="e.g. Open the laptop" aria-label="Smaller step"><button class="btn-calm" type="submit">Use this</button></form>
     </div>
-    <p class="small muted">${strict()?'2 minutes. Then you decide. But first you start.':'You don\'t have to finish. You only have to start. After 2 minutes you can stop, and it still counts.'}</p>
+    <p class="small muted">${strict()?'2 minutes. After that, you decide.':'You don\'t have to finish. You only have to start. After 2 minutes you can stop, and it still counts.'}</p>
     ${strict()&&S.reasons.length?(()=>{const r=S.reasons[(S.nowReason||0)%S.reasons.length];return `<div class="nowreason"><p class="label">Remember why</p><p class="${isAr(r.text)?'ar':''}" dir="auto" style="font-weight:700">${esc(r.text)}</p>${r.note?`<p class="small muted">${esc(r.note)}</p>`:''}<button class="btn-ghost" id="nextReason">Another one</button></div>`})():''}`;
   if($('nextReason'))$('nextReason').onclick=()=>{S.nowReason=((S.nowReason||0)+1)%S.reasons.length;save();renderNow()};
   $('jtNow').onclick=jtOpen;
@@ -735,12 +842,12 @@ const replies={
   bored:['It is boring. Waiting won\'t change that. Put something on in the background and do {s}.','Boring doesn\'t get better with time. Set 2 minutes and do {s}.']
 };
 const strictReplies={
-  no:['No isn\'t an answer. It\'s a delay. {s}. Now.','You said no. The work didn\'t hear you. {s}.','Still no? Then it gets smaller, not optional. {s}.','I\'m not going anywhere, and neither is this. {s}.'],
-  later:['Later is how today disappears. {s}. Start the timer.','You\'ve already seen what you love. Don\'t walk away from it now. {s}.'],
-  cant:['Can\'t is a story. 2 minutes is a fact. {s}.','You\'ve done harder things than 2 minutes. {s}. Go.'],
-  tired:['Tired gets the small version, not the day off. {s}.','Al-Firdaws isn\'t free. Right now it costs 2 minutes. {s}.'],
-  point:['You know the point. You said it yourself: hard work today is your ticket to Al-Firdaws. {s}.','The point is the person you told me you want to be. {s}.'],
-  bored:['Boring isn\'t a reason. It\'s a feeling. Do {s} anyway.','No goal without struggle. This is today\'s struggle, and it\'s small. {s}.']
+  no:['Understood. The task stays either way, so let\'s shrink it: {s}.','Okay. A smaller version: {s}.','Still no. That tells me the step is too big. Smaller: {s}.','I\'ll stay with this as long as you need. {s}.'],
+  later:['With ADHD, "later" usually means the start never gets a clear moment. Two minutes now: {s}.','Either pick an exact time for it, or do 2 minutes now: {s}.'],
+  cant:['The whole task may be too much right now. The step isn\'t: {s}.','This is about the size of the step, not your ability. {s}.'],
+  tired:['Tiredness is real, so the step stays small: {s}.','A tired day gets the small version, not nothing. {s}.'],
+  point:['You named the point yourself: Al-Firdaws. Motivation usually comes after starting, not before. {s}.','The reason is already there. Starting is the missing piece. {s}.'],
+  bored:['It is boring. Boring tasks need a time limit and something in the background. {s}.','Low interest means your brain needs more stimulation. Put a lecture on, then {s}.']
 };
 function coachSay(t){CO.log.push({c:1,t})}
 function coachOpen(){CO.log=[];CO.nos=0;CO.lvl=0;CO.rested=false;CO.started=false;coachSay(strict()?'Next step: '+ladder()[0]+'. 2 minutes. Are you starting?':'Next step: '+ladder()[0]+'. 2 minutes. Yes or no?')}
@@ -749,7 +856,7 @@ function coachAnswer(kind,label){
   if(kind==='yes'){const st=ladder()[CO.lvl];coachSay(CO.nos?(strict()?'Good. That yes is the one that counts. +1 spark. Timer\'s starting.':'Good. A yes after a no is harder than an easy yes, so it gets +1 spark. Timer\'s starting.'):(strict()?'Good. Go.':'Good. Timer\'s starting.'));
     if(CO.nos)award(1,'Said yes after '+CO.nos+' no'+(CO.nos>1?'s':''));CO.started=true;renderCoach();setTimeout(()=>kickWith(st),700);return}
   if(kind==='rest'){openRestCheck();if(!CO.rested){CO.rested=true;coachSay(strict()?'If it\'s real rest, take 20 minutes, not the whole evening. Water first, set an alarm, then come back to this step.':'Fair. If it\'s real rest, take it. One condition: drink a glass of water first, so today isn\'t a zero. Then rest without guilt.')}
-    else coachSay(strict()?'Rest, then. Coming back is your job. The step will be right here.':'Okay. Rest. The step will be the same size when you come back.');renderCoach();return}
+    else coachSay(strict()?'Okay, rest. Set an alarm so coming back is easy. The step will be right here.':'Okay. Rest. The step will be the same size when you come back.');renderCoach();return}
   CO.nos++;CO.lvl=Math.min(CO.lvl+1,ladder().length-1);const s=ladder()[CO.lvl];
   if(kind==='later'||(strict()?CO.nos>=2:CO.nos%2===0))setTimeout(showReason,500);const R=strict()?strictReplies:replies;
   let r;do{r=pick(R[kind])}while(r===CO.last&&R[kind].length>1);CO.last=r;
@@ -762,7 +869,7 @@ function coachAnswer(kind,label){
 function kickWith(label){const t=current(),s=t&&nextStep(t);startTimer(2,{taskId:t&&t.id,stepId:s&&s.id,label,kick:true})}
 function renderCoach(){
   if(!CO.log.length)coachOpen();
-  $('coachIntro').textContent=strict()?'Strict mode. Short answers, no pep talk. Every no makes the step smaller, never optional, and your reasons come up when you stall. Firm, not cruel.':'Say no as many times as you like. I\'ll keep making the step smaller until it\'s doable. No pep talk, no guilt trip.';
+  $('coachIntro').textContent=strict()?'Brief mode: short, direct answers. Every no makes the step smaller, and your reasons come up when you stall.':'Explain mode: I say why each step works. Say no as often as you need. The step keeps getting smaller until it\'s doable.';
   document.querySelectorAll('[data-style]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.style===S.coachStyle));
   $('chat').innerHTML=CO.log.map(m=>`<div class="msg ${m.c?'c':'u'}">${esc(m.t)}</div>`).join('');
   $('chat').scrollTop=$('chat').scrollHeight;
@@ -795,12 +902,13 @@ function taskHTML(t){
   return `<div class="task ${t.top?'top':''} ${t.done?'done':''}" data-id="${t.id}">
     <div class="task-head">
       <input type="checkbox" data-act="done" ${t.done?'checked':''} aria-label="Finish ${esc(t.title)}">
-      <span class="task-title">${esc(t.title)}</span>
+      <span class="task-title">${esc(t.title)}${t.due&&!t.done?`<br><span class="due ${t.due<dkey()?'late':''}">${t.due===dkey()?'Today':fmtD(t.due)}${t.time?' '+esc(t.time):''}</span>`:''}</span>
       <span class="small muted">${t.steps.length?doneN+'/'+t.steps.length:''}</span>
       <button class="star icon-btn" data-act="top" aria-pressed="${!!t.top}" title="${t.top?'Remove from top 3':'Add to top 3'}">★</button>
       <button class="icon-btn" data-act="open" aria-expanded="${!!t.open}" title="Steps">${t.open?'▴':'▾'}</button>
     </div>
     ${t.open?`<ul class="steps">${t.steps.map(s=>`<li class="${s.done?'done':''}"><input type="checkbox" data-act="step" data-s="${s.id}" ${s.done?'checked':''} aria-label="${esc(s.text)}"><span>${esc(s.text)}</span></li>`).join('')}</ul>
+      <div class="inline-form"><input type="date" data-act="due" value="${t.due||''}" aria-label="Day"><input type="time" data-act="tm" value="${t.time||''}" aria-label="Time" style="max-width:120px"><button class="small" data-act="ren">Rename</button></div>
       <form class="inline-form" data-act="addstep"><input type="text" placeholder="Add a tiny step" aria-label="New step"><button type="submit">Add</button></form>
       <div class="row"><button class="btn-main" data-act="focus" style="font-size:.95rem;padding:.6rem 1rem">Start 2 min</button>${t.steps.length?'':'<button class="small" data-act="breakdown">Break it down for me</button>'}<button class="btn-ghost small" data-act="del">Delete task</button></div>`:''}
   </div>`;
@@ -820,25 +928,27 @@ function onTaskEvent(e){
   const t=S.tasks.find(x=>x.id===box.dataset.id);if(!t)return;const act=el.dataset.act;
   if(e.type==='submit'){e.preventDefault();if(act!=='addstep')return;const inp=el.querySelector('input'),v=inp.value.trim();if(!v)return;t.steps.push({id:uid(),text:v,done:false});save();render();const again=document.querySelector(`.task[data-id="${t.id}"] form input`);again&&again.focus();return}
   if(e.type!=='click'&&e.type!=='change')return;
-  if(act==='done'&&e.type==='change'){if(!t.done){t.steps.forEach(s=>s.done=true);finishTask(t)}else{t.done=false;t.doneAt=null}save();render()}
+  if((act==='due'||act==='tm')&&e.type==='change'){const b=clone(t);if(act==='due')t.due=el.value;else t.time=el.value;H('todo',act==='due'?'moved':'set time',t.title,b,t);save();render();return}
+  if(act==='done'&&e.type==='change'){H('todo',t.done?'reopened':'done',t.title,clone(t),Object.assign(clone(t),{done:!t.done}));if(!t.done){t.steps.forEach(s=>s.done=true);finishTask(t)}else{t.done=false;t.doneAt=null}save();render()}
   else if(act==='step'&&e.type==='change'){const s=t.steps.find(x=>x.id===el.dataset.s);if(!s.done)completeStep(t,s);else{s.done=false;save();render()}}
   else if(e.type==='click'){
     if(act==='top'){if(!t.top&&S.tasks.filter(x=>x.top&&!x.done).length>=3){toast('Top 3 is full. Unstar one first.');return}t.top=!t.top;save();render()}
     else if(act==='open'){t.open=!t.open;render()}
     else if(act==='breakdown'){t.steps=breakdown(t.title).map(x=>({id:uid(),text:x,done:false}));save();render();toast('Broken into '+t.steps.length+' small steps.')}
-    else if(act==='del'){S.tasks=S.tasks.filter(x=>x!==t);save();render();toast('Deleted.')}
+    else if(act==='ren'){modalCard(`<p class="label">Rename</p><input type="text" id="rnT" value="${esc(t.title)}" aria-label="Title"><div class="row"><button class="btn-main" id="rnS">Save</button><button class="btn-ghost small" id="rnX">Cancel</button></div>`);$('rnS').onclick=()=>{const b=clone(t);t.title=$('rnT').value.trim()||t.title;H('todo','renamed',t.title,b,t);save();modalClose()};$('rnX').onclick=modalClose}
+    else if(act==='del'){H('todo','deleted',t.title,t,null);S.tasks=S.tasks.filter(x=>x!==t);save();render();toast('Deleted.')}
     else if(act==='focus'){const s=nextStep(t);startTimer(2,{taskId:t.id,stepId:s&&s.id,label:s?s.text:t.title,kick:true})}
   }
 }
 ['click','change','submit'].forEach(ev=>{$('topList').addEventListener(ev,onTaskEvent);$('laterList').addEventListener(ev,onTaskEvent)});
 $('dumpForm').onsubmit=e=>{e.preventDefault();const v=$('dumpInput').value.trim();if(!v)return;
-  const tops=S.tasks.filter(x=>x.top&&!x.done).length;S.tasks.push({id:uid(),title:v,top:false,done:false,steps:[],open:false});
+  const tops=S.tasks.filter(x=>x.top&&!x.done).length;const nt={id:uid(),title:v,top:false,done:false,steps:[],open:false};S.tasks.push(nt);H('todo','added',v,null,nt);
   $('dumpInput').value='';save();render();toast(tops<3?'Added. Star it if it\'s a top 3.':'Added to Later.')};
 
 /* ---------- timer ---------- */
 const C=2*Math.PI*52;$('ringBar').style.strokeDasharray=C;
 let T={min:2,total:120,left:120,running:false,ctx:null,iv:null,startedAt:0};
-const strictBuddy=['Stay in the chair.','Eyes on the step. Nothing else.','No goal without struggle. This is it.','Wandered off? Come back. No commentary.','Al-Firdaws is not free. Keep going.','Hard work today. Keep going.','You\'re doing it. Don\'t stop to check.'];
+const strictBuddy=['Stay with the step.','Eyes on the step.','Wandered off? Notice it and come back.','Keep going. You\'re in it.','Steady. One thing.','You\'re doing it.'];
 const buddyLines=['I\'m right here with you.','Just this one step. Nothing else.','You started. That\'s the hardest part.','Wandered off? No problem. Come back to the step.','Slow is fine. Slow is still moving.','Breathe out. Keep going.','You\'re doing it right now.','Messy counts.'];
 let wake=null;
 function fmt(s){return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
@@ -861,7 +971,7 @@ function startTimer(min,ctx){
 }
 function run(){
   $('timerEnd').hidden=true;T.running=true;T.startedAt=T.startedAt||Date.now();
-  if(T.left===T.total){$('buddy').textContent=T.ctx&&T.ctx.rest?'Real rest. Phone away, eyes closed if you like. When this ends, your next step will be waiting.':T.ctx&&T.ctx.kick?(strict()?T.min+' minutes. Phone face down. Go.':'Only '+T.min+' minutes. You can stop after that, and it still counts.'):buddyLines[0];if(!T.ctx.awarded){award(2,'Started: '+(T.ctx.label||T.min+' min focus'));T.ctx.awarded=true;toast('+2 sparks for starting')}}
+  if(T.left===T.total){$('buddy').textContent=T.ctx&&T.ctx.rest?'Real rest. Phone away, eyes closed if you like. When this ends, your next step will be waiting.':T.ctx&&T.ctx.kick?(strict()?T.min+' minutes. Phone face down. Begin.':'Only '+T.min+' minutes. You can stop after that, and it still counts.'):buddyLines[0];if(!T.ctx.awarded){award(2,'Started: '+(T.ctx.label||T.min+' min focus'));T.ctx.awarded=true;toast('+2 sparks for starting')}}
   requestWake();
   const endAt=Date.now()+T.left*1000;clearInterval(T.iv);
   T.iv=setInterval(()=>{T.left=Math.max(0,Math.round((endAt-Date.now())/1000));
@@ -932,7 +1042,7 @@ $('rewardForm').onsubmit=e=>{e.preventDefault();const t=$('rewardText').value.tr
   S.rewards.push({id:uid(),text:t,cost:c});S.rewards.sort((a,b)=>a.cost-b.cost);$('rewardText').value='';$('rewardCost').value='';save();render()};
 $('resetBtn').onclick=()=>{$('resetConfirm').hidden=false};
 $('resetNo').onclick=()=>{$('resetConfirm').hidden=true};
-$('resetYes').onclick=()=>{const keep=S.reasons,kp=S.plan,kc=S.checkins,kj=S.journal;S=seed();S.reasons=keep||[];S.plan=kp;S.planDone={};S.checkins=kc||[];S.journal=kj||[];S.reasonIx=0;S.earned=0;S.tasks=[];S.examples=false;save();$('resetConfirm').hidden=true;render();toast('Fresh start.')};
+$('resetYes').onclick=()=>{const keep=S.reasons,kp=S.plan,kc=S.checkins,kj=S.journal,km=S.money,kg=S.goals,kh=S.hist;S=seed();S.money=km;S.goals=kg;S.hist=kh;S.started=true;S.reasons=keep||[];S.plan=kp;S.planDone={};S.checkins=kc||[];S.journal=kj||[];S.reasonIx=0;S.earned=0;S.tasks=[];S.examples=false;save();$('resetConfirm').hidden=true;render();toast('Fresh start.')};
 
 /* ---------- plan: the coach's sample week ---------- */
 const TYPES={focus:['Focus','#E3962A'],life:['Life','#2B8577'],faith:['Salah','#8B6FD6'],rest:['Rest','#4F86E8'],transition:['Transition','#8796A6']};
@@ -1324,7 +1434,7 @@ function openCaught(){
   const o=openTasks(),t=current(),s=t&&nextStep(t),step=s?s.text:t?t.title:null;
   $('scrollBody').innerHTML=`
     <p class="label">Caught it</p>
-    <p class="reason-text" style="font-size:1.5rem">${strict()?'Phone face down. Now.':'Put the phone face down.'}</p>
+    <p class="reason-text" style="font-size:1.5rem">${strict()?'Put the phone face down.':'Put the phone face down.'}</p>
     <p>${strict()?'Noticing is the skill, and you just did it. +1 spark.':'Good catch. Noticing is the hardest part. +1 spark.'}</p>
     <div class="note" style="text-align:left"><p><b>"I've got nothing else to do."</b> ${o.length?`You have <b>${o.length}</b> thing${o.length>1?'s':''} on your list. The next one is: <b>${esc(step)}</b>.`:'Your list is empty right now, so this is a good time to add one thing.'}</p>
       <details class="small" style="margin-top:6px"><summary>Why do I keep doing this?</summary>You won't remember the last video. Scrolling isn't rest and it isn't fun. It's just the <b>easiest</b> thing in reach. Feeds are built to give tiny, unpredictable hits of novelty, which is exactly what an ADHD brain is hungry for. That's not a character flaw. It's a trap that's hard to leave by design, so we don't fight it with willpower. We make the next thing easier than the scroll.</details></div>
@@ -1549,6 +1659,250 @@ function renderJournal(){
     S.journal.unshift({d:dkey(),slot:jSlot(),q:q[1],a,at:Date.now()});S.journal=S.journal.slice(0,365);JR.extra=0;award(2,'Reflected: '+q[0]);save();renderJournal();toast('Written. That\'s muhasaba.')};
   if($('jrMore'))$('jrMore').onclick=()=>{JR.extra=1;renderJournal();$('jrIn')&&$('jrIn').focus()};
 }
+/* ================= LIFE: history, money, goals, calendar, sort, landing ================= */
+if(!S.money)S.money={items:[],cur:'$',budget:{}};
+if(!S.goals)S.goals=[];
+if(!S.hist)S.hist=[];
+const clone=o=>o==null?o:JSON.parse(JSON.stringify(o));
+const pd=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+const fmtD=s=>pd(s).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+function lifeFix(){if(!S.money)S.money={items:[],cur:'$',budget:{}};if(!S.money.budget)S.money.budget={};if(!S.goals)S.goals=[];if(!S.hist)S.hist=[]}
+/* ---- edit history ---- */
+function H(area,act,label,before,after){lifeFix();S.hist.unshift({id:uid(),at:Date.now(),area,act,label:String(label||'').slice(0,80),before:clone(before),after:clone(after)});S.hist=S.hist.slice(0,600)}
+const AREAS={todo:['To-do','✅'],money:['Money','💰'],goals:['Goals','🎯']};
+const coll=a=>a==='todo'?S.tasks:a==='money'?S.money.items:a==='goals'?S.goals:null;
+function histRestore(id){const h=S.hist.find(x=>x.id===id);if(!h||!h.before)return;const c=coll(h.area);const i=c.findIndex(x=>x.id===h.before.id);
+  const cur=i>=0?clone(c[i]):null;if(i>=0)c[i]=clone(h.before);else c.push(clone(h.before));H(h.area,'restored',h.label,cur,h.before);save();render();toast('Restored.')}
+function histDiff(h){const b=h.before,a=h.after;if(!b||!a)return'';const out=[];
+  ['title','amount','label','cat','date','due','time','by','term','kind','recur'].forEach(k=>{if(b[k]!==undefined&&a[k]!==undefined&&String(b[k])!==String(a[k]))out.push(`${esc(String(b[k]||'—'))} → ${esc(String(a[k]||'—'))}`)});
+  return out.join(' · ')}
+let HF='all';
+function renderHist(){if(!$('histList'))return;lifeFix();
+  $('histF').innerHTML=[['all','All'],...Object.entries(AREAS).map(([k,v])=>[k,v[1]+' '+v[0]])].map(([k,l])=>`<button class="chip" data-hf="${k}" style="${HF===k?'background:var(--ink);color:var(--bg)':''}">${l}</button>`).join('');
+  const L=S.hist.filter(h=>HF==='all'||h.area===HF).slice(0,60);
+  $('histList').innerHTML=L.length?L.map(h=>`<div class="hrow"><span aria-hidden="true">${(AREAS[h.area]||['','•'])[1]}</span><div class="t"><b>${esc(h.act[0].toUpperCase()+h.act.slice(1))}</b> ${esc(h.label)}${histDiff(h)?`<br><span class="small muted">${histDiff(h)}</span>`:''}</div><time>${new Date(h.at).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</time>${h.before&&h.act!=='restored'?`<button class="small" data-hr="${h.id}">Restore</button>`:''}</div>`).join(''):'<p class="muted small">Nothing yet. Changes you make show up here.</p>';
+}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-hf]');if(f){HF=f.dataset.hf;renderHist();return}const r=e.target.closest('[data-hr]');if(r)histRestore(r.dataset.hr)});
+
+/* ---- money ---- */
+const CATS={expense:['Home & rent','Bills','Food','Transport','Shopping','Family','Sadaqah','Debt','Savings','Health','Fun','Other'],income:['Salary','Side income','Gift','Other']};
+const CAT_EMO={'Home & rent':'🏠','Bills':'🧾','Food':'🍲','Transport':'🚌','Shopping':'🛍️','Family':'👨‍👩‍👧','Sadaqah':'🤲','Debt':'💳','Savings':'🏦','Health':'💊','Fun':'🎈','Other':'•','Salary':'💼','Side income':'🧩','Gift':'🎁'};
+function guessCat(l){l=l.toLowerCase();return /rent|mortgage|house/.test(l)?'Home & rent':/bill|phone|internet|electric|water|gas bill|subscription/.test(l)?'Bills':/food|grocer|lunch|dinner|coffee|restaurant|eat/.test(l)?'Food':/uber|bus|gas|fuel|car|train|taxi/.test(l)?'Transport':/sadaq|zakat|charity|donat/.test(l)?'Sadaqah':/debt|loan|credit/.test(l)?'Debt':/sav/.test(l)?'Savings':/doctor|medic|pharm|meds/.test(l)?'Health':/mom|dad|family|sister|brother/.test(l)?'Family':/cloth|shop|amazon|bought/.test(l)?'Shopping':'Other'}
+const MN={kind:'expense',ym:dkey().slice(0,7)};
+const money=n=>{const c=S.money.cur||'$';const v=Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:2});return (n<0?'−':'')+(c.length>1?v+' '+c:c+v)};
+function monthItems(ym){return S.money.items.filter(it=>it.recur==='monthly'?(it.date.slice(0,7)<=ym&&(!it.end||it.end>=ym)):it.date.slice(0,7)===ym).map(it=>Object.assign({},it,{on:it.recur==='monthly'?ym+'-'+String(Math.min(+it.date.slice(8),28)).padStart(2,'0'):it.date}))}
+function ymShift(ym,n){const d=new Date(+ym.slice(0,4),+ym.slice(5)-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+function renderMoney(){if(!$('monSum'))return;lifeFix();
+  const its=monthItems(MN.ym),inc=its.filter(i=>i.kind==='income').reduce((a,b)=>a+ +b.amount,0),out=its.filter(i=>i.kind==='expense').reduce((a,b)=>a+ +b.amount,0),left=inc-out;
+  const byCat={};its.filter(i=>i.kind==='expense').forEach(i=>byCat[i.cat]=(byCat[i.cat]||0)+ +i.amount);
+  Object.keys(S.money.budget).forEach(c=>{if(!(c in byCat))byCat[c]=0});
+  const cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
+  const mname=new Date(+MN.ym.slice(0,4),+MN.ym.slice(5)-1,1).toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  const upcoming=MN.ym===dkey().slice(0,7)?its.filter(i=>i.kind==='expense'&&i.recur==='monthly'&&i.on>=dkey()).sort((a,b)=>a.on<b.on?-1:1):[];
+  $('monSum').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-mym="-1" aria-label="Previous month">◀</button><h2 style="margin:0"><span class="h2i" aria-hidden="true">💰</span>${esc(mname)}</h2><button class="icon-btn" data-mym="1" aria-label="Next month">▶</button></div>
+    <div class="big3"><div><span class="small muted">In</span><b class="pos">${money(inc)}</b></div><div><span class="small muted">Out</span><b>${money(out)}</b></div><div><span class="small muted">Left</span><b class="${left<0?'neg':'pos'}">${money(left)}</b></div></div>
+    ${inc?`<div class="bar" title="Spent ${Math.round(out/inc*100)}% of income"><i class="${out>inc?'over':''}" style="width:${Math.min(100,out/inc*100)}%"></i></div><p class="small muted">${Math.round(out/inc*100)}% of income spent</p>`:''}
+    ${cats.length?`<p class="label" style="margin-top:6px">Where it goes · tap to set a limit</p>${cats.map(([c,v])=>{const lim=S.money.budget[c];const pct=lim?v/lim*100:(out?v/out*100:0);return `<button class="catrow" data-cat="${esc(c)}"><span>${CAT_EMO[c]||'•'} ${esc(c)}</span><span class="small"><b>${money(v)}</b>${lim?` / ${money(lim)}`:''}</span><span class="bar"><i class="${lim&&v>lim?'over':''}" style="width:${Math.min(100,pct)}%"></i></span></button>`}).join('')}`:''}
+    ${upcoming.length?`<p class="label" style="margin-top:6px">Bills still coming this month</p>${upcoming.map(i=>`<p class="small">📌 ${esc(i.label)} · <b>${money(i.amount)}</b> · ${fmtD(i.on)}</p>`).join('')}`:''}
+    <button class="btn-ghost small" id="monCur" style="align-self:flex-start">Currency: ${esc(S.money.cur||'$')}</button>`;
+  const sel=$('monCat');const cur=sel.value;sel.innerHTML=CATS[MN.kind].map(c=>`<option ${c===cur?'selected':''}>${c}</option>`).join('');
+  if(!$('monDate').value)$('monDate').value=dkey();
+  document.querySelectorAll('[data-mk]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mk===MN.kind));
+  const L=its.sort((a,b)=>a.on<b.on?1:-1);
+  $('monList').innerHTML=L.length?L.map(i=>`<button class="mrow" data-mid="${i.id}"><span>${CAT_EMO[i.cat]||'•'} ${esc(i.label)}<br><span class="small muted">${fmtD(i.on)}${i.recur==='monthly'?' · monthly':''}</span></span><span class="amt ${i.kind==='income'?'in':''}">${i.kind==='income'?'+':'−'}${money(i.amount)}</span></button>`).join(''):'<p class="muted small">Nothing this month yet. Add it above, or write it in the ✨ box on Now.</p>';
+}
+function monEdit(id){const it=S.money.items.find(x=>x.id===id);if(!it)return;
+  modalCard(`<p class="label">Edit</p><input type="text" id="meL" value="${esc(it.label)}" aria-label="What"><input type="number" id="meA" value="${it.amount}" step="0.01" aria-label="Amount">
+    <select id="meC" aria-label="Category">${CATS[it.kind].map(c=>`<option ${c===it.cat?'selected':''}>${c}</option>`).join('')}</select><input type="date" id="meD" value="${it.date}" aria-label="Date">
+    <label class="row small" style="gap:8px"><input type="checkbox" id="meR" ${it.recur==='monthly'?'checked':''}> Repeats every month</label>
+    <div class="wrap" style="gap:8px;width:100%"><button class="btn-main" id="meS">Save</button>${it.recur==='monthly'?'<button id="meStop">Stop repeating after this month</button>':''}<button class="btn-ghost small" id="meDel">Delete</button><button class="btn-ghost small" id="meX">Cancel</button></div>`);
+  $('meS').onclick=()=>{const b=clone(it);it.label=$('meL').value.trim()||it.label;it.amount=+$('meA').value||it.amount;it.cat=$('meC').value;it.date=$('meD').value||it.date;it.recur=$('meR').checked?'monthly':'none';H('money','edited',it.label,b,it);save();modalClose();toast('Saved.')};
+  if($('meStop'))$('meStop').onclick=()=>{const b=clone(it);it.end=MN.ym;H('money','stopped repeating',it.label,b,it);save();modalClose();toast('It stops after this month.')};
+  $('meDel').onclick=()=>{H('money','deleted',it.label,it,null);S.money.items=S.money.items.filter(x=>x!==it);save();modalClose();toast('Deleted. You can restore it from Edit history.')};
+  $('meX').onclick=modalClose}
+function addMoney(o,quiet){lifeFix();const it={id:uid(),kind:o.kind==='income'?'income':'expense',amount:Math.abs(+o.amount)||0,label:o.label||'Untitled',cat:o.cat&&CATS[o.kind==='income'?'income':'expense'].includes(o.cat)?o.cat:(o.kind==='income'?'Other':guessCat(o.label||'')),date:/^\d{4}-\d\d-\d\d$/.test(o.date||'')?o.date:dkey(),recur:o.recur==='monthly'?'monthly':'none'};
+  S.money.items.push(it);H('money','added',it.label,null,it);if(!quiet){save();render()}return it}
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-mk],[data-mym],[data-cat],[data-mid],#monCur');if(!t)return;
+  if(t.dataset.mk){MN.kind=t.dataset.mk;$('monCat').value='';renderMoney()}
+  else if(t.dataset.mym){MN.ym=ymShift(MN.ym,+t.dataset.mym);renderMoney()}
+  else if(t.dataset.mid)monEdit(t.dataset.mid);
+  else if(t.dataset.cat){const c=t.dataset.cat;modalCard(`<p class="label">${esc(c)}</p><p class="reason-text" style="font-size:1.3rem">Monthly limit</p><input type="number" id="blim" value="${S.money.budget[c]||''}" placeholder="e.g. 300" aria-label="Limit"><div class="row"><button class="btn-main" id="bS">Save</button><button class="btn-ghost small" id="bN">No limit</button></div>`);
+    $('bS').onclick=()=>{const v=+$('blim').value;if(v>0)S.money.budget[c]=v;save();modalClose()};$('bN').onclick=()=>{delete S.money.budget[c];save();modalClose()}}
+  else if(t.id==='monCur'){modalCard(`<p class="label">Currency</p><input type="text" id="curIn" maxlength="4" value="${esc(S.money.cur||'$')}" aria-label="Currency symbol"><div class="row">${['$','£','€','SAR','AED','QAR','KWD','₦','MAD'].map(c=>`<button class="chip" data-cu="${c}">${c}</button>`).join('')}</div><button class="btn-main" id="curS">Save</button>`);
+    $('scrollBody').querySelectorAll('[data-cu]').forEach(b=>b.onclick=()=>$('curIn').value=b.dataset.cu);$('curS').onclick=()=>{S.money.cur=$('curIn').value.trim()||'$';save();modalClose()}}
+});
+$('monForm').onsubmit=e=>{e.preventDefault();const a=+$('monAmt').value;if(!a){$('monAmt').focus();return}
+  addMoney({kind:MN.kind,amount:a,label:$('monWhat').value.trim()||$('monCat').value,cat:$('monCat').value,date:$('monDate').value,recur:$('monRec').checked?'monthly':'none'});
+  $('monAmt').value='';$('monWhat').value='';$('monRec').checked=false;toast(MN.kind==='income'?'Income added.':'Expense added.')};
+
+/* ---- goals ---- */
+const GL={term:'short'};
+function goalSteps(title){return ['Write down what "done" looks like for: '+title,'Pick the first small step and put it on a day','Do the first step','Halfway check: still the right goal?','Finish and mark it done']}
+function goalHTML(g){const n=g.steps.filter(s=>s.done).length,pct=g.steps.length?Math.round(n/g.steps.length*100):0;
+  const days=g.by?Math.ceil((pd(g.by)-pd(dkey()))/864e5):null;
+  return `<div class="goalc ${pct===100?'won':''}" data-gid="${g.id}">
+    <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><h3>${esc(g.title)}</h3><span class="small" style="white-space:nowrap"><b>${pct}%</b></span></div>
+    ${g.by?`<p class="small muted">By ${fmtD(g.by)} · ${days>=0?days+' days left':Math.abs(days)+' days past'}</p>`:''}
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <ul class="steps">${g.steps.map(s=>`<li class="${s.done?'done':''}"><input type="checkbox" data-gs="${s.id}" ${s.done?'checked':''} aria-label="${esc(s.text)}"><span style="flex:1">${esc(s.text)}</span></li>`).join('')}</ul>
+    <form class="inline-form" data-gadd><input type="text" placeholder="Add a step" aria-label="New step"><button type="submit">Add</button></form>
+    <div class="row">${g.steps.some(s=>!s.done)?'<button class="btn-calm small" data-ga="next">Next step → today</button>':''}${g.steps.length?'':'<button class="small" data-ga="split">Break it down</button>'}<button class="btn-ghost small" data-ga="edit">Edit</button><button class="btn-ghost small" data-ga="del">Delete</button></div></div>`}
+function renderGoals(){if(!$('goalsShort'))return;lifeFix();
+  ['short','long'].forEach(t=>{const L=S.goals.filter(g=>g.term===t);$(t==='short'?'goalsShort':'goalsLong').innerHTML=L.length?L.map(goalHTML).join(''):`<p class="muted small">${t==='short'?'Nothing for the next 3 months yet.':'No big goals yet. Al-Firdaws counts.'}</p>`});
+  document.querySelectorAll('[data-gt]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.gt===GL.term))}
+function addGoal(o,quiet){lifeFix();const g={id:uid(),title:o.title,term:o.term==='long'?'long':'short',by:/^\d{4}-\d\d-\d\d$/.test(o.by||'')?o.by:'',steps:(o.steps&&o.steps.length?o.steps:goalSteps(o.title)).map(x=>({id:uid(),text:x,done:false}))};
+  S.goals.push(g);H('goals','added',g.title,null,g);if(!quiet){save();render()}return g}
+$('goalForm').onsubmit=e=>{e.preventDefault();const v=$('goalTitle').value.trim();if(!v)return;addGoal({title:v,term:GL.term,by:$('goalBy').value});$('goalTitle').value='';$('goalBy').value='';toast('Goal added, with first steps. Edit them to fit.')};
+document.addEventListener('click',e=>{const b=e.target.closest('[data-gt]');if(b){GL.term=b.dataset.gt;renderGoals()}});
+$('tab-goals').addEventListener('change',e=>{const id=e.target.dataset.gs;if(!id)return;const g=S.goals.find(x=>x.steps.some(s=>s.id===id)),s=g.steps.find(x=>x.id===id);const b=clone(g);s.done=e.target.checked;H('goals',s.done?'ticked':'unticked',g.title+': '+s.text,b,g);
+  if(s.done){award(2,'Goal step: '+s.text);if(g.steps.every(x=>x.done)){confetti();chime();toast('Goal reached. Alhamdulillah.')}else toast('+2 sparks. Step done.')}save();render()});
+$('tab-goals').addEventListener('submit',e=>{const f=e.target.closest('[data-gadd]');if(!f)return;e.preventDefault();const g=S.goals.find(x=>x.id===f.closest('[data-gid]').dataset.gid),v=f.querySelector('input').value.trim();if(!v)return;const b=clone(g);g.steps.push({id:uid(),text:v,done:false});H('goals','added step to',g.title,b,g);save();render()});
+$('tab-goals').addEventListener('click',e=>{const a=e.target.closest('[data-ga]');if(!a)return;const g=S.goals.find(x=>x.id===a.closest('[data-gid]').dataset.gid);if(!g)return;const k=a.dataset.ga;
+  if(k==='next'){const s=g.steps.find(x=>!x.done);const tops=S.tasks.filter(x=>x.top&&!x.done).length;const t={id:uid(),title:s.text,top:tops<3,done:false,steps:[],open:false,due:dkey(),goal:g.id};S.tasks.push(t);H('todo','added',t.title,null,t);save();render();toast('On today\'s list.')}
+  else if(k==='split'){const b=clone(g);g.steps=goalSteps(g.title).map(x=>({id:uid(),text:x,done:false}));H('goals','broke down',g.title,b,g);save();render()}
+  else if(k==='del'){H('goals','deleted',g.title,g,null);S.goals=S.goals.filter(x=>x!==g);save();render();toast('Deleted. You can restore it from Edit history.')}
+  else if(k==='edit'){modalCard(`<p class="label">Edit goal</p><input type="text" id="geT" value="${esc(g.title)}" aria-label="Goal"><div class="row"><select id="geTerm" aria-label="Term"><option value="short" ${g.term==='short'?'selected':''}>Short-term</option><option value="long" ${g.term==='long'?'selected':''}>Long-term</option></select><input type="date" id="geB" value="${g.by||''}" aria-label="By when"></div>
+    <p class="label">Steps (one per line)</p><textarea id="geS" rows="5">${esc(g.steps.map(s=>s.text).join('\n'))}</textarea><div class="row"><button class="btn-main" id="geSave">Save</button><button class="btn-ghost small" id="geX">Cancel</button></div>`);
+    $('geSave').onclick=()=>{const b=clone(g);g.title=$('geT').value.trim()||g.title;g.term=$('geTerm').value;g.by=$('geB').value;const lines=$('geS').value.split('\n').map(x=>x.trim()).filter(Boolean);g.steps=lines.map(x=>{const o=b.steps.find(s=>s.text===x);return o?o:{id:uid(),text:x,done:false}});H('goals','edited',g.title,b,g);save();modalClose();toast('Saved.')};$('geX').onclick=modalClose}
+});
+
+/* ---- calendar: week + month ---- */
+const CAL={view:'week',off:0};
+function dayItems(d){const ym=d.slice(0,7);return{
+  tasks:S.tasks.filter(t=>t.due===d||(!t.due&&t.done&&t.doneAt&&dkey(new Date(t.doneAt))===d)),
+  money:monthItems(ym).filter(i=>i.on===d),goals:S.goals.filter(g=>g.by===d)}}
+function chipsFor(d){const I=dayItems(d);return [...I.tasks.map(t=>`<span class="cal-it ${t.done?'d':''}">${t.time?esc(t.time)+' ':''}${esc(t.title)}</span>`),...I.money.map(m=>`<span class="cal-it m">${m.kind==='income'?'+':'−'}${money(m.amount)} ${esc(m.label)}</span>`),...I.goals.map(g=>`<span class="cal-it g">🎯 ${esc(g.title)}</span>`)].join('')}
+function renderCal(){if(!$('calBody'))return;lifeFix();document.querySelectorAll('[data-cv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cv===CAL.view));const today=dkey();
+  if(CAL.view==='week'){const now=new Date();const start=addDays(now,-now.getDay()+CAL.off*7);
+    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous week">◀</button><b>${start.toLocaleDateString(undefined,{month:'short',day:'numeric'})} – ${addDays(start,6).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next week">▶</button></div>
+    <div class="cal-week">${[0,1,2,3,4,5,6].map(i=>{const d=dkey(addDays(start,i)),dt=pd(d);return `<button class="cal-day ${d===today?'today':''}" data-cd="${d}"><span class="dn">${dt.toLocaleDateString(undefined,{weekday:'short'})}<small>${dt.getDate()}</small></span><span class="its">${chipsFor(d)||'<span class="small muted">—</span>'}</span></button>`}).join('')}</div>`}
+  else{const n=new Date();const first=new Date(n.getFullYear(),n.getMonth()+CAL.off,1);const start=addDays(first,-first.getDay());
+    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous month">◀</button><b>${first.toLocaleDateString(undefined,{month:'long',year:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next month">▶</button></div>
+    <div class="cal-month">${['S','M','T','W','T','F','S'].map(x=>`<span class="h">${x}</span>`).join('')}${Array.from({length:42},(_,i)=>{const dt=addDays(start,i),d=dkey(dt),I=dayItems(d);
+      return `<button class="cal-cell ${dt.getMonth()!==first.getMonth()?'out':''} ${d===today?'today':''}" data-cd="${d}" aria-label="${fmtD(d)}"><span>${dt.getDate()}</span><span class="dots">${I.tasks.slice(0,4).map(()=>'<i></i>').join('')}${I.money.slice(0,2).map(()=>'<i class="m"></i>').join('')}${I.goals.map(()=>'<i class="g"></i>').join('')}</span></button>`}).join('')}</div>
+    <p class="small muted" style="margin-top:6px"><span style="color:var(--calm)">●</span> to-do &nbsp;<span style="color:var(--accent)">●</span> money &nbsp;● goal deadline</p>`}
+}
+function dayOpen(d){const I=dayItems(d);
+  modalCard(`<p class="label">${fmtD(d)}</p>
+    <div class="sp-sec">${I.tasks.length?I.tasks.map(t=>`<div class="sp-it"><input type="checkbox" data-dt="${t.id}" ${t.done?'checked':''} aria-label="Done"><span>${t.time?'<b>'+esc(t.time)+'</b> ':''}${esc(t.title)}</span><input type="date" data-dmv="${t.id}" value="${t.due||d}" aria-label="Move to" style="max-width:150px"></div>`).join(''):'<p class="small muted">No to-dos on this day.</p>'}
+    ${I.money.map(m=>`<p class="small">${m.kind==='income'?'💰':'💸'} ${esc(m.label)} · <b>${money(m.amount)}</b></p>`).join('')}${I.goals.map(g=>`<p class="small">🎯 Deadline: ${esc(g.title)}</p>`).join('')}</div>
+    <form class="inline-form" id="dAdd" style="width:100%"><input type="text" id="dAddT" placeholder="Add a to-do for this day" aria-label="New to-do"><input type="time" id="dAddTm" aria-label="Time (optional)" style="max-width:120px"><button type="submit">Add</button></form>
+    <button class="btn-ghost small" id="dX">Close</button>`);
+  $('scrollBody').querySelectorAll('[data-dt]').forEach(c=>c.onchange=()=>{const t=S.tasks.find(x=>x.id===c.dataset.dt);const b=clone(t);if(c.checked){finishTask(t)}else{t.done=false;t.doneAt=null}H('todo',c.checked?'done':'reopened',t.title,b,t);save();dayOpen(d)});
+  $('scrollBody').querySelectorAll('[data-dmv]').forEach(c=>c.onchange=()=>{const t=S.tasks.find(x=>x.id===c.dataset.dmv);const b=clone(t);t.due=c.value;H('todo','moved',t.title,b,t);save();toast('Moved to '+fmtD(c.value)+'.');dayOpen(d)});
+  $('dAdd').onsubmit=e=>{e.preventDefault();const v=$('dAddT').value.trim();if(!v)return;const t={id:uid(),title:v,top:false,done:false,steps:[],open:false,due:d,time:$('dAddTm').value||''};S.tasks.push(t);H('todo','added',v,null,t);save();dayOpen(d)};
+  $('dX').onclick=modalClose}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-cv],[data-co],[data-cd]');if(!b)return;
+  if(b.dataset.cv){CAL.view=b.dataset.cv;CAL.off=0;renderCal()}else if(b.dataset.co){CAL.off+=+b.dataset.co;renderCal()}else if(b.dataset.cd)dayOpen(b.dataset.cd)});
+
+/* ---- sort my messy list ---- */
+const WD=['sunday','monday','tuesday','wednesday','thursday','friday','saturday'];
+function whenIn(l){const low=l.toLowerCase(),now=new Date();
+  if(/\btomorrow\b/.test(low))return dkey(addDays(now,1));if(/\b(today|tonight)\b/.test(low))return dkey();
+  for(let i=0;i<7;i++)if(new RegExp('\\b'+WD[i]+'\\b').test(low)){let k=(i-now.getDay()+7)%7;if(k===0&&/next/.test(low))k=7;return dkey(addDays(now,k))}
+  const on=low.match(/\b(?:on the |the )?(\d{1,2})(?:st|nd|rd|th)\b/);if(on){const n=+on[1];if(n>=1&&n<=31){let d=new Date(now.getFullYear(),now.getMonth(),n);if(d<pd(dkey()))d=new Date(now.getFullYear(),now.getMonth()+1,n);return dkey(d)}}
+  const md=low.match(/\b(\d{1,2})\/(\d{1,2})\b/);if(md){let d=new Date(now.getFullYear(),+md[1]-1,+md[2]);if(d<pd(dkey()))d.setFullYear(d.getFullYear()+1);return dkey(d)}
+  return null}
+const timeIn=l=>{const m=l.match(/\b(?:at )?(\d{1,2})(?::(\d\d))?\s*(am|pm)\b/i)||l.match(/\bat (\d{1,2}):(\d\d)\b/i);if(!m)return'';let h=+m[1];if(m[3]){if(/pm/i.test(m[3])&&h<12)h+=12;if(/am/i.test(m[3])&&h===12)h=0}return String(h).padStart(2,'0')+':'+(m[2]||'00')};
+const cleanT=l=>l.replace(/\b(tomorrow|today|tonight|on (the )?\d{1,2}(st|nd|rd|th)?|(on )?(next )?(sunday|monday|tuesday|wednesday|thursday|friday|saturday)|at \d{1,2}(:\d\d)?\s*(am|pm)?|\d{1,2}(:\d\d)?\s*(am|pm)|every month|monthly)\b/gi,'').replace(/\s{2,}/g,' ').replace(/[\s,.-]+$/,'').trim();
+const cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
+function roughSort(text){const out={tasks:[],money:[],goals:[]};
+  text.split(/\n|;/).map(l=>l.replace(/^[\s\-*•·\d]+[.)]\s+|^[\s\-*•·]+/,'').trim()).filter(Boolean).forEach(l=>{
+    const amt=l.match(/[$£€]?\s?(\d[\d,]*(?:\.\d+)?)\s?(k\b)?/);const low=l.toLowerCase();
+    const isMoney=amt&&(/[$£€]|\b(pay|paid|bill|rent|salary|income|spent|spend|cost|bought|buy|owe|debt|earn|paycheck|wage|sar|aed|qar|kwd|dollars?|pounds?|euros?|budget|subscription|sadaqah|zakat|loan|insurance|fee)\b/i.test(l))&&!/\b\d{1,2}(:\d\d)?\s*(am|pm)\b/i.test(amt[0]+low.slice(low.indexOf(amt[0])+amt[0].length,low.indexOf(amt[0])+amt[0].length+3));
+    if(isMoney){const inc=/\b(salary|income|earn|earned|got paid|paycheck|wage|received|bonus)\b/i.test(l);let v=+amt[1].replace(/,/g,'');if(amt[2])v*=1000;
+      const label=cap(cleanT(l.replace(amt[0],' ').replace(/[$£€]/g,'').replace(/\b(pay|paid|spent|for|on)\b\s*$/i,'')).replace(/^\b(pay|paid)\b\s*/i,'Pay '))||'Untitled';
+      const rec=/\b(monthly|every month|rent|salary|subscription|insurance)\b/i.test(l);let dt=whenIn(l)||dkey();if(rec&&dt.slice(0,7)>dkey().slice(0,7))dt=dkey().slice(0,7)+dt.slice(7);out.money.push({kind:inc?'income':'expense',amount:v,label,cat:inc?'Salary':guessCat(l),date:dt,recur:/\b(monthly|every month|rent|salary|subscription|insurance)\b/i.test(l)?'monthly':'none'})}
+    else if(/\b(goal|this year|next year|by (the )?end of|in \d+ (months?|years?|weeks?)|someday|one day|want to (become|learn|save|finish|memori[sz]e|start|lose|get)|memori[sz]e|learn to)\b/i.test(l)){
+      const long=/\b(year|years|someday|one day|become|degree|career)\b/i.test(l);out.goals.push({title:cap(l),term:long?'long':'short',by:'',steps:[]})}
+    else{const due=whenIn(l);out.tasks.push({title:cap(cleanT(l))||cap(l),due,time:timeIn(l),steps:breakdown(l),top:false,_dated:!!due})}});
+  /* spread undated to-dos: max 3 per day, from today */
+  const load={};out.tasks.filter(t=>t.due).forEach(t=>load[t.due]=(load[t.due]||0)+1);S.tasks.filter(t=>!t.done&&t.due).forEach(t=>load[t.due]=(load[t.due]||0)+1);
+  out.tasks.filter(t=>!t.due).forEach(t=>{let i=0,d;do{d=dkey(addDays(new Date(),i++))}while((load[d]||0)>=3&&i<60);t.due=d;load[d]=(load[d]||0)+1});
+  return out}
+let SAMPLE=null;
+async function aiSort(text){
+  try{if(!(window.claude&&window.claude.use))return null;SAMPLE=SAMPLE||await window.claude.use('sample');if(!SAMPLE)return null;
+    const now=new Date();const prompt=`You turn a messy list written by an adult with ADHD into structured items. Today is ${dkey()} (${WD[now.getDay()]}). Return ONLY JSON, no prose:
+{"tasks":[{"title":"short, starts with a verb","due":"YYYY-MM-DD","time":"HH:MM or empty","steps":["3 to 5 tiny concrete steps; the first takes under 2 minutes"]}],
+"money":[{"kind":"income|expense","amount":number,"label":"short","cat":"one of ${[...CATS.expense,...CATS.income].join(', ')}","date":"YYYY-MM-DD","recur":"none|monthly"}],
+"goals":[{"title":"short","term":"short|long (long = more than 3 months)","by":"YYYY-MM-DD or empty","steps":["4 to 6 milestones"]}]}
+Rules: never invent items that are not in the list. Resolve relative dates from today. Give undated to-dos a date, spreading them so no day has more than 3. Rent, salary and subscriptions recur monthly.
+LIST:
+${text}`;
+    const r=await SAMPLE.json(prompt,{modelTier:'default'});if(r&&(r.tasks||r.money||r.goals))return{tasks:r.tasks||[],money:r.money||[],goals:r.goals||[]};return null}
+  catch(e){return null}}
+async function sortGo(){const text=$('sortIn').value.trim();if(!text){$('sortIn').focus();return}
+  const b=$('sortGo');b.disabled=true;b.textContent='Sorting...';
+  let r=await aiSort(text);if(!r)r=roughSort(text);b.disabled=false;b.textContent='✨ Sort it for me';
+  const sec=(k,title,L,fmt)=>L.length?`<p class="label" style="margin-top:6px">${title}</p>${L.map((x,i)=>`<label class="sp-it"><input type="checkbox" checked data-sp="${k}:${i}"><span>${fmt(x)}</span></label>`).join('')}`:'';
+  modalCard(`<p class="label">Here's the sorted version</p><p class="small muted">Untick anything you don't want. You can edit everything after.</p><div class="sp-sec">
+    ${sec('tasks','✅ To-dos',r.tasks,t=>`${esc(t.title)} <span class="due">${t.due?fmtD(t.due):'no date'}${t.time?' · '+esc(t.time):''}</span>${t.steps&&t.steps.length?`<br><span class="small muted">${t.steps.length} small steps</span>`:''}`)}
+    ${sec('money','💰 Money',r.money,m=>`${m.kind==='income'?'+':'−'}${money(+m.amount||0)} ${esc(m.label)} <span class="small muted">· ${esc(m.cat||'')}${m.recur==='monthly'?' · monthly':''}</span>`)}
+    ${sec('goals','🎯 Goals',r.goals,g=>`${esc(g.title)} <span class="small muted">· ${g.term==='long'?'long-term':'short-term'}</span>`)}
+    </div><div class="row" style="width:100%"><button class="btn-main" id="spAdd">Add these</button><button class="btn-ghost small" id="spX">Cancel</button></div>`);
+  $('spAdd').onclick=()=>{let n=0;S.tasks=S.tasks.filter(t=>!t.example);S.examples=false;$('scrollBody').querySelectorAll('[data-sp]').forEach(c=>{if(!c.checked)return;const [k,i]=c.dataset.sp.split(':');const x=r[k][+i];n++;
+      if(k==='tasks'){const tops=S.tasks.filter(t=>t.top&&!t.done).length;const t={id:uid(),title:x.title,top:x.due===dkey()&&tops<3,done:false,open:false,due:x.due||dkey(),time:x.time||'',steps:(x.steps||[]).map(s=>({id:uid(),text:String(s),done:false}))};S.tasks.push(t);H('todo','added',t.title,null,t)}
+      else if(k==='money')addMoney(x,true);else addGoal(x,true)});
+    S.examples=false;S.tasks=S.tasks.filter(t=>!t.example);$('sortIn').value='';save();modalClose();toast(n+' added. See Plan → Calendar.')};
+  $('spX').onclick=modalClose}
+$('sortGo').onclick=sortGo;
+
+/* ---------- accounts: Supabase (public site) / Claude (artifact) + landing ---------- */
+const SUPA={url:'',key:''};/* filled in after Supabase setup: Project URL + anon/publishable key (both public by design) */
+const AU={sb:null,user:null};
+const inArtifact=()=>!!(window.claude&&window.claude.use)||/claude\.ai|claudeusercontent/.test(location.hostname);
+function landingShow(on){$('landing').hidden=!on;document.body.style.overflow=on?'hidden':''}
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+function authForm(msg){
+  const box=$('ldAuth');
+  if(inArtifact()){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Continue with your Claude account</button>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};$('ldNote').textContent='You\'re signed in through Claude. Your data is private to your account.';return}
+  if(!SUPA.url){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Try it now</button><p class="small muted">Accounts are being switched on. Until then, everything saves on this device.</p>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};return}
+  box.innerHTML=`<input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password">
+    <div class="row"><button class="btn-main" id="auIn">Sign in</button><button class="btn-calm" id="auUp">Create account</button></div>
+    <button class="btn-ghost small" id="auF">Forgot password?</button>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
+  const say=t=>{$('auMsg').textContent=t};
+  const creds=()=>{const email=$('auE').value.trim(),password=$('auP').value;if(!/\S+@\S+\.\S+/.test(email)){say('Enter your email.');return null}if(password.length<8){say('Password needs 8 or more characters.');return null}return{email,password}};
+  $('auIn').onclick=async()=>{const c=creds();if(!c)return;say('Signing in...');const {error}=await AU.sb.auth.signInWithPassword(c);if(error)say(error.message.includes('Invalid')?'Email or password is wrong.':error.message)};
+  $('auUp').onclick=async()=>{const c=creds();if(!c)return;say('Creating your account...');const {data,error}=await AU.sb.auth.signUp({...c,options:{emailRedirectTo:location.origin+location.pathname}});
+    if(error)say(error.message);else if(!data.session)say('Check your email and tap the link to confirm. Then sign in here.')};
+  $('auF').onclick=async()=>{const email=$('auE').value.trim();if(!email){say('Type your email first.');return}const {error}=await AU.sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});say(error?error.message:'Check your email for a reset link.')};
+}
+async function cloudInit(user){
+  if(S.uid&&S.uid!==user.id){S=seed();}S.uid=user.id;
+  SYNC.state='wait';syncBadge();
+  try{const {data,error}=await AU.sb.from('fastaqim_state').select('state').eq('user_id',user.id).maybeSingle();if(error)throw error;
+    const remote=data&&data.state;
+    if(remote&&(remote.savedAt||0)>(S.savedAt||0)){S=Object.assign({},S,clone(remote));S.uid=user.id;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}toast('Welcome back. Your plan is loaded.')}
+    SYNC.ref={set:async o=>{const {error}=await AU.sb.from('fastaqim_state').upsert({user_id:user.id,state:o.state,updated_at:new Date().toISOString()});if(error)throw error}};
+    SYNC.state='on';syncBadge();if(!remote||(S.savedAt||0)>(remote.savedAt||0)){SYNC.dirty=true;dbPush()}
+  }catch(e){SYNC.state='local';syncBadge();toast('Couldn\'t reach your account. Saving on this device for now.')}
+  lifeFix();render();
+}
+function acctRender(){const b=$('acctBox');if(!b)return;
+  b.innerHTML=AU.user?`<p class="label">Account</p><p class="small">${esc(AU.user.email||'')}</p><div class="row"><button class="small" id="acPw">Change password</button><button class="btn-ghost small" id="acOut">Sign out</button></div>`:'';
+  if(!AU.user)return;
+  $('acOut').onclick=async()=>{if(SYNC.dirty)await dbPush();await AU.sb.auth.signOut();try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
+  $('acPw').onclick=()=>pwModal()}
+function pwModal(){modalCard(`<p class="label">New password</p><input type="password" id="npw" placeholder="8+ characters" aria-label="New password"><div class="row"><button class="btn-main" id="npS">Save</button><button class="btn-ghost small" id="npX">Cancel</button></div>`);
+  $('npS').onclick=async()=>{const v=$('npw').value;if(v.length<8){toast('8 or more characters.');return}const {error}=await AU.sb.auth.updateUser({password:v});toast(error?error.message:'Password changed.');if(!error)modalClose()};$('npX').onclick=modalClose}
+async function authBoot(){
+  if(inArtifact()){if(!S.started&&!S.name){authForm();landingShow(true)}return}
+  if(!SUPA.url){if(!S.started){authForm();landingShow(true)}return}
+  landingShow(true);$('ldAuth').innerHTML='<p class="small muted">Loading...</p>';
+  try{await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');AU.sb=window.supabase.createClient(SUPA.url,SUPA.key)}
+  catch(e){$('ldAuth').innerHTML='<p class="small">Couldn\'t connect. Check your internet and refresh.</p>';return}
+  AU.sb.auth.onAuthStateChange((ev,session)=>{
+    if(ev==='PASSWORD_RECOVERY'){landingShow(false);pwModal();}
+    const u=session&&session.user;
+    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender()}
+    else if(!u&&AU.user){AU.user=null;landingShow(true);authForm()}
+  });
+  const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=seed();lifeFix();authForm();}
+}
+
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
   const xs=card.querySelectorAll(':scope > .xp, :scope > p.muted.small:not([id]), :scope > .coach-note, :scope > ul.tips, :scope > p.small:not([id]), :scope > p.label + p.small');
@@ -1700,8 +2054,8 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();if(!T.running)drawTimer()}
-document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Strict coach on.':'Firm coach on.')});
-renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();if(!T.running)drawTimer()}
+document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Brief mode.':'Explain mode.')});
+renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
 })();
 </script>
