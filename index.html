@@ -581,7 +581,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-logo .ld-name{cursor:pointer;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,currentColor 55%,transparent)}
 #landing .ld-h{margin-top:48px!important}
 #landing .ld-logo{margin-top:32px!important}#landing .ld-logo .ld-brand{font-size:2.3rem!important}#landing .ld-logo .ld-name{font-size:1rem!important;margin-top:4px}
-#landing .ld-sub2{margin-top:14px!important;font-size:.98rem!important;color:var(--lmuted,var(--muted));max-width:30ch;display:block!important;text-align:center;line-height:1.5}
+#landing .ld-go1{display:none!important}#landing .ld-sub2{margin-top:12px!important;font-size:.88rem!important;color:var(--lmuted,var(--muted));max-width:30ch;display:block!important;text-align:center;line-height:1.5}
 #landing .ld-sub2 .ld-adhd{font-weight:700;color:var(--ltext,var(--ink))}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
@@ -663,8 +663,8 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
     
     <div class="ld-tools">
-      <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
-      <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
+      <div class="c2"><b>✅</b><span>To-do</span></div><div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div>
+      <div class="c3"><b>🎯</b><span>Goals</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c4"><b>💰</b><span>Money</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
     <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldRe" hidden>↻ Refresh</button><a class="ld-home" id="ldSaf" href="https://alfirdows.github.io/fastaqim/" target="_blank" rel="noopener" hidden>🧭 Open in browser</a><button type="button" class="ld-home" id="ldDl">🖨️ Printables</button></div>
     <p class="ld-free">Free · No ads · 26 languages</p>
@@ -3062,7 +3062,7 @@ const AYAH={
 };
 const QWORD={en:"Qur'an",om:"Qur'aana",so:'Quraanka',fr:'Coran',de:'Koran',es:'Corán',it:'Corano',pt:'Alcorão',nl:'Koran',tr:"Kur'an",id:"Al-Qur'an",ms:'Al-Quran',ur:'قرآن',fa:'قرآن',ps:'قرآن',bn:'কুরআন',hi:'क़ुरआन',ru:'Коран',sw:"Qur'ani",ha:"Alƙur'ani",yo:'Al-Kurani',uz:'Qurʼon',zh:'古兰经',am:'ቁርኣን'};
 function ayahApply(l){const a=AYAH[l]||AYAH.en,ar=l==='ar';
-  {const S2={en:'A calm planner for {A}, and for everyone.',ar:'مخطِّط هادئ لأصحاب {A}، وللجميع.',om:'Karoora tasgabbaa\'aa namoota {A} qabaniif, akkasumas nama hundaaf.',so:'Qorshe xasilloon oo loogu talagalay dadka qaba {A}, iyo qof kasta.'};const e=$('ldSub2');if(e){const k=l.split('-')[0];e.classList.toggle('notranslate',!!S2[k]);e.innerHTML=esc(S2[k]||S2.en).replace('{A}','<button type="button" class="ld-adhd" id="ldInfo">ADHD</button>')}}const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
+  {const S2={en:'For {A} & everyone',ar:'لأصحاب {A} وللجميع',om:'{A} qabaniif fi nama hundaaf',so:'Dadka qaba {A} iyo qof kasta'};const e=$('ldSub2');if(e){const k=l.split('-')[0];e.classList.toggle('notranslate',!!S2[k]);e.innerHTML=esc(S2[k]||S2.en).replace('{A}','<button type="button" class="ld-adhd" id="ldInfo">ADHD</button>')}}const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
   if($('ayS'))$('ayS').textContent=ar?'القرآن الكريم، سورة هود ١١٢':(QWORD[l]||QWORD[l.split('-')[0]]||"Qur'an")+', Hūd 11:112';
   if($('ayL'))$('ayL').href=ar?'https://quran.com/ar/11:112':'https://quran.com/11:112?translations='+(a[2]||131);
   document.querySelectorAll('#ldName,#hdName').forEach(n=>{n.textContent=ar?'فَٱسْتَقِمْ':a[3];n.classList.toggle('arq',ar);n.lang=ar?'ar':'';n.dir=ar?'rtl':'auto'});
