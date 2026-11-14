@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Fastaqim</title>
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#0f766e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fastaqim"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Amiri+Quran&family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;600;800&family=Noto+Naskh+Arabic:wght@400;600;700&family=Nunito:wght@400;700;800&family=Poppins:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&family=Scheherazade+New:wght@400;700&family=Amiri:wght@400;700&family=Amiri+Quran&family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@400;600;800&family=Noto+Naskh+Arabic:wght@400;600;700&family=Nunito:wght@400;700;800&family=Poppins:wght@400;600;700;800&display=swap">
 <style>
 /* Layout: one calm column; the "Now" card is the single loud thing, everything else is quiet. */
 :root{
@@ -140,7 +141,7 @@ details[open] summary{margin-bottom:10px}
 .modal{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--ink) 55%,transparent);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .modal .card{max-width:460px;width:100%;text-align:center;align-items:center;border:2.5px solid var(--accent)}
 .reason-text{font-family:var(--display);font-size:1.3rem;font-weight:600;line-height:1.5;overflow-wrap:anywhere}
-.reason-text[dir=rtl],.ar{font-family:"Amiri","Noto Naskh Arabic","Geeza Pro",serif;font-size:1.7rem;line-height:1.9;font-weight:700}
+.reason-text[dir=rtl],.ar{font-family:"Scheherazade New","Amiri","Geeza Pro",serif;font-size:1.7rem;line-height:1.9;font-weight:700}
 .reason{display:flex;gap:10px;align-items:flex-start;justify-content:space-between;border-bottom:1px solid var(--line);padding-block:10px}
 .reason:last-child{border-bottom:0}
 .reason .t{min-width:0;overflow-wrap:anywhere;flex:1;display:flex;flex-direction:column;gap:2px}
@@ -380,8 +381,8 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .langSel{margin:0;max-width:110px;font-size:.78rem;padding:6px 8px}
 .ld-top{gap:8px;flex-wrap:nowrap}
 .ld-brand,.brand b{font-family:"Poppins",system-ui,sans-serif;font-weight:800;letter-spacing:0}
-.ld-brand .ar,.brand .ar{font-family:"Aref Ruqaa","Amiri",serif;font-weight:700}
-.ld-ayah{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:-6px}.ld-ayah .ar{font-family:"Amiri Quran","Amiri",serif;font-size:1.45rem;color:var(--k2);margin:0;line-height:1.9}.ld-ayah p:not(.ar){margin:0;font-size:.85rem;color:var(--lmuted);font-style:italic}.ld-ayah small{color:var(--lmuted);font-size:.72rem;font-weight:700;letter-spacing:.04em}.ld-top .ld-brand{font-size:1rem;white-space:nowrap;margin:0}.ld-top>*{flex:1}.ld-top .ld-login{flex:0 0 auto}.ld-lang{position:relative;display:flex}.ld-lang-b{border:1.5px solid var(--lline);border-radius:99px;padding:.45rem .8rem;font-weight:800;font-size:.85rem;white-space:nowrap}.ld-lang .langSel{position:absolute;inset:0;opacity:0;width:100%;max-width:none!important;cursor:pointer}.ld-top{display:grid!important;grid-template-columns:1fr auto 1fr}.ld-top .ld-lang{justify-self:start}.ld-top .ld-login{justify-self:end}.ld-top .ld-brand .ar{font-size:1.25rem}
+.ld-brand .ar,.brand .ar{font-family:"Scheherazade New","Amiri",serif;font-weight:700}
+.ld-ayah{display:flex;flex-direction:column;align-items:center;gap:0;margin-top:-6px}.ld-ayah .ar{font-family:"Scheherazade New","Amiri Quran",serif;font-size:1.45rem;color:var(--k2);margin:0;line-height:1.9}.ld-ayah p:not(.ar){margin:0;font-size:.85rem;color:var(--lmuted);font-style:italic}.ld-ayah small{color:var(--lmuted);font-size:.72rem;font-weight:700;letter-spacing:.04em}.ld-top .ld-brand{font-size:1rem;white-space:nowrap;margin:0}.ld-top>*{flex:1}.ld-top .ld-login{flex:0 0 auto}.ld-lang{position:relative;display:flex}.ld-lang-b{border:1.5px solid var(--lline);border-radius:99px;padding:.45rem .8rem;font-weight:800;font-size:.85rem;white-space:nowrap}.ld-lang .langSel{position:absolute;inset:0;opacity:0;width:100%;max-width:none!important;cursor:pointer}.ld-top{display:grid!important;grid-template-columns:1fr auto 1fr}.ld-top .ld-lang{justify-self:start}.ld-top .ld-login{justify-self:end}.ld-top .ld-brand .ar{font-size:1.25rem}
 #landing .ld{padding:14px 16px 40px;gap:14px}#landing .ld-h{font-size:clamp(1.7rem,7.2vw,2.8rem);margin:2px 0 0}#landing .ld-sub{font-size:1rem;margin-top:-6px}
 #landing .ld-go{font-size:1.1rem;padding:.8rem 2rem}.ld-tools div{padding:10px 2px 8px}.ld-tools b{width:42px;height:42px;font-size:1.5rem}
 #landing .ld-phone{width:220px}
@@ -414,11 +415,11 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .ld-logo{display:flex;flex-direction:column;align-items:center;line-height:1.1}
 .ld-name{margin:2px 0 0;font-size:.8rem;font-weight:700;color:var(--k2,var(--calm));white-space:nowrap}
 .ld-name:empty{display:none}
-.ld-name.arq{font-family:"Amiri Quran","Amiri",serif;font-size:1.15rem;font-weight:400;line-height:1.5;letter-spacing:0}
-.ld-ayah .ayq{font-family:"Amiri Quran","Amiri",serif}
+.ld-name.arq{font-family:"Scheherazade New","Amiri Quran",serif;font-size:1.15rem;font-weight:400;line-height:1.5;letter-spacing:0}
+.ld-ayah .ayq{font-family:"Scheherazade New","Amiri Quran",serif}
 .ld-ayah u,.ayt u{text-decoration:underline;text-decoration-color:var(--accent);text-decoration-thickness:2px;text-underline-offset:6px}
 .ld-ayah .ayt{max-width:34ch;text-align:center;font-style:normal!important;font-size:.85rem;color:var(--lmuted);margin:0;line-height:1.55}
-.ld-ayah .ayt[lang=ar]{font-family:"Noto Naskh Arabic","Amiri",serif;font-size:.92rem;line-height:1.9;max-width:38ch}
+.ld-ayah .ayt[lang=ar]{font-family:"IBM Plex Sans Arabic","Geeza Pro",sans-serif;font-size:.92rem;line-height:1.9;max-width:38ch}
 .ld-ayah small{letter-spacing:0!important}
 .ay-listen{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font-size:.75rem;font-weight:700;color:var(--k2,var(--calm));text-decoration:none;border:1.5px solid var(--lline,var(--line));border-radius:99px;padding:4px 10px}
 .ay-listen svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
@@ -434,9 +435,9 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .lnk{background:none;border:0;padding:0;min-height:0;color:var(--calm);font-weight:800;text-decoration:underline;cursor:pointer;font-size:inherit}
 .ld-note a{color:inherit}
 /* Arabic / RTL typography */
-:root[dir=rtl] body,:root[dir=rtl] #landing{--body:"Noto Naskh Arabic","Amiri",system-ui,sans-serif;--display:"Noto Naskh Arabic","Amiri",system-ui,sans-serif}
+:root[dir=rtl] body,:root[dir=rtl] #landing{--body:"IBM Plex Sans Arabic","Geeza Pro",system-ui,sans-serif;--display:"IBM Plex Sans Arabic","Geeza Pro",system-ui,sans-serif}
 :root[lang=ar] body{line-height:1.8}
-:root[lang=ar] h1,:root[lang=ar] h2,:root[lang=ar] h3,:root[lang=ar] .ld-h{font-family:"Noto Naskh Arabic","Amiri",serif;font-weight:700;line-height:1.5;letter-spacing:0}
+:root[lang=ar] h1,:root[lang=ar] h2,:root[lang=ar] h3,:root[lang=ar] .ld-h{font-family:"IBM Plex Sans Arabic","Geeza Pro",sans-serif;font-weight:700;line-height:1.5;letter-spacing:0}
 :root[dir=rtl] *{letter-spacing:0!important}
 :root[dir=rtl] .label,:root[dir=rtl] .ld-sec,:root[dir=rtl] small{text-transform:none!important}
 :root[dir=rtl] .ld-brand{font-family:"Poppins",system-ui,sans-serif}
@@ -449,7 +450,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .ipop>div{background:var(--surface);color:var(--ink);max-width:420px;border-radius:20px;padding:18px 18px 14px;display:flex;flex-direction:column;gap:10px;animation:ldUp .25s ease-out}
 .ipop h3{font-size:1.05rem}.ipop p{font-size:.92rem;line-height:1.65}
 
-.hd-name{font-size:.85rem;color:var(--calm);font-weight:700}.hd-name.arq{font-family:"Amiri Quran","Amiri",serif;font-weight:400;font-size:1.05rem}
+.hd-name{font-size:.85rem;color:var(--calm);font-weight:700}.hd-name.arq{font-family:"Scheherazade New","Amiri Quran",serif;font-weight:400;font-size:1.05rem}
 .hype{position:fixed;left:50%;bottom:calc(70px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:60;display:flex;align-items:center;gap:10px;max-width:min(92vw,460px);background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-inline-start:4px solid var(--accent);border-radius:16px;padding:10px 8px 10px 12px;box-shadow:0 12px 28px -14px rgba(0,0,0,.45);transition:opacity .5s ease,transform .5s ease}
 .hype.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}.hype p{margin:0;font-size:.88rem;line-height:1.45;flex:1}.hype .hy-i{color:var(--accent);font-size:1.1rem}
 .hype button{min-height:0;width:30px;height:30px;padding:0;border-radius:50%;border:0;background:transparent;color:var(--muted);font-size:.9rem;flex:0 0 30px}
@@ -470,7 +471,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .cz-b{width:40px;height:40px;min-height:0;padding:0;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font-size:1rem}.cz-b.on{background:var(--calm);color:#fff;border-color:var(--calm)}
 .cz-chip{font-size:.75rem;font-weight:700;color:var(--muted);background:var(--surface);border-radius:99px;padding:6px 10px;border:1.5px solid var(--line)}
 .cz-mid{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;position:relative;z-index:2;pointer-events:none}.cz-mid .cz-go{pointer-events:auto;margin-top:10px}
-.cz-ar{font-family:"Amiri Quran","Amiri",serif;font-size:clamp(1.4rem,6vw,2.3rem);line-height:2;color:var(--calm);margin:0;max-height:40vh;overflow:auto}
+.cz-ar{font-family:"Scheherazade New","Amiri Quran",serif;font-size:clamp(1.4rem,6vw,2.3rem);line-height:2;color:var(--calm);margin:0;max-height:40vh;overflow:auto}
 .cz-tr{font-size:.9rem;margin:0;font-style:italic}.cz-en{margin:0;max-width:36ch}
 .cz-n{font-family:var(--display);font-size:clamp(3.5rem,18vw,6rem);line-height:1;margin-top:10px;color:var(--ink)}.cz-n.pulse{animation:czp .25s ease-out}
 @keyframes czp{from{opacity:.55}to{opacity:1}}
@@ -493,27 +494,67 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .hisn-p{background:var(--bg);width:min(92vw,400px);height:100%;overflow:auto;padding:calc(14px + env(safe-area-inset-top,0px)) 16px 24px;display:flex;flex-direction:column;gap:12px;animation:hisnIn .3s ease-out}
 :root[dir=rtl] .hisn{justify-content:flex-start}
 @keyframes hisnIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
-.hisn-h{display:flex;justify-content:space-between;align-items:center;gap:8px}.hisn-h .ar{font-family:"Amiri",serif;color:var(--calm);font-weight:400;margin-inline-start:4px}
+.hisn-h{display:flex;justify-content:space-between;align-items:center;gap:8px}.hisn-h .ar{font-family:"Scheherazade New",serif;color:var(--calm);font-weight:400;margin-inline-start:4px}
 .hisn-l{display:flex;flex-direction:column;gap:8px}.hisn-i{display:flex;align-items:center;gap:12px;background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px}.hisn-i.on{border-color:var(--calm)}
 .hisn-i span{display:flex;flex-direction:column}.hisn-i small{color:var(--muted);font-size:.75rem}
 .hisn-pl{width:44px;height:44px;min-height:0;padding:0;border-radius:50%;background:var(--calm);color:#fff;border:0;font-size:1rem;flex:0 0 44px}
 .hisn-a{text-align:center;text-decoration:none;padding:.8rem;border-radius:99px}.hisn-s{color:var(--calm);text-align:center}
+
+.hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
+.modal{z-index:85}.toast{z-index:96}
+.qt-bar{position:fixed;top:calc(8px + env(safe-area-inset-top,0px));inset-inline-start:50%;transform:translateX(-50%);z-index:90;border-radius:999px;padding:.45rem 1rem;background:var(--ink);color:var(--bg);border:0;font-variant-numeric:tabular-nums;box-shadow:0 6px 20px color-mix(in srgb,var(--ink) 25%,transparent);max-width:86vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html[dir=rtl] .qt-bar{transform:translateX(50%)}
+.qt-big{font-size:3.2rem;font-weight:800;text-align:center;font-variant-numeric:tabular-nums;margin:6px 0}
+.qt-pre{flex-wrap:wrap;gap:6px}.chip.on{background:var(--calm);color:#fff;border-color:var(--calm)}
+.off-badge{position:fixed;bottom:calc(64px + env(safe-area-inset-bottom,0px));inset-inline-start:12px;z-index:46;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:.4rem .7rem;max-width:70vw}
+.dv{max-height:62vh;overflow-y:auto;border:1.5px solid var(--line);border-radius:14px;margin-top:8px;background:var(--surface)}
+.dv-h{display:grid;grid-template-columns:62px 1fr;min-height:52px;border-top:1px solid var(--line);cursor:pointer}.dv-h:first-child{border-top:0}
+.dv-l{font-size:.72rem;color:var(--muted);padding:4px 6px;text-align:end;white-space:nowrap}
+.dv-c{position:relative;display:flex;flex-direction:column;gap:3px;padding:3px 6px;border-inline-start:1px solid var(--line)}
+.dv-it{display:block;text-align:start;font-size:.85rem;padding:.3rem .5rem;border-radius:8px;background:color-mix(in srgb,var(--calm) 16%,var(--surface));border:0;border-inline-start:3px solid var(--calm);color:var(--ink);width:100%}
+.dv-it.s{background:color-mix(in srgb,var(--accent) 12%,var(--surface));border-inline-start-color:var(--accent)}.dv-it.d{opacity:.55;text-decoration:line-through}
+.dv-all{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}.dv-all .dv-it{width:auto}
+.ig-wrap{display:grid;gap:12px}@media(min-width:620px){.ig-wrap{grid-template-columns:1fr 1fr}}.ig-col{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface)}.ig-h{font-weight:700;margin:0 0 6px}
+.ig{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ig}.ig-s{display:grid;grid-template-columns:28px 40px 1fr;align-items:center;gap:6px;counter-increment:ig}.ig-s::before{content:counter(ig);width:26px;height:26px;border-radius:50%;background:var(--calm);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}.ig-i{width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--calm) 14%,var(--surface));display:grid;place-items:center;font-size:1.25rem}
+.hj{display:block;font-weight:400;font-size:.78rem;color:var(--muted)}.hjd{display:block;font-style:normal;font-size:.62rem;color:var(--muted);line-height:1}
+.ld-today{width:100%;max-width:440px;margin:6px auto 0;padding:12px 14px;border-radius:18px;background:color-mix(in srgb,var(--calm) 9%,var(--surface));border:1.5px solid color-mix(in srgb,var(--calm) 25%,transparent);text-align:center;display:grid;gap:6px}
+.ldt-d{margin:0;display:grid;gap:1px}.ldt-d span{font-size:.85rem;color:var(--muted)}.ldt-n{margin:0;font-size:.95rem}.ldt-n b{color:var(--calm)}
+.ldt-row{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.ldt-row span{display:grid;padding:5px 2px;border-radius:10px;background:var(--surface)}.ldt-row small{font-size:.66rem;color:var(--muted)}.ldt-row b{font-size:.74rem;white-space:nowrap;font-variant-numeric:tabular-nums}
+.ldt-row span.on{background:var(--calm);color:#fff}.ldt-row span.on small{color:#fff}.ldt-w{margin:0;font-size:.72rem;color:var(--muted)}.ldt-loc{background:none;border:0;padding:0;color:var(--calm);text-decoration:underline;font-size:inherit}
+.ld-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:14px 0 4px}.ld-lb{min-height:46px;padding:.65rem 1.1rem;border-radius:14px;font-size:1rem;font-weight:600;background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
+.ld-ayah{gap:10px!important;margin-bottom:6px}.ld-ayah .ayt{margin-top:2px!important;line-height:1.7!important}.ld-ayah #ayS{display:block;margin-top:-2px;opacity:.85}
+.ay-listen{font-size:.66rem!important;padding:3px 9px!important;margin-top:4px!important;gap:4px!important}.ay-listen svg{width:13px!important;height:13px!important}
+body{padding-bottom:84px}
+:root[lang=om] .ld-h,:root[lang=so] .ld-h{font-size:clamp(1.5rem,6.6vw,2rem)!important;line-height:1.15}
+.ld-ayah .ayq{font-family:"Scheherazade New",serif!important;font-weight:700;font-size:1.75rem;color:#0b5f56;letter-spacing:0!important;word-spacing:.08em;line-height:2.1;max-width:100%;-webkit-font-smoothing:antialiased;font-synthesis:none}
+.ld-ayah .ayq .orn{color:#b7791f;font-weight:400;margin:0 .18em;font-size:.95em}
+.ld-ayah u,.ayt u{text-decoration:underline!important;text-decoration-color:var(--accent)!important;text-decoration-thickness:2px!important;text-decoration-skip-ink:none!important;-webkit-text-decoration-skip:none;text-underline-offset:.62em!important}
+.ayt u{text-underline-offset:4px!important}
+html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *{max-width:100%;overflow-wrap:break-word}
+.ld-top .ld-brand{font-size:1.6rem!important;line-height:1.1}.ld-top .ld-name{font-size:.9rem}.ld-top .ld-name.arq{font-size:1.2rem}
+.ld-lang-b{font-size:.72rem!important;padding:.3rem .6rem!important;border-width:1px!important}.ld-top .ld-login{font-size:.75rem!important;padding:.32rem .7rem!important;border-width:1px!important;min-height:32px}
+.brand b{font-size:1.3rem}
+.ld-home{margin-top:10px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:.55rem 1.1rem;font-weight:700;font-size:.9rem;min-height:44px}
+.gd-note{margin:2px 0 6px;font-size:.78rem}
+.dv-now{position:absolute;inset-inline:0;height:2px;background:#e11d48;pointer-events:none}.dv-now::before{content:"";position:absolute;inset-inline-start:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:#e11d48}
 </style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
     <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><button class="ld-login" id="ldLogin">Sign in</button></div>
-    <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><u>فَاسْتَقِمْ</u> كَمَا أُمِرْتَ</p><p class="ayt" id="ayT" dir="auto"></p><small id="ayS"></small><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg><span>Listen on Quran.com</span></a></div>
-    <h1 class="ld-h">Can't start?<br><span>Start in 2 minutes.</span></h1>
+    <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><span class="orn">﴿</span><u>فَاسْتَقِمْ</u> كَمَا أُمِرْتَ<span class="orn">﴾</span></p><p class="ayt" id="ayT" dir="auto"></p><small id="ayS"></small><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg><span>Listen on Quran.com</span></a></div>
+    <div class="ld-today" id="ldToday" aria-live="polite"></div>
+    <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
     <p class="ld-tag">Turn your ADHD into what changes your life.</p>
     <p class="ld-sub"><span>Built for ADHD</span> <button class="ld-i" id="ldInfo" aria-label="What is ADHD?">i</button> <span>Open to everyone.</span></p>
     <div class="ld-tools">
-      <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c4"><b>💰</b><span>Money</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
-      <div class="c2"><b>🕌</b><span>Salah</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Coach</span></div>
+      <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
+      <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
     <button class="btn-main ld-go" id="ldStart">Create account</button>
-    <p class="ld-free">100% free, always · No ads · 26 languages</p>
+    <button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button>
+    <p class="ld-free">Free · No ads · 26 languages</p>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
       <div class="ld-mrow"><span class="ld-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" cx="18" cy="18" r="15"/></svg><b>75%</b></span><span><b>Today</b><br><small>Level 4 · 🔥 6 days</small></span><span class="ld-spark">✦ 128</span></div>
@@ -532,7 +573,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <div id="ldAuth" class="ld-auth"></div>
     <p class="ld-swap ld-sw-in"><span>No account?</span> <button class="lnk" data-at2="up">Register</button></p><p class="ld-swap ld-sw-up"><span>Already have one?</span> <button class="lnk" data-at2="in">Sign in</button></p>
     <p class="ld-free">Fastaqim is 100% free, always. No ads, no paid plan.</p></div></div>
-    <p class="small muted ld-note" id="ldNote"><a href="#" class="privLink">Privacy</a> · <a href="#" id="ldFb">💡 Suggest an idea</a></p>
+    <div class="ld-note ld-btns" id="ldNote"><button type="button" class="ld-lb privLink">🔒 Privacy</button><button type="button" class="ld-lb" id="ldFb">💡 Suggest an idea</button></div>
   </div>
 </div>
 <div class="wrap">
@@ -545,6 +586,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <div class="hud">
       <span class="tring" id="tRing" title="Today's progress"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="tRingP" cx="18" cy="18" r="15"/></svg><b id="tRingN">0%</b></span>
       <div class="sparks" title="Sparks you can spend"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.9L21 12l-6.6 3.1L12 22l-2.4-6.9L3 12l6.6-3.1z"/></svg><span id="sparkCount">0</span></div>
+      <span class="hd-tools"><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
       <span class="small muted" id="syncBadge" style="font-size:.75rem"></span>
       <div class="level" title="Your level goes up with every spark you earn and never goes down"><span id="levelText">Level 1</span><div class="xp"><i id="xpBar"></i></div></div>
     </div>
@@ -587,8 +629,8 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div style="display:flex;flex-direction:column;gap:10px" id="jrBody"></div>
     </div>
     <div class="card coach" id="coachCard">
-      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">🧭</span>Coach</h2><div class="seg" role="group" aria-label="Coach style"><button data-style="strict">Direct</button><button data-style="bal">Balanced</button><button data-style="firm">Gentle</button></div></div>
-      <p class="muted small xp" id="coachIntro"></p>
+      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">🧭</span>Guide</h2><div class="seg" role="group" aria-label="Guide style"><button data-style="strict">Direct</button><button data-style="bal">Balanced</button><button data-style="firm">Gentle</button></div></div>
+      <p class="small muted gd-note">Self-help tips, not therapy or professional advice.</p><p class="muted small xp" id="coachIntro"></p>
       <div class="chat" id="chat" aria-live="polite"></div>
       <div class="row" id="coachAsk"></div>
       <div class="row" id="coachBtns"></div>
@@ -623,12 +665,13 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
   <!-- PLAN -->
   <section id="tab-plan" class="wrap" style="gap:20px" hidden>
     <div class="card" id="calCard">
-      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📅</span>Calendar</h2><div class="seg" role="group" aria-label="View"><button data-cv="week">Week</button><button data-cv="month">Month</button></div></div>
+      <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📅</span>Calendar</h2><div class="seg" role="group" aria-label="View"><button data-cv="day">Day</button><button data-cv="week">Week</button><button data-cv="month">Month</button></div></div>
       <div id="calBody"></div>
+      <div class="row" style="gap:8px;margin-top:10px"><button class="chip" id="icsBtn">📥 Import .ics</button><button class="chip" id="pasteBtn">📋 Paste from email</button><input type="file" id="icsFile" accept=".ics,text/calendar" hidden></div>
     </div>
     <div class="card">
       <details id="coachNotes">
-        <summary>Coach's notes: where we're starting</summary>
+        <summary>Notes: where we're starting</summary>
         <div class="coach-note">
           <p>Whether you were diagnosed as a kid, a teen or an adult, ADHD usually means years of working twice as hard as the people around you, and hearing some version of "you're so smart, if you'd just apply yourself." You weren't lazy. Your brain runs on <b>interest, urgency, novelty and challenge</b>, not on importance. Knowing what to do was never the problem. Starting, switching and finishing were.</p>
           <p>So we stop asking willpower to carry everything. We put the structure <b>outside your head</b>: a plan you can see, steps small enough to start, rewards that land now, and people (or a buddy timer) beside you.</p>
@@ -641,7 +684,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
           </ol>
           <p class="label">How to use the plan</p>
           <p>Treat it as a guess, not a contract. Tick blocks when they happen. When the day goes sideways, switch to <b>Low battery</b> and only the core blocks stay. On Sunday we look at what worked and change one thing.</p>
-          <p class="small muted">This is a self-help coaching tool, not therapy or medical care. Diagnosis, medication and anything about your mental health belong with your doctor or therapist. Bring your check-ins to them; they're useful there.</p>
+          <p class="small muted">This is a self-help guide, not therapy or medical care. Diagnosis, medication and anything about your mental health belong with your doctor or therapist. Bring your check-ins to them; they're useful there.</p>
         </div>
       </details>
     </div>
@@ -670,7 +713,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div id="nearOut" class="wrap" style="gap:10px" hidden></div>
     </div>
     <div class="card">
-      <h2><span class="h2i" aria-hidden="true">📘</span>Coach's playbook</h2>
+      <h2><span class="h2i" aria-hidden="true">📘</span>Playbook</h2>
       <p class="muted small">The strategies behind the plan. Each one has a small thing to try this week. One at a time is plenty.</p>
       <div class="play" id="playbook"></div>
     </div>
@@ -814,6 +857,8 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 
   <!-- REWARDS -->
   <section id="tab-wins" class="wrap" style="gap:20px" hidden>
+    <div class="card" id="instCard" hidden></div>
+    <div class="card" id="remCard"></div>
     <div class="card">
       <h2><span class="h2i" aria-hidden="true">🔥</span>You keep showing up</h2>
       <div class="stats">
@@ -879,7 +924,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <p class="small muted">Mode</p><div class="seg" role="group" aria-label="Mode" id="lkMode"><button data-lm="auto">Auto</button><button data-lm="light">☀️ Light</button><button data-lm="dark">🌙 Dark</button></div>
       <p class="small muted">Text size</p><div class="seg" role="group" aria-label="Text size" id="lkZoom"><button data-lz="0.9">A−</button><button data-lz="1">A</button><button data-lz="1.15">A+</button><button data-lz="1.3">A++</button></div></div>
     <div class="card"><p class="label">Starter length</p><div class="seg" role="group" aria-label="Starter length"><button data-sm="1">1 min</button><button data-sm="2">2 min</button><button data-sm="5">5 min</button><button data-sm="10">10 min</button></div><p class="small muted">How long every "Start" button runs. Short is easier to begin.</p></div>
-    <div class="card"><p class="label">Coach style</p><div class="seg" role="group" aria-label="Coach style"><button data-style="strict">Direct</button><button data-style="bal">Balanced</button><button data-style="firm">Gentle</button></div><p class="small muted">Direct: straight talk, no sugarcoating. Balanced: direct about the step, warm on hard days. Gentle: softer words. Both give you the same small steps, explain why, and leave the choice with you.</p></div>
+    <div class="card"><p class="label">Guide style</p><div class="seg" role="group" aria-label="Guide style"><button data-style="strict">Direct</button><button data-style="bal">Balanced</button><button data-style="firm">Gentle</button></div><p class="small muted">Direct: straight talk, no sugarcoating. Balanced: direct about the step, warm on hard days. Gentle: softer words. Both give you the same small steps, explain why, and leave the choice with you.</p></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and vibration</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
@@ -905,6 +950,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 <div class="jt" id="jt" hidden role="dialog" aria-modal="true" aria-label="Just this mode">
   <div class="jt-in"><div class="jt-top"><span class="label">Just this</span><button class="btn-ghost small" id="jtX">Close</button></div><div id="jtBody"></div></div>
 </div>
+<button class="qt-bar" id="qtBar" hidden></button><div class="off-badge small" id="offBadge" hidden></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <button class="sprint-bar" id="sprintBar" hidden></button>
 
@@ -1038,7 +1084,7 @@ function renderHeader(){
   $('sparkCount').textContent=S.sparks;
   const L=lvl();$('levelText').textContent='Level '+L.n+' · '+L.left+' to next';$('xpBar').style.width=L.pct+'%';
   const h=new Date().getHours();
-  $('dateLabel').textContent=new Date().toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'});
+  $('dateLabel').textContent=new Date().toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'})+' · '+hijri(new Date());
   const nm=S.name?', '+S.name:'';$('hello').textContent=strict()?'Bismillah'+nm+'. One step at a time.':(h<12?'Good morning':h<18?'Hi':'Good evening')+nm+'. One small thing at a time.';
 }
 
@@ -1233,6 +1279,7 @@ function taskHTML(t){
       <input type="checkbox" data-act="done" ${t.done?'checked':''} aria-label="Finish ${esc(t.title)}">
       <span class="task-title">${uT(t.title)}${t.due&&!t.done?`<br><span class="due ${t.due<dkey()?'late':''}">${t.due===dkey()?'Today':fmtD(t.due)}${t.time?' '+esc(t.time):''}</span>`:''}</span>
       <span class="small muted">${t.steps.length?doneN+'/'+t.steps.length:''}</span>
+      <button class="icon-btn" data-act="tmr" title="Timer" aria-label="Timer">⏱</button>
       <button class="star icon-btn" data-act="top" aria-pressed="${!!t.top}" title="${t.top?'Remove from top 3':'Add to top 3'}">★</button>
       <button class="icon-btn" data-act="open" aria-expanded="${!!t.open}" title="Steps">${t.open?'▴':'▾'}</button>
     </div>
@@ -1257,6 +1304,7 @@ function onTaskEvent(e){
   const t=S.tasks.find(x=>x.id===box.dataset.id);if(!t)return;const act=el.dataset.act;
   if(e.type==='submit'){e.preventDefault();if(act!=='addstep')return;const inp=el.querySelector('input'),v=inp.value.trim();if(!v)return;t.steps.push({id:uid(),text:v,done:false});save();render();const again=document.querySelector(`.task[data-id="${t.id}"] form input`);again&&again.focus();return}
   if(e.type!=='click'&&e.type!=='change')return;
+  if(act==='tmr'&&e.type==='click'){qtOpen(t.title);return}
   if((act==='due'||act==='tm')&&e.type==='change'){const b=clone(t);if(act==='due')t.due=el.value;else t.time=el.value;H('todo',act==='due'?'moved':'set time',t.title,b,t);save();render();return}
   if(act==='done'&&e.type==='change'){H('todo',t.done?'reopened':'done',t.title,clone(t),Object.assign(clone(t),{done:!t.done}));if(!t.done){t.steps.forEach(s=>s.done=true);finishTask(t)}else{t.done=false;t.doneAt=null}save();render()}
   else if(act==='step'&&e.type==='change'){const s=t.steps.find(x=>x.id===el.dataset.s);if(!s.done)completeStep(t,s);else{s.done=false;save();render()}}
@@ -2105,14 +2153,14 @@ function dayItems(d){const ym=d.slice(0,7);return{
   tasks:S.tasks.filter(t=>t.due===d||(!t.due&&t.done&&t.doneAt&&dkey(new Date(t.doneAt))===d)),
   money:monthItems(ym).filter(i=>i.on===d),goals:S.goals.filter(g=>g.by===d)}}
 function chipsFor(d){const I=dayItems(d);return [...I.tasks.map(t=>`<span class="cal-it ${t.done?'d':''}">${t.time?esc(t.time)+' ':''}${esc(t.title)}</span>`),...I.money.map(m=>`<span class="cal-it m">${m.kind==='income'?'+':'−'}${money(m.amount)} ${esc(m.label)}</span>`),...I.goals.map(g=>`<span class="cal-it g">🎯 ${esc(g.title)}</span>`)].join('')}
-function renderCal(){if(!$('calBody'))return;lifeFix();document.querySelectorAll('[data-cv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cv===CAL.view));const today=dkey();
+function renderCal(){if(!$('calBody'))return;lifeFix();document.querySelectorAll('[data-cv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cv===CAL.view));const today=dkey();if(CAL.view==='day'){renderDayView();return}
   if(CAL.view==='week'){const now=new Date();const start=addDays(now,-now.getDay()+CAL.off*7);
     $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous week">◀</button><b>${start.toLocaleDateString(LOC(),{month:'short',day:'numeric'})} – ${addDays(start,6).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next week">▶</button></div>
-    <div class="cal-week">${[0,1,2,3,4,5,6].map(i=>{const d=dkey(addDays(start,i)),dt=pd(d);return `<button class="cal-day ${d===today?'today':''}" data-cd="${d}"><span class="dn">${dt.toLocaleDateString(LOC(),{weekday:'short'})}<small>${dt.getDate()}</small></span><span class="its">${chipsFor(d)||'<span class="small muted">—</span>'}</span></button>`}).join('')}</div>`}
+    <div class="cal-week">${[0,1,2,3,4,5,6].map(i=>{const d=dkey(addDays(start,i)),dt=pd(d);return `<button class="cal-day ${d===today?'today':''}" data-cd="${d}"><span class="dn">${dt.toLocaleDateString(LOC(),{weekday:'short'})}<small>${dt.getDate()}</small><i class="hjd">${hday(dt)}</i></span><span class="its">${chipsFor(d)||'<span class="small muted">—</span>'}</span></button>`}).join('')}</div>`}
   else{const n=new Date();const first=new Date(n.getFullYear(),n.getMonth()+CAL.off,1);const start=addDays(first,-first.getDay());
-    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous month">◀</button><b>${first.toLocaleDateString(LOC(),{month:'long',year:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next month">▶</button></div>
-    <div class="cal-month">${['S','M','T','W','T','F','S'].map(x=>`<span class="h">${x}</span>`).join('')}${Array.from({length:42},(_,i)=>{const dt=addDays(start,i),d=dkey(dt),I=dayItems(d);
-      return `<button class="cal-cell ${dt.getMonth()!==first.getMonth()?'out':''} ${d===today?'today':''}" data-cd="${d}" aria-label="${fmtD(d)}"><span>${dt.getDate()}</span><span class="dots">${I.tasks.slice(0,4).map(()=>'<i></i>').join('')}${I.money.slice(0,2).map(()=>'<i class="m"></i>').join('')}${I.goals.map(()=>'<i class="g"></i>').join('')}</span></button>`}).join('')}</div>
+    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous month">◀</button><b>${first.toLocaleDateString(LOC(),{month:'long',year:'numeric'})}<small class="hj">🌙 ${hijri(first,{month:'long'})} – ${hijri(addDays(first,new Date(first.getFullYear(),first.getMonth()+1,0).getDate()-1),{month:'long',year:'numeric'})}</small></b><button class="icon-btn" data-co="1" aria-label="Next month">▶</button></div>
+    <div class="cal-month">${[0,1,2,3,4,5,6].map(i=>`<span class="h">${addDays(start,i).toLocaleDateString(LOC(),{weekday:'narrow'})}</span>`).join('')}${Array.from({length:42},(_,i)=>{const dt=addDays(start,i),d=dkey(dt),I=dayItems(d);
+      return `<button class="cal-cell ${dt.getMonth()!==first.getMonth()?'out':''} ${d===today?'today':''}" data-cd="${d}" aria-label="${fmtD(d)}"><span>${dt.getDate()}</span><i class="hjd">${hday(dt)}</i><span class="dots">${I.tasks.slice(0,4).map(()=>'<i></i>').join('')}${I.money.slice(0,2).map(()=>'<i class="m"></i>').join('')}${I.goals.map(()=>'<i class="g"></i>').join('')}</span></button>`}).join('')}</div>
     <p class="small muted" style="margin-top:6px"><span style="color:var(--calm)">●</span> to-do &nbsp;<span style="color:var(--accent)">●</span> money &nbsp;● goal deadline</p>`}
 }
 function dayOpen(d){const I=dayItems(d);
@@ -2186,7 +2234,7 @@ $('sortGo').onclick=sortGo;
 const SUPA={url:'https://xnxqibdjjrgjqpszvdbe.supabase.co',key:'sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId'};/* filled in after Supabase setup: Project URL + anon/publishable key (both public by design) */
 const AU={sb:null,user:null};
 const inArtifact=()=>!!(window.claude&&window.claude.use)||/claude\.ai|claudeusercontent/.test(location.hostname);
-function landingShow(on){$('landing').hidden=!on;document.body.style.overflow=on?'hidden':'';if(on&&window.ldIntro)ldIntro()}
+function landingShow(on){$('landing').hidden=!on;if(on)try{ldToday()}catch(e){}document.body.style.overflow=on?'hidden':'';if(on&&window.ldIntro)ldIntro()}
 function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 function authForm(msg){
   const box=$('ldAuth');
@@ -2384,7 +2432,7 @@ ADHKAR.worry={t:'Worry & laziness',ic:'🫶',v:'When you feel stuck, anxious or 
 (()=>{const h=new Date().getHours();AZ.cat=h>=4&&h<11?'morning':h>=15&&h<20?'evening':h>=21||h<4?'sleep':'salawat'})();
 
 /* ---------- profile picture ---------- */
-const AVE=['🌙','⭐','🌿','🌸','📚','🕌','🦁','🐢','☕','🌊','🌻','🦋'];
+const AVE=['🌙','⭐','🌿','🌸','📚','🕌','🌴','⛰️','☕','🌊','🌻','🍃'];
 const avHTML=(av,name)=>av&&/^data:image\//.test(av)?`<img src="${av}" alt="" class="avimg">`:av?`<span class="avemo">${esc(av)}</span>`:esc(((name||'?').trim()[0]||'?').toUpperCase());
 function avDot(av,name){return `<span class="avdot">${avHTML(av,name)}</span>`}
 function renderAvatar(){const p=$('avPrev');if(!p)return;p.innerHTML=avHTML(S.avatar,S.name||(AU.user&&AU.user.email));
@@ -2528,7 +2576,7 @@ try{const L=JSON.parse(localStorage.getItem('fastaqim.look')||'null');if(L)S.loo
 
 /* ---------- feedback ---------- */
 function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 Feedback</p><p class="small muted">Ideas, problems, anything. It goes straight to the person who made Fastaqim.</p>
-  <div class="row" id="fbK" style="gap:6px"><button class="chip" data-fk="idea">💡 Idea</button><button class="chip" data-fk="problem">🐞 Problem</button><button class="chip" data-fk="other">💬 Other</button></div>
+  <div class="row" id="fbK" style="gap:6px"><button class="chip" data-fk="idea">💡 Idea</button><button class="chip" data-fk="problem">🛠️ Problem</button><button class="chip" data-fk="other">💬 Other</button></div>
   <form id="fbForm" class="wrap" style="gap:8px"><textarea id="fbText" rows="4" maxlength="2000" placeholder="Write here" style="width:100%" required></textarea>
   <div class="row"><button class="btn-main" type="submit">Send</button><button class="btn-ghost small" type="button" id="fbX">Cancel</button></div></form>`);
   const mark=()=>$('fbK').querySelectorAll('[data-fk]').forEach(b=>b.style.background=b.dataset.fk===kind?'var(--calm-soft)':'');mark();
@@ -2542,7 +2590,7 @@ $('fbBtn').onclick=fbOpen;
 const FB={rows:null};
 async function fbLoad(){if(!AU.sb||!ADM.rows)return;try{const {data,error}=await AU.sb.from('fastaqim_feedback').select('*').order('created_at',{ascending:false}).limit(100);if(error)throw error;FB.rows=data||[]}catch(e){FB.rows=null}fbAdmin()}
 function fbAdmin(){const b=$('admBox');if(!b||!FB.rows)return;let d=$('fbInbox');if(!d){d=document.createElement('details');d.id='fbInbox';d.className='sp-sec';b.appendChild(d)}const n=FB.rows.filter(r=>!r.seen).length;
-  d.innerHTML=`<summary class="label">📥 Feedback ${n?`<span class="due">${n} new</span>`:''}</summary>${FB.rows.length?FB.rows.map(r=>`<div class="mrow" style="cursor:default;${r.seen?'opacity:.6':''}"><span><b>${r.kind==='problem'?'🐞':r.kind==='idea'?'💡':'💬'} ${esc(r.name||r.email||'')}</b> <span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC())}</span><br><span class="small notranslate">${esc(r.body)}</span></span>${r.seen?'':`<button class="small" data-fs="${r.id}">Seen</button>`}</div>`).join(''):'<p class="small muted">No feedback yet.</p>'}`;
+  d.innerHTML=`<summary class="label">📥 Feedback ${n?`<span class="due">${n} new</span>`:''}</summary>${FB.rows.length?FB.rows.map(r=>`<div class="mrow" style="cursor:default;${r.seen?'opacity:.6':''}"><span><b>${r.kind==='problem'?'🛠️':r.kind==='idea'?'💡':'💬'} ${esc(r.name||r.email||'')}</b> <span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC())}</span><br><span class="small notranslate">${esc(r.body)}</span></span>${r.seen?'':`<button class="small" data-fs="${r.id}">Seen</button>`}</div>`).join(''):'<p class="small muted">No feedback yet.</p>'}`;
   d.querySelectorAll('[data-fs]').forEach(x=>x.onclick=async()=>{await AU.sb.from('fastaqim_feedback').update({seen:true}).eq('id',x.dataset.fs);d.open=true;fbLoad()})}
 
 /* ---------- owner page: users + request to view (user must allow) ---------- */
@@ -2770,8 +2818,8 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){try{renderProg()}catch(e){}renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAvatar();renderTrackers();renderLook();renderRing();renderBadges();renderAdhkar();if(!T.running)drawTimer()}
-document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(S.coachStyle==='bal'?'Balanced coach.':strict()?'Direct coach.':'Gentle coach.')});
+function render(){try{renderProg()}catch(e){}try{renderRemind();renderInstall()}catch(e){}renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAvatar();renderTrackers();renderLook();renderRing();renderBadges();renderAdhkar();if(!T.running)drawTimer()}
+document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(tl(S.coachStyle==='bal'?'Balanced':strict()?'Direct':'Gentle'))});
 const I18N=[
 // landing
 ['Your whole life,','حياتك كلها،','Jireenya kee guutuu,'],
@@ -2855,9 +2903,9 @@ const I18N=[
 ['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and vibration','🎉 الاحتفال والاهتزاز','🎉 Ayyaneffannaa fi raafama'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
 ['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Linked accounts','الحسابات المرتبطة','Herregoota walitti hidhaman'],['↩ Back to my own plan','↩ العودة إلى خطتي','↩ Gara karoora koootti deebi\'i'],['Switch back','ارجع','Deebi\'i'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan'],
 ['🛡️ Ruqyah & protection','🛡️ الرقية والتحصين','🛡️ Ruqyaa fi eegumsa'],['Profile picture','الصورة الشخصية','Suuraa profaayilii'],['📷 Upload photo','📷 ارفع صورة','📷 Suuraa olkaa\'i'],['Or pick one:','أو اختر واحدة:','Ykn tokko filadhu:'],['More languages','لغات أخرى','Afaanota biroo'],
-['I don\'t feel like it','لا أشعر برغبة','Hin fedhu'],['Overwhelmed','مُثقَل','Na ulfaate'],['Don\'t know where to start','لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku'],['Anxious','قلق','Yaaddoo qaba'],['I\'m scrolling','أتصفح الجوال','Bilbila irra jira'],['Heavy feeling','شعور بالثقل','Ulfaatina natti dhagahama'],['Send','أرسل','Ergi'],['Direct','مباشر','Kallattiin'],['Balanced','متوازن','Madaallii'],['Gentle','لطيف','Laafaa'],['Coach style','أسلوب المدرب','Akkaata leenjisaa'],['For ADHD at every age.','لكل من لديه فرط الحركة وتشتت الانتباه، في أي عمر.','Namoota ADHD qaban umurii hundaaf.'],['Get started','ابدأ الآن','Jalqabi'],['✓ 100% free, always ✓ No ads ✓ 26 languages','✓ مجاني 100% دائمًا ✓ بلا إعلانات ✓ 26 لغة','✓ Yeroo hunda 100% bilisa ✓ Beeksisa hin qabu ✓ Afaan 26'],['Write it messy','اكتبها كما هي','Akkuma jirutti barreessi'],['We sort it','نحن نرتّبها','Nuti ni qindeessina'],['Start in 2 minutes','ابدأ في دقيقتين','Daqiiqaa 2 keessatti jalqabi'],['Salah tracker','متابعة الصلاة','Hordoffii salaataa'],['26 languages','26 لغة','Afaan 26'],['My trackers','متابعاتي','Hordoffiiwwan koo'],['+ Add','+ أضف','+ Dabali'],['Mark done','تم','Xumurameera jedhi'],['Yes','نعم','Eeyyee'],['▶ Start','▶ ابدأ','▶ Jalqabi'],['Add a tracker','أضف متابعة','Hordoffii dabali'],['Ready-made:','جاهزة:','Kan qophaa\'e:'],['Or make your own:','أو اصنع خاصتك:','Ykn kan kee uumi:'],['Add tracker','أضف المتابعة','Hordoffii dabali'],['Daily','يومي','Guyyaa guyyaan'],['Weekly','أسبوعي','Torbaniin'],['Fajr','الفجر','Fajrii'],['Dhuhr','الظهر','Zuhrii'],['Asr','العصر','Asrii'],['Maghrib','المغرب','Magribii'],['Isha','العشاء','Ishaa\'ii'],['Look','المظهر','Bifa'],['Color','اللون','Halluu'],['Mode','الوضع','Haala'],['Auto','تلقائي','Ofumaan'],['☀️ Light','☀️ فاتح','☀️ Ifa'],['🌙 Dark','🌙 داكن','🌙 Dukkana'],['Text size','حجم النص','Guddina barreeffamaa'],['💡 Feedback','💡 ملاحظات','💡 Yaada'],['💡 Idea','💡 فكرة','💡 Yaada'],['🐞 Problem','🐞 مشكلة','🐞 Rakkoo'],['💬 Other','💬 أخرى','💬 Kan biraa'],['Create your account','أنشئ حسابك','Herrega kee uumi'],['Fastaqim is 100% free, always. No ads, no paid plan.','فاستقم مجاني 100% دائمًا. بلا إعلانات ولا اشتراكات.','Fastaqim yeroo hunda 100% bilisa. Beeksisa hin qabu, kaffaltii hin qabu.'],['Can\'t start?','صعب تبدأ؟','Jalqabuu dadhabdee?'],['Start in 2 minutes.','ابدأ في دقيقتين.','Daqiiqaa 2 keessatti jalqabi.'],['The planner built for ADHD.','المخطِّط المصمَّم لعقول ADHD.','Karoorsaa sammuu ADHD qabaniif hojjetame.'],['Try it here ↓','جرّبه هنا ↓','Asitti yaali ↓'],['How it works','كيف يعمل','Akkamitti hojjeta'],['Try it: tap one','جرّب: اضغط على واحدة','Yaali: tokko tuqi'],['Pray Dhuhr','صلِّ الظهر','Salaata Zuhrii salaati'],['Drink water','اشرب ماء','Bishaan dhugi'],['Open the laptop','افتح اللابتوب','Laaptooppii bani'],['That feeling? Every day. 👇','هذا الشعور؟ كل يوم. 👇','Miira kana? Guyyaa guyyaan. 👇'],['Everything in one place','كل شيء في مكان واحد','Wanti hundi bakka tokkotti'],['Day · week · month','يوم · أسبوع · شهر','Guyyaa · torban · ji\'a'],['Tracker + adhkar','متابعة + أذكار','Hordoffii + azkaara'],['Short + long term','قصيرة + طويلة المدى','Yeroo gabaabaa + dheeraa'],['Budget + spending','ميزانية + مصاريف','Baajata + baasii'],['Talks back','يرد عليك','Deebii siif kenna'],['Level up','ارتقِ مستوى','Sadarkaa ol ba\'i'],['Sparks · streaks','شرارات · سلاسل','Qabsiisota · walitti fufiinsa'],['Salah','الصلاة','Salaata'],['Today','اليوم','Har\'a'],['Planner','المخطِّط','Karoorsaa'],['Start for 1 minute','ابدأ لمدة دقيقة','Daqiiqaa 1f jalqabi'],['Start for 5 minutes','ابدأ لمدة 5 دقائق','Daqiiqaa 5f jalqabi'],['Start for 10 minutes','ابدأ لمدة 10 دقائق','Daqiiqaa 10f jalqabi'],['Start 1 min','ابدأ دقيقة','Daq. 1 jalqabi'],['Start 5 min','ابدأ 5 د','Daq. 5 jalqabi'],['Start 10 min','ابدأ 10 د','Daq. 10 jalqabi'],['Starter length','مدة البداية','Dheerina jalqabaa'],['Badges','الأوسمة','Badhaasota'],['Delete my account','احذف حسابي','Herrega koo haqi'],['Keep my account','أبقِ حسابي','Herrega koo eegi'],['Restore my account','استرجع حسابي','Herrega koo deebisi'],['Delete','احذف','Haqi'],['First start','أول بداية','Jalqaba jalqabaa'],['10 tasks done','10 مهام منجزة','Hojii 10 xumurame'],['Salah: 7 days','الصلاة: 7 أيام','Salaata: guyyaa 7'],['Salah: 30 days','الصلاة: 30 يومًا','Salaata: guyyaa 30'],['100 sparks','100 شرارة','Qabsiisota 100'],['500 sparks','500 شرارة','Qabsiisota 500'],['7 reflections','7 تأملات','Yaada 7'],['Goal reached','هدف تحقق','Kaayyoon milkaa\'e'],['3 trackers','3 متابعات','Hordoffii 3'],['Money tracked','المال مُتابَع','Maallaqni hordofame'],['Journal','اليوميات','Galmee guyyaa'],['See it move','شاهده يتحرك','Socho\'uu isaa ilaali'],['Log in','تسجيل الدخول','Seeni'],['PH:Or type what\'s in the way','أو اكتب ما الذي يعيقك','Ykn maaltu si dhorke barreessi']
+['I don\'t feel like it','لا أشعر برغبة','Hin fedhu'],['Overwhelmed','مُثقَل','Na ulfaate'],['Don\'t know where to start','لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku'],['Anxious','قلق','Yaaddoo qaba'],['I\'m scrolling','أتصفح الجوال','Bilbila irra jira'],['Heavy feeling','شعور بالثقل','Ulfaatina natti dhagahama'],['Send','أرسل','Ergi'],['Direct','مباشر','Kallattiin'],['Balanced','متوازن','Madaallii'],['Gentle','لطيف','Laafaa'],['Coach style','أسلوب المدرب','Akkaata leenjisaa'],['For ADHD at every age.','لكل من لديه فرط الحركة وتشتت الانتباه، في أي عمر.','Namoota ADHD qaban umurii hundaaf.'],['Get started','ابدأ الآن','Jalqabi'],['✓ 100% free, always ✓ No ads ✓ 26 languages','✓ مجاني 100% دائمًا ✓ بلا إعلانات ✓ 26 لغة','✓ Yeroo hunda 100% bilisa ✓ Beeksisa hin qabu ✓ Afaan 26'],['Write it messy','اكتبها كما هي','Akkuma jirutti barreessi'],['We sort it','نحن نرتّبها','Nuti ni qindeessina'],['Start in 2 minutes','ابدأ في دقيقتين','Daqiiqaa 2 keessatti jalqabi'],['Salah tracker','متابعة الصلاة','Hordoffii salaataa'],['26 languages','26 لغة','Afaan 26'],['My trackers','متابعاتي','Hordoffiiwwan koo'],['+ Add','+ أضف','+ Dabali'],['Mark done','تم','Xumurameera jedhi'],['Yes','نعم','Eeyyee'],['▶ Start','▶ ابدأ','▶ Jalqabi'],['Add a tracker','أضف متابعة','Hordoffii dabali'],['Ready-made:','جاهزة:','Kan qophaa\'e:'],['Or make your own:','أو اصنع خاصتك:','Ykn kan kee uumi:'],['Add tracker','أضف المتابعة','Hordoffii dabali'],['Daily','يومي','Guyyaa guyyaan'],['Weekly','أسبوعي','Torbaniin'],['Fajr','الفجر','Fajrii'],['Dhuhr','الظهر','Zuhrii'],['Asr','العصر','Asrii'],['Maghrib','المغرب','Magribii'],['Isha','العشاء','Ishaa\'ii'],['Look','المظهر','Bifa'],['Color','اللون','Halluu'],['Mode','الوضع','Haala'],['Auto','تلقائي','Ofumaan'],['☀️ Light','☀️ فاتح','☀️ Ifa'],['🌙 Dark','🌙 داكن','🌙 Dukkana'],['Text size','حجم النص','Guddina barreeffamaa'],['💡 Feedback','💡 ملاحظات','💡 Yaada'],['💡 Idea','💡 فكرة','💡 Yaada'],['🛠️ Problem','🛠️ مشكلة','🛠️ Rakkoo'],['💬 Other','💬 أخرى','💬 Kan biraa'],['Create your account','أنشئ حسابك','Herrega kee uumi'],['Fastaqim is 100% free, always. No ads, no paid plan.','فاستقم مجاني 100% دائمًا. بلا إعلانات ولا اشتراكات.','Fastaqim yeroo hunda 100% bilisa. Beeksisa hin qabu, kaffaltii hin qabu.'],['Can\'t start?','صعب تبدأ؟','Jalqabuu dadhabdee?'],['Start in 2 minutes.','ابدأ في دقيقتين.','Daqiiqaa 2 keessatti jalqabi.'],['The planner built for ADHD.','المخطِّط المصمَّم لعقول ADHD.','Karoorsaa sammuu ADHD qabaniif hojjetame.'],['Try it here ↓','جرّبه هنا ↓','Asitti yaali ↓'],['How it works','كيف يعمل','Akkamitti hojjeta'],['Try it: tap one','جرّب: اضغط على واحدة','Yaali: tokko tuqi'],['Pray Dhuhr','صلِّ الظهر','Salaata Zuhrii salaati'],['Drink water','اشرب ماء','Bishaan dhugi'],['Open the laptop','افتح اللابتوب','Laaptooppii bani'],['That feeling? Every day. 👇','هذا الشعور؟ كل يوم. 👇','Miira kana? Guyyaa guyyaan. 👇'],['Everything in one place','كل شيء في مكان واحد','Wanti hundi bakka tokkotti'],['Day · week · month','يوم · أسبوع · شهر','Guyyaa · torban · ji\'a'],['Tracker + adhkar','متابعة + أذكار','Hordoffii + azkaara'],['Short + long term','قصيرة + طويلة المدى','Yeroo gabaabaa + dheeraa'],['Budget + spending','ميزانية + مصاريف','Baajata + baasii'],['Talks back','يرد عليك','Deebii siif kenna'],['Level up','ارتقِ مستوى','Sadarkaa ol ba\'i'],['Sparks · streaks','شرارات · سلاسل','Qabsiisota · walitti fufiinsa'],['Salah','الصلاة','Salaata'],['Today','اليوم','Har\'a'],['Planner','المخطِّط','Karoorsaa'],['Start for 1 minute','ابدأ لمدة دقيقة','Daqiiqaa 1f jalqabi'],['Start for 5 minutes','ابدأ لمدة 5 دقائق','Daqiiqaa 5f jalqabi'],['Start for 10 minutes','ابدأ لمدة 10 دقائق','Daqiiqaa 10f jalqabi'],['Start 1 min','ابدأ دقيقة','Daq. 1 jalqabi'],['Start 5 min','ابدأ 5 د','Daq. 5 jalqabi'],['Start 10 min','ابدأ 10 د','Daq. 10 jalqabi'],['Starter length','مدة البداية','Dheerina jalqabaa'],['Badges','الأوسمة','Badhaasota'],['Delete my account','احذف حسابي','Herrega koo haqi'],['Keep my account','أبقِ حسابي','Herrega koo eegi'],['Restore my account','استرجع حسابي','Herrega koo deebisi'],['Delete','احذف','Haqi'],['First start','أول بداية','Jalqaba jalqabaa'],['10 tasks done','10 مهام منجزة','Hojii 10 xumurame'],['Salah: 7 days','الصلاة: 7 أيام','Salaata: guyyaa 7'],['Salah: 30 days','الصلاة: 30 يومًا','Salaata: guyyaa 30'],['100 sparks','100 شرارة','Qabsiisota 100'],['500 sparks','500 شرارة','Qabsiisota 500'],['7 reflections','7 تأملات','Yaada 7'],['Goal reached','هدف تحقق','Kaayyoon milkaa\'e'],['3 trackers','3 متابعات','Hordoffii 3'],['Money tracked','المال مُتابَع','Maallaqni hordofame'],['Journal','اليوميات','Galmee guyyaa'],['See it move','شاهده يتحرك','Socho\'uu isaa ilaali'],['Log in','تسجيل الدخول','Seeni'],['PH:Or type what\'s in the way','أو اكتب ما الذي يعيقك','Ykn maaltu si dhorke barreessi']
 ];
-const SO=["Noloshaada oo dhan,", "hal qorshe oo deggan.", "Waxaa loo sameeyay maskaxda ADHD da' kasta: carruur, dhallinyaro iyo dad waaweyn, goor hore ama goor dambe la ogaaday. Si kasta u qor. Fastaqim ayaa habeynaya, jadwal u samaynaya, oo ku bilaabsiinaya.", "Ku sii wad Google", "ama iimayl", "Gal", "Samee akoon", "Ma ilowday furaha sirta?", "Liis qasan geli, jadwal ka hel", "Wax kasta ku bilow 2 daqiiqo", "Maalin, toddobaad iyo bil", "Miisaaniyad, dakhli, kharash", "Yoolal gaaban iyo kuwo dheer", "Maalmo salaadda ku dhisan", "Hal milicsi maalintii", "Wax kasta oo la beddelo waa la kaydiyaa", "Aragtida qoyska ee waalidiinta iyo masuuliyiinta", "Qoys", "Dadka aan daryeelo", "Eeg", "Ka saar xiriirka", "Ku biir", "Samee koodh qoys", "Samee koodh cusub", "Qof baan daryeelaa (waalid, masuul, walaal ka weyn)", "Qof ayaa i daryeela", "Koodhka qoyska", "“Bilowgu waa qaybta adag. Sidaas darteed taas ayaan yareynaa.”", "Xogtaadu waa mid gaar u ah akoonkaaga. Si Fastaqim u ammaan ahaado, milkiilaha bogga wuxuu arki karaa dhaqdhaqaaqa akoonnada.", "Asturnaan", "Markaad is diiwaangeliso waxaad aqbashay", "Siyaasadda asturnaanta", "Isticmaalayaasha Fastaqim", "Wadarta", "Cusub toddobaadkan", "Firfircoon toddobaadkan", "Cusboonaysii", "Codso inaad aragto", "Mar kale weydii", "Oggolow", "Diid", "Jooji wadaagga", "Adiga", "Masuul (ka yar 18)", "Ka saar", "Hadda isku day", "Waa la soo rarayaa...", "Iimayl", "Furaha sirta (8+ xaraf)", "Bismillah. Hal tallaabo markiiba.", "📱 Waxaa lagu kaydiyay qalabkan", "☁️ Waxaa lagu kaydiyay akoonkaaga", "Hadda", "Qorshe", "Hawlo", "Lacag", "Yoolal", "Diirad", "Ku raaxayso", "Aniga", "Maxaan kugu magacaabaa?", "Magacaaga", "Soco", "Kaliya tan", "Bilow 2 daqiiqo", "Waan sameeyay", "Ka dhig mid yar", "2 daqiiqo. Intaas kadib adaa go'aansanaya.", "Xusuuso sababta", "Mid kale", "📱 Waxaan is qabtay anigoo isha mariya", "😴 Waan daallanahay / waan nasanayaa", "Adkaar", "🤍 Salawaat ﷺ", "🌅 Subax", "🌇 Fiid", "🕌 Salaadda kadib", "🌙 Hurdo", "☀️ Toosid", "🫶 Walwal iyo caajis", "Fajarka kadib ilaa qorraxdu ka soo baxdo. Ka bilow shayga 1aad. Hal taabasho mar kasta oo aad tiraahdo.", "Casarka kadib ilaa Maqribka (ama habeenka). Ka bilow shayga 1aad.", "Isla markaad salaanto, intaadan kicin.", "Sariirta, nalka dami, taleefanka fogee.", "Erayada ugu horreeya ee maalinta.", "Markaad dareento inaad xayiran tahay, walwalsan tahay ama culus tahay.", "Si kasta u qor. Anigaa habeyn doona.", "✨ Ii habee", "Waa la habeynayaa...", "Milicsiga maanta", "Kaydi (+2)", "+ Mid kale", "Maanta waa dhammaatay.", "Hal sadar ayaa ku filan", "Tababare", "Kooban", "Sharax", "Hagaag, waan samayn doonaa", "Maya", "Hadhow", "Ma awoodo", "Waan daallanahay", "Waa caajis", "Maxay faa'iido leedahay", "Runtii nasasho ayaan u baahanahay", "Mar kale ila hadal", "Waxaan u shaqaynayaa", "Ma xayirantahay? Ii sheeg sababta.", "Waxay u egtahay mid aad u weyn", "Ma garanayo meel aan ka bilaabo", "Wax badan ayaa maskaxdayda ku jira", "Tamar yar", "Waxaan ka baqayaa inaysan fiicnaan", "Waan ogahay, kaliya dan kama lihi", "Ma dareemayo inaan sameeyo", "Abaalmarinta waan ogahay laakiin weli ma bilaabi karo", "Maanta waan ku guuldarreystay", "Kalandar", "Toddobaad", "Bil", "Axad", "Isn", "Tal", "Arb", "Kha", "Jim", "Sab", "Toddobaadkaaga", "🪄 Dhis jadwalkayga", "Wax ka beddel", "Maalin buuxda", "Tamar yar", "Waqtiyo", "Kaliya kala horreyn", "Salaad", "Muhiim", "Nasasho", "Nolol", "Kala guur", "Hubin toddobaadle ah", "Kaydi hubinta", "Buugga tababaraha", "Maskax faaruqin", "Ku dar", "3da ugu muhiimsan maanta", "Dhammee liiskayga: habka Kaliya tan", "Habkayga, saacad la'aan", "Hadhow", "Tirtir tusaalooyinka", "Markaan toosto", "Markaan wax cuno kadib", "Markaan taleefanka u fadhiisto", "Hurdada ka hor", "Ku dar waqti", "Bilow 2 daqiiqo", "Ii kala jaji", "Tirtir hawsha", "Magac beddel", "Maanta", "Ku dar caado yar", "Ku dar tallaabo yar", "tus. Nadiifi qolkayga", "Soo galay", "Ka baxay", "Haray", "Ku dar lacag soo gashay ama baxday", "💸 La kharash gareeyay", "💰 La helay", "Guri iyo kiro", "Biilal", "Cunto", "Gaadiid", "Wax iibsi", "Qoys", "Sadaqo", "Deyn", "Kayd", "Caafimaad", "Madadaalo", "Kale", "Mushahar", "Dakhli dheeraad ah", "Hadiyad", "Bil kasta wuu soo noqdaa", "Bishan", "Qadarka", "Maxaa loogu talagalay", "Weli waxba bishan ma jiraan. Kor ku dar, ama ku qor sanduuqa ✨ ee Hadda.", "Yool cusub", "Muddo gaaban", "Muddo dheer", "Ku dar yool", "Tallaabada xigta → maanta", "Kala jaji", "Tirtir", "Weli waxba 3da bilood ee soo socda ma jiraan.", "Weli yoolal waaweyn ma jiraan. Al-Firdaws ayaa mudan.", "tus. Xifdi Suuratul Mulk", "Ku dar tallaabo", "Diirad saar adigoo saaxib leh", "Dooro dherer oo riix bilow", "Bilow", "Camal wanaagsan oo yar, hadda", "Baro madax xanuun la'aan", "Akhris", "Muxaadaro", "Bilow qayb", "Hel hiwaayaddaada", "Isku day", "Wax ka beddelid, xariiq dhammaad leh", "Fikrad kale", "Bilow waqtiga", "Xusuuso", "Waad sii joogtaa", "maalmood aad timid", "maalmood isku xiga", "dhimbilo", "4tii toddobaad ee la soo dhaafay", "Dukaanka abaalmarinta", "Sababahayga", "Guulo", "Taariikhda wax ka beddelka", "Dhammaan", "✅ Hawlo", "💰 Lacag", "🎯 Yoolal", "Soo celi", "Weli waxba. Waxaad beddesho halkan ayay ka muuqan doonaan.", "Magacaaga", "Kaydi", "🎉 Dabaaldeg iyo gariir", "💾 Kayd / soo celin", "Dib u deji wax walba", "Haa, dhammaan tirtir", "Hay alaabtayda", "Akoon", "Beddel furaha sirta", "🔁 Beddel akoonka", "Akoonnada ku xiran", "↩ Ku noqo qorshahayga", "Dib u beddel", "Akoonnada qalabkan", "+ Ku dar akoon", "Beddel", "← Dib u noqo", "Ka bax", "Xir", "Jooji", "Luqad"].concat(['🛡️ Ruqyah iyo ilaalin','Sawirka profaylka','📷 Soo geli sawir','Ama mid dooro:','Luqado kale','Ma dareemayo inaan sameeyo','Culays badan','Ma garanayo meel aan ka bilaabo','Walwal','Isha ayaan marinayaa','Culays dareen','Dir','Toos','Dheellitiran','Debecsan','Habka tababaraha','Dadka ADHD qaba ee da\' kasta.','Bilow','✓ 100% bilaash, weligeed ✓ Xayeysiis ma leh ✓ 26 luqadood','Si kasta u qor','Annagaa habeyneyna','Ku bilow 2 daqiiqo','La socoshada salaadda','26 luqadood','Raadrayaashayda','+ Ku dar','Calaamadee dhammaad','Haa','▶ Bilow','Ku dar raadraaca','Diyaar ah:','Ama adigu samee:','Ku dar raadraaca','Maalin kasta','Toddobaad kasta','Fajar','Duhur','Casar','Maqrib','Cishe','Muuqaal','Midab','Hab','Toos','☀️ Iftiin','🌙 Mugdi','Cabbirka qoraalka','💡 Fikrad','💡 Fikrad','🐞 Dhibaato','💬 Kale','Samee akoonkaaga','Fastaqim waa 100% bilaash, weligeed. Xayeysiis ma leh, lacag ma leh.','Ma bilaabi kartid?','Ku bilow 2 daqiiqo.','Qorshaha loo sameeyay maskaxda ADHD.','Halkan ku tijaabi ↓','Sida uu u shaqeeyo','Tijaabi: mid taabo','Tuko Duhurka','Biyo cab','Fur laabtoobka','Dareenkaas? Maalin kasta. 👇','Wax walba hal meel','Maalin · toddobaad · bil','Raadraac + adkaar','Muddo gaaban + dheer','Miisaaniyad + kharash','Wuu kuu jawaabaa','Kor u kac','Dhimbilo · isku xigxig','Salaad','Maanta','Qorshe','Ku bilow 1 daqiiqo','Ku bilow 5 daqiiqo','Ku bilow 10 daqiiqo','Bilow 1 daqiiqo','Bilow 5 daqiiqo','Bilow 10 daqiiqo','Dhererka bilowga','Calaamado','Tirtir akoonkayga','Hay akoonkayga','Soo celi akoonkayga','Tirtir','Bilowgii ugu horreeyay','10 hawlood la dhammeeyay','Salaad: 7 maalmood','Salaad: 30 maalmood','100 dhimbilo','500 dhimbilo','7 milicsi','Yool la gaaray','3 raadraac','Lacag la raacay','Xusuus-qor','Daawo dhaqdhaqaaqa','Gal','Ama qor waxa ku hor istaagay']);
+const SO=["Noloshaada oo dhan,", "hal qorshe oo deggan.", "Waxaa loo sameeyay maskaxda ADHD da' kasta: carruur, dhallinyaro iyo dad waaweyn, goor hore ama goor dambe la ogaaday. Si kasta u qor. Fastaqim ayaa habeynaya, jadwal u samaynaya, oo ku bilaabsiinaya.", "Ku sii wad Google", "ama iimayl", "Gal", "Samee akoon", "Ma ilowday furaha sirta?", "Liis qasan geli, jadwal ka hel", "Wax kasta ku bilow 2 daqiiqo", "Maalin, toddobaad iyo bil", "Miisaaniyad, dakhli, kharash", "Yoolal gaaban iyo kuwo dheer", "Maalmo salaadda ku dhisan", "Hal milicsi maalintii", "Wax kasta oo la beddelo waa la kaydiyaa", "Aragtida qoyska ee waalidiinta iyo masuuliyiinta", "Qoys", "Dadka aan daryeelo", "Eeg", "Ka saar xiriirka", "Ku biir", "Samee koodh qoys", "Samee koodh cusub", "Qof baan daryeelaa (waalid, masuul, walaal ka weyn)", "Qof ayaa i daryeela", "Koodhka qoyska", "“Bilowgu waa qaybta adag. Sidaas darteed taas ayaan yareynaa.”", "Xogtaadu waa mid gaar u ah akoonkaaga. Si Fastaqim u ammaan ahaado, milkiilaha bogga wuxuu arki karaa dhaqdhaqaaqa akoonnada.", "Asturnaan", "Markaad is diiwaangeliso waxaad aqbashay", "Siyaasadda asturnaanta", "Isticmaalayaasha Fastaqim", "Wadarta", "Cusub toddobaadkan", "Firfircoon toddobaadkan", "Cusboonaysii", "Codso inaad aragto", "Mar kale weydii", "Oggolow", "Diid", "Jooji wadaagga", "Adiga", "Masuul (ka yar 18)", "Ka saar", "Hadda isku day", "Waa la soo rarayaa...", "Iimayl", "Furaha sirta (8+ xaraf)", "Bismillah. Hal tallaabo markiiba.", "📱 Waxaa lagu kaydiyay qalabkan", "☁️ Waxaa lagu kaydiyay akoonkaaga", "Hadda", "Qorshe", "Hawlo", "Lacag", "Yoolal", "Diirad", "Ku raaxayso", "Aniga", "Maxaan kugu magacaabaa?", "Magacaaga", "Soco", "Kaliya tan", "Bilow 2 daqiiqo", "Waan sameeyay", "Ka dhig mid yar", "2 daqiiqo. Intaas kadib adaa go'aansanaya.", "Xusuuso sababta", "Mid kale", "📱 Waxaan is qabtay anigoo isha mariya", "😴 Waan daallanahay / waan nasanayaa", "Adkaar", "🤍 Salawaat ﷺ", "🌅 Subax", "🌇 Fiid", "🕌 Salaadda kadib", "🌙 Hurdo", "☀️ Toosid", "🫶 Walwal iyo caajis", "Fajarka kadib ilaa qorraxdu ka soo baxdo. Ka bilow shayga 1aad. Hal taabasho mar kasta oo aad tiraahdo.", "Casarka kadib ilaa Maqribka (ama habeenka). Ka bilow shayga 1aad.", "Isla markaad salaanto, intaadan kicin.", "Sariirta, nalka dami, taleefanka fogee.", "Erayada ugu horreeya ee maalinta.", "Markaad dareento inaad xayiran tahay, walwalsan tahay ama culus tahay.", "Si kasta u qor. Anigaa habeyn doona.", "✨ Ii habee", "Waa la habeynayaa...", "Milicsiga maanta", "Kaydi (+2)", "+ Mid kale", "Maanta waa dhammaatay.", "Hal sadar ayaa ku filan", "Tababare", "Kooban", "Sharax", "Hagaag, waan samayn doonaa", "Maya", "Hadhow", "Ma awoodo", "Waan daallanahay", "Waa caajis", "Maxay faa'iido leedahay", "Runtii nasasho ayaan u baahanahay", "Mar kale ila hadal", "Waxaan u shaqaynayaa", "Ma xayirantahay? Ii sheeg sababta.", "Waxay u egtahay mid aad u weyn", "Ma garanayo meel aan ka bilaabo", "Wax badan ayaa maskaxdayda ku jira", "Tamar yar", "Waxaan ka baqayaa inaysan fiicnaan", "Waan ogahay, kaliya dan kama lihi", "Ma dareemayo inaan sameeyo", "Abaalmarinta waan ogahay laakiin weli ma bilaabi karo", "Maanta waan ku guuldarreystay", "Kalandar", "Toddobaad", "Bil", "Axad", "Isn", "Tal", "Arb", "Kha", "Jim", "Sab", "Toddobaadkaaga", "🪄 Dhis jadwalkayga", "Wax ka beddel", "Maalin buuxda", "Tamar yar", "Waqtiyo", "Kaliya kala horreyn", "Salaad", "Muhiim", "Nasasho", "Nolol", "Kala guur", "Hubin toddobaadle ah", "Kaydi hubinta", "Buugga tababaraha", "Maskax faaruqin", "Ku dar", "3da ugu muhiimsan maanta", "Dhammee liiskayga: habka Kaliya tan", "Habkayga, saacad la'aan", "Hadhow", "Tirtir tusaalooyinka", "Markaan toosto", "Markaan wax cuno kadib", "Markaan taleefanka u fadhiisto", "Hurdada ka hor", "Ku dar waqti", "Bilow 2 daqiiqo", "Ii kala jaji", "Tirtir hawsha", "Magac beddel", "Maanta", "Ku dar caado yar", "Ku dar tallaabo yar", "tus. Nadiifi qolkayga", "Soo galay", "Ka baxay", "Haray", "Ku dar lacag soo gashay ama baxday", "💸 La kharash gareeyay", "💰 La helay", "Guri iyo kiro", "Biilal", "Cunto", "Gaadiid", "Wax iibsi", "Qoys", "Sadaqo", "Deyn", "Kayd", "Caafimaad", "Madadaalo", "Kale", "Mushahar", "Dakhli dheeraad ah", "Hadiyad", "Bil kasta wuu soo noqdaa", "Bishan", "Qadarka", "Maxaa loogu talagalay", "Weli waxba bishan ma jiraan. Kor ku dar, ama ku qor sanduuqa ✨ ee Hadda.", "Yool cusub", "Muddo gaaban", "Muddo dheer", "Ku dar yool", "Tallaabada xigta → maanta", "Kala jaji", "Tirtir", "Weli waxba 3da bilood ee soo socda ma jiraan.", "Weli yoolal waaweyn ma jiraan. Al-Firdaws ayaa mudan.", "tus. Xifdi Suuratul Mulk", "Ku dar tallaabo", "Diirad saar adigoo saaxib leh", "Dooro dherer oo riix bilow", "Bilow", "Camal wanaagsan oo yar, hadda", "Baro madax xanuun la'aan", "Akhris", "Muxaadaro", "Bilow qayb", "Hel hiwaayaddaada", "Isku day", "Wax ka beddelid, xariiq dhammaad leh", "Fikrad kale", "Bilow waqtiga", "Xusuuso", "Waad sii joogtaa", "maalmood aad timid", "maalmood isku xiga", "dhimbilo", "4tii toddobaad ee la soo dhaafay", "Dukaanka abaalmarinta", "Sababahayga", "Guulo", "Taariikhda wax ka beddelka", "Dhammaan", "✅ Hawlo", "💰 Lacag", "🎯 Yoolal", "Soo celi", "Weli waxba. Waxaad beddesho halkan ayay ka muuqan doonaan.", "Magacaaga", "Kaydi", "🎉 Dabaaldeg iyo gariir", "💾 Kayd / soo celin", "Dib u deji wax walba", "Haa, dhammaan tirtir", "Hay alaabtayda", "Akoon", "Beddel furaha sirta", "🔁 Beddel akoonka", "Akoonnada ku xiran", "↩ Ku noqo qorshahayga", "Dib u beddel", "Akoonnada qalabkan", "+ Ku dar akoon", "Beddel", "← Dib u noqo", "Ka bax", "Xir", "Jooji", "Luqad"].concat(['🛡️ Ruqyah iyo ilaalin','Sawirka profaylka','📷 Soo geli sawir','Ama mid dooro:','Luqado kale','Ma dareemayo inaan sameeyo','Culays badan','Ma garanayo meel aan ka bilaabo','Walwal','Isha ayaan marinayaa','Culays dareen','Dir','Toos','Dheellitiran','Debecsan','Habka tababaraha','Dadka ADHD qaba ee da\' kasta.','Bilow','✓ 100% bilaash, weligeed ✓ Xayeysiis ma leh ✓ 26 luqadood','Si kasta u qor','Annagaa habeyneyna','Ku bilow 2 daqiiqo','La socoshada salaadda','26 luqadood','Raadrayaashayda','+ Ku dar','Calaamadee dhammaad','Haa','▶ Bilow','Ku dar raadraaca','Diyaar ah:','Ama adigu samee:','Ku dar raadraaca','Maalin kasta','Toddobaad kasta','Fajar','Duhur','Casar','Maqrib','Cishe','Muuqaal','Midab','Hab','Toos','☀️ Iftiin','🌙 Mugdi','Cabbirka qoraalka','💡 Fikrad','💡 Fikrad','🛠️ Dhibaato','💬 Kale','Samee akoonkaaga','Fastaqim waa 100% bilaash, weligeed. Xayeysiis ma leh, lacag ma leh.','Ma bilaabi kartid?','Ku bilow 2 daqiiqo.','Qorshaha loo sameeyay maskaxda ADHD.','Halkan ku tijaabi ↓','Sida uu u shaqeeyo','Tijaabi: mid taabo','Tuko Duhurka','Biyo cab','Fur laabtoobka','Dareenkaas? Maalin kasta. 👇','Wax walba hal meel','Maalin · toddobaad · bil','Raadraac + adkaar','Muddo gaaban + dheer','Miisaaniyad + kharash','Wuu kuu jawaabaa','Kor u kac','Dhimbilo · isku xigxig','Salaad','Maanta','Qorshe','Ku bilow 1 daqiiqo','Ku bilow 5 daqiiqo','Ku bilow 10 daqiiqo','Bilow 1 daqiiqo','Bilow 5 daqiiqo','Bilow 10 daqiiqo','Dhererka bilowga','Calaamado','Tirtir akoonkayga','Hay akoonkayga','Soo celi akoonkayga','Tirtir','Bilowgii ugu horreeyay','10 hawlood la dhammeeyay','Salaad: 7 maalmood','Salaad: 30 maalmood','100 dhimbilo','500 dhimbilo','7 milicsi','Yool la gaaray','3 raadraac','Lacag la raacay','Xusuus-qor','Daawo dhaqdhaqaaqa','Gal','Ama qor waxa ku hor istaagay']);
 
 /* ---------- languages: English, العربية, Afaan Oromoo ---------- */
 const LANGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali']];
@@ -2957,7 +3005,7 @@ const X4=[
 /* visitor feedback */
 ['Thank you','شكرًا لك','Galatoomi','Mahadsanid'],['Got it. Every message is read.','وصلت. كل رسالة تُقرأ.','Nu ga\'eera. Ergaan hundi ni dubbifama.','Waa la helay. Fariin kasta waa la akhriyaa.'],
 ['Ideas, problems, anything. It goes straight to the person who made Fastaqim.','أفكار أو مشكلات أو أي شيء. تصل مباشرة إلى صاحب فاستقم.','Yaada, rakkoo, waan barbaadde. Kallattiin nama Fastaqim hojjeteef ga\'a.','Fikrado, dhibaatooyin, wax kasta. Si toos ah ayay u gaarayaan qofka sameeyay Fastaqim.'],
-['Send','أرسل','Ergi','Dir'],['Cancel','إلغاء','Dhiisi','Jooji'],['PH:Write here','اكتب هنا','Asitti barreessi','Halkan ku qor'],['💡 Feedback','💡 ملاحظات','💡 Yaada','💡 Ra\'yi'],['💡 Idea','💡 فكرة','💡 Yaada','💡 Fikrad'],['🐞 Problem','🐞 مشكلة','🐞 Rakkoo','🐞 Dhibaato'],['💬 Other','💬 أخرى','💬 Kan biraa','💬 Wax kale']
+['Send','أرسل','Ergi','Dir'],['Cancel','إلغاء','Dhiisi','Jooji'],['PH:Write here','اكتب هنا','Asitti barreessi','Halkan ku qor'],['💡 Feedback','💡 ملاحظات','💡 Yaada','💡 Ra\'yi'],['💡 Idea','💡 فكرة','💡 Yaada','💡 Fikrad'],['🛠️ Problem','🛠️ مشكلة','🛠️ Rakkoo','🛠️ Dhibaato'],['💬 Other','💬 أخرى','💬 Kan biraa','💬 Wax kale']
 ];
 const X4M={};X4.forEach(([en,ar,om,so])=>{const o={ar,om,so};if(en.startsWith('PH:'))TXP[en.slice(3)]=Object.assign(TXP[en.slice(3)]||{},o);else{TX[en]=Object.assign(TX[en]||{},o);X4M[en]=o}});
 const tl=en=>{if(LANG==='en')return en==='ADHD_DEF'?'ADHD (attention-deficit/hyperactivity disorder) is a neurodevelopmental condition. It affects attention, impulse control and activity level, and especially the "executive functions": planning, starting tasks, sense of time and motivation. It is not laziness or a lack of intelligence. It shows up in children and adults, and it can be managed with the right tools and support.':en;const t=TX[en];return t&&t[LANG]||en};
@@ -3067,7 +3115,7 @@ function czOpen(free){const C=ADHKAR[AZ.cat];CZ.free=!!free;CZ.n=0;CZ.combo=0;CZ
   o.hidden=false;document.documentElement.style.overflow='hidden';czRender();setTimeout(()=>hype('adhkar'),900)}
 function czItem(){const C=ADHKAR[AZ.cat];return CZ.free?{ar:'سُبْحَانَ اللَّهِ',tr:'SubḥānAllāh',en:'Glory be to Allah.',n:0,id:'free'}:C.items[AZ.i]}
 function czRender(){const o=$('czBox'),it=czItem(),done=CZ.n>=it.n&&it.n>0;
-  o.innerHTML=`<div class="cz-top"><button class="cz-b" data-cz="x" aria-label="${tl('Close')}">✕</button><span class="cz-chip">🔥 ${azStreak()} · ${tl('Adhkar streak')}</span><span><button class="cz-b${CZ.game?' on':''}" data-cz="g" aria-label="${tl('Game mode')}">🎮</button> <button class="cz-b" data-cz="r" aria-label="${tl('Reset')}">↺</button></span></div>
+  o.innerHTML=`<div class="cz-top"><button class="cz-b" data-cz="x" aria-label="${tl('Close')}">✕</button><span class="cz-chip">🔥 ${azStreak()} · ${tl('Adhkar streak')}</span><span><button class="cz-b${CZ.game?' on':''}" data-cz="g" aria-label="${tl('Game mode')}">🎮</button> <button class="cz-b" data-cz="t" aria-label="${tl('Timer')}">⏱</button> <button class="cz-b" data-cz="r" aria-label="${tl('Reset')}">↺</button></span></div>
   <div class="cz-mid"><p class="ar cz-ar" lang="ar" dir="rtl">${it.ar}</p><p class="cz-tr">${esc(it.tr)}</p>${LANG==='ar'?'':`<p class="cz-en small muted">${esc(it.en)}</p>`}
    <b class="cz-n" id="czN">${CZ.n}</b><small class="cz-of" dir="ltr">/ ${it.n||'∞'}</small>
    ${CZ.game?`<div class="cz-game"><span>${tl('Combo')} ×<b id="czC">${CZ.combo}</b></span><span>Lv <b id="czL">${1+Math.floor(CZ.total/33)}</b></span><i style="--w:${(CZ.total%33)/33*100}%"></i></div>`:''}
@@ -3083,7 +3131,7 @@ function czTap(e){const it=czItem();CZ.n++;CZ.total++;const now=Date.now();CZ.co
   else if(CZ.game&&$('czBox').querySelector('.cz-game i'))$('czBox').querySelector('.cz-game i').style.setProperty('--w',(CZ.total%33)/33*100+'%')}
 function czBadge(t){const b=document.createElement('span');b.className='cz-badge';b.textContent=t;$('czBox').appendChild(b);setTimeout(()=>b.remove(),1600)}
 document.addEventListener('pointerdown',e=>{const o=$('czBox');if(!o||o.hidden||!o.contains(e.target))return;const b=e.target.closest('[data-cz]');
-  if(b){const k=b.dataset.cz;if(k==='x'){o.hidden=true;CZ.on=false;document.documentElement.style.overflow='';renderAdhkar();return}
+  if(b){const k=b.dataset.cz;if(k==='t'){e.preventDefault();qtOpen();return}if(k==='x'){o.hidden=true;CZ.on=false;document.documentElement.style.overflow='';renderAdhkar();return}
     if(k==='r'){CZ.n=0;czRender();return}if(k==='g'){CZ.game=!CZ.game;czRender();return}
     if(k==='n'){const C=ADHKAR[AZ.cat];CZ.n=0;if(AZ.i<C.items.length-1)AZ.i++;else{confetti();chime();o.hidden=true;document.documentElement.style.overflow='';renderAdhkar();return}czRender();return}}
   e.preventDefault();czTap(e)});
@@ -3190,7 +3238,7 @@ function hisnOpen(){let d=$('hisnD');if(!d){d=document.createElement('div');d.id
 function hisnClose(){const d=$('hisnD');if(d)d.hidden=true}
 function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudio();
   d.innerHTML=`<aside class="hisn-p" role="dialog" aria-label="${tl('Hisnul Muslim')}"><div class="hisn-h"><b>📖 ${tl('Hisnul Muslim')} <span class="ar" lang="ar">حصن المسلم</span></b><button class="cz-b" data-hz="x" aria-label="${tl('Close')}">✕</button></div>
-   <div class="seg" role="group"><button data-ht="audio" aria-pressed="${HZ.tab==='audio'}">🎧 ${tl('Audio')}</button><button data-ht="book" aria-pressed="${HZ.tab==='book'}">📄 ${tl('Book')}</button></div>
+   <div class="seg" role="group"><button data-ht="audio" aria-pressed="${HZ.tab==='audio'}">🔊 ${tl('Audio')}</button><button data-ht="book" aria-pressed="${HZ.tab==='book'}">📄 ${tl('Book')}</button></div>
    ${HZ.tab==='audio'?`<div class="hisn-l">${HISN.map(([k,t,ic,nums],i)=>`<div class="hisn-i${HZ.cur===i?' on':''}"><button class="hisn-pl" data-hp="${i}" aria-label="Play">${HZ.cur===i&&!a.paused?'⏸':'▶'}</button><span><b>${ic} ${tl(t)}</b><small dir="ltr">#${nums}</small></span></div>`).join('')}</div>
     <div class="row" style="gap:8px"><button class="chip${HZ.loop1?' on':''}" data-hz="l1">🔂 ${tl('Loop')}</button><button class="chip${HZ.all?' on':''}" data-hz="all">🔁 ${tl('Play all')}</button></div>`
    :`<a class="btn-calm hisn-a" href="${HB}hisnul-muslim.pdf" target="_blank" rel="noopener">📄 ${tl('Open the book (PDF)')}</a>
@@ -3210,6 +3258,223 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
   if(o.month==='numeric'||!o.month)return this.getDate()+'/'+(this.getMonth()+1)+'/'+this.getFullYear();
   const m=o.month==='long'?M[this.getMonth()]:sh(M[this.getMonth()]);const w=o.weekday?(o.weekday==='long'?W[this.getDay()]:sh(W[this.getDay()]))+', ':'';
   return w+(o.day?m+' '+this.getDate():m)+(o.year?' '+this.getFullYear():'')}})();
+
+/* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
+const X40=[
+['⏱ Timer','⏱ مؤقّت','⏱ Yeroo lakkaa\'aa','⏱ Saacad'],['Timer','المؤقّت','Yeroo lakkaa\'aa','Saacad'],['Countdown','عدّ تنازلي','Gadi lakkaa\'uu','Hoos u tirin'],['Stopwatch','ساعة إيقاف','Sa\'aatii dhaabaa','Saacad joojin'],
+['Minutes','دقائق','Daqiiqaa','Daqiiqo'],['Start','ابدأ','Jalqabi','Bilow'],['Pause','إيقاف مؤقت','Dhaabi','Hakad'],['Resume','متابعة','Itti fufi','Sii wad'],['Stop','إيقاف','Dhaabi','Jooji'],['+1 min','+دقيقة','+daq. 1','+1 daq'],
+['Time\'s up','انتهى الوقت','Yeroon ga\'eera','Waqtigii waa dhammaaday'],['What is it for? (optional)','لأي شيء؟ (اختياري)','Maaliif? (dirqama miti)','Maxay u tahay? (ikhtiyaari)'],
+['Day','يوم','Guyyaa','Maalin'],['Week','أسبوع','Torban','Toddobaad'],['Month','شهر','Ji\'a','Bil'],['Calendar','التقويم','Kaaleendara','Kalandar'],['Today','اليوم','Har\'a','Maanta'],
+['Salah times','أوقات الصلاة','Yeroo salaataa','Waqtiyada salaadda'],['📍 Use my location','📍 استخدم موقعي','📍 Bakka koo fayyadami','📍 Isticmaal goobtayda'],['Method','طريقة الحساب','Mala herregaa','Habka xisaabta'],['Asr','العصر','Asrii','Casar'],['Standard','الجمهور','Idilee','Caadi'],['Hanafi','الحنفي','Hanafii','Xanafi'],
+['Sunrise','الشروق','Ba\'a aduu','Qorrax-soo-bax'],['Fajr','الفجر','Fajrii','Subax'],['Dhuhr','الظهر','Zuhrii','Duhur'],['Maghrib','المغرب','Magribii','Maqrib'],['Isha','العشاء','Ishaa\'ii','Cishaa'],
+['Nothing timed today. Tap an hour to add.','لا شيء بوقت محدد اليوم. اضغط على ساعة للإضافة.','Har\'a wanti yeroo qabu hin jiru. Dabaluuf sa\'aatii tuqi.','Maanta wax waqti leh ma jiro. Taabo saacad si aad ugu darto.'],
+['📥 Import .ics','📥 استيراد .ics','📥 .ics galchi','📥 Soo geli .ics'],['📋 Paste from email','📋 الصق من البريد','📋 Imeelii irraa maxxansi','📋 Ka dheji iimaylka'],
+['Paste the email or message. Fastaqim finds the date and time.','الصق الرسالة أو البريد، وفاستقم يجد التاريخ والوقت.','Imeelii ykn ergaa maxxansi. Fastaqim guyyaa fi yeroo argata.','Dheji iimaylka ama fariinta. Fastaqim ayaa helaya taariikhda iyo waqtiga.'],
+['Add to calendar','أضف إلى التقويم','Kaaleendaratti dabali','Ku dar kalandarka'],['Found','تم العثور على','Argame','La helay'],['No date found. Pick one:','لم يُعثر على تاريخ. اختر واحدًا:','Guyyaan hin argamne. Tokko filadhu:','Taariikh lama helin. Mid dooro:'],
+['events added','أحداث أُضيفت','taateewwan dabalaman','dhacdooyin ayaa lagu daray'],['📲 Add Fastaqim to your Home Screen','📲 أضف فاستقم إلى الشاشة الرئيسية','📲 Fastaqim gara Home Screen dabali','📲 Ku dar Fastaqim shaashadda hore'],
+['On iPhone: tap Share, then "Add to Home Screen". It opens full-screen and works without WiFi.','على الآيفون: اضغط «مشاركة» ثم «إضافة إلى الشاشة الرئيسية». يفتح بملء الشاشة ويعمل بلا إنترنت.','iPhone irratti: "Share" tuqi, achii "Add to Home Screen". Guutuu argama, WiFi malees hojjeta.','iPhone-ka: taabo "Share", kadib "Add to Home Screen". Shaashad buuxda ayuu ku furmaa, WiFi la\'aanna wuu shaqeeyaa.'],
+['Offline. Your changes are saved and will sync.','بلا إنترنت. تغييراتك محفوظة وستُزامَن.','Interneetii hin jiru. Jijjiiramni kee olkaa\'ameera, booda ni walsimata.','Internet ma jiro. Isbeddelladaada waa la keydiyay, waana la isku waafajin doonaa.'],
+['🔔 Reminders','🔔 التذكيرات','🔔 Yaadachiisota','🔔 Xasuusin'],['Remind me at salah times','ذكّرني بأوقات الصلاة','Yeroo salaataatti na yaadachiisi','I xasuusi waqtiyada salaadda'],['Remind me of timed to-dos','ذكّرني بالمهام ذات الوقت','Hojiiwwan yeroo qaban na yaadachiisi','I xasuusi hawlaha waqtiga leh'],['minutes before','دقائق قبلها','daqiiqaa dura','daqiiqo ka hor'],
+['Turn on notifications','فعّل الإشعارات','Beeksisa banii','Daar ogeysiisyada'],['Notifications are on.','الإشعارات مفعّلة.','Beeksisni baneera.','Ogeysiisyadu waa shidan yihiin.'],
+['First add Fastaqim to your Home Screen, then turn this on there.','أضف فاستقم أولًا إلى الشاشة الرئيسية، ثم فعّل هذا من هناك.','Jalqaba Fastaqim gara Home Screen dabali, achii kana bani.','Marka hore ku dar Fastaqim shaashadda hore, kadibna halkaas ka shid.'],
+['Location is not available here.','الموقع غير متاح هنا.','Bakki asitti hin argamu.','Goobta halkan lagama heli karo.'],['Location was not allowed.','لم يُسمح بالموقع.','Bakki hin hayyamamne.','Goobta lama oggolaan.'],
+['📲 Alerts on my phone (.ics)','📲 تنبيهات على هاتفي (.ics)','📲 Akeekkachiisa bilbila koo irratti (.ics)','📲 Digniino taleefankayga (.ics)'],['Works even when Fastaqim is closed: salah and timed to-dos for the next 30 days, with an alert.','يعمل حتى لو كان فاستقم مغلقًا: الصلوات والمهام ذات الوقت لـ30 يومًا قادمة، مع تنبيه.','Fastaqim yoo cufamellee ni hojjeta: salaata fi hojiiwwan yeroo qaban guyyaa 30 itti aananiif, akeekkachiisa waliin.','Wuu shaqeeyaa xitaa marka Fastaqim xiran yahay: salaadaha iyo hawlaha waqtiga leh 30 maalmood ee soo socda, digniin la socota.'],
+['From your time zone','حسب منطقتك الزمنية','Akka zoonii yeroo keetii','Sida aagga waqtigaaga'],['From your location','حسب موقعك','Akka bakka keetii','Sida goobtaada'],['Hijri (Umm al-Qura, Makkah)','الهجري (أم القرى، مكة)','Hijrii (Umm al-Qura, Makkah)','Hijri (Umm al-Qura, Makkah)'],
+['🔒 Privacy','🔒 الخصوصية','🔒 Dhuunfaa','🔒 Qarsoodi'],
+['Starting made simple.','البداية صارت أسهل.','Jalqabuun salphateera.','Bilaabiddu way fududaatay.'],['Added to calendar','أُضيف إلى التقويم','Kaaleendaratti dabalame','Waxaa lagu daray kalandarka'],
+['Guide','الدليل','Qajeelcha','Hage'],['Guide style','أسلوب الدليل','Akkaata qajeelchaa','Habka hagaha'],['Playbook','خطة العمل','Karoora hojii','Qorshaha shaqada'],
+['Self-help tips, not therapy or professional advice.','نصائح للمساعدة الذاتية، وليست علاجًا ولا استشارة مهنية.','Gorsa of-gargaarsaa, yaala ykn gorsa ogummaa miti.','Talooyin is-caawin ah, ma aha daaweyn ama talo xirfadeed.'],
+['Notes: where we\'re starting','ملاحظات: من أين نبدأ','Yaadannoo: eessaa jalqabna','Qoraallo: halka aan ka bilaabayno'],
+['📲 Add to Home Screen','📲 أضف إلى الشاشة الرئيسية','📲 Gara Home Screen dabali','📲 Ku dar shaashadda hore'],
+['This is a self-help guide, not therapy or medical care.','هذا دليل للمساعدة الذاتية، وليس علاجًا ولا رعاية طبية.','Kun qajeelcha of-gargaarsaa ti, yaala ykn kunuunsa fayyaa miti.','Kani waa hage is-caawin ah, ma aha daaweyn ama daryeel caafimaad.'],
+['Free · No ads · 26 languages','مجاني · بلا إعلانات · 26 لغة','Bilisa · Beeksisa malee · Afaan 26','Bilaash · Xayeysiis la\'aan · 26 luqadood'],
+['It\'s time for','حان وقت','Yeroon','Waa waqtigii']
+];
+X40.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ---------- quick timer (works on any screen, vibration only) ---------- */
+const QT={iv:0};
+function qtNow(){const q=S.qt;if(!q)return 0;if(q.mode==='up')return q.paused?q.acc:q.acc+(Date.now()-q.t0)/1000;return Math.max(0,q.paused?q.left:(q.end-Date.now())/1000)}
+const qfmt=s=>{s=Math.round(s);const h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')};
+function qtTick(){clearInterval(QT.iv);const bar=$('qtBar');if(!S.qt){bar&&(bar.hidden=true);return}
+  const run=()=>{const q=S.qt;if(!q){clearInterval(QT.iv);bar.hidden=true;return}const v=qtNow();bar.hidden=false;bar.innerHTML=`⏱ <b>${qfmt(v)}</b>${q.label?' · '+esc(q.label).slice(0,22):''}${q.paused?' ⏸':''}`;
+    if(q.mode!=='up'&&!q.paused&&v<=0){S.qt=null;save();clearInterval(QT.iv);bar.hidden=true;qtDone(q)}};run();QT.iv=setInterval(run,500)}
+function qtDone(q){try{navigator.vibrate&&navigator.vibrate([300,120,300,120,500])}catch(e){}confetti();toast('⏱ '+tl('Time\'s up')+(q.label?': '+q.label:''));notify('⏱ '+tl('Time\'s up'),q.label||'Fastaqim')}
+function qtStart(min,label,mode){S.qt=mode==='up'?{mode:'up',t0:Date.now(),acc:0,label:label||''}:{mode:'down',end:Date.now()+min*60000,total:min*60,label:label||''};save();qtTick()}
+function qtOpen(label){const q=S.qt;let mode='down',min=Math.max(1,SM());
+  const body=()=>q?`<p class="label">${tl('Timer')}</p><p class="qt-big">${qfmt(qtNow())}</p>${q.label?`<p class="small muted" style="text-align:center">${esc(q.label)}</p>`:''}
+     <div class="row" style="justify-content:center">${q.paused?`<button class="btn-main" data-q="res">${tl('Resume')}</button>`:`<button class="btn-calm" data-q="pau">${tl('Pause')}</button>`}${q.mode!=='up'?`<button data-q="add">${tl('+1 min')}</button>`:''}<button class="btn-ghost" data-q="stop">${tl('Stop')}</button></div>`
+   :`<p class="label">${tl('⏱ Timer')}</p><div class="seg" role="group"><button data-qm="down" aria-pressed="${mode==='down'}">${tl('Countdown')}</button><button data-qm="up" aria-pressed="${mode==='up'}">${tl('Stopwatch')}</button></div>
+     ${mode==='down'?`<div class="row qt-pre">${[1,2,5,10,15,20,25,30,45,60].map(m=>`<button class="chip${m===min?' on':''}" data-qp="${m}">${m}</button>`).join('')}</div><label class="small muted">${tl('Minutes')} <input type="number" id="qtMin" min="1" max="600" value="${min}" style="max-width:90px"></label>`:''}
+     <input type="text" id="qtLab" placeholder="${tl('What is it for? (optional)')}" value="${esc(label||'')}" maxlength="60"><button class="btn-main" data-q="go">${tl('Start')}</button>`;
+  const draw=()=>{modalCard(body()+`<button class="btn-ghost small" data-q="x">${tl('Close')}</button>`);const B=$('scrollBody');
+    B.querySelectorAll('[data-qm]').forEach(b=>b.onclick=()=>{mode=b.dataset.qm;draw()});B.querySelectorAll('[data-qp]').forEach(b=>b.onclick=()=>{min=+b.dataset.qp;draw()});
+    if($('qtMin'))$('qtMin').oninput=e=>{min=Math.max(1,+e.target.value||1)};
+    B.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const k=b.dataset.q,q=S.qt;
+      if(k==='go'){qtStart(min,$('qtLab').value.trim(),mode);modalClose();return}if(k==='x'){modalClose();return}if(!q)return;
+      if(k==='pau'){if(q.mode==='up'){q.acc+=(Date.now()-q.t0)/1000}else q.left=(q.end-Date.now())/1000;q.paused=true}
+      if(k==='res'){if(q.mode==='up')q.t0=Date.now();else q.end=Date.now()+q.left*1000;q.paused=false}
+      if(k==='add'){if(q.paused)q.left+=60;else q.end+=60000}
+      if(k==='stop'){S.qt=null;save();qtTick();modalClose();return}save();qtTick();qtOpen()})};draw()}
+
+/* ---------- notifications (shown by the app; background ones come from the server once set up) ---------- */
+async function notify(title,body){try{if(!('Notification' in window)||Notification.permission!=='granted')return;const r=navigator.serviceWorker&&await navigator.serviceWorker.getRegistration();
+  if(r)r.showNotification(title,{body,icon:'icon-192.png',badge:'icon-192.png',vibrate:[200,100,200],tag:'fq-'+title});else new Notification(title,{body})}catch(e){}}
+
+/* ---------- salah times (calculated on the device, no internet needed) ---------- */
+const PMETH={mwl:['Muslim World League',18,17],isna:['ISNA (North America)',15,15],egypt:['Egypt',19.5,17.5],makkah:['Umm al-Qura (Makkah)',18.5,'90'],karachi:['Karachi',18,18],gulf:['Gulf (UAE, Qatar)',18.2,18.2],kuwait:['Kuwait',18,17.5],turkey:['Türkiye (Diyanet)',18,17],sea:['Singapore, Malaysia, Indonesia',20,18],tehran:['Tehran',17.7,14],france:['France (UOIF)',12,12],russia:['Russia',16,15]};
+/* country from the phone's time zone → nearest city + the method that country uses (no location permission needed) */
+const TZC={'America/New_York':[40.71,-74.01,'isna'],'America/Chicago':[41.88,-87.63,'isna'],'America/Denver':[39.74,-104.99,'isna'],'America/Phoenix':[33.45,-112.07,'isna'],'America/Los_Angeles':[34.05,-118.24,'isna'],'America/Anchorage':[61.22,-149.9,'isna'],'America/Detroit':[42.33,-83.05,'isna'],'America/Toronto':[43.65,-79.38,'isna'],'America/Vancouver':[49.28,-123.12,'isna'],'America/Edmonton':[53.55,-113.49,'isna'],'America/Winnipeg':[49.9,-97.14,'isna'],'America/Halifax':[44.65,-63.57,'isna'],'Pacific/Honolulu':[21.31,-157.86,'isna'],'America/Mexico_City':[19.43,-99.13,'isna'],'America/Sao_Paulo':[-23.55,-46.63,'mwl'],
+'Europe/London':[51.51,-0.13,'mwl'],'Europe/Dublin':[53.35,-6.26,'mwl'],'Europe/Paris':[48.86,2.35,'france'],'Europe/Berlin':[52.52,13.4,'mwl'],'Europe/Amsterdam':[52.37,4.9,'mwl'],'Europe/Brussels':[50.85,4.35,'mwl'],'Europe/Stockholm':[59.33,18.07,'mwl'],'Europe/Oslo':[59.91,10.75,'mwl'],'Europe/Copenhagen':[55.68,12.57,'mwl'],'Europe/Helsinki':[60.17,24.94,'mwl'],'Europe/Madrid':[40.42,-3.7,'mwl'],'Europe/Rome':[41.9,12.5,'mwl'],'Europe/Vienna':[48.21,16.37,'mwl'],'Europe/Zurich':[47.38,8.54,'mwl'],'Europe/Istanbul':[41.01,28.98,'turkey'],'Europe/Moscow':[55.76,37.62,'russia'],'Europe/Sarajevo':[43.86,18.41,'mwl'],'Europe/Tirane':[41.33,19.82,'mwl'],
+'Africa/Addis_Ababa':[9.03,38.74,'mwl'],'Africa/Mogadishu':[2.05,45.32,'mwl'],'Africa/Djibouti':[11.59,43.15,'mwl'],'Africa/Nairobi':[-1.29,36.82,'mwl'],'Africa/Asmara':[15.32,38.93,'mwl'],'Africa/Kampala':[0.35,32.58,'mwl'],'Africa/Dar_es_Salaam':[-6.79,39.21,'mwl'],'Africa/Khartoum':[15.5,32.56,'egypt'],'Africa/Cairo':[30.04,31.24,'egypt'],'Africa/Tripoli':[32.89,13.19,'egypt'],'Africa/Tunis':[36.81,10.18,'mwl'],'Africa/Algiers':[36.75,3.06,'mwl'],'Africa/Casablanca':[33.57,-7.59,'mwl'],'Africa/Lagos':[6.52,3.38,'mwl'],'Africa/Dakar':[14.72,-17.47,'mwl'],'Africa/Johannesburg':[-26.2,28.05,'mwl'],'Africa/Accra':[5.6,-0.19,'mwl'],
+'Asia/Riyadh':[21.42,39.83,'makkah'],'Asia/Aden':[12.79,45.02,'makkah'],'Asia/Dubai':[25.2,55.27,'gulf'],'Asia/Qatar':[25.29,51.53,'gulf'],'Asia/Bahrain':[26.23,50.59,'gulf'],'Asia/Muscat':[23.59,58.41,'gulf'],'Asia/Kuwait':[29.38,47.99,'kuwait'],'Asia/Baghdad':[33.31,44.36,'mwl'],'Asia/Amman':[31.95,35.93,'mwl'],'Asia/Damascus':[33.51,36.29,'mwl'],'Asia/Beirut':[33.89,35.5,'mwl'],'Asia/Gaza':[31.5,34.47,'mwl'],'Asia/Hebron':[31.53,35.1,'mwl'],'Asia/Jerusalem':[31.78,35.23,'mwl'],'Asia/Tehran':[35.69,51.39,'tehran'],'Asia/Karachi':[24.86,67.01,'karachi'],'Asia/Kolkata':[28.61,77.21,'karachi'],'Asia/Calcutta':[28.61,77.21,'karachi'],'Asia/Dhaka':[23.81,90.41,'karachi'],'Asia/Kabul':[34.56,69.21,'karachi'],'Asia/Tashkent':[41.3,69.24,'mwl'],'Asia/Almaty':[43.24,76.89,'mwl'],'Asia/Baku':[40.41,49.87,'mwl'],'Asia/Kuala_Lumpur':[3.14,101.69,'sea'],'Asia/Singapore':[1.35,103.82,'sea'],'Asia/Jakarta':[-6.2,106.85,'sea'],'Asia/Makassar':[-5.15,119.43,'sea'],'Asia/Brunei':[4.9,114.94,'sea'],'Asia/Manila':[14.6,120.98,'mwl'],'Asia/Shanghai':[39.9,116.4,'mwl'],'Asia/Tokyo':[35.68,139.69,'mwl'],'Asia/Colombo':[6.93,79.86,'karachi'],'Indian/Maldives':[4.18,73.51,'karachi'],'Australia/Sydney':[-33.87,151.21,'mwl'],'Australia/Melbourne':[-37.81,144.96,'mwl'],'Australia/Perth':[-31.95,115.86,'mwl'],'Pacific/Auckland':[-36.85,174.76,'mwl']};
+function locAuto(){if(S.loc)return;let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}const c=TZC[tz];
+  S.loc=c?{lat:c[0],lng:c[1],meth:c[2],auto:tz}:{lat:21.42,lng:39.83,meth:'makkah',auto:'Makkah'};save()}
+/* Hijri date, Umm al-Qura (Makkah) calendar, built into the phone */
+const HMON=['Muharram','Safar','Rabiʿ al-Awwal','Rabiʿ al-Thani','Jumada al-Ula','Jumada al-Akhirah','Rajab','Shaʿban','Ramadan','Shawwal','Dhul-Qiʿdah','Dhul-Hijjah'];
+function hijri(d,o){try{if(LANG==='ar')return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-latn',o||{day:'numeric',month:'long',year:'numeric'}).format(d).replace(/\s?هـ$/,'')+(o&&!o.year?'':' هـ');
+  const P=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));
+  const y=String(P.year||P.relatedYear||'').replace(/\D/g,''),m=HMON[(+P.month||1)-1];if(o&&!o.year)return m;if(o)return m+' '+y+' AH';return P.day+' '+m+' '+y+' AH'}catch(e){return ''}}
+const hday=d=>{try{return new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric'}).format(d)}catch(e){return ''}};
+function prayerTimes(date,lat,lng,meth,hanafi){const M=PMETH[meth]||PMETH.mwl,rad=Math.PI/180,dsin=x=>Math.sin(x*rad),dcos=x=>Math.cos(x*rad),dtan=x=>Math.tan(x*rad),
+  darcsin=x=>Math.asin(x)/rad,darccos=x=>Math.acos(Math.max(-1,Math.min(1,x)))/rad,darctan2=(y,x)=>Math.atan2(y,x)/rad,darccot=x=>Math.atan(1/x)/rad,fixA=a=>{a=a-360*Math.floor(a/360);return a<0?a+360:a},fixH=a=>{a=a-24*Math.floor(a/24);return a<0?a+24:a};
+  let y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();if(m<=2){y--;m+=12}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);const jd0=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5-lng/(15*24);
+  const sun=t=>{const D=jd0+t-2451545,g=fixA(357.529+0.98560028*D),q=fixA(280.459+0.98564736*D),L=fixA(q+1.915*dsin(g)+0.020*dsin(2*g)),e=23.439-0.00000036*D,RA=fixH(darctan2(dcos(e)*dsin(L),dcos(L))/15);return{decl:darcsin(dsin(e)*dsin(L)),eqt:q/15-RA}};
+  const mid=t=>fixH(12-sun(t).eqt);const ang=(a,t,ccw)=>{const de=sun(t).decl,n=mid(t),T=darccos((-dsin(a)-dsin(de)*dsin(lat))/(dcos(de)*dcos(lat)))/15;return n+(ccw?-T:T)};
+  const asr=(f,t)=>{const de=sun(t).decl;return ang(-darccot(f+dtan(Math.abs(lat-de))),t)};
+  let T={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
+  for(let k=0;k<2;k++){const p=Object.fromEntries(Object.entries(T).map(([a,b])=>[a,b/24]));
+    T={fajr:ang(M[1],p.fajr,true),sunrise:ang(0.833,p.sunrise,true),dhuhr:mid(p.dhuhr),asr:asr(hanafi?2:1,p.asr),maghrib:ang(0.833,p.maghrib),isha:typeof M[2]==='string'?0:ang(M[2],p.isha)};
+    if(typeof M[2]==='string')T.isha=T.maghrib+(+M[2])/60}
+  const tz=-date.getTimezoneOffset()/60,out={};for(const [k,v] of Object.entries(T)){const h=v+tz-lng/15+(k==='dhuhr'?1/60:0);const dt=new Date(date.getFullYear(),date.getMonth(),date.getDate(),0,0,0);dt.setMinutes(Math.round(fixH(h)*60));out[k]=dt}return out}
+function salahFor(d){const L=S.loc;if(!L)return null;return prayerTimes(d,L.lat,L.lng,L.meth||'mwl',L.hanafi)}
+function locAsk(cb){if(!navigator.geolocation){toast(tl('Location is not available here.'));return}navigator.geolocation.getCurrentPosition(p=>{S.loc=Object.assign({meth:'mwl'},S.loc,{lat:+p.coords.latitude.toFixed(3),lng:+p.coords.longitude.toFixed(3),auto:''});save();cb&&cb()},()=>toast(tl('Location was not allowed.')),{timeout:15000})}
+const fmtHM=dt=>dt.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'});
+
+/* ---------- calendar: Day view like a phone calendar ---------- */
+const SAL=[['fajr','Fajr'],['sunrise','Sunrise'],['dhuhr','Dhuhr'],['asr','Asr'],['maghrib','Maghrib'],['isha','Isha']];
+function renderDayView(){const base=new Date();const dt=addDays(base,CAL.off),d=dkey(dt),I=dayItems(d);const P=salahFor(dt);
+  const items=[];I.tasks.filter(t=>t.time).forEach(t=>{const [h,m]=t.time.split(':').map(Number);items.push({m:h*60+m,html:`<button class="dv-it${t.done?' d':''}" data-dvt="${t.id}">⏰ ${fmtHM(new Date(2000,0,1,h,m))} · <bdi>${esc(t.title)}</bdi></button>`})});
+  if(P)SAL.forEach(([k,n])=>{const x=P[k];items.push({m:x.getHours()*60+x.getMinutes(),html:`<span class="dv-it s">${k==='sunrise'?'🌅':'🕌'} ${fmtHM(x)} · ${tl(n)}</span>`})});
+  const untimed=I.tasks.filter(t=>!t.time);const nowM=d===dkey()?base.getHours()*60+base.getMinutes():-1;
+  let rows='';for(let h=0;h<24;h++){const here=items.filter(x=>Math.floor(x.m/60)===h).sort((a,b)=>a.m-b.m);
+    rows+=`<div class="dv-h" data-dvh="${h}"><span class="dv-l">${fmtHM(new Date(2000,0,1,h))}</span><span class="dv-c">${here.map(x=>x.html).join('')}${nowM>=h*60&&nowM<h*60+60?`<i class="dv-now" style="top:${(nowM-h*60)/60*100}%"></i>`:''}</span></div>`}
+  $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous day">◀</button><b>${dt.toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'})}<small class="hj">🌙 ${hijri(dt)}</small></b><button class="icon-btn" data-co="1" aria-label="Next day">▶</button></div>
+   ${CAL.off?`<button class="chip" data-dtoday style="align-self:center">${tl('Today')}</button>`:''}
+   ${untimed.length?`<div class="dv-all">${untimed.map(t=>`<button class="dv-it${t.done?' d':''}" data-dvt="${t.id}"><bdi>${esc(t.title)}</bdi></button>`).join('')}</div>`:''}
+   ${P?'':`<button class="chip" id="dvLoc" style="align-self:flex-start">${tl('📍 Use my location')} · ${tl('Salah times')}</button>`}
+   <div class="dv" id="dvScroll">${rows}</div>
+   `;
+  const sc=$('dvScroll');if(sc){const h=nowM>=0?Math.max(0,Math.floor(nowM/60)-1):(P?P.fajr.getHours():7);sc.scrollTop=h*52}
+  if($('dvLoc'))$('dvLoc').onclick=()=>locAsk(renderCal);
+  $('calBody').querySelectorAll('[data-dtoday]').forEach(b=>b.onclick=()=>{CAL.off=0;renderCal()});
+  $('calBody').querySelectorAll('[data-dvt]').forEach(b=>b.onclick=e=>{e.stopPropagation();dayOpen(d)});
+  $('calBody').querySelectorAll('[data-dvh]').forEach(r=>r.onclick=e=>{if(e.target.closest('[data-dvt]'))return;dayOpen(d);setTimeout(()=>{const tm=$('dAddTm');if(tm)tm.value=String(r.dataset.dvh).padStart(2,'0')+':00';$('dAddT')&&$('dAddT').focus()},60)});
+}
+function icsWire(){if($('icsBtn'))$('icsBtn').onclick=()=>$('icsFile').click();if($('icsFile'))$('icsFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>icsImport(String(r.result));r.readAsText(f)};
+  if($('pasteBtn'))$('pasteBtn').onclick=pasteOpen}
+/* .ics → to-dos with date + time */
+function icsImport(txt){const un=txt.replace(/\r?\n[ \t]/g,'');const evs=un.split('BEGIN:VEVENT').slice(1);let n=0;
+  for(const ev of evs){const g=k=>{const m=ev.match(new RegExp('^'+k+'(;[^:\\n]*)?:(.*)$','m'));return m?{p:m[1]||'',v:m[2].trim()}:null};const s=g('DTSTART');if(!s)continue;
+    const sum=(g('SUMMARY')||{v:'Event'}).v.replace(/\\,/g,',').replace(/\\n/gi,' ').replace(/\\;/g,';');const loc=g('LOCATION');
+    const m=s.v.match(/^(\d{4})(\d{2})(\d{2})(?:T(\d{2})(\d{2})(\d{2})?(Z)?)?/);if(!m)continue;let dt;
+    if(m[4]){dt=m[7]?new Date(Date.UTC(+m[1],m[2]-1,+m[3],+m[4],+m[5])):new Date(+m[1],m[2]-1,+m[3],+m[4],+m[5])}else dt=new Date(+m[1],m[2]-1,+m[3]);
+    const title=sum+(loc&&loc.v?' · '+loc.v.replace(/\\,/g,','):'');if(blocked(title))continue;
+    S.tasks.push({id:uid(),title,top:false,done:false,steps:[],open:false,due:dkey(dt),time:m[4]?String(dt.getHours()).padStart(2,'0')+':'+String(dt.getMinutes()).padStart(2,'0'):'',src:'ics'});n++}
+  save();render();toast('✓ '+tl('Added to calendar')+': '+n)}
+/* paste an email → find the date and time */
+const MON=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+function findWhen(t){const low=t.toLowerCase(),now=new Date();let d=null,tm='';
+  let m=low.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})\b/);if(m)d=new Date(+m[1],m[2]-1,+m[3]);
+  if(!d){m=low.match(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?\s+(\d{1,2})(?:st|nd|rd|th)?(?:,?\s+(\d{4}))?/);if(m)d=new Date(m[3]?+m[3]:now.getFullYear(),MON.indexOf(m[1]),+m[2])}
+  if(!d){m=low.match(/\b(\d{1,2})(?:st|nd|rd|th)?\s+(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?(?:,?\s+(\d{4}))?/);if(m)d=new Date(m[3]?+m[3]:now.getFullYear(),MON.indexOf(m[2]),+m[1])}
+  if(!d){m=low.match(/\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?\b/);if(m){let y=m[3]?+m[3]:now.getFullYear();if(y<100)y+=2000;d=new Date(y,m[1]-1,+m[2])}}
+  if(!d){const w=whenIn(t);if(w)d=pd(w)}
+  if(d&&!m&&d<addDays(now,-1))d.setFullYear(d.getFullYear()+1);
+  m=low.match(/\b(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.?|p\.?m\.?)/);if(m){let h=+m[1]%12;if(m[3][0]==='p')h+=12;tm=String(h).padStart(2,'0')+':'+(m[2]||'00')}
+  else{m=low.match(/\b([01]?\d|2[0-3]):([0-5]\d)\b/);if(m)tm=m[1].padStart(2,'0')+':'+m[2]}
+  return{d:d?dkey(d):'',tm}}
+function pasteOpen(){modalCard(`<p class="label">${tl('📋 Paste from email')}</p><p class="small muted">${tl('Paste the email or message. Fastaqim finds the date and time.')}</p><textarea id="pmT" rows="6" style="width:100%"></textarea><div id="pmR"></div><button class="btn-ghost small" id="pmX">${tl('Close')}</button>`);
+  $('pmX').onclick=modalClose;$('pmT').oninput=()=>{const t=$('pmT').value.trim();if(!t){$('pmR').innerHTML='';return}const w=findWhen(t);
+    const sub=(t.match(/^subject:\s*(.+)$/im)||[])[1]||t.split('\n').map(x=>x.trim()).find(x=>x&&!/^(from|to|date|sent|cc):/i.test(x))||t;
+    $('pmR').innerHTML=`<p class="small">${w.d?tl('Found'):tl('No date found. Pick one:')}</p><input type="text" id="pmTi" value="${esc(sub.slice(0,90))}"><div class="row"><input type="date" id="pmD" value="${w.d}"><input type="time" id="pmTm" value="${w.tm}"></div><button class="btn-main" id="pmGo">${tl('Add to calendar')}</button>`;
+    $('pmGo').onclick=()=>{const title=$('pmTi').value.trim(),d=$('pmD').value;if(!title||!d)return;if(blocked(title)){blkWarn(title);return}S.tasks.push({id:uid(),title,top:false,done:false,steps:[],open:false,due:d,time:$('pmTm').value||'',src:'paste'});save();modalClose();CAL.view='day';CAL.off=Math.round((pd(d)-pd(dkey()))/864e5);show('plan');toast('✓ '+tl('Added to calendar'))}}}
+
+/* ---------- reminders while Fastaqim is open (background ones need the server step) ---------- */
+const RM={done:{}};
+function remindTick(){const R=S.remind||{};if(!R.salah&&!R.tasks)return;const now=new Date(),key=dkey(now),before=(R.before||0)*60000;
+  if(R.salah){const P=salahFor(now);if(P)['fajr','dhuhr','asr','maghrib','isha'].forEach(k=>{const at=P[k].getTime()-before,id=key+k;if(!RM.done[id]&&now>=at&&now-at<120000){RM.done[id]=1;try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}notify('🕌 '+tl('It\'s time for')+' '+tl(SAL.find(s=>s[0]===k)[1]),fmtHM(P[k]));toast('🕌 '+tl(SAL.find(s=>s[0]===k)[1])+' · '+fmtHM(P[k]))}})}
+  if(R.tasks)S.tasks.filter(t=>!t.done&&t.due===key&&t.time).forEach(t=>{const [h,m]=t.time.split(':').map(Number);const at=new Date(now.getFullYear(),now.getMonth(),now.getDate(),h,m).getTime()-before,id=key+t.id;
+    if(!RM.done[id]&&now>=at&&now-at<120000){RM.done[id]=1;notify('⏰ '+t.title,t.time);toast('⏰ '+t.title)}})}
+function renderRemind(){const c=$('remCard');if(!c)return;const R=S.remind||{};const sa=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  const perm=('Notification' in window)?Notification.permission:'none';const P=salahFor(new Date());
+  c.innerHTML=`<p class="label">${tl('🔔 Reminders')}</p>
+   <label class="row" style="justify-content:space-between"><span>🕌 ${tl('Remind me at salah times')}</span><input type="checkbox" id="rmS" ${R.salah?'checked':''}></label>
+   <label class="row" style="justify-content:space-between"><span>⏰ ${tl('Remind me of timed to-dos')}</span><input type="checkbox" id="rmT" ${R.tasks?'checked':''}></label>
+   <label class="small muted"><input type="number" id="rmB" min="0" max="60" value="${R.before||0}" style="max-width:70px"> ${tl('minutes before')}</label>
+   ${P?`<p class="small muted">📍 ${S.loc.auto?tl('From your time zone')+' ('+esc(S.loc.auto.split('/').pop().replace(/_/g,' '))+')':tl('From your location')} <button class="chip" id="rmLoc">${tl('📍 Use my location')}</button></p><p class="small">${SAL.map(([k,n])=>`${tl(n)} <b>${fmtHM(P[k])}</b>`).join(' · ')}</p>`:`<button class="chip" id="rmLoc">${tl('📍 Use my location')}</button>`}
+   <div class="row" style="gap:6px"><select id="rmM" aria-label="${tl('Method')}">${Object.entries(PMETH).map(([k,v])=>`<option value="${k}" ${(S.loc&&S.loc.meth||'mwl')===k?'selected':''}>${v[0]}</option>`).join('')}</select><select id="rmA" aria-label="${tl('Asr')}"><option value="0">${tl('Asr')}: ${tl('Standard')}</option><option value="1" ${S.loc&&S.loc.hanafi?'selected':''}>${tl('Asr')}: ${tl('Hanafi')}</option></select></div>
+   <button class="chip" id="rmIcs">${tl('📲 Alerts on my phone (.ics)')}</button><p class="small muted">${tl('Works even when Fastaqim is closed: salah and timed to-dos for the next 30 days, with an alert.')}</p>
+   ${perm==='granted'?`<p class="small">✓ ${tl('Notifications are on.')}</p>`:`<button class="btn-calm" id="rmN">${tl('Turn on notifications')}</button>${sa?'':`<p class="small muted">${tl('First add Fastaqim to your Home Screen, then turn this on there.')} <button class="chip" id="rmHow">${tl('Show me how')}</button></p>`}`}`;
+  const set=(k,v)=>{S.remind=Object.assign({},S.remind,{[k]:v});save();if(typeof pushSync==='function')pushSync()};
+  const gd=on=>{if(on&&!isStand())setTimeout(instGuide,50)};$('rmS').onchange=e=>{set('salah',e.target.checked);if(e.target.checked&&!S.loc)locAsk(renderRemind);gd(e.target.checked)};$('rmT').onchange=e=>{set('tasks',e.target.checked);gd(e.target.checked)};$('rmB').onchange=e=>set('before',Math.max(0,Math.min(60,+e.target.value||0)));
+  if($('rmLoc'))$('rmLoc').onclick=()=>locAsk(renderRemind);$('rmIcs').onclick=icsAlerts;if($('rmHow'))$('rmHow').onclick=instGuide;
+  $('rmM').onchange=e=>{S.loc=Object.assign({},S.loc,{meth:e.target.value});save();renderRemind();typeof pushSync==='function'&&pushSync()};$('rmA').onchange=e=>{S.loc=Object.assign({},S.loc,{hanafi:e.target.value==='1'});save();renderRemind();typeof pushSync==='function'&&pushSync()};
+  if($('rmN'))$('rmN').onclick=async()=>{if(!('Notification' in window)||!isStand()&&/iphone|ipad/i.test(navigator.userAgent)){instGuide();return}const p=await Notification.requestPermission();if(p==='granted'&&typeof pushSubscribe==='function')await pushSubscribe();renderRemind()}}
+
+/* ---------- install + offline ---------- */
+function renderInstall(){const c=$('instCard');if(!c)return;const sa=window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone;c.hidden=!!sa;
+  c.innerHTML=`<p class="label">${tl('📲 Add Fastaqim to your Home Screen')}</p><p class="small">${tl('Reminders work from the Fastaqim icon on your Home Screen.')}</p><div class="row" style="gap:8px">${BIP?`<button class="btn-main" id="instGo">${tl('📲 Install now')}</button>`:''}<button class="btn-calm" id="instHow">${tl('Show me how')}</button></div>`;
+  $('instHow').onclick=instGuide;if($('instGo'))$('instGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;renderInstall()}}
+function netBadge(){const b=$('offBadge');if(!b)return;b.hidden=navigator.onLine!==false;b.textContent='☁︎ '+tl('Offline. Your changes are saved and will sync.')}
+addEventListener('online',()=>{netBadge();try{SYNC.dirty=true;dbSchedule()}catch(e){}});addEventListener('offline',netBadge);
+if('serviceWorker' in navigator&&!inArtifact()&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+/* alerts file: the phone's own calendar rings them even when Fastaqim is closed */
+function icsAlerts(){const R=S.remind||{},b=R.before||0,pad=n=>String(n).padStart(2,'0'),f=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z',ev=[],now=new Date();
+  const add=(id,dt,title)=>ev.push(['BEGIN:VEVENT','UID:'+id+'@fastaqim','DTSTAMP:'+f(now),'DTSTART:'+f(dt),'DTEND:'+f(new Date(dt.getTime()+10*60000)),'SUMMARY:'+title.replace(/[,;\\]/g,m=>'\\'+m).replace(/\n/g,' '),'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:'+title.replace(/[,;\\]/g,' '),'TRIGGER:-PT'+b+'M','END:VALARM','END:VEVENT'].join('\r\n'));
+  if(S.loc)for(let i=0;i<30;i++){const d=addDays(now,i),P=salahFor(d);['fajr','dhuhr','asr','maghrib','isha'].forEach(k=>{if(P[k]>now)add(dkey(d)+k,P[k],'🕌 '+tl(SAL.find(s=>s[0]===k)[1]))})}
+  S.tasks.filter(t=>!t.done&&t.due&&t.time&&t.due>=dkey(now)).forEach(t=>{const [h,m]=t.time.split(':').map(Number),d=pd(t.due);d.setHours(h,m,0,0);add('t'+t.id+t.due+t.time,d,'⏰ '+t.title)});
+  if(!ev.length){if(!S.loc){locAsk(icsAlerts);return}toast(tl('Nothing timed today. Tap an hour to add.'));return}
+  const txt=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Fastaqim//EN','CALSCALE:GREGORIAN','X-WR-CALNAME:Fastaqim',...ev,'END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'text/calendar'}));a.download='fastaqim-alerts.ics';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},4000)}
+
+/* ---------- visual Home Screen guide (needed for reminders) ---------- */
+const X40B=[
+['Add to Home Screen','أضف إلى الشاشة الرئيسية','Gara Home Screen dabali','Ku dar shaashadda hore'],
+['Reminders work from the Fastaqim icon on your Home Screen.','التذكيرات تعمل من أيقونة فاستقم على الشاشة الرئيسية.','Yaadachiisni mallattoo Fastaqim Home Screen irra jiru irraa hojjeta.','Xasuusinta waxay ka shaqeysaa astaanta Fastaqim ee shaashadda hore.'],
+['Open Fastaqim in Safari','افتح فاستقم في Safari','Fastaqim Safari keessatti bani','Ka fur Fastaqim Safari'],
+['Tap Share ⬆︎ (newer iPhones: tap ⋯ first)','اضغط «مشاركة» ⬆︎ (في الآيفون الأحدث: اضغط ⋯ أولًا)','"Share" ⬆︎ tuqi (iPhone haaraa irratti: dura ⋯ tuqi)','Taabo "Share" ⬆︎ (iPhone-yada cusub: marka hore taabo ⋯)'],
+['Tap "Add to Home Screen"','اضغط «إضافة إلى الشاشة الرئيسية»','"Add to Home Screen" tuqi','Taabo "Add to Home Screen"'],
+['Tap "Add", then open Fastaqim from the new icon','اضغط «إضافة»، ثم افتح فاستقم من الأيقونة الجديدة','"Add" tuqi, achii mallattoo haaraa irraa Fastaqim bani','Taabo "Add", kadib Fastaqim ka fur astaanta cusub'],
+['Open Fastaqim in Chrome','افتح فاستقم في Chrome','Fastaqim Chrome keessatti bani','Ka fur Fastaqim Chrome'],
+['Tap the menu ⋮','اضغط القائمة ⋮','Baafata ⋮ tuqi','Taabo liiska ⋮'],
+['Tap "Install app" or "Add to Home screen"','اضغط «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية»','"Install app" ykn "Add to Home screen" tuqi','Taabo "Install app" ama "Add to Home screen"'],
+['Tap "Install", then open Fastaqim from the new icon','اضغط «تثبيت»، ثم افتح فاستقم من الأيقونة الجديدة','"Install" tuqi, achii mallattoo haaraa irraa Fastaqim bani','Taabo "Install", kadib Fastaqim ka fur astaanta cusub'],
+['Then turn on 🔔 Reminders in Me.','ثم فعّل 🔔 التذكيرات من «أنا».','Achii "Ana" keessatti 🔔 Yaadachiisota bani.','Kadib "Aniga" ka shid 🔔 Xasuusinta.'],
+['📲 Install now','📲 ثبّت الآن','📲 Amma fe\'i','📲 Hadda ku rakib'],['Show me how','أرني الطريقة','Akkamitti akka ta\'u natti agarsiisi','I tus sida loo sameeyo']];
+X40B.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+let BIP=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();BIP=e;renderInstall()});
+const isStand=()=>!!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone);
+function instGuide(){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),and=/android/i.test(navigator.userAgent);
+  const st=(ic,t)=>`<li class="ig-s"><span class="ig-i" aria-hidden="true">${ic}</span><span>${tl(t)}</span></li>`;
+  const I=`<div class="ig-col"><p class="ig-h"> iPhone · Safari</p><ol class="ig">${st('🧭','Open Fastaqim in Safari')}${st('⬆︎','Tap Share ⬆︎ (newer iPhones: tap ⋯ first)')}${st('➕','Tap "Add to Home Screen"')}${st('✅','Tap "Add", then open Fastaqim from the new icon')}</ol></div>`;
+  const A=`<div class="ig-col"><p class="ig-h">🤖 Android · Chrome</p><ol class="ig">${st('🌐','Open Fastaqim in Chrome')}${st('⋮','Tap the menu ⋮')}${st('📲','Tap "Install app" or "Add to Home screen"')}${st('✅','Tap "Install", then open Fastaqim from the new icon')}</ol></div>`;
+  modalCard(`<p class="label">📲 ${tl('Add to Home Screen')}</p><p class="small">${tl('Reminders work from the Fastaqim icon on your Home Screen.')}</p>
+   ${BIP?`<button class="btn-main" id="igGo">${tl('📲 Install now')}</button>`:''}<div class="ig-wrap">${and&&!ios?A+I:I+A}</div>
+   <p class="small muted">${tl('Then turn on 🔔 Reminders in Me.')}</p><button class="btn-ghost small" id="igX">${tl('Close')}</button>`);
+  $('igX').onclick=modalClose;if($('igGo'))$('igGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;modalClose()}}
+
+/* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
+function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
+  const five=['fajr','dhuhr','asr','maghrib','isha'];let nx=five.find(k=>P[k]>now),nt=nx?P[nx]:salahFor(addDays(now,1)).fajr;nx=nx||'fajr';
+  const mins=Math.max(0,Math.round((nt-now)/60000)),left=Math.floor(mins/60)+':'+String(mins%60).padStart(2,'0');
+  b.innerHTML=`<p class="ldt-d"><b>${now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</b><span>🌙 ${hijri(now)}</span></p>
+   <p class="ldt-n">🕌 ${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> · <span dir="ltr">⏳ ${left}</span></p>
+   <div class="ldt-row">${five.map(k=>`<span class="${k===nx?'on':''}"><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
+   <p class="ldt-w">📍 ${S.loc.auto?esc(S.loc.auto.split('/').pop().replace(/_/g,' ')):tl('From your location')} · <button class="ldt-loc" id="ldtLoc">${tl('📍 Use my location')}</button></p>`;
+  $('ldtLoc').onclick=()=>locAsk(ldToday)}
+setInterval(()=>{const l=$('landing');if(l&&!l.hidden)ldToday()},30000);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
@@ -3240,5 +3505,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
+locAuto();qtTick();$('ldHome').onclick=instGuide;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+$('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
