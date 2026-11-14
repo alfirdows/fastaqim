@@ -583,6 +583,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-logo{margin-top:32px!important}#landing .ld-logo .ld-brand{font-size:2.3rem!important}#landing .ld-logo .ld-name{font-size:1rem!important;margin-top:4px}
 #landing .ld-go1{display:none!important}#landing .ld-sub2{margin-top:12px!important;font-size:.88rem!important;color:var(--lmuted,var(--muted));max-width:30ch;display:block!important;text-align:center;line-height:1.5}
 #landing .ld-sub2 .ld-adhd{font-weight:700;color:var(--ltext,var(--ink))}
+.pv2-l{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:7px;font-size:.8rem;line-height:1.45;text-align:start}.pv2-l li{padding-bottom:6px;border-bottom:1px solid var(--line)}.pv2-l li:last-child{border:0}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -684,7 +685,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="ld-am" id="ldAuthM" hidden><div class="ld-amc"><div class="ld-tabs"><button data-at="in">Sign in</button><button data-at="up">Create account</button><button class="ld-amx" id="ldAmX" aria-label="Close">✕</button></div>
     <div id="ldAuth" class="ld-auth"></div>
     <p class="ld-swap ld-sw-in"><span>No account?</span> <button class="lnk" data-at2="up">Register</button></p><p class="ld-swap ld-sw-up"><span>Already have one?</span> <button class="lnk" data-at2="in">Sign in</button></p>
-    <p class="ld-free">Fastaqim is 100% free, always. No ads, no paid plan.</p></div></div>
+    <p class="ld-free">Free · No ads.</p></div></div>
     <div class="ld-note ld-btns" id="ldNote"><button type="button" class="ld-lb privLink">🔒 Privacy</button><button type="button" class="ld-lb" id="ldFb">💡 Suggest an idea</button></div>
   </div>
 </div>
@@ -2778,7 +2779,7 @@ const PRIV={
   ['Xiriiriyeyaal','Quran.com iyo sunnah.com waxay furmaan oo keliya markaad taabato.'],
   ['Ra\'yi','waxa aad ku qorto 💡 waxay gaaraan milkiilaha oo keliya. Booqdayaasha aan akoon lahayn waxay u diraan magac iyo iimayl la\'aan.'],
   ['Tirtirid','akoonkaaga adigu tirtir waqti kasta "Aniga" → Akoon. Gal 30 maalmood gudahood si aad dib ugu soo celiso. 30 maalmood kadib gebi ahaanba wuu baxayaa.']],'Xir']};
-function privacyOpen(){const P=PRIV[LANG]||PRIV.en,rtl=LANG==='ar';
+function privacyOpenOld(){const P=PRIV[LANG]||PRIV.en,rtl=LANG==='ar';
   modalCard(`<div class="notranslate" dir="${rtl?'rtl':'ltr'}" lang="${PRIV[LANG]?LANG:'en'}"><p class="label">${P[0]}</p><div class="sp-sec small" style="gap:8px">${P[1].map(([h,t])=>`<p><b>${esc(h)}:</b> ${esc(t)}</p>`).join('')}</div>
   <button class="btn-ghost small" id="pvX">${P[2]}</button></div>`);if(!PRIV[LANG])$('scrollBody').firstElementChild.classList.remove('notranslate');$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
 
@@ -3380,6 +3381,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Free · No ads.','مجاني · بلا إعلانات.','Bilisa · Beeksisa hin qabu.','Bilaash · Xayeysiis ma leh.'],
 ['Your day,','يومك،','Guyyaan kee,','Maalintaada,'],['made doable.','صار أيسر.','salphateera.','waa la fududeeyay.'],
 ['Show Hijri dates too','أظهر التاريخ الهجري أيضًا','Guyyaa Hijrii illee agarsiisi','Sidoo kale tus taariikhda Hijriga'],
 ['↻ Refresh','↻ تحديث','↻ Haaromsi','↻ Cusboonaysii'],['🧭 Open in browser','🧭 افتح في المتصفح','🧭 Barbaadduu keessatti bani','🧭 Ku fur biraawsarka'],
@@ -3651,6 +3653,15 @@ function zStep(d){const c=zCur();let v;if(d===0)v=1;else{const L=d>0?ZST.find(z=
 document.addEventListener('click',e=>{const b=e.target.closest('[data-zs]');if(b)zStep(+b.dataset.zs)});
 function zoomOpen(){modalCard(`<p class="label">${tl('Text size')}</p>${zCtl()}<p class="small muted">${tl('Tap the % to go back to 100%.')}</p><button class="btn-ghost small" id="zoX">${tl('Done')}</button>`);$('zoX').onclick=modalClose}
 function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zCtl()}</div>`;document.querySelectorAll('.zm-in').forEach(e=>e.innerHTML=zCtl())}
+
+/* Privacy: short, one line each, in the four pinned languages */
+const PRIV2={
+ en:['Privacy',['💚 Free · No ads. Your data is never sold or shared.','🔐 What you add is saved safely in your account.','👀 The owner sees only how many people use Fastaqim, and their names and emails.','🤝 Nothing is shared unless you tap Allow. Adults can stop anytime. Under 18 links: only the owner can remove them.','📍 Location stays on your phone. City search and 🌐 translate send only that word or line.','💡 Ideas you send reach only the owner.','🗑️ Delete your account anytime in Me → Account. You have 30 days to restore it.'],'Close'],
+ ar:['الخصوصية',['💚 مجاني · بلا إعلانات. لا تُباع بياناتك ولا تُشارَك.','🔐 ما تضيفه محفوظ بأمان في حسابك.','👀 يرى صاحب الموقع عدد المستخدمين وأسماءهم وبريدهم فقط.','🤝 لا يُشارَك شيء إلا إذا ضغطت «سماح». يمكن للبالغ الإيقاف متى شاء. ربط من هم دون 18: لا يزيله إلا صاحب الموقع.','📍 موقعك يبقى على هاتفك. البحث عن مدينة والترجمة 🌐 يرسلان تلك الكلمة أو السطر فقط.','💡 أفكارك تصل إلى صاحب الموقع وحده.','🗑️ احذف حسابك متى شئت من «أنا» ← الحساب، ولديك 30 يومًا لاسترجاعه.'],'إغلاق'],
+ om:['Dhuunfaa',['💚 Bilisa · Beeksisa hin qabu. Odeeffannoon kee hin gurguramu, hin qoodamus.','🔐 Wanti ati dabaltu herrega kee keessatti nageenyaan olkaa\'ama.','👀 Abbaan marsariitii baay\'ina fayyadamtootaa, maqaa fi imeelii isaanii qofa arga.','🤝 Yoo "Hayyami" hin tuqne homtuu hin qoodamu. Gurguddoon yeroo barbaadan dhaabuu danda\'u. Walqabsiisa umurii 18 gadii: abbaa marsariitii qofatu haqa.','📍 Bakki kee bilbila kee irra jira. Magaalaa barbaaduu fi hiikkaan 🌐 jecha ykn sarara sana qofa ergu.','💡 Yaadni ati ergitu abbaa marsariitii qofaaf ga\'a.','🗑️ Yeroo barbaadde "Ana" → Herrega keessaa herrega kee haqi. Deebisuuf guyyaa 30 qabda.'],'Cufi'],
+ so:['Qarsoodi',['💚 Bilaash · Xayeysiis ma leh. Xogtaada lama iibiyo, lamana wadaago.','🔐 Waxa aad ku darto si ammaan ah ayaa akoonkaaga loogu keydiyaa.','👀 Milkiiluhu wuxuu arkaa oo keliya inta qof ee isticmaasha, magacyadooda iyo iimaylladooda.','🤝 Waxba lama wadaago ilaa aad taabato "Oggolow". Dadka waaweyni way joojin karaan waqti kasta. Xiriirka kuwa ka yar 18: milkiilaha keliya ayaa ka saari kara.','📍 Goobtaadu taleefankaaga ayay ku jirtaa. Raadinta magaalada iyo turjumaadda 🌐 waxay diraan oo keliya ereygaas ama sadarkaas.','💡 Fikradaha aad dirto waxay gaaraan milkiilaha oo keliya.','🗑️ Tirtir akoonkaaga waqti kasta "Aniga" → Akoon. Waxaad haysataa 30 maalmood si aad dib ugu soo celiso.'],'Xir']};
+function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar';
+  modalCard(`<div class="${PRIV2[LANG]?'notranslate':''} pv2" dir="${rtl?'rtl':'ltr'}" lang="${PRIV2[LANG]?LANG:'en'}"><p class="label">🔒 ${P[0]}</p><ul class="pv2-l">${P[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul><button class="btn-ghost small" id="pvX">${P[2]}</button></div>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
 
 /* ---------- daily inspiration: Sahih hadith, Sunni scholars, then well-known wise people (verified attributions only) ---------- */
 const NB={en:'Prophet Muhammad ﷺ',ar:'النبي ﷺ',om:'Nabi Muhammad ﷺ',so:'Nabi Muxammad ﷺ'};
