@@ -1851,7 +1851,7 @@ async function sortGo(){const text=$('sortIn').value.trim();if(!text){$('sortIn'
 $('sortGo').onclick=sortGo;
 
 /* ---------- accounts: Supabase (public site) / Claude (artifact) + landing ---------- */
-const SUPA={url:'',key:''};/* filled in after Supabase setup: Project URL + anon/publishable key (both public by design) */
+const SUPA={url:'https://xnxqibdjjrgjqpszvdbe.supabase.co',key:'sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId'};/* filled in after Supabase setup: Project URL + anon/publishable key (both public by design) */
 const AU={sb:null,user:null};
 const inArtifact=()=>!!(window.claude&&window.claude.use)||/claude\.ai|claudeusercontent/.test(location.hostname);
 function landingShow(on){$('landing').hidden=!on;document.body.style.overflow=on?'hidden':''}
@@ -1870,8 +1870,10 @@ function authForm(msg){
     if(error)say(error.message);else if(!data.session)say('Check your email and tap the link to confirm. Then sign in here.')};
   $('auF').onclick=async()=>{const email=$('auE').value.trim();if(!email){say('Type your email first.');return}const {error}=await AU.sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname});say(error?error.message:'Check your email for a reset link.')};
 }
+function freshS(){const o=seed();Object.assign(o,{name:'',earned:0,reasonIx:0,coachStyle:'strict',reasonsV2:true,plan:seedPlan(),planDone:{},checkins:[],starts:{},deedTimes:{},caught:{},friction:[],learned:[],hobbies:{},shipped:0,journal:[],money:{items:[],cur:'$',budget:{}},goals:[],hist:[],dayCheck:{},examples:true,
+  reasons:[{id:uid(),text:'قُلْ أَذَٰلِكَ خَيْرٌ أَمْ جَنَّةُ الْخُلْدِ الَّتِي وُعِدَ الْمُتَّقُونَ',note:'Al-Furqan 25:15 · "Say, is that better, or the Garden of Eternity which is promised to the righteous?"'}]});return o}
 async function cloudInit(user){
-  if(S.uid&&S.uid!==user.id){S=seed();}S.uid=user.id;
+  if(S.uid!==user.id){S=freshS();}S.uid=user.id;
   SYNC.state='wait';syncBadge();
   try{const {data,error}=await AU.sb.from('fastaqim_state').select('state').eq('user_id',user.id).maybeSingle();if(error)throw error;
     const remote=data&&data.state;
@@ -1900,7 +1902,7 @@ async function authBoot(){
     if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender()}
     else if(!u&&AU.user){AU.user=null;landingShow(true);authForm()}
   });
-  const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=seed();lifeFix();authForm();}
+  const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=freshS();render();authForm();}
 }
 
 /* ---------- less text: explanations behind a ? ---------- */
