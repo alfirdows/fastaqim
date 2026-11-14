@@ -297,7 +297,7 @@ body.rtl .cal-nav .icon-btn{transform:scaleX(-1)}
 body.rtl .ld-quote{text-align:right;border-left:0;border-right:4px solid var(--accent)}
 body.rtl .cal-day,body.rtl .catrow,body.rtl .mrow,body.rtl .sp-sec{text-align:right}
 section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:stretch;min-width:0}#azBody>.row{max-width:100%;min-width:0}
-.avdot{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--calm);color:#fff;font-weight:800;align-items:center;justify-content:center;overflow:hidden;vertical-align:middle;flex:none;font-size:.85rem}.avbig{width:64px;height:64px;font-size:1.6rem}.avimg{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}.avemo{font-size:1.15em;line-height:1}.avpick{font-size:1.3rem;padding:4px 8px;background:transparent;border:2px solid transparent;border-radius:10px}.avpick.on{border-color:var(--calm)}.avatar{overflow:hidden;width:34px;height:34px;border-radius:50%;padding:0;margin-inline-end:8px;background:var(--calm);color:#fff;border:0;font-weight:800;font-size:1rem;vertical-align:middle}
+.goog-te-banner-frame,.skiptranslate iframe,#goog-gt-tt,.goog-te-balloon-frame{display:none!important}body{top:0!important}.goog-text-highlight{background:none!important;box-shadow:none!important}.trb{background:none;border:0;padding:0 4px;font-size:.9rem;opacity:.6;cursor:pointer;min-height:0}.trout{display:block;font-size:.85rem;color:var(--muted);font-style:italic}.avdot{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--calm);color:#fff;font-weight:800;align-items:center;justify-content:center;overflow:hidden;vertical-align:middle;flex:none;font-size:.85rem}.avbig{width:64px;height:64px;font-size:1.6rem}.avimg{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}.avemo{font-size:1.15em;line-height:1}.avpick{font-size:1.3rem;padding:4px 8px;background:transparent;border:2px solid transparent;border-radius:10px}.avpick.on{border-color:var(--calm)}.avatar{overflow:hidden;width:34px;height:34px;border-radius:50%;padding:0;margin-inline-end:8px;background:var(--calm);color:#fff;border:0;font-weight:800;font-size:1rem;vertical-align:middle}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -585,6 +585,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
         <svg viewBox="0 0 120 120"><circle class="track" cx="60" cy="60" r="52"/><circle class="bar" id="ringBar" cx="60" cy="60" r="52"/></svg>
         <div class="time" id="timeText">2:00</div>
       </div>
+      <p class="small" id="protDua" style="text-align:center;margin:0"><span class="ar" lang="ar" dir="rtl">بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ</span><br><span class="muted">Bismillāh, tawakkaltu ʿalallāh, wa lā ḥawla wa lā quwwata illā billāh</span></p>
       <p class="buddy" id="buddy">I'll sit here with you. You only have to start.</p>
       <div class="row presets" id="presets"></div>
       <div class="row" style="justify-content:center" id="timerBtns"></div>
@@ -673,6 +674,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
   </div>
 </div>
 <div class="modal" id="scrollModal" hidden role="dialog" aria-modal="true" aria-label="Caught scrolling"><div class="card scroll-card" id="scrollBody"></div></div>
+<div id="gtEl" hidden></div>
 <div class="jt" id="jt" hidden role="dialog" aria-modal="true" aria-label="Just this mode">
   <div class="jt-in"><div class="jt-top"><span class="label">Just this</span><button class="btn-ghost small" id="jtX">Close</button></div><div id="jtBody"></div></div>
 </div>
@@ -684,6 +686,25 @@ const KEY='launchpad.v1';
 const uid=()=>Math.random().toString(36).slice(2,10);
 const dkey=d=>{d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uT=s=>`<span class="notranslate">${esc(s)}</span><button type="button" class="trb notranslate" aria-label="Translate" title="Translate">🌐</button>`;
+const MTC={};
+async function mt(text,to){const k=to+'|'+text;if(MTC[k])return MTC[k];let out=null;
+  try{if(self.Translator&&self.LanguageDetector){const d=await LanguageDetector.create();const r=(await d.detect(text))[0];const from=r&&r.detectedLanguage;if(from&&from!=='und'){if(from===to)out=text;else{const t=await Translator.create({sourceLanguage:from,targetLanguage:to});out=await t.translate(text)}}}}catch(e){}
+  if(out==null)for(const pair of ['Autodetect|'+to,(/[\u0600-\u06FF]/.test(text)?'ar':'en')+'|'+to]){try{const r=await fetch('https://api.mymemory.translated.net/get?q='+encodeURIComponent(text.slice(0,450))+'&langpair='+encodeURIComponent(pair));const j=await r.json();const tx=(j.responseData&&j.responseData.translatedText)||'';const lim=/USED ALL AVAILABLE FREE TRANSLATIONS/i.test(tx+' '+(j.responseDetails||''))||+j.responseStatus===429;
+    if(lim){const m=(tx+' '+(j.responseDetails||'')).match(/(\d+)\s*HOURS?\s*(\d+)\s*MINUTES?/i);const ms=m?(+m[1]*60+ +m[2])*6e4:null;return {limit:ms?new Date(Date.now()+ms):null}}
+    if(+j.responseStatus===200&&tx){out=tx;break}}catch(e){}}
+  if(out!=null)MTC[k]=out;return out}
+document.addEventListener('click',async e=>{const b=e.target.closest&&e.target.closest('.trb');if(!b)return;e.preventDefault();e.stopPropagation();
+  const nx=b.nextElementSibling;if(nx&&nx.classList.contains('trout')){nx.remove();return}
+  const src=b.previousElementSibling,text=src?src.textContent.trim():'';if(!text)return;const to=(typeof LANG!=='undefined'?LANG:'en').split('-')[0];
+  const o=document.createElement('span');o.className='trout notranslate';o.textContent='…';b.after(o);const r=await mt(text,to);
+  if(r&&r.limit!==undefined){o.classList.remove('notranslate');const at=r.limit?r.limit.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'}):null;
+    const L={en:['Free translations are used up for today.',a=>'They come back around '+a+'.','They come back tomorrow.'],
+      ar:['انتهت الترجمات المجانية لهذا اليوم.',a=>'تعود حوالي الساعة '+a+'.','تعود غدًا.'],
+      om:['Hiikkaan bilisaa har\'aaf dhumeera.',a=>'Sa\'aatii '+a+' naannoo deebi\'a.','Boru deebi\'a.'],
+      so:['Turjumaadda bilaashka ah maanta way dhammaatay.',a=>'Waxay soo laabanaysaa qiyaastii '+a+'.','Berri ayay soo laabanaysaa.']}[to]||null;
+    const t=L||['Free translations are used up for today.',a=>'They come back around '+a+'.','They come back tomorrow.'];o.textContent=t[0]+' '+(at?t[1](at):t[2]);return}
+  o.textContent=r==null?'Translation isn\'t available right now.':r},true);
 const $=id=>document.getElementById(id);
 
 function seed(){
@@ -851,29 +872,22 @@ $('routineList').addEventListener('submit',e=>{e.preventDefault();const f=e.targ
 /* ---------- coach: firm, kind, never gives up ---------- */
 const CO={log:[],nos:0,lvl:0,rested:false,started:false};
 function ladder(){const t=current(),s=t&&nextStep(t),base=s?s.text:t?t.title:'one small thing on your list';
-  return [base,'Just 2 minutes of: '+base,'Just put what you need for it in front of you','Just stand up and go to where it happens','Count 5, 4, 3, 2, 1 out loud, then stand up']}
+  return [base,'Just 2 minutes of: '+base,'Just put what you need for it in front of you','Just stand up and go to where it happens','Say the first physical action out loud, then do only that']}
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const replies={
-  no:['Noted. The task is still there either way. Smaller version: {s}.','Okay. Saying no doesn\'t remove it, it moves it to later-you. {s}.','Still no. Then smaller: {s}.','You can keep saying no. I\'ll keep making it smaller. {s}.'],
-  later:['Later is where this has been sitting. 2 minutes now, then you decide about the rest. {s}.','If later worked, this would be done already. {s}.'],
-  cant:['You can\'t do all of it right now. That isn\'t the ask. The ask is {s}.','That\'s the whole task talking. The step in front of you is {s}.'],
-  tired:['Tired is real, so the step is small: {s}. It costs less than avoiding it.','Tired doesn\'t mean zero. It means small. {s}.'],
-  point:['You already know the point. You said so. The gap is starting, and starting is {s}.','You don\'t need to feel motivated first. Most people start, then the motivation shows up. {s}.'],
-  bored:['It is boring. Waiting won\'t change that. Put something on in the background and do {s}.','Boring doesn\'t get better with time. Set 2 minutes and do {s}.']
+  no:['Okay. A no tells me the step is still too big. Smaller: {s}.','Noted. Let\'s lower the activation cost: {s}.','Still no. Then less friction: {s}.','I\'ll keep shrinking it until yes is easy. {s}.'],
+  later:['Later works when it has a cue. Implementation intention: "When ___, I\'ll start." Or the 2-minute start now: {s}.','"Later" with no time tends to drift. Pick the exact time, or do 2 minutes now: {s}.'],
+  cant:['Your brain is looking at the whole task. The ask is only the first action: {s}.','This is about step size, not ability. {s}.'],
+  tired:['Tiredness is real. Match the step to the energy you have: {s}.','Low-energy day, small dose. {s}. Then check in with yourself again.'],
+  point:['Motivation usually follows action, it rarely comes first (behavioural activation). Al-Firdaws is the why. The how is {s}.','You have the reason already. What\'s missing is a start signal. {s}.'],
+  bored:['An interest-based brain needs a hook. Pair it with a lecture or nasheed, then: {s}.','Make it a race you chose: 2 minutes, see how far {s} gets.']
 };
-const strictReplies={
-  no:['Understood. The task stays either way, so let\'s shrink it: {s}.','Okay. A smaller version: {s}.','Still no. That tells me the step is too big. Smaller: {s}.','I\'ll stay with this as long as you need. {s}.'],
-  later:['With ADHD, "later" usually means the start never gets a clear moment. Two minutes now: {s}.','Either pick an exact time for it, or do 2 minutes now: {s}.'],
-  cant:['The whole task may be too much right now. The step isn\'t: {s}.','This is about the size of the step, not your ability. {s}.'],
-  tired:['Tiredness is real, so the step stays small: {s}.','A tired day gets the small version, not nothing. {s}.'],
-  point:['You named the point yourself: Al-Firdaws. Motivation usually comes after starting, not before. {s}.','The reason is already there. Starting is the missing piece. {s}.'],
-  bored:['It is boring. Boring tasks need a time limit and something in the background. {s}.','Low interest means your brain needs more stimulation. Put a lecture on, then {s}.']
-};
+const strictReplies=replies;
 function coachSay(t){CO.log.push({c:1,t})}
-function coachOpen(){CO.log=[];CO.nos=0;CO.lvl=0;CO.rested=false;CO.started=false;coachSay(strict()?'Next step: '+ladder()[0]+'. 2 minutes. Are you starting?':'Next step: '+ladder()[0]+'. 2 minutes. Yes or no?')}
+function coachOpen(){CO.log=[];CO.nos=0;CO.lvl=0;CO.rested=false;CO.started=false;coachSay('Next step: '+ladder()[0]+'. 2 minutes, then you decide whether to keep going. Starting?')}
 function coachAnswer(kind,label){
   CO.log.push({c:0,t:label});
-  if(kind==='yes'){const st=ladder()[CO.lvl];coachSay(CO.nos?(strict()?'Good. That yes is the one that counts. +1 spark. Timer\'s starting.':'Good. A yes after a no is harder than an easy yes, so it gets +1 spark. Timer\'s starting.'):(strict()?'Good. Go.':'Good. Timer\'s starting.'));
+  if(kind==='yes'){const st=ladder()[CO.lvl];coachSay(CO.nos?(strict()?'Good. That yes is the one that counts. +1 spark. Timer\'s starting.':'Good. A yes after a no takes more effort, so it gets +1 spark. Body-double timer is on.'):(strict()?'Good. Go.':'Good. Timer\'s starting.'));
     if(CO.nos)award(1,'Said yes after '+CO.nos+' no'+(CO.nos>1?'s':''));CO.started=true;renderCoach();setTimeout(()=>kickWith(st),700);return}
   if(kind==='rest'){openRestCheck();if(!CO.rested){CO.rested=true;coachSay(strict()?'If it\'s real rest, take 20 minutes, not the whole evening. Water first, set an alarm, then come back to this step.':'Fair. If it\'s real rest, take it. One condition: drink a glass of water first, so today isn\'t a zero. Then rest without guilt.')}
     else coachSay(strict()?'Okay, rest. Set an alarm so coming back is easy. The step will be right here.':'Okay. Rest. The step will be the same size when you come back.');renderCoach();return}
@@ -922,7 +936,7 @@ function taskHTML(t){
   return `<div class="task ${t.top?'top':''} ${t.done?'done':''}" data-id="${t.id}">
     <div class="task-head">
       <input type="checkbox" data-act="done" ${t.done?'checked':''} aria-label="Finish ${esc(t.title)}">
-      <span class="task-title">${esc(t.title)}${t.due&&!t.done?`<br><span class="due ${t.due<dkey()?'late':''}">${t.due===dkey()?'Today':fmtD(t.due)}${t.time?' '+esc(t.time):''}</span>`:''}</span>
+      <span class="task-title">${uT(t.title)}${t.due&&!t.done?`<br><span class="due ${t.due<dkey()?'late':''}">${t.due===dkey()?'Today':fmtD(t.due)}${t.time?' '+esc(t.time):''}</span>`:''}</span>
       <span class="small muted">${t.steps.length?doneN+'/'+t.steps.length:''}</span>
       <button class="star icon-btn" data-act="top" aria-pressed="${!!t.top}" title="${t.top?'Remove from top 3':'Add to top 3'}">★</button>
       <button class="icon-btn" data-act="open" aria-expanded="${!!t.open}" title="Steps">${t.open?'▴':'▾'}</button>
@@ -987,7 +1001,7 @@ function drawTimer(){
 }
 function startTimer(min,ctx){
   $('timerEnd').hidden=true;clearInterval(T.iv);
-  T.min=min;T.total=T.left=min*60;T.ctx=ctx||{};show('focus');run();
+  T.min=min;T.total=T.left=min*60;T.ctx=ctx||{};$('protDua').hidden=!!T.ctx.rest;show('focus');run();
 }
 function run(){
   $('timerEnd').hidden=true;T.running=true;T.startedAt=T.startedAt||Date.now();
@@ -1764,7 +1778,7 @@ function goalSteps(title){return ['Write down what "done" looks like for: '+titl
 function goalHTML(g){const n=g.steps.filter(s=>s.done).length,pct=g.steps.length?Math.round(n/g.steps.length*100):0;
   const days=g.by?Math.ceil((pd(g.by)-pd(dkey()))/864e5):null;
   return `<div class="goalc ${pct===100?'won':''}" data-gid="${g.id}">
-    <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><h3>${esc(g.title)}</h3><span class="small" style="white-space:nowrap"><b>${pct}%</b></span></div>
+    <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><h3>${uT(g.title)}</h3><span class="small" style="white-space:nowrap"><b>${pct}%</b></span></div>
     ${g.by?`<p class="small muted">By ${fmtD(g.by)} · ${days>=0?days+' days left':Math.abs(days)+' days past'}</p>`:''}
     <div class="bar"><i style="width:${pct}%"></i></div>
     <ul class="steps">${g.steps.map(s=>`<li class="${s.done?'done':''}"><input type="checkbox" data-gs="${s.id}" ${s.done?'checked':''} aria-label="${esc(s.text)}"><span style="flex:1">${esc(s.text)}</span></li>`).join('')}</ul>
@@ -2045,6 +2059,19 @@ ADHKAR.sleep={t:'Sleep',ic:'🌙',v:'In bed, lights off, phone away.',items:[
  mk('z8',{ar:'اللَّهُ أَكْبَرُ',tr:'Allāhu akbar',en:'Allah is the Greatest.',n:34,src:'al-Bukhārī 3705'})]};
 ADHKAR.waking={t:'Waking up',ic:'☀️',v:'The first words of the day.',items:[
  mk('w1',{ar:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',tr:'Al-ḥamdu lillāhil-ladhī aḥyānā baʿda mā amātanā wa ilayhin-nushūr',en:'All praise is for Allah who gave us life after causing us to die, and to Him is the resurrection.',n:1,src:'al-Bukhārī 6312'})]};
+ADHKAR.ruqyah={t:'Ruqyah & protection',ic:'🛡️',v:'Protection from the evil eye, envy and shayṭān. Morning and evening, or any time you feel heavy. After al-Ikhlāṣ, al-Falaq and an-Nās you can blow lightly into your hands and wipe over your body (al-Bukhārī 5017).',items:[
+ mk('r1',{ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',tr:'Sūrat al-Fātiḥah',en:'In the name of Allah, the Entirely Merciful, the Especially Merciful. All praise is due to Allah, Lord of the worlds, the Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path, the path of those You have blessed, not of those who earned anger or of those who are astray.',n:1,src:'Qur\'an 1 · used as ruqyah: al-Bukhārī 5736'}),
+ mk('r2',QZ.kursi,{src:'Qur\'an 2:255 · protection until morning: al-Bukhārī 2311'}),
+ mk('r3',{ar:'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',tr:'Last two āyāt of al-Baqarah',en:'The Messenger has believed in what was revealed to him from his Lord, and so have the believers... Allah does not charge a soul except with what it can bear... Our Lord, do not burden us with what we cannot bear. Pardon us, forgive us and have mercy on us. You are our Protector.',n:1,src:'Qur\'an 2:285–286 · "they will suffice him": al-Bukhārī 5009'}),
+ mk('r4',QZ.ikhlas,{src:'Abū Dāwūd 5082, at-Tirmidhī 3575'}),mk('r5',QZ.falaq,{src:'Abū Dāwūd 5082 · Muslim 814'}),mk('r6',QZ.nas,{src:'Abū Dāwūd 5082 · Muslim 814'}),
+ mk('r7',{ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ، مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ',tr:'Aʿūdhu bi kalimātillāhit-tāmmah, min kulli shayṭānin wa hāmmah, wa min kulli ʿaynin lāmmah',en:'I seek refuge in the perfect words of Allah from every devil and harmful creature, and from every evil eye.',n:3,src:'al-Bukhārī 3371'}),
+ mk('r8',{ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ',tr:'Aʿūdhu bi kalimātillāhit-tāmmāti min sharri mā khalaq',en:'I seek refuge in the perfect words of Allah from the evil of what He has created.',n:3,src:'Muslim 2708, 2709'}),
+ mk('r9',DZ.bismi,{n:3,src:'Abū Dāwūd 5088, at-Tirmidhī 3388'}),
+ mk('r10',{ar:'بِسْمِ اللَّهِ (×3) ۝ أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ',tr:'Bismillāh (3 times), then: Aʿūdhu billāhi wa qudratihi min sharri mā ajidu wa uḥādhir',en:'Hand on the place that hurts. In the name of Allah. I seek refuge in Allah and His power from the evil of what I feel and what I fear.',n:7,src:'Muslim 2202'}),
+ mk('r11',{ar:'بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ',tr:'Bismillāhi arqīk, min kulli shay\'in yu\'dhīk, min sharri kulli nafsin aw ʿayni ḥāsid, Allāhu yashfīk, bismillāhi arqīk',en:'In the name of Allah I do ruqyah for you, from everything that harms you, from the evil of every soul or envious eye. May Allah cure you. In the name of Allah I do ruqyah for you. (Jibrīl\'s ruqyah, said over someone else.)',n:3,src:'Muslim 2186'}),
+ mk('r12',{ar:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',tr:'Aʿūdhu billāhi minash-shayṭānir-rajīm',en:'I seek refuge in Allah from the accursed shayṭān. Say it when you feel the heaviness or the pull to scroll.',n:3,src:'Qur\'an 16:98 · al-Bukhārī 3282'}),
+ mk('r13',{ar:'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',tr:'Bismillāh, tawakkaltu ʿalallāh, wa lā ḥawla wa lā quwwata illā billāh',en:'In the name of Allah, I rely on Allah, and there is no power or strength except with Allah. "The shayṭān turns away from him."',n:1,src:'Abū Dāwūd 5095, at-Tirmidhī 3426'}),
+ mk('r14',{ar:'اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا، وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا',tr:'Allāhumma lā sahla illā mā jaʿaltahu sahlā, wa anta tajʿalul-ḥazna idhā shi\'ta sahlā',en:'O Allah, nothing is easy except what You make easy, and You make the difficult easy if You wish.',n:1,src:'Ibn Ḥibbān 974'})]};
 ADHKAR.worry={t:'Worry & laziness',ic:'🫶',v:'When you feel stuck, anxious or heavy.',items:[
  mk('h1',{ar:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ',tr:'Allāhumma innī aʿūdhu bika minal-hammi wal-ḥazan, wal-ʿajzi wal-kasal, wal-bukhli wal-jubn, wa ḍalaʿid-dayni wa ghalabatir-rijāl',en:'O Allah, I seek refuge in You from worry and grief, from helplessness and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by people.',n:1,src:'al-Bukhārī 6369'}),
  mk('h2',{ar:'لَا إِلَٰهَ إِلَّا أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ',tr:'Lā ilāha illā anta subḥānaka innī kuntu minaẓ-ẓālimīn',en:'There is no deity except You; glory be to You. Indeed, I have been of the wrongdoers.',n:1,src:'Qur\'an 21:87 · at-Tirmidhī 3505'}),
@@ -2074,20 +2101,28 @@ const BLOCK_AR=['خمر','الخمر','كحول','كحولي','بيرة','بير
 const BLOCK_OM=['alkoolii','araqee','farsoo','daadhii','biiraa','wayinii','muuziqaa','qumaara','qoricha sammuu','jaalallee','michuu jaalalaa'];
 const BLK={extra:[]};
 const blkNorm=s=>String(s).toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[إأآ]/g,'ا');
-function blocked(text){if(!text)return null;const t=blkNorm(text);
-  for(const w of [...BLOCK_EN,...BLOCK_OM,...BLK.extra]){const n=blkNorm(w).trim();if(!n)continue;if(/[؀-ۿ]/.test(n)){if(t.includes(n))return w;continue}
-    if(new RegExp('(^|[^\\p{L}])'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^\\p{L}]|$)','u').test(t))return w}
-  for(const w of BLOCK_AR){const n=blkNorm(w);if(new RegExp('(^|[^\\u0600-\\u06FF])(و|ف|ب|ل|ال|وال|بال|لل)?'+n+'([^\\u0600-\\u06FF]|$)').test(t))return w}
-  return null}
+const BLOCK_BAD=['fuck','fucking','fucked','fucker','motherfucker','fck','fuk','shit','shitty','bullshit','bitch','bitches','bastard','asshole','ass','damn','dick','dickhead','pussy','cunt','whore','slut','piss','cock','wtf','stfu','sex','sexy','sexting','nude','nudes','horny','boobs','tits','hoe',
+ 'merde','putain','puta','puto','mierda','joder','cabrón','scheiße','scheisse','arschloch','siktir','amk','orospu','bhenchod','madarchod','chutiya','harami','wasmo','dhillo','siil','sharmuuto','kintir','anjing','bangsat','kontol','memek'];
+const BLOCK_BAD_AR=['كس','زب','شرموطة','شرموطه','عاهرة','قحبة','قحبه','منيوك','نيك','يلعن','سكس'];
+const blkEsc=n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function blkWords(t,L,AR){for(const w of L){const n=blkNorm(w).trim();if(!n)continue;
+    if(/[؀-ۿ]/.test(n)){if(t.includes(n))return w;continue}
+    if(new RegExp('(^|[^\\p{L}])'+blkEsc(n)+'([^\\p{L}]|$)','u').test(t))return w}
+  for(const w of AR){const n=blkNorm(w);if(new RegExp('(^|[^\\u0600-\\u06FF])(و|ف|ب|ل|ال|وال|بال|لل)?'+n+'([^\\u0600-\\u06FF]|$)').test(t))return w}return null}
+const blockedBad=text=>text?blkWords(blkNorm(text),BLOCK_BAD,BLOCK_BAD_AR):null;
+function blocked(text){if(!text)return null;const t=blkNorm(text);return blkWords(t,[...BLOCK_EN,...BLOCK_OM,...BLK.extra],BLOCK_AR)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR)}
 const BLK_MSG=['Let\'s leave this one out. Fastaqim is for plans that bring you closer to Allah. What could go here instead, like a walk, a nasheed, a lecture or time with family?',
  'This one won\'t be added. Pick something halal you\'d enjoy instead. You deserve rest that you feel good about after.'];
-function blkWarn(w){const lang=typeof LANG!=='undefined'?LANG:'en';modalCard(`<p class="label">🌿 Let's swap this one</p><p>${BLK_MSG[Math.random()<.5?0:1]}</p>
-  <p class="small muted">If you meant medicine, write "medicine" or its name. Words like "drink water" are fine.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`);$('blkOk').onclick=modalClose;return w}
-const BLK_SKIP=new Set(['nameCard','nameEdit','reasonForm']);
-document.addEventListener('submit',e=>{const f=e.target;if(!f||BLK_SKIP.has(f.id)||f.closest('#ldAuth,#tab-journal,#coachBox'))return;
-  const v=[...f.querySelectorAll('input[type=text],input:not([type]),textarea')].map(x=>x.value).join(' ');if(blocked(v)){e.preventDefault();e.stopImmediatePropagation();blkWarn(blocked(v))}},true);
-document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('input[type=text],input:not([type]),textarea')||el.closest('#ldAuth,#tab-journal,#coachBox,#nameEdit,#nameCard,#reasonForm,form,#sortIn,#pasteBox'))return;
-  if(blocked(el.value)){e.stopImmediatePropagation();const w=blocked(el.value);el.value=el.defaultValue;blkWarn(w)}},true);
+function blkWarn(text){const bad=blockedBad(text);modalCard(bad?`<p class="label">🌿 Let's keep it clean</p><p>Curse words and rude words aren't allowed here. Try saying it another way. You can still write how you feel.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`
+  :`<p class="label">🌿 Let's swap this one</p><p>${BLK_MSG[Math.random()<.5?0:1]}</p>
+  <p class="small muted">If you meant medicine, write "medicine" or its name. Words like "drink water" are fine.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`);$('blkOk').onclick=modalClose}
+const BLK_SOFT='#nameCard,#nameEdit,#reasonForm,#jrIn';
+const blkVals=root=>[...root.querySelectorAll('input[type=text],input:not([type]),textarea')].map(x=>x.value).join(' ');
+document.addEventListener('submit',e=>{const f=e.target;if(!f||f.closest('#ldAuth'))return;const v=blkVals(f);const hit=f.matches(BLK_SOFT)?blockedBad(v):blocked(v);
+  if(hit){e.preventDefault();e.stopImmediatePropagation();blkWarn(v)}},true);
+document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('input[type=text],input:not([type]),textarea')||el.closest('#ldAuth,form,#sortIn,#pasteBox,#jrIn,#blkTa'))return;
+  if(blocked(el.value)){e.stopImmediatePropagation();const v=el.value;el.value=el.defaultValue;blkWarn(v)}},true);
+document.addEventListener('click',e=>{if(!e.target.closest||!e.target.closest('#jrSave'))return;const v=$('jrIn')?$('jrIn').value:'';if(blockedBad(v)){e.preventDefault();e.stopImmediatePropagation();blkWarn(v)}},true);
 function blkLines(text){const L=text.split('\n'),keep=L.filter(l=>!blocked(l));return {text:keep.join('\n'),cut:L.length-keep.length}}
 async function blkLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.from('fastaqim_blocklist').select('word');if(error)throw error;BLK.extra=(data||[]).map(r=>r.word)}catch(e){}}
 function blkAdmin(){const b=$('admBox');if(!b||!ADM.rows)return;const d=document.createElement('details');d.className='sp-sec';d.innerHTML=`<summary class="label">🚫 Blocked words</summary>
@@ -2373,29 +2408,40 @@ const I18N=[
 ['Reward shop','متجر المكافآت','Suuqii badhaasaa'],['My reasons','أسبابي','Sababoota koo'],['Wins','الإنجازات','Milkaa\'ina'],['Edit history','سجل التعديلات','Seenaa gulaallii'],['All','الكل','Hunda'],['✅ To-do','✅ المهام','✅ Hojii'],['💰 Money','💰 المال','💰 Maallaqa'],['🎯 Goals','🎯 الأهداف','🎯 Kaayyoo'],['Restore','استرجع','Deebisi'],
 ['Nothing yet. Changes you make show up here.','لا شيء بعد. ستظهر تعديلاتك هنا.','Ammaaf homaa hin jiru. Jijjiiramni ati gootu asitti mul\'ata.'],
 ['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and sounds','🎉 الاحتفال والأصوات','🎉 Ayyaneffannaa fi sagalee'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
-['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Linked accounts','الحسابات المرتبطة','Herregoota walitti hidhaman'],['↩ Back to my own plan','↩ العودة إلى خطتي','↩ Gara karoora koootti deebi\'i'],['Switch back','ارجع','Deebi\'i'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
+['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Linked accounts','الحسابات المرتبطة','Herregoota walitti hidhaman'],['↩ Back to my own plan','↩ العودة إلى خطتي','↩ Gara karoora koootti deebi\'i'],['Switch back','ارجع','Deebi\'i'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan'],
+['🛡️ Ruqyah & protection','🛡️ الرقية والتحصين','🛡️ Ruqyaa fi eegumsa'],['Profile picture','الصورة الشخصية','Suuraa profaayilii'],['📷 Upload photo','📷 ارفع صورة','📷 Suuraa olkaa\'i'],['Or pick one:','أو اختر واحدة:','Ykn tokko filadhu:'],['More languages','لغات أخرى','Afaanota biroo']
 ];
+const SO=["Noloshaada oo dhan,", "hal qorshe oo deggan.", "Waxaa loo sameeyay maskaxda ADHD da' kasta: carruur, dhallinyaro iyo dad waaweyn, goor hore ama goor dambe la ogaaday. Si kasta u qor. Fastaqim ayaa habeynaya, jadwal u samaynaya, oo ku bilaabsiinaya.", "Ku sii wad Google", "ama iimayl", "Gal", "Samee akoon", "Ma ilowday furaha sirta?", "Liis qasan geli, jadwal ka hel", "Wax kasta ku bilow 2 daqiiqo", "Maalin, toddobaad iyo bil", "Miisaaniyad, dakhli, kharash", "Yoolal gaaban iyo kuwo dheer", "Maalmo salaadda ku dhisan", "Hal milicsi maalintii", "Wax kasta oo la beddelo waa la kaydiyaa", "Aragtida qoyska ee waalidiinta iyo masuuliyiinta", "Qoys", "Dadka aan daryeelo", "Eeg", "Ka saar xiriirka", "Ku biir", "Samee koodh qoys", "Samee koodh cusub", "Qof baan daryeelaa (waalid, masuul, walaal ka weyn)", "Qof ayaa i daryeela", "Koodhka qoyska", "“Bilowgu waa qaybta adag. Sidaas darteed taas ayaan yareynaa.”", "Xogtaadu waa mid gaar u ah akoonkaaga. Si Fastaqim u ammaan ahaado, milkiilaha bogga wuxuu arki karaa dhaqdhaqaaqa akoonnada.", "Asturnaan", "Markaad is diiwaangeliso waxaad aqbashay", "Siyaasadda asturnaanta", "Isticmaalayaasha Fastaqim", "Wadarta", "Cusub toddobaadkan", "Firfircoon toddobaadkan", "Cusboonaysii", "Codso inaad aragto", "Mar kale weydii", "Oggolow", "Diid", "Jooji wadaagga", "Adiga", "Masuul (ka yar 18)", "Ka saar", "Hadda isku day", "Waa la soo rarayaa...", "Iimayl", "Furaha sirta (8+ xaraf)", "Bismillah. Hal tallaabo markiiba.", "📱 Waxaa lagu kaydiyay qalabkan", "☁️ Waxaa lagu kaydiyay akoonkaaga", "Hadda", "Qorshe", "Hawlo", "Lacag", "Yoolal", "Diirad", "Ku raaxayso", "Aniga", "Maxaan kugu magacaabaa?", "Magacaaga", "Soco", "Kaliya tan", "Bilow 2 daqiiqo", "Waan sameeyay", "Ka dhig mid yar", "2 daqiiqo. Intaas kadib adaa go'aansanaya.", "Xusuuso sababta", "Mid kale", "📱 Waxaan is qabtay anigoo isha mariya", "😴 Waan daallanahay / waan nasanayaa", "Adkaar", "🤍 Salawaat ﷺ", "🌅 Subax", "🌇 Fiid", "🕌 Salaadda kadib", "🌙 Hurdo", "☀️ Toosid", "🫶 Walwal iyo caajis", "Fajarka kadib ilaa qorraxdu ka soo baxdo. Ka bilow shayga 1aad. Hal taabasho mar kasta oo aad tiraahdo.", "Casarka kadib ilaa Maqribka (ama habeenka). Ka bilow shayga 1aad.", "Isla markaad salaanto, intaadan kicin.", "Sariirta, nalka dami, taleefanka fogee.", "Erayada ugu horreeya ee maalinta.", "Markaad dareento inaad xayiran tahay, walwalsan tahay ama culus tahay.", "Si kasta u qor. Anigaa habeyn doona.", "✨ Ii habee", "Waa la habeynayaa...", "Milicsiga maanta", "Kaydi (+2)", "+ Mid kale", "Maanta waa dhammaatay.", "Hal sadar ayaa ku filan", "Tababare", "Kooban", "Sharax", "Hagaag, waan samayn doonaa", "Maya", "Hadhow", "Ma awoodo", "Waan daallanahay", "Waa caajis", "Maxay faa'iido leedahay", "Runtii nasasho ayaan u baahanahay", "Mar kale ila hadal", "Waxaan u shaqaynayaa", "Ma xayirantahay? Ii sheeg sababta.", "Waxay u egtahay mid aad u weyn", "Ma garanayo meel aan ka bilaabo", "Wax badan ayaa maskaxdayda ku jira", "Tamar yar", "Waxaan ka baqayaa inaysan fiicnaan", "Waan ogahay, kaliya dan kama lihi", "Ma dareemayo inaan sameeyo", "Abaalmarinta waan ogahay laakiin weli ma bilaabi karo", "Maanta waan ku guuldarreystay", "Kalandar", "Toddobaad", "Bil", "Axad", "Isn", "Tal", "Arb", "Kha", "Jim", "Sab", "Toddobaadkaaga", "🪄 Dhis jadwalkayga", "Wax ka beddel", "Maalin buuxda", "Tamar yar", "Waqtiyo", "Kaliya kala horreyn", "Salaad", "Muhiim", "Nasasho", "Nolol", "Kala guur", "Hubin toddobaadle ah", "Kaydi hubinta", "Buugga tababaraha", "Maskax faaruqin", "Ku dar", "3da ugu muhiimsan maanta", "Dhammee liiskayga: habka Kaliya tan", "Habkayga, saacad la'aan", "Hadhow", "Tirtir tusaalooyinka", "Markaan toosto", "Markaan wax cuno kadib", "Markaan taleefanka u fadhiisto", "Hurdada ka hor", "Ku dar waqti", "Bilow 2 daqiiqo", "Ii kala jaji", "Tirtir hawsha", "Magac beddel", "Maanta", "Ku dar caado yar", "Ku dar tallaabo yar", "tus. Nadiifi qolkayga", "Soo galay", "Ka baxay", "Haray", "Ku dar lacag soo gashay ama baxday", "💸 La kharash gareeyay", "💰 La helay", "Guri iyo kiro", "Biilal", "Cunto", "Gaadiid", "Wax iibsi", "Qoys", "Sadaqo", "Deyn", "Kayd", "Caafimaad", "Madadaalo", "Kale", "Mushahar", "Dakhli dheeraad ah", "Hadiyad", "Bil kasta wuu soo noqdaa", "Bishan", "Qadarka", "Maxaa loogu talagalay", "Weli waxba bishan ma jiraan. Kor ku dar, ama ku qor sanduuqa ✨ ee Hadda.", "Yool cusub", "Muddo gaaban", "Muddo dheer", "Ku dar yool", "Tallaabada xigta → maanta", "Kala jaji", "Tirtir", "Weli waxba 3da bilood ee soo socda ma jiraan.", "Weli yoolal waaweyn ma jiraan. Al-Firdaws ayaa mudan.", "tus. Xifdi Suuratul Mulk", "Ku dar tallaabo", "Diirad saar adigoo saaxib leh", "Dooro dherer oo riix bilow", "Bilow", "Camal wanaagsan oo yar, hadda", "Baro madax xanuun la'aan", "Akhris", "Muxaadaro", "Bilow qayb", "Hel hiwaayaddaada", "Isku day", "Wax ka beddelid, xariiq dhammaad leh", "Fikrad kale", "Bilow waqtiga", "Xusuuso", "Waad sii joogtaa", "maalmood aad timid", "maalmood isku xiga", "dhimbilo", "4tii toddobaad ee la soo dhaafay", "Dukaanka abaalmarinta", "Sababahayga", "Guulo", "Taariikhda wax ka beddelka", "Dhammaan", "✅ Hawlo", "💰 Lacag", "🎯 Yoolal", "Soo celi", "Weli waxba. Waxaad beddesho halkan ayay ka muuqan doonaan.", "Magacaaga", "Kaydi", "🎉 Dabaaldeg iyo codad", "💾 Kayd / soo celin", "Dib u deji wax walba", "Haa, dhammaan tirtir", "Hay alaabtayda", "Akoon", "Beddel furaha sirta", "🔁 Beddel akoonka", "Akoonnada ku xiran", "↩ Ku noqo qorshahayga", "Dib u beddel", "Akoonnada qalabkan", "+ Ku dar akoon", "Beddel", "← Dib u noqo", "Ka bax", "Xir", "Jooji", "Luqad"].concat(['🛡️ Ruqyah iyo ilaalin','Sawirka profaylka','📷 Soo geli sawir','Ama mid dooro:','Luqado kale']);
 
 /* ---------- languages: English, العربية, Afaan Oromoo ---------- */
-const LANGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo']];
+const LANGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali']];
+const LANGS2=[['am','አማርኛ'],['bn','বাংলা'],['de','Deutsch'],['es','Español'],['fa','فارسی'],['fr','Français'],['ha','Hausa'],['hi','हिन्दी'],['id','Bahasa Indonesia'],['it','Italiano'],['ms','Bahasa Melayu'],['nl','Nederlands'],['ps','پښتو'],['pt','Português'],['ru','Русский'],['sw','Kiswahili'],['ti','ትግርኛ'],['tr','Türkçe'],['ur','اردو'],['uz','Oʻzbek'],['yo','Yorùbá'],['zh-CN','中文']];
+const RTL=['ar','ur','fa','ps'];
 let LANG=(()=>{try{return localStorage.getItem('fastaqim.lang')||'en'}catch(e){return 'en'}})();
-const TX={},TXP={};I18N.forEach(([en,ar,om])=>{if(en.startsWith('PH:'))TXP[en.slice(3)]={ar,om};else TX[en]={ar,om}});
+const TX={},TXP={};I18N.forEach(([en,ar,om],i)=>{const o={ar,om};if(SO[i])o.so=SO[i];if(en.startsWith('PH:'))TXP[en.slice(3)]=o;else TX[en]=o});
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];
-  if(LANG==='en'||!t){if(n.__en!=null&&n.nodeValue!==n.__en)n.nodeValue=n.__en;return}
-  if(n.__en==null)n.__en=en;const v=en.replace(k,t[LANG]);if(n.nodeValue!==v)n.nodeValue=v}
+  if(LANG==='en'||!t||!t[LANG]){if(n.__en!=null&&n.nodeValue!==n.__en)n.nodeValue=n.__en;return}
+  if(n.__en==null)n.__en=en;const v=en.replace(k,t[LANG]);if(n.nodeValue!==v)n.nodeValue=v;const pe=n.parentElement;if(pe&&pe.childNodes.length===1)pe.classList.add('notranslate')}
 function txAttr(e,a){const key='__'+a;const en=e[key]!=null?e[key]:e.getAttribute(a);if(!en)return;const t=TXP[en]||TX[en];
-  if(LANG==='en'||!t){if(e[key]!=null)e.setAttribute(a,e[key]);return}if(e[key]==null)e[key]=en;e.setAttribute(a,t[LANG])}
+  if(LANG==='en'||!t||!t[LANG]){if(e[key]!=null)e.setAttribute(a,e[key]);return}if(e[key]==null)e[key]=en;e.setAttribute(a,t[LANG])}
 function txTree(root){if(!root)return;i18nBusy=true;
   if(root.nodeType===3){if(!root.parentElement||!root.parentElement.closest('script,style,.ar,[lang=ar]:not(html),textarea'))txNode(root)}
   else if(root.nodeType===1){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement&&n.parentElement.closest('script,style,.ar,[lang=ar]:not(html),textarea')?2:1});let n;while(n=w.nextNode())txNode(n);
-    [root,...root.querySelectorAll('[placeholder],[aria-label]')].forEach(e=>{if(e.getAttribute&&e.getAttribute('placeholder'))txAttr(e,'placeholder')})}
+    root.querySelectorAll('.ar,[lang=ar]:not(html),#azBody i').forEach(e=>e.classList.add('notranslate'));[root,...root.querySelectorAll('[placeholder],[aria-label]')].forEach(e=>{if(e.getAttribute&&e.getAttribute('placeholder'))txAttr(e,'placeholder')})}
   i18nBusy=false}
-function setLang(l){LANG=l;try{localStorage.setItem('fastaqim.lang',l)}catch(e){}
-  document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.body.classList.toggle('rtl',l==='ar');
+/* whole-page translation for everything not in our own word list: Google's free website translator (no key, no billing) */
+const GT={on:false};
+function gtCookie(v){const d=location.hostname;['',';domain='+d,';domain=.'+d].forEach(x=>{document.cookie='googtrans='+(v?'/en/'+v:'')+';path=/'+x+(v?'':';expires=Thu, 01 Jan 1970 00:00:00 GMT')})}
+function gtUse(l){if(inArtifact())return;if(l==='en'){if(GT.on){gtCookie('');location.reload()}return}
+  gtCookie(l);const c=document.querySelector('.goog-te-combo');if(c){c.value=l;c.dispatchEvent(new Event('change'));return}
+  if(GT.on)return;GT.on=true;window.gtInit=()=>{try{new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'gtEl')}catch(e){}};
+  const sc=document.createElement('script');sc.src='https://translate.google.com/translate_a/element.js?cb=gtInit';sc.onerror=()=>{GT.on=false};document.head.appendChild(sc)}
+function setLang(l){const was=LANG;LANG=l;try{localStorage.setItem('fastaqim.lang',l)}catch(e){}
+  document.documentElement.lang=l;document.documentElement.dir=RTL.includes(l)?'rtl':'ltr';document.body.classList.toggle('rtl',RTL.includes(l));gtUse(l);
   document.querySelectorAll('.langSel').forEach(s=>s.value=l);if(typeof render==='function'&&S&&S.started)try{render()}catch(e){}txTree(document.body)}
 new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.type==='characterData')txTree(m.target);else m.addedNodes.forEach(txTree)})}).observe(document.body,{childList:true,subtree:true,characterData:true});
-(()=>{const mk=()=>{const s=document.createElement('select');s.className='langSel';s.setAttribute('aria-label','Language');s.innerHTML=LANGS.map(([k,l])=>`<option value="${k}">🌐 ${l}</option>`).join('');s.value=LANG;s.onchange=()=>setLang(s.value);return s};
+(()=>{const mk=()=>{const s=document.createElement('select');s.className='langSel';s.setAttribute('aria-label','Language');s.innerHTML=LANGS.map(([k,l])=>`<option value="${k}">🌐 ${l}</option>`).join('')+`<optgroup label="More languages">${LANGS2.map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</optgroup>`;s.classList.add('notranslate');s.value=LANG;s.onchange=()=>setLang(s.value);return s};
   const brand=document.querySelector('.wrap header .brand');if(brand)brand.after(mk());
   const ld=document.querySelector('.ld-brand');if(ld)ld.before(mk());
   setLang(LANG)})();
