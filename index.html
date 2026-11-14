@@ -291,6 +291,12 @@ button:active{transform:scale(.97)}
 .ld-auth #auF{border:0;background:none}
 .ld-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:.85rem 1rem;border-radius:999px;background:#fff;color:#1f1f1f;border:1.5px solid #dadce0;font-weight:700;font-size:1rem}
 .ld-auth .row{justify-content:center}
+.langSel{font:inherit;font-size:.8rem;padding:4px 8px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);width:auto;margin:4px 0}
+.ld .langSel{align-self:flex-end}
+body.rtl .cal-nav .icon-btn{transform:scaleX(-1)}
+body.rtl .ld-quote{text-align:right;border-left:0;border-right:4px solid var(--accent)}
+body.rtl .cal-day,body.rtl .catrow,body.rtl .mrow,body.rtl .sp-sec{text-align:right}
+section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:stretch;min-width:0}#azBody>.row{max-width:100%;min-width:0}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -748,6 +754,7 @@ function show(tab){
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.tab));
 
 /* ---------- helpers ---------- */
+function LOC(){try{return LANG==='ar'?'ar':LANG==='om'?'om':undefined}catch(e){return undefined}}
 const openTasks=()=>S.tasks.filter(t=>!t.done);
 function current(){const o=openTasks();return o.find(t=>t.top)||o[0]||null}
 function nextStep(t){return t.steps.find(s=>!s.done)||null}
@@ -764,7 +771,7 @@ function renderHeader(){
   $('sparkCount').textContent=S.sparks;
   const L=lvl();$('levelText').textContent='Level '+L.n+' · '+L.left+' to next';$('xpBar').style.width=L.pct+'%';
   const h=new Date().getHours();
-  $('dateLabel').textContent=new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'});
+  $('dateLabel').textContent=new Date().toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'});
   const nm=S.name?', '+S.name:'';$('hello').textContent=strict()?'Bismillah'+nm+'. One step at a time.':(h<12?'Good morning':h<18?'Hi':'Good evening')+nm+'. One small thing at a time.';
 }
 
@@ -1038,7 +1045,7 @@ function renderWins(){
   $('daysGrid').innerHTML=cells.join('');
   $('rewardList').innerHTML=S.rewards.map(r=>`<div class="reward" data-id="${r.id}"><span class="t" style="flex:1">${S.goalId===r.id?'<b>🎯 </b>':''}${esc(r.text)} <span class="muted small">· ${r.cost} sparks</span><div class="bar"><i style="width:${Math.min(100,S.sparks/r.cost*100)}%"></i></div></span>
     <span class="row" style="flex-wrap:nowrap;gap:6px"><button class="icon-btn small" data-act="aim" aria-pressed="${S.goalId===r.id}">${S.goalId===r.id?'Aiming':'Aim'}</button><button class="${S.sparks>=r.cost?'btn-main':''} small" data-act="claim" ${S.sparks>=r.cost?'':'disabled'} style="padding:.45rem .9rem;font-size:.9rem">${S.sparks>=r.cost?'Claim':'Need '+(r.cost-S.sparks)}</button><button class="icon-btn btn-ghost" data-act="rm" aria-label="Remove reward">✕</button></span></div>`).join('')||'<p class="muted">Add a reward you\'d love.</p>';
-  $('winsList').innerHTML=S.wins.length?S.wins.slice(0,25).map(w=>`<li><span>${esc(w.text)}</span><time>${new Date(w.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</time></li>`).join(''):'<li class="muted">Your wins will show up here. Even tiny ones.</li>';
+  $('winsList').innerHTML=S.wins.length?S.wins.slice(0,25).map(w=>`<li><span>${esc(w.text)}</span><time>${new Date(w.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</time></li>`).join(''):'<li class="muted">Your wins will show up here. Even tiny ones.</li>';
 }
 $('rewardList').onclick=e=>{const b=e.target.closest('[data-act]'),row=e.target.closest('.reward');if(!b||!row)return;const r=S.rewards.find(x=>x.id===row.dataset.id);
   if(b.dataset.act==='aim'){S.goalId=S.goalId===r.id?null:r.id;if(S.goalId)toast('Goal set. Watch the jar fill up on Now.')}
@@ -1291,7 +1298,7 @@ function renderCheckin(){
     <label class="small wrap" style="gap:6px"><b>What got in the way?</b> <span class="muted">Facts, not verdicts.</span><textarea id="ciBlocked" rows="2" placeholder="e.g. Stayed up late Tuesday, so Wednesday was gone"></textarea></label>
     <label class="small wrap" style="gap:6px"><b>One tweak for next week</b><textarea id="ciTweak" rows="2" placeholder="e.g. Phone charges in the kitchen"></textarea></label>
     <button class="btn-calm" id="ciSave" style="align-self:flex-start">Save check-in</button>
-    ${S.checkins.length?`<details><summary class="small">Past check-ins (${S.checkins.length})</summary><div class="wrap" style="gap:10px">${S.checkins.slice(0,12).map(c=>`<div class="small" style="border-bottom:1px solid var(--line);padding-bottom:8px"><p class="label">${new Date(c.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</p>${c.worked?`<p><b>Worked:</b> ${esc(c.worked)}</p>`:''}${c.blocked?`<p><b>In the way:</b> ${esc(c.blocked)}</p>`:''}${c.tweak?`<p><b>Tweak:</b> ${esc(c.tweak)}</p>`:''}</div>`).join('')}</div></details>`:''}`;
+    ${S.checkins.length?`<details><summary class="small">Past check-ins (${S.checkins.length})</summary><div class="wrap" style="gap:10px">${S.checkins.slice(0,12).map(c=>`<div class="small" style="border-bottom:1px solid var(--line);padding-bottom:8px"><p class="label">${new Date(c.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</p>${c.worked?`<p><b>Worked:</b> ${esc(c.worked)}</p>`:''}${c.blocked?`<p><b>In the way:</b> ${esc(c.blocked)}</p>`:''}${c.tweak?`<p><b>Tweak:</b> ${esc(c.tweak)}</p>`:''}</div>`).join('')}</div></details>`:''}`;
   $('ciSave').onclick=()=>{const w=$('ciWorked').value.trim(),b=$('ciBlocked').value.trim(),t=$('ciTweak').value.trim();
     if(!w&&!b&&!t){toast('Write one line in any box.');return}
     S.checkins.unshift({at:Date.now(),worked:w,blocked:b,tweak:t});award(3,'Weekly check-in');save();renderCheckin();toast('Saved. +3 sparks. Try the tweak this week.')};
@@ -1522,7 +1529,7 @@ const len=(arr,cur,id)=>`${arr.map(m=>`<button aria-pressed="${cur===m}" data-${
 function renderEnjoy(){
   $('learnKind').innerHTML=['Reading','Lecture'].map(k=>`<button class="chip" aria-pressed="${EN.kind===k}" data-kind="${k}" style="${EN.kind===k?'background:var(--calm-soft);border-color:var(--calm)':''}">${k}</button>`).join('');
   $('learnLen').innerHTML=len([5,10,15],EN.len,'ll');
-  $('learnedList').innerHTML=S.learned.length?`<p class="label" style="margin-top:6px">What I took in</p><ul class="wins">${S.learned.slice(0,3).map(l=>`<li><span>${esc(l.text)}${l.what?` <span class="muted small">· ${esc(l.what)}</span>`:''}</span><time>${new Date(l.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</time></li>`).join('')}</ul>`:'';
+  $('learnedList').innerHTML=S.learned.length?`<p class="label" style="margin-top:6px">What I took in</p><ul class="wins">${S.learned.slice(0,3).map(l=>`<li><span>${esc(l.text)}${l.what?` <span class="muted small">· ${esc(l.what)}</span>`:''}</span><time>${new Date(l.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</time></li>`).join('')}</ul>`:'';
   $('doodleText').textContent=DOODLES[EN.doodle%DOODLES.length];
   const rate=r=>r===3?'😍':r===2?'🙂':r===1?'😐':'';
   $('hobbyList').innerHTML=(EN.allHob?HOBBIES:HOBBIES.slice(0,5)).map(([id,t,m])=>`<div class="reward"><span class="t">${esc(t)} <span class="muted small">· ${m} min</span>${S.hobbies[id]?` <span title="How it felt">${(S.hobbies[id].r||[]).map(rate).join('')}</span>`:''}</span><button class="small" data-hob="${id}">Try</button></div>`).join('')+(EN.allHob?'':`<button class="small btn-ghost" id="hobMore" style="align-self:flex-start">+ ${HOBBIES.length-5} more ideas</button>`);
@@ -1595,7 +1602,7 @@ const R={item:null,shown:false};
 function renderMemory(){
   const box=$('memBody'),due=dueItems(),kept=S.learned.filter(l=>l.stage>=GAPS.length).length;
   if(R.item){const l=R.item;
-    box.innerHTML=`<div class="note"><p class="label">Cue</p><p style="font-weight:700">${esc(l.kw||l.what||'Your note from '+new Date(l.at).toLocaleDateString(undefined,{month:'short',day:'numeric'}))}</p>
+    box.innerHTML=`<div class="note"><p class="label">Cue</p><p style="font-weight:700">${esc(l.kw||l.what||'Your note from '+new Date(l.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'}))}</p>
       <p class="small" style="margin-top:6px">${R.shown?'':'Before you look: what was the main point? Say it out loud or in your head. A rough guess counts. The trying is what builds the memory.'}</p></div>
       ${R.shown?`<div class="note" style="background:var(--accent-soft)"><p class="label">Your note</p><p>${esc(l.point||l.text)}</p>${l.q?`<p class="small muted" style="margin-top:6px">Your question: ${esc(l.q)}</p>`:''}</div>
         <div class="row"><button class="btn-calm" id="rvGot">I remembered (most of) it</button><button id="rvMiss">I forgot</button></div>`
@@ -1658,7 +1665,7 @@ function renderJournal(){
       <textarea id="jrIn" rows="2" placeholder="One line is enough" aria-label="Your answer"></textarea>
       <button class="btn-main" id="jrSave" style="align-self:flex-start">Save (+2)</button>`
     :`<button class="small" id="jrMore" style="align-self:flex-start">+ Another one</button>`)+
-    (S.journal.length?`<details><summary class="small">Past reflections (${S.journal.length})</summary><ul class="wins">${S.journal.slice(0,30).map(j=>`<li><span><b>${esc(j.q)}</b><br>${esc(j.a)}</span><time>${new Date(j.at).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</time></li>`).join('')}</ul></details>`:'');
+    (S.journal.length?`<details><summary class="small">Past reflections (${S.journal.length})</summary><ul class="wins">${S.journal.slice(0,30).map(j=>`<li><span><b>${esc(j.q)}</b><br>${esc(j.a)}</span><time>${new Date(j.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</time></li>`).join('')}</ul></details>`:'');
   let pick='';
   box.querySelectorAll('[data-jo]').forEach(b=>b.onclick=()=>{pick=b.dataset.jo;box.querySelectorAll('[data-jo]').forEach(x=>x.style.background=x===b?'var(--calm-soft)':'');$('jrIn').focus()});
   if($('jrSave'))$('jrSave').onclick=()=>{const t=$('jrIn').value.trim(),a=[pick,t].filter(Boolean).join(': ');if(!a){$('jrIn').focus();return}
@@ -1672,7 +1679,7 @@ if(!S.hist)S.hist=[];
 const clone=o=>o==null?o:JSON.parse(JSON.stringify(o));
 const pd=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
-const fmtD=s=>pd(s).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'});
+const fmtD=s=>pd(s).toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'});
 function lifeFix(){if(!S.money)S.money={items:[],cur:'$',budget:{}};if(!S.money.budget)S.money.budget={};if(!S.goals)S.goals=[];if(!S.hist)S.hist=[]}
 /* ---- edit history ---- */
 function H(area,act,label,before,after){lifeFix();S.hist.unshift({id:uid(),at:Date.now(),area,act,label:String(label||'').slice(0,80),before:clone(before),after:clone(after)});S.hist=S.hist.slice(0,600)}
@@ -1687,7 +1694,7 @@ let HF='all';
 function renderHist(){if(!$('histList'))return;lifeFix();
   $('histF').innerHTML=[['all','All'],...Object.entries(AREAS).map(([k,v])=>[k,v[1]+' '+v[0]])].map(([k,l])=>`<button class="chip" data-hf="${k}" style="${HF===k?'background:var(--ink);color:var(--bg)':''}">${l}</button>`).join('');
   const L=S.hist.filter(h=>HF==='all'||h.area===HF).slice(0,60);
-  $('histList').innerHTML=L.length?L.map(h=>`<div class="hrow"><span aria-hidden="true">${(AREAS[h.area]||['','•'])[1]}</span><div class="t"><b>${esc(h.act[0].toUpperCase()+h.act.slice(1))}</b> ${esc(h.label)}${histDiff(h)?`<br><span class="small muted">${histDiff(h)}</span>`:''}</div><time>${new Date(h.at).toLocaleString(undefined,{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</time>${h.before&&h.act!=='restored'?`<button class="small" data-hr="${h.id}">Restore</button>`:''}</div>`).join(''):'<p class="muted small">Nothing yet. Changes you make show up here.</p>';
+  $('histList').innerHTML=L.length?L.map(h=>`<div class="hrow"><span aria-hidden="true">${(AREAS[h.area]||['','•'])[1]}</span><div class="t"><b>${esc(h.act[0].toUpperCase()+h.act.slice(1))}</b> ${esc(h.label)}${histDiff(h)?`<br><span class="small muted">${histDiff(h)}</span>`:''}</div><time>${new Date(h.at).toLocaleString(LOC(),{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</time>${h.before&&h.act!=='restored'?`<button class="small" data-hr="${h.id}">Restore</button>`:''}</div>`).join(''):'<p class="muted small">Nothing yet. Changes you make show up here.</p>';
 }
 document.addEventListener('click',e=>{const f=e.target.closest('[data-hf]');if(f){HF=f.dataset.hf;renderHist();return}const r=e.target.closest('[data-hr]');if(r)histRestore(r.dataset.hr)});
 
@@ -1696,7 +1703,7 @@ const CATS={expense:['Home & rent','Bills','Food','Transport','Shopping','Family
 const CAT_EMO={'Home & rent':'🏠','Bills':'🧾','Food':'🍲','Transport':'🚌','Shopping':'🛍️','Family':'👨‍👩‍👧','Sadaqah':'🤲','Debt':'💳','Savings':'🏦','Health':'💊','Fun':'🎈','Other':'•','Salary':'💼','Side income':'🧩','Gift':'🎁'};
 function guessCat(l){l=l.toLowerCase();return /rent|mortgage|house/.test(l)?'Home & rent':/bill|phone|internet|electric|water|gas bill|subscription/.test(l)?'Bills':/food|grocer|lunch|dinner|coffee|restaurant|eat/.test(l)?'Food':/uber|bus|gas|fuel|car|train|taxi/.test(l)?'Transport':/sadaq|zakat|charity|donat/.test(l)?'Sadaqah':/debt|loan|credit/.test(l)?'Debt':/sav/.test(l)?'Savings':/doctor|medic|pharm|meds/.test(l)?'Health':/mom|dad|family|sister|brother/.test(l)?'Family':/cloth|shop|amazon|bought/.test(l)?'Shopping':'Other'}
 const MN={kind:'expense',ym:dkey().slice(0,7)};
-const money=n=>{const c=S.money.cur||'$';const v=Math.abs(n).toLocaleString(undefined,{maximumFractionDigits:2});return (n<0?'−':'')+(c.length>1?v+' '+c:c+v)};
+const money=n=>{const c=S.money.cur||'$';const v=Math.abs(n).toLocaleString(LOC(),{maximumFractionDigits:2});return (n<0?'−':'')+(c.length>1?v+' '+c:c+v)};
 function monthItems(ym){return S.money.items.filter(it=>it.recur==='monthly'?(it.date.slice(0,7)<=ym&&(!it.end||it.end>=ym)):it.date.slice(0,7)===ym).map(it=>Object.assign({},it,{on:it.recur==='monthly'?ym+'-'+String(Math.min(+it.date.slice(8),28)).padStart(2,'0'):it.date}))}
 function ymShift(ym,n){const d=new Date(+ym.slice(0,4),+ym.slice(5)-1+n,1);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
 function renderMoney(){if(!$('monSum'))return;lifeFix();
@@ -1704,7 +1711,7 @@ function renderMoney(){if(!$('monSum'))return;lifeFix();
   const byCat={};its.filter(i=>i.kind==='expense').forEach(i=>byCat[i.cat]=(byCat[i.cat]||0)+ +i.amount);
   Object.keys(S.money.budget).forEach(c=>{if(!(c in byCat))byCat[c]=0});
   const cats=Object.entries(byCat).sort((a,b)=>b[1]-a[1]);
-  const mname=new Date(+MN.ym.slice(0,4),+MN.ym.slice(5)-1,1).toLocaleDateString(undefined,{month:'long',year:'numeric'});
+  const mname=new Date(+MN.ym.slice(0,4),+MN.ym.slice(5)-1,1).toLocaleDateString(LOC(),{month:'long',year:'numeric'});
   const upcoming=MN.ym===dkey().slice(0,7)?its.filter(i=>i.kind==='expense'&&i.recur==='monthly'&&i.on>=dkey()).sort((a,b)=>a.on<b.on?-1:1):[];
   $('monSum').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-mym="-1" aria-label="Previous month">◀</button><h2 style="margin:0"><span class="h2i" aria-hidden="true">💰</span>${esc(mname)}</h2><button class="icon-btn" data-mym="1" aria-label="Next month">▶</button></div>
     <div class="big3"><div><span class="small muted">In</span><b class="pos">${money(inc)}</b></div><div><span class="small muted">Out</span><b>${money(out)}</b></div><div><span class="small muted">Left</span><b class="${left<0?'neg':'pos'}">${money(left)}</b></div></div>
@@ -1782,10 +1789,10 @@ function dayItems(d){const ym=d.slice(0,7);return{
 function chipsFor(d){const I=dayItems(d);return [...I.tasks.map(t=>`<span class="cal-it ${t.done?'d':''}">${t.time?esc(t.time)+' ':''}${esc(t.title)}</span>`),...I.money.map(m=>`<span class="cal-it m">${m.kind==='income'?'+':'−'}${money(m.amount)} ${esc(m.label)}</span>`),...I.goals.map(g=>`<span class="cal-it g">🎯 ${esc(g.title)}</span>`)].join('')}
 function renderCal(){if(!$('calBody'))return;lifeFix();document.querySelectorAll('[data-cv]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.cv===CAL.view));const today=dkey();
   if(CAL.view==='week'){const now=new Date();const start=addDays(now,-now.getDay()+CAL.off*7);
-    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous week">◀</button><b>${start.toLocaleDateString(undefined,{month:'short',day:'numeric'})} – ${addDays(start,6).toLocaleDateString(undefined,{month:'short',day:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next week">▶</button></div>
-    <div class="cal-week">${[0,1,2,3,4,5,6].map(i=>{const d=dkey(addDays(start,i)),dt=pd(d);return `<button class="cal-day ${d===today?'today':''}" data-cd="${d}"><span class="dn">${dt.toLocaleDateString(undefined,{weekday:'short'})}<small>${dt.getDate()}</small></span><span class="its">${chipsFor(d)||'<span class="small muted">—</span>'}</span></button>`}).join('')}</div>`}
+    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous week">◀</button><b>${start.toLocaleDateString(LOC(),{month:'short',day:'numeric'})} – ${addDays(start,6).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next week">▶</button></div>
+    <div class="cal-week">${[0,1,2,3,4,5,6].map(i=>{const d=dkey(addDays(start,i)),dt=pd(d);return `<button class="cal-day ${d===today?'today':''}" data-cd="${d}"><span class="dn">${dt.toLocaleDateString(LOC(),{weekday:'short'})}<small>${dt.getDate()}</small></span><span class="its">${chipsFor(d)||'<span class="small muted">—</span>'}</span></button>`}).join('')}</div>`}
   else{const n=new Date();const first=new Date(n.getFullYear(),n.getMonth()+CAL.off,1);const start=addDays(first,-first.getDay());
-    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous month">◀</button><b>${first.toLocaleDateString(undefined,{month:'long',year:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next month">▶</button></div>
+    $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous month">◀</button><b>${first.toLocaleDateString(LOC(),{month:'long',year:'numeric'})}</b><button class="icon-btn" data-co="1" aria-label="Next month">▶</button></div>
     <div class="cal-month">${['S','M','T','W','T','F','S'].map(x=>`<span class="h">${x}</span>`).join('')}${Array.from({length:42},(_,i)=>{const dt=addDays(start,i),d=dkey(dt),I=dayItems(d);
       return `<button class="cal-cell ${dt.getMonth()!==first.getMonth()?'out':''} ${d===today?'today':''}" data-cd="${d}" aria-label="${fmtD(d)}"><span>${dt.getDate()}</span><span class="dots">${I.tasks.slice(0,4).map(()=>'<i></i>').join('')}${I.money.slice(0,2).map(()=>'<i class="m"></i>').join('')}${I.goals.map(()=>'<i class="g"></i>').join('')}</span></button>`}).join('')}</div>
     <p class="small muted" style="margin-top:6px"><span style="color:var(--calm)">●</span> to-do &nbsp;<span style="color:var(--accent)">●</span> money &nbsp;● goal deadline</p>`}
@@ -2151,6 +2158,114 @@ $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id===
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
 function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAdhkar();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Brief mode.':'Explain mode.')});
+const I18N=[
+// landing
+['Your whole life,','حياتك كلها،','Jireenya kee guutuu,'],
+['one calm plan.','في خطة واحدة هادئة.','karoora tasgabbaa\'aa tokko.'],
+['Built for adults with ADHD. Write it messy. Fastaqim sorts it, schedules it, and gets you started.','مصمَّم للبالغين مع فرط الحركة وتشتت الانتباه. اكتبها كما هي، وفاستقم يرتّبها ويجدولها ويساعدك على البدء.','Namoota gurguddoo ADHD qabaniif kan qophaa\'e. Akkuma jirutti barreessi. Fastaqim ni qindeessa, sagantaa irra kaa\'a, akka jalqabdus si gargaara.'],
+['Continue with Google','المتابعة باستخدام Google','Google\'n itti fufi'],
+['or with email','أو بالبريد الإلكتروني','ykn imeelii\'n'],
+['Sign in','تسجيل الدخول','Seeni'],
+['Create account','إنشاء حساب','Herrega uumi'],
+['Forgot password?','نسيت كلمة المرور؟','Jecha icciitii irraanfatte?'],
+['Messy list in, schedule out','قائمة مبعثرة تدخل، وجدول منظم يخرج','Tarree walxaxaa galchi, sagantaa qindaa\'e argadhu'],
+['Start anything in 2 minutes','ابدأ أي شيء في دقيقتين','Waan kamiyyuu daqiiqaa 2 keessatti jalqabi'],
+['Day, week and month','اليوم والأسبوع والشهر','Guyyaa, torban fi ji\'a'],
+['Budget, income, expenses','الميزانية والدخل والمصاريف','Baajata, galii fi baasii'],
+['Short and long-term goals','أهداف قصيرة وطويلة المدى','Kaayyoo yeroo gabaabaa fi dheeraa'],
+['Days built around salah','أيام مبنية حول الصلاة','Guyyoota salaata irratti ijaaraman'],
+['One reflection a day','تأمل واحد في اليوم','Guyyaatti yaada of-ilaaluu tokko'],
+['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],
+['“Starting is the hard part. So that\'s the part we make tiny.”','«البداية هي الجزء الصعب، لذلك نجعلها صغيرة جدًا.»','“Jalqabuun kutaa ulfaataadha. Kanaaf isa xiqqeessina.”'],
+['Your data is private to your account.','بياناتك خاصة بحسابك فقط.','Odeeffannoon kee herrega kee qofaaf dhuunfaadha.'],
+['Try it now','جرّبه الآن','Amma yaali'],
+['Loading...','جارٍ التحميل...','Fe\'aa jira...'],
+['PH:Email','البريد الإلكتروني','Imeelii'],
+['PH:Password (8+ characters)','كلمة المرور (8 أحرف أو أكثر)','Jecha icciitii (qubee 8+)'],
+// header & nav
+['Bismillah. One step at a time.','بسم الله. خطوة واحدة في كل مرة.','Bismillah. Tarkaanfii tokko tokkoon.'],
+['📱 Saved on this device','📱 محفوظ على هذا الجهاز','📱 Meeshaa kana irratti olkaa\'ame'],
+['☁️ Saved to your account','☁️ محفوظ في حسابك','☁️ Herrega kee irratti olkaa\'ame'],
+['Now','الآن','Amma'],['Plan','الخطة','Karoora'],['To-do','المهام','Hojii'],['Money','المال','Maallaqa'],['Goals','الأهداف','Kaayyoo'],['Focus','التركيز','Xiyyeeffannaa'],['Enjoy','استمتع','Gammadi'],['Me','أنا','Ana'],
+['What should I call you?','بماذا أناديك؟','Maqaa kee maal jedhee si waamu?'],['PH:Your name','اسمك','Maqaa kee'],['Go','انطلق','Deemi'],
+// now
+['Just this','هذا فقط','Kana qofa'],['Start for 2 minutes','ابدأ لمدة دقيقتين','Daqiiqaa 2f jalqabi'],['I did it','فعلتُها','Hojjedheera'],['Make it smaller','اجعلها أصغر','Xiqqeessi'],
+['2 minutes. After that, you decide.','دقيقتان. بعدها أنت تقرّر.','Daqiiqaa 2. Sana booda ati murteessi.'],
+['Remember why','تذكّر السبب','Sababa yaadadhu'],['Another one','واحد آخر','Kan biraa'],
+['📱 I caught myself scrolling','📱 انتبهت أنني أتصفح بلا هدف','📱 Of qabadheen yeroo bilbila irra naanna\'u'],
+['😴 I\'m tired / resting','😴 أنا متعب / أرتاح','😴 Dadhabeera / boqochaa jira'],
+['Adhkar','الأذكار','Azkaara'],['🤍 Salawat ﷺ','🤍 الصلاة على النبي ﷺ','🤍 Salawaata ﷺ'],['🌅 Morning','🌅 أذكار الصباح','🌅 Ganama'],['🌇 Evening','🌇 أذكار المساء','🌇 Galgala'],['🕌 After salah','🕌 بعد الصلاة','🕌 Salaata booda'],['🌙 Sleep','🌙 النوم','🌙 Hirriba'],['☀️ Waking up','☀️ الاستيقاظ','☀️ Hirriba irraa ka\'uu'],['🫶 Worry & laziness','🫶 الهم والكسل','🫶 Yaaddoo fi dhibaa'],
+['After Fajr until the sun is up. Start with item 1. One tap per time you say it.','بعد الفجر حتى طلوع الشمس. ابدأ بالرقم 1. اضغط مرة مع كل مرة تقولها.','Fajrii booda hanga aduun baatutti. Lakk. 1 irraa jalqabi. Yeroo jettu hunda al tokko tuqi.'],
+['After Asr until Maghrib (or into the night). Start with item 1.','بعد العصر حتى المغرب (أو في الليل). ابدأ بالرقم 1.','Asrii booda hanga Magriibaatti (ykn halkan). Lakk. 1 irraa jalqabi.'],
+['Right after the salam, before you get up.','بعد التسليم مباشرة، قبل أن تقوم.','Salaamtee booda battaluma, osoo hin ka\'in.'],
+['In bed, lights off, phone away.','في الفراش، الأضواء مطفأة، والهاتف بعيد.','Siree irratti, ibsaa dhaamsii, bilbila fageessi.'],
+['The first words of the day.','أول كلمات اليوم.','Jechoota guyyaa jalqabaa.'],
+['When you feel stuck, anxious or heavy.','عندما تشعر بالتعثر أو القلق أو الثقل.','Yeroo itti gufattu, yaaddoftu ykn ulfaatinni sitti dhagahamu.'],
+['Write it messy. I\'ll sort it.','اكتبها كما هي، وأنا أرتّبها.','Akkuma jirutti barreessi. Ani nan qindeessa.'],
+['✨ Sort it for me','✨ رتّبها لي','✨ Naaf qindeessi'],['Sorting...','جارٍ الترتيب...','Qindeessaa jira...'],
+['Today\'s reflection','تأمل اليوم','Of-ilaaluu har\'aa'],['Save (+2)','احفظ (+2)','Olkaa\'i (+2)'],['+ Another one','+ سؤال آخر','+ Kan biraa'],['Done for today.','تمّ لليوم.','Har\'aaf xumurameera.'],['PH:One line is enough','سطر واحد يكفي','Sarara tokko ga\'aadha'],
+['Coach','المدرّب','Leenjisaa'],['Brief','مختصر','Gabaabaa'],['Explain','اشرح','Ibsi'],
+['Okay, I\'ll do it','حسنًا، سأفعلها','Tole, nan hojjedha'],['No','لا','Lakki'],['Later','لاحقًا','Booda'],['I can\'t','لا أستطيع','Hin danda\'u'],['I\'m tired','أنا متعب','Dadhabeera'],['It\'s boring','إنه ممل','Ni nama dadhabsiisa'],['What\'s the point','ما الفائدة','Faayidaan isaa maali'],['I really need rest','أحتاج فعلًا إلى الراحة','Dhugumaan boqonnaa nan barbaada'],['Talk to me again','كلّمني مرة أخرى','Ammas na haasofsiisi'],
+['Working toward','أعمل نحو','Gara kanaatti hojjechaa jira'],
+['Stuck? Tell me why.','متعثّر؟ أخبرني لماذا.','Gufatteettaa? Maaliif akka ta\'e natti himi.'],
+['It feels too big','تبدو كبيرة جدًا','Baay\'ee guddaa natti fakkaata'],['I don\'t know where to start','لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku'],['Too much on my mind','ذهني مزدحم','Sammuun koo baay\'ee guutameera'],['Low energy','طاقتي منخفضة','Humni koo gadi bu\'aadha'],['Scared it won\'t be good','أخشى ألا تكون جيدة','Gaarii hin ta\'u jedheen sodaadha'],['I know, I just don\'t care','أعرف، لكنني لا أهتم','Nan beeka, garuu natti hin dhaga\'amu'],['I don\'t feel like it','لا رغبة لي','Fedhiin natti hin dhaga\'amu'],['I know the reward but still can\'t start','أعرف الأجر لكنني ما زلت لا أستطيع البدء','Mindaa nan beeka garuu jalqabuu hin danda\'u'],['I already failed today','لقد فشلت اليوم بالفعل','Har\'a duraanuu kufeera'],
+// plan / calendar
+['Calendar','التقويم','Dabtara guyyaa'],['Week','أسبوع','Torban'],['Month','شهر','Ji\'a'],
+['Sun','أحد','Dil'],['Mon','إثنين','Wix'],['Tue','ثلاثاء','Kib'],['Wed','أربعاء','Roo'],['Thu','خميس','Kam'],['Fri','جمعة','Jim'],['Sat','سبت','San'],
+['Your week','أسبوعك','Torban kee'],['🪄 Build my schedule','🪄 ابنِ جدولي','🪄 Sagantaa koo ijaari'],['Edit','تعديل','Gulaali'],['Full day','يوم كامل','Guyyaa guutuu'],['Low battery','طاقة منخفضة','Humni xiqqaa'],['Times','الأوقات','Yeroo'],['Order only','الترتيب فقط','Tartiiba qofa'],
+['Salah','الصلاة','Salaata'],['Core','أساسي','Bu\'uura'],['Rest','راحة','Boqonnaa'],['Life','الحياة','Jireenya'],['Transition','انتقال','Ce\'umsa'],
+['Weekly check-in','المراجعة الأسبوعية','Ilaalcha torbanii'],['Save check-in','احفظ المراجعة','Ilaalcha olkaa\'i'],
+['Coach\'s playbook','دليل المدرّب','Qajeelfama leenjisaa'],
+// todo
+['Brain dump','أفرغ ذهنك','Sammuu duwwaasi'],['Add','أضف','Dabaladhu'],['Today\'s top 3','أهم 3 اليوم','3 olaanoo har\'aa'],['Finish my list: Just this mode','أنهِ قائمتي: وضع «هذا فقط»','Tarree koo xumuri: haala "Kana qofa"'],
+['My rhythm, no clock needed','إيقاعي، بلا ساعة','Haala koo, sa\'aatii malee'],['Later','لاحقًا','Booda'],['Clear examples','امسح الأمثلة','Fakkeenyota haqi'],
+['When I wake up','عندما أستيقظ','Yeroon ka\'u'],['After I eat','بعد أن آكل','Erga nyaadhee booda'],['When I sit down to my phone','عندما أمسك هاتفي','Yeroon bilbila koo qabadhu'],['Before bed','قبل النوم','Hirribaan dura'],['Add moment','أضف لحظة','Yeroo dabaladhu'],
+['Start 2 min','ابدأ دقيقتين','Daq. 2 jalqabi'],['Break it down for me','قسّمها لي','Naaf qoqqoodi'],['Delete task','احذف المهمة','Hojii haqi'],['Rename','إعادة تسمية','Maqaa jijjiiri'],['Today','اليوم','Har\'a'],
+['PH:Add a tiny habit','أضف عادة صغيرة','Amala xiqqaa dabaladhu'],['PH:Add a tiny step','أضف خطوة صغيرة','Tarkaanfii xiqqaa dabaladhu'],['PH:e.g. Clean my room','مثلًا: رتّب غرفتي','Fkn. Kutaa koo qulqulleessi'],
+// money
+['In','الداخل','Galii'],['Out','الخارج','Baasii'],['Left','المتبقي','Kan hafe'],['Add money in or out','أضف دخلًا أو مصروفًا','Galii ykn baasii dabaladhu'],['💸 Spent','💸 صرفت','💸 Baase'],['💰 Got','💰 حصلت','💰 Argadhe'],
+['Home & rent','السكن والإيجار','Mana fi kiraa'],['Bills','الفواتير','Kaffaltii'],['Food','الطعام','Nyaata'],['Transport','المواصلات','Geejjiba'],['Shopping','التسوق','Bittaa'],['Family','العائلة','Maatii'],['Sadaqah','الصدقة','Sadaqaa'],['Debt','الدَّين','Liqii'],['Savings','الادخار','Qusannaa'],['Health','الصحة','Fayyaa'],['Fun','الترفيه','Bashannana'],['Other','أخرى','Kan biraa'],['Salary','الراتب','Mindaa'],['Side income','دخل إضافي','Galii dabalataa'],['Gift','هدية','Kennaa'],
+['Repeats every month','يتكرر كل شهر','Ji\'a hunda irra deebi\'a'],['This month','هذا الشهر','Ji\'a kana'],['PH:Amount','المبلغ','Hanga'],['PH:What for','لأجل ماذا','Maaliif'],
+['Nothing this month yet. Add it above, or write it in the ✨ box on Now.','لا شيء هذا الشهر بعد. أضفه بالأعلى أو اكتبه في مربع ✨ في «الآن».','Ji\'a kana ammaaf homaa hin jiru. Olitti dabaladhu, ykn saanduqa ✨ "Amma" keessatti barreessi.'],
+// goals
+['New goal','هدف جديد','Kaayyoo haaraa'],['Short-term','قصير المدى','Yeroo gabaabaa'],['Long-term','طويل المدى','Yeroo dheeraa'],['Add goal','أضف الهدف','Kaayyoo dabaladhu'],['Next step → today','الخطوة التالية ← اليوم','Tarkaanfii itti aanu → har\'a'],['Break it down','قسّمه','Qoqqoodi'],['Delete','احذف','Haqi'],
+['Nothing for the next 3 months yet.','لا شيء للأشهر الثلاثة القادمة بعد.','Ji\'oota 3 dhufaniif ammaaf homaa hin jiru.'],['No big goals yet. Al-Firdaws counts.','لا أهداف كبيرة بعد. والفردوس هدف.','Ammaaf kaayyoon guddaan hin jiru. Al-Firdaws ni lakkaa\'ama.'],['PH:e.g. Memorise Surah Al-Mulk','مثلًا: حفظ سورة الملك','Fkn. Suuratu Al-Mulk qabadhu'],['PH:Add a step','أضف خطوة','Tarkaanfii dabaladhu'],
+// focus / enjoy
+['Focus with a buddy','ركّز مع رفيق','Hiriyaa wajjin xiyyeeffadhu'],['Pick a length and press start','اختر المدة واضغط ابدأ','Dheerina filadhuu jalqabi tuqi'],['Start','ابدأ','Jalqabi'],
+['Small deeds, right now','أعمال صغيرة، الآن','Hojii gaarii xixiqqaa, amma'],['Learn without the headache','تعلّم بلا صداع','Mataa dhukkubbii malee baradhu'],['Reading','قراءة','Dubbisuu'],['Lecture','محاضرة','Barnoota'],['Start a chunk','ابدأ جزءًا','Kutaa tokko jalqabi'],
+['Find your hobby','اكتشف هوايتك','Fedhii kee barbaadi'],['Try','جرّب','Yaali'],['Editing, with a finish line','المونتاج، بخط نهاية','Gulaallii, sarara xumuraa wajjin'],['Another idea','فكرة أخرى','Yaada biraa'],['Start the timebox','ابدأ الوقت المحدد','Yeroo murtaa\'e jalqabi'],['Remember it','احفظه','Yaadadhu'],
+// me
+['You keep showing up','أنت مستمر في الحضور','Itti fufiinsaan dhufaa jirta'],['days showed up','أيام حضور','guyyoota dhufte'],['day run','أيام متتالية','guyyoota walitti aanan'],['sparks','شرارات','qabsiisota'],['Last 4 weeks','آخر 4 أسابيع','Torbanoota 4 darban'],
+['Reward shop','متجر المكافآت','Suuqii badhaasaa'],['My reasons','أسبابي','Sababoota koo'],['Wins','الإنجازات','Milkaa\'ina'],['Edit history','سجل التعديلات','Seenaa gulaallii'],['All','الكل','Hunda'],['✅ To-do','✅ المهام','✅ Hojii'],['💰 Money','💰 المال','💰 Maallaqa'],['🎯 Goals','🎯 الأهداف','🎯 Kaayyoo'],['Restore','استرجع','Deebisi'],
+['Nothing yet. Changes you make show up here.','لا شيء بعد. ستظهر تعديلاتك هنا.','Ammaaf homaa hin jiru. Jijjiiramni ati gootu asitti mul\'ata.'],
+['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and sounds','🎉 الاحتفال والأصوات','🎉 Ayyaneffannaa fi sagalee'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
+['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
+];
+
+/* ---------- languages: English, العربية, Afaan Oromoo ---------- */
+const LANGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo']];
+let LANG=(()=>{try{return localStorage.getItem('fastaqim.lang')||'en'}catch(e){return 'en'}})();
+const TX={},TXP={};I18N.forEach(([en,ar,om])=>{if(en.startsWith('PH:'))TXP[en.slice(3)]={ar,om};else TX[en]={ar,om}});
+let i18nBusy=false;
+function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];
+  if(LANG==='en'||!t){if(n.__en!=null&&n.nodeValue!==n.__en)n.nodeValue=n.__en;return}
+  if(n.__en==null)n.__en=en;const v=en.replace(k,t[LANG]);if(n.nodeValue!==v)n.nodeValue=v}
+function txAttr(e,a){const key='__'+a;const en=e[key]!=null?e[key]:e.getAttribute(a);if(!en)return;const t=TXP[en]||TX[en];
+  if(LANG==='en'||!t){if(e[key]!=null)e.setAttribute(a,e[key]);return}if(e[key]==null)e[key]=en;e.setAttribute(a,t[LANG])}
+function txTree(root){if(!root)return;i18nBusy=true;
+  if(root.nodeType===3){if(!root.parentElement||!root.parentElement.closest('script,style,.ar,[lang=ar]:not(html),textarea'))txNode(root)}
+  else if(root.nodeType===1){const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement&&n.parentElement.closest('script,style,.ar,[lang=ar]:not(html),textarea')?2:1});let n;while(n=w.nextNode())txNode(n);
+    [root,...root.querySelectorAll('[placeholder],[aria-label]')].forEach(e=>{if(e.getAttribute&&e.getAttribute('placeholder'))txAttr(e,'placeholder')})}
+  i18nBusy=false}
+function setLang(l){LANG=l;try{localStorage.setItem('fastaqim.lang',l)}catch(e){}
+  document.documentElement.lang=l;document.documentElement.dir=l==='ar'?'rtl':'ltr';document.body.classList.toggle('rtl',l==='ar');
+  document.querySelectorAll('.langSel').forEach(s=>s.value=l);if(typeof render==='function'&&S&&S.started)try{render()}catch(e){}txTree(document.body)}
+new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.type==='characterData')txTree(m.target);else m.addedNodes.forEach(txTree)})}).observe(document.body,{childList:true,subtree:true,characterData:true});
+(()=>{const mk=()=>{const s=document.createElement('select');s.className='langSel';s.setAttribute('aria-label','Language');s.innerHTML=LANGS.map(([k,l])=>`<option value="${k}">🌐 ${l}</option>`).join('');s.value=LANG;s.onchange=()=>setLang(s.value);return s};
+  const brand=document.querySelector('.wrap header .brand');if(brand)brand.after(mk());
+  const ld=document.querySelector('.ld-brand');if(ld)ld.before(mk());
+  setLang(LANG)})();
+
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
 })();
 </script>
