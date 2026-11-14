@@ -346,6 +346,10 @@ button:active{transform:scale(.97)}
     <div class="card now" id="nowCard"></div>
     <div class="row" style="gap:10px"><button class="scroll-btn" id="caughtBtn" style="flex:1;min-width:150px">📱 I caught myself scrolling</button><button class="scroll-btn" id="restBtn" style="flex:1;min-width:150px;border-color:var(--calm);background:var(--calm-soft)">😴 I'm tired / resting</button></div>
     <div class="card" id="planNowCard"></div>
+    <div class="card" id="azCard">
+      <h2><span class="h2i" aria-hidden="true">📿</span>Adhkar</h2>
+      <div style="display:flex;flex-direction:column;gap:10px" id="azBody"></div>
+    </div>
     <div class="card sortcard" id="sortCard">
       <h2><span class="h2i" aria-hidden="true">✨</span>Write it messy. I'll sort it.</h2>
       <p class="small muted">To-dos, bills, income, goals, all in one list, in any order. You'll see the sorted version before anything is added: to-dos go on your calendar with small steps, money goes to your budget, goals to Goals.</p>
@@ -1910,6 +1914,31 @@ async function authBoot(){
   const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=freshS();render();authForm();}
 }
 
+/* ---------- adhkar (Hisnul Muslim) ---------- */
+const ADHKAR={
+  salawat:{t:'Salawat ﷺ',ic:'🤍',v:'"Whoever sends one salah upon me, Allah sends ten upon him." (Muslim 408)',items:[
+    {id:'sal1',ar:'اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ',tr:'Allāhumma ṣalli wa sallim ʿalā nabiyyinā Muḥammad',en:'O Allah, send prayers and peace upon our Prophet Muhammad.',n:10,src:'Hisnul Muslim: morning and evening, 10 times (aṭ-Ṭabarānī)'},
+    {id:'sal2',ar:'اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا صَلَّيْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ، اللَّهُمَّ بَارِكْ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ، كَمَا بَارَكْتَ عَلَى إِبْرَاهِيمَ وَعَلَى آلِ إِبْرَاهِيمَ، إِنَّكَ حَمِيدٌ مَجِيدٌ',tr:'Allāhumma ṣalli ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā ṣallayta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka Ḥamīdun Majīd. Allāhumma bārik ʿalā Muḥammadin wa ʿalā āli Muḥammad, kamā bārakta ʿalā Ibrāhīma wa ʿalā āli Ibrāhīm, innaka Ḥamīdun Majīd.',en:'O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Ibrahim and the family of Ibrahim; You are Praiseworthy, Glorious. O Allah, bless Muhammad and the family of Muhammad, as You blessed Ibrahim and the family of Ibrahim; You are Praiseworthy, Glorious.',n:1,src:'al-Bukhārī 3370'},
+    {id:'sal3',ar:'صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ',tr:'Ṣallallāhu ʿalayhi wa sallam',en:'May Allah send prayers and peace upon him.',n:100,src:'Short form, any time'}]}
+};
+const AZ={cat:'salawat',i:0,n:0};
+function azDone(){const k=dkey();S.azkar=S.azkar||{};if(!S.azkar[k]){S.azkar={};S.azkar[k]={}}return S.azkar[k]}
+function renderAdhkar(){const box=$('azBody');if(!box)return;const C=ADHKAR[AZ.cat],it=C.items[AZ.i],done=azDone();
+  box.innerHTML=`<div class="row">${Object.entries(ADHKAR).map(([k,c])=>`<button class="chip" data-azc="${k}" style="${k===AZ.cat?'background:var(--ink);color:var(--bg)':''}">${c.ic} ${esc(c.t)}</button>`).join('')}</div>
+    <p class="small muted">${esc(C.v)}</p>
+    <div class="row" style="gap:6px">${C.items.map((x,i)=>`<button class="chip" data-azi="${i}" style="${i===AZ.i?'background:var(--calm-soft);border-color:var(--calm)':''}">${i+1}${done[x.id]?' ✓':''}</button>`).join('')}</div>
+    <p class="ar" dir="rtl" lang="ar" style="text-align:center;font-size:${it.ar.length>120?'1.35rem':'1.7rem'}">${it.ar}</p>
+    <p class="small" style="text-align:center"><i>${esc(it.tr)}</i></p>
+    <p class="small muted" style="text-align:center">${esc(it.en)}</p>
+    <button class="tap" id="azTap" aria-label="Count one">${AZ.n}<small>of ${it.n}</small></button>
+    <p class="small muted" style="text-align:center">${esc(it.src)}${done[it.id]?' · done today ✓':''}</p>`;
+  box.querySelectorAll('[data-azc]').forEach(b=>b.onclick=()=>{AZ.cat=b.dataset.azc;AZ.i=0;AZ.n=0;renderAdhkar()});
+  box.querySelectorAll('[data-azi]').forEach(b=>b.onclick=()=>{AZ.i=+b.dataset.azi;AZ.n=0;renderAdhkar()});
+  $('azTap').onclick=()=>{AZ.n++;if(navigator.vibrate)try{navigator.vibrate(12)}catch(e){}
+    if(AZ.n>=it.n){done[it.id]=true;award(1,it.tr.slice(0,40));save();confetti();chime();toast('Done. ﷺ');AZ.n=0;if(AZ.i<C.items.length-1)AZ.i++;renderAdhkar();return}
+    $('azTap').firstChild.textContent=AZ.n};
+}
+
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
   const xs=card.querySelectorAll(':scope > .xp, :scope > p.muted.small:not([id]), :scope > .coach-note, :scope > ul.tips, :scope > p.small:not([id]), :scope > p.label + p.small');
@@ -2061,7 +2090,7 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();if(!T.running)drawTimer()}
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAdhkar();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Brief mode.':'Explain mode.')});
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
 })();
