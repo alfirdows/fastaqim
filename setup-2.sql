@@ -68,5 +68,16 @@ alter table public.fastaqim_blocklist enable row level security;
 create policy "everyone signed in reads blocked words" on public.fastaqim_blocklist for select to authenticated using (true);
 create policy "owner edits blocked words" on public.fastaqim_blocklist for all to authenticated using (public.is_admin()) with check (public.is_admin());
 
+-- Feedback (users send, only the owner reads)
+create table if not exists public.fastaqim_feedback (
+  id bigint generated always as identity primary key,
+  user_id uuid default auth.uid() references auth.users(id) on delete set null,
+  email text, name text, kind text, body text not null check (char_length(body) <= 2000), lang text,
+  seen boolean not null default false, created_at timestamptz not null default now());
+alter table public.fastaqim_feedback enable row level security;
+create policy "users send feedback" on public.fastaqim_feedback for insert to authenticated with check (user_id = auth.uid());
+create policy "owner reads feedback" on public.fastaqim_feedback for select to authenticated using (public.is_admin());
+create policy "owner marks feedback" on public.fastaqim_feedback for update to authenticated using (public.is_admin());
+
 -- Put the email YOU sign in with between the quotes:
 insert into public.site_admins (email) values ('YOUR-EMAIL-HERE');

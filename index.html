@@ -24,6 +24,10 @@
   --calm:#4CB5A5; --calm-soft:#17332F; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
+:root{--calm-soft:color-mix(in srgb,var(--calm) 16%,var(--surface));--accent-soft:color-mix(in srgb,var(--accent) 20%,var(--surface))}
+:root[data-color=blue]{--calm:#2F6FB5}:root[data-color=purple]{--calm:#7357B8}:root[data-color=rose]{--calm:#B84D72}:root[data-color=green]{--calm:#3E8A3A}:root[data-color=brown]{--calm:#8A5B33}:root[data-color=navy]{--calm:#2C3E7A}
+.swatch{width:36px;height:36px;border-radius:50%;border:3px solid transparent;padding:0;min-height:0}.swatch.on{border-color:var(--ink)}
+#fbBtn{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom,0px));inset-inline-end:14px;z-index:45;border-radius:999px;padding:.6rem .9rem;background:var(--surface);border:1.5px solid var(--line);box-shadow:0 8px 20px -10px rgba(0,0,0,.4);font-weight:800}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.5;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 60px}
 .wrap{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
@@ -253,6 +257,19 @@ button:active{transform:scale(.97)}
 .ld-brand{font-weight:800;letter-spacing:.02em;font-size:1.1rem}.ld-brand .ar{color:var(--calm);margin-left:6px}
 .ld-h{font-size:clamp(2.1rem,7vw,3.3rem);line-height:1.05;margin:6px 0 0}.ld-h span{color:var(--calm)}
 .ld-sub{font-size:1.1rem;color:var(--muted);max-width:30ch}
+.ld-free{color:var(--calm);font-weight:700;margin-top:-4px}.ld-h2{font-size:1.6rem;margin:10px 0 0}
+.ld-phone{width:230px;border-radius:34px;padding:10px;background:var(--ink);box-shadow:0 30px 60px -25px rgba(0,0,0,.45);transform:rotate(-3deg);margin:10px 0}
+.ld-scr{background:var(--bg);border-radius:26px;padding:14px 12px;display:flex;flex-direction:column;gap:8px;text-align:left}
+.ld-mrow{display:flex;justify-content:space-between;align-items:center;font-size:.9rem}.ld-spark{background:var(--accent-soft);border-radius:99px;padding:2px 8px;font-size:.75rem;font-weight:800}
+.ld-mcard{background:var(--surface);border:1.5px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:5px;font-size:.9rem}.ld-mcard small{font-size:.65rem;letter-spacing:.06em;color:var(--muted);font-weight:800}
+.ld-mbtn{background:var(--accent);color:#fff;border-radius:99px;padding:6px 10px;text-align:center;font-weight:800;font-size:.8rem}
+.ld-dots{display:flex;gap:6px}.ld-dots i{width:22px;height:22px;border-radius:50%;border:2px solid var(--calm)}.ld-dots i.on{background:var(--calm)}
+.ld-mini{flex-direction:row;justify-content:space-between;font-weight:700;font-size:.8rem}
+.ld-how{display:flex;align-items:center;gap:6px;justify-content:center;width:100%}.ld-how div{display:flex;flex-direction:column;align-items:center;gap:4px;font-weight:700;font-size:.85rem;flex:1;text-align:center}.ld-how b{font-size:2rem}.ld-how i{color:var(--muted);font-style:normal}
+body.rtl .ld-how i{transform:scaleX(-1)}
+.trk{border:1.5px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;flex-direction:column;gap:8px}.trk.met{border-color:var(--calm);background:var(--calm-soft)}.trk-e{font-size:1.2rem}
+.trk-pr{display:flex;gap:6px;justify-content:space-between}.trk-dot{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;background:none;border:0;padding:0;min-height:0}.trk-dot span{width:38px;height:38px;border-radius:50%;border:2.5px solid var(--calm);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}.trk-dot.on span{background:var(--calm)}.trk-dot small{font-size:.7rem;color:var(--muted)}
+.trk-chk{align-self:flex-start}.trk-chk.on{background:var(--calm);color:#fff}.trk-cnt{align-items:center;gap:10px}.trk-cnt b{font-size:1.3rem}.trk-cnt small{font-size:.8rem;color:var(--muted)}
 .ld-go{font-size:1.15rem;padding:1rem 2rem;box-shadow:0 10px 30px -10px var(--accent)}
 .ld-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;margin-top:8px}
 .ld-t{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;gap:6px;font-weight:700;font-size:.95rem;animation:ldin .5s both;animation-delay:var(--d)}
@@ -305,20 +322,29 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
   <div class="ld">
     <p class="ld-brand">Fastaqim <span class="ar" lang="ar">فَاسْتَقِمْ</span></p>
     <h1 class="ld-h">Your whole life,<br><span>one calm plan.</span></h1>
-    <p class="ld-sub">Built for ADHD brains of every age: kids, teens and adults, diagnosed early or late. Write it messy. Fastaqim sorts it, schedules it, and gets you started.</p>
-    <div id="ldAuth" class="ld-auth"></div>
+    <p class="ld-sub">For ADHD brains of every age.</p>
+    <button class="btn-main ld-go" id="ldStart">Get started</button>
+    <p class="small ld-free">✓ 100% free, always ✓ No ads ✓ 26 languages</p>
+    <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
+      <div class="ld-mrow"><b>Bismillah, Amina.</b><span class="ld-spark">✦ 12</span></div>
+      <div class="ld-mcard"><small>NEXT STEP</small><b>Open the laptop</b><span class="ld-mbtn">Start for 2 minutes</span></div>
+      <div class="ld-mcard"><small>🕌 SALAH · 🔥 6 days</small><div class="ld-dots"><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      <div class="ld-mcard ld-mini"><span>💧 5/8</span><span>📖 2/2 ✓</span><span>💰 −$12</span></div>
+    </div></div>
+    <div class="ld-how"><div><b>✍️</b><span>Write it messy</span></div><i>→</i><div><b>✨</b><span>We sort it</span></div><i>→</i><div><b>🚀</b><span>Start in 2 minutes</span></div></div>
     <div class="ld-grid">
-      <div class="ld-t" style="--d:0s"><b>✨</b><span>Messy list in, schedule out</span></div>
-      <div class="ld-t" style="--d:.06s"><b>🚀</b><span>Start anything in 2 minutes</span></div>
-      <div class="ld-t" style="--d:.12s"><b>📅</b><span>Day, week and month</span></div>
-      <div class="ld-t" style="--d:.18s"><b>💰</b><span>Budget, income, expenses</span></div>
-      <div class="ld-t" style="--d:.24s"><b>🎯</b><span>Short and long-term goals</span></div>
-      <div class="ld-t" style="--d:.30s"><b>🕌</b><span>Days built around salah</span></div>
+      <div class="ld-t" style="--d:0s"><b>📅</b><span>Day, week and month</span></div>
+      <div class="ld-t" style="--d:.06s"><b>💰</b><span>Budget, income, expenses</span></div>
+      <div class="ld-t" style="--d:.12s"><b>🎯</b><span>Short and long-term goals</span></div>
+      <div class="ld-t" style="--d:.18s"><b>🕌</b><span>Salah tracker</span></div>
+      <div class="ld-t" style="--d:.24s"><b>📿</b><span>Adhkar</span></div>
+      <div class="ld-t" style="--d:.30s"><b>🧭</b><span>Coach</span></div>
       <div class="ld-t" style="--d:.36s"><b>🌙</b><span>One reflection a day</span></div>
-      <div class="ld-t" style="--d:.42s"><b>🕘</b><span>Every edit saved with history</span></div>
-      <div class="ld-t" style="--d:.48s"><b>🌐</b><span>English, العربية, Afaan Oromoo</span></div>
+      <div class="ld-t" style="--d:.42s"><b>🌐</b><span>26 languages</span></div>
     </div>
     <div class="ld-quote"><p>“Starting is the hard part. So that's the part we make tiny.”</p></div>
+    <h2 class="ld-h2" id="ldStartH">Create your account</h2><p class="small muted" style="margin-top:-6px">Fastaqim is 100% free, always. No ads, no paid plan.</p>
+    <div id="ldAuth" class="ld-auth"></div>
     <p class="small muted ld-note" id="ldNote"><a href="#" class="privLink">Privacy</a></p>
   </div>
 </div>
@@ -355,6 +381,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <div class="card now" id="nowCard"></div>
     <div class="row" style="gap:10px"><button class="scroll-btn" id="caughtBtn" style="flex:1;min-width:150px">📱 I caught myself scrolling</button><button class="scroll-btn" id="restBtn" style="flex:1;min-width:150px;border-color:var(--calm);background:var(--calm-soft)">😴 I'm tired / resting</button></div>
     <div class="card" id="planNowCard"></div>
+    <div class="card" id="trkCard"><div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📊</span>My trackers</h2><button class="small btn-calm" id="trkAdd">+ Add</button></div><div id="trkList" class="wrap" style="gap:10px"></div></div>
     <div class="card" id="azCard">
       <h2><span class="h2i" aria-hidden="true">📿</span>Adhkar</h2>
       <div style="display:flex;flex-direction:column;gap:10px" id="azBody"></div>
@@ -656,6 +683,10 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <div class="card" id="admBox" hidden></div>
     <div class="card" id="vrMe" hidden></div>
     <div class="card" id="avCard"><p class="label">Profile picture</p><div class="row" style="align-items:center"><span class="avdot avbig" id="avPrev"></span><label class="small" style="cursor:pointer;display:inline-block;padding:8px 14px;border-radius:999px;background:var(--calm);color:#fff;font-weight:700">📷 Upload photo<input type="file" id="avFile" accept="image/*" hidden></label><button class="btn-ghost small" id="avDel" hidden>Remove</button></div><p class="small muted">Or pick one:</p><div class="row" id="avEmo" style="gap:6px"></div></div>
+    <div class="card" id="lookCard"><p class="label">Look</p>
+      <p class="small muted">Color</p><div class="row" id="lkColor" style="gap:8px"></div>
+      <p class="small muted">Mode</p><div class="seg" role="group" aria-label="Mode" id="lkMode"><button data-lm="auto">Auto</button><button data-lm="light">☀️ Light</button><button data-lm="dark">🌙 Dark</button></div>
+      <p class="small muted">Text size</p><div class="seg" role="group" aria-label="Text size" id="lkZoom"><button data-lz="0.9">A−</button><button data-lz="1">A</button><button data-lz="1.15">A+</button><button data-lz="1.3">A++</button></div></div>
     <div class="card"><p class="label">Coach style</p><div class="seg" role="group" aria-label="Coach style"><button data-style="strict">Direct</button><button data-style="bal">Balanced</button><button data-style="firm">Gentle</button></div><p class="small muted">Direct: straight talk, no sugarcoating. Balanced: direct about the step, warm on hard days. Gentle: softer words. Both give you the same small steps, explain why, and leave the choice with you.</p></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
@@ -678,6 +709,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 </div>
 <div class="modal" id="scrollModal" hidden role="dialog" aria-modal="true" aria-label="Caught scrolling"><div class="card scroll-card" id="scrollBody"></div></div>
 <div id="gtEl" hidden></div>
+<button id="fbBtn" aria-label="Send feedback">💡 Feedback</button>
 <div class="jt" id="jt" hidden role="dialog" aria-modal="true" aria-label="Just this mode">
   <div class="jt-in"><div class="jt-top"><span class="label">Just this</span><button class="btn-ghost small" id="jtX">Close</button></div><div id="jtBody"></div></div>
 </div>
@@ -1076,6 +1108,7 @@ function endTimer(early){
   clearInterval(T.iv);T.running=false;releaseWake();
   const mins=Math.floor((T.total-T.left)/60),bonus=Math.floor(mins/5);
   if(bonus&&!(T.ctx&&(T.ctx.rest||T.ctx.after)))award(bonus,mins+' focused minutes');
+  if(T.ctx&&T.ctx.trk&&mins>0){trkFix();const tk=S.trackers.find(x=>x.id===T.ctx.trk);if(tk)trkSet(tk,trkVal(tk,new Date())+mins)}
   const wasRest=T.ctx&&T.ctx.rest,after=T.ctx&&T.ctx.after;
   if(!early){chime();confetti()}
   const ctx=T.ctx||{},t=ctx.taskId&&S.tasks.find(x=>x.id===ctx.taskId),s=t&&ctx.stepId&&t.steps.find(x=>x.id===ctx.stepId);
@@ -1611,7 +1644,7 @@ function renderEnjoy(){
   $('learnLen').innerHTML=len([5,10,15],EN.len,'ll');
   $('learnedList').innerHTML=S.learned.length?`<p class="label" style="margin-top:6px">What I took in</p><ul class="wins">${S.learned.slice(0,3).map(l=>`<li><span>${esc(l.text)}${l.what?` <span class="muted small">· ${esc(l.what)}</span>`:''}</span><time>${new Date(l.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</time></li>`).join('')}</ul>`:'';
   $('doodleText').textContent=DOODLES[EN.doodle%DOODLES.length];
-  const rate=r=>r===3?'😍':r===2?'🙂':r===1?'😐':'';
+  const rate=r=>r===3?'😄':r===2?'🙂':r===1?'😐':'';
   $('hobbyList').innerHTML=(EN.allHob?HOBBIES:HOBBIES.slice(0,5)).map(([id,t,m])=>`<div class="reward"><span class="t">${esc(t)} <span class="muted small">· ${m} min</span>${S.hobbies[id]?` <span title="How it felt">${(S.hobbies[id].r||[]).map(rate).join('')}</span>`:''}</span><button class="small" data-hob="${id}">Try</button></div>`).join('')+(EN.allHob?'':`<button class="small btn-ghost" id="hobMore" style="align-self:flex-start">+ ${HOBBIES.length-5} more ideas</button>`);
   const favs=HOBBIES.filter(([id])=>{const r=(S.hobbies[id]||{}).r||[];return r.length&&r.reduce((a,b)=>a+b,0)/r.length>=2.5});
   $('hobbyFav').innerHTML=favs.length?`<div class="note small"><b>Ones you liked:</b> ${favs.map(f=>esc(f[1])).join(', ')}. Try them twice more. Three good tries and it's a hobby.</div>`:'';
@@ -2169,7 +2202,8 @@ function blkWords(t,L,AR){for(const w of L){const n=blkNorm(w).trim();if(!n)cont
     if(new RegExp('(^|[^\\p{L}])'+blkEsc(n)+'([^\\p{L}]|$)','u').test(t))return w}
   for(const w of AR){const n=blkNorm(w);if(new RegExp('(^|[^\\u0600-\\u06FF])(و|ف|ب|ل|ال|وال|بال|لل)?'+n+'([^\\u0600-\\u06FF]|$)').test(t))return w}return null}
 const blockedBad=text=>text?blkWords(blkNorm(text),BLOCK_BAD,BLOCK_BAD_AR):null;
-function blocked(text){if(!text)return null;const t=blkNorm(text);return blkWords(t,[...BLOCK_EN,...BLOCK_OM,...BLK.extra],BLOCK_AR)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR)}
+const BAD_EMO=/[🎵🎶🎸🎹🎷🎺🥁🎻🎤🎧📯🪕🪗🪘🍷🍺🍻🥂🍸🍹🥃🍾🍶🐷🐖🐽🥓🎲🃏🎰♠♣♦💀☠😈👿👹👺🎄🎅🤶🎃👻✝☦✡🕉☸☯🔯🕎⛪🛕🕍⛩🍆🍑🖕💋💏💑😘😚😙👙🩲🔞💩🚬🤘💃🕺🪩]/u;
+function blocked(text){if(!text)return null;const t=blkNorm(text);return (BAD_EMO.test(text)?'emoji':null)||blkWords(t,[...BLOCK_EN,...BLOCK_OM,...BLK.extra],BLOCK_AR)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR)}
 const BLK_MSG=['Let\'s leave this one out. Fastaqim is for plans that bring you closer to Allah. What could go here instead, like a walk, a nasheed, a lecture or time with family?',
  'This one won\'t be added. Pick something halal you\'d enjoy instead. You deserve rest that you feel good about after.'];
 function blkWarn(text){const bad=blockedBad(text);modalCard(bad?`<p class="label">🌿 Let's keep it clean</p><p>Curse words and rude words aren't allowed here. Try saying it another way. You can still write how you feel.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`
@@ -2191,9 +2225,100 @@ function blkAdmin(){const b=$('admBox');if(!b||!ADM.rows)return;const d=document
     const {error:e1}=await AU.sb.from('fastaqim_blocklist').delete().neq('word','');const {error:e2}=W.length?await AU.sb.from('fastaqim_blocklist').insert(W.map(word=>({word}))):{error:null};
     if(e1||e2){toast('Couldn\'t save. Run the setup step first.');return}BLK.extra=W;toast('Saved.')}}
 
+/* ---------- trackers: salah + templates + make your own ---------- */
+$('ldStart').onclick=()=>{$('ldStartH').scrollIntoView({behavior:'smooth'});setTimeout(()=>{const i=document.querySelector('#ldAuth input,#ldAuth button');i&&i.focus({preventScroll:true})},500)};
+const TRK_T={salah:{name:'Salah',emoji:'🕌',type:'salah',goal:5,per:'day'},quran:{name:'Quran pages',emoji:'📖',type:'count',goal:2,per:'day'},water:{name:'Water',emoji:'💧',type:'count',goal:8,per:'day'},
+  sleep:{name:'Slept before 11',emoji:'😴',type:'yesno',goal:1,per:'day'},exercise:{name:'Exercise',emoji:'🏃',type:'timer',goal:20,per:'day'},adhkar:{name:'Morning & evening adhkar',emoji:'📿',type:'check',goal:1,per:'day'},
+  meds:{name:'Medication',emoji:'💊',type:'check',goal:1,per:'day'},fast:{name:'Sunnah fast',emoji:'🌙',type:'check',goal:2,per:'week'}};
+const PRAY=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+function trkFix(){if(!S.trackers){S.trackers=[Object.assign({id:uid()},TRK_T.salah)]}if(!S.trk)S.trk={}}
+const trkDay=(d)=>{const k=dkey(d);return S.trk[k]=S.trk[k]||{}};
+const trkVal=(t,d)=>{const v=(S.trk[dkey(d)]||{})[t.id];return t.type==='salah'?(v||[0,0,0,0,0]):(v||0)};
+const trkNum=(t,d)=>{const v=trkVal(t,d);return t.type==='salah'?v.filter(Boolean).length:v===1||v===true?1:t.type==='yesno'?(v===1?1:0):+v||0};
+function trkWeek(t){const now=new Date(),dow=(now.getDay()+6)%7;let sum=0;for(let i=0;i<=dow;i++){const d=new Date(now);d.setDate(now.getDate()-i);sum+=trkNum(t,d)}return sum}
+const trkMet=(t,d)=>trkNum(t,d)>=(t.type==='check'||t.type==='yesno'?1:t.goal);
+function trkStreak(t){if(t.per!=='day')return 0;let n=0;const d=new Date();if(!trkMet(t,d))d.setDate(d.getDate()-1);while(trkMet(t,d)&&n<999){n++;d.setDate(d.getDate()-1)}return n}
+function trkSet(t,v){const day=trkDay();const was=trkMet(t,new Date());day[t.id]=v;if(!was&&trkMet(t,new Date())){award(1,t.name);chime();toast(t.emoji+' '+t.name+' done today.')}save();renderTrackers()}
+function renderTrackers(){const box=$('trkList');if(!box)return;trkFix();const today=new Date();
+  box.innerHTML=S.trackers.length?S.trackers.map(t=>{const v=trkVal(t,today),st=trkStreak(t),wk=t.per==='week';let ctl='';
+    if(t.type==='salah')ctl=`<div class="trk-pr">${PRAY.map((p,i)=>`<button class="trk-dot${v[i]?' on':''}" data-tp="${t.id}:${i}" aria-pressed="${!!v[i]}"><span>${v[i]?'✓':''}</span><small>${p}</small></button>`).join('')}</div>`;
+    else if(t.type==='check')ctl=`<button class="trk-chk${v?' on':''}" data-tc="${t.id}">${v?'✓ Done':'Mark done'}</button>`;
+    else if(t.type==='yesno')ctl=`<div class="row" style="gap:6px"><button class="small${v===1?' btn-calm':''}" data-ty="${t.id}:1">Yes</button><button class="small${v===-1?' btn-calm':''}" data-ty="${t.id}:-1">No</button></div>`;
+    else if(t.type==='count')ctl=`<div class="row trk-cnt"><button class="small" data-tn="${t.id}:-1" aria-label="Minus">−</button><b>${v}<small> / ${t.goal}</small></b><button class="small btn-calm" data-tn="${t.id}:1" aria-label="Plus">+</button></div>`;
+    else if(t.type==='timer')ctl=`<div class="row trk-cnt"><b>${v}<small> / ${t.goal} min</small></b><button class="small btn-calm" data-tt="${t.id}">▶ Start</button></div>`;
+    const sub=wk?`${trkWeek(t)} / ${t.goal} this week`:st?`🔥 ${st} day${st>1?'s':''}`:'';
+    return `<div class="trk${trkMet(t,today)?' met':''}"><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><span><span class="trk-e">${esc(t.emoji)}</span> <b class="notranslate">${esc(t.name)}</b> <span class="small muted">${sub}</span></span><button class="btn-ghost small" data-tm="${t.id}" aria-label="Options">⋯</button></div>${ctl}</div>`}).join('')
+    :'<p class="small muted">No trackers yet.</p>';
+  box.querySelectorAll('[data-tp]').forEach(b=>b.onclick=()=>{const [id,i]=b.dataset.tp.split(':'),t=S.trackers.find(x=>x.id===id),v=trkVal(t,new Date()).slice();v[+i]=v[+i]?0:1;trkSet(t,v)});
+  box.querySelectorAll('[data-tc]').forEach(b=>b.onclick=()=>{const t=S.trackers.find(x=>x.id===b.dataset.tc);trkSet(t,trkVal(t,new Date())?0:1)});
+  box.querySelectorAll('[data-ty]').forEach(b=>b.onclick=()=>{const [id,v]=b.dataset.ty.split(':'),t=S.trackers.find(x=>x.id===id);trkSet(t,+v)});
+  box.querySelectorAll('[data-tn]').forEach(b=>b.onclick=()=>{const [id,d]=b.dataset.tn.split(':'),t=S.trackers.find(x=>x.id===id);trkSet(t,Math.max(0,trkVal(t,new Date())+ +d))});
+  box.querySelectorAll('[data-tt]').forEach(b=>b.onclick=()=>{const t=S.trackers.find(x=>x.id===b.dataset.tt);startTimer(Math.max(1,t.goal-trkVal(t,new Date()))||t.goal,{label:t.emoji+' '+t.name,trk:t.id})});
+  box.querySelectorAll('[data-tm]').forEach(b=>b.onclick=()=>trkMenu(b.dataset.tm))}
+function trkMenu(id){const t=S.trackers.find(x=>x.id===id),i=S.trackers.indexOf(t);
+  modalCard(`<p class="label">${esc(t.emoji)} ${esc(t.name)}</p><div class="row"><button class="small" id="tmUp" ${i?'':'disabled'}>↑ Move up</button><button class="small" id="tmEd">Edit</button><button class="btn-ghost small" id="tmDel">Delete</button><button class="btn-ghost small" id="tmX">Close</button></div>`);
+  $('tmUp').onclick=()=>{S.trackers.splice(i,1);S.trackers.splice(i-1,0,t);save();modalClose();renderTrackers()};
+  $('tmEd').onclick=()=>trkBuilder(t);
+  $('tmDel').onclick=()=>{S.trackers.splice(i,1);save();modalClose();renderTrackers();toast('Tracker removed.')};$('tmX').onclick=modalClose}
+const TRK_EMO=['🕌','📖','💧','😴','🏃','📿','💊','🌙','🥗','🧹','📚','✍️','🤲','☀️','🚶','🧘','📵','💰','❤️','⭐'];
+function trkBuilder(edit){const have=new Set((S.trackers||[]).map(t=>t.name));const e=edit||{name:'',emoji:'⭐',type:'check',goal:1,per:'day'};
+  modalCard(`<p class="label">${edit?'Edit tracker':'Add a tracker'}</p>
+    ${edit?'':`<p class="small muted">Ready-made:</p><div class="row" style="gap:6px">${Object.entries(TRK_T).filter(([,x])=>!have.has(x.name)).map(([k,x])=>`<button class="chip" data-tk="${k}">${x.emoji} ${esc(x.name)}</button>`).join('')||'<span class="small muted">All added.</span>'}</div><p class="small muted" style="margin-top:8px">Or make your own:</p>`}
+    <form id="trkForm" class="wrap" style="gap:8px"><input type="text" id="tkName" placeholder="Name, e.g. Read 10 pages" maxlength="40" value="${esc(e.name)}" required>
+    <div class="row" id="tkEmo" style="gap:4px">${TRK_EMO.map(x=>`<button type="button" class="avpick${x===e.emoji?' on':''}" data-te="${x}">${x}</button>`).join('')}</div>
+    <div class="row" style="gap:6px"><select id="tkType" aria-label="Type"><option value="check">✓ Check</option><option value="count">＋ Counter</option><option value="timer">⏱ Timer (minutes)</option><option value="yesno">Yes / No</option><option value="salah">🕌 5 prayers</option></select>
+    <input type="number" id="tkGoal" min="1" max="999" value="${e.goal}" style="width:80px" aria-label="Goal"><select id="tkPer" aria-label="How often"><option value="day">Daily</option><option value="week">Weekly</option></select></div>
+    <p class="small muted" id="tkHint"></p>
+    <div class="row"><button class="btn-main" type="submit">${edit?'Save':'Add tracker'}</button><button class="btn-ghost small" type="button" id="tkX">Cancel</button></div></form>`);
+  let emo=e.emoji;$('tkType').value=e.type;$('tkPer').value=e.per;
+  const hint=()=>{const ty=$('tkType').value;$('tkGoal').hidden=ty==='salah'||ty==='yesno'||(ty==='check'&&$('tkPer').value==='day');$('tkHint').textContent={check:'Tap once when done.',count:'Tap + each time. Goal = how many.',timer:'Starts a focus timer. Goal = minutes.',yesno:'Answer once a day.',salah:'Tap each prayer as you pray it.'}[ty]};hint();
+  $('tkType').onchange=hint;$('tkPer').onchange=hint;
+  $('tkEmo').querySelectorAll('[data-te]').forEach(b=>b.onclick=()=>{emo=b.dataset.te;$('tkEmo').querySelectorAll('.avpick').forEach(x=>x.classList.toggle('on',x===b))});
+  $('scrollBody').querySelectorAll('[data-tk]').forEach(b=>b.onclick=()=>{trkFix();S.trackers.push(Object.assign({id:uid()},TRK_T[b.dataset.tk]));save();modalClose();renderTrackers();toast('Added.')});
+  $('tkX').onclick=modalClose;
+  $('trkForm').onsubmit=ev=>{ev.preventDefault();const name=$('tkName').value.trim();if(!name)return;const ty=$('tkType').value;
+    const o={name,emoji:emo,type:ty,goal:ty==='salah'?5:ty==='yesno'?1:Math.max(1,+$('tkGoal').value||1),per:ty==='salah'?'day':$('tkPer').value};
+    trkFix();if(edit)Object.assign(edit,o);else S.trackers.push(Object.assign({id:uid()},o));save();modalClose();renderTrackers();toast(edit?'Saved.':'Tracker added.')}}
+$('trkAdd').onclick=()=>trkBuilder();
+
+
+/* ---------- look: color, mode, text size (per user) ---------- */
+const COLORS=[['teal','#2B8577'],['blue','#2F6FB5'],['navy','#2C3E7A'],['purple','#7357B8'],['rose','#B84D72'],['green','#3E8A3A'],['brown','#8A5B33']];
+function lookApply(){const L=S.look||{},r=document.documentElement;
+  if(L.color&&L.color!=='teal')r.dataset.color=L.color;else delete r.dataset.color;
+  if(L.mode&&L.mode!=='auto')r.dataset.theme=L.mode;else delete r.dataset.theme;
+  document.body.style.zoom=L.zoom&&L.zoom!==1?L.zoom:'';try{localStorage.setItem('fastaqim.look',JSON.stringify(L))}catch(e){}}
+function renderLook(){if(!$('lkColor'))return;const L=S.look||{};
+  $('lkColor').innerHTML=COLORS.map(([k,c])=>`<button class="swatch${(L.color||'teal')===k?' on':''}" data-lc="${k}" style="background:${c}" aria-label="${k}"></button>`).join('');
+  document.querySelectorAll('[data-lm]').forEach(b=>b.setAttribute('aria-pressed',(L.mode||'auto')===b.dataset.lm));
+  document.querySelectorAll('[data-lz]').forEach(b=>b.setAttribute('aria-pressed',(L.zoom||1)===+b.dataset.lz));
+  $('lkColor').querySelectorAll('[data-lc]').forEach(b=>b.onclick=()=>lookSet('color',b.dataset.lc));lookApply()}
+function lookSet(k,v){S.look=Object.assign({},S.look,{[k]:v});save();renderLook()}
+document.querySelectorAll('[data-lm]').forEach(b=>b.onclick=()=>lookSet('mode',b.dataset.lm));
+document.querySelectorAll('[data-lz]').forEach(b=>b.onclick=()=>lookSet('zoom',+b.dataset.lz));
+try{const L=JSON.parse(localStorage.getItem('fastaqim.look')||'null');if(L){S.look=S.look||L;lookApply()}}catch(e){}
+
+/* ---------- feedback ---------- */
+function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 Feedback</p><p class="small muted">Ideas, problems, anything. It goes straight to the person who made Fastaqim.</p>
+  <div class="row" id="fbK" style="gap:6px"><button class="chip" data-fk="idea">💡 Idea</button><button class="chip" data-fk="problem">🐞 Problem</button><button class="chip" data-fk="other">💬 Other</button></div>
+  <form id="fbForm" class="wrap" style="gap:8px"><textarea id="fbText" rows="4" maxlength="2000" placeholder="Write here" style="width:100%" required></textarea>
+  <div class="row"><button class="btn-main" type="submit">Send</button><button class="btn-ghost small" type="button" id="fbX">Cancel</button></div></form>`);
+  const mark=()=>$('fbK').querySelectorAll('[data-fk]').forEach(b=>b.style.background=b.dataset.fk===kind?'var(--calm-soft)':'');mark();
+  $('fbK').querySelectorAll('[data-fk]').forEach(b=>b.onclick=()=>{kind=b.dataset.fk;mark()});$('fbX').onclick=modalClose;
+  $('fbForm').onsubmit=async e=>{e.preventDefault();const body=$('fbText').value.trim();if(!body)return;let ok=false;
+    if(AU.sb&&AU.user){const {error}=await AU.sb.from('fastaqim_feedback').insert({user_id:AU.user.id,email:AU.user.email,name:S.name||'',kind,body,lang:LANG});ok=!error}
+    else{S.feedbackLocal=(S.feedbackLocal||[]).concat({at:Date.now(),kind,body});save();ok=true}
+    modalCard(ok?'<p class="label">Thank you</p><p>Got it. Every message is read.</p><button class="btn-calm" id="fbOk">Close</button>':'<p>That didn\'t send. Please try again in a bit.</p><button class="btn-calm" id="fbOk">Close</button>');$('fbOk').onclick=modalClose}}
+$('fbBtn').onclick=fbOpen;
+const FB={rows:null};
+async function fbLoad(){if(!AU.sb||!ADM.rows)return;try{const {data,error}=await AU.sb.from('fastaqim_feedback').select('*').order('created_at',{ascending:false}).limit(100);if(error)throw error;FB.rows=data||[]}catch(e){FB.rows=null}fbAdmin()}
+function fbAdmin(){const b=$('admBox');if(!b||!FB.rows)return;let d=$('fbInbox');if(!d){d=document.createElement('details');d.id='fbInbox';d.className='sp-sec';b.appendChild(d)}const n=FB.rows.filter(r=>!r.seen).length;
+  d.innerHTML=`<summary class="label">📥 Feedback ${n?`<span class="due">${n} new</span>`:''}</summary>${FB.rows.length?FB.rows.map(r=>`<div class="mrow" style="cursor:default;${r.seen?'opacity:.6':''}"><span><b>${r.kind==='problem'?'🐞':r.kind==='idea'?'💡':'💬'} ${esc(r.name||r.email||'')}</b> <span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC())}</span><br><span class="small notranslate">${esc(r.body)}</span></span>${r.seen?'':`<button class="small" data-fs="${r.id}">Seen</button>`}</div>`).join(''):'<p class="small muted">No feedback yet.</p>'}`;
+  d.querySelectorAll('[data-fs]').forEach(x=>x.onclick=async()=>{await AU.sb.from('fastaqim_feedback').update({seen:true}).eq('id',x.dataset.fs);d.open=true;fbLoad()})}
+
 /* ---------- owner page: users + request to view (user must allow) ---------- */
 const ADM={rows:null};
-async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}await blkLoad();admRender();vrLoad()}
+async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}await blkLoad();admRender();fbLoad();vrLoad()}
 function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.rows;if(!ADM.rows)return;const R=ADM.rows,wk=7*864e5;
   const chip=r=>r.user_id===AU.user.id?'<span class="small muted">You</span>':r.request==='allowed'?`<span class="row" style="gap:4px">${r.guardian?'<span class="small muted">🛡️</span>':''}<button class="small btn-calm" data-av="${r.user_id}">View</button><button class="btn-ghost small" data-ax="${r.user_id}">Remove</button></span>`:r.request==='pending'?'<span class="small muted">Asked ⏳</span>':`<span class="row" style="gap:4px"><button class="small" data-aq="${r.user_id}">${r.request==='declined'?'Ask again':'Request to view'}</button><button class="small" data-ag="${r.user_id}">Guardian (under 18)</button></span>`;
   b.innerHTML=`<h2><span class="h2i" aria-hidden="true">📊</span>Fastaqim users</h2>
@@ -2384,7 +2509,7 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAvatar();renderAdhkar();if(!T.running)drawTimer()}
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAvatar();renderTrackers();renderLook();renderAdhkar();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(S.coachStyle==='bal'?'Balanced coach.':strict()?'Direct coach.':'Gentle coach.')});
 const I18N=[
 // landing
@@ -2469,9 +2594,9 @@ const I18N=[
 ['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and sounds','🎉 الاحتفال والأصوات','🎉 Ayyaneffannaa fi sagalee'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
 ['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Linked accounts','الحسابات المرتبطة','Herregoota walitti hidhaman'],['↩ Back to my own plan','↩ العودة إلى خطتي','↩ Gara karoora koootti deebi\'i'],['Switch back','ارجع','Deebi\'i'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan'],
 ['🛡️ Ruqyah & protection','🛡️ الرقية والتحصين','🛡️ Ruqyaa fi eegumsa'],['Profile picture','الصورة الشخصية','Suuraa profaayilii'],['📷 Upload photo','📷 ارفع صورة','📷 Suuraa olkaa\'i'],['Or pick one:','أو اختر واحدة:','Ykn tokko filadhu:'],['More languages','لغات أخرى','Afaanota biroo'],
-['I don\'t feel like it','لا أشعر برغبة','Hin fedhu'],['Overwhelmed','مُثقَل','Na ulfaate'],['Don\'t know where to start','لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku'],['Anxious','قلق','Yaaddoo qaba'],['I\'m scrolling','أتصفح الجوال','Bilbila irra jira'],['Heavy feeling','شعور بالثقل','Ulfaatina natti dhagahama'],['Send','أرسل','Ergi'],['Direct','مباشر','Kallattiin'],['Balanced','متوازن','Madaallii'],['Gentle','لطيف','Laafaa'],['Coach style','أسلوب المدرب','Akkaata leenjisaa'],['PH:Or type what\'s in the way','أو اكتب ما الذي يعيقك','Ykn maaltu si dhorke barreessi']
+['I don\'t feel like it','لا أشعر برغبة','Hin fedhu'],['Overwhelmed','مُثقَل','Na ulfaate'],['Don\'t know where to start','لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku'],['Anxious','قلق','Yaaddoo qaba'],['I\'m scrolling','أتصفح الجوال','Bilbila irra jira'],['Heavy feeling','شعور بالثقل','Ulfaatina natti dhagahama'],['Send','أرسل','Ergi'],['Direct','مباشر','Kallattiin'],['Balanced','متوازن','Madaallii'],['Gentle','لطيف','Laafaa'],['Coach style','أسلوب المدرب','Akkaata leenjisaa'],['For ADHD brains of every age.','لكل من لديه فرط الحركة وتشتت الانتباه، في أي عمر.','Namoota ADHD qaban umurii hundaaf.'],['Get started','ابدأ الآن','Jalqabi'],['✓ 100% free, always ✓ No ads ✓ 26 languages','✓ مجاني 100% دائمًا ✓ بلا إعلانات ✓ 26 لغة','✓ Yeroo hunda 100% bilisa ✓ Beeksisa hin qabu ✓ Afaan 26'],['Write it messy','اكتبها كما هي','Akkuma jirutti barreessi'],['We sort it','نحن نرتّبها','Nuti ni qindeessina'],['Start in 2 minutes','ابدأ في دقيقتين','Daqiiqaa 2 keessatti jalqabi'],['Salah tracker','متابعة الصلاة','Hordoffii salaataa'],['26 languages','26 لغة','Afaan 26'],['My trackers','متابعاتي','Hordoffiiwwan koo'],['+ Add','+ أضف','+ Dabali'],['Mark done','تم','Xumurameera jedhi'],['Yes','نعم','Eeyyee'],['▶ Start','▶ ابدأ','▶ Jalqabi'],['Add a tracker','أضف متابعة','Hordoffii dabali'],['Ready-made:','جاهزة:','Kan qophaa\'e:'],['Or make your own:','أو اصنع خاصتك:','Ykn kan kee uumi:'],['Add tracker','أضف المتابعة','Hordoffii dabali'],['Daily','يومي','Guyyaa guyyaan'],['Weekly','أسبوعي','Torbaniin'],['Fajr','الفجر','Fajrii'],['Dhuhr','الظهر','Zuhrii'],['Asr','العصر','Asrii'],['Maghrib','المغرب','Magribii'],['Isha','العشاء','Ishaa\'ii'],['Look','المظهر','Bifa'],['Color','اللون','Halluu'],['Mode','الوضع','Haala'],['Auto','تلقائي','Ofumaan'],['☀️ Light','☀️ فاتح','☀️ Ifa'],['🌙 Dark','🌙 داكن','🌙 Dukkana'],['Text size','حجم النص','Guddina barreeffamaa'],['💡 Feedback','💡 ملاحظات','💡 Yaada'],['💡 Idea','💡 فكرة','💡 Yaada'],['🐞 Problem','🐞 مشكلة','🐞 Rakkoo'],['💬 Other','💬 أخرى','💬 Kan biraa'],['Create your account','أنشئ حسابك','Herrega kee uumi'],['Fastaqim is 100% free, always. No ads, no paid plan.','فاستقم مجاني 100% دائمًا. بلا إعلانات ولا اشتراكات.','Fastaqim yeroo hunda 100% bilisa. Beeksisa hin qabu, kaffaltii hin qabu.'],['PH:Or type what\'s in the way','أو اكتب ما الذي يعيقك','Ykn maaltu si dhorke barreessi']
 ];
-const SO=["Noloshaada oo dhan,", "hal qorshe oo deggan.", "Waxaa loo sameeyay maskaxda ADHD da' kasta: carruur, dhallinyaro iyo dad waaweyn, goor hore ama goor dambe la ogaaday. Si kasta u qor. Fastaqim ayaa habeynaya, jadwal u samaynaya, oo ku bilaabsiinaya.", "Ku sii wad Google", "ama iimayl", "Gal", "Samee akoon", "Ma ilowday furaha sirta?", "Liis qasan geli, jadwal ka hel", "Wax kasta ku bilow 2 daqiiqo", "Maalin, toddobaad iyo bil", "Miisaaniyad, dakhli, kharash", "Yoolal gaaban iyo kuwo dheer", "Maalmo salaadda ku dhisan", "Hal milicsi maalintii", "Wax kasta oo la beddelo waa la kaydiyaa", "Aragtida qoyska ee waalidiinta iyo masuuliyiinta", "Qoys", "Dadka aan daryeelo", "Eeg", "Ka saar xiriirka", "Ku biir", "Samee koodh qoys", "Samee koodh cusub", "Qof baan daryeelaa (waalid, masuul, walaal ka weyn)", "Qof ayaa i daryeela", "Koodhka qoyska", "“Bilowgu waa qaybta adag. Sidaas darteed taas ayaan yareynaa.”", "Xogtaadu waa mid gaar u ah akoonkaaga. Si Fastaqim u ammaan ahaado, milkiilaha bogga wuxuu arki karaa dhaqdhaqaaqa akoonnada.", "Asturnaan", "Markaad is diiwaangeliso waxaad aqbashay", "Siyaasadda asturnaanta", "Isticmaalayaasha Fastaqim", "Wadarta", "Cusub toddobaadkan", "Firfircoon toddobaadkan", "Cusboonaysii", "Codso inaad aragto", "Mar kale weydii", "Oggolow", "Diid", "Jooji wadaagga", "Adiga", "Masuul (ka yar 18)", "Ka saar", "Hadda isku day", "Waa la soo rarayaa...", "Iimayl", "Furaha sirta (8+ xaraf)", "Bismillah. Hal tallaabo markiiba.", "📱 Waxaa lagu kaydiyay qalabkan", "☁️ Waxaa lagu kaydiyay akoonkaaga", "Hadda", "Qorshe", "Hawlo", "Lacag", "Yoolal", "Diirad", "Ku raaxayso", "Aniga", "Maxaan kugu magacaabaa?", "Magacaaga", "Soco", "Kaliya tan", "Bilow 2 daqiiqo", "Waan sameeyay", "Ka dhig mid yar", "2 daqiiqo. Intaas kadib adaa go'aansanaya.", "Xusuuso sababta", "Mid kale", "📱 Waxaan is qabtay anigoo isha mariya", "😴 Waan daallanahay / waan nasanayaa", "Adkaar", "🤍 Salawaat ﷺ", "🌅 Subax", "🌇 Fiid", "🕌 Salaadda kadib", "🌙 Hurdo", "☀️ Toosid", "🫶 Walwal iyo caajis", "Fajarka kadib ilaa qorraxdu ka soo baxdo. Ka bilow shayga 1aad. Hal taabasho mar kasta oo aad tiraahdo.", "Casarka kadib ilaa Maqribka (ama habeenka). Ka bilow shayga 1aad.", "Isla markaad salaanto, intaadan kicin.", "Sariirta, nalka dami, taleefanka fogee.", "Erayada ugu horreeya ee maalinta.", "Markaad dareento inaad xayiran tahay, walwalsan tahay ama culus tahay.", "Si kasta u qor. Anigaa habeyn doona.", "✨ Ii habee", "Waa la habeynayaa...", "Milicsiga maanta", "Kaydi (+2)", "+ Mid kale", "Maanta waa dhammaatay.", "Hal sadar ayaa ku filan", "Tababare", "Kooban", "Sharax", "Hagaag, waan samayn doonaa", "Maya", "Hadhow", "Ma awoodo", "Waan daallanahay", "Waa caajis", "Maxay faa'iido leedahay", "Runtii nasasho ayaan u baahanahay", "Mar kale ila hadal", "Waxaan u shaqaynayaa", "Ma xayirantahay? Ii sheeg sababta.", "Waxay u egtahay mid aad u weyn", "Ma garanayo meel aan ka bilaabo", "Wax badan ayaa maskaxdayda ku jira", "Tamar yar", "Waxaan ka baqayaa inaysan fiicnaan", "Waan ogahay, kaliya dan kama lihi", "Ma dareemayo inaan sameeyo", "Abaalmarinta waan ogahay laakiin weli ma bilaabi karo", "Maanta waan ku guuldarreystay", "Kalandar", "Toddobaad", "Bil", "Axad", "Isn", "Tal", "Arb", "Kha", "Jim", "Sab", "Toddobaadkaaga", "🪄 Dhis jadwalkayga", "Wax ka beddel", "Maalin buuxda", "Tamar yar", "Waqtiyo", "Kaliya kala horreyn", "Salaad", "Muhiim", "Nasasho", "Nolol", "Kala guur", "Hubin toddobaadle ah", "Kaydi hubinta", "Buugga tababaraha", "Maskax faaruqin", "Ku dar", "3da ugu muhiimsan maanta", "Dhammee liiskayga: habka Kaliya tan", "Habkayga, saacad la'aan", "Hadhow", "Tirtir tusaalooyinka", "Markaan toosto", "Markaan wax cuno kadib", "Markaan taleefanka u fadhiisto", "Hurdada ka hor", "Ku dar waqti", "Bilow 2 daqiiqo", "Ii kala jaji", "Tirtir hawsha", "Magac beddel", "Maanta", "Ku dar caado yar", "Ku dar tallaabo yar", "tus. Nadiifi qolkayga", "Soo galay", "Ka baxay", "Haray", "Ku dar lacag soo gashay ama baxday", "💸 La kharash gareeyay", "💰 La helay", "Guri iyo kiro", "Biilal", "Cunto", "Gaadiid", "Wax iibsi", "Qoys", "Sadaqo", "Deyn", "Kayd", "Caafimaad", "Madadaalo", "Kale", "Mushahar", "Dakhli dheeraad ah", "Hadiyad", "Bil kasta wuu soo noqdaa", "Bishan", "Qadarka", "Maxaa loogu talagalay", "Weli waxba bishan ma jiraan. Kor ku dar, ama ku qor sanduuqa ✨ ee Hadda.", "Yool cusub", "Muddo gaaban", "Muddo dheer", "Ku dar yool", "Tallaabada xigta → maanta", "Kala jaji", "Tirtir", "Weli waxba 3da bilood ee soo socda ma jiraan.", "Weli yoolal waaweyn ma jiraan. Al-Firdaws ayaa mudan.", "tus. Xifdi Suuratul Mulk", "Ku dar tallaabo", "Diirad saar adigoo saaxib leh", "Dooro dherer oo riix bilow", "Bilow", "Camal wanaagsan oo yar, hadda", "Baro madax xanuun la'aan", "Akhris", "Muxaadaro", "Bilow qayb", "Hel hiwaayaddaada", "Isku day", "Wax ka beddelid, xariiq dhammaad leh", "Fikrad kale", "Bilow waqtiga", "Xusuuso", "Waad sii joogtaa", "maalmood aad timid", "maalmood isku xiga", "dhimbilo", "4tii toddobaad ee la soo dhaafay", "Dukaanka abaalmarinta", "Sababahayga", "Guulo", "Taariikhda wax ka beddelka", "Dhammaan", "✅ Hawlo", "💰 Lacag", "🎯 Yoolal", "Soo celi", "Weli waxba. Waxaad beddesho halkan ayay ka muuqan doonaan.", "Magacaaga", "Kaydi", "🎉 Dabaaldeg iyo codad", "💾 Kayd / soo celin", "Dib u deji wax walba", "Haa, dhammaan tirtir", "Hay alaabtayda", "Akoon", "Beddel furaha sirta", "🔁 Beddel akoonka", "Akoonnada ku xiran", "↩ Ku noqo qorshahayga", "Dib u beddel", "Akoonnada qalabkan", "+ Ku dar akoon", "Beddel", "← Dib u noqo", "Ka bax", "Xir", "Jooji", "Luqad"].concat(['🛡️ Ruqyah iyo ilaalin','Sawirka profaylka','📷 Soo geli sawir','Ama mid dooro:','Luqado kale','Ma dareemayo inaan sameeyo','Culays badan','Ma garanayo meel aan ka bilaabo','Walwal','Isha ayaan marinayaa','Culays dareen','Dir','Ama qor waxa ku hor istaagay','Toos','Dheellitiran','Debecsan','Habka tababaraha']);
+const SO=["Noloshaada oo dhan,", "hal qorshe oo deggan.", "Waxaa loo sameeyay maskaxda ADHD da' kasta: carruur, dhallinyaro iyo dad waaweyn, goor hore ama goor dambe la ogaaday. Si kasta u qor. Fastaqim ayaa habeynaya, jadwal u samaynaya, oo ku bilaabsiinaya.", "Ku sii wad Google", "ama iimayl", "Gal", "Samee akoon", "Ma ilowday furaha sirta?", "Liis qasan geli, jadwal ka hel", "Wax kasta ku bilow 2 daqiiqo", "Maalin, toddobaad iyo bil", "Miisaaniyad, dakhli, kharash", "Yoolal gaaban iyo kuwo dheer", "Maalmo salaadda ku dhisan", "Hal milicsi maalintii", "Wax kasta oo la beddelo waa la kaydiyaa", "Aragtida qoyska ee waalidiinta iyo masuuliyiinta", "Qoys", "Dadka aan daryeelo", "Eeg", "Ka saar xiriirka", "Ku biir", "Samee koodh qoys", "Samee koodh cusub", "Qof baan daryeelaa (waalid, masuul, walaal ka weyn)", "Qof ayaa i daryeela", "Koodhka qoyska", "“Bilowgu waa qaybta adag. Sidaas darteed taas ayaan yareynaa.”", "Xogtaadu waa mid gaar u ah akoonkaaga. Si Fastaqim u ammaan ahaado, milkiilaha bogga wuxuu arki karaa dhaqdhaqaaqa akoonnada.", "Asturnaan", "Markaad is diiwaangeliso waxaad aqbashay", "Siyaasadda asturnaanta", "Isticmaalayaasha Fastaqim", "Wadarta", "Cusub toddobaadkan", "Firfircoon toddobaadkan", "Cusboonaysii", "Codso inaad aragto", "Mar kale weydii", "Oggolow", "Diid", "Jooji wadaagga", "Adiga", "Masuul (ka yar 18)", "Ka saar", "Hadda isku day", "Waa la soo rarayaa...", "Iimayl", "Furaha sirta (8+ xaraf)", "Bismillah. Hal tallaabo markiiba.", "📱 Waxaa lagu kaydiyay qalabkan", "☁️ Waxaa lagu kaydiyay akoonkaaga", "Hadda", "Qorshe", "Hawlo", "Lacag", "Yoolal", "Diirad", "Ku raaxayso", "Aniga", "Maxaan kugu magacaabaa?", "Magacaaga", "Soco", "Kaliya tan", "Bilow 2 daqiiqo", "Waan sameeyay", "Ka dhig mid yar", "2 daqiiqo. Intaas kadib adaa go'aansanaya.", "Xusuuso sababta", "Mid kale", "📱 Waxaan is qabtay anigoo isha mariya", "😴 Waan daallanahay / waan nasanayaa", "Adkaar", "🤍 Salawaat ﷺ", "🌅 Subax", "🌇 Fiid", "🕌 Salaadda kadib", "🌙 Hurdo", "☀️ Toosid", "🫶 Walwal iyo caajis", "Fajarka kadib ilaa qorraxdu ka soo baxdo. Ka bilow shayga 1aad. Hal taabasho mar kasta oo aad tiraahdo.", "Casarka kadib ilaa Maqribka (ama habeenka). Ka bilow shayga 1aad.", "Isla markaad salaanto, intaadan kicin.", "Sariirta, nalka dami, taleefanka fogee.", "Erayada ugu horreeya ee maalinta.", "Markaad dareento inaad xayiran tahay, walwalsan tahay ama culus tahay.", "Si kasta u qor. Anigaa habeyn doona.", "✨ Ii habee", "Waa la habeynayaa...", "Milicsiga maanta", "Kaydi (+2)", "+ Mid kale", "Maanta waa dhammaatay.", "Hal sadar ayaa ku filan", "Tababare", "Kooban", "Sharax", "Hagaag, waan samayn doonaa", "Maya", "Hadhow", "Ma awoodo", "Waan daallanahay", "Waa caajis", "Maxay faa'iido leedahay", "Runtii nasasho ayaan u baahanahay", "Mar kale ila hadal", "Waxaan u shaqaynayaa", "Ma xayirantahay? Ii sheeg sababta.", "Waxay u egtahay mid aad u weyn", "Ma garanayo meel aan ka bilaabo", "Wax badan ayaa maskaxdayda ku jira", "Tamar yar", "Waxaan ka baqayaa inaysan fiicnaan", "Waan ogahay, kaliya dan kama lihi", "Ma dareemayo inaan sameeyo", "Abaalmarinta waan ogahay laakiin weli ma bilaabi karo", "Maanta waan ku guuldarreystay", "Kalandar", "Toddobaad", "Bil", "Axad", "Isn", "Tal", "Arb", "Kha", "Jim", "Sab", "Toddobaadkaaga", "🪄 Dhis jadwalkayga", "Wax ka beddel", "Maalin buuxda", "Tamar yar", "Waqtiyo", "Kaliya kala horreyn", "Salaad", "Muhiim", "Nasasho", "Nolol", "Kala guur", "Hubin toddobaadle ah", "Kaydi hubinta", "Buugga tababaraha", "Maskax faaruqin", "Ku dar", "3da ugu muhiimsan maanta", "Dhammee liiskayga: habka Kaliya tan", "Habkayga, saacad la'aan", "Hadhow", "Tirtir tusaalooyinka", "Markaan toosto", "Markaan wax cuno kadib", "Markaan taleefanka u fadhiisto", "Hurdada ka hor", "Ku dar waqti", "Bilow 2 daqiiqo", "Ii kala jaji", "Tirtir hawsha", "Magac beddel", "Maanta", "Ku dar caado yar", "Ku dar tallaabo yar", "tus. Nadiifi qolkayga", "Soo galay", "Ka baxay", "Haray", "Ku dar lacag soo gashay ama baxday", "💸 La kharash gareeyay", "💰 La helay", "Guri iyo kiro", "Biilal", "Cunto", "Gaadiid", "Wax iibsi", "Qoys", "Sadaqo", "Deyn", "Kayd", "Caafimaad", "Madadaalo", "Kale", "Mushahar", "Dakhli dheeraad ah", "Hadiyad", "Bil kasta wuu soo noqdaa", "Bishan", "Qadarka", "Maxaa loogu talagalay", "Weli waxba bishan ma jiraan. Kor ku dar, ama ku qor sanduuqa ✨ ee Hadda.", "Yool cusub", "Muddo gaaban", "Muddo dheer", "Ku dar yool", "Tallaabada xigta → maanta", "Kala jaji", "Tirtir", "Weli waxba 3da bilood ee soo socda ma jiraan.", "Weli yoolal waaweyn ma jiraan. Al-Firdaws ayaa mudan.", "tus. Xifdi Suuratul Mulk", "Ku dar tallaabo", "Diirad saar adigoo saaxib leh", "Dooro dherer oo riix bilow", "Bilow", "Camal wanaagsan oo yar, hadda", "Baro madax xanuun la'aan", "Akhris", "Muxaadaro", "Bilow qayb", "Hel hiwaayaddaada", "Isku day", "Wax ka beddelid, xariiq dhammaad leh", "Fikrad kale", "Bilow waqtiga", "Xusuuso", "Waad sii joogtaa", "maalmood aad timid", "maalmood isku xiga", "dhimbilo", "4tii toddobaad ee la soo dhaafay", "Dukaanka abaalmarinta", "Sababahayga", "Guulo", "Taariikhda wax ka beddelka", "Dhammaan", "✅ Hawlo", "💰 Lacag", "🎯 Yoolal", "Soo celi", "Weli waxba. Waxaad beddesho halkan ayay ka muuqan doonaan.", "Magacaaga", "Kaydi", "🎉 Dabaaldeg iyo codad", "💾 Kayd / soo celin", "Dib u deji wax walba", "Haa, dhammaan tirtir", "Hay alaabtayda", "Akoon", "Beddel furaha sirta", "🔁 Beddel akoonka", "Akoonnada ku xiran", "↩ Ku noqo qorshahayga", "Dib u beddel", "Akoonnada qalabkan", "+ Ku dar akoon", "Beddel", "← Dib u noqo", "Ka bax", "Xir", "Jooji", "Luqad"].concat(['🛡️ Ruqyah iyo ilaalin','Sawirka profaylka','📷 Soo geli sawir','Ama mid dooro:','Luqado kale','Ma dareemayo inaan sameeyo','Culays badan','Ma garanayo meel aan ka bilaabo','Walwal','Isha ayaan marinayaa','Culays dareen','Dir','Toos','Dheellitiran','Debecsan','Habka tababaraha','Dadka ADHD qaba ee da\' kasta.','Bilow','✓ 100% bilaash, weligeed ✓ Xayeysiis ma leh ✓ 26 luqadood','Si kasta u qor','Annagaa habeyneyna','Ku bilow 2 daqiiqo','La socoshada salaadda','26 luqadood','Raadrayaashayda','+ Ku dar','Calaamadee dhammaad','Haa','▶ Bilow','Ku dar raadraaca','Diyaar ah:','Ama adigu samee:','Ku dar raadraaca','Maalin kasta','Toddobaad kasta','Fajar','Duhur','Casar','Maqrib','Cishe','Muuqaal','Midab','Hab','Toos','☀️ Iftiin','🌙 Mugdi','Cabbirka qoraalka','💡 Fikrad','💡 Fikrad','🐞 Dhibaato','💬 Kale','Samee akoonkaaga','Fastaqim waa 100% bilaash, weligeed. Xayeysiis ma leh, lacag ma leh.','Ama qor waxa ku hor istaagay']);
 
 /* ---------- languages: English, العربية, Afaan Oromoo ---------- */
 const LANGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali']];
