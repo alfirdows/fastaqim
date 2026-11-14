@@ -541,6 +541,22 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ldt-chip b{color:var(--calm);font-weight:800}
 #landing .ldt-more{position:absolute;top:40px;inset-inline-end:0;z-index:30;width:min(330px,calc(100vw - 36px));background:var(--surface);border:1px solid var(--lline,var(--line));border-radius:16px;box-shadow:0 12px 30px -12px rgba(20,40,70,.35);padding:12px;display:grid;gap:8px;text-align:center}
 #landing .ldt-more .ldt-d{margin:0;font-size:.78rem;color:var(--muted)}
+#landing .ld-flow{margin-top:36px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 8px;font-weight:700;font-size:.9rem;color:var(--ltext,var(--ink))}#landing .ld-flow i{font-style:normal;color:var(--k1,var(--accent));font-weight:800}:root[dir=rtl] #landing .ld-flow i{transform:scaleX(-1)}
+.zm-in .zs{border:0!important;background:transparent!important;border-radius:0}.zm-in .zs button{min-height:32px;height:32px;min-width:0;padding:0 .35rem;font-size:.78rem;color:var(--ltext,var(--ink))}.zm-in .zs .zs-p{border:0!important;min-width:0;font-size:.72rem;color:var(--lmuted,var(--muted))}
+#landing .ld-adhd{background:none;border:0;padding:0;min-height:0;font:inherit;color:inherit;text-decoration:underline dotted;text-decoration-color:var(--k2,var(--calm));text-decoration-thickness:1.5px;text-underline-offset:4px;cursor:pointer}#landing .ld-sub{gap:6px!important}
+#landing .ld-logo{margin-top:22px!important}
+#landing .ld-ayah{margin-top:8px!important}
+#landing .ld-ayah .ayq{font-size:1.25rem!important;line-height:1.7!important}
+#landing .ld-ayah .ayq u{text-underline-offset:.5em!important;text-decoration-thickness:1.5px!important}
+#landing .ld-ayah .ayt{font-size:.8rem!important;max-width:36ch;line-height:1.45!important;color:#4b5563!important}
+#landing .ld-ayah .ayt[lang=ar]{font-size:.8rem!important;line-height:1.7!important}
+#landing .ld-ayah .ayt u{text-decoration-thickness:1px!important;text-underline-offset:4px!important}
+#landing .ay-meta{margin-top:4px!important}
+#landing .ay-listen,#landing .ay-meta #ayS{font-size:.66rem!important}
+#landing .ay-listen svg{width:11px!important;height:11px!important}
+#landing .ld-h{margin-top:38px!important;font-size:clamp(1.7rem,7.6vw,2.4rem)!important}
+#landing .ld-go1{margin-top:24px!important}
+#landing .ld-tools{margin-top:32px!important}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -613,17 +629,17 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button type="button" class="zm" data-zmo aria-label="Text size"><span aria-hidden="true">Aa</span></button><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><span class="zm-in"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
-    <p class="ld-tag">Small steps every day build a life you're proud of.</p>
-    <p class="ld-sub"><span>Built for ADHD</span> <button class="ld-i" id="ldInfo" aria-label="What is ADHD?">i</button> <span>Open to everyone.</span></p>
+    <p class="ld-tag">Small steps. Big change.</p>
+    <p class="ld-sub"><button type="button" class="ld-adhd" id="ldInfo">Designed with ADHD in mind</button><span aria-hidden="true">·</span><span>Open to everyone.</span></p>
+    <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
     <div class="ld-tools">
       <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
-    <button class="btn-main ld-go" id="ldStart">Create account</button>
-    <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldDl">📥 Free downloads</button></div>
+    <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldDl">🖨️ Printables</button></div>
     <p class="ld-free">Free · No ads · 26 languages</p>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
@@ -632,8 +648,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="ld-mcard c2"><small>🕌 SALAH</small><div class="ld-dots"><i></i><i></i><i></i><i></i><i></i></div></div>
       <div class="ld-mini"><span class="c3">💧 5/8</span><span class="c4">📖 2/2</span><span class="c5">💰 −12</span></div>
     </div><span class="ld-pop">+1 ✦</span></div>
-    <p class="ld-sec">Fastaqim helps you…</p>
-    <div class="ld-how"><div class="c1"><b>🎯</b><span>Set your goals</span></div><div class="c2"><b>🧩</b><span>Break them into tiny steps</span></div><div class="c3"><b>🚀</b><span>Act today</span></div></div>
+    <div class="ld-flow"><span>🎯 Pick a goal</span><i aria-hidden="true">›</i><span>🧩 Make it tiny</span><i aria-hidden="true">›</i><span>🚀 Do it today</span></div>
     <p class="ld-sec" id="ldDemo">Try it: tap one</p>
     <div class="ldd"><div class="ldd-list"><button class="ldd-t" data-d="0"><i></i><span>Dhuhr salah</span></button><button class="ldd-t" data-d="1"><i></i><span>Drink water</span></button><button class="ldd-t" data-d="2"><i></i><span>Make your bed</span></button></div>
       <div class="ldd-side"><span class="ld-ring big"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="lddP" cx="18" cy="18" r="15"/></svg><b id="lddN">0/3</b></span><span class="ld-spark" id="lddS">✦ 0</span></div></div>
@@ -656,7 +671,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="hud">
       <span class="tring" id="tRing" title="Today's progress"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="tRingP" cx="18" cy="18" r="15"/></svg><b id="tRingN">0%</b></span>
       <div class="sparks" title="Sparks you can spend"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.9L21 12l-6.6 3.1L12 22l-2.4-6.9L3 12l6.6-3.1z"/></svg><span id="sparkCount">0</span></div>
-      <span class="hd-tools"><button type="button" class="zm" data-zmo aria-label="Text size"><span aria-hidden="true">Aa</span></button><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
+      <span class="hd-tools"><span class="zm-in"></span><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
       <span class="small muted" id="syncBadge" style="font-size:.75rem"></span>
       <div class="level" title="Your level goes up with every spark you earn and never goes down"><span id="levelText">Level 1</span><div class="xp"><i id="xpBar"></i></div></div>
     </div>
@@ -695,7 +710,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     </div>
     <div class="card" id="jrCard">
       <h2><span class="h2i" aria-hidden="true">🌙</span>Today's reflection</h2>
-      <p class="small muted">One question a day. Muhasaba the way al-Muhasibi and al-Ghazali taught it: set your intention in the morning, check yourself at midday, take account at night. Want more? Tap "+ Another one" anytime. Questions adapted from @rawia.journey.</p>
+      <p class="small muted">One question a day: set your intention in the morning, check in at midday, look back at night. Want more? Tap "+ Another one" anytime.</p>
       <div style="display:flex;flex-direction:column;gap:10px" id="jrBody"></div>
     </div>
     <div class="card coach" id="coachCard">
@@ -737,7 +752,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="card" id="calCard">
       <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📅</span>Calendar</h2><div class="seg" role="group" aria-label="View"><button data-cv="day">Day</button><button data-cv="week">Week</button><button data-cv="month">Month</button></div></div>
       <div id="calBody"></div>
-      <div class="row" style="gap:8px;margin-top:10px"><button class="chip" id="icsBtn">📥 Import .ics</button><button class="chip" id="pasteBtn">📋 Paste from email</button><button class="chip" id="prBtn">🖨️ Print / PDF</button><button class="chip" id="dlBtn">📥 Free downloads</button><input type="file" id="icsFile" accept=".ics,text/calendar" hidden></div>
+      <div class="row" style="gap:8px;margin-top:10px"><button class="chip" id="icsBtn">📥 Import .ics</button><button class="chip" id="pasteBtn">📋 Paste from email</button><button class="chip" id="prBtn">🖨️ Print / PDF</button><button class="chip" id="dlBtn">🖨️ Printables</button><input type="file" id="icsFile" accept=".ics,text/calendar" hidden></div>
     </div>
     <div class="card">
       <details id="coachNotes">
@@ -3034,9 +3049,10 @@ const X4=[
 ['Register','سجّل الآن','Galmaa\'i','Is diiwaangeli'],
 ['Already have one?','لديك حساب؟','Herrega qabdaa?','Akoon ma leedahay?'],
 ['Listen on Quran.com','استمع على Quran.com','Quran.com irratti dhaggeeffadhu','Ka dhageyso Quran.com'],
-['Small steps every day build a life you\'re proud of.','خطوات صغيرة كل يوم تبني حياةً تفخر بها.','Tarkaanfiin xixiqqaan guyyaa guyyaan jireenya ati itti boontu ijaaru.','Tallaabooyin yaryar maalin kasta waxay dhisaan nolol aad ku faanto.'],
+['Small steps. Big change.','خطوات صغيرة. تغيير كبير.','Tarkaanfii xixiqqaa. Jijjiirama guddaa.','Tallaabooyin yaryar. Isbeddel weyn.'],
 ['Built for ADHD','مصمَّم لفرط الحركة وتشتت الانتباه (ADHD)','ADHD\'f kan qophaa\'e','Waxaa loo sameeyay ADHD'],
-['Open to everyone.','ومتاح للجميع.','Nama hundaaf banaa dha.','Qof walba wuu isticmaali karaa.'],
+['Designed with ADHD in mind','صُمِّم مع مراعاة ADHD','ADHD yaada keessa galchuun qophaa\'e','Loo naqshadeeyay iyadoo ADHD la tixgelinayo'],
+['Open to everyone.','متاح للجميع.','Nama hundaaf banaa dha.','Qof walba wuu isticmaali karaa.'],
 ['100% free, always · No ads · 26 languages','مجاني 100% دائمًا · بلا إعلانات · 26 لغة','Yeroo hunda 100% bilisa · Beeksisa hin qabu · Afaan 26','Had iyo jeer 100% bilaash · Xayeysiis ma leh · 26 luqadood'],
 ['Read 1 page','اقرأ صفحة واحدة','Fuula 1 dubbisi','Akhri 1 bog'],
 ['Dhuhr salah','صلاة الظهر','Salaata Zuhrii','Salaadda Duhur'],
@@ -3336,6 +3352,8 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['🎯 Pick a goal','🎯 اختر هدفًا','🎯 Kaayyoo filadhu','🎯 Dooro hadaf'],['🧩 Make it tiny','🧩 اجعله صغيرًا','🧩 Xiqqeessi','🧩 Yaree'],['🚀 Do it today','🚀 افعله اليوم','🚀 Har\'a hojjedhu','🚀 Maanta samee'],
+['One question a day: set your intention in the morning, check in at midday, look back at night. Want more? Tap "+ Another one" anytime.','سؤال واحد كل يوم: جدّد نيتك في الصباح، وتوقّف مع نفسك في منتصف اليوم، وراجع يومك في المساء. تريد المزيد؟ اضغط «+ سؤال آخر» متى شئت.','Gaaffii tokko guyyaatti: ganama niyyaa kee haaromsi, guyyaa walakkaa of ilaali, galgala guyyaa kee deebi\'ii ilaali. Dabalataa barbaaddaa? Yeroo barbaadde "+ Kan biraa" tuqi.','Hal su\'aal maalintii: subaxa cusboonaysii niyaddaada, duhurkii is eeg, fiidkiina dib u eeg maalintaada. Ma rabtaa wax dheeraad ah? Taabo "+ Mid kale" waqti kasta.'],
 ['Text size','حجم الخط','Hamma barreeffamaa','Cabbirka qoraalka'],['Smaller text','تصغير الخط','Barreeffama xiqqeessi','Qoraal yaree'],['Bigger text','تكبير الخط','Barreeffama guddisi','Qoraal weynee'],['Back to 100%','العودة إلى 100%','Gara 100%tti deebi\'i','Ku noqo 100%'],['Tap the % to go back to 100%.','اضغط على النسبة للعودة إلى 100%.','100%tti deebi\'uuf % tuqi.','Taabo % si aad ugu noqoto 100%.'],
 ['📍 Set location for salah times','📍 حدّد موقعك لأوقات الصلاة','📍 Yeroo salaataaf bakka kee filadhu','📍 Dooro goobtaada waqtiyada salaadda'],
 ['Finding your location…','جارٍ تحديد موقعك…','Bakki kee barbaadamaa jira…','Goobtaada waa la raadinayaa…'],
@@ -3597,11 +3615,11 @@ setInterval(()=>{const l=$('landing');if(l&&!l.hidden)ldToday()},30000);
 /* text size like iPhone Safari: −  100%  +  (tap the % to go back to 100%) */
 const ZST=[0.8,0.9,1,1.1,1.25,1.5,1.75];
 const zCur=()=>(S.look&&S.look.zoom)||1;
-const zCtl=()=>`<div class="zs" role="group" aria-label="${tl('Text size')}"><button type="button" data-zs="-1" aria-label="${tl('Smaller text')}">A<small>−</small></button><button type="button" data-zs="0" class="zs-p" aria-label="${tl('Back to 100%')}">${Math.round(zCur()*100)}%</button><button type="button" data-zs="1" aria-label="${tl('Bigger text')}">A<small>+</small></button></div>`;
+const zCtl=()=>`<div class="zs" dir="ltr" role="group" aria-label="${tl('Text size')}"><button type="button" data-zs="-1" aria-label="${tl('Smaller text')}">A<small>−</small></button><button type="button" data-zs="0" class="zs-p" aria-label="${tl('Back to 100%')}">${Math.round(zCur()*100)}%</button><button type="button" data-zs="1" aria-label="${tl('Bigger text')}">A<small>+</small></button></div>`;
 function zStep(d){const c=zCur();let v;if(d===0)v=1;else{const L=d>0?ZST.find(z=>z>c+0.001):[...ZST].reverse().find(z=>z<c-0.001);v=L||c}lookSet('zoom',v);document.querySelectorAll('.zs-p').forEach(b=>b.textContent=Math.round(v*100)+'%')}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-zs]');if(b)zStep(+b.dataset.zs)});
 function zoomOpen(){modalCard(`<p class="label">${tl('Text size')}</p>${zCtl()}<p class="small muted">${tl('Tap the % to go back to 100%.')}</p><button class="btn-ghost small" id="zoX">${tl('Done')}</button>`);$('zoX').onclick=modalClose}
-function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zCtl()}</div>`}
+function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zCtl()}</div>`;document.querySelectorAll('.zm-in').forEach(e=>e.innerHTML=zCtl())}
 
 /* ---------- daily inspiration: Sahih hadith, Sunni scholars, then well-known wise people (verified attributions only) ---------- */
 const NB={en:'Prophet Muhammad ﷺ',ar:'النبي ﷺ',om:'Nabi Muhammad ﷺ',so:'Nabi Muxammad ﷺ'};
@@ -3709,19 +3727,19 @@ async function pdfMake(){toast(tl('Making the PDF…'));let L;try{L=await loadPd
 
 /* ---------- 📥 Free downloads: planner pages, trackers, worksheets, wallpapers (all free, made on the phone) ---------- */
 const X40D=[
-['📥 Free downloads','📥 تنزيلات مجانية','📥 Buufata bilisaa','📥 Soo dejin bilaash ah'],['Planner pages','صفحات المخطِّط','Fuulota karooraa','Bogagga qorshaha'],['Layout samples','نماذج التصميم','Fakkeenya qophii','Tusaalooyin qaab'],
+['🖨️ Printables','🖨️ للطباعة','🖨️ Kan maxxanfamu','🖨️ Waraaqo la daabaco'],['Planner pages','صفحات المخطِّط','Fuulota karooraa','Bogagga qorshaha'],['Layout samples','نماذج التصميم','Fakkeenya qophii','Tusaalooyin qaab'],
 ['Inserts & trackers','إضافات ومتابعات','Dabalataa fi hordoffii','Lifaaqyo iyo la-socod'],['Worksheets, challenges & reflections','أوراق عمل وتحديات ومحاسبة','Waraqaa hojii, qormaata fi of-ilaaluu','Waraaqo shaqo, tartanno iyo milicsi'],['Phone wallpapers','خلفيات للهاتف','Duubee bilbilaa','Sawirrada gadaal ee taleefanka'],
 ['Daily page','صفحة يومية','Fuula guyyaa','Bog maalinle'],['Weekly page','صفحة أسبوعية','Fuula torbanii','Bog toddobaadle'],['Monthly page','صفحة شهرية','Fuula ji\'aa','Bog bille'],['Pick days','اختر الأيام','Guyyoota filadhu','Dooro maalmaha'],['From','من','Irraa','Laga bilaabo'],['To','إلى','Hanga','Ilaa'],['Up to 31 days, one page each.','حتى 31 يومًا، صفحة لكل يوم.','Hanga guyyaa 31, guyyaa tokkoof fuula tokko.','Ilaa 31 maalmood, bog walba maalin.'],
 ['Sample day (filled in)','يوم نموذجي (معبّأ)','Guyyaa fakkeenyaa (guutame)','Maalin tusaale ah (la buuxiyay)'],['Sample week (filled in)','أسبوع نموذجي (معبّأ)','Torban fakkeenyaa (guutame)','Toddobaad tusaale ah (la buuxiyay)'],
 ['Salah tracker','متابعة الصلاة','Hordoffii salaataa','La-socodka salaadda'],['Habit tracker','متابعة العادات','Hordoffii amalaa','La-socodka caadooyinka'],['Monthly budget','ميزانية الشهر','Baajata ji\'aa','Miisaaniyadda bisha'],
-['Morning intention (al-Muhasibi)','نية الصباح (المحاسبي)','Niyyaa ganamaa (al-Muhaasibii)','Niyadda subaxa (al-Muxaasibi)'],['Evening muhasaba (al-Ghazali, 6 steps)','محاسبة المساء (الغزالي، 6 خطوات)','Of-qorannoo galgalaa (al-Gazaalii, tarkaanfii 6)','Is-xisaabinta fiidka (al-Ghazaali, 6 tallaabo)'],['Weekly review','مراجعة الأسبوع','Ilaalcha torbanii','Dib-u-eegista toddobaadka'],['2-minute start','بداية الدقيقتين','Jalqaba daqiiqaa 2','Bilow 2 daqiiqo'],['30-day challenge','تحدّي 30 يومًا','Qormaata guyyaa 30','Tartanka 30 maalmood'],
+['Morning intention','نية الصباح','Niyyaa ganamaa','Niyadda subaxa'],['Evening check-in','وقفة المساء','Of-ilaalcha galgalaa','Is-eegidda fiidka'],['Weekly review','مراجعة الأسبوع','Ilaalcha torbanii','Dib-u-eegista toddobaadka'],['2-minute start','بداية الدقيقتين','Jalqaba daqiiqaa 2','Bilow 2 daqiiqo'],['30-day challenge','تحدّي 30 يومًا','Qormaata guyyaa 30','Tartanka 30 maalmood'],
 ['Print','اطبع','Maxxansi','Daabac'],['Download','تنزيل','Buusi','Soo deji'],
 ['On time','في وقتها','Yeroo isaatti','Waqtigeeda'],['Quran','القرآن','Qur\'aana','Quraanka'],['Adhkar','الأذكار','Zikrii','Adkaar'],['Habit','العادة','Amala','Caado'],['Date','التاريخ','Guyyaa','Taariikh'],['Item','البند','Wanta','Shay'],['Income','الدخل','Galii','Dakhli'],['Expense','المصروف','Baasii','Kharash'],
 ['Total income','مجموع الدخل','Waliigala galii','Wadarta dakhliga'],['Total expenses','مجموع المصروفات','Waliigala baasii','Wadarta kharashka'],['Saved','المُدَّخَر','Kan qusatame','Waxa la keydiyay'],
 ['My intention today (niyyah)','نيّتي اليوم','Niyyaa koo har\'aa','Niyaddayda maanta'],['One thing I will avoid','أمر واحد سأتجنّبه','Waan tokko kan ani irraa fagaadhu','Hal shay oo aan ka fogaanayo'],['Dhikr I will keep','ذكرٌ سأحافظ عليه','Zikrii ani eegu','Dikriga aan ilaalinayo'],
-['Musharata: what I promised myself this morning','المشارطة: ما شرطتُه على نفسي صباحًا','Mushaaratah: waan ganama ofiif waadaa gale','Mushaarada: waxa aan subaxa naftayda u ballanqaaday'],['Muraqaba: where I stayed mindful of Allah','المراقبة: أين استحضرتُ مراقبة الله','Muraaqabah: eessatti Rabbiin yaadadhe','Muraaqabo: halka aan Alle ku xusuustay'],
-['Muhasaba: what went well, where I fell short','المحاسبة: ما أحسنتُ فيه وما قصّرتُ','Muhaasabah: waan gaarii fi waan irraa hir\'ate','Muxaasabo: waxa aan si fiican u qabtay iyo halka aan ka gaabiyay'],['Mu\'aqaba: one good deed to make up for it','المعاقبة: عملٌ صالح أستدرك به','Mu\'aaqabah: hojii gaarii tokko kan ittiin deebisu','Mucaaqabo: hal camal wanaagsan oo aan ku magdhabo'],
-['Mujahada: one thing I will push for tomorrow','المجاهدة: أمر واحد أجاهد نفسي عليه غدًا','Mujaahadah: waan tokko kan boru itti cimu','Mujaahado: hal shay oo aan berri ku dadaali doono'],['Mu\'ataba: a kind word to myself','المعاتبة: كلمة لطيفة لنفسي','Mu\'aatabah: jecha gaarii ofiif','Mucaatabo: eray naxariis leh oo naftayda ah'],
+['What I promised myself this morning','ما وعدتُ به نفسي صباحًا','Waan ganama ofiif waadaa gale','Waxa aan subaxa naftayda u ballanqaaday'],['Where I remembered Allah today','أين ذكرتُ الله اليوم','Har\'a eessatti Rabbiin yaadadhe','Halka aan maanta Alle ku xusuustay'],
+['What went well, and what I can do better','ما أحسنتُ فيه وما أستطيع تحسينه','Waan gaarii ta\'e fi waan fooyyessuu danda\'u','Waxa si fiican u socday iyo waxa aan hagaajin karo'],['One good deed to make up for a slip','عملٌ صالح أتدارك به تقصيري','Hojii gaarii tokko kan dogoggora ittiin deebisu','Hal camal wanaagsan oo aan ku magdhabo'],
+['One thing I will push for tomorrow','أمر واحد أجاهد نفسي عليه غدًا','Waan tokko kan boru itti cimu','Hal shay oo aan berri ku dadaali doono'],['A kind word to myself','كلمة لطيفة لنفسي','Jecha gaarii ofiif','Eray naxariis leh oo naftayda ah'],
 ['What went well','ما الذي سار جيدًا','Maaltu gaarii ta\'e','Maxaa si fiican u socday'],['What got in the way','ما الذي أعاقني','Maaltu na dhowwe','Maxaa i hor istaagay'],['What would make it 10% easier','ما الذي يجعله أسهل بـ10%','Maaltu %10 laaffisa','Maxaa ka dhigi lahaa 10% ka fudud'],['Top 3 for next week','أهم 3 للأسبوع القادم','Ijoo 3 torban itti aanuuf','3-da ugu muhiimsan toddobaadka dambe'],
 ['The task','المهمة','Hojii','Hawsha'],['Its first move (2 minutes)','أول حركة فيها (دقيقتان)','Tarkaanfii jalqabaa (daqiiqaa 2)','Tallaabadeeda koowaad (2 daqiiqo)'],['When: right after…','متى: مباشرة بعد…','Yoom: battaluma booda…','Goorma: isla markiiba kadib…'],['Where','أين','Eessatti','Halkee'],['My small reward','مكافأتي الصغيرة','Badhaasa koo xiqqaa','Abaalmarintayda yar'],
 ['Tick each day you started','ضع علامة على كل يوم بدأت فيه','Guyyaa jalqabde hunda mallatteessi','Calaamadee maalin kasta oo aad bilowday'],['Week','أسبوع','Torban','Toddobaad'],
@@ -3736,8 +3754,8 @@ const SPEC={
  salah:()=>{const f=MONTH0();return{title:tl('Salah tracker'),sub:mTitle(f),blocks:[{k:'grid',cols:[tl('Fajr'),tl('Dhuhr'),tl('Asr'),tl('Maghrib'),tl('Isha'),tl('On time'),tl('Quran'),tl('Adhkar')],rows:Array.from({length:mLen(f)},(_,i)=>{const d=addDays(f,i);return d.getDate()+' · '+d.toLocaleDateString(LOC(),{weekday:'short'})})}]}},
  habit:()=>{const f=MONTH0();return{land:true,title:tl('Habit tracker'),sub:mTitle(f),blocks:[{k:'grid',lw:120,cols:Array.from({length:mLen(f)},(_,i)=>String(i+1)),rows:Array(10).fill(''),head:tl('Habit')}]}},
  budget:()=>{const f=MONTH0();return{title:tl('Monthly budget'),sub:mTitle(f),blocks:[{k:'table',cols:[[tl('Date'),.16],[tl('Item'),.44],[tl('Income'),.2],[tl('Expense'),.2]],n:22},{k:'lines',items:[tl('Total income'),tl('Total expenses'),tl('Saved')],inline:true}]}},
- morning:()=>({title:tl('Morning intention (al-Muhasibi)'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:[{k:'lines',label:tl('My intention today (niyyah)'),n:2},{k:'lines',label:tl('Top 3'),n:3,check:true},{k:'lines',label:tl('One thing I will avoid'),n:1},{k:'lines',label:tl('Dhikr I will keep'),n:1},{k:'box',label:tl('Notes')}]}),
- evening:()=>({title:tl('Evening muhasaba (al-Ghazali, 6 steps)'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:['Musharata: what I promised myself this morning','Muraqaba: where I stayed mindful of Allah','Muhasaba: what went well, where I fell short','Mu\'aqaba: one good deed to make up for it','Mujahada: one thing I will push for tomorrow','Mu\'ataba: a kind word to myself'].map((l,i)=>({k:'lines',label:(i+1)+'. '+tl(l),n:2}))}),
+ morning:()=>({title:tl('Morning intention'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:[{k:'lines',label:tl('My intention today (niyyah)'),n:2},{k:'lines',label:tl('Top 3'),n:3,check:true},{k:'lines',label:tl('One thing I will avoid'),n:1},{k:'lines',label:tl('Dhikr I will keep'),n:1},{k:'box',label:tl('Notes')}]}),
+ evening:()=>({title:tl('Evening check-in'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:['What I promised myself this morning','Where I remembered Allah today','What went well, and what I can do better','One good deed to make up for a slip','One thing I will push for tomorrow','A kind word to myself'].map((l,i)=>({k:'lines',label:(i+1)+'. '+tl(l),n:2}))}),
  review:()=>({title:tl('Weekly review'),sub:hijri(new Date()),blocks:[{k:'lines',label:tl('What went well'),n:3},{k:'lines',label:tl('What got in the way'),n:3},{k:'lines',label:tl('What would make it 10% easier'),n:2},{k:'lines',label:tl('Top 3 for next week'),n:3,check:true},{k:'box',label:tl('Notes')}]}),
  start2:()=>({title:tl('2-minute start'),sub:'',blocks:[{k:'lines',label:tl('The task'),n:1},{k:'lines',label:tl('Its first move (2 minutes)'),n:1},{k:'lines',label:tl('When: right after…'),n:1},{k:'lines',label:tl('Where'),n:1},{k:'lines',label:tl('My small reward'),n:1},{k:'grid',head:tl('Tick each day you started'),cols:wkNames(),rows:[1,2,3,4].map(i=>tl('Week')+' '+i)}]}),
  ch30:()=>({title:tl('30-day challenge'),sub:'',blocks:[{k:'lines',label:tl('My challenge'),n:1},{k:'lines',label:tl('Why it matters to me'),n:2},{k:'grid',cols:Array.from({length:10},(_,i)=>String(i+1)),rows:['1–10','11–20','21–30'],num:true},{k:'lines',label:tl('My reward at the end'),n:1},{k:'box',label:tl('Notes')}]})};
@@ -3807,11 +3825,11 @@ function sampleRun(view){const now=dkey(),keep=S.tasks;S.tasks=SAMPLE_T.map(([t,
   const v=PR.view,f=PR.fill;PR.view=view;PR.fill=true;try{printNow()}finally{S.tasks=keep;PR.view=v;PR.fill=f}}
 function dlOpen(){const row=(ic,name,act)=>`<div class="dl-it"><span class="dl-n"><b aria-hidden="true">${ic}</b>${tl(name)}</span><span class="dl-b">${act}</span></div>`;
   const pa=k=>`<button class="chip" data-dlp="${k}">🖨️ ${tl('Print')}</button><button class="chip" data-dlf="${k}">✍️ PDF</button>`;
-  modalCard(`<p class="label">${tl('📥 Free downloads')}</p>
+  modalCard(`<p class="label">${tl('🖨️ Printables')}</p>
    <details open class="dl-sec"><summary>🗓️ ${tl('Planner pages')}</summary>${[['📄','Daily page','day'],['🗒️','Weekly page','week'],['📅','Monthly page','month'],['📆','Pick days','range']].map(([i,n,v])=>row(i,n,`<button class="chip" data-dlv="${v}">${tl('Print')} / PDF</button>`)).join('')}</details>
    <details class="dl-sec"><summary>👀 ${tl('Layout samples')}</summary>${row('📄','Sample day (filled in)',`<button class="chip" data-dls="day">🖨️ ${tl('Print')}</button>`)}${row('🗒️','Sample week (filled in)',`<button class="chip" data-dls="week">🖨️ ${tl('Print')}</button>`)}</details>
    <details class="dl-sec"><summary>📌 ${tl('Inserts & trackers')}</summary>${row('🕌','Salah tracker',pa('salah'))}${row('✅','Habit tracker',pa('habit'))}${row('💰','Monthly budget',pa('budget'))}</details>
-   <details class="dl-sec"><summary>✍️ ${tl('Worksheets, challenges & reflections')}</summary>${row('🌅','Morning intention (al-Muhasibi)',pa('morning'))}${row('🌙','Evening muhasaba (al-Ghazali, 6 steps)',pa('evening'))}${row('🔁','Weekly review',pa('review'))}${row('⏱','2-minute start',pa('start2'))}${row('🏁','30-day challenge',pa('ch30'))}</details>
+   <details class="dl-sec"><summary>✍️ ${tl('Worksheets, challenges & reflections')}</summary>${row('🌅','Morning intention',pa('morning'))}${row('🌙','Evening check-in',pa('evening'))}${row('🔁','Weekly review',pa('review'))}${row('⏱','2-minute start',pa('start2'))}${row('🏁','30-day challenge',pa('ch30'))}</details>
    <details class="dl-sec"><summary>🌙 ${tl('Islamic seasons')}</summary>${row('🌙','Ramadan timetable',pa('ramTT'))}${row('📖','Ramadan tracker',pa('ramTr'))}${row('🕋','First 10 days of Dhul Hijjah',pa('dhul'))}${row('📅','Muharram & Ashura',pa('ashura'))}${row('✨','6 days of Shawwal',pa('shawwal'))}${row('🌕','White days (13, 14, 15)',pa('white'))}${row('📗','Quran khatm plan',pa('khatm'))}</details>
    <details class="dl-sec"><summary>📱 ${tl('Phone wallpapers')}</summary><div class="dl-walls" id="dlWalls">${WALLS.map((w,i)=>`<button class="dl-w" data-dlw="${i}" aria-label="${tl('Download')}"><img alt="" id="dlWi${i}"><span>⬇️ ${tl('Download')}</span></button>`).join('')}</div></details>
    <button class="btn-ghost small" id="dlX">${tl('Close')}</button>`);
@@ -3835,7 +3853,7 @@ function hFind(m,day,from){let d=new Date((from||new Date()).getFullYear(),(from
 function hMonthDays(m){const t=new Date(),cur=hParts(t);let st=cur.m===m?addDays(t,1-cur.d):hFind(m,1);if(!st)return[];const out=[];for(let i=0;i<30;i++){const d=addDays(st,i);if(hParts(d).m!==m)break;out.push(d)}return out}
 const gd=d=>d.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'});
 Object.assign(SPEC,{
- ramTT:()=>{locAuto();if(!S.loc)setTimeout(()=>locAsk(),400);const D=hMonthDays(9);const y=D[0]?hParts(D[0]).y:'';return{title:tl('Ramadan timetable')+' '+y,sub:(S.loc?locName()+' · ':'')+tl('Times are calculated for your location. Check your local mosque.'),blocks:[{k:'table',cols:[[tl('Day'),.1,'t'],[tl('Date'),.3,'t'],[tl('Suhoor ends (Fajr)'),.24,'t'],[tl('Iftar (Maghrib)'),.24,'t'],[tl('Fasted'),.12,'c']],rows:D.map((d,i)=>{const P=salahFor(d);return[String(i+1),gd(d),P?fmtHM(P.fajr):'',P?fmtHM(P.maghrib):'','']})}]}},
+ ramTT:()=>{locAuto();const D=hMonthDays(9);const y=D[0]?hParts(D[0]).y:'';return{title:tl('Ramadan timetable')+' '+y,sub:(S.loc?locName()+' · ':'')+tl('Times are calculated for your location. Check your local mosque.'),blocks:[{k:'table',cols:[[tl('Day'),.1,'t'],[tl('Date'),.3,'t'],[tl('Suhoor ends (Fajr)'),.24,'t'],[tl('Iftar (Maghrib)'),.24,'t'],[tl('Fasted'),.12,'c']],rows:D.map((d,i)=>{const P=salahFor(d);return[String(i+1),gd(d),P?fmtHM(P.fajr):'',P?fmtHM(P.maghrib):'','']})}]}},
  ramTr:()=>{const D=hMonthDays(9);return{title:tl('Ramadan tracker'),sub:D[0]?hijri(D[0],{month:'long',year:'numeric'}):'',blocks:[{k:'grid',cols:[tl('Fasted'),tl('Quran'),tl('Taraweeh'),tl('Sadaqah'),tl('Dua'),tl('Adhkar')],rows:Array.from({length:30},(_,i)=>(i+1)+(D[i]?' · '+D[i].toLocaleDateString(LOC(),{day:'numeric',month:'short'}):''))}]}},
  dhul:()=>{const D=hMonthDays(12).slice(0,10);return{title:tl('First 10 days of Dhul Hijjah'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'grid',cols:[tl('Fasted'),tl('Takbir'),tl('Quran'),tl('Sadaqah'),tl('Good deed')],rows:D.length?D.map((d,i)=>(i+1)+' · '+gd(d)+(i===8?' · '+tl('Day of Arafah'):i===9?' · '+tl('Eid al-Adha'):'')):Array.from({length:10},(_,i)=>String(i+1))},{k:'box',label:tl('Notes')}]}},
  ashura:()=>{const n=hFind(1,9),t=hFind(1,10),e=hFind(1,11);return{title:tl('Muharram & Ashura'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'table',cols:[[tl('Day'),.3,'t'],[tl('Date'),.5,'t'],[tl('Fasted'),.2,'c']],rows:[['9 Muharram',n?gd(n):'',''],['10 Muharram (Ashura)',t?gd(t):'',''],['11 Muharram',e?gd(e):'','']]},{k:'box',label:tl('Notes')}]}},
