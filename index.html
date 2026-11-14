@@ -319,7 +319,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div class="ld-t" style="--d:.54s"><b>🌐</b><span>English, العربية, Afaan Oromoo</span></div>
     </div>
     <div class="ld-quote"><p>“Starting is the hard part. So that's the part we make tiny.”</p></div>
-    <p class="small muted ld-note" id="ldNote">Your data is private to your account.</p>
+    <p class="small muted ld-note" id="ldNote">Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.</p>
   </div>
 </div>
 <div class="wrap">
@@ -650,6 +650,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     </div>
     <div class="card" id="acctBox"></div>
     <div class="card" id="famBox" hidden></div>
+    <div class="card" id="admBox" hidden></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
@@ -1880,7 +1881,7 @@ function authForm(msg){
     <p class="small muted" style="margin:2px 0">or with email</p>
     <input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password">
     <div class="row"><button class="btn-main" id="auIn">Sign in</button><button class="btn-calm" id="auUp">Create account</button></div>
-    <button class="btn-ghost small" id="auF">Forgot password?</button>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
+    <button class="btn-ghost small" id="auF">Forgot password?</button><p class="small muted" style="margin:0">By creating an account you agree that the site owner can see your activity on Fastaqim.</p>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
   const say=t=>{$('auMsg').textContent=t};
   const creds=()=>{const email=$('auE').value.trim(),password=$('auP').value;if(!/\S+@\S+\.\S+/.test(email)){say('Enter your email.');return null}if(password.length<8){say('Password needs 8 or more characters.');return null}return{email,password}};
   $('auG').onclick=async()=>{say('Opening Google...');const {error}=await AU.sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)say(error.message)};
@@ -1918,7 +1919,7 @@ async function authBoot(){
   AU.sb.auth.onAuthStateChange((ev,session)=>{
     if(ev==='PASSWORD_RECOVERY'){landingShow(false);pwModal();}
     const u=session&&session.user;
-    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender();famLoad()}
+    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender();famLoad();admLoad()}
     else if(!u&&AU.user){AU.user=null;landingShow(true);authForm()}
   });
   const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=freshS();render();authForm();}
@@ -2015,7 +2016,7 @@ function famRender(){const b=$('famBox');if(!b)return;b.hidden=!(AU.sb&&AU.user)
   const me=AU.user.id,mine=FAM.links.filter(l=>l.guardian_id===me),over=FAM.links.filter(l=>l.member_id===me);
   b.innerHTML=`<h2><span class="h2i" aria-hidden="true">👨‍👩‍👧</span>Family</h2>
     ${FAM.err?`<p class="small muted">Family isn't switched on yet.</p>`:''}
-    ${over.map(l=>`<div class="note small">🔗 Linked to <b>${esc(l.guardian_name||'your guardian')}</b>. They can see your activity: tasks, streak, adhkar and goals. Not your reflections or money.</div>`).join('')}
+    ${over.map(l=>`<div class="note small">🔗 Linked to <b>${esc(l.guardian_name||'your guardian')}</b>. They can see your activity: tasks, streak, adhkar and goals. Not your reflections or money (the site owner can see all activity for safety).</div>`).join('')}
     ${mine.length?`<p class="label">People I look after</p>${mine.map(l=>`<div class="mrow" style="cursor:default"><span>👤 ${esc(l.member_name||'Member')}</span><span class="row" style="gap:6px"><button class="small" data-fv="${l.member_id}">View</button><button class="btn-ghost small" data-fu="${l.member_id}">Unlink</button></span></div>`).join('')}`:''}
     <details ${FAM.code?'open':''}><summary class="small">I look after someone (parent, guardian, older sibling)</summary><div class="wrap" style="gap:8px;padding-top:8px">
       <p class="small muted">Make a code and have them type it on their Fastaqim, in Me → Family. Codes last 7 days.</p>
@@ -2047,6 +2048,32 @@ async function famView(id){const l=FAM.links.find(x=>x.member_id===id);modalCard
     ${goals.length?`<p class="label">Goals</p>${goals.map(g=>`<p class="small">🎯 ${g}</p>`).join('')}`:''}</div>
     <p class="small muted">Reflections and money stay private.</p><button class="btn-ghost small" id="fvX">Close</button>`);
   $('fvX').onclick=modalClose}
+
+/* ---------- owner view: all accounts (only for emails in site_admins) ---------- */
+const ADM={rows:null,q:''};
+async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}admRender()}
+function admStats(s){s=s||{};const today=dkey(),days=s.days||{};let streak=0;for(let i=0;i<60;i++){const k=dkey(addDays(new Date(),-i));if(days[k])streak++;else if(i>0)break}
+  return{streak,tasks:(s.tasks||[]).length,done:(s.tasks||[]).filter(t=>t.done).length,goals:(s.goals||[]).length,refl:(s.journal||[]).length,name:s.name||''}}
+function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.rows;if(!ADM.rows)return;
+  const L=ADM.rows.filter(r=>!ADM.q||(r.email||'').toLowerCase().includes(ADM.q)||((r.state||{}).name||'').toLowerCase().includes(ADM.q));
+  const active7=ADM.rows.filter(r=>r.updated_at&&Date.now()-new Date(r.updated_at)<7*864e5).length;
+  b.innerHTML=`<h2><span class="h2i" aria-hidden="true">🛡️</span>Owner view</h2>
+    <div class="big3"><div><span class="small muted">Accounts</span><b>${ADM.rows.length}</b></div><div><span class="small muted">Active 7 days</span><b>${active7}</b></div><div><span class="small muted">New 7 days</span><b>${ADM.rows.filter(r=>Date.now()-new Date(r.joined)<7*864e5).length}</b></div></div>
+    <input type="text" id="admQ" placeholder="Search name or email" value="${esc(ADM.q)}" aria-label="Search">
+    <div>${L.slice(0,100).map(r=>{const st=admStats(r.state);return `<div class="mrow" style="cursor:default"><span><b>${esc(st.name||'—')}</b> <span class="small muted">${esc(r.email||'')}</span><br><span class="small muted">Last active ${r.updated_at?new Date(r.updated_at).toLocaleDateString(LOC(),{month:'short',day:'numeric'}):'never'} · ${st.done}/${st.tasks} tasks · ${st.streak}-day run</span></span><button class="small" data-adm="${r.user_id}">View</button></div>`}).join('')}</div>
+    <button class="btn-ghost small" id="admR">Refresh</button>`;
+  $('admQ').oninput=e=>{ADM.q=e.target.value.toLowerCase();const pos=e.target.selectionStart;admRender();$('admQ').focus();$('admQ').setSelectionRange(pos,pos)};
+  $('admR').onclick=admLoad;b.querySelectorAll('[data-adm]').forEach(x=>x.onclick=()=>admView(x.dataset.adm))}
+function admView(id){const r=ADM.rows.find(x=>x.user_id===id);if(!r)return;const s=r.state||{},st=admStats(s);
+  const list=(arr,f)=>arr.length?arr.map(f).join(''):'<p class="small muted">—</p>';
+  modalCard(`<p class="label">${esc(st.name||r.email)} · ${esc(r.email||'')}</p>
+    <p class="small muted">Joined ${new Date(r.joined).toLocaleDateString(LOC())} · last sign-in ${r.last_sign_in?new Date(r.last_sign_in).toLocaleString(LOC()):'—'}</p>
+    <div class="sp-sec" style="max-height:60vh;overflow:auto">
+    <p class="label">To-dos (${st.tasks})</p>${list((s.tasks||[]).slice(0,40),t=>`<p class="small">${t.done?'✅':'⬜'} ${esc(t.title)}${t.due?' · '+esc(t.due):''}</p>`)}
+    <p class="label">Goals</p>${list(s.goals||[],g=>`<p class="small">🎯 ${esc(g.title)}</p>`)}
+    <p class="label">Reflections</p>${list((s.journal||[]).slice(0,20),j=>`<p class="small"><b>${esc(j.q)}</b><br>${esc(j.a)}</p>`)}
+    <p class="label">Recent changes</p>${list((s.hist||[]).slice(0,25),h=>`<p class="small">${new Date(h.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})} · ${esc(h.act)} ${esc(h.label)}</p>`)}
+    </div><button class="btn-ghost small" id="avX">Close</button>`);$('avX').onclick=modalClose}
 
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
@@ -2220,7 +2247,7 @@ const I18N=[
 ['One reflection a day','تأمل واحد في اليوم','Guyyaatti yaada of-ilaaluu tokko'],
 ['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],['Family view for parents and guardians','عرض العائلة للوالدين والأوصياء','Ilaalcha maatii warra fi eegdotaaf'],['Family','العائلة','Maatii'],['People I look after','من أرعاهم','Namoota ani kunuunsu'],['View','عرض','Ilaali'],['Unlink','إلغاء الربط','Hidhata kuti'],['Join','انضم','Makami'],['Make a family code','أنشئ رمز العائلة','Koodii maatii uumi'],['Make a new code','أنشئ رمزًا جديدًا','Koodii haaraa uumi'],['I look after someone (parent, guardian, older sibling)','أرعى شخصًا (والد، وصي، أخ أكبر)','Nama tokko nan kunuunsa (warra, eegduu, obboleessa hangafa)'],['Someone looks after me','شخص يرعاني','Namni tokko na kunuunsa'],['PH:Family code','رمز العائلة','Koodii maatii'],
 ['“Starting is the hard part. So that\'s the part we make tiny.”','«البداية هي الجزء الصعب، لذلك نجعلها صغيرة جدًا.»','“Jalqabuun kutaa ulfaataadha. Kanaaf isa xiqqeessina.”'],
-['Your data is private to your account.','بياناتك خاصة بحسابك فقط.','Odeeffannoon kee herrega kee qofaaf dhuunfaadha.'],
+['Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.','بياناتك خاصة بحسابك. وللحفاظ على أمان فاستقم، يمكن لمالك الموقع رؤية نشاط الحسابات.','Odeeffannoon kee herrega keetiif dhuunfaadha. Fastaqim nageenyaan eeguuf, abbaan marsariitii sochii herregaa ilaaluu danda\'a.'],['By creating an account you agree that the site owner can see your activity on Fastaqim.','بإنشاء حساب، توافق على أن مالك الموقع يمكنه رؤية نشاطك على فاستقم.','Herrega uumuun, abbaan marsariitii sochii kee Fastaqim irratti akka ilaalu ni eeyyamta.'],['Owner view','عرض المالك','Ilaalcha abbaa'],
 ['Try it now','جرّبه الآن','Amma yaali'],
 ['Loading...','جارٍ التحميل...','Fe\'aa jira...'],
 ['PH:Email','البريد الإلكتروني','Imeelii'],
