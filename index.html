@@ -557,6 +557,23 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-h{margin-top:38px!important;font-size:clamp(1.7rem,7.6vw,2.4rem)!important}
 #landing .ld-go1{margin-top:24px!important}
 #landing .ld-tools{margin-top:32px!important}
+@media print{
+ @page{size:A4;margin:0}
+ body.printing #printArea{padding:0;margin:0}
+ #printArea .pr-page{position:relative;box-sizing:border-box;padding:12mm 12mm 8mm!important;margin:0}
+ #printArea .pr-foot{position:static!important;display:flex;justify-content:flex-end;margin-top:5mm;background:none;padding:0;break-inside:avoid}
+ #printArea .pr-foot img{width:10mm;height:10mm}
+ #printArea .pr-wd{min-height:128pt}
+ #printArea .pr-mc{min-height:80pt}
+}
+#landing .ld-logo{margin-top:16px!important}
+#landing .ld-ayah{margin-top:8px!important}
+#landing .ld-h{margin-top:40px!important}
+#landing .ld-tag{margin-top:16px!important;font-size:1.02rem}
+#landing .ld-go1{margin-top:32px!important}
+#landing .ld-sub{margin-top:16px!important;font-size:.82rem!important;color:var(--lmuted,var(--muted))}
+#landing .ld-tools{margin-top:40px!important}
+#printArea .pr-wd{min-height:142pt!important}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -629,12 +646,12 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><span class="zm-in"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
     <p class="ld-tag">Small steps. Big change.</p>
-    <p class="ld-sub"><button type="button" class="ld-adhd" id="ldInfo">Designed with ADHD in mind</button><span aria-hidden="true">·</span><span>Open to everyone.</span></p>
     <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
+    <p class="ld-sub"><button type="button" class="ld-adhd" id="ldInfo">Designed with ADHD in mind</button><span aria-hidden="true">·</span><span>Open to everyone.</span></p>
     <div class="ld-tools">
       <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
@@ -671,7 +688,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="hud">
       <span class="tring" id="tRing" title="Today's progress"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="tRingP" cx="18" cy="18" r="15"/></svg><b id="tRingN">0%</b></span>
       <div class="sparks" title="Sparks you can spend"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.9L21 12l-6.6 3.1L12 22l-2.4-6.9L3 12l6.6-3.1z"/></svg><span id="sparkCount">0</span></div>
-      <span class="hd-tools"><span class="zm-in"></span><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
+      <span class="hd-tools"><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
       <span class="small muted" id="syncBadge" style="font-size:.75rem"></span>
       <div class="level" title="Your level goes up with every spark you earn and never goes down"><span id="levelText">Level 1</span><div class="xp"><i id="xpBar"></i></div></div>
     </div>
@@ -3352,6 +3369,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Show Hijri dates too','أظهر التاريخ الهجري أيضًا','Guyyaa Hijrii illee agarsiisi','Sidoo kale tus taariikhda Hijriga'],
 ['↻ Refresh','↻ تحديث','↻ Haaromsi','↻ Cusboonaysii'],['🧭 Open in browser','🧭 افتح في المتصفح','🧭 Barbaadduu keessatti bani','🧭 Ku fur biraawsarka'],
 ['🎯 Pick a goal','🎯 اختر هدفًا','🎯 Kaayyoo filadhu','🎯 Dooro hadaf'],['🧩 Make it tiny','🧩 اجعله صغيرًا','🧩 Xiqqeessi','🧩 Yaree'],['🚀 Do it today','🚀 افعله اليوم','🚀 Har\'a hojjedhu','🚀 Maanta samee'],
 ['One question a day: set your intention in the morning, check in at midday, look back at night. Want more? Tap "+ Another one" anytime.','سؤال واحد كل يوم: جدّد نيتك في الصباح، وتوقّف مع نفسك في منتصف اليوم، وراجع يومك في المساء. تريد المزيد؟ اضغط «+ سؤال آخر» متى شئت.','Gaaffii tokko guyyaatti: ganama niyyaa kee haaromsi, guyyaa walakkaa of ilaali, galgala guyyaa kee deebi\'ii ilaali. Dabalataa barbaaddaa? Yeroo barbaadde "+ Kan biraa" tuqi.','Hal su\'aal maalintii: subaxa cusboonaysii niyaddaada, duhurkii is eeg, fiidkiina dib u eeg maalintaada. Ma rabtaa wax dheeraad ah? Taabo "+ Mid kale" waqti kasta.'],
@@ -3663,7 +3681,10 @@ const X40P=[
 ['Top 3','أهم 3','Ijoo 3','Ugu muhiimsan 3'],['To-do','المهام','Hojiiwwan','Hawlaha'],['Notes','ملاحظات','Yaadannoo','Qoraallo'],['Making the PDF…','جارٍ تجهيز الملف…','PDF qopheessaa jira…','PDF-ka waa la diyaarinayaa…'],
 ['Could not make the PDF. Check your internet and try again.','تعذّر إنشاء الملف. تحقّق من الإنترنت وحاول مرة أخرى.','PDF uumuun hin danda\'amne. Interneetii kee mirkaneessiitii irra deebi\'ii yaali.','PDF-ka lama samayn karin. Hubi internetkaaga oo isku day mar kale.']];
 X40P.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
-const PR={view:'day',fill:true};
+const PR={view:'day',fill:true,hj:false};
+const HMS=['Muharram','Safar','Rabiʿ I','Rabiʿ II','Jumada I','Jumada II','Rajab','Shaʿban','Ramadan','Shawwal','Dhul-Qiʿdah','Dhul-Hijjah'];
+function hjS(d){if(LANG==='ar')return hijri(d,{day:'numeric',month:'long'});try{const P=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));return P.day+' '+HMS[(+P.month||1)-1]}catch(e){return ''}}
+function hjRange(a,b){if(!PR.hj)return '';const x=hijri(a,{month:'long',year:'numeric'}),y=hijri(b,{month:'long',year:'numeric'});return x===y?x:hijri(a,{month:'long'})+' – '+y}
 function prDays(view){const now=new Date();if(view==='range'){const a=pd(PR.from||dkey()),b=pd(PR.to||PR.from||dkey());const n=Math.max(0,Math.min(30,Math.round((b-a)/864e5)));return Array.from({length:n+1},(_,i)=>addDays(a,i))}if(view==='day')return[addDays(now,CAL.view==='day'?CAL.off:0)];
   if(view==='week'){const st=addDays(now,-now.getDay()+(CAL.view==='week'?CAL.off*7:0));return [0,1,2,3,4,5,6].map(i=>addDays(st,i))}
   const first=new Date(now.getFullYear(),now.getMonth()+(CAL.view==='month'?CAL.off:0),1);return Array.from({length:new Date(first.getFullYear(),first.getMonth()+1,0).getDate()},(_,i)=>addDays(first,i))}
@@ -3671,22 +3692,23 @@ function printOpen(){PR.view=CAL.view;const draw=()=>{modalCard(`<p class="label
   <div class="seg" role="group">${['day','week','month','range'].map(v=>`<button data-pv="${v}" aria-pressed="${PR.view===v}">${tl(v==='range'?'Pick days':v[0].toUpperCase()+v.slice(1))}</button>`).join('')}</div>
   ${PR.view==='range'?`<div class="row"><label class="small">${tl('From')} <input type="date" id="prF" value="${PR.from||dkey()}"></label><label class="small">${tl('To')} <input type="date" id="prT" value="${PR.to||dkey(addDays(new Date(),6))}"></label></div><p class="small muted">${tl('Up to 31 days, one page each.')}</p>`:''}
   <div class="seg" role="group"><button data-pf="1" aria-pressed="${PR.fill}">${tl('With my to-dos')}</button><button data-pf="0" aria-pressed="${!PR.fill}">${tl('Blank')}</button></div>
+  <label class="row small" style="gap:8px"><input type="checkbox" id="prHj" ${PR.hj?'checked':''}> ${tl('Show Hijri dates too')}</label>
   <button class="btn-main" id="prGo">${tl('🖨️ Print or save as PDF')}</button><button class="btn-calm" id="prPdf">${tl('✍️ PDF you can type in')}</button>
   <p class="small muted">${tl('On iPhone: Print, then pinch the preview out to get a PDF.')}</p><button class="btn-ghost small" id="prX">${tl('Close')}</button>`);
   const B=$('scrollBody');B.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>{PR.view=b.dataset.pv;draw()});B.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{PR.fill=b.dataset.pf==='1';draw()});
-  if($('prF')){PR.from=$('prF').value;PR.to=$('prT').value;$('prF').onchange=e=>PR.from=e.target.value;$('prT').onchange=e=>PR.to=e.target.value}$('prX').onclick=modalClose;$('prGo').onclick=()=>{modalClose();printNow()};$('prPdf').onclick=()=>pdfMake()};draw()}
+  if($('prF')){PR.from=$('prF').value;PR.to=$('prT').value;$('prF').onchange=e=>PR.from=e.target.value;$('prT').onchange=e=>PR.to=e.target.value}$('prHj').onchange=e=>{PR.hj=e.target.checked};$('prX').onclick=modalClose;$('prGo').onclick=()=>{modalClose();printNow()};$('prPdf').onclick=()=>pdfMake()};draw()}
 const prItems=d=>PR.fill?dayItems(dkey(d)).tasks:[];
 function printNow(){const days=prDays(PR.view),rtl=document.documentElement.dir==='rtl';let h='';
   const head=(t,s)=>`<div class="pr-h"><b>${esc(t)}</b><span>${esc(s)}</span></div>`;
   if(PR.view==='day'||PR.view==='range'){for(const d of days){const T=prItems(d),P=salahFor(d);
-    h+=`<section class="pr-page">${head(d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),hijri(d))}${quoteHTML(d)}<div class="pr-day"><div class="pr-hours">${Array.from({length:19},(_,i)=>i+5).map(hr=>{const its=T.filter(t=>t.time&&+t.time.slice(0,2)===hr).map(t=>esc(t.title)).join(' · ');
+    h+=`<section class="pr-page">${head(d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),PR.hj?hijri(d):'')}${quoteHTML(d)}<div class="pr-day"><div class="pr-hours">${Array.from({length:19},(_,i)=>i+5).map(hr=>{const its=T.filter(t=>t.time&&+t.time.slice(0,2)===hr).map(t=>esc(t.title)).join(' · ');
       const sl=P?SAL.filter(([k])=>P[k].getHours()===hr).map(([k,n])=>'🕌 '+tl(n)+' '+fmtHM(P[k])).join(' · '):'';return `<div class="pr-hr"><span>${fmtHM(new Date(2000,0,1,hr))}</span><i>${[sl,its].filter(Boolean).join(' · ')}</i></div>`}).join('')}</div>
       <div class="pr-side"><p class="pr-l">${tl('Top 3')}</p>${[0,1,2].map(i=>{const t=T.filter(x=>x.top)[i];return `<div class="pr-ln">☐ ${t?esc(t.title):''}</div>`}).join('')}
       <p class="pr-l">${tl('To-do')}</p>${Array.from({length:8},(_,i)=>{const t=T.filter(x=>!x.top&&!x.time)[i];return `<div class="pr-ln">☐ ${t?esc(t.title):''}</div>`}).join('')}<p class="pr-l">${tl('Notes')}</p><div class="pr-notes"></div></div></div></section>`}}
-  else if(PR.view==='week'){h+=`<section class="pr-page">${head(days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hijri(days[0],{month:'long',year:'numeric'}))}${quoteHTML(days[0])}<div class="pr-week">${days.map(d=>`<div class="pr-wd"><p><b>${d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})}</b> <small>${hday(d)}</small></p>${prItems(d).map(t=>`<div class="pr-ln">☐ ${t.time?fmtHM(new Date(2000,0,1,+t.time.slice(0,2),+t.time.slice(3))) +' ':''}${esc(t.title)}</div>`).join('')}<div class="pr-blank"></div></div>`).join('')}<div class="pr-wd"><p><b>${tl('Notes')}</b></p><div class="pr-blank"></div></div></div></section>`}
-  else{const f=days[0],st=addDays(f,-f.getDay());h+=`<section class="pr-page">${head(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),hijri(f,{month:'long'})+' – '+hijri(days[days.length-1],{month:'long',year:'numeric'}))}${quoteHTML(days[0])}<div class="pr-month">${[0,1,2,3,4,5,6].map(i=>`<span class="pr-mh">${addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'})}</span>`).join('')}${Array.from({length:42},(_,i)=>{const d=addDays(st,i),out=d.getMonth()!==f.getMonth();return `<div class="pr-mc${out?' out':''}"><p><b>${d.getDate()}</b><small>${hday(d)}</small></p>${out?'':prItems(d).slice(0,3).map(t=>`<div class="pr-mi">${esc(t.title)}</div>`).join('')}</div>`}).join('')}</div></section>`}
+  else if(PR.view==='week'){h+=`<section class="pr-page">${head(days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hjRange(days[0],days[6]))}${quoteHTML(days[0])}<div class="pr-week">${days.map(d=>`<div class="pr-wd"><p><b>${d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})}</b>${PR.hj?' <small>'+hjS(d)+'</small>':''}</p>${prItems(d).map(t=>`<div class="pr-ln">☐ ${t.time?fmtHM(new Date(2000,0,1,+t.time.slice(0,2),+t.time.slice(3))) +' ':''}${esc(t.title)}</div>`).join('')}<div class="pr-blank"></div></div>`).join('')}<div class="pr-wd"><p><b>${tl('Notes')}</b></p><div class="pr-blank"></div></div></div></section>`}
+  else{const f=days[0],st=addDays(f,-f.getDay());h+=`<section class="pr-page">${head(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),hjRange(f,days[days.length-1]))}${quoteHTML(days[0])}<div class="pr-month">${[0,1,2,3,4,5,6].map(i=>`<span class="pr-mh">${addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'})}</span>`).join('')}${Array.from({length:42},(_,i)=>{const d=addDays(st,i),out=d.getMonth()!==f.getMonth();return `<div class="pr-mc${out?' out':''}"><p><b>${d.getDate()}</b>${PR.hj?'<small>'+hjS(d)+'</small>':''}</p>${out?'':prItems(d).slice(0,3).map(t=>`<div class="pr-mi">${esc(t.title)}</div>`).join('')}</div>`}).join('')}</div></section>`}
   let a=$('printArea');if(!a){a=document.createElement('div');a.id='printArea';document.body.appendChild(a)}
-  a.dir=rtl?'rtl':'ltr';a.innerHTML=h+`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer>`;
+  a.dir=rtl?'rtl':'ltr';a.innerHTML=h.replace(/<\/section>/g,`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer></section>`);
   document.body.classList.add('printing');const done=()=>{document.body.classList.remove('printing');removeEventListener('afterprint',done)};addEventListener('afterprint',done);setTimeout(()=>{try{window.print()}catch(e){done()}},120)}
 /* fillable PDF, made on the phone (pdf-lib, free) */
 function loadPdfLib(){return window.PDFLib?Promise.resolve(window.PDFLib):new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=()=>ok(window.PDFLib);s.onerror=no;document.head.appendChild(s)})}
@@ -3702,7 +3724,7 @@ async function pdfMake(){toast(tl('Making the PDF…'));let L;try{L=await loadPd
     const days=prDays(PR.view),X=ar?W-M:M;
     const qline=async(p,d,y,maxW)=>{const q=quoteFor(d);const t=(LANG==='ar'&&q.t!=='w'?'«'+q.text+'»':'“'+q.text+'”');let fs=8.5,I=txtImg(t,fs,false,'#374151');while(I.w>maxW&&fs>5.6){fs-=.3;I=txtImg(t,fs,false,'#374151')}const e=await doc.embedPng(I.url);const w=Math.min(I.w,maxW),h=I.h*w/I.w;const PWd=p.getWidth();p.drawImage(e,{x:ar?PWd-M-w:M,y:y-h/2,width:w,height:h});await img('— '+q.by+' · '+q.ref,7,ar?PWd-M:M,y-11,false,'#b7791f',p,ar)};
     const title=async(p,t,s)=>{await img(t,15,X,H-M-8,true,'#0b5f56',p,ar);await img(s,9,X,H-M-26,false,'#6b7280',p,ar);line(p,M,H-M-36,W-M,H-M-36,rgb(.06,.46,.43))};
-    if(PR.view==='day'||PR.view==='range'){for(const d of days){const T=prItems(d),P=salahFor(d),p=doc.addPage([W,H]);await title(p,d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),hijri(d));await qline(p,d,H-M-50,W-2*M);
+    if(PR.view==='day'||PR.view==='range'){for(const d of days){const T=prItems(d),P=salahFor(d),p=doc.addPage([W,H]);await title(p,d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),PR.hj?hijri(d):'');await qline(p,d,H-M-50,W-2*M);
       const top=H-M-74,rowH=(top-70)/19,colW=330,lx=ar?W-M-colW:M;
       for(let i=0;i<19;i++){const hr=i+5,y=top-i*rowH;line(p,lx,y-rowH,lx+colW,y-rowH);await img(fmtHM(new Date(2000,0,1,hr)),7.5,ar?lx+colW:lx,y-rowH/2,false,'#6b7280',p,ar);
         const sl=P?SAL.filter(([k])=>P[k].getHours()===hr).map(([k,n])=>tl(n)+' '+fmtHM(P[k])).join(' · '):'';const it=T.filter(t=>t.time&&+t.time.slice(0,2)===hr).map(t=>t.title).join(' · ');
@@ -3711,16 +3733,16 @@ async function pdfMake(){toast(tl('Making the PDF…'));let L;try{L=await loadPd
       const sec=async(t,n,list)=>{await img(t,10,ar?sx+sw:sx,y-6,true,'#0b5f56',p,ar);y-=16;for(let i=0;i<n;i++){chk(p,ar?sx+sw-10:sx,y-12);fld(p,ar?sx:sx+14,y-16,sw-14,15,list[i]&&list[i].title);line(p,sx,y-17,sx+sw,y-17);y-=20}y-=8};
       await sec(tl('Top 3'),3,T.filter(x=>x.top));await sec(tl('To-do'),8,T.filter(x=>!x.top&&!x.time));await img(tl('Notes'),10,ar?sx+sw:sx,y-6,true,'#0b5f56',p,ar);y-=14;
       p.drawRectangle({x:sx,y:70,width:sw,height:y-70,borderColor:rgb(.82,.85,.88),borderWidth:.6});fld(p,sx+2,72,sw-4,y-74,'',true);await foot(p)}}
-    else if(PR.view==='week'){const p=doc.addPage([W,H]);await title(p,days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hijri(days[0],{month:'long',year:'numeric'}));await qline(p,days[0],H-M-50,W-2*M);
+    else if(PR.view==='week'){const p=doc.addPage([W,H]);await title(p,days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hjRange(days[0],days[6]));await qline(p,days[0],H-M-50,W-2*M);
       const top=H-M-70,bh=(top-64)/4-6,bw=(W-2*M-12)/2;const boxes=[...days,null];
       for(let i=0;i<8;i++){const col=ar?1-i%2:i%2,row=Math.floor(i/2),x=M+col*(bw+12),y=top-row*(bh+8)-bh,d=boxes[i];p.drawRectangle({x,y,width:bw,height:bh,borderColor:rgb(.82,.85,.88),borderWidth:.6});
-        await img(d?d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})+'  ·  '+hday(d):tl('Notes'),9,ar?x+bw-6:x+6,y+bh-10,true,'#0b5f56',p,ar);
+        await img(d?d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})+(PR.hj?'  ·  '+hjS(d):''):tl('Notes'),9,ar?x+bw-6:x+6,y+bh-10,true,'#0b5f56',p,ar);
         const its=d?prItems(d).map(t=>(t.time?t.time+' ':'')+t.title).join('\n'):'';fld(p,x+3,y+3,bw-6,bh-22,its,true)}await foot(p)}
     else{const p=doc.addPage([H,W]),PW=H,PH=W,f=days[0],st=addDays(f,-f.getDay());
-      await img(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),15,ar?PW-M:M,PH-M-6,true,'#0b5f56',p,ar);await img(hijri(f,{month:'long'})+' – '+hijri(days[days.length-1],{month:'long',year:'numeric'}),9,ar?PW-M:M,PH-M-24,false,'#6b7280',p,ar);
+      await img(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),15,ar?PW-M:M,PH-M-6,true,'#0b5f56',p,ar);await img(hjRange(f,days[days.length-1]),9,ar?PW-M:M,PH-M-24,false,'#6b7280',p,ar);
       await qline(p,f,PH-M-40,PW-2*M);const top=PH-M-64,cw=(PW-2*M)/7,ch=(top-60)/6;for(let i=0;i<7;i++){const cx=ar?PW-M-(i+1)*cw:M+i*cw;await img(addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'}),8,cx+cw/2-10,top+6,true,'#6b7280',p,false)}
       for(let i=0;i<42;i++){const d=addDays(st,i),c=i%7,r=Math.floor(i/7),cx=ar?PW-M-(c+1)*cw:M+c*cw,cy=top-(r+1)*ch,out=d.getMonth()!==f.getMonth();p.drawRectangle({x:cx,y:cy,width:cw,height:ch,borderColor:rgb(.82,.85,.88),borderWidth:.6,color:out?rgb(.96,.97,.97):undefined});
-        if(out)continue;await img(String(d.getDate()),9,cx+4,cy+ch-8,true,'#1f2a37',p,false);await img(hday(d),6.5,cx+cw-4,cy+ch-8,false,'#b7791f',p,true);fld(p,cx+2,cy+2,cw-4,ch-17,prItems(d).map(t=>t.title).join('\n'),true)}
+        if(out)continue;await img(String(d.getDate()),9,cx+4,cy+ch-8,true,'#1f2a37',p,false);if(PR.hj)await img(hjS(d),6.5,cx+cw-4,cy+ch-8,false,'#b7791f',p,true);fld(p,cx+2,cy+2,cw-4,ch-17,prItems(d).map(t=>t.title).join('\n'),true)}
       p.drawImage(qr,{x:ar?M:PW-M-30,y:12,width:30,height:30});await img('Fastaqim · '+SITE,7.5,ar?M+36:PW-M-36,27,false,'#6b7280',p,!ar)}
     form.updateFieldAppearances(hv);const bytes=await doc.save(),url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
     const a=document.createElement('a');a.href=url;a.download='fastaqim-'+PR.view+'-'+dkey(days[0])+'.pdf';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},8000);modalClose();window.__pdfBytes=bytes.length}
@@ -3768,7 +3790,7 @@ function specHTML(sp){const q=quoteHTML(new Date());let h=`<section class="pr-pa
    else if(b.k==='box')h+=`<div class="pr-boxw"><p class="pr-l">${esc(b.label)}</p><div class="pr-notes"></div></div>`}
   return h+`</div></section>`}
 function printHTML(h){let a=$('printArea');if(!a){a=document.createElement('div');a.id='printArea';document.body.appendChild(a)}a.dir=document.documentElement.dir==='rtl'?'rtl':'ltr';
-  a.innerHTML=h+`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer>`;document.body.classList.toggle('pr-land',/pr-page land/.test(h));
+  a.innerHTML=h.replace(/<\/section>/g,`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer></section>`);document.body.classList.toggle('pr-land',/pr-page land/.test(h));
   document.body.classList.add('printing');const done=()=>{document.body.classList.remove('printing');removeEventListener('afterprint',done)};addEventListener('afterprint',done);setTimeout(()=>{try{window.print()}catch(e){done()}},150)}
 /* fillable PDF of a spec */
 async function specPDF(key){toast(tl('Making the PDF…'));let L;try{L=await loadPdfLib()}catch(e){toast(tl('Could not make the PDF. Check your internet and try again.'));return}
