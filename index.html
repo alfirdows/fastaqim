@@ -562,13 +562,16 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 }
 .ld-ayah .ayt{color:#374151!important;font-size:.95rem!important}.ld-ayah #ayS{color:#a8761c!important;font-size:.74rem!important;font-weight:700;opacity:1!important}
 #landing .ld-tag{margin-top:18px!important}#landing .ld-sub{margin-top:10px!important;margin-bottom:8px!important}#landing .ld-h{margin-top:18px!important}
+.ld-top{align-items:center!important;padding-top:14px}.ld-left{display:flex;flex-direction:column;align-items:flex-start;gap:6px;justify-self:start}.ld-top .ld-logo{align-self:center}
+.zm{display:inline-flex;border:1px solid var(--lline,var(--line));border-radius:99px;overflow:hidden;background:var(--surface)}.zm button{border:0;background:transparent;padding:.18rem .55rem;font-size:.72rem;font-weight:700;color:var(--ink);min-height:28px;min-width:0;border-radius:0}.zm button+button{border-inline-start:1px solid var(--lline,var(--line))}
+.ld-top .ld-login{align-self:start;margin-top:2px}.ld-lang-b,.ld-top .ld-login{height:32px;display:inline-flex;align-items:center}
 .dv-now{position:absolute;inset-inline:0;height:2px;background:#e11d48;pointer-events:none}.dv-now::before{content:"";position:absolute;inset-inline-start:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:#e11d48}
 </style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><button class="ld-login" id="ldLogin">Sign in</button></div>
+    <div class="ld-top"><span class="ld-left"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="zm" role="group" aria-label="Text size"><button type="button" data-zm="-1" aria-label="Smaller text">A−</button><button type="button" data-zm="1" aria-label="Bigger text">A+</button></span></span><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><button class="ld-login" id="ldLogin">Sign in</button></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><small id="ayS"></small><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg><span>Listen on Quran.com</span></a></div>
     <div class="ld-today" id="ldToday" aria-live="polite"></div>
     <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
@@ -612,7 +615,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="hud">
       <span class="tring" id="tRing" title="Today's progress"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="tRingP" cx="18" cy="18" r="15"/></svg><b id="tRingN">0%</b></span>
       <div class="sparks" title="Sparks you can spend"><svg viewBox="0 0 24 24"><path d="M12 2l2.4 6.9L21 12l-6.6 3.1L12 22l-2.4-6.9L3 12l6.6-3.1z"/></svg><span id="sparkCount">0</span></div>
-      <span class="hd-tools"><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
+      <span class="hd-tools"><span class="zm" role="group" aria-label="Text size"><button type="button" data-zm="-1" aria-label="Smaller text">A−</button><button type="button" data-zm="1" aria-label="Bigger text">A+</button></span><button class="icon-btn hd-b" id="qtHdr" aria-label="Timer">⏱</button><button class="icon-btn hd-b" id="calHdr" aria-label="Calendar">📅</button></span>
       <span class="small muted" id="syncBadge" style="font-size:.75rem"></span>
       <div class="level" title="Your level goes up with every spark you earn and never goes down"><span id="levelText">Level 1</span><div class="xp"><i id="xpBar"></i></div></div>
     </div>
@@ -1083,7 +1086,7 @@ function show(tab){
 document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>show(b.dataset.tab));
 
 /* ---------- helpers ---------- */
-function LOC(){try{return LANG==='en'?undefined:LANG}catch(e){return undefined}}
+function LOC(){try{return LANG==='en'?'en-US':LANG}catch(e){return undefined}}
 const openTasks=()=>S.tasks.filter(t=>!t.done);
 function current(){const o=openTasks();return o.find(t=>t.top)||o[0]||null}
 function nextStep(t){return t.steps.find(s=>!s.done)||null}
@@ -2662,6 +2665,7 @@ const PRIV={
   ['Sharing','the owner can ask to view or help with your plan. Nothing is shared unless you tap Allow. Adults can stop sharing anytime in Me. Under 18s with a guardian link: only the guardian can remove it.'],
   ['Translate 🌐','when you tap it, only that line is sent to a free translation service.'],
   ['Links','Quran.com and sunnah.com open only when you tap them.'],
+  ['Location','salah times use your location only on your phone. If you search a city, only the city name is sent to a free map service.'],
   ['Feedback','what you write in 💡 goes only to the owner. Visitors without an account send it without a name or email.'],
   ['Delete','delete your account yourself anytime in Me → Account. Sign in within 30 days to restore it. After 30 days it\'s gone for good.']],'Close'],
  ar:['الخصوصية',[['مجاني','فاستقم مجاني 100% دائمًا، بلا إعلانات. لا تُباع بياناتك ولا تُشارَك أبدًا.'],
@@ -2669,6 +2673,7 @@ const PRIV={
   ['ما يراه صاحب الموقع','عدد المستخدمين، واسم كل شخص وبريده فقط. لا شيء غير ذلك.'],
   ['المشاركة','يمكن لصاحب الموقع أن يطلب الاطلاع على خطتك أو المساعدة فيها، ولا يُشارَك شيء إلا إذا ضغطت «سماح». يستطيع البالغ إيقاف المشاركة في أي وقت من «أنا». ومن هم دون 18 مع ربط وليّ الأمر: لا يزيل الربطَ إلا وليُّ الأمر.'],
   ['الترجمة 🌐','عند الضغط عليها يُرسَل ذلك السطر وحده إلى خدمة ترجمة مجانية.'],
+  ['الموقع','تُحسب أوقات الصلاة بموقعك على هاتفك فقط. وإذا بحثت عن مدينة يُرسَل اسمها وحده إلى خدمة خرائط مجانية.'],
   ['الروابط','لا يُفتح Quran.com ولا sunnah.com إلا عندما تضغط عليهما.'],
   ['الملاحظات','ما تكتبه في 💡 يصل إلى صاحب الموقع وحده. والزائر بلا حساب يرسلها دون اسم أو بريد.'],
   ['الحذف','احذف حسابك بنفسك في أي وقت من «أنا» ← الحساب. سجّل الدخول خلال 30 يومًا لاسترجاعه، وبعدها يُحذف نهائيًا.']],'إغلاق'],
@@ -2677,6 +2682,7 @@ const PRIV={
   ['Abbaan marsariitii kan argu','baay\'ina namoota Fastaqim fayyadaman, akkasumas maqaa fi imeelii nama tokkoo tokkoo. Kana qofa.'],
   ['Qooduu','abbaan marsariitii karoora kee ilaaluu ykn si gargaaruuf gaafachuu danda\'a. Yoo ati "Hayyami" hin tuqne homtuu hin qoodamu. Gurguddoon yeroo barbaadanitti "Ana" keessaa qooduu dhaabuu danda\'u. Umuriin isaanii 18 gadii kan guddisaan isaanii walqabsiise: guddisaa qofatu haquu danda\'a.'],
   ['Hiikkaa 🌐','yeroo tuqxu, sarara sana qofatu tajaajila hiikkaa bilisaatti ergama.'],
+  ['Bakka','yeroon salaataa bakka kee bilbila kee irratti qofa fayyadama. Yoo magaalaa barbaadde, maqaan magaalaa qofti tajaajila kaartaa bilisaatti ergama.'],
   ['Liinkiiwwan','Quran.com fi sunnah.com yeroo ati tuqxu qofa banamu.'],
   ['Yaada','wanti ati 💡 keessatti barreessitu abbaa marsariitii qofaaf ga\'a. Daawwattoonni herrega hin qabne maqaa fi imeelii malee ergu.'],
   ['Haquu','yeroo barbaadde "Ana" → Herrega keessaa herrega kee mataan kee haqi. Guyyaa 30 keessatti yoo seente ni deebi\'a. Guyyaa 30 booda guutummaatti bada.']],'Cufi'],
@@ -2685,6 +2691,7 @@ const PRIV={
   ['Waxa milkiiluhu arko','inta qof ee isticmaasha Fastaqim, iyo magaca iyo iimaylka qof kasta. Wax kale ma arko.'],
   ['Wadaagid','milkiiluhu wuxuu codsan karaa inuu arko ama kaa caawiyo qorshahaaga. Waxba lama wadaago ilaa aad taabato "Oggolow". Dadka waaweyni way joojin karaan wadaagga waqti kasta "Aniga" gudihiisa. Kuwa ka yar 18 ee leh xiriir waalid: waalidka keliya ayaa ka saari kara.'],
   ['Turjumaad 🌐','markaad taabato, sadarkaas oo keliya ayaa loo diraa adeeg turjumaad oo bilaash ah.'],
+  ['Goob','waqtiyada salaaddu waxay goobtaada ku isticmaalaan taleefankaaga oo keliya. Haddii aad magaalo raadiso, magaca magaalada oo keliya ayaa loo diraa adeeg khariidad oo bilaash ah.'],
   ['Xiriiriyeyaal','Quran.com iyo sunnah.com waxay furmaan oo keliya markaad taabato.'],
   ['Ra\'yi','waxa aad ku qorto 💡 waxay gaaraan milkiilaha oo keliya. Booqdayaasha aan akoon lahayn waxay u diraan magac iyo iimayl la\'aan.'],
   ['Tirtirid','akoonkaaga adigu tirtir waqti kasta "Aniga" → Akoon. Gal 30 maalmood gudahood si aad dib ugu soo celiso. 30 maalmood kadib gebi ahaanba wuu baxayaa.']],'Xir']};
@@ -3288,6 +3295,17 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['📍 Set location for salah times','📍 حدّد موقعك لأوقات الصلاة','📍 Yeroo salaataaf bakka kee filadhu','📍 Dooro goobtaada waqtiyada salaadda'],
+['Finding your location…','جارٍ تحديد موقعك…','Bakki kee barbaadamaa jira…','Goobtaada waa la raadinayaa…'],
+['Location was not allowed. Search your city instead.','لم يُسمح بالموقع. ابحث عن مدينتك بدلًا من ذلك.','Bakki hin hayyamamne. Magaalaa kee barbaadi.','Goobta lama oggolaan. Raadi magaaladaada.'],
+['Choose your place so the times are right for you.','اختر مكانك لتكون الأوقات صحيحة لك.','Akka yeroon siif sirrii ta\'uuf bakka kee filadhu.','Dooro meeshaada si waqtiyadu kuugu saxsan yihiin.'],
+['Or type your city','أو اكتب اسم مدينتك','Ykn maqaa magaalaa kee barreessi','Ama qor magaaladaada'],['Search','بحث','Barbaadi','Raadi'],
+['Match my masjid','طابِق مسجدي','Masjiida koo wajjin walsimsiisi','La jaanqaad masjidkayga'],
+['Minutes + or − for each salah','دقائق + أو − لكل صلاة','Daqiiqaa + ykn − salaata hundaaf','Daqiiqado + ama − salaad kasta'],
+['Calculated times. Always follow your local masjid.','أوقات محسوبة. اتّبع دائمًا مسجدك المحلي.','Yeroo herregame. Yeroo hunda masjiida naannoo keetii hordofi.','Waqtiyo la xisaabiyey. Had iyo jeer raac masjidka xaafaddaada.'],
+['No city found. Check the spelling.','لم نجد المدينة. تحقّق من الكتابة.','Magaalaan hin argamne. Qubee ilaali.','Magaalo lama helin. Hubi higgaadda.'],
+['No internet. Try “Use my location”.','لا يوجد إنترنت. جرّب «استخدم موقعي».','Interneetiin hin jiru. "Bakka koo fayyadami" yaali.','Internet ma jiro. Isku day "Isticmaal goobtayda".'],
+['Salah settings','إعدادات الصلاة','Qindaa\'ina salaataa','Dejinta salaadda'],['My location','موقعي','Bakka koo','Goobtayda'],['Change','تغيير','Jijjiiri','Beddel'],['Done','تم','Xumurameera','Dhammaatay'],
 ['⏱ Timer','⏱ مؤقّت','⏱ Yeroo lakkaa\'aa','⏱ Saacad'],['Timer','المؤقّت','Yeroo lakkaa\'aa','Saacad'],['Countdown','عدّ تنازلي','Gadi lakkaa\'uu','Hoos u tirin'],['Stopwatch','ساعة إيقاف','Sa\'aatii dhaabaa','Saacad joojin'],
 ['Minutes','دقائق','Daqiiqaa','Daqiiqo'],['Start','ابدأ','Jalqabi','Bilow'],['Pause','إيقاف مؤقت','Dhaabi','Hakad'],['Resume','متابعة','Itti fufi','Sii wad'],['Stop','إيقاف','Dhaabi','Jooji'],['+1 min','+دقيقة','+daq. 1','+1 daq'],
 ['Time\'s up','انتهى الوقت','Yeroon ga\'eera','Waqtigii waa dhammaaday'],['What is it for? (optional)','لأي شيء؟ (اختياري)','Maaliif? (dirqama miti)','Maxay u tahay? (ikhtiyaari)'],
@@ -3350,14 +3368,16 @@ async function notify(title,body){try{if(!('Notification' in window)||Notificati
   if(r)r.showNotification(title,{body,icon:'icon-192.png',badge:'icon-192.png',vibrate:[200,100,200],tag:'fq-'+title});else new Notification(title,{body})}catch(e){}}
 
 /* ---------- salah times (calculated on the device, no internet needed) ---------- */
-const PMETH={mwl:['Muslim World League',18,17],isna:['ISNA (North America)',15,15],egypt:['Egypt',19.5,17.5],makkah:['Umm al-Qura (Makkah)',18.5,'90'],karachi:['Karachi',18,18],gulf:['Gulf (UAE, Qatar)',18.2,18.2],kuwait:['Kuwait',18,17.5],turkey:['Türkiye (Diyanet)',18,17],sea:['Singapore, Malaysia, Indonesia',20,18],tehran:['Tehran',17.7,14],france:['France (UOIF)',12,12],russia:['Russia',16,15]};
+const PMETH={mwl:['Muslim World League',18,17],isna:['ISNA (North America)',15,15],egypt:['Egypt',19.5,17.5],makkah:['Umm al-Qura (Makkah)',18.5,'90'],karachi:['Karachi',18,18],gulf:['Gulf (UAE, Qatar)',18.2,18.2],kuwait:['Kuwait',18,17.5],turkey:['Türkiye (Diyanet)',18,17],sea:['Singapore, Malaysia, Indonesia',20,18],tehran:['Tehran',17.7,14],france:['France (UOIF)',12,12],russia:['Russia',16,15],morocco:['Morocco',19,17],algeria:['Algeria',18,17],tunisia:['Tunisia',18,18],jordan:['Jordan',18,18]};
+const CCM={US:'isna',CA:'isna',SA:'makkah',YE:'makkah',AE:'gulf',QA:'gulf',BH:'gulf',OM:'gulf',KW:'kuwait',EG:'egypt',SD:'egypt',LY:'egypt',SY:'egypt',LB:'egypt',IQ:'egypt',PK:'karachi',IN:'karachi',BD:'karachi',AF:'karachi',LK:'karachi',MV:'karachi',NP:'karachi',MY:'sea',SG:'sea',ID:'sea',BN:'sea',TR:'turkey',IR:'tehran',FR:'france',RU:'russia',MA:'morocco',DZ:'algeria',TN:'tunisia',JO:'jordan'},HANAFI_CC={PK:1,IN:1,BD:1,AF:1};
+const methFor=(cc,lat,lng)=>{if(cc&&CCM[cc])return CCM[cc];let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}if(!cc&&TZC[tz])return TZC[tz][2];if(lng<-50&&lat>14)return 'isna';return 'mwl'};
 /* country from the phone's time zone → nearest city + the method that country uses (no location permission needed) */
 const TZC={'America/New_York':[40.71,-74.01,'isna'],'America/Chicago':[41.88,-87.63,'isna'],'America/Denver':[39.74,-104.99,'isna'],'America/Phoenix':[33.45,-112.07,'isna'],'America/Los_Angeles':[34.05,-118.24,'isna'],'America/Anchorage':[61.22,-149.9,'isna'],'America/Detroit':[42.33,-83.05,'isna'],'America/Toronto':[43.65,-79.38,'isna'],'America/Vancouver':[49.28,-123.12,'isna'],'America/Edmonton':[53.55,-113.49,'isna'],'America/Winnipeg':[49.9,-97.14,'isna'],'America/Halifax':[44.65,-63.57,'isna'],'Pacific/Honolulu':[21.31,-157.86,'isna'],'America/Mexico_City':[19.43,-99.13,'isna'],'America/Sao_Paulo':[-23.55,-46.63,'mwl'],
 'Europe/London':[51.51,-0.13,'mwl'],'Europe/Dublin':[53.35,-6.26,'mwl'],'Europe/Paris':[48.86,2.35,'france'],'Europe/Berlin':[52.52,13.4,'mwl'],'Europe/Amsterdam':[52.37,4.9,'mwl'],'Europe/Brussels':[50.85,4.35,'mwl'],'Europe/Stockholm':[59.33,18.07,'mwl'],'Europe/Oslo':[59.91,10.75,'mwl'],'Europe/Copenhagen':[55.68,12.57,'mwl'],'Europe/Helsinki':[60.17,24.94,'mwl'],'Europe/Madrid':[40.42,-3.7,'mwl'],'Europe/Rome':[41.9,12.5,'mwl'],'Europe/Vienna':[48.21,16.37,'mwl'],'Europe/Zurich':[47.38,8.54,'mwl'],'Europe/Istanbul':[41.01,28.98,'turkey'],'Europe/Moscow':[55.76,37.62,'russia'],'Europe/Sarajevo':[43.86,18.41,'mwl'],'Europe/Tirane':[41.33,19.82,'mwl'],
 'Africa/Addis_Ababa':[9.03,38.74,'mwl'],'Africa/Mogadishu':[2.05,45.32,'mwl'],'Africa/Djibouti':[11.59,43.15,'mwl'],'Africa/Nairobi':[-1.29,36.82,'mwl'],'Africa/Asmara':[15.32,38.93,'mwl'],'Africa/Kampala':[0.35,32.58,'mwl'],'Africa/Dar_es_Salaam':[-6.79,39.21,'mwl'],'Africa/Khartoum':[15.5,32.56,'egypt'],'Africa/Cairo':[30.04,31.24,'egypt'],'Africa/Tripoli':[32.89,13.19,'egypt'],'Africa/Tunis':[36.81,10.18,'mwl'],'Africa/Algiers':[36.75,3.06,'mwl'],'Africa/Casablanca':[33.57,-7.59,'mwl'],'Africa/Lagos':[6.52,3.38,'mwl'],'Africa/Dakar':[14.72,-17.47,'mwl'],'Africa/Johannesburg':[-26.2,28.05,'mwl'],'Africa/Accra':[5.6,-0.19,'mwl'],
 'Asia/Riyadh':[21.42,39.83,'makkah'],'Asia/Aden':[12.79,45.02,'makkah'],'Asia/Dubai':[25.2,55.27,'gulf'],'Asia/Qatar':[25.29,51.53,'gulf'],'Asia/Bahrain':[26.23,50.59,'gulf'],'Asia/Muscat':[23.59,58.41,'gulf'],'Asia/Kuwait':[29.38,47.99,'kuwait'],'Asia/Baghdad':[33.31,44.36,'mwl'],'Asia/Amman':[31.95,35.93,'mwl'],'Asia/Damascus':[33.51,36.29,'mwl'],'Asia/Beirut':[33.89,35.5,'mwl'],'Asia/Gaza':[31.5,34.47,'mwl'],'Asia/Hebron':[31.53,35.1,'mwl'],'Asia/Jerusalem':[31.78,35.23,'mwl'],'Asia/Tehran':[35.69,51.39,'tehran'],'Asia/Karachi':[24.86,67.01,'karachi'],'Asia/Kolkata':[28.61,77.21,'karachi'],'Asia/Calcutta':[28.61,77.21,'karachi'],'Asia/Dhaka':[23.81,90.41,'karachi'],'Asia/Kabul':[34.56,69.21,'karachi'],'Asia/Tashkent':[41.3,69.24,'mwl'],'Asia/Almaty':[43.24,76.89,'mwl'],'Asia/Baku':[40.41,49.87,'mwl'],'Asia/Kuala_Lumpur':[3.14,101.69,'sea'],'Asia/Singapore':[1.35,103.82,'sea'],'Asia/Jakarta':[-6.2,106.85,'sea'],'Asia/Makassar':[-5.15,119.43,'sea'],'Asia/Brunei':[4.9,114.94,'sea'],'Asia/Manila':[14.6,120.98,'mwl'],'Asia/Shanghai':[39.9,116.4,'mwl'],'Asia/Tokyo':[35.68,139.69,'mwl'],'Asia/Colombo':[6.93,79.86,'karachi'],'Indian/Maldives':[4.18,73.51,'karachi'],'Australia/Sydney':[-33.87,151.21,'mwl'],'Australia/Melbourne':[-37.81,144.96,'mwl'],'Australia/Perth':[-31.95,115.86,'mwl'],'Pacific/Auckland':[-36.85,174.76,'mwl']};
-function locAuto(){if(S.loc)return;let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}const c=TZC[tz];
-  S.loc=c?{lat:c[0],lng:c[1],meth:c[2],auto:tz}:{lat:21.42,lng:39.83,meth:'makkah',auto:'Makkah'};save()}
+/* salah times are shown ONLY for a place the person chose (their location or a city). Never a guess. */
+function locAuto(){if(S.loc&&(S.loc.auto||!isFinite(S.loc.lat))){delete S.loc;save()}}
 /* Hijri date, Umm al-Qura (Makkah) calendar, built into the phone */
 const HMON=['Muharram','Safar','Rabiʿ al-Awwal','Rabiʿ al-Thani','Jumada al-Ula','Jumada al-Akhirah','Rajab','Shaʿban','Ramadan','Shawwal','Dhul-Qiʿdah','Dhul-Hijjah'];
 function hijri(d,o){try{if(LANG==='ar')return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-latn',o||{day:'numeric',month:'long',year:'numeric'}).format(d).replace(/\s?هـ$/,'')+(o&&!o.year?'':' هـ');
@@ -3374,9 +3394,36 @@ function prayerTimes(date,lat,lng,meth,hanafi){const M=PMETH[meth]||PMETH.mwl,ra
   for(let k=0;k<2;k++){const p=Object.fromEntries(Object.entries(T).map(([a,b])=>[a,b/24]));
     T={fajr:ang(M[1],p.fajr,true),sunrise:ang(0.833,p.sunrise,true),dhuhr:mid(p.dhuhr),asr:asr(hanafi?2:1,p.asr),maghrib:ang(0.833,p.maghrib),isha:typeof M[2]==='string'?0:ang(M[2],p.isha)};
     if(typeof M[2]==='string')T.isha=T.maghrib+(+M[2])/60}
+  {const night=24-(T.maghrib-T.sunrise),fp=M[1]/60*night,ip=(typeof M[2]==='string'?18:M[2])/60*night;if(!isFinite(T.fajr)||T.sunrise-T.fajr>fp)T.fajr=T.sunrise-fp;if(typeof M[2]!=='string'&&(!isFinite(T.isha)||T.isha-T.maghrib>ip))T.isha=T.maghrib+ip}
   const tz=-date.getTimezoneOffset()/60,out={};for(const [k,v] of Object.entries(T)){const h=v+tz-lng/15+(k==='dhuhr'?1/60:0);const dt=new Date(date.getFullYear(),date.getMonth(),date.getDate(),0,0,0);dt.setMinutes(Math.round(fixH(h)*60));out[k]=dt}return out}
-function salahFor(d){const L=S.loc;if(!L)return null;return prayerTimes(d,L.lat,L.lng,L.meth||'mwl',L.hanafi)}
-function locAsk(cb){if(!navigator.geolocation){toast(tl('Location is not available here.'));return}navigator.geolocation.getCurrentPosition(p=>{S.loc=Object.assign({meth:'mwl'},S.loc,{lat:+p.coords.latitude.toFixed(3),lng:+p.coords.longitude.toFixed(3),auto:''});save();cb&&cb()},()=>toast(tl('Location was not allowed.')),{timeout:15000})}
+function salahFor(d){const L=S.loc;if(!L||!isFinite(L.lat))return null;const P=prayerTimes(d,L.lat,L.lng,L.meth||'mwl',L.hanafi),A=L.adj||{};for(const k in A)if(P[k]&&A[k])P[k]=new Date(P[k].getTime()+A[k]*60000);return P}
+const locName=()=>S.loc?(S.loc.name||tl('My location')):'';
+const methName=()=>S.loc?(PMETH[S.loc.meth]||PMETH.mwl)[0]+(S.loc.hanafi?' · '+tl('Asr')+' '+tl('Hanafi'):''):'';
+function locSet(o){S.loc=Object.assign({},S.loc||{},o);if(o.lat!=null&&!o.keepMeth){const m=methFor(o.cc,o.lat,o.lng);S.loc.meth=m;S.loc.hanafi=!!HANAFI_CC[o.cc]}delete S.loc.keepMeth;delete S.loc.auto;save();typeof pushSync==='function'&&pushSync()}
+function locGPS(cb){if(!navigator.geolocation){toast(tl('Location is not available here.'));return}toast(tl('Finding your location…'));navigator.geolocation.getCurrentPosition(p=>{locSet({lat:+p.coords.latitude.toFixed(3),lng:+p.coords.longitude.toFixed(3),name:'',cc:''});cb&&cb()},()=>toast(tl('Location was not allowed. Search your city instead.')),{timeout:15000,enableHighAccuracy:false})}
+/* one place to set location, method, Asr and ± minutes to match the local masjid */
+function locAsk(cb){const L=S.loc||{},A=L.adj||{},five=['fajr','dhuhr','asr','maghrib','isha'];const done=()=>{modalClose();cb&&cb();const l=$('landing');if(l&&!l.hidden)ldToday()};
+  const draw=()=>{const L=S.loc||{},A=L.adj||{},P=salahFor(new Date());modalCard(`<p class="label">🕌 ${tl('Salah times')}</p>
+   ${P?`<p class="small">📍 <b>${esc(locName())}</b><br><span class="muted">${esc(methName())}</span></p>`:`<p class="small muted">${tl('Choose your place so the times are right for you.')}</p>`}
+   <button class="btn-calm" id="lcG">${tl('📍 Use my location')}</button>
+   <div class="row" style="gap:6px"><input id="lcQ" placeholder="${tl('Or type your city')}" autocomplete="off" style="flex:1"><button class="chip" id="lcS">${tl('Search')}</button></div><div id="lcR" class="stack" style="gap:4px"></div>
+   ${P?`<div class="ldt-row">${five.map(k=>`<span><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
+   <details><summary class="small">${tl('Match my masjid')}</summary><div class="stack" style="gap:8px;margin-top:8px">
+   <select id="lcM" aria-label="${tl('Method')}">${Object.entries(PMETH).map(([k,v])=>`<option value="${k}" ${(L.meth||'mwl')===k?'selected':''}>${v[0]}</option>`).join('')}</select>
+   <select id="lcA" aria-label="${tl('Asr')}"><option value="0">${tl('Asr')}: ${tl('Standard')}</option><option value="1" ${L.hanafi?'selected':''}>${tl('Asr')}: ${tl('Hanafi')}</option></select>
+   <p class="small muted">${tl('Minutes + or − for each salah')}</p><div class="ldt-row">${five.map(k=>`<label><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><input type="number" step="1" min="-30" max="30" data-adj="${k}" value="${A[k]||0}" style="width:100%;text-align:center;padding:4px"></label>`).join('')}</div></div></details>`:''}
+   <p class="small muted">${tl('Calculated times. Always follow your local masjid.')}</p>
+   <button class="btn-ghost small" id="lcX">${P?tl('Done'):tl('Close')}</button>`);
+   $('lcX').onclick=done;$('lcG').onclick=()=>locGPS(draw);
+   const go=async()=>{const q=$('lcQ').value.trim();if(q.length<2)return;$('lcR').innerHTML=`<p class="small muted">…</p>`;
+     try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?count=6&format=json&language='+(LANG==='ar'?'ar':'en')+'&name='+encodeURIComponent(q));const j=await r.json();const R=j.results||[];
+       $('lcR').innerHTML=R.length?R.map((c,i)=>`<button class="chip" data-lc="${i}" style="justify-content:flex-start">📍 ${esc([c.name,c.admin1,c.country].filter(Boolean).join(', '))}</button>`).join(''):`<p class="small muted">${tl('No city found. Check the spelling.')}</p>`;
+       $('lcR').querySelectorAll('[data-lc]').forEach(b=>b.onclick=()=>{const c=R[+b.dataset.lc];locSet({lat:+c.latitude.toFixed(3),lng:+c.longitude.toFixed(3),cc:c.country_code||'',name:[c.name,c.country].filter(Boolean).join(', ')});draw()})}
+     catch(e){$('lcR').innerHTML=`<p class="small muted">${tl('No internet. Try “Use my location”.')}</p>`}};
+   $('lcS').onclick=go;$('lcQ').onkeydown=e=>{if(e.key==='Enter')go()};
+   if($('lcM'))$('lcM').onchange=e=>{locSet({meth:e.target.value});draw()};if($('lcA'))$('lcA').onchange=e=>{locSet({hanafi:e.target.value==='1'});draw()};
+   document.querySelectorAll('[data-adj]').forEach(i=>i.onchange=()=>{const a=Object.assign({},(S.loc||{}).adj);a[i.dataset.adj]=Math.max(-30,Math.min(30,Math.round(+i.value||0)));locSet({adj:a});draw()})};
+  draw()}
 const fmtHM=dt=>dt.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'});
 
 /* ---------- calendar: Day view like a phone calendar ---------- */
@@ -3391,7 +3438,7 @@ function renderDayView(){const base=new Date();const dt=addDays(base,CAL.off),d=
    ${quoteHTML(dt)}
    ${CAL.off?`<button class="chip" data-dtoday style="align-self:center">${tl('Today')}</button>`:''}
    ${untimed.length?`<div class="dv-all">${untimed.map(t=>`<button class="dv-it${t.done?' d':''}" data-dvt="${t.id}"><bdi>${esc(t.title)}</bdi></button>`).join('')}</div>`:''}
-   ${P?'':`<button class="chip" id="dvLoc" style="align-self:flex-start">${tl('📍 Use my location')} · ${tl('Salah times')}</button>`}
+   ${P?`<button class="chip" id="dvLoc" style="align-self:flex-start">🕌 📍 ${esc(locName())}</button>`:`<button class="chip" id="dvLoc" style="align-self:flex-start">${tl('📍 Set location for salah times')}</button>`}
    <div class="dv" id="dvScroll">${rows}</div>
    `;
   const sc=$('dvScroll');if(sc){const h=nowM>=0?Math.max(0,Math.floor(nowM/60)-1):(P?P.fajr.getHours():7);sc.scrollTop=h*52}
@@ -3441,14 +3488,12 @@ function renderRemind(){const c=$('remCard');if(!c)return;const R=S.remind||{};c
    <label class="row" style="justify-content:space-between"><span>🕌 ${tl('Remind me at salah times')}</span><input type="checkbox" id="rmS" ${R.salah?'checked':''}></label>
    <label class="row" style="justify-content:space-between"><span>⏰ ${tl('Remind me of timed to-dos')}</span><input type="checkbox" id="rmT" ${R.tasks?'checked':''}></label>
    <label class="small muted"><input type="number" id="rmB" min="0" max="60" value="${R.before||0}" style="max-width:70px"> ${tl('minutes before')}</label>
-   ${P?`<p class="small muted">📍 ${S.loc.auto?tl('From your time zone')+' ('+esc(S.loc.auto.split('/').pop().replace(/_/g,' '))+')':tl('From your location')} <button class="chip" id="rmLoc">${tl('📍 Use my location')}</button></p><p class="small">${SAL.map(([k,n])=>`${tl(n)} <b>${fmtHM(P[k])}</b>`).join(' · ')}</p>`:`<button class="chip" id="rmLoc">${tl('📍 Use my location')}</button>`}
-   <div class="row" style="gap:6px"><select id="rmM" aria-label="${tl('Method')}">${Object.entries(PMETH).map(([k,v])=>`<option value="${k}" ${(S.loc&&S.loc.meth||'mwl')===k?'selected':''}>${v[0]}</option>`).join('')}</select><select id="rmA" aria-label="${tl('Asr')}"><option value="0">${tl('Asr')}: ${tl('Standard')}</option><option value="1" ${S.loc&&S.loc.hanafi?'selected':''}>${tl('Asr')}: ${tl('Hanafi')}</option></select></div>
+   ${P?`<p class="small">📍 ${esc(locName())} · ${SAL.filter(x=>x[0]!=='sunrise').map(([k,n])=>`${tl(n)} <b>${fmtHM(P[k])}</b>`).join(' · ')}<br><span class="muted">${esc(methName())}</span></p><button class="chip" id="rmLoc">⚙️ ${tl('Salah settings')}</button>`:`<button class="chip" id="rmLoc">${tl('📍 Set location for salah times')}</button>`}
    <button class="chip" id="rmIcs">${tl('📲 Alerts on my phone (.ics)')}</button><p class="small muted">${tl('Works even when Fastaqim is closed: salah and timed to-dos for the next 30 days, with an alert.')}</p>
    ${perm==='granted'?`<p class="small">✓ ${tl('Notifications are on.')}</p>`:`<button class="btn-calm" id="rmN">${tl('Turn on notifications')}</button>${sa?'':`<p class="small muted">${tl('First add Fastaqim to your Home Screen, then turn this on there.')} <button class="chip" id="rmHow">${tl('Show me how')}</button></p>`}`}`;
   const set=(k,v)=>{S.remind=Object.assign({},S.remind,{[k]:v});save();if(typeof pushSync==='function')pushSync()};
   const gd=on=>{if(on&&!isStand())setTimeout(instGuide,50)};$('rmS').onchange=e=>{set('salah',e.target.checked);if(e.target.checked&&!S.loc)locAsk(renderRemind);gd(e.target.checked)};$('rmT').onchange=e=>{set('tasks',e.target.checked);gd(e.target.checked)};$('rmB').onchange=e=>set('before',Math.max(0,Math.min(60,+e.target.value||0)));
   if($('rmLoc'))$('rmLoc').onclick=()=>locAsk(renderRemind);$('rmIcs').onclick=icsAlerts;if($('rmHow'))$('rmHow').onclick=instGuide;
-  $('rmM').onchange=e=>{S.loc=Object.assign({},S.loc,{meth:e.target.value});save();renderRemind();typeof pushSync==='function'&&pushSync()};$('rmA').onchange=e=>{S.loc=Object.assign({},S.loc,{hanafi:e.target.value==='1'});save();renderRemind();typeof pushSync==='function'&&pushSync()};
   if($('rmN'))$('rmN').onclick=async()=>{if(!('Notification' in window)||!isStand()&&/iphone|ipad/i.test(navigator.userAgent)){instGuide();return}const p=await Notification.requestPermission();if(p==='granted'&&typeof pushSubscribe==='function')await pushSubscribe();renderRemind()}}
 
 /* ---------- install + offline ---------- */
@@ -3495,16 +3540,15 @@ function instGuide(){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(n
   $('igX').onclick=modalClose;if($('igGo'))$('igGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;modalClose()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
-function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
+function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now),hj=`<span class="ldt-hj">🌙 ${hijri(now,{day:'numeric',month:'long'})}</span>`;
+  if(!P){b.classList.remove('open');b.innerHTML=`<button class="ldt-chip" id="ldtT">🕌 ${tl('📍 Set location for salah times')} ${hj}</button>`;$('ldtT').onclick=()=>locAsk(ldToday);return}
   const five=['fajr','dhuhr','asr','maghrib','isha'];let nx=five.find(k=>P[k]>now),nt=nx?P[nx]:salahFor(addDays(now,1)).fajr;nx=nx||'fajr';
   const mins=Math.max(0,Math.round((nt-now)/60000)),left=Math.floor(mins/60)+':'+String(mins%60).padStart(2,'0');
   const open=b.classList.contains('open');
-  b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-expanded="${open}">🕌 ${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> <span dir="ltr">⏳ ${left}</span> <span class="ldt-hj">🌙 ${hijri(now,{day:'numeric',month:'long'})}</span></button>
-   ${open?`<div class="ldt-more"><p class="ldt-d">${now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${hijri(now)}</p>
-   <div class="ldt-row">${five.map(k=>`<span class="${k===nx?'on':''}"><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
-   <p class="ldt-w">📍 ${S.loc.auto?esc(S.loc.auto.split('/').pop().replace(/_/g,' ')):tl('From your location')} · <button class="ldt-loc" id="ldtLoc">${tl('📍 Use my location')}</button></p></div>`:''}`;
-  $('ldtT').onclick=()=>{b.classList.toggle('open');ldToday()};if(!$('ldtLoc'))return;
-  $('ldtLoc').onclick=()=>locAsk(ldToday)}
+  b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-expanded="${open}">🕌 ${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> <span dir="ltr">⏳ ${left}</span> ${hj}</button>
+   ${open?`<div class="ldt-more"><div class="ldt-row">${five.map(k=>`<span class="${k===nx?'on':''}"><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
+   <p class="ldt-w">📍 ${esc(locName())} · ${esc(methName())} · <button class="ldt-loc" id="ldtLoc">${tl('Change')}</button></p></div>`:''}`;
+  $('ldtT').onclick=()=>{b.classList.toggle('open');ldToday()};if($('ldtLoc'))$('ldtLoc').onclick=()=>locAsk(ldToday)}
 setInterval(()=>{const l=$('landing');if(l&&!l.hidden)ldToday()},30000);
 
 /* ---------- daily inspiration: Sahih hadith, Sunni scholars, then well-known wise people (verified attributions only) ---------- */
@@ -3739,7 +3783,7 @@ function hFind(m,day,from){let d=new Date((from||new Date()).getFullYear(),(from
 function hMonthDays(m){const t=new Date(),cur=hParts(t);let st=cur.m===m?addDays(t,1-cur.d):hFind(m,1);if(!st)return[];const out=[];for(let i=0;i<30;i++){const d=addDays(st,i);if(hParts(d).m!==m)break;out.push(d)}return out}
 const gd=d=>d.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'});
 Object.assign(SPEC,{
- ramTT:()=>{locAuto();const D=hMonthDays(9);const y=D[0]?hParts(D[0]).y:'';return{title:tl('Ramadan timetable')+' '+y,sub:(S.loc&&S.loc.auto||'')+' · '+tl('Times are calculated for your location. Check your local mosque.'),blocks:[{k:'table',cols:[[tl('Day'),.1,'t'],[tl('Date'),.3,'t'],[tl('Suhoor ends (Fajr)'),.24,'t'],[tl('Iftar (Maghrib)'),.24,'t'],[tl('Fasted'),.12,'c']],rows:D.map((d,i)=>{const P=salahFor(d);return[String(i+1),gd(d),P?fmtHM(P.fajr):'',P?fmtHM(P.maghrib):'','']})}]}},
+ ramTT:()=>{locAuto();if(!S.loc)setTimeout(()=>locAsk(),400);const D=hMonthDays(9);const y=D[0]?hParts(D[0]).y:'';return{title:tl('Ramadan timetable')+' '+y,sub:(S.loc?locName()+' · ':'')+tl('Times are calculated for your location. Check your local mosque.'),blocks:[{k:'table',cols:[[tl('Day'),.1,'t'],[tl('Date'),.3,'t'],[tl('Suhoor ends (Fajr)'),.24,'t'],[tl('Iftar (Maghrib)'),.24,'t'],[tl('Fasted'),.12,'c']],rows:D.map((d,i)=>{const P=salahFor(d);return[String(i+1),gd(d),P?fmtHM(P.fajr):'',P?fmtHM(P.maghrib):'','']})}]}},
  ramTr:()=>{const D=hMonthDays(9);return{title:tl('Ramadan tracker'),sub:D[0]?hijri(D[0],{month:'long',year:'numeric'}):'',blocks:[{k:'grid',cols:[tl('Fasted'),tl('Quran'),tl('Taraweeh'),tl('Sadaqah'),tl('Dua'),tl('Adhkar')],rows:Array.from({length:30},(_,i)=>(i+1)+(D[i]?' · '+D[i].toLocaleDateString(LOC(),{day:'numeric',month:'short'}):''))}]}},
  dhul:()=>{const D=hMonthDays(12).slice(0,10);return{title:tl('First 10 days of Dhul Hijjah'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'grid',cols:[tl('Fasted'),tl('Takbir'),tl('Quran'),tl('Sadaqah'),tl('Good deed')],rows:D.length?D.map((d,i)=>(i+1)+' · '+gd(d)+(i===8?' · '+tl('Day of Arafah'):i===9?' · '+tl('Eid al-Adha'):'')):Array.from({length:10},(_,i)=>String(i+1))},{k:'box',label:tl('Notes')}]}},
  ashura:()=>{const n=hFind(1,9),t=hFind(1,10),e=hFind(1,11);return{title:tl('Muharram & Ashura'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'table',cols:[[tl('Day'),.3,'t'],[tl('Date'),.5,'t'],[tl('Fasted'),.2,'c']],rows:[['9 Muharram',n?gd(n):'',''],['10 Muharram (Ashura)',t?gd(t):'',''],['11 Muharram',e?gd(e):'','']]},{k:'box',label:tl('Notes')}]}},
@@ -3777,7 +3821,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();qtTick();$('ldHome').onclick=instGuide;$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{const b=e.target.closest('[data-zm]');if(!b)return;const Z=[0.9,1,1.15,1.3],cur=(S.look&&S.look.zoom)||1;let i=Z.indexOf(cur);if(i<0)i=1;i=Math.max(0,Math.min(Z.length-1,i+(+b.dataset.zm)));lookSet('zoom',Z[i])});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
