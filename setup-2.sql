@@ -48,18 +48,19 @@ language sql stable security definer set search_path = public as $$
   select exists (select 1 from site_admins where lower(email) = lower(auth.jwt() ->> 'email'));
 $$;
 
-create or replace function public.admin_users()
-returns table (user_id uuid, email text, joined timestamptz, last_sign_in timestamptz, updated_at timestamptz, state jsonb)
+-- Owner sees COUNTS only, never anyone's content
+create or replace function public.admin_stats()
+returns table (total bigint, new_7d bigint, active_7d bigint)
 language plpgsql stable security definer set search_path = public, auth as $$
 begin
   if not public.is_admin() then raise exception 'not allowed'; end if;
-  return query
-    select u.id, u.email::text, u.created_at, u.last_sign_in_at, s.updated_at, s.state
-    from auth.users u left join public.fastaqim_state s on s.user_id = u.id
-    order by coalesce(s.updated_at, u.created_at) desc;
+  return query select
+    (select count(*) from auth.users),
+    (select count(*) from auth.users where created_at > now() - interval '7 days'),
+    (select count(*) from public.fastaqim_state where updated_at > now() - interval '7 days');
 end $$;
-revoke execute on function public.admin_users() from anon, public;
-grant execute on function public.admin_users() to authenticated;
+revoke execute on function public.admin_stats() from anon, public;
+grant execute on function public.admin_stats() to authenticated;
 
 -- Put the email YOU sign in with between the quotes:
 insert into public.site_admins (email) values ('YOUR-EMAIL-HERE');

@@ -2050,38 +2050,19 @@ async function famView(id){const l=FAM.links.find(x=>x.member_id===id);modalCard
     <p class="small muted">Reflections and money stay private.</p><button class="btn-ghost small" id="fvX">Close</button>`);
   $('fvX').onclick=modalClose}
 
-/* ---------- owner view: all accounts (only for emails in site_admins) ---------- */
-const ADM={rows:null,q:''};
-async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}admRender()}
-function admStats(s){s=s||{};const today=dkey(),days=s.days||{};let streak=0;for(let i=0;i<60;i++){const k=dkey(addDays(new Date(),-i));if(days[k])streak++;else if(i>0)break}
-  return{streak,tasks:(s.tasks||[]).length,done:(s.tasks||[]).filter(t=>t.done).length,goals:(s.goals||[]).length,refl:(s.journal||[]).length,name:s.name||''}}
-function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.rows;if(!ADM.rows)return;
-  const L=ADM.rows.filter(r=>!ADM.q||(r.email||'').toLowerCase().includes(ADM.q)||((r.state||{}).name||'').toLowerCase().includes(ADM.q));
-  const active7=ADM.rows.filter(r=>r.updated_at&&Date.now()-new Date(r.updated_at)<7*864e5).length;
-  b.innerHTML=`<h2><span class="h2i" aria-hidden="true">🛡️</span>Owner view</h2>
-    <div class="big3"><div><span class="small muted">Accounts</span><b>${ADM.rows.length}</b></div><div><span class="small muted">Active 7 days</span><b>${active7}</b></div><div><span class="small muted">New 7 days</span><b>${ADM.rows.filter(r=>Date.now()-new Date(r.joined)<7*864e5).length}</b></div></div>
-    <input type="text" id="admQ" placeholder="Search name or email" value="${esc(ADM.q)}" aria-label="Search">
-    <div>${L.slice(0,100).map(r=>{const st=admStats(r.state);return `<div class="mrow" style="cursor:default"><span><b>${esc(st.name||'—')}</b> <span class="small muted">${esc(r.email||'')}</span><br><span class="small muted">Last active ${r.updated_at?new Date(r.updated_at).toLocaleDateString(LOC(),{month:'short',day:'numeric'}):'never'} · ${st.done}/${st.tasks} tasks · ${st.streak}-day run</span></span><button class="small" data-adm="${r.user_id}">View</button></div>`}).join('')}</div>
-    <button class="btn-ghost small" id="admR">Refresh</button>`;
-  $('admQ').oninput=e=>{ADM.q=e.target.value.toLowerCase();const pos=e.target.selectionStart;admRender();$('admQ').focus();$('admQ').setSelectionRange(pos,pos)};
-  $('admR').onclick=admLoad;b.querySelectorAll('[data-adm]').forEach(x=>x.onclick=()=>admView(x.dataset.adm))}
-function admView(id){const r=ADM.rows.find(x=>x.user_id===id);if(!r)return;const s=r.state||{},st=admStats(s);
-  const list=(arr,f)=>arr.length?arr.map(f).join(''):'<p class="small muted">—</p>';
-  modalCard(`<p class="label">${esc(st.name||r.email)} · ${esc(r.email||'')}</p>
-    <p class="small muted">Joined ${new Date(r.joined).toLocaleDateString(LOC())} · last sign-in ${r.last_sign_in?new Date(r.last_sign_in).toLocaleString(LOC()):'—'}</p>
-    <div class="sp-sec" style="max-height:60vh;overflow:auto">
-    <p class="label">To-dos (${st.tasks})</p>${list((s.tasks||[]).slice(0,40),t=>`<p class="small">${t.done?'✅':'⬜'} ${esc(t.title)}${t.due?' · '+esc(t.due):''}</p>`)}
-    <p class="label">Goals</p>${list(s.goals||[],g=>`<p class="small">🎯 ${esc(g.title)}</p>`)}
-    <p class="label">Reflections</p>${list((s.journal||[]).slice(0,20),j=>`<p class="small"><b>${esc(j.q)}</b><br>${esc(j.a)}</p>`)}
-    <p class="label">Recent changes</p>${list((s.hist||[]).slice(0,25),h=>`<p class="small">${new Date(h.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})} · ${esc(h.act)} ${esc(h.label)}</p>`)}
-    </div><button class="btn-ghost small" id="avX">Close</button>`);$('avX').onclick=modalClose}
-
+/* ---------- owner: user counts only (emails in site_admins) ---------- */
+const ADM={st:null};
+async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_stats');if(error)throw error;ADM.st=(data&&data[0])||null}catch(e){ADM.st=null}admRender()}
+function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.st;if(!ADM.st)return;const s=ADM.st;
+  b.innerHTML=`<h2><span class="h2i" aria-hidden="true">📊</span>Fastaqim users</h2>
+    <div class="big3"><div><span class="small muted">Total</span><b>${s.total}</b></div><div><span class="small muted">New this week</span><b>${s.new_7d}</b></div><div><span class="small muted">Active this week</span><b>${s.active_7d}</b></div></div>
+    <button class="btn-ghost small" id="admR" style="align-self:flex-start">Refresh</button>`;$('admR').onclick=admLoad}
 
 /* ---------- privacy page ---------- */
 function privacyOpen(){modalCard(`<p class="label">Privacy</p><div class="sp-sec small" style="gap:8px">
   <p><b>What's saved:</b> your name, email, and what you add here (to-dos, plans, money, goals, reflections, adhkar counts).</p>
   <p><b>Where:</b> in a secure database (Supabase). Fastaqim doesn't sell or share your data.</p>
-  <p><b>Who can see it:</b> you; a family member you link to (activity only); and the site owner, to keep Fastaqim safe and working.</p>
+  <p><b>Who can see it:</b> only you, plus a family member if you link to one (they see activity only, not reflections or money).</p>
   <p><b>Delete:</b> ask the owner to delete your account and everything in it.</p></div>
   <button class="btn-ghost small" id="pvX">Close</button>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
 document.addEventListener('click',e=>{if(e.target.closest('.privLink')){e.preventDefault();privacyOpen()}});
@@ -2257,7 +2238,7 @@ const I18N=[
 ['One reflection a day','تأمل واحد في اليوم','Guyyaatti yaada of-ilaaluu tokko'],
 ['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],['Family view for parents and guardians','عرض العائلة للوالدين والأوصياء','Ilaalcha maatii warra fi eegdotaaf'],['Family','العائلة','Maatii'],['People I look after','من أرعاهم','Namoota ani kunuunsu'],['View','عرض','Ilaali'],['Unlink','إلغاء الربط','Hidhata kuti'],['Join','انضم','Makami'],['Make a family code','أنشئ رمز العائلة','Koodii maatii uumi'],['Make a new code','أنشئ رمزًا جديدًا','Koodii haaraa uumi'],['I look after someone (parent, guardian, older sibling)','أرعى شخصًا (والد، وصي، أخ أكبر)','Nama tokko nan kunuunsa (warra, eegduu, obboleessa hangafa)'],['Someone looks after me','شخص يرعاني','Namni tokko na kunuunsa'],['PH:Family code','رمز العائلة','Koodii maatii'],
 ['“Starting is the hard part. So that\'s the part we make tiny.”','«البداية هي الجزء الصعب، لذلك نجعلها صغيرة جدًا.»','“Jalqabuun kutaa ulfaataadha. Kanaaf isa xiqqeessina.”'],
-['Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.','بياناتك خاصة بحسابك. وللحفاظ على أمان فاستقم، يمكن لمالك الموقع رؤية نشاط الحسابات.','Odeeffannoon kee herrega keetiif dhuunfaadha. Fastaqim nageenyaan eeguuf, abbaan marsariitii sochii herregaa ilaaluu danda\'a.'],['Privacy','الخصوصية','Dhuunfaa'],['By signing up you agree to the','بالتسجيل، أنت توافق على','Galmaa\'uun, ni eeyyamta'],['Privacy policy','سياسة الخصوصية','imaammata dhuunfaa'],['Owner view','عرض المالك','Ilaalcha abbaa'],
+['Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.','بياناتك خاصة بحسابك. وللحفاظ على أمان فاستقم، يمكن لمالك الموقع رؤية نشاط الحسابات.','Odeeffannoon kee herrega keetiif dhuunfaadha. Fastaqim nageenyaan eeguuf, abbaan marsariitii sochii herregaa ilaaluu danda\'a.'],['Privacy','الخصوصية','Dhuunfaa'],['By signing up you agree to the','بالتسجيل، أنت توافق على','Galmaa\'uun, ni eeyyamta'],['Privacy policy','سياسة الخصوصية','imaammata dhuunfaa'],['Fastaqim users','مستخدمو فاستقم','Fayyadamtoota Fastaqim'],['Total','المجموع','Waliigala'],['New this week','جدد هذا الأسبوع','Haaraa torban kana'],['Active this week','نشطون هذا الأسبوع','Hojii irra torban kana'],['Refresh','تحديث','Haaromsi'],
 ['Try it now','جرّبه الآن','Amma yaali'],
 ['Loading...','جارٍ التحميل...','Fe\'aa jira...'],
 ['PH:Email','البريد الإلكتروني','Imeelii'],
