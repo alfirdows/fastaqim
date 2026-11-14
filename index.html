@@ -386,11 +386,11 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-go{font-size:1.1rem;padding:.8rem 2rem}.ld-tools div{padding:10px 2px 8px}.ld-tools b{width:42px;height:42px;font-size:1.5rem}
 #landing .ld-phone{width:220px}
 .ld-tools{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%}
-.ld-tools div{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--lcard);border-radius:18px;padding:12px 2px 10px;border-bottom:4px solid var(--k);animation:ldPopIn .55s cubic-bezier(.2,1.4,.4,1) backwards}
+.ld-tools div{display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--lcard);border-radius:18px;padding:12px 2px 10px;border-bottom:4px solid var(--k);animation:ldRise .45s cubic-bezier(.22,1,.36,1) backwards}
 @keyframes ldPopIn{from{opacity:0;transform:translateY(18px) scale(.6)}}@keyframes ldTap{40%{transform:scale(1.12) rotate(-3deg)}}@keyframes ldSpot{0%,90%,100%{transform:none}93%{transform:scale(1.25) rotate(-8deg)}96%{transform:scale(1.15) rotate(6deg)}}
 .ld-tools b{font-size:1.7rem;width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--k) 24%,transparent)}
 .ld-tools span{font-weight:800;font-size:.8rem}
-.ld-tools div:nth-child(1){animation-delay:0.33s}.ld-tools div:nth-child(2){animation-delay:0.51s}.ld-tools div:nth-child(3){animation-delay:0.69s}.ld-tools div:nth-child(4){animation-delay:0.87s}.ld-tools div:nth-child(5){animation-delay:1.05s}.ld-tools div:nth-child(6){animation-delay:1.23s}.ld-tools div:nth-child(7){animation-delay:1.41s}.ld-tools div:nth-child(8){animation-delay:1.59s}
+.ld-tools div:nth-child(1){animation-delay:0.27s}.ld-tools div:nth-child(2){animation-delay:0.32s}.ld-tools div:nth-child(3){animation-delay:0.37s}.ld-tools div:nth-child(4){animation-delay:0.42s}.ld-tools div:nth-child(5){animation-delay:0.47s}.ld-tools div:nth-child(6){animation-delay:0.52s}.ld-tools div:nth-child(7){animation-delay:0.57s}.ld-tools div:nth-child(8){animation-delay:0.62s}
 @keyframes ldIn{from{opacity:0;transform:translateY(12px)}}
 #landing .ld-h{font-size:clamp(2rem,8vw,3.2rem)}
 .ld-am{position:fixed;inset:0;z-index:55;background:rgba(5,12,22,.7);display:flex;align-items:flex-end;justify-content:center}
@@ -401,6 +401,13 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .ld-tabs{display:flex;gap:6px;width:100%;background:var(--lbg);border-radius:99px;padding:4px}.ld-tabs button{flex:1;white-space:nowrap;font-size:.92rem;border:0;background:transparent;color:var(--lmuted);font-weight:800;border-radius:99px;min-height:40px}.ld-tabs button[aria-pressed=true]{background:#fff;color:var(--lbg)}.ld-tabs .ld-amx{flex:0 0 40px}
 #landing .ld-amc .ld-auth{background:transparent;padding:0}
 .ld-am[data-tab=in] #auUp,.ld-am[data-tab=up] #auIn{display:none}
+
+@keyframes ldRise{from{opacity:0;transform:translateY(14px) scale(.97)}}
+#landing .ld-ayah,#landing .ld-h,#landing .ld-sub,#landing .ld-top{animation:ldRise .5s cubic-bezier(.22,1,.36,1) backwards}
+#landing .ld-ayah{animation-delay:.05s}#landing .ld-h{animation-delay:.1s}#landing .ld-sub{animation-delay:.16s}
+#landing #ldStart,#landing .ld-free{animation:ldRise .45s cubic-bezier(.22,1,.36,1) .7s backwards}
+#landing .rv{opacity:0;translate:0 18px;transition:opacity .6s cubic-bezier(.22,1,.36,1),translate .6s cubic-bezier(.22,1,.36,1)}#landing .rv.in{opacity:1;translate:none}
+@media (prefers-reduced-motion:reduce){#landing .rv{opacity:1;translate:none;transition:none}}
 @media (prefers-reduced-motion:reduce){#landing *{animation:none!important}}
 </style>
 
@@ -2343,6 +2350,9 @@ function blkAdmin(){const b=$('admBox');if(!b||!ADM.rows)return;const d=document
     const n=D.filter(Boolean).length;$('lddN').textContent=n+'/3';$('lddP').style.strokeDashoffset=94.2*(1-n/3);$('lddS').textContent='✦ '+sp;$('lddMsg').hidden=n<3;if(n===3)try{chime()}catch(e){}});
   if($('lddP'))$('lddP').style.strokeDashoffset=94.2})();
 function ldAuthOpen(t){const m=$('ldAuthM');m.hidden=false;m.dataset.tab=t;m.querySelectorAll('[data-at]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.at===t));setTimeout(()=>{const i=$('auE')||$('ldGo');i&&i.focus()},60)}
+(()=>{const els=document.querySelectorAll('#landing .ld-sec,#landing .ld-phone,#landing .ld-how,#landing .ldd,#ldStart2,#landing .ld-note');els.forEach(e=>e.classList.add('rv'));
+  if(!('IntersectionObserver' in window)){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{root:$('landing'),threshold:.15});els.forEach(e=>io.observe(e))})();
 $('ldStart').onclick=$('ldStart2').onclick=()=>ldAuthOpen('up');$('ldLogin').onclick=()=>ldAuthOpen('in');$('ldAmX').onclick=()=>{$('ldAuthM').hidden=true};
 document.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>ldAuthOpen(b.dataset.at));
 const TRK_T={salah:{name:'Salah',emoji:'🕌',type:'salah',goal:5,per:'day'},quran:{name:'Quran pages',emoji:'📖',type:'count',goal:2,per:'day'},water:{name:'Water',emoji:'💧',type:'count',goal:8,per:'day'},
