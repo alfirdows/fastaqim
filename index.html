@@ -1687,7 +1687,8 @@ const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 const fmtD=s=>pd(s).toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'});
 function lifeFix(){if(!S.money)S.money={items:[],cur:'$',budget:{}};if(!S.money.budget)S.money.budget={};if(!S.goals)S.goals=[];if(!S.hist)S.hist=[]}
 /* ---- edit history ---- */
-function H(area,act,label,before,after){lifeFix();S.hist.unshift({id:uid(),at:Date.now(),area,act,label:String(label||'').slice(0,80),before:clone(before),after:clone(after)});S.hist=S.hist.slice(0,600)}
+function histBy(){try{const p=JSON.parse(localStorage.getItem('fastaqim.primary')||'null');if(p&&typeof AU!=='undefined'&&AU.user&&p.id!==AU.user.id){const a=(JSON.parse(localStorage.getItem('fastaqim.accounts')||'[]')).find(x=>x.id===p.id);return (a&&a.name)||p.email.split('@')[0]}}catch(e){}return ''}
+function H(area,act,label,before,after){lifeFix();const by=histBy();S.hist.unshift({id:uid(),at:Date.now(),area,act,label:String(label||'').slice(0,80),before:clone(before),after:clone(after),...(by?{by}:{})});S.hist=S.hist.slice(0,600)}
 const AREAS={todo:['To-do','✅'],money:['Money','💰'],goals:['Goals','🎯']};
 const coll=a=>a==='todo'?S.tasks:a==='money'?S.money.items:a==='goals'?S.goals:null;
 function histRestore(id){const h=S.hist.find(x=>x.id===id);if(!h||!h.before)return;const c=coll(h.area);const i=c.findIndex(x=>x.id===h.before.id);
@@ -1699,7 +1700,7 @@ let HF='all';
 function renderHist(){if(!$('histList'))return;lifeFix();
   $('histF').innerHTML=[['all','All'],...Object.entries(AREAS).map(([k,v])=>[k,v[1]+' '+v[0]])].map(([k,l])=>`<button class="chip" data-hf="${k}" style="${HF===k?'background:var(--ink);color:var(--bg)':''}">${l}</button>`).join('');
   const L=S.hist.filter(h=>HF==='all'||h.area===HF).slice(0,60);
-  $('histList').innerHTML=L.length?L.map(h=>`<div class="hrow"><span aria-hidden="true">${(AREAS[h.area]||['','•'])[1]}</span><div class="t"><b>${esc(h.act[0].toUpperCase()+h.act.slice(1))}</b> ${esc(h.label)}${histDiff(h)?`<br><span class="small muted">${histDiff(h)}</span>`:''}</div><time>${new Date(h.at).toLocaleString(LOC(),{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</time>${h.before&&h.act!=='restored'?`<button class="small" data-hr="${h.id}">Restore</button>`:''}</div>`).join(''):'<p class="muted small">Nothing yet. Changes you make show up here.</p>';
+  $('histList').innerHTML=L.length?L.map(h=>`<div class="hrow"><span aria-hidden="true">${(AREAS[h.area]||['','•'])[1]}</span><div class="t"><b>${esc(h.act[0].toUpperCase()+h.act.slice(1))}</b> ${esc(h.label)}${h.by?` <span class="due">by ${esc(h.by)}</span>`:''}${histDiff(h)?`<br><span class="small muted">${histDiff(h)}</span>`:''}</div><time>${new Date(h.at).toLocaleString(LOC(),{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}</time>${h.before&&h.act!=='restored'?`<button class="small" data-hr="${h.id}">Restore</button>`:''}</div>`).join(''):'<p class="muted small">Nothing yet. Changes you make show up here.</p>';
 }
 document.addEventListener('click',e=>{const f=e.target.closest('[data-hf]');if(f){HF=f.dataset.hf;renderHist();return}const r=e.target.closest('[data-hr]');if(r)histRestore(r.dataset.hr)});
 
@@ -1904,10 +1905,33 @@ async function cloudInit(user){
   }catch(e){SYNC.state='local';syncBadge();toast('Couldn\'t reach your account. Saving on this device for now.')}
   lifeFix();render();
 }
+/* ---------- account switcher (accounts signed in on this device) ---------- */
+const ACK='fastaqim.accounts';
+const accList=()=>{try{return JSON.parse(localStorage.getItem(ACK)||'[]')}catch(e){return[]}};
+const accSave=L=>{try{localStorage.setItem(ACK,JSON.stringify(L))}catch(e){}};
+function accRemember(session){if(!session||!session.user)return;try{if(!localStorage.getItem('fastaqim.primary'))localStorage.setItem('fastaqim.primary',JSON.stringify({id:session.user.id,email:session.user.email}))}catch(e){}const L=accList().filter(a=>a.id!==session.user.id);const old=accList().find(a=>a.id===session.user.id)||{};
+  L.unshift({id:session.user.id,email:session.user.email,name:(S&&S.uid===session.user.id&&S.name)||old.name||'',at:session.access_token,rt:session.refresh_token});accSave(L)}
+async function accFlush(){if(SYNC.dirty){clearTimeout(SYNC.t);await dbPush()}}
+async function accSwitch(id){const a=accList().find(x=>x.id===id);if(!a||(AU.user&&AU.user.id===id)){modalClose();return}
+  await accFlush();modalCard('<p class="small muted">Switching...</p>');
+  const {error}=await AU.sb.auth.setSession({access_token:a.at,refresh_token:a.rt});
+  if(error){accSave(accList().filter(x=>x.id!==id));modalClose();toast('That account needs to sign in again.');accAdd(a.email);return}
+  modalClose();toast('Switched to '+(a.name||a.email)+'.')}
+async function accAdd(email){await accFlush();$('scrollModal').hidden=true;AU.adding=true;authForm();landingShow(true);
+  if(email&&$('auE'))$('auE').value=email;
+  const c=document.createElement('button');c.className='btn-ghost small';c.textContent='← Back';c.onclick=()=>{AU.adding=false;landingShow(false)};$('ldAuth').prepend(c)}
+function accMenu(){const L=accList();const me=AU.user&&AU.user.id;
+  modalCard(`<p class="label">Accounts on this device</p><div class="sp-sec">${L.map(a=>`<button class="mrow" data-acc="${a.id}"><span>${a.id===me?'✅':'👤'} <b>${esc(a.name||a.email.split('@')[0])}</b><br><span class="small muted">${esc(a.email)}</span></span>${a.id===me?'<span class="small muted">Now</span>':'<span class="small">Switch</span>'}</button>`).join('')}</div>
+    <p class="small muted">Each person signs in here once. After that, switching needs no password.</p>
+    <div class="row"><button class="btn-calm" id="accNew">+ Add account</button><button class="btn-ghost small" id="accX">Close</button></div>`);
+  $('scrollBody').querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>accSwitch(b.dataset.acc));$('accNew').onclick=()=>accAdd();$('accX').onclick=modalClose}
 function acctRender(){const b=$('acctBox');if(!b)return;
-  b.innerHTML=AU.user?`<p class="label">Account</p><p class="small">${esc(AU.user.email||'')}</p><div class="row"><button class="small" id="acPw">Change password</button><button class="btn-ghost small" id="acOut">Sign out</button></div>`:'';
+  b.innerHTML=AU.user?`<p class="label">Account</p><p class="small">${esc(AU.user.email||'')}</p><div class="row"><button class="btn-calm small" id="acSw">🔁 Switch account</button><button class="small" id="acPw">Change password</button><button class="btn-ghost small" id="acOut">Sign out</button></div>`:'';
   if(!AU.user)return;
-  $('acOut').onclick=async()=>{if(SYNC.dirty)await dbPush();await AU.sb.auth.signOut();try{localStorage.removeItem(KEY)}catch(e){}location.reload()};
+  {const L=accList(),me=L.find(a=>a.id===AU.user.id);if(me&&S.uid===AU.user.id&&me.name!==S.name){me.name=S.name||'';accSave(L)}}
+  $('acSw').onclick=accMenu;
+  $('acOut').onclick=async()=>{await accFlush();const id=AU.user.id;await AU.sb.auth.signOut({scope:'local'});accSave(accList().filter(a=>a.id!==id));try{localStorage.removeItem(KEY)}catch(e){}
+    const next=accList()[0];if(next){const {error}=await AU.sb.auth.setSession({access_token:next.at,refresh_token:next.rt});if(!error)return}location.reload()};
   $('acPw').onclick=()=>pwModal()}
 function pwModal(){modalCard(`<p class="label">New password</p><input type="password" id="npw" placeholder="8+ characters" aria-label="New password"><div class="row"><button class="btn-main" id="npS">Save</button><button class="btn-ghost small" id="npX">Cancel</button></div>`);
   $('npS').onclick=async()=>{const v=$('npw').value;if(v.length<8){toast('8 or more characters.');return}const {error}=await AU.sb.auth.updateUser({password:v});toast(error?error.message:'Password changed.');if(!error)modalClose()};$('npX').onclick=modalClose}
@@ -1918,9 +1942,10 @@ async function authBoot(){
   try{await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');AU.sb=window.supabase.createClient(SUPA.url,SUPA.key)}
   catch(e){$('ldAuth').innerHTML='<p class="small">Couldn\'t connect. Check your internet and refresh.</p>';return}
   AU.sb.auth.onAuthStateChange((ev,session)=>{
+    if(session&&session.user)accRemember(session);
     if(ev==='PASSWORD_RECOVERY'){landingShow(false);pwModal();}
     const u=session&&session.user;
-    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender();admLoad()}
+    if(u&&(!AU.user||AU.user.id!==u.id)){if(AU.user&&S.uid===AU.user.id){try{localStorage.removeItem(KEY)}catch(e){}}AU.adding=false;AU.user=u;ADM.rows=null;VR.st=null;S.started=true;landingShow(false);cloudInit(u);acctRender();admLoad()}
     else if(!u&&AU.user){AU.user=null;landingShow(true);authForm()}
   });
   const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=freshS();render();authForm();}
@@ -2286,7 +2311,7 @@ const I18N=[
 ['Reward shop','متجر المكافآت','Suuqii badhaasaa'],['My reasons','أسبابي','Sababoota koo'],['Wins','الإنجازات','Milkaa\'ina'],['Edit history','سجل التعديلات','Seenaa gulaallii'],['All','الكل','Hunda'],['✅ To-do','✅ المهام','✅ Hojii'],['💰 Money','💰 المال','💰 Maallaqa'],['🎯 Goals','🎯 الأهداف','🎯 Kaayyoo'],['Restore','استرجع','Deebisi'],
 ['Nothing yet. Changes you make show up here.','لا شيء بعد. ستظهر تعديلاتك هنا.','Ammaaf homaa hin jiru. Jijjiiramni ati gootu asitti mul\'ata.'],
 ['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and sounds','🎉 الاحتفال والأصوات','🎉 Ayyaneffannaa fi sagalee'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
-['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
+['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
 ];
 
 /* ---------- languages: English, العربية, Afaan Oromoo ---------- */
