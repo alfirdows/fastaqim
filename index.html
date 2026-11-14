@@ -584,6 +584,9 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-top .ld-login{padding:0 .65rem!important}
 #landing .ldt-chip{padding:0 .5rem!important}
 #landing .ld-ayah{margin-top:28px!important}
+:root:not([lang=ar]) #landing .ld-ayah .ayq{display:none!important}
+:root[lang=ar] #landing .ld-ayah .ayt{display:none!important}
+#landing .ld-ayah .ayt{font-size:.92rem!important;cursor:pointer;color:#374151!important}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -3063,8 +3066,8 @@ const AYAH={
 const QWORD={en:"Qur'an",om:"Qur'aana",so:'Quraanka',fr:'Coran',de:'Koran',es:'Corán',it:'Corano',pt:'Alcorão',nl:'Koran',tr:"Kur'an",id:"Al-Qur'an",ms:'Al-Quran',ur:'قرآن',fa:'قرآن',ps:'قرآن',bn:'কুরআন',hi:'क़ुरआन',ru:'Коран',sw:"Qur'ani",ha:"Alƙur'ani",yo:'Al-Kurani',uz:'Qurʼon',zh:'古兰经',am:'ቁርኣን'};
 function ayahApply(l){const a=AYAH[l]||AYAH.en,ar=l==='ar';
   const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
-  if($('ayS'))$('ayS').textContent=ar?'القرآن الكريم، سورة هود ١١٢ (تفسير السعدي)':(QWORD[l]||QWORD[l.split('-')[0]]||"Qur'an")+', Hūd 11:112';
-  if($('ayL'))$('ayL').href=ar?'https://quran.com/ar/11:112/tafsirs/ar-tafseer-al-saddi':'https://quran.com/11:112?translations='+(a[2]||131);
+  if($('ayS'))$('ayS').textContent=ar?'القرآن الكريم، سورة هود ١١٢':(QWORD[l]||QWORD[l.split('-')[0]]||"Qur'an")+', Hūd 11:112';
+  if($('ayL'))$('ayL').href=ar?'https://quran.com/ar/11:112':'https://quran.com/11:112?translations='+(a[2]||131);
   document.querySelectorAll('#ldName,#hdName').forEach(n=>{n.textContent=ar?'فَٱسْتَقِمْ':a[3];n.classList.toggle('arq',ar);n.lang=ar?'ar':'';n.dir=ar?'rtl':'auto'});
   if($('ldLangC')){const nm=LNAME[l]||((LANGS2.find(x=>x[0]===l)||[])[1])||l;$('ldLangC').textContent=nm}}
 
@@ -3925,7 +3928,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();$('ldRe').hidden=$('ldSaf').hidden=!isStand();$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
