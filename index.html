@@ -574,19 +574,15 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-sub{margin-top:16px!important;font-size:.82rem!important;color:var(--lmuted,var(--muted))}
 #landing .ld-tools{margin-top:40px!important}
 #printArea .pr-wd{min-height:132pt!important}
-#landing .ld-top{padding-top:4px!important;align-items:center!important}
-#landing .ld-top .ld-logo{margin:0!important;align-items:flex-start;text-align:start;line-height:1.05}
-#landing .ld-top .ld-logo .ld-brand{font-size:1.3rem!important;letter-spacing:-.01em}
-#landing .ld-top .ld-logo .ld-name{font-size:.68rem!important;margin-top:1px}
-#landing .ld-top .ld-logo .ld-name.arq{font-size:.95rem!important}
-#landing .ld-right{gap:6px!important}
-#landing .ld-lang-b{padding:0 .55rem!important}
-#landing .ld-top .ld-login{padding:0 .65rem!important}
-#landing .ldt-chip{padding:0 .5rem!important}
-#landing .ld-ayah{margin-top:28px!important}
 :root:not([lang=ar]) #landing .ld-ayah .ayq{display:none!important}
 :root[lang=ar] #landing .ld-ayah .ayt{display:none!important}
 #landing .ld-ayah .ayt{font-size:.92rem!important;cursor:pointer;color:#374151!important}
+#landing .ld-ayah{display:none!important}
+#landing .ld-logo .ld-name{cursor:pointer;text-decoration:underline dotted;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:color-mix(in srgb,currentColor 55%,transparent)}
+#landing .ld-h{margin-top:48px!important}
+#landing .ld-logo{margin-top:32px!important}#landing .ld-logo .ld-brand{font-size:2.3rem!important}#landing .ld-logo .ld-name{font-size:1rem!important;margin-top:4px}
+#landing .ld-sub2{margin-top:14px!important;font-size:.98rem!important;color:var(--lmuted,var(--muted));max-width:30ch;display:block!important;text-align:center;line-height:1.5}
+#landing .ld-sub2 .ld-adhd{font-weight:700;color:var(--ltext,var(--ink))}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -659,12 +655,13 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><span class="ld-right"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
-    <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
-    <p class="ld-tag">Small steps. Big change.</p>
+    <h1 class="ld-h">Your day,<br><span>made doable.</span></h1>
+    <p class="ld-sub ld-sub2" id="ldSub2"></p>
+    
     <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
-    <p class="ld-sub"><span>Made for every kind of mind.</span><button type="button" id="ldInfo" hidden></button></p>
+    
     <div class="ld-tools">
       <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
@@ -3065,7 +3062,7 @@ const AYAH={
 };
 const QWORD={en:"Qur'an",om:"Qur'aana",so:'Quraanka',fr:'Coran',de:'Koran',es:'Corán',it:'Corano',pt:'Alcorão',nl:'Koran',tr:"Kur'an",id:"Al-Qur'an",ms:'Al-Quran',ur:'قرآن',fa:'قرآن',ps:'قرآن',bn:'কুরআন',hi:'क़ुरआन',ru:'Коран',sw:"Qur'ani",ha:"Alƙur'ani",yo:'Al-Kurani',uz:'Qurʼon',zh:'古兰经',am:'ቁርኣን'};
 function ayahApply(l){const a=AYAH[l]||AYAH.en,ar=l==='ar';
-  const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
+  {const S2={en:'A calm planner for {A}, and for everyone.',ar:'مخطِّط هادئ لأصحاب {A}، وللجميع.',om:'Karoora tasgabbaa\'aa namoota {A} qabaniif, akkasumas nama hundaaf.',so:'Qorshe xasilloon oo loogu talagalay dadka qaba {A}, iyo qof kasta.'};const e=$('ldSub2');if(e){const k=l.split('-')[0];e.classList.toggle('notranslate',!!S2[k]);e.innerHTML=esc(S2[k]||S2.en).replace('{A}','<button type="button" class="ld-adhd" id="ldInfo">ADHD</button>')}}const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
   if($('ayS'))$('ayS').textContent=ar?'القرآن الكريم، سورة هود ١١٢':(QWORD[l]||QWORD[l.split('-')[0]]||"Qur'an")+', Hūd 11:112';
   if($('ayL'))$('ayL').href=ar?'https://quran.com/ar/11:112':'https://quran.com/11:112?translations='+(a[2]||131);
   document.querySelectorAll('#ldName,#hdName').forEach(n=>{n.textContent=ar?'فَٱسْتَقِمْ':a[3];n.classList.toggle('arq',ar);n.lang=ar?'ar':'';n.dir=ar?'rtl':'auto'});
@@ -3383,6 +3380,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Your day,','يومك،','Guyyaan kee,','Maalintaada,'],['made doable.','صار أيسر.','salphateera.','waa la fududeeyay.'],
 ['Show Hijri dates too','أظهر التاريخ الهجري أيضًا','Guyyaa Hijrii illee agarsiisi','Sidoo kale tus taariikhda Hijriga'],
 ['↻ Refresh','↻ تحديث','↻ Haaromsi','↻ Cusboonaysii'],['🧭 Open in browser','🧭 افتح في المتصفح','🧭 Barbaadduu keessatti bani','🧭 Ku fur biraawsarka'],
 ['🎯 Pick a goal','🎯 اختر هدفًا','🎯 Kaayyoo filadhu','🎯 Dooro hadaf'],['🧩 Make it tiny','🧩 اجعله صغيرًا','🧩 Xiqqeessi','🧩 Yaree'],['🚀 Do it today','🚀 افعله اليوم','🚀 Har\'a hojjedhu','🚀 Maanta samee'],
@@ -3928,7 +3926,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
