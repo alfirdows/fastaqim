@@ -297,6 +297,7 @@ body.rtl .cal-nav .icon-btn{transform:scaleX(-1)}
 body.rtl .ld-quote{text-align:right;border-left:0;border-right:4px solid var(--accent)}
 body.rtl .cal-day,body.rtl .catrow,body.rtl .mrow,body.rtl .sp-sec{text-align:right}
 section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:stretch;min-width:0}#azBody>.row{max-width:100%;min-width:0}
+.avdot{display:inline-flex;width:28px;height:28px;border-radius:50%;background:var(--calm);color:#fff;font-weight:800;align-items:center;justify-content:center;overflow:hidden;vertical-align:middle;flex:none;font-size:.85rem}.avbig{width:64px;height:64px;font-size:1.6rem}.avimg{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}.avemo{font-size:1.15em;line-height:1}.avpick{font-size:1.3rem;padding:4px 8px;background:transparent;border:2px solid transparent;border-radius:10px}.avpick.on{border-color:var(--calm)}.avatar{overflow:hidden;width:34px;height:34px;border-radius:50%;padding:0;margin-inline-end:8px;background:var(--calm);color:#fff;border:0;font-weight:800;font-size:1rem;vertical-align:middle}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -324,7 +325,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 <div class="wrap">
   <header>
     <div>
-      <p class="brand"><b>Fastaqim</b> <span class="ar" lang="ar">فَاسْتَقِمْ</span></p>
+      <p class="brand"><button class="avatar" id="avatarBtn" aria-label="Switch account" hidden></button><b>Fastaqim</b> <span class="ar" lang="ar">فَاسْتَقِمْ</span></p>
       <p class="label" id="dateLabel">Today</p>
       <h1 id="hello">One small thing at a time.</h1>
     </div>
@@ -651,6 +652,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <div class="card" id="acctBox"></div>
     <div class="card" id="admBox" hidden></div>
     <div class="card" id="vrMe" hidden></div>
+    <div class="card" id="avCard"><p class="label">Profile picture</p><div class="row" style="align-items:center"><span class="avdot avbig" id="avPrev"></span><label class="small" style="cursor:pointer;display:inline-block;padding:8px 14px;border-radius:999px;background:var(--calm);color:#fff;font-weight:700">📷 Upload photo<input type="file" id="avFile" accept="image/*" hidden></label><button class="btn-ghost small" id="avDel" hidden>Remove</button></div><p class="small muted">Or pick one:</p><div class="row" id="avEmo" style="gap:6px"></div></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
@@ -1221,7 +1223,7 @@ $('planBody').addEventListener('click',e=>{
     t.blocks.push({id:uid(),s,e:String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0'),t:'',ty:'life',core:false,tip:'',low:''});planTouched();renderPlan();
     const rows=document.querySelectorAll('#editRows .erow');rows[rows.length-1].querySelector('[data-f=t]').focus();return}
   if(b.id==='tplCopy'){const t=curTpl(),k='t'+uid();S.plan.tpl[k]={name:DAYN[planDay],blocks:t.blocks.map(x=>Object.assign({},x,{id:uid()}))};S.plan.week[planDay]=k;planTouched();renderPlan();toast(DAYN[planDay]+' has its own plan now.');return}
-  if(b.id==='pasteGo'){const bl=parsePaste($('pasteBox').value);if(!bl.length){toast('I couldn\'t read any lines. Start each one with a time, like 9:00 Class.');return}
+  if(b.id==='pasteGo'){const pk=blkLines($('pasteBox').value);if(pk.cut)toast(pk.cut+' line'+(pk.cut>1?'s':'')+' left out. Fastaqim keeps plans halal.');const bl=parsePaste(pk.text);if(!bl.length){toast('I couldn\'t read any lines. Start each one with a time, like 9:00 Class.');return}
     curTpl().blocks=bl;planTouched();renderPlan();toast(bl.length+' blocks added.');return}
   if(b.id==='editDone'){sortB(curTpl().blocks);planEdit=false;save();render();window.scrollTo({top:$('planCard').offsetTop-70});return}
   if(b.id==='planReset'){resetPlanAsk=true;renderPlan();return}
@@ -1687,7 +1689,7 @@ const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 const fmtD=s=>pd(s).toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'});
 function lifeFix(){if(!S.money)S.money={items:[],cur:'$',budget:{}};if(!S.money.budget)S.money.budget={};if(!S.goals)S.goals=[];if(!S.hist)S.hist=[]}
 /* ---- edit history ---- */
-function histBy(){try{const p=JSON.parse(localStorage.getItem('fastaqim.primary')||'null');if(p&&typeof AU!=='undefined'&&AU.user&&p.id!==AU.user.id){const a=(JSON.parse(localStorage.getItem('fastaqim.accounts')||'[]')).find(x=>x.id===p.id);return (a&&a.name)||p.email.split('@')[0]}}catch(e){}return ''}
+function histBy(){if(typeof ACT!=='undefined'&&ACT.id)return ACT.by;try{const p=JSON.parse(localStorage.getItem('fastaqim.primary')||'null');if(p&&typeof AU!=='undefined'&&AU.user&&p.id!==AU.user.id){const a=(JSON.parse(localStorage.getItem('fastaqim.accounts')||'[]')).find(x=>x.id===p.id);return (a&&a.name)||p.email.split('@')[0]}}catch(e){}return ''}
 function H(area,act,label,before,after){lifeFix();const by=histBy();S.hist.unshift({id:uid(),at:Date.now(),area,act,label:String(label||'').slice(0,80),before:clone(before),after:clone(after),...(by?{by}:{})});S.hist=S.hist.slice(0,600)}
 const AREAS={todo:['To-do','✅'],money:['Money','💰'],goals:['Goals','🎯']};
 const coll=a=>a==='todo'?S.tasks:a==='money'?S.money.items:a==='goals'?S.goals:null;
@@ -1853,7 +1855,8 @@ LIST:
 ${text}`;
     const r=await SAMPLE.json(prompt,{modelTier:'default'});if(r&&(r.tasks||r.money||r.goals))return{tasks:r.tasks||[],money:r.money||[],goals:r.goals||[]};return null}
   catch(e){return null}}
-async function sortGo(){const text=$('sortIn').value.trim();if(!text){$('sortIn').focus();return}
+async function sortGo(){let text=$('sortIn').value.trim();if(!text){$('sortIn').focus();return}
+  {const k=blkLines(text);if(k.cut){text=k.text.trim();toast(k.cut+' line'+(k.cut>1?'s':'')+' left out. Fastaqim keeps plans halal.');if(!text){blkWarn('');return}}}
   const b=$('sortGo');b.disabled=true;b.textContent='Sorting...';
   let r=await aiSort(text);if(!r)r=roughSort(text);b.disabled=false;b.textContent='✨ Sort it for me';
   const sec=(k,title,L,fmt)=>L.length?`<p class="label" style="margin-top:6px">${title}</p>${L.map((x,i)=>`<label class="sp-it"><input type="checkbox" checked data-sp="${k}:${i}"><span>${fmt(x)}</span></label>`).join('')}`:'';
@@ -1905,14 +1908,26 @@ async function cloudInit(user){
   }catch(e){SYNC.state='local';syncBadge();toast('Couldn\'t reach your account. Saving on this device for now.')}
   lifeFix();render();
 }
+/* ---------- act as a linked account (they tapped Allow on the owner's request) ---------- */
+const ACT={id:null,name:'',by:''};
+async function actSwitch(id){const r=(ADM.rows||[]).find(x=>x.user_id===id);if(!r)return;await accFlush();modalCard('<p class="small muted">Switching...</p>');
+  const {data,error}=await AU.sb.from('fastaqim_state').select('state').eq('user_id',id).maybeSingle();
+  if(error||!data){modalClose();toast('Nothing saved in that account yet.');return}
+  const by=S.name||AU.user.email.split('@')[0];
+  ACT.id=id;ACT.name=r.name||r.email;ACT.by=by;S=Object.assign(freshS(),clone(data.state));S.uid=id;S.started=true;lifeFix();
+  SYNC.ref={set:async o=>{const {error}=await AU.sb.from('fastaqim_state').update({state:o.state,updated_at:new Date().toISOString()}).eq('user_id',id);if(error)throw error}};
+  modalClose();render();actBar();toast('Now editing '+ACT.name+'\'s plan.')}
+async function actBack(){await accFlush();ACT.id=null;actBar();modalClose();await cloudInit(AU.user);toast('Back to your own plan.')}
+function actBar(){let b=$('actBar');if(!b){b=document.createElement('div');b.id='actBar';b.className='note small';b.style.cssText='display:flex;justify-content:space-between;align-items:center;gap:8px';document.querySelector('.wrap header').after(b)}
+  b.hidden=!ACT.id;if(ACT.id){b.innerHTML=`<span>✏️ Editing <b>${esc(ACT.name)}</b>'s plan</span><button class="small" id="actBk">Switch back</button>`;$('actBk').onclick=actBack}}
 /* ---------- account switcher (accounts signed in on this device) ---------- */
 const ACK='fastaqim.accounts';
 const accList=()=>{try{return JSON.parse(localStorage.getItem(ACK)||'[]')}catch(e){return[]}};
 const accSave=L=>{try{localStorage.setItem(ACK,JSON.stringify(L))}catch(e){}};
 function accRemember(session){if(!session||!session.user)return;try{if(!localStorage.getItem('fastaqim.primary'))localStorage.setItem('fastaqim.primary',JSON.stringify({id:session.user.id,email:session.user.email}))}catch(e){}const L=accList().filter(a=>a.id!==session.user.id);const old=accList().find(a=>a.id===session.user.id)||{};
-  L.unshift({id:session.user.id,email:session.user.email,name:(S&&S.uid===session.user.id&&S.name)||old.name||'',at:session.access_token,rt:session.refresh_token});accSave(L)}
+  L.unshift({id:session.user.id,email:session.user.email,name:(S&&S.uid===session.user.id&&S.name)||old.name||'',avatar:S&&S.uid===session.user.id?(S.avatar||''):(old.avatar||''),at:session.access_token,rt:session.refresh_token});accSave(L)}
 async function accFlush(){if(SYNC.dirty){clearTimeout(SYNC.t);await dbPush()}}
-async function accSwitch(id){const a=accList().find(x=>x.id===id);if(!a||(AU.user&&AU.user.id===id)){modalClose();return}
+async function accSwitch(id){const a=accList().find(x=>x.id===id);if(!a||(AU.user&&AU.user.id===id)){modalClose();if(AU.user&&AU.user.id===id&&S.uid!==id)cloudInit(AU.user);return}
   await accFlush();modalCard('<p class="small muted">Switching...</p>');
   const {error}=await AU.sb.auth.setSession({access_token:a.at,refresh_token:a.rt});
   if(error){accSave(accList().filter(x=>x.id!==id));modalClose();toast('That account needs to sign in again.');accAdd(a.email);return}
@@ -1921,11 +1936,13 @@ async function accAdd(email){await accFlush();$('scrollModal').hidden=true;AU.ad
   if(email&&$('auE'))$('auE').value=email;
   const c=document.createElement('button');c.className='btn-ghost small';c.textContent='← Back';c.onclick=()=>{AU.adding=false;landingShow(false)};$('ldAuth').prepend(c)}
 function accMenu(){const L=accList();const me=AU.user&&AU.user.id;
-  modalCard(`<p class="label">Accounts on this device</p><div class="sp-sec">${L.map(a=>`<button class="mrow" data-acc="${a.id}"><span>${a.id===me?'✅':'👤'} <b>${esc(a.name||a.email.split('@')[0])}</b><br><span class="small muted">${esc(a.email)}</span></span>${a.id===me?'<span class="small muted">Now</span>':'<span class="small">Switch</span>'}</button>`).join('')}</div>
+  const linked=(ADM.rows||[]).filter(r=>r.request==='allowed'&&r.user_id!==me);
+  modalCard(`${ACT.id?`<button class="btn-main" id="accBack" style="width:100%">↩ Back to my own plan</button>`:''}${linked.length?`<p class="label">Linked accounts</p><div class="sp-sec">${linked.map(r=>`<button class="mrow" data-act="${r.user_id}"><span>${avDot(r.avatar,r.name||r.email)} ${r.guardian?'🛡️':''} <b>${esc(r.name||r.email.split('@')[0])}</b><br><span class="small muted">${esc(r.email)}</span></span><span class="small">${ACT.id===r.user_id?'Now':'Switch'}</span></button>`).join('')}</div>`:''}<p class="label">Accounts on this device</p><div class="sp-sec">${L.map(a=>`<button class="mrow" data-acc="${a.id}"><span>${avDot(a.avatar,a.name||a.email)} ${a.id===me?'✅':''} <b>${esc(a.name||a.email.split('@')[0])}</b><br><span class="small muted">${esc(a.email)}</span></span>${a.id===me?'<span class="small muted">Now</span>':'<span class="small">Switch</span>'}</button>`).join('')}</div>
     <p class="small muted">Each person signs in here once. After that, switching needs no password.</p>
     <div class="row"><button class="btn-calm" id="accNew">+ Add account</button><button class="btn-ghost small" id="accX">Close</button></div>`);
-  $('scrollBody').querySelectorAll('[data-acc]').forEach(b=>b.onclick=()=>accSwitch(b.dataset.acc));$('accNew').onclick=()=>accAdd();$('accX').onclick=modalClose}
-function acctRender(){const b=$('acctBox');if(!b)return;
+  $('scrollBody').querySelectorAll('[data-acc]').forEach(b=>b.onclick=async()=>{if(ACT.id){ACT.id=null;actBar()}accSwitch(b.dataset.acc)});$('scrollBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>actSwitch(b.dataset.act));if($('accBack'))$('accBack').onclick=actBack;$('accNew').onclick=()=>accAdd();$('accX').onclick=modalClose}
+function acctRender(){const av=$('avatarBtn');if(av){av.hidden=!AU.user;if(AU.user){av.innerHTML=avHTML(S.avatar,(ACT.id?ACT.name:S.name)||AU.user.email||'?');av.onclick=accMenu}}
+  const b=$('acctBox');if(!b)return;
   b.innerHTML=AU.user?`<p class="label">Account</p><p class="small">${esc(AU.user.email||'')}</p><div class="row"><button class="btn-calm small" id="acSw">🔁 Switch account</button><button class="small" id="acPw">Change password</button><button class="btn-ghost small" id="acOut">Sign out</button></div>`:'';
   if(!AU.user)return;
   {const L=accList(),me=L.find(a=>a.id===AU.user.id);if(me&&S.uid===AU.user.id&&me.name!==S.name){me.name=S.name||'';accSave(L)}}
@@ -2035,21 +2052,66 @@ ADHKAR.worry={t:'Worry & laziness',ic:'🫶',v:'When you feel stuck, anxious or 
  mk('h4',DZ.hayy)]};
 (()=>{const h=new Date().getHours();AZ.cat=h>=4&&h<11?'morning':h>=15&&h<20?'evening':h>=21||h<4?'sleep':'salawat'})();
 
+/* ---------- profile picture ---------- */
+const AVE=['🌙','⭐','🌿','🌸','📚','🕌','🦁','🐢','☕','🌊','🌻','🦋'];
+const avHTML=(av,name)=>av&&/^data:image\//.test(av)?`<img src="${av}" alt="" class="avimg">`:av?`<span class="avemo">${esc(av)}</span>`:esc(((name||'?').trim()[0]||'?').toUpperCase());
+function avDot(av,name){return `<span class="avdot">${avHTML(av,name)}</span>`}
+function renderAvatar(){const p=$('avPrev');if(!p)return;p.innerHTML=avHTML(S.avatar,S.name||(AU.user&&AU.user.email));
+  $('avEmo').innerHTML=AVE.map(e=>`<button type="button" class="avpick${S.avatar===e?' on':''}" data-ave="${e}">${e}</button>`).join('');$('avDel').hidden=!S.avatar}
+function avSet(v){S.avatar=v;save();render();if(AU.user&&!ACT.id)accSave(accList().map(a=>a.id===AU.user.id?Object.assign(a,{avatar:v}):a))}
+$('avEmo').addEventListener('click',e=>{const b=e.target.closest('[data-ave]');if(b)avSet(b.dataset.ave)});
+$('avDel').onclick=()=>avSet('');
+$('avFile').onchange=e=>{const f=e.target.files[0];e.target.value='';if(!f||!/^image\//.test(f.type))return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const z=128,c=document.createElement('canvas');c.width=c.height=z;const k=Math.min(im.width,im.height),x=c.getContext('2d');
+    x.drawImage(im,(im.width-k)/2,(im.height-k)/2,k,k,0,0,z,z);avSet(c.toDataURL('image/jpeg',0.8));toast('Photo saved.')};im.onerror=()=>toast('That photo didn\'t open. Try another one.');im.src=r.result};r.readAsDataURL(f)};
+
+/* ---------- gentle filter for haram items in plans, to-dos, goals, money ---------- */
+const BLOCK_EN=['alcohol','alcoholic','beer','beers','wine','wines','vodka','whiskey','whisky','rum','tequila','gin','liquor','champagne','cocktail','cocktails','booze','drunk','get drunk','hangover','nightclub','night club','bar crawl','pub crawl','happy hour',
+ 'weed','marijuana','cannabis','cocaine','coke line','heroin','meth','mdma','ecstasy','lsd','shrooms','drug','drugs','get high','smoke weed',
+ 'music','song','songs','concert','concerts','music festival','festival music','playlist','dj','rave','karaoke','singing lesson','guitar','piano','drums',
+ 'gamble','gambling','casino','bet','bets','betting','lottery','lotto','poker','slots','blackjack','porn','pornography','strip club','girlfriend','girlfriends','boyfriend','boyfriends','dating','date night','hookup','hook up','tinder','bumble','situationship','pork','bacon'];
+const BLOCK_AR=['خمر','الخمر','كحول','كحولي','بيرة','بيره','نبيذ','فودكا','ويسكي','مخدرات','مخدر','حشيش','كوكايين','هيروين','موسيقى','موسيقي','أغنية','أغاني','اغاني','اغنية','حفلة موسيقية','حفل غنائي','مهرجان موسيقي','ديسكو','ملهى','قمار','كازينو','يانصيب','مراهنة','رهان','إباحية','خنزير','بوي فريند','بويفريند','جيرل فريند','مواعدة'];
+const BLOCK_OM=['alkoolii','araqee','farsoo','daadhii','biiraa','wayinii','muuziqaa','qumaara','qoricha sammuu','jaalallee','michuu jaalalaa'];
+const BLK={extra:[]};
+const blkNorm=s=>String(s).toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[إأآ]/g,'ا');
+function blocked(text){if(!text)return null;const t=blkNorm(text);
+  for(const w of [...BLOCK_EN,...BLOCK_OM,...BLK.extra]){const n=blkNorm(w).trim();if(!n)continue;if(/[؀-ۿ]/.test(n)){if(t.includes(n))return w;continue}
+    if(new RegExp('(^|[^\\p{L}])'+n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'([^\\p{L}]|$)','u').test(t))return w}
+  for(const w of BLOCK_AR){const n=blkNorm(w);if(new RegExp('(^|[^\\u0600-\\u06FF])(و|ف|ب|ل|ال|وال|بال|لل)?'+n+'([^\\u0600-\\u06FF]|$)').test(t))return w}
+  return null}
+const BLK_MSG=['Let\'s leave this one out. Fastaqim is for plans that bring you closer to Allah. What could go here instead, like a walk, a nasheed, a lecture or time with family?',
+ 'This one won\'t be added. Pick something halal you\'d enjoy instead. You deserve rest that you feel good about after.'];
+function blkWarn(w){const lang=typeof LANG!=='undefined'?LANG:'en';modalCard(`<p class="label">🌿 Let's swap this one</p><p>${BLK_MSG[Math.random()<.5?0:1]}</p>
+  <p class="small muted">If you meant medicine, write "medicine" or its name. Words like "drink water" are fine.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`);$('blkOk').onclick=modalClose;return w}
+const BLK_SKIP=new Set(['nameCard','nameEdit','reasonForm']);
+document.addEventListener('submit',e=>{const f=e.target;if(!f||BLK_SKIP.has(f.id)||f.closest('#ldAuth,#tab-journal,#coachBox'))return;
+  const v=[...f.querySelectorAll('input[type=text],input:not([type]),textarea')].map(x=>x.value).join(' ');if(blocked(v)){e.preventDefault();e.stopImmediatePropagation();blkWarn(blocked(v))}},true);
+document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('input[type=text],input:not([type]),textarea')||el.closest('#ldAuth,#tab-journal,#coachBox,#nameEdit,#nameCard,#reasonForm,form,#sortIn,#pasteBox'))return;
+  if(blocked(el.value)){e.stopImmediatePropagation();const w=blocked(el.value);el.value=el.defaultValue;blkWarn(w)}},true);
+function blkLines(text){const L=text.split('\n'),keep=L.filter(l=>!blocked(l));return {text:keep.join('\n'),cut:L.length-keep.length}}
+async function blkLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.from('fastaqim_blocklist').select('word');if(error)throw error;BLK.extra=(data||[]).map(r=>r.word)}catch(e){}}
+function blkAdmin(){const b=$('admBox');if(!b||!ADM.rows)return;const d=document.createElement('details');d.className='sp-sec';d.innerHTML=`<summary class="label">🚫 Blocked words</summary>
+  <p class="small muted">Built-in list covers alcohol, drugs, music, gambling and more, in English, Arabic and Oromo. Add your own, one per line.</p>
+  <textarea id="blkTa" rows="4" style="width:100%">${esc(BLK.extra.join('\n'))}</textarea><button class="small btn-calm" id="blkSave">Save words</button>`;b.appendChild(d);
+  $('blkSave').onclick=async()=>{const W=[...new Set($('blkTa').value.split('\n').map(x=>x.trim().toLowerCase()).filter(Boolean))];
+    const {error:e1}=await AU.sb.from('fastaqim_blocklist').delete().neq('word','');const {error:e2}=W.length?await AU.sb.from('fastaqim_blocklist').insert(W.map(word=>({word}))):{error:null};
+    if(e1||e2){toast('Couldn\'t save. Run the setup step first.');return}BLK.extra=W;toast('Saved.')}}
+
 /* ---------- owner page: users + request to view (user must allow) ---------- */
 const ADM={rows:null};
-async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}admRender();vrLoad()}
+async function admLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.rpc('admin_users');if(error)throw error;ADM.rows=data||[]}catch(e){ADM.rows=null}await blkLoad();admRender();vrLoad()}
 function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.rows;if(!ADM.rows)return;const R=ADM.rows,wk=7*864e5;
   const chip=r=>r.user_id===AU.user.id?'<span class="small muted">You</span>':r.request==='allowed'?`<span class="row" style="gap:4px">${r.guardian?'<span class="small muted">🛡️</span>':''}<button class="small btn-calm" data-av="${r.user_id}">View</button><button class="btn-ghost small" data-ax="${r.user_id}">Remove</button></span>`:r.request==='pending'?'<span class="small muted">Asked ⏳</span>':`<span class="row" style="gap:4px"><button class="small" data-aq="${r.user_id}">${r.request==='declined'?'Ask again':'Request to view'}</button><button class="small" data-ag="${r.user_id}">Guardian (under 18)</button></span>`;
   b.innerHTML=`<h2><span class="h2i" aria-hidden="true">📊</span>Fastaqim users</h2>
     <div class="big3"><div><span class="small muted">Total</span><b>${R.length}</b></div><div><span class="small muted">New this week</span><b>${R.filter(r=>Date.now()-new Date(r.joined)<wk).length}</b></div><div><span class="small muted">Active this week</span><b>${R.filter(r=>r.last_active&&Date.now()-new Date(r.last_active)<wk).length}</b></div></div>
-    <div>${R.map(r=>`<div class="mrow" style="cursor:default"><span><b>${esc(r.name||'—')}</b><br><span class="small muted">${esc(r.email||'')}</span></span>${chip(r)}</div>`).join('')}</div>
+    <div>${R.map(r=>`<div class="mrow" style="cursor:default"><span>${avDot(r.avatar,r.name||r.email)} <b>${esc(r.name||'—')}</b><br><span class="small muted">${esc(r.email||'')}</span></span>${chip(r)}</div>`).join('')}</div>
     <p class="small muted">They see your request in their app and choose Allow or Decline.</p>
     <button class="btn-ghost small" id="admR" style="align-self:flex-start">Refresh</button>`;
   $('admR').onclick=admLoad;
   b.querySelectorAll('[data-aq]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('request_view',{p_user:x.dataset.aq});toast(error?'Couldn\'t send.':'Request sent.');admLoad()});
   b.querySelectorAll('[data-ag]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('request_view',{p_user:x.dataset.ag,p_guardian:true});toast(error?'Couldn\'t send.':'Guardian request sent.');admLoad()});
   b.querySelectorAll('[data-ax]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('remove_view',{p_user:x.dataset.ax});toast(error?'Couldn\'t remove.':'Removed.');admLoad()});
-  b.querySelectorAll('[data-av]').forEach(x=>x.onclick=()=>admView(x.dataset.av))}
+  b.querySelectorAll('[data-av]').forEach(x=>x.onclick=()=>admView(x.dataset.av));blkAdmin()}
 async function admView(id){const r=ADM.rows.find(x=>x.user_id===id);modalCard('<p class="small muted">Loading...</p>');
   const {data}=await AU.sb.from('fastaqim_state').select('state,updated_at').eq('user_id',id).maybeSingle();
   if(!data){modalCard('<p>Nothing to show. They may have stopped sharing.</p><button class="btn-ghost small" id="avX">Close</button>');$('avX').onclick=modalClose;return}
@@ -2228,7 +2290,7 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAdhkar();if(!T.running)drawTimer()}
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAvatar();renderAdhkar();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Brief mode.':'Explain mode.')});
 const I18N=[
 // landing
@@ -2311,7 +2373,7 @@ const I18N=[
 ['Reward shop','متجر المكافآت','Suuqii badhaasaa'],['My reasons','أسبابي','Sababoota koo'],['Wins','الإنجازات','Milkaa\'ina'],['Edit history','سجل التعديلات','Seenaa gulaallii'],['All','الكل','Hunda'],['✅ To-do','✅ المهام','✅ Hojii'],['💰 Money','💰 المال','💰 Maallaqa'],['🎯 Goals','🎯 الأهداف','🎯 Kaayyoo'],['Restore','استرجع','Deebisi'],
 ['Nothing yet. Changes you make show up here.','لا شيء بعد. ستظهر تعديلاتك هنا.','Ammaaf homaa hin jiru. Jijjiiramni ati gootu asitti mul\'ata.'],
 ['Your name','اسمك','Maqaa kee'],['Save','احفظ','Olkaa\'i'],['🎉 Confetti and sounds','🎉 الاحتفال والأصوات','🎉 Ayyaneffannaa fi sagalee'],['💾 Back up / restore','💾 نسخ احتياطي / استرجاع','💾 Kuusaa / deebisuu'],['Reset everything','إعادة ضبط كل شيء','Hunda haaromsi'],['Yes, delete it all','نعم، احذف كل شيء','Eeyyee, hunda haqi'],['Keep my stuff','احتفظ بأشيائي','Waan koo eegi'],
-['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
+['Account','الحساب','Herrega'],['Change password','تغيير كلمة المرور','Jecha icciitii jijjiiri'],['🔁 Switch account','🔁 تبديل الحساب','🔁 Herrega jijjiiri'],['Linked accounts','الحسابات المرتبطة','Herregoota walitti hidhaman'],['↩ Back to my own plan','↩ العودة إلى خطتي','↩ Gara karoora koootti deebi\'i'],['Switch back','ارجع','Deebi\'i'],['Accounts on this device','الحسابات على هذا الجهاز','Herregoota meeshaa kana irra'],['+ Add account','+ أضف حسابًا','+ Herrega dabaladhu'],['Switch','تبديل','Jijjiiri'],['← Back','← رجوع','← Deebi\'i'],['Sign out','تسجيل الخروج','Ba\'i'],['Close','إغلاق','Cufi'],['Cancel','إلغاء','Dhiisi'],['Language','اللغة','Afaan']
 ];
 
 /* ---------- languages: English, العربية, Afaan Oromoo ---------- */

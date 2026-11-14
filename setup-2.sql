@@ -37,13 +37,14 @@ begin
   delete from view_requests where user_id = p_user;
 end $$;
 
+drop function if exists public.admin_users();
 create or replace function public.admin_users()
-returns table (user_id uuid, email text, name text, joined timestamptz, last_active timestamptz, request text, guardian boolean)
+returns table (user_id uuid, email text, name text, avatar text, joined timestamptz, last_active timestamptz, request text, guardian boolean)
 language plpgsql stable security definer set search_path = public, auth as $$
 begin
   if not public.is_admin() then raise exception 'not allowed'; end if;
   return query
-    select u.id, u.email::text, s.state ->> 'name', u.created_at, s.updated_at, r.status, coalesce(r.guardian, false)
+    select u.id, u.email::text, s.state ->> 'name', s.state ->> 'avatar', u.created_at, s.updated_at, r.status, coalesce(r.guardian, false)
     from auth.users u
     left join public.fastaqim_state s on s.user_id = u.id
     left join public.view_requests r on r.user_id = u.id
@@ -60,6 +61,12 @@ grant execute on function public.remove_view(uuid) to authenticated;
 revoke execute on function public.admin_users() from anon, public;
 grant execute on function public.request_view(uuid, boolean) to authenticated;
 grant execute on function public.admin_users() to authenticated;
+
+-- Blocked words (owner adds extra words on the owner page)
+create table if not exists public.fastaqim_blocklist (word text primary key);
+alter table public.fastaqim_blocklist enable row level security;
+create policy "everyone signed in reads blocked words" on public.fastaqim_blocklist for select to authenticated using (true);
+create policy "owner edits blocked words" on public.fastaqim_blocklist for all to authenticated using (public.is_admin()) with check (public.is_admin());
 
 -- Put the email YOU sign in with between the quotes:
 insert into public.site_admins (email) values ('YOUR-EMAIL-HERE');
