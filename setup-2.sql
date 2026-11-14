@@ -88,6 +88,8 @@ create table if not exists public.fastaqim_feedback (
 alter table public.fastaqim_feedback enable row level security;
 drop policy if exists "users send feedback" on public.fastaqim_feedback;
 create policy "users send feedback" on public.fastaqim_feedback for insert to authenticated with check (user_id = auth.uid());
+drop policy if exists "visitors send feedback" on public.fastaqim_feedback;
+create policy "visitors send feedback" on public.fastaqim_feedback for insert to anon with check (user_id is null and email is null);
 drop policy if exists "owner reads feedback" on public.fastaqim_feedback;
 create policy "owner reads feedback" on public.fastaqim_feedback for select to authenticated using (public.is_admin());
 drop policy if exists "owner marks feedback" on public.fastaqim_feedback;
