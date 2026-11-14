@@ -2473,10 +2473,12 @@ function vrRender(){const a=$('vrAsk'),m=$('vrMe');if(!a||!m)return;
 
 /* ---------- privacy page ---------- */
 function privacyOpen(){modalCard(`<p class="label">Privacy</p><div class="sp-sec small" style="gap:8px">
-  <p><b>What's saved:</b> your name, email, and what you add here (to-dos, plans, money, goals, reflections, adhkar counts).</p>
-  <p><b>Where:</b> in a secure database (Supabase). Fastaqim doesn't sell or share your data.</p>
-  <p><b>Who can see it:</b> only you. The site owner can see your name and email, and can ask to view your plan. They only see it if you tap Allow. Adults can stop sharing anytime; for under 18s with a guardian link, only the guardian can remove it.</p>
-  <p><b>Delete:</b> ask the owner to delete your account and everything in it.</p></div>
+  <p><b>Free:</b> Fastaqim is 100% free, always. No ads. Your data is never sold or shared.</p>
+  <p><b>What's saved:</b> your name, email, photo, and what you add (to-dos, plans, money, goals, trackers, reflections). It's stored securely in your account.</p>
+  <p><b>The owner sees:</b> how many people use Fastaqim, and each person's name and email. Nothing else.</p>
+  <p><b>Sharing:</b> the owner can ask to view or help with your plan. Nothing is shared unless you tap Allow. Adults can stop sharing anytime in Me. Under 18s with a guardian link: only the guardian can remove it.</p>
+  <p><b>Translate 🌐:</b> when you tap it, only that line is sent to a free translation service.</p>
+  <p><b>Delete:</b> delete your account yourself anytime in Me → Account. Sign in within 30 days to restore it. After 30 days it's gone for good.</p></div>
   <button class="btn-ghost small" id="pvX">Close</button>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
 document.addEventListener('click',e=>{if(e.target.closest('.privLink')){e.preventDefault();privacyOpen()}});
 /* ---------- less text: explanations behind a ? ---------- */
