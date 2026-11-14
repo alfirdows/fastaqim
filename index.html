@@ -536,6 +536,31 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 .brand b{font-size:1.3rem}
 .ld-home{margin-top:10px;background:var(--surface);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;padding:.55rem 1.1rem;font-weight:700;font-size:.9rem;min-height:44px}
 .gd-note{margin:2px 0 6px;font-size:.78rem}
+@font-face{font-family:"Fastaqim Quran";src:url(fonts/UthmanicHafs.otf) format("opentype"),url(https://alfirdows.github.io/fastaqim/fonts/UthmanicHafs.otf) format("opentype");font-display:swap}
+.ld-ayah .ayq,.ld-name.arq,.hd-name.arq{font-family:"Fastaqim Quran","Scheherazade New",serif!important;font-weight:400!important}.ld-ayah .ayq{font-size:1.9rem!important;color:#0a4d46!important}.ld-ayah .ayq .orn{color:#a8761c!important;margin:0 .12em!important;font-size:1em!important}
+.ld-row2{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.qd{margin:8px 0 4px;padding:8px 12px;border-inline-start:3px solid #b7791f;background:color-mix(in srgb,#b7791f 7%,var(--surface));border-radius:10px}.qd blockquote{margin:0;font-size:.9rem;line-height:1.5}.qd-ar{margin:0 0 2px;font-size:1.05rem;color:#0a4d46;line-height:1.8}.qd figcaption{font-size:.72rem;color:#8a6116;margin-top:3px}
+.dl-sec{border:1.5px solid var(--line);border-radius:14px;padding:8px 12px;margin:6px 0;background:var(--surface)}.dl-sec summary{font-weight:700;cursor:pointer;padding:4px 0}
+.dl-it{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:7px 0;border-top:1px solid var(--line);flex-wrap:wrap}.dl-n{display:flex;gap:8px;align-items:center;font-size:.92rem}.dl-b{display:flex;gap:6px}
+.dl-walls{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:6px 0}.dl-w{display:grid;gap:4px;padding:6px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);font-size:.8rem}.dl-w img{width:100%;aspect-ratio:1179/2556;border-radius:10px;background:var(--line);object-fit:cover}
+#printArea{display:none}
+@media print{
+ @page{size:A4;margin:12mm 12mm 10mm}.pr-page{padding-bottom:15mm}body.pr-land{}
+ body.printing>*:not(#printArea){display:none!important}body.printing #printArea{display:block!important}body.printing{background:#fff!important;padding:0!important}
+ #printArea{font-family:"Atkinson Hyperlegible",system-ui,sans-serif;color:#1f2a37;font-size:10.5pt}
+ #printArea[dir=rtl]{font-family:"IBM Plex Sans Arabic",sans-serif}
+ .pr-page{break-after:page;page-break-after:always}.pr-page:last-of-type{break-after:auto}
+ .pr-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;border-bottom:1.5pt solid #0f766e;padding-bottom:4pt;margin-bottom:6pt}.pr-h b{font-size:15pt;color:#0b5f56}.pr-h span{font-size:9pt;color:#6b7280}
+ .pr-day{display:grid;grid-template-columns:1.35fr 1fr;gap:12pt}.pr-hr{display:grid;grid-template-columns:52pt 1fr;border-bottom:.5pt solid #d1d5db;min-height:27pt;align-items:start}.pr-hr span{font-size:8pt;color:#6b7280;padding-top:3pt}.pr-hr i{font-style:normal;font-size:9pt;padding-top:3pt}
+ .pr-l{font-weight:700;color:#0b5f56;margin:8pt 0 2pt;font-size:10pt}.pr-ln{border-bottom:.5pt solid #d1d5db;min-height:20pt;padding-top:4pt;font-size:9.5pt}.pr-notes{border:.5pt solid #d1d5db;border-radius:4pt;min-height:150pt}
+ .pr-week{display:grid;grid-template-columns:1fr 1fr;gap:8pt}.pr-wd{border:.5pt solid #d1d5db;border-radius:4pt;padding:5pt;min-height:150pt}.pr-wd p{margin:0 0 3pt;color:#0b5f56}.pr-wd small{color:#b7791f}
+ .pr-month{display:grid;grid-template-columns:repeat(7,1fr);border-top:.5pt solid #d1d5db;border-inline-start:.5pt solid #d1d5db}.pr-mh{font-size:8pt;font-weight:700;text-align:center;padding:2pt;color:#6b7280;border-inline-end:.5pt solid #d1d5db;border-bottom:.5pt solid #d1d5db}.pr-mc{min-height:88pt;border-inline-end:.5pt solid #d1d5db;border-bottom:.5pt solid #d1d5db;padding:2pt 3pt}.pr-mc p{margin:0;display:flex;justify-content:space-between}.pr-mc small{color:#b7791f;font-size:7pt}.pr-mc.out{background:#f5f6f7}.pr-mi{font-size:7.5pt;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+ .pr-grid,.pr-tab{width:100%;border-collapse:collapse;margin:4pt 0 8pt}.pr-grid th,.pr-grid td,.pr-tab th,.pr-tab td{border:.5pt solid #d1d5db;padding:2pt 3pt;font-size:8.5pt;height:15pt}.pr-grid thead th,.pr-tab thead th{color:#0b5f56;font-size:8pt}.pr-grid tbody th{text-align:start;font-weight:400;white-space:nowrap}.pr-grid td{text-align:center;color:#9ca3af;font-size:6.5pt;vertical-align:top}.pr-grid.tight th,.pr-grid.tight td{padding:1pt;font-size:6.5pt}
+ .pr-tot div{display:grid;grid-template-columns:120pt 1fr;align-items:end;min-height:20pt}.pr-tot i{border-bottom:.5pt solid #d1d5db;height:16pt}.pr-boxw .pr-notes{min-height:110pt}
+ .qd{margin:0 0 8pt;padding:4pt 8pt;border-inline-start:2pt solid #b7791f;background:#fbf6ec;border-radius:3pt;break-inside:avoid}.qd blockquote{font-size:9pt}.qd-ar{font-size:10.5pt}.qd figcaption{font-size:7.5pt}
+ .pr-foot{position:fixed;bottom:0;background:#fff;padding-top:2pt;inset-inline-end:0;display:flex;align-items:center;gap:6pt;font-size:7.5pt;color:#6b7280}.pr-foot img{width:12mm;height:12mm}
+}
+.ld-ayah .ayt{color:#374151!important;font-size:.95rem!important}.ld-ayah #ayS{color:#a8761c!important;font-size:.74rem!important;font-weight:700;opacity:1!important}
 .dv-now{position:absolute;inset-inline:0;height:2px;background:#e11d48;pointer-events:none}.dv-now::before{content:"";position:absolute;inset-inline-start:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:#e11d48}
 </style>
 
@@ -543,7 +568,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <div id="landing" hidden>
   <div class="ld">
     <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><button class="ld-login" id="ldLogin">Sign in</button></div>
-    <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><span class="orn">﴿</span><u>فَاسْتَقِمْ</u> كَمَا أُمِرْتَ<span class="orn">﴾</span></p><p class="ayt" id="ayT" dir="auto"></p><small id="ayS"></small><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg><span>Listen on Quran.com</span></a></div>
+    <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><small id="ayS"></small><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg><span>Listen on Quran.com</span></a></div>
     <div class="ld-today" id="ldToday" aria-live="polite"></div>
     <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
     <p class="ld-tag">Turn your ADHD into what changes your life.</p>
@@ -553,7 +578,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
     <button class="btn-main ld-go" id="ldStart">Create account</button>
-    <button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button>
+    <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldDl">📥 Free downloads</button></div>
     <p class="ld-free">Free · No ads · 26 languages</p>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
@@ -562,8 +587,8 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="ld-mcard c2"><small>🕌 SALAH</small><div class="ld-dots"><i></i><i></i><i></i><i></i><i></i></div></div>
       <div class="ld-mini"><span class="c3">💧 5/8</span><span class="c4">📖 2/2</span><span class="c5">💰 −12</span></div>
     </div><span class="ld-pop">+1 ✦</span></div>
-    <p class="ld-sec">How it works</p>
-    <div class="ld-how"><div class="c1"><b>✍️</b><span>Write it messy</span></div><div class="c2"><b>✨</b><span>We sort it</span></div><div class="c3"><b>🚀</b><span>Start in 2 minutes</span></div></div>
+    <p class="ld-sec">Fastaqim helps you…</p>
+    <div class="ld-how"><div class="c1"><b>🎯</b><span>Set your goals</span></div><div class="c2"><b>🧩</b><span>Break them into tiny steps</span></div><div class="c3"><b>🚀</b><span>Act today</span></div></div>
     <p class="ld-sec" id="ldDemo">Try it: tap one</p>
     <div class="ldd"><div class="ldd-list"><button class="ldd-t" data-d="0"><i></i><span>Dhuhr salah</span></button><button class="ldd-t" data-d="1"><i></i><span>Drink water</span></button><button class="ldd-t" data-d="2"><i></i><span>Make your bed</span></button></div>
       <div class="ldd-side"><span class="ld-ring big"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="lddP" cx="18" cy="18" r="15"/></svg><b id="lddN">0/3</b></span><span class="ld-spark" id="lddS">✦ 0</span></div></div>
@@ -667,7 +692,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     <div class="card" id="calCard">
       <div class="row" style="justify-content:space-between"><h2><span class="h2i" aria-hidden="true">📅</span>Calendar</h2><div class="seg" role="group" aria-label="View"><button data-cv="day">Day</button><button data-cv="week">Week</button><button data-cv="month">Month</button></div></div>
       <div id="calBody"></div>
-      <div class="row" style="gap:8px;margin-top:10px"><button class="chip" id="icsBtn">📥 Import .ics</button><button class="chip" id="pasteBtn">📋 Paste from email</button><input type="file" id="icsFile" accept=".ics,text/calendar" hidden></div>
+      <div class="row" style="gap:8px;margin-top:10px"><button class="chip" id="icsBtn">📥 Import .ics</button><button class="chip" id="pasteBtn">📋 Paste from email</button><button class="chip" id="prBtn">🖨️ Print / PDF</button><button class="chip" id="dlBtn">📥 Free downloads</button><input type="file" id="icsFile" accept=".ics,text/calendar" hidden></div>
     </div>
     <div class="card">
       <details id="coachNotes">
@@ -2944,11 +2969,12 @@ const AYAH={
  yo:['<u>Dúró ṣinṣin</u> gẹ́gẹ́ bí A ṣe pa ìwọ… láṣẹ.','Abu Rahimah Mikael Aykyuni',125,'Dúró ṣinṣin'],
  'zh-CN':['你应当按照天命而<u>遵循正路</u>。','马坚',56,'遵循正路']
 };
+const QWORD={en:"Qur'an",om:"Qur'aana",so:'Quraanka',fr:'Coran',de:'Koran',es:'Corán',it:'Corano',pt:'Alcorão',nl:'Koran',tr:"Kur'an",id:"Al-Qur'an",ms:'Al-Quran',ur:'قرآن',fa:'قرآن',ps:'قرآن',bn:'কুরআন',hi:'क़ुरआन',ru:'Коран',sw:"Qur'ani",ha:"Alƙur'ani",yo:'Al-Kurani',uz:'Qurʼon',zh:'古兰经',am:'ቁርኣን'};
 function ayahApply(l){const a=AYAH[l]||AYAH.en,ar=l==='ar';
   const t=$('ayT');if(t){t.innerHTML=a[0];t.lang=AYAH[l]?l.split('-')[0]:'en';t.dir=RTL.includes(l)?'rtl':'ltr'}
-  if($('ayS'))$('ayS').textContent=(ar?'سورة هود ١١٢':'Hūd 11:112')+' · '+a[1];
+  if($('ayS'))$('ayS').textContent=ar?'القرآن الكريم، سورة هود ١١٢ (تفسير السعدي)':(QWORD[l]||QWORD[l.split('-')[0]]||"Qur'an")+', Hūd 11:112';
   if($('ayL'))$('ayL').href=ar?'https://quran.com/ar/11:112/tafsirs/ar-tafseer-al-saddi':'https://quran.com/11:112?translations='+(a[2]||131);
-  document.querySelectorAll('#ldName,#hdName').forEach(n=>{n.textContent=ar?'فَاسْتَقِمْ':a[3];n.classList.toggle('arq',ar);n.lang=ar?'ar':'';n.dir=ar?'rtl':'auto'});
+  document.querySelectorAll('#ldName,#hdName').forEach(n=>{n.textContent=ar?'فَٱسْتَقِمْ':a[3];n.classList.toggle('arq',ar);n.lang=ar?'ar':'';n.dir=ar?'rtl':'auto'});
   if($('ldLangC')){const nm=LNAME[l]||((LANGS2.find(x=>x[0]===l)||[])[1])||l;$('ldLangC').textContent=nm}}
 
 /* hand-written strings for the four pinned languages: [en, ar, om, so] */
@@ -3288,6 +3314,7 @@ const X40=[
 ['📲 Add to Home Screen','📲 أضف إلى الشاشة الرئيسية','📲 Gara Home Screen dabali','📲 Ku dar shaashadda hore'],
 ['This is a self-help guide, not therapy or medical care.','هذا دليل للمساعدة الذاتية، وليس علاجًا ولا رعاية طبية.','Kun qajeelcha of-gargaarsaa ti, yaala ykn kunuunsa fayyaa miti.','Kani waa hage is-caawin ah, ma aha daaweyn ama daryeel caafimaad.'],
 ['Free · No ads · 26 languages','مجاني · بلا إعلانات · 26 لغة','Bilisa · Beeksisa malee · Afaan 26','Bilaash · Xayeysiis la\'aan · 26 luqadood'],
+['Fastaqim helps you…','فاستقم يساعدك على…','Fastaqim si gargaara…','Fastaqim wuxuu kaa caawiyaa…'],['Set your goals','تحديد أهدافك','Kaayyoo kee kaa\'uu','Dejinta hadafyadaada'],['Break them into tiny steps','تقسيمها إلى خطوات صغيرة','Tarkaanfii xixiqqaatti qooduu','U kala jarista tallaabooyin yaryar'],['Act today','البدء اليوم','Har\'a hojjechuu','Ku dhaqaaqidda maanta'],
 ['It\'s time for','حان وقت','Yeroon','Waa waqtigii']
 ];
 X40.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
@@ -3360,6 +3387,7 @@ function renderDayView(){const base=new Date();const dt=addDays(base,CAL.off),d=
   let rows='';for(let h=0;h<24;h++){const here=items.filter(x=>Math.floor(x.m/60)===h).sort((a,b)=>a.m-b.m);
     rows+=`<div class="dv-h" data-dvh="${h}"><span class="dv-l">${fmtHM(new Date(2000,0,1,h))}</span><span class="dv-c">${here.map(x=>x.html).join('')}${nowM>=h*60&&nowM<h*60+60?`<i class="dv-now" style="top:${(nowM-h*60)/60*100}%"></i>`:''}</span></div>`}
   $('calBody').innerHTML=`<div class="cal-nav"><button class="icon-btn" data-co="-1" aria-label="Previous day">◀</button><b>${dt.toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'})}<small class="hj">🌙 ${hijri(dt)}</small></b><button class="icon-btn" data-co="1" aria-label="Next day">▶</button></div>
+   ${quoteHTML(dt)}
    ${CAL.off?`<button class="chip" data-dtoday style="align-self:center">${tl('Today')}</button>`:''}
    ${untimed.length?`<div class="dv-all">${untimed.map(t=>`<button class="dv-it${t.done?' d':''}" data-dvt="${t.id}"><bdi>${esc(t.title)}</bdi></button>`).join('')}</div>`:''}
    ${P?'':`<button class="chip" id="dvLoc" style="align-self:flex-start">${tl('📍 Use my location')} · ${tl('Salah times')}</button>`}
@@ -3476,6 +3504,247 @@ function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Dat
   $('ldtLoc').onclick=()=>locAsk(ldToday)}
 setInterval(()=>{const l=$('landing');if(l&&!l.hidden)ldToday()},30000);
 
+/* ---------- daily inspiration: Sahih hadith, Sunni scholars, then well-known wise people (verified attributions only) ---------- */
+const NB={en:'Prophet Muhammad ﷺ',ar:'النبي ﷺ',om:'Nabi Muhammad ﷺ',so:'Nabi Muxammad ﷺ'};
+const QUOTES=[
+{t:'h',ref:'Bukhari 6464 · Muslim 783',ar:'أحبُّ الأعمالِ إلى اللهِ أدومُها وإن قلَّ',en:'The most beloved deeds to Allah are the most consistent, even if small.',om:'Hojiiwwan Rabbiitti jaallatamoo ta\'an kanneen itti fufiinsaan hojjetamanidha, yoo xixiqqaatanillee.',so:'Camalada Alle u jecel yihiin waa kuwa joogtada ah, xitaa haddii ay yar yihiin.'},
+{t:'h',ref:'Bukhari 6412',ar:'نعمتانِ مغبونٌ فيهما كثيرٌ من الناسِ: الصحةُ والفراغُ',en:'Two blessings many people lose out on: health and free time.',om:'Kennaawwan lama namoonni baay\'een irratti miliqsan: fayyaa fi yeroo duwwaa.',so:'Laba nicmo oo dad badani ka khasaaraan: caafimaadka iyo waqtiga bannaan.'},
+{t:'h',ref:'Muslim 2664',ar:'احرصْ على ما ينفعُك، واستعنْ باللهِ ولا تعجزْ',en:'Strive for what benefits you, seek Allah\'s help, and do not give up.',om:'Waan si fayyadu irratti cimi, Rabbiin gargaarsa gaafadhu, hin dadhabin.',so:'Ku dadaal waxa ku anfacaya, Alle kaalmo weydiiso, hana is dhiibin.'},
+{t:'h',ref:'Bukhari 1 · Muslim 1907',ar:'إنما الأعمالُ بالنياتِ',en:'Actions are only by intentions.',om:'Hojiiwwan niyyaadhaan qofa.',so:'Camalladu waxay ku xiran yihiin niyadda oo keliya.'},
+{t:'h',ref:'al-Adab al-Mufrad 479',ar:'إن قامتِ الساعةُ وفي يدِ أحدِكم فسيلةٌ، فإن استطاع ألا تقومَ حتى يغرسَها فليغرسْها',en:'If the Hour comes while one of you holds a sapling, and he can plant it before it comes, let him plant it.',om:'Yoo Sa\'aatiin dhufte harka nama keessan keessa biqiltuun jiraatee, dhaabuu yoo danda\'e haa dhaabu.',so:'Haddii Saacaddu dhacdo adigoo gacanta ku haya geed yar, haddii aad beeri karto ka hor, beer.'},
+{t:'h',ref:'Bukhari 6416',ar:'كنْ في الدنيا كأنك غريبٌ أو عابرُ سبيلٍ',en:'Be in this world as if you were a stranger or a traveller.',om:'Addunyaa kana keessatti akka orma ykn imaltuu karaa irra darbuu ta\'i.',so:'Adduunyada ku noqo sidii qariib ama socdaal jidka maraya.'},
+{t:'h',ref:'Muslim 2699',ar:'من سلكَ طريقًا يلتمسُ فيه علمًا سهَّلَ اللهُ له به طريقًا إلى الجنةِ',en:'Whoever takes a path seeking knowledge, Allah makes easy for him a path to Paradise.',om:'Namni beekumsa barbaaduuf karaa qabate, Rabbiin karaa Jannataa isaaf laaffisa.',so:'Qofkii jid u maraa cilmi doon, Alle wuxuu u fududeeyaa jid Jannada loo maro.'},
+{t:'h',ref:'Bukhari 69',ar:'يسِّروا ولا تعسِّروا، وبشِّروا ولا تنفِّروا',en:'Make things easy, not hard. Give good news, do not drive people away.',om:'Laaffisaa malee hin cimsinaa. Oduu gaarii himaa malee hin baqachiisinaa.',so:'Fududeeya ha adkeynina. Bishaareeya ha fogeynina.'},
+{t:'h',ref:'Bukhari 2989 · Muslim 1009',ar:'الكلمةُ الطيبةُ صدقةٌ',en:'A good word is charity.',om:'Jechi gaariin sadaqaadha.',so:'Erayga wanaagsani waa sadaqo.'},
+{t:'h',ref:'Muslim 2626',ar:'لا تحقرنَّ من المعروفِ شيئًا، ولو أن تلقى أخاك بوجهٍ طلْقٍ',en:'Do not belittle any good deed, even meeting your brother with a cheerful face.',om:'Waan gaarii tokkollee hin tuffatin, obboleessa kee fuula gammadaa waliin simachuu illee.',so:'Ha yasyeelin wax wanaag ah, xitaa inaad walaalkaa ku soo dhaweyso waji furfuran.'},
+{t:'h',ref:'Tirmidhi 2517',ar:'اعقِلْها وتوكَّلْ',en:'Tie it, and trust in Allah.',om:'Hidhi, achii Rabbitti hirkadhu.',so:'Xir, kadibna Alle tala saaro.'},
+{t:'h',ref:'Bukhari 6114 · Muslim 2609',ar:'ليس الشديدُ بالصُّرَعةِ، إنما الشديدُ الذي يملكُ نفسَه عند الغضبِ',en:'The strong one is not the wrestler. The strong one controls himself when angry.',om:'Jabaan kan nama lolaan injifatu miti. Jabaan kan yeroo aaru of to\'atu.',so:'Kan xoogga lihi ma aha kan dadka la legdama. Kan xoogga lihi waa kan is xakameeya marka uu cadhoodo.'},
+{t:'h',ref:'Bukhari 5027',ar:'خيرُكم من تعلَّمَ القرآنَ وعلَّمَه',en:'The best of you are those who learn the Quran and teach it.',om:'Isin keessaa kan caalu kan Qur\'aana baratee barsiisu.',so:'Kiinna ugu khayrka badani waa kan Quraanka barta oo bara.'},
+{t:'s',by:{en:'Ibn al-Qayyim',ar:'ابن القيم',om:'Ibnu al-Qayyim',so:'Ibnu al-Qayyim'},ref:'al-Fawa\'id',ar:'إضاعةُ الوقتِ أشدُّ من الموتِ؛ لأن إضاعةَ الوقتِ تقطعُك عن اللهِ والدارِ الآخرةِ، والموتُ يقطعُك عن الدنيا وأهلِها',en:'Wasting time is worse than death: wasting time cuts you off from Allah and the Hereafter, while death cuts you off from this world and its people.',om:'Yeroo balleessuun du\'a caala: yeroo balleessuun Rabbii fi Aakhiraa irraa si kuta, du\'i garuu addunyaa fi namoota ishee irraa si kuta.',so:'Waqti lumintu way ka daran tahay dhimashada: waqti lumintu waxay kaa goysaa Alle iyo Aakhiro, dhimashaduna waxay kaa goysaa adduunka iyo dadkiisa.'},
+{t:'s',by:{en:'al-Hasan al-Basri',ar:'الحسن البصري',om:'al-Hasan al-Basrii',so:'al-Xasan al-Basri'},ref:'Hilyat al-Awliya',ar:'يا ابنَ آدمَ، إنما أنت أيامٌ، فإذا ذهبَ يومٌ ذهبَ بعضُك',en:'O son of Adam, you are only days. Whenever a day goes, part of you goes.',om:'Yaa ilma Aadam, ati guyyoota qofa. Guyyaan tokko yeroo darbu, kutaan kee darba.',so:'Ina Aadamow, waxaad tahay maalmo keliya. Marka maalin tagto, qayb adiga ka mid ah ayaa tagta.'},
+{t:'s',by:{en:'Imam al-Shafi\'i',ar:'الإمام الشافعي',om:'Imaam ash-Shaafi\'ii',so:'Imaam ash-Shaafici'},ref:'al-Jawab al-Kafi',ar:'نفسُك إن لم تشغلْها بالحقِّ شغلتْك بالباطلِ',en:'If you do not keep your soul busy with what is right, it will keep you busy with what is wrong.',om:'Lubbuu kee waan sirriitiin yoo hin qabanne, ishee waan sobaatiin si qabatti.',so:'Naftaada haddii aadan ku mashquulin xaqa, iyadaa kugu mashquulin doonta baadilka.'},
+{t:'s',by:{en:'Umar ibn Abd al-Aziz',ar:'عمر بن عبد العزيز',om:'Umar ibnu Abdul-Aziiz',so:'Cumar ibnu Cabdulcasiis'},ref:'Hilyat al-Awliya',ar:'إن الليلَ والنهارَ يعملانِ فيك، فاعملْ فيهما',en:'Night and day are working on you, so work in them.',om:'Halkaa fi guyyaan sirratti hojjetu, kanaaf ati isaan keessatti hojjedhu.',so:'Habeenka iyo maalintu way kugu shaqeeyaan, ee adna ku shaqee.'},
+{t:'s',by:{en:'Ibn Taymiyyah',ar:'ابن تيمية',om:'Ibnu Taymiyyah',so:'Ibnu Taymiyah'},ref:'al-Wabil al-Sayyib',ar:'ما يصنعُ أعدائي بي؟ أنا جنتي وبستاني في صدري',en:'What can my enemies do to me? My garden and my paradise are in my heart.',om:'Diinonni koo maal na godhu? Jannanni koo fi biqiltuun koo onnee koo keessa jira.',so:'Maxay cadaawayaashaydu i yeeli karaan? Jannadayda iyo beertaydu waxay ku jiraan laabtayda.'},
+{t:'w',by:{en:'Nelson Mandela',ar:'نيلسون مانديلا',om:'Nelson Mandela',so:'Nelson Mandela'},ref:'Long Walk to Freedom',en:'I learned that courage was not the absence of fear, but the triumph over it.',ar:'تعلّمتُ أن الشجاعة ليست غياب الخوف، بل الانتصار عليه.',om:'Akka ijaajjummaan sodaa dhabuu hin taane, sodaa mo\'achuu ta\'e baradhe.',so:'Waxaan bartay in geesinimadu aanay ahayn cabsi la\'aan, balse ka adkaanshaha cabsida.'},
+{t:'w',by:{en:'Nelson Mandela',ar:'نيلسون مانديلا',om:'Nelson Mandela',so:'Nelson Mandela'},ref:'2003',en:'Education is the most powerful weapon which you can use to change the world.',ar:'التعليم هو أقوى سلاح يمكنك أن تستخدمه لتغيير العالم.',om:'Barnootni meeshaa addunyaa jijjiiruuf fayyadamtu keessaa isa cimaadha.',so:'Waxbarashadu waa hubka ugu xooga badan ee aad u isticmaali karto beddelidda adduunka.'},
+{t:'w',by:{en:'Benjamin Franklin',ar:'بنجامين فرانكلين',om:'Benjamin Franklin',so:'Benjamin Franklin'},ref:'Poor Richard\'s Almanack, 1737',en:'Well done is better than well said.',ar:'العمل الجيد خيرٌ من القول الجيد.',om:'Hojjechuun gaarii dubbachuu gaarii caala.',so:'Wax si fiican loo sameeyay ayaa ka wanaagsan wax si fiican loo yiri.'},
+{t:'w',by:{en:'Will Durant',ar:'ويل ديورانت',om:'Will Durant',so:'Will Durant'},ref:'The Story of Philosophy, 1926',en:'We are what we repeatedly do. Excellence, then, is not an act but a habit.',ar:'نحن ما نفعله مرارًا. فالإتقان إذن ليس فعلًا بل عادة.',om:'Nuti waan irra deddeebinee hojjennudha. Kanaaf gaarummaan gocha tokko miti, amala.',so:'Waxaan nahay waxa aan si joogto ah u samayno. Wanaaggu ma aha fal mar dhaca, ee waa caado.'}
+];
+function quoteFor(d){const n=Math.floor((pd(dkey(d))-new Date(2026,0,1))/864e5);const q=QUOTES[((n%QUOTES.length)+QUOTES.length)%QUOTES.length];const l=LANG in NB?LANG:'en';
+  const who=q.t==='h'?NB[l]:q.by[l]||q.by.en;return{text:q[l]||q.en,ar:q.t!=='w'&&l!=='ar'?q.ar:'',by:who,ref:q.ref,t:q.t}}
+function quoteHTML(d){const q=quoteFor(d);return `<figure class="qd">${q.ar?`<p class="ar qd-ar" lang="ar" dir="rtl">«${esc(q.ar)}»</p>`:''}<blockquote dir="auto">${q.t==='w'||LANG==='ar'&&q.t!=='w'?'':''}${LANG==='ar'&&q.t!=='w'?'«'+esc(q.text)+'»':'“'+esc(q.text)+'”'}</blockquote><figcaption>${esc(q.by)} · <bdi>${esc(q.ref)}</bdi></figcaption></figure>`}
+
+/* ---------- print the planner / fillable PDF, with a small Fastaqim name + QR on every page ---------- */
+const QR_PNG='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALoAAAC6CAIAAACWbMCmAAAD+UlEQVR4nO3dTY7kNACAUQZxEPZcgPuvuAB7btLs2KRG8mf8U9V6bznqTlI9n6yynDg/vr6+foExv96+AD6JXAjkQiAXArkQ/Pb8p9//+PP8dfznn7//OnauVZ905Jqf55r7rZOeV2h0IZALgVwI5EIgF4IXM6OnfbOVkW/++2YHz881d66T85e7/xdGFwK5EMiFQC4EciEYmhk9zc0F5r7Vj8xf5n5m5Fz7zF3hyHFGzJ3L6EIgFwK5EMiFQC4EkzOju1bNcVbNTeaOfHIWtorRhUAuBHIhkAuBXAg+YGa0aoVo1Z17q1Z2zIz45uRCIBcCuRDIhWByZnTyW/2qO+Xmjvw0tx508mmpfYwuBHIhkAuBXAjkQjA0M7q7Q9q+p4pG7Js9feJudUYXArkQyIVALgRyIfjxie8zOrnnwMl7+d7//jqjC4FcCORCIBcCuRC8mBntmwvsW+s5+XzQnJO7be/bfcLoQiAXArkQyIVALgRDa0Yn1zvuzqdO7mh38o67Vb9ldCGQC4FcCORCIBeCoTWjEfvuMZs7+5y7c6WRI49Y9Xc2M+J/kQuBXAjkQiAXgqEdGPbtDHD3DrdVeynMnevu/nXupmM7uRDIhUAuBHIh2Pg+o1W7ENzdd+7k80Ej3E3Hx5ALgVwI5EIgF4IXM6OT7wY6uRvb3aeTTq4QjZi7HqMLgVwI5EIgFwK5EGx8zujp3Y48d64R+95VtGr1Z+5cRhcCuRDIhUAuBHIhGFozmpt37PueP+LuXnlzR346uabmOSMWkwuBXAjkQiAXgmVrRnfd3W171fWMsGbEx5ALgVwI5EIgF4KNa0YjR346uYfbqrnSyZWdOav+qkYXArkQyIVALgRyIXgxM9q3s9nJvenunmvf7nmrzj43uzS6EMiFQC4EciGQC8GLu+mevsea0d3d4Va9CffufNPoQiAXArkQyIVALgRDzxnd3R1u1Tf/ud86+dlX2Xd3n9GFQC4EciGQC4FcCDa+z+jdfI8dueeOvGqVzehCIBcCuRDIhUAuBEPPGZ30/Db+bm+eXbXSNOLuM19PRhcCuRDIhUAuBHIheDEzetq3HnTyTUAnV7Xe7c2zq45sdCGQC4FcCORCIBeCoZnR08m3r+57f9Ddecfzeu7udDFyHKMLgVwI5EIgFwK5EEzOjE5aNevZd4fbKvt2e1h1zUYXArkQyIVALgRyIfiAmdHJ97rOzbDe7c2z+/aIMLoQyIVALgRyIZALweTM6OQzOyffmvr0bvfg3d3bwehCIBcCuRDIhUAuBEMzo7u71e172+ncz+y7n23fTnQjRo5jdCGQC4FcCORCIBeCF296hZ8xuhDIhUAuBHIhkAvBv5UEMe4w4lxzAAAAAElFTkSuQmCC';
+const SITE='alfirdows.github.io/fastaqim';
+const X40P=[
+['🖨️ Print / PDF','🖨️ طباعة / PDF','🖨️ Maxxansi / PDF','🖨️ Daabac / PDF'],['Print the planner','اطبع المخطِّط','Karoora maxxansi','Daabac qorshaha'],
+['With my to-dos','مع مهامي','Hojiiwwan koo waliin','Hawlahayga la socda'],['Blank','فارغ','Duwwaa','Bannaan'],
+['🖨️ Print or save as PDF','🖨️ اطبع أو احفظ PDF','🖨️ Maxxansi ykn PDF taasisi','🖨️ Daabac ama u keydi PDF'],['✍️ PDF you can type in','✍️ ملف PDF تكتب فيه','✍️ PDF itti barreessitu','✍️ PDF aad wax ku qori karto'],
+['On iPhone: Print, then pinch the preview out to get a PDF.','على الآيفون: اختر «طباعة» ثم باعد بإصبعين على المعاينة لتحصل على PDF.','iPhone irratti: "Print" filadhu, achii PDF argachuuf fakkii dura-argii quba lamaan bal\'isi.','iPhone-ka: dooro "Print", kadib labo farood ku kala bixi muuqaalka si aad PDF u hesho.'],
+['Top 3','أهم 3','Ijoo 3','Ugu muhiimsan 3'],['To-do','المهام','Hojiiwwan','Hawlaha'],['Notes','ملاحظات','Yaadannoo','Qoraallo'],['Making the PDF…','جارٍ تجهيز الملف…','PDF qopheessaa jira…','PDF-ka waa la diyaarinayaa…'],
+['Could not make the PDF. Check your internet and try again.','تعذّر إنشاء الملف. تحقّق من الإنترنت وحاول مرة أخرى.','PDF uumuun hin danda\'amne. Interneetii kee mirkaneessiitii irra deebi\'ii yaali.','PDF-ka lama samayn karin. Hubi internetkaaga oo isku day mar kale.']];
+X40P.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const PR={view:'day',fill:true};
+function prDays(view){const now=new Date();if(view==='range'){const a=pd(PR.from||dkey()),b=pd(PR.to||PR.from||dkey());const n=Math.max(0,Math.min(30,Math.round((b-a)/864e5)));return Array.from({length:n+1},(_,i)=>addDays(a,i))}if(view==='day')return[addDays(now,CAL.view==='day'?CAL.off:0)];
+  if(view==='week'){const st=addDays(now,-now.getDay()+(CAL.view==='week'?CAL.off*7:0));return [0,1,2,3,4,5,6].map(i=>addDays(st,i))}
+  const first=new Date(now.getFullYear(),now.getMonth()+(CAL.view==='month'?CAL.off:0),1);return Array.from({length:new Date(first.getFullYear(),first.getMonth()+1,0).getDate()},(_,i)=>addDays(first,i))}
+function printOpen(){PR.view=CAL.view;const draw=()=>{modalCard(`<p class="label">${tl('Print the planner')}</p>
+  <div class="seg" role="group">${['day','week','month','range'].map(v=>`<button data-pv="${v}" aria-pressed="${PR.view===v}">${tl(v==='range'?'Pick days':v[0].toUpperCase()+v.slice(1))}</button>`).join('')}</div>
+  ${PR.view==='range'?`<div class="row"><label class="small">${tl('From')} <input type="date" id="prF" value="${PR.from||dkey()}"></label><label class="small">${tl('To')} <input type="date" id="prT" value="${PR.to||dkey(addDays(new Date(),6))}"></label></div><p class="small muted">${tl('Up to 31 days, one page each.')}</p>`:''}
+  <div class="seg" role="group"><button data-pf="1" aria-pressed="${PR.fill}">${tl('With my to-dos')}</button><button data-pf="0" aria-pressed="${!PR.fill}">${tl('Blank')}</button></div>
+  <button class="btn-main" id="prGo">${tl('🖨️ Print or save as PDF')}</button><button class="btn-calm" id="prPdf">${tl('✍️ PDF you can type in')}</button>
+  <p class="small muted">${tl('On iPhone: Print, then pinch the preview out to get a PDF.')}</p><button class="btn-ghost small" id="prX">${tl('Close')}</button>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>{PR.view=b.dataset.pv;draw()});B.querySelectorAll('[data-pf]').forEach(b=>b.onclick=()=>{PR.fill=b.dataset.pf==='1';draw()});
+  if($('prF')){PR.from=$('prF').value;PR.to=$('prT').value;$('prF').onchange=e=>PR.from=e.target.value;$('prT').onchange=e=>PR.to=e.target.value}$('prX').onclick=modalClose;$('prGo').onclick=()=>{modalClose();printNow()};$('prPdf').onclick=()=>pdfMake()};draw()}
+const prItems=d=>PR.fill?dayItems(dkey(d)).tasks:[];
+function printNow(){const days=prDays(PR.view),rtl=document.documentElement.dir==='rtl';let h='';
+  const head=(t,s)=>`<div class="pr-h"><b>${esc(t)}</b><span>${esc(s)}</span></div>`;
+  if(PR.view==='day'||PR.view==='range'){for(const d of days){const T=prItems(d),P=salahFor(d);
+    h+=`<section class="pr-page">${head(d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),hijri(d))}${quoteHTML(d)}<div class="pr-day"><div class="pr-hours">${Array.from({length:19},(_,i)=>i+5).map(hr=>{const its=T.filter(t=>t.time&&+t.time.slice(0,2)===hr).map(t=>esc(t.title)).join(' · ');
+      const sl=P?SAL.filter(([k])=>P[k].getHours()===hr).map(([k,n])=>'🕌 '+tl(n)+' '+fmtHM(P[k])).join(' · '):'';return `<div class="pr-hr"><span>${fmtHM(new Date(2000,0,1,hr))}</span><i>${[sl,its].filter(Boolean).join(' · ')}</i></div>`}).join('')}</div>
+      <div class="pr-side"><p class="pr-l">${tl('Top 3')}</p>${[0,1,2].map(i=>{const t=T.filter(x=>x.top)[i];return `<div class="pr-ln">☐ ${t?esc(t.title):''}</div>`}).join('')}
+      <p class="pr-l">${tl('To-do')}</p>${Array.from({length:8},(_,i)=>{const t=T.filter(x=>!x.top&&!x.time)[i];return `<div class="pr-ln">☐ ${t?esc(t.title):''}</div>`}).join('')}<p class="pr-l">${tl('Notes')}</p><div class="pr-notes"></div></div></div></section>`}}
+  else if(PR.view==='week'){h+=`<section class="pr-page">${head(days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hijri(days[0],{month:'long',year:'numeric'}))}${quoteHTML(days[0])}<div class="pr-week">${days.map(d=>`<div class="pr-wd"><p><b>${d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})}</b> <small>${hday(d)}</small></p>${prItems(d).map(t=>`<div class="pr-ln">☐ ${t.time?fmtHM(new Date(2000,0,1,+t.time.slice(0,2),+t.time.slice(3))) +' ':''}${esc(t.title)}</div>`).join('')}<div class="pr-blank"></div></div>`).join('')}<div class="pr-wd"><p><b>${tl('Notes')}</b></p><div class="pr-blank"></div></div></div></section>`}
+  else{const f=days[0],st=addDays(f,-f.getDay());h+=`<section class="pr-page">${head(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),hijri(f,{month:'long'})+' – '+hijri(days[days.length-1],{month:'long',year:'numeric'}))}${quoteHTML(days[0])}<div class="pr-month">${[0,1,2,3,4,5,6].map(i=>`<span class="pr-mh">${addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'})}</span>`).join('')}${Array.from({length:42},(_,i)=>{const d=addDays(st,i),out=d.getMonth()!==f.getMonth();return `<div class="pr-mc${out?' out':''}"><p><b>${d.getDate()}</b><small>${hday(d)}</small></p>${out?'':prItems(d).slice(0,3).map(t=>`<div class="pr-mi">${esc(t.title)}</div>`).join('')}</div>`}).join('')}</div></section>`}
+  let a=$('printArea');if(!a){a=document.createElement('div');a.id='printArea';document.body.appendChild(a)}
+  a.dir=rtl?'rtl':'ltr';a.innerHTML=h+`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer>`;
+  document.body.classList.add('printing');const done=()=>{document.body.classList.remove('printing');removeEventListener('afterprint',done)};addEventListener('afterprint',done);setTimeout(()=>{try{window.print()}catch(e){done()}},120)}
+/* fillable PDF, made on the phone (pdf-lib, free) */
+function loadPdfLib(){return window.PDFLib?Promise.resolve(window.PDFLib):new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js';s.onload=()=>ok(window.PDFLib);s.onerror=no;document.head.appendChild(s)})}
+function txtImg(t,px,bold,color){const c=document.createElement('canvas'),x=c.getContext('2d'),k=3,ff=LANG==='ar'?'"IBM Plex Sans Arabic",sans-serif':'"Atkinson Hyperlegible",system-ui,sans-serif';x.font=`${bold?700:400} ${px*k}px ${ff}`;const w=Math.ceil(x.measureText(t).width)+4;
+  c.width=Math.max(4,w);c.height=Math.ceil(px*k*1.45);x.font=`${bold?700:400} ${px*k}px ${ff}`;x.fillStyle=color||'#1f2a37';x.textBaseline='middle';x.direction=LANG==='ar'?'rtl':'ltr';x.textAlign=LANG==='ar'?'right':'left';x.fillText(t,LANG==='ar'?c.width-2:2,c.height/2);return{url:c.toDataURL('image/png'),w:c.width/k,h:c.height/k}}
+async function pdfMake(){toast(tl('Making the PDF…'));let L;try{L=await loadPdfLib()}catch(e){toast(tl('Could not make the PDF. Check your internet and try again.'));return}
+  try{const {PDFDocument,rgb,StandardFonts}=L,doc=await PDFDocument.create(),form=doc.getForm(),hv=await doc.embedFont(StandardFonts.Helvetica),qr=await doc.embedPng(QR_PNG),W=595,H=842,M=36,ar=LANG==='ar';
+    const img=async(t,px,x,y,bold,color,page,alignR)=>{if(!t)return 0;const I=txtImg(t,px,bold,color),e=await doc.embedPng(I.url);page.drawImage(e,{x:alignR?x-I.w:x,y:y-I.h/2,width:I.w,height:I.h});return I.w};
+    const line=(p,x1,y1,x2,y2,c)=>p.drawLine({start:{x:x1,y:y1},end:{x:x2,y:y2},thickness:.6,color:c||rgb(.82,.85,.88)});
+    let fid=0;const fld=(p,x,y,w,h,val,multi)=>{const f=form.createTextField('f'+(fid++));if(multi)f.enableMultiline();f.addToPage(p,{x,y,width:w,height:h,borderWidth:0,backgroundColor:rgb(1,1,1),font:hv});f.setFontSize(multi?9:10);if(val){try{f.setText(val)}catch(e){}}return f};
+    const chk=(p,x,y)=>{const c=form.createCheckBox('c'+(fid++));c.addToPage(p,{x,y,width:9,height:9,borderWidth:.8,borderColor:rgb(.5,.55,.6)})};
+    const foot=async p=>{p.drawImage(qr,{x:ar?M:W-M-34,y:14,width:34,height:34});await img('Fastaqim · '+SITE,7.5,ar?M+40:W-M-40,31,false,'#6b7280',p,!ar)};
+    const days=prDays(PR.view),X=ar?W-M:M;
+    const qline=async(p,d,y,maxW)=>{const q=quoteFor(d);const t=(LANG==='ar'&&q.t!=='w'?'«'+q.text+'»':'“'+q.text+'”');let fs=8.5,I=txtImg(t,fs,false,'#374151');while(I.w>maxW&&fs>5.6){fs-=.3;I=txtImg(t,fs,false,'#374151')}const e=await doc.embedPng(I.url);const w=Math.min(I.w,maxW),h=I.h*w/I.w;const PWd=p.getWidth();p.drawImage(e,{x:ar?PWd-M-w:M,y:y-h/2,width:w,height:h});await img('— '+q.by+' · '+q.ref,7,ar?PWd-M:M,y-11,false,'#b7791f',p,ar)};
+    const title=async(p,t,s)=>{await img(t,15,X,H-M-8,true,'#0b5f56',p,ar);await img(s,9,X,H-M-26,false,'#6b7280',p,ar);line(p,M,H-M-36,W-M,H-M-36,rgb(.06,.46,.43))};
+    if(PR.view==='day'||PR.view==='range'){for(const d of days){const T=prItems(d),P=salahFor(d),p=doc.addPage([W,H]);await title(p,d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'}),hijri(d));await qline(p,d,H-M-50,W-2*M);
+      const top=H-M-74,rowH=(top-70)/19,colW=330,lx=ar?W-M-colW:M;
+      for(let i=0;i<19;i++){const hr=i+5,y=top-i*rowH;line(p,lx,y-rowH,lx+colW,y-rowH);await img(fmtHM(new Date(2000,0,1,hr)),7.5,ar?lx+colW:lx,y-rowH/2,false,'#6b7280',p,ar);
+        const sl=P?SAL.filter(([k])=>P[k].getHours()===hr).map(([k,n])=>tl(n)+' '+fmtHM(P[k])).join(' · '):'';const it=T.filter(t=>t.time&&+t.time.slice(0,2)===hr).map(t=>t.title).join(' · ');
+        if(sl)await img(sl,7,ar?lx+colW-48:lx+48,y-5,true,'#b7791f',p,ar);fld(p,ar?lx:lx+48,y-rowH+1,colW-50,sl?rowH-10:rowH-2,it)}
+      const sx=ar?M:M+colW+20,sw=W-2*M-colW-20;let y=top;
+      const sec=async(t,n,list)=>{await img(t,10,ar?sx+sw:sx,y-6,true,'#0b5f56',p,ar);y-=16;for(let i=0;i<n;i++){chk(p,ar?sx+sw-10:sx,y-12);fld(p,ar?sx:sx+14,y-16,sw-14,15,list[i]&&list[i].title);line(p,sx,y-17,sx+sw,y-17);y-=20}y-=8};
+      await sec(tl('Top 3'),3,T.filter(x=>x.top));await sec(tl('To-do'),8,T.filter(x=>!x.top&&!x.time));await img(tl('Notes'),10,ar?sx+sw:sx,y-6,true,'#0b5f56',p,ar);y-=14;
+      p.drawRectangle({x:sx,y:70,width:sw,height:y-70,borderColor:rgb(.82,.85,.88),borderWidth:.6});fld(p,sx+2,72,sw-4,y-74,'',true);await foot(p)}}
+    else if(PR.view==='week'){const p=doc.addPage([W,H]);await title(p,days[0].toLocaleDateString(LOC(),{day:'numeric',month:'short'})+' – '+days[6].toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}),hijri(days[0],{month:'long',year:'numeric'}));await qline(p,days[0],H-M-50,W-2*M);
+      const top=H-M-70,bh=(top-64)/4-6,bw=(W-2*M-12)/2;const boxes=[...days,null];
+      for(let i=0;i<8;i++){const col=ar?1-i%2:i%2,row=Math.floor(i/2),x=M+col*(bw+12),y=top-row*(bh+8)-bh,d=boxes[i];p.drawRectangle({x,y,width:bw,height:bh,borderColor:rgb(.82,.85,.88),borderWidth:.6});
+        await img(d?d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric'})+'  ·  '+hday(d):tl('Notes'),9,ar?x+bw-6:x+6,y+bh-10,true,'#0b5f56',p,ar);
+        const its=d?prItems(d).map(t=>(t.time?t.time+' ':'')+t.title).join('\n'):'';fld(p,x+3,y+3,bw-6,bh-22,its,true)}await foot(p)}
+    else{const p=doc.addPage([H,W]),PW=H,PH=W,f=days[0],st=addDays(f,-f.getDay());
+      await img(f.toLocaleDateString(LOC(),{month:'long',year:'numeric'}),15,ar?PW-M:M,PH-M-6,true,'#0b5f56',p,ar);await img(hijri(f,{month:'long'})+' – '+hijri(days[days.length-1],{month:'long',year:'numeric'}),9,ar?PW-M:M,PH-M-24,false,'#6b7280',p,ar);
+      await qline(p,f,PH-M-40,PW-2*M);const top=PH-M-64,cw=(PW-2*M)/7,ch=(top-60)/6;for(let i=0;i<7;i++){const cx=ar?PW-M-(i+1)*cw:M+i*cw;await img(addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'}),8,cx+cw/2-10,top+6,true,'#6b7280',p,false)}
+      for(let i=0;i<42;i++){const d=addDays(st,i),c=i%7,r=Math.floor(i/7),cx=ar?PW-M-(c+1)*cw:M+c*cw,cy=top-(r+1)*ch,out=d.getMonth()!==f.getMonth();p.drawRectangle({x:cx,y:cy,width:cw,height:ch,borderColor:rgb(.82,.85,.88),borderWidth:.6,color:out?rgb(.96,.97,.97):undefined});
+        if(out)continue;await img(String(d.getDate()),9,cx+4,cy+ch-8,true,'#1f2a37',p,false);await img(hday(d),6.5,cx+cw-4,cy+ch-8,false,'#b7791f',p,true);fld(p,cx+2,cy+2,cw-4,ch-17,prItems(d).map(t=>t.title).join('\n'),true)}
+      p.drawImage(qr,{x:ar?M:PW-M-30,y:12,width:30,height:30});await img('Fastaqim · '+SITE,7.5,ar?M+36:PW-M-36,27,false,'#6b7280',p,!ar)}
+    form.updateFieldAppearances(hv);const bytes=await doc.save(),url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+    const a=document.createElement('a');a.href=url;a.download='fastaqim-'+PR.view+'-'+dkey(days[0])+'.pdf';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},8000);modalClose();window.__pdfBytes=bytes.length}
+  catch(e){console.error(e);toast(tl('Could not make the PDF. Check your internet and try again.'))}}
+
+/* ---------- 📥 Free downloads: planner pages, trackers, worksheets, wallpapers (all free, made on the phone) ---------- */
+const X40D=[
+['📥 Free downloads','📥 تنزيلات مجانية','📥 Buufata bilisaa','📥 Soo dejin bilaash ah'],['Planner pages','صفحات المخطِّط','Fuulota karooraa','Bogagga qorshaha'],['Layout samples','نماذج التصميم','Fakkeenya qophii','Tusaalooyin qaab'],
+['Inserts & trackers','إضافات ومتابعات','Dabalataa fi hordoffii','Lifaaqyo iyo la-socod'],['Worksheets, challenges & reflections','أوراق عمل وتحديات ومحاسبة','Waraqaa hojii, qormaata fi of-ilaaluu','Waraaqo shaqo, tartanno iyo milicsi'],['Phone wallpapers','خلفيات للهاتف','Duubee bilbilaa','Sawirrada gadaal ee taleefanka'],
+['Daily page','صفحة يومية','Fuula guyyaa','Bog maalinle'],['Weekly page','صفحة أسبوعية','Fuula torbanii','Bog toddobaadle'],['Monthly page','صفحة شهرية','Fuula ji\'aa','Bog bille'],['Pick days','اختر الأيام','Guyyoota filadhu','Dooro maalmaha'],['From','من','Irraa','Laga bilaabo'],['To','إلى','Hanga','Ilaa'],['Up to 31 days, one page each.','حتى 31 يومًا، صفحة لكل يوم.','Hanga guyyaa 31, guyyaa tokkoof fuula tokko.','Ilaa 31 maalmood, bog walba maalin.'],
+['Sample day (filled in)','يوم نموذجي (معبّأ)','Guyyaa fakkeenyaa (guutame)','Maalin tusaale ah (la buuxiyay)'],['Sample week (filled in)','أسبوع نموذجي (معبّأ)','Torban fakkeenyaa (guutame)','Toddobaad tusaale ah (la buuxiyay)'],
+['Salah tracker','متابعة الصلاة','Hordoffii salaataa','La-socodka salaadda'],['Habit tracker','متابعة العادات','Hordoffii amalaa','La-socodka caadooyinka'],['Monthly budget','ميزانية الشهر','Baajata ji\'aa','Miisaaniyadda bisha'],
+['Morning intention (al-Muhasibi)','نية الصباح (المحاسبي)','Niyyaa ganamaa (al-Muhaasibii)','Niyadda subaxa (al-Muxaasibi)'],['Evening muhasaba (al-Ghazali, 6 steps)','محاسبة المساء (الغزالي، 6 خطوات)','Of-qorannoo galgalaa (al-Gazaalii, tarkaanfii 6)','Is-xisaabinta fiidka (al-Ghazaali, 6 tallaabo)'],['Weekly review','مراجعة الأسبوع','Ilaalcha torbanii','Dib-u-eegista toddobaadka'],['2-minute start','بداية الدقيقتين','Jalqaba daqiiqaa 2','Bilow 2 daqiiqo'],['30-day challenge','تحدّي 30 يومًا','Qormaata guyyaa 30','Tartanka 30 maalmood'],
+['Print','اطبع','Maxxansi','Daabac'],['Download','تنزيل','Buusi','Soo deji'],
+['On time','في وقتها','Yeroo isaatti','Waqtigeeda'],['Quran','القرآن','Qur\'aana','Quraanka'],['Adhkar','الأذكار','Zikrii','Adkaar'],['Habit','العادة','Amala','Caado'],['Date','التاريخ','Guyyaa','Taariikh'],['Item','البند','Wanta','Shay'],['Income','الدخل','Galii','Dakhli'],['Expense','المصروف','Baasii','Kharash'],
+['Total income','مجموع الدخل','Waliigala galii','Wadarta dakhliga'],['Total expenses','مجموع المصروفات','Waliigala baasii','Wadarta kharashka'],['Saved','المُدَّخَر','Kan qusatame','Waxa la keydiyay'],
+['My intention today (niyyah)','نيّتي اليوم','Niyyaa koo har\'aa','Niyaddayda maanta'],['One thing I will avoid','أمر واحد سأتجنّبه','Waan tokko kan ani irraa fagaadhu','Hal shay oo aan ka fogaanayo'],['Dhikr I will keep','ذكرٌ سأحافظ عليه','Zikrii ani eegu','Dikriga aan ilaalinayo'],
+['Musharata: what I promised myself this morning','المشارطة: ما شرطتُه على نفسي صباحًا','Mushaaratah: waan ganama ofiif waadaa gale','Mushaarada: waxa aan subaxa naftayda u ballanqaaday'],['Muraqaba: where I stayed mindful of Allah','المراقبة: أين استحضرتُ مراقبة الله','Muraaqabah: eessatti Rabbiin yaadadhe','Muraaqabo: halka aan Alle ku xusuustay'],
+['Muhasaba: what went well, where I fell short','المحاسبة: ما أحسنتُ فيه وما قصّرتُ','Muhaasabah: waan gaarii fi waan irraa hir\'ate','Muxaasabo: waxa aan si fiican u qabtay iyo halka aan ka gaabiyay'],['Mu\'aqaba: one good deed to make up for it','المعاقبة: عملٌ صالح أستدرك به','Mu\'aaqabah: hojii gaarii tokko kan ittiin deebisu','Mucaaqabo: hal camal wanaagsan oo aan ku magdhabo'],
+['Mujahada: one thing I will push for tomorrow','المجاهدة: أمر واحد أجاهد نفسي عليه غدًا','Mujaahadah: waan tokko kan boru itti cimu','Mujaahado: hal shay oo aan berri ku dadaali doono'],['Mu\'ataba: a kind word to myself','المعاتبة: كلمة لطيفة لنفسي','Mu\'aatabah: jecha gaarii ofiif','Mucaatabo: eray naxariis leh oo naftayda ah'],
+['What went well','ما الذي سار جيدًا','Maaltu gaarii ta\'e','Maxaa si fiican u socday'],['What got in the way','ما الذي أعاقني','Maaltu na dhowwe','Maxaa i hor istaagay'],['What would make it 10% easier','ما الذي يجعله أسهل بـ10%','Maaltu %10 laaffisa','Maxaa ka dhigi lahaa 10% ka fudud'],['Top 3 for next week','أهم 3 للأسبوع القادم','Ijoo 3 torban itti aanuuf','3-da ugu muhiimsan toddobaadka dambe'],
+['The task','المهمة','Hojii','Hawsha'],['Its first move (2 minutes)','أول حركة فيها (دقيقتان)','Tarkaanfii jalqabaa (daqiiqaa 2)','Tallaabadeeda koowaad (2 daqiiqo)'],['When: right after…','متى: مباشرة بعد…','Yoom: battaluma booda…','Goorma: isla markiiba kadib…'],['Where','أين','Eessatti','Halkee'],['My small reward','مكافأتي الصغيرة','Badhaasa koo xiqqaa','Abaalmarintayda yar'],
+['Tick each day you started','ضع علامة على كل يوم بدأت فيه','Guyyaa jalqabde hunda mallatteessi','Calaamadee maalin kasta oo aad bilowday'],['Week','أسبوع','Torban','Toddobaad'],
+['My challenge','تحدّيي','Qormaata koo','Tartankayga'],['Why it matters to me','لماذا يهمّني','Maaliif naaf barbaachisa','Sababta ay ii muhiim u tahay'],['My reward at the end','مكافأتي في النهاية','Badhaasa koo dhuma irratti','Abaalmarintayda dhammaadka'],
+['Start in 2 minutes.','ابدأ في دقيقتين.','Daqiiqaa 2 keessatti jalqabi.','Ku bilow 2 daqiiqo.']];
+X40D.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const MONTH0=()=>{const n=new Date();return new Date(n.getFullYear(),n.getMonth(),1)};
+const mLen=f=>new Date(f.getFullYear(),f.getMonth()+1,0).getDate();
+const mTitle=f=>f.toLocaleDateString(LOC(),{month:'long',year:'numeric'})+' · '+hijri(f,{month:'long'})+' – '+hijri(addDays(f,mLen(f)-1),{month:'long',year:'numeric'});
+const wkNames=()=>{const n=new Date(),st=addDays(n,-n.getDay());return [0,1,2,3,4,5,6].map(i=>addDays(st,i).toLocaleDateString(LOC(),{weekday:'short'}))};
+const SPEC={
+ salah:()=>{const f=MONTH0();return{title:tl('Salah tracker'),sub:mTitle(f),blocks:[{k:'grid',cols:[tl('Fajr'),tl('Dhuhr'),tl('Asr'),tl('Maghrib'),tl('Isha'),tl('On time'),tl('Quran'),tl('Adhkar')],rows:Array.from({length:mLen(f)},(_,i)=>{const d=addDays(f,i);return d.getDate()+' · '+d.toLocaleDateString(LOC(),{weekday:'short'})})}]}},
+ habit:()=>{const f=MONTH0();return{land:true,title:tl('Habit tracker'),sub:mTitle(f),blocks:[{k:'grid',lw:120,cols:Array.from({length:mLen(f)},(_,i)=>String(i+1)),rows:Array(10).fill(''),head:tl('Habit')}]}},
+ budget:()=>{const f=MONTH0();return{title:tl('Monthly budget'),sub:mTitle(f),blocks:[{k:'table',cols:[[tl('Date'),.16],[tl('Item'),.44],[tl('Income'),.2],[tl('Expense'),.2]],n:22},{k:'lines',items:[tl('Total income'),tl('Total expenses'),tl('Saved')],inline:true}]}},
+ morning:()=>({title:tl('Morning intention (al-Muhasibi)'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:[{k:'lines',label:tl('My intention today (niyyah)'),n:2},{k:'lines',label:tl('Top 3'),n:3,check:true},{k:'lines',label:tl('One thing I will avoid'),n:1},{k:'lines',label:tl('Dhikr I will keep'),n:1},{k:'box',label:tl('Notes')}]}),
+ evening:()=>({title:tl('Evening muhasaba (al-Ghazali, 6 steps)'),sub:new Date().toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})+' · '+hijri(new Date()),blocks:['Musharata: what I promised myself this morning','Muraqaba: where I stayed mindful of Allah','Muhasaba: what went well, where I fell short','Mu\'aqaba: one good deed to make up for it','Mujahada: one thing I will push for tomorrow','Mu\'ataba: a kind word to myself'].map((l,i)=>({k:'lines',label:(i+1)+'. '+tl(l),n:2}))}),
+ review:()=>({title:tl('Weekly review'),sub:hijri(new Date()),blocks:[{k:'lines',label:tl('What went well'),n:3},{k:'lines',label:tl('What got in the way'),n:3},{k:'lines',label:tl('What would make it 10% easier'),n:2},{k:'lines',label:tl('Top 3 for next week'),n:3,check:true},{k:'box',label:tl('Notes')}]}),
+ start2:()=>({title:tl('2-minute start'),sub:'',blocks:[{k:'lines',label:tl('The task'),n:1},{k:'lines',label:tl('Its first move (2 minutes)'),n:1},{k:'lines',label:tl('When: right after…'),n:1},{k:'lines',label:tl('Where'),n:1},{k:'lines',label:tl('My small reward'),n:1},{k:'grid',head:tl('Tick each day you started'),cols:wkNames(),rows:[1,2,3,4].map(i=>tl('Week')+' '+i)}]}),
+ ch30:()=>({title:tl('30-day challenge'),sub:'',blocks:[{k:'lines',label:tl('My challenge'),n:1},{k:'lines',label:tl('Why it matters to me'),n:2},{k:'grid',cols:Array.from({length:10},(_,i)=>String(i+1)),rows:['1–10','11–20','21–30'],num:true},{k:'lines',label:tl('My reward at the end'),n:1},{k:'box',label:tl('Notes')}]})};
+/* printable HTML of a spec */
+function specHTML(sp){const q=quoteHTML(new Date());let h=`<section class="pr-page${sp.land?' land':''}"><div class="pr-h"><b>${esc(sp.title)}</b><span>${esc(sp.sub||'')}</span></div>${q}<div class="pr-blocks">`;
+  for(const b of sp.blocks){if(b.k==='lines'){if(b.inline)h+=`<div class="pr-tot">${b.items.map(x=>`<div><span>${esc(x)}</span><i></i></div>`).join('')}</div>`;else h+=`<div class="pr-lines"><p class="pr-l">${esc(b.label)}</p>${Array.from({length:b.n},()=>`<div class="pr-ln">${b.check?'☐ ':''}</div>`).join('')}</div>`}
+   else if(b.k==='grid')h+=`<table class="pr-grid${b.cols.length>12?' tight':''}"><thead><tr><th>${esc(b.head||'')}</th>${b.cols.map(c=>`<th>${esc(c)}</th>`).join('')}</tr></thead><tbody>${b.rows.map((r,ri)=>`<tr><th>${esc(r)}</th>${b.cols.map((c,ci)=>`<td>${b.num?ri*10+ci+1:''}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+   else if(b.k==='table')h+=`<table class="pr-tab"><thead><tr>${b.cols.map(c=>`<th style="width:${c[1]*100}%">${esc(c[0])}</th>`).join('')}</tr></thead><tbody>${(b.rows||Array.from({length:b.n},()=>b.cols.map(()=>''))).map(r=>`<tr>${b.cols.map((c,i)=>`<td>${c[2]==='c'?'☐':esc(r[i]||'')}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+   else if(b.k==='box')h+=`<div class="pr-boxw"><p class="pr-l">${esc(b.label)}</p><div class="pr-notes"></div></div>`}
+  return h+`</div></section>`}
+function printHTML(h){let a=$('printArea');if(!a){a=document.createElement('div');a.id='printArea';document.body.appendChild(a)}a.dir=document.documentElement.dir==='rtl'?'rtl':'ltr';
+  a.innerHTML=h+`<footer class="pr-foot"><img src="${QR_PNG}" alt=""><span><b>Fastaqim</b> · ${SITE}</span></footer>`;document.body.classList.toggle('pr-land',/pr-page land/.test(h));
+  document.body.classList.add('printing');const done=()=>{document.body.classList.remove('printing');removeEventListener('afterprint',done)};addEventListener('afterprint',done);setTimeout(()=>{try{window.print()}catch(e){done()}},150)}
+/* fillable PDF of a spec */
+async function specPDF(key){toast(tl('Making the PDF…'));let L;try{L=await loadPdfLib()}catch(e){toast(tl('Could not make the PDF. Check your internet and try again.'));return}
+ try{const sp=SPEC[key](),{PDFDocument,rgb,StandardFonts}=L,doc=await PDFDocument.create(),form=doc.getForm(),hv=await doc.embedFont(StandardFonts.Helvetica),qr=await doc.embedPng(QR_PNG),ar=LANG==='ar',M=36;
+  const W=sp.land?842:595,H=sp.land?595:842,p=doc.addPage([W,H]),gray=rgb(.82,.85,.88);let fid=0;
+  const img=async(t,px,x,y,bold,color,alignR,maxW)=>{if(!t)return 0;let I=txtImg(t,px,bold,color);let w=I.w,h=I.h;if(maxW&&w>maxW){h=h*maxW/w;w=maxW}const e=await doc.embedPng(I.url);p.drawImage(e,{x:alignR?x-w:x,y:y-h/2,width:w,height:h});return w};
+  const X=(x,w)=>ar?W-x-w:x;const fld=(x,y,w,h,multi)=>{const f=form.createTextField('f'+(fid++));if(multi)f.enableMultiline();f.addToPage(p,{x:X(x,w),y,width:w,height:h,borderWidth:0,font:hv});f.setFontSize(multi?9:10)};
+  const chk=(x,y,s)=>{const c=form.createCheckBox('c'+(fid++));c.addToPage(p,{x:X(x,s),y,width:s,height:s,borderWidth:.8,borderColor:rgb(.5,.55,.6)})};
+  const line=(x1,y1,x2)=>p.drawLine({start:{x:X(x1,0),y:y1},end:{x:X(x2,0),y:y1},thickness:.6,color:gray});
+  const TX0=ar?W-M:M;await img(sp.title,15,TX0,H-M-8,true,'#0b5f56',ar,W-2*M);await img(sp.sub,8.5,TX0,H-M-25,false,'#6b7280',ar,W-2*M);p.drawLine({start:{x:M,y:H-M-34},end:{x:W-M,y:H-M-34},thickness:1,color:rgb(.06,.46,.43)});
+  const q=quoteFor(new Date());await img((ar&&q.t!=='w'?'«'+q.text+'»':'“'+q.text+'”'),8,TX0,H-M-46,false,'#374151',ar,W-2*M);await img('— '+q.by+' · '+q.ref,6.8,TX0,H-M-58,false,'#b7791f',ar);
+  let y=H-M-72;const bottom=60,cw=W-2*M;
+  const tabRH=b=>{const n=(b.rows?b.rows.length:b.n);return Math.max(11,Math.min(17,(y-bottom-30)/(n+1)))};const fixedH=b=>b.k==='lines'?(b.inline?b.items.length*20:16+b.n*20+6):b.k==='table'?((b.rows?b.rows.length:b.n)+1)*tabRH(b)+8:0;
+  const gridN=sp.blocks.filter(b=>b.k==='grid'),boxN=sp.blocks.filter(b=>b.k==='box').length;const fixed=sp.blocks.reduce((a,b)=>a+fixedH(b),0);
+  let gridRowH=gridN.length?Math.max(10,Math.min(22,(y-bottom-fixed-(boxN?90:0)-gridN.length*24)/gridN.reduce((a,b)=>a+b.rows.length,0))):0;
+  for(const b of sp.blocks){
+   if(b.k==='lines'){if(b.inline){for(const t of b.items){await img(t,9,ar?W-M:M,y-8,true,'#1f2a37',ar);fld(M+150,y-16,cw-150,15);line(M+150,y-16,W-M);y-=20}continue}
+     await img(b.label,9.5,ar?W-M:M,y-6,true,'#0b5f56',ar,cw);y-=16;for(let i=0;i<b.n;i++){if(b.check)chk(M,y-15,9);fld(M+(b.check?14:0),y-17,cw-(b.check?14:0),15);line(M,y-18,W-M);y-=20}y-=6}
+   else if(b.k==='table'){const xs=[];let x=M;for(const c of b.cols){xs.push([x,c[1]*cw]);x+=c[1]*cw}
+     for(let i=0;i<b.cols.length;i++)await img(b.cols[i][0],8,ar?W-xs[i][0]-3:xs[i][0]+3,y-8,true,'#0b5f56',ar,xs[i][1]-6);y-=17;
+     const rows=b.rows||Array.from({length:b.n},()=>b.cols.map(()=>'')),th=Math.min(17,fixedH(b)/(rows.length+1));
+     for(const rw of rows){for(let i=0;i<b.cols.length;i++){const [cx,cwd]=xs[i],ty=b.cols[i][2];p.drawRectangle({x:X(cx,cwd),y:y-th,width:cwd,height:th,borderColor:gray,borderWidth:.5});
+       if(ty==='c'){const s2=Math.min(9,th-4);chk(cx+(cwd-s2)/2,y-th+(th-s2)/2,s2)}else if(ty==='t'&&rw[i])await img(rw[i],Math.min(8,th*.55),ar?W-cx-3:cx+3,y-th/2,false,'#1f2a37',ar,cwd-6);else fld(cx+2,y-th+1,cwd-4,th-2)}y-=th}y-=8}
+   else if(b.k==='grid'){const lw=b.lw||(b.cols.length>12?110:120),cwid=(cw-lw)/b.cols.length,rh=gridRowH;if(b.head)await img(b.head,8,ar?W-M-3:M+3,y-9,true,'#0b5f56',ar,lw-6);
+     for(let i=0;i<b.cols.length;i++)await img(b.cols[i],b.cols.length>12?6.5:7.5,ar?W-M-lw-(i+.5)*cwid:M+lw+(i+.5)*cwid,y-9,true,'#6b7280',ar,cwid-2).then(()=>0);y-=18;
+     for(let r=0;r<b.rows.length;r++){p.drawRectangle({x:X(M,lw),y:y-rh,width:lw,height:rh,borderColor:gray,borderWidth:.5});if(b.rows[r])await img(b.rows[r],Math.min(8,rh*.55),ar?W-M-4:M+4,y-rh/2,false,'#1f2a37',ar,lw-8);else fld(M+2,y-rh+1,lw-4,rh-2);
+       for(let i=0;i<b.cols.length;i++){const cx=M+lw+i*cwid;p.drawRectangle({x:X(cx,cwid),y:y-rh,width:cwid,height:rh,borderColor:gray,borderWidth:.5});const s=Math.min(9,rh-4,cwid-4);
+         if(b.num)await img(String(r*10+i+1),6,ar?W-cx-2:cx+2,y-5,false,'#9ca3af',ar);chk(cx+(cwid-s)/2,y-rh+(rh-s)/2,s)}y-=rh}y-=8}
+   else if(b.k==='box'){await img(b.label,9.5,ar?W-M:M,y-6,true,'#0b5f56',ar);y-=14;const h=Math.max(50,y-bottom);p.drawRectangle({x:M,y:y-h,width:cw,height:h,borderColor:gray,borderWidth:.6});fld(M+2,y-h+2,cw-4,h-4,true);y-=h+6}}
+  p.drawImage(qr,{x:ar?M:W-M-32,y:14,width:32,height:32});await img('Fastaqim · '+SITE,7.2,ar?M+38:W-M-38,30,false,'#6b7280',!ar);
+  form.updateFieldAppearances(hv);const bytes=await doc.save(),url=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));const a=document.createElement('a');a.href=url;a.download='fastaqim-'+key+'.pdf';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(url);a.remove()},8000);window.__pdfBytes=bytes.length}
+ catch(e){console.error(e);toast(tl('Could not make the PDF. Check your internet and try again.'))}}
+/* phone wallpapers: text only, no images of living things */
+const WALLS=[
+ {id:'ayah',quran:true,bg:['#0a4d46','#0d6157'],fg:'#fdf8ec',acc:'#e3b45c',ar:'فَٱسْتَقِمْ كَمَآ أُمِرْتَ',tr:()=>LANG==='ar'?'':($('ayT')&&$('ayT').textContent)||'So be steadfast as you are commanded.',ref:()=>LANG==='ar'?'القرآن الكريم، سورة هود ١١٢':(QWORD[LANG]||"Qur'an")+', Hūd 11:112'},
+ {id:'deeds',bg:['#fdf8ec','#f3ead3'],fg:'#0b5f56',acc:'#b7791f',ar:'أحبُّ الأعمالِ إلى اللهِ أدومُها وإن قلَّ',tr:()=>quoteText(0),ref:()=>'Bukhari 6464 · Muslim 783'},
+ {id:'dhikr',bg:['#13283a','#1f3b52'],fg:'#f5f1e6',acc:'#e3b45c',ar:'سُبْحَانَ اللهِ وَبِحَمْدِهِ، سُبْحَانَ اللهِ العَظِيمِ',tr:()=>({en:'Glory be to Allah and praise Him; glory be to Allah, the Most Great.',ar:'',om:'Rabbiin qulqulleessa, galatas isaaf nan galchaa; Rabbiin Guddaa nan qulqulleessa.',so:'Alle waa nadiif oo ammaan baa u sugnaatay; Alle Weyne waa nadiif.'})[LANG]||'Glory be to Allah and praise Him; glory be to Allah, the Most Great.',ref:()=>'Bukhari 6406 · Muslim 2694'},
+ {id:'start',bg:['#fff7ed','#fde7c8'],fg:'#1f2a37',acc:'#ea7a1f',ar:'',tr:()=>tl('Start in 2 minutes.'),ref:()=>'Fastaqim'}];
+const quoteText=i=>{const q=QUOTES[i],l=LANG in NB?LANG:'en';return l==='ar'?'':q[l]||q.en};
+async function wallMake(w,toUrl){try{await document.fonts.load('400 90px "Fastaqim Quran"');await document.fonts.load('700 90px "Scheherazade New"');await document.fonts.load('400 40px "Atkinson Hyperlegible"')}catch(e){}
+  const c=document.createElement('canvas'),W=1179,H=2556;c.width=W;c.height=H;const x=c.getContext('2d');const g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,w.bg[0]);g.addColorStop(1,w.bg[1]);x.fillStyle=g;x.fillRect(0,0,W,H);
+  const wrap=(t,font,maxW)=>{x.font=font;const out=[];let cur='';for(const wd of t.split(' ')){const tr=cur?cur+' '+wd:wd;if(x.measureText(tr).width>maxW&&cur){out.push(cur);cur=wd}else cur=tr}if(cur)out.push(cur);return out};
+  let y=H*.5;x.textAlign='center';x.textBaseline='middle';
+  if(w.ar){x.direction='rtl';const f=w.quran?'400 120px "Fastaqim Quran", "Scheherazade New", serif':'700 104px "Scheherazade New", serif',ls=wrap(w.ar,f,W-(w.quran?300:180));x.fillStyle=w.fg;y-=ls.length*90;
+    for(const l of ls){x.font=f;x.fillText(l,W/2,y);if(w.quran){const tw=x.measureText(l).width;x.direction='ltr';x.fillStyle=w.acc;x.textAlign='left';x.fillText('\uFD3E',W/2-tw/2-120,y);x.textAlign='right';x.fillText('\uFD3F',W/2+tw/2+120,y);x.textAlign='center';x.fillStyle=w.fg;x.direction='rtl'}y+=190}x.direction='ltr'}
+  else{x.fillStyle=w.acc;x.font='800 64px "Poppins", sans-serif';x.fillText('Fastaqim',W/2,y-220)}
+  x.fillStyle=w.acc;x.fillRect(W/2-60,y-30,120,6);y+=50;
+  const tr=w.tr();if(tr){const ar=LANG==='ar';x.direction=ar?'rtl':'ltr';const f=(w.ar?'400 50px ':'800 96px ')+(ar?'"IBM Plex Sans Arabic"':w.ar?'"Atkinson Hyperlegible"':'"Poppins"')+', sans-serif',ls=wrap(tr,f,W-200);x.fillStyle=w.fg;x.globalAlpha=w.ar?.88:1;for(const l of ls){x.font=f;x.fillText(l,W/2,y);y+=w.ar?72:120}x.globalAlpha=1;x.direction='ltr'}
+  x.font='600 38px "Atkinson Hyperlegible", sans-serif';x.fillStyle=w.acc;x.fillText(w.ref(),W/2,y+30);
+  x.globalAlpha=.55;x.font='600 30px "Atkinson Hyperlegible", sans-serif';x.fillStyle=w.fg;x.fillText('Fastaqim · '+SITE,W/2,H-150);x.globalAlpha=1;
+  const url=c.toDataURL('image/png');if(toUrl)return url;const a=document.createElement('a');a.href=url;a.download='fastaqim-wallpaper-'+w.id+'.png';document.body.appendChild(a);a.click();setTimeout(()=>a.remove(),3000)}
+/* the downloads hub */
+const SAMPLE_T=[['Fajr + 2 minutes of Quran','05:10'],['Reply to one email','09:00'],['Walk 10 minutes','16:30'],['Read 1 page','21:00']];
+function sampleRun(view){const now=dkey(),keep=S.tasks;S.tasks=SAMPLE_T.map(([t,tm],i)=>({id:'s'+i,title:tl(t),top:i<2,done:false,steps:[],due:now,time:tm})).concat([{id:'s9',title:tl('Pay the phone bill'),top:false,done:false,steps:[],due:now,time:''}]);
+  const v=PR.view,f=PR.fill;PR.view=view;PR.fill=true;try{printNow()}finally{S.tasks=keep;PR.view=v;PR.fill=f}}
+function dlOpen(){const row=(ic,name,act)=>`<div class="dl-it"><span class="dl-n"><b aria-hidden="true">${ic}</b>${tl(name)}</span><span class="dl-b">${act}</span></div>`;
+  const pa=k=>`<button class="chip" data-dlp="${k}">🖨️ ${tl('Print')}</button><button class="chip" data-dlf="${k}">✍️ PDF</button>`;
+  modalCard(`<p class="label">${tl('📥 Free downloads')}</p>
+   <details open class="dl-sec"><summary>🗓️ ${tl('Planner pages')}</summary>${[['📄','Daily page','day'],['🗒️','Weekly page','week'],['📅','Monthly page','month'],['📆','Pick days','range']].map(([i,n,v])=>row(i,n,`<button class="chip" data-dlv="${v}">${tl('Print')} / PDF</button>`)).join('')}</details>
+   <details class="dl-sec"><summary>👀 ${tl('Layout samples')}</summary>${row('📄','Sample day (filled in)',`<button class="chip" data-dls="day">🖨️ ${tl('Print')}</button>`)}${row('🗒️','Sample week (filled in)',`<button class="chip" data-dls="week">🖨️ ${tl('Print')}</button>`)}</details>
+   <details class="dl-sec"><summary>📌 ${tl('Inserts & trackers')}</summary>${row('🕌','Salah tracker',pa('salah'))}${row('✅','Habit tracker',pa('habit'))}${row('💰','Monthly budget',pa('budget'))}</details>
+   <details class="dl-sec"><summary>✍️ ${tl('Worksheets, challenges & reflections')}</summary>${row('🌅','Morning intention (al-Muhasibi)',pa('morning'))}${row('🌙','Evening muhasaba (al-Ghazali, 6 steps)',pa('evening'))}${row('🔁','Weekly review',pa('review'))}${row('⏱','2-minute start',pa('start2'))}${row('🏁','30-day challenge',pa('ch30'))}</details>
+   <details class="dl-sec"><summary>🌙 ${tl('Islamic seasons')}</summary>${row('🌙','Ramadan timetable',pa('ramTT'))}${row('📖','Ramadan tracker',pa('ramTr'))}${row('🕋','First 10 days of Dhul Hijjah',pa('dhul'))}${row('📅','Muharram & Ashura',pa('ashura'))}${row('✨','6 days of Shawwal',pa('shawwal'))}${row('🌕','White days (13, 14, 15)',pa('white'))}${row('📗','Quran khatm plan',pa('khatm'))}</details>
+   <details class="dl-sec"><summary>📱 ${tl('Phone wallpapers')}</summary><div class="dl-walls" id="dlWalls">${WALLS.map((w,i)=>`<button class="dl-w" data-dlw="${i}" aria-label="${tl('Download')}"><img alt="" id="dlWi${i}"><span>⬇️ ${tl('Download')}</span></button>`).join('')}</div></details>
+   <button class="btn-ghost small" id="dlX">${tl('Close')}</button>`);
+  const B=$('scrollBody');$('dlX').onclick=modalClose;
+  B.querySelectorAll('[data-dlv]').forEach(b=>b.onclick=()=>{CAL.view=b.dataset.dlv==='range'?CAL.view:b.dataset.dlv;CAL.off=0;printOpen();if(b.dataset.dlv==='range'){PR.view='range';$('scrollBody').querySelector('[data-pv="range"]').click()}});
+  B.querySelectorAll('[data-dls]').forEach(b=>b.onclick=()=>{modalClose();sampleRun(b.dataset.dls)});
+  B.querySelectorAll('[data-dlp]').forEach(b=>b.onclick=()=>{modalClose();printHTML(specHTML(SPEC[b.dataset.dlp]()))});
+  B.querySelectorAll('[data-dlf]').forEach(b=>b.onclick=()=>specPDF(b.dataset.dlf));
+  B.querySelectorAll('[data-dlw]').forEach(b=>b.onclick=()=>wallMake(WALLS[+b.dataset.dlw]));
+  const ws=B.querySelector('.dl-sec:last-of-type');ws&&ws.addEventListener('toggle',async()=>{if(!ws.open)return;for(let i=0;i<WALLS.length;i++){const im=$('dlWi'+i);if(im&&!im.src)im.src=await wallMake(WALLS[i],true)}})}
+/* ---------- Islamic seasons: dates from the Umm al-Qura calendar, times from your location ---------- */
+const X40S=[['Islamic seasons','المواسم الإسلامية','Yeroowwan Islaamaa','Xilliyada Islaamka'],['Ramadan timetable','إمساكية رمضان','Sagantaa Ramadaanaa','Jadwalka Ramadaan'],['Ramadan tracker','متابعة رمضان','Hordoffii Ramadaanaa','La-socodka Ramadaan'],
+['First 10 days of Dhul Hijjah','العشر الأوائل من ذي الحجة','Guyyoota 10 jalqabaa Zul-Hijjaa','10-ka maalmood ee hore ee Dul-Xijjo'],['Muharram & Ashura','محرم وعاشوراء','Muharram fi Aashuuraa','Muxarram iyo Caashuuraa'],['6 days of Shawwal','ست من شوال','Guyyoota 6 Shawwaal','6-da maalmood ee Shawaal'],['White days (13, 14, 15)','الأيام البيض (13، 14، 15)','Guyyoota adii (13, 14, 15)','Maalmaha cadcad (13, 14, 15)'],['Quran khatm plan','خطة ختم القرآن','Karoora xumura Qur\'aanaa','Qorshaha khatmiga Quraanka'],
+['Suhoor ends (Fajr)','الإمساك (الفجر)','Suhuurri dhuma (Fajrii)','Suxuurku wuu dhammaadaa (Subax)'],['Iftar (Maghrib)','الإفطار (المغرب)','Afuura (Magribii)','Afur (Maqrib)'],['Day','اليوم','Guyyaa','Maalin'],['Fasted','صُمت','Soome','Waan soomay'],['Taraweeh','التراويح','Taraawiih','Taraawiix'],['Sadaqah','الصدقة','Sadaqaa','Sadaqo'],['Dua','الدعاء','Du\'aa','Ducada'],['Juz','الجزء','Juz\'ii','Juzka'],
+['Takbir','التكبير','Takbiira','Takbiir'],['Good deed','عمل صالح','Hojii gaarii','Camal wanaagsan'],['Day of Arafah','يوم عرفة','Guyyaa Arafaa','Maalinta Carafo'],['Eid al-Adha','عيد الأضحى','Iida Arafaa','Ciidul Adxa'],['Month','الشهر','Ji\'a','Bisha'],['Planned date','التاريخ المخطط','Guyyaa karoorfame','Taariikhda la qorsheeyay'],['Done','تم','Xumurame','Waa la dhammeeyay'],
+['Times are calculated for your location. Check your local mosque.','الأوقات محسوبة حسب موقعك. راجع مسجدك المحلي.','Yeroon bakka keetiif herregame. Masjida naannoo keetii mirkaneeffadhu.','Waqtiyada waxaa loo xisaabiyay goobtaada. La xaqiiji masjidka xaafaddaada.'],
+['Dates follow the Umm al-Qura calendar and may differ by a day where you live.','التواريخ وفق تقويم أم القرى، وقد تختلف بيوم في بلدك.','Guyyoonni akka kaaleendara Umm al-Qura ti, bakka ati jirtutti guyyaa tokkoon garaagarachuu danda\'u.','Taariikhaha waxay raacaan kalandarka Umm al-Qura, waxaana laga yaabaa inay maalin ku kala duwanaadaan meesha aad joogto.']];
+X40S.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const hParts=d=>{try{const P=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));return{d:+P.day,m:+P.month,y:+String(P.year||P.relatedYear).replace(/\D/g,'')}}catch(e){return{d:0,m:0,y:0}}};
+function hFind(m,day,from){let d=new Date((from||new Date()).getFullYear(),(from||new Date()).getMonth(),(from||new Date()).getDate());for(let i=0;i<420;i++){const h=hParts(d);if(h.m===m&&h.d===day)return d;d=addDays(d,1)}return null}
+function hMonthDays(m){const t=new Date(),cur=hParts(t);let st=cur.m===m?addDays(t,1-cur.d):hFind(m,1);if(!st)return[];const out=[];for(let i=0;i<30;i++){const d=addDays(st,i);if(hParts(d).m!==m)break;out.push(d)}return out}
+const gd=d=>d.toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'});
+Object.assign(SPEC,{
+ ramTT:()=>{locAuto();const D=hMonthDays(9);const y=D[0]?hParts(D[0]).y:'';return{title:tl('Ramadan timetable')+' '+y,sub:(S.loc&&S.loc.auto||'')+' · '+tl('Times are calculated for your location. Check your local mosque.'),blocks:[{k:'table',cols:[[tl('Day'),.1,'t'],[tl('Date'),.3,'t'],[tl('Suhoor ends (Fajr)'),.24,'t'],[tl('Iftar (Maghrib)'),.24,'t'],[tl('Fasted'),.12,'c']],rows:D.map((d,i)=>{const P=salahFor(d);return[String(i+1),gd(d),P?fmtHM(P.fajr):'',P?fmtHM(P.maghrib):'','']})}]}},
+ ramTr:()=>{const D=hMonthDays(9);return{title:tl('Ramadan tracker'),sub:D[0]?hijri(D[0],{month:'long',year:'numeric'}):'',blocks:[{k:'grid',cols:[tl('Fasted'),tl('Quran'),tl('Taraweeh'),tl('Sadaqah'),tl('Dua'),tl('Adhkar')],rows:Array.from({length:30},(_,i)=>(i+1)+(D[i]?' · '+D[i].toLocaleDateString(LOC(),{day:'numeric',month:'short'}):''))}]}},
+ dhul:()=>{const D=hMonthDays(12).slice(0,10);return{title:tl('First 10 days of Dhul Hijjah'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'grid',cols:[tl('Fasted'),tl('Takbir'),tl('Quran'),tl('Sadaqah'),tl('Good deed')],rows:D.length?D.map((d,i)=>(i+1)+' · '+gd(d)+(i===8?' · '+tl('Day of Arafah'):i===9?' · '+tl('Eid al-Adha'):'')):Array.from({length:10},(_,i)=>String(i+1))},{k:'box',label:tl('Notes')}]}},
+ ashura:()=>{const n=hFind(1,9),t=hFind(1,10),e=hFind(1,11);return{title:tl('Muharram & Ashura'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'table',cols:[[tl('Day'),.3,'t'],[tl('Date'),.5,'t'],[tl('Fasted'),.2,'c']],rows:[['9 Muharram',n?gd(n):'',''],['10 Muharram (Ashura)',t?gd(t):'',''],['11 Muharram',e?gd(e):'','']]},{k:'box',label:tl('Notes')}]}},
+ shawwal:()=>({title:tl('6 days of Shawwal'),sub:hijri(hFind(10,2)||new Date(),{month:'long',year:'numeric'}),blocks:[{k:'table',cols:[[tl('Day'),.2,'t'],[tl('Date'),.6,'f'],[tl('Fasted'),.2,'c']],rows:[1,2,3,4,5,6].map(i=>[String(i),'',''])},{k:'box',label:tl('Notes')}]}),
+ white:()=>{const rows=[];let d=new Date();for(let i=0;i<12;i++){const s=hFind(hParts(d).d>15?(hParts(d).m%12)+1:hParts(d).m,13,d);if(!s)break;rows.push([hijri(s,{month:'long',year:'numeric'}),gd(s)+' – '+gd(addDays(s,2)),'']);d=addDays(s,20)}
+   return{title:tl('White days (13, 14, 15)'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'table',cols:[[tl('Month'),.4,'t'],[tl('Date'),.44,'t'],[tl('Fasted'),.16,'c']],rows}]}},
+ khatm:()=>({title:tl('Quran khatm plan'),sub:'',blocks:[{k:'table',cols:[[tl('Juz'),.14,'t'],[tl('Planned date'),.66,'f'],[tl('Done'),.2,'c']],rows:Array.from({length:30},(_,i)=>[String(i+1),'',''])}]})});
+
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
   if(!tv){if(n.__en!=null&&n.nodeValue!==n.__en)n.nodeValue=n.__en;const pe=n.parentElement;if(pe&&RTL.includes(LANG)&&/^[^\u0600-\u06FF]*[A-Za-z]/.test(k)&&pe.childNodes.length===1&&!pe.hasAttribute('dir'))pe.setAttribute('dir','auto');return}
@@ -3505,7 +3774,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();qtTick();$('ldHome').onclick=instGuide;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();qtTick();$('ldHome').onclick=instGuide;$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
