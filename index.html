@@ -304,7 +304,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
   <div class="ld">
     <p class="ld-brand">Fastaqim <span class="ar" lang="ar">فَاسْتَقِمْ</span></p>
     <h1 class="ld-h">Your whole life,<br><span>one calm plan.</span></h1>
-    <p class="ld-sub">Built for adults with ADHD. Write it messy. Fastaqim sorts it, schedules it, and gets you started.</p>
+    <p class="ld-sub">Built for ADHD brains of every age: kids, teens and adults, diagnosed early or late. Write it messy. Fastaqim sorts it, schedules it, and gets you started.</p>
     <div id="ldAuth" class="ld-auth"></div>
     <div class="ld-grid">
       <div class="ld-t" style="--d:0s"><b>✨</b><span>Messy list in, schedule out</span></div>
@@ -315,6 +315,8 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div class="ld-t" style="--d:.30s"><b>🕌</b><span>Days built around salah</span></div>
       <div class="ld-t" style="--d:.36s"><b>🌙</b><span>One reflection a day</span></div>
       <div class="ld-t" style="--d:.42s"><b>🕘</b><span>Every edit saved with history</span></div>
+      <div class="ld-t" style="--d:.48s"><b>👨‍👩‍👧</b><span>Family view for parents and guardians</span></div>
+      <div class="ld-t" style="--d:.54s"><b>🌐</b><span>English, العربية, Afaan Oromoo</span></div>
     </div>
     <div class="ld-quote"><p>“Starting is the hard part. So that's the part we make tiny.”</p></div>
     <p class="small muted ld-note" id="ldNote">Your data is private to your account.</p>
@@ -408,7 +410,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <details id="coachNotes">
         <summary>Coach's notes: where we're starting</summary>
         <div class="coach-note">
-          <p>Let's say you were diagnosed in your 20s. That usually means years of working twice as hard as the people around you, and hearing some version of "you're so smart, if you'd just apply yourself." You weren't lazy. Your brain runs on <b>interest, urgency, novelty and challenge</b>, not on importance. Knowing what to do was never the problem. Starting, switching and finishing were.</p>
+          <p>Whether you were diagnosed as a kid, a teen or an adult, ADHD usually means years of working twice as hard as the people around you, and hearing some version of "you're so smart, if you'd just apply yourself." You weren't lazy. Your brain runs on <b>interest, urgency, novelty and challenge</b>, not on importance. Knowing what to do was never the problem. Starting, switching and finishing were.</p>
           <p>So we stop asking willpower to carry everything. We put the structure <b>outside your head</b>: a plan you can see, steps small enough to start, rewards that land now, and people (or a buddy timer) beside you.</p>
           <p class="label">What we're working on</p>
           <ol class="goals">
@@ -647,6 +649,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div id="histList"></div>
     </div>
     <div class="card" id="acctBox"></div>
+    <div class="card" id="famBox" hidden></div>
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
@@ -1838,7 +1841,7 @@ function roughSort(text){const out={tasks:[],money:[],goals:[]};
 let SAMPLE=null;
 async function aiSort(text){
   try{if(!(window.claude&&window.claude.use))return null;SAMPLE=SAMPLE||await window.claude.use('sample');if(!SAMPLE)return null;
-    const now=new Date();const prompt=`You turn a messy list written by an adult with ADHD into structured items. Today is ${dkey()} (${WD[now.getDay()]}). Return ONLY JSON, no prose:
+    const now=new Date();const prompt=`You turn a messy list written by someone with ADHD into structured items. Today is ${dkey()} (${WD[now.getDay()]}). Return ONLY JSON, no prose:
 {"tasks":[{"title":"short, starts with a verb","due":"YYYY-MM-DD","time":"HH:MM or empty","steps":["3 to 5 tiny concrete steps; the first takes under 2 minutes"]}],
 "money":[{"kind":"income|expense","amount":number,"label":"short","cat":"one of ${[...CATS.expense,...CATS.income].join(', ')}","date":"YYYY-MM-DD","recur":"none|monthly"}],
 "goals":[{"title":"short","term":"short|long (long = more than 3 months)","by":"YYYY-MM-DD or empty","steps":["4 to 6 milestones"]}]}
@@ -1915,7 +1918,7 @@ async function authBoot(){
   AU.sb.auth.onAuthStateChange((ev,session)=>{
     if(ev==='PASSWORD_RECOVERY'){landingShow(false);pwModal();}
     const u=session&&session.user;
-    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender()}
+    if(u&&(!AU.user||AU.user.id!==u.id)){AU.user=u;S.started=true;landingShow(false);cloudInit(u);acctRender();famLoad()}
     else if(!u&&AU.user){AU.user=null;landingShow(true);authForm()}
   });
   const {data}=await AU.sb.auth.getSession();if(!data.session){try{localStorage.removeItem(KEY)}catch(e){}S=freshS();render();authForm();}
@@ -2004,6 +2007,46 @@ ADHKAR.worry={t:'Worry & laziness',ic:'🫶',v:'When you feel stuck, anxious or 
  mk('h3',{ar:'حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ',tr:'Ḥasbunallāhu wa niʿmal-wakīl',en:'Allah is sufficient for us, and He is the best Disposer of affairs.',n:7,src:'Qur\'an 3:173'}),
  mk('h4',DZ.hayy)]};
 (()=>{const h=new Date().getHours();AZ.cat=h>=4&&h<11?'morning':h>=15&&h<20?'evening':h>=21||h<4?'sleep':'salawat'})();
+
+/* ---------- family: guardians can see younger members' activity ---------- */
+const FAM={links:[],code:'',err:''};
+async function famLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.from('family_links').select('*');if(error)throw error;FAM.links=data||[];FAM.err=''}catch(e){FAM.err=(e&&e.message)||'error'}famRender()}
+function famRender(){const b=$('famBox');if(!b)return;b.hidden=!(AU.sb&&AU.user);if(b.hidden)return;
+  const me=AU.user.id,mine=FAM.links.filter(l=>l.guardian_id===me),over=FAM.links.filter(l=>l.member_id===me);
+  b.innerHTML=`<h2><span class="h2i" aria-hidden="true">👨‍👩‍👧</span>Family</h2>
+    ${FAM.err?`<p class="small muted">Family isn't switched on yet.</p>`:''}
+    ${over.map(l=>`<div class="note small">🔗 Linked to <b>${esc(l.guardian_name||'your guardian')}</b>. They can see your activity: tasks, streak, adhkar and goals. Not your reflections or money.</div>`).join('')}
+    ${mine.length?`<p class="label">People I look after</p>${mine.map(l=>`<div class="mrow" style="cursor:default"><span>👤 ${esc(l.member_name||'Member')}</span><span class="row" style="gap:6px"><button class="small" data-fv="${l.member_id}">View</button><button class="btn-ghost small" data-fu="${l.member_id}">Unlink</button></span></div>`).join('')}`:''}
+    <details ${FAM.code?'open':''}><summary class="small">I look after someone (parent, guardian, older sibling)</summary><div class="wrap" style="gap:8px;padding-top:8px">
+      <p class="small muted">Make a code and have them type it on their Fastaqim, in Me → Family. Codes last 7 days.</p>
+      ${FAM.code?`<p style="font-size:2rem;font-weight:800;letter-spacing:.2em;text-align:center">${esc(FAM.code)}</p>`:''}
+      <button class="btn-calm" id="famMake" style="align-self:flex-start">${FAM.code?'Make a new code':'Make a family code'}</button></div></details>
+    ${over.length?'':`<details><summary class="small">Someone looks after me</summary><div class="inline-form" style="padding-top:8px"><input type="text" id="famCode" placeholder="Family code" maxlength="8" aria-label="Family code" style="text-transform:uppercase"><button id="famJoin">Join</button></div></details>`}`;
+  if($('famMake'))$('famMake').onclick=async()=>{const code=Array.from(crypto.getRandomValues(new Uint8Array(6)),x=>'ABCDEFGHJKMNPQRSTUVWXYZ23456789'[x%31]).join('');
+    const {error}=await AU.sb.from('family_codes').insert({code,guardian_id:me,guardian_name:S.name||AU.user.email.split('@')[0]});if(error){toast('Family isn\'t switched on yet.');return}FAM.code=code;famRender()};
+  if($('famJoin'))$('famJoin').onclick=async()=>{const c=$('famCode').value.trim().toUpperCase();if(!c)return;
+    const {data,error}=await AU.sb.rpc('join_family',{p_code:c,p_name:S.name||AU.user.email.split('@')[0]});if(error){toast(error.message.includes('expired')?'That code isn\'t valid or has expired.':'Couldn\'t join. Check the code.');return}toast('Linked to '+data+'.');famLoad()};
+  b.querySelectorAll('[data-fv]').forEach(x=>x.onclick=()=>famView(x.dataset.fv));
+  b.querySelectorAll('[data-fu]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.from('family_links').delete().eq('guardian_id',me).eq('member_id',x.dataset.fu);toast(error?'Couldn\'t unlink.':'Unlinked.');famLoad()});
+}
+async function famView(id){const l=FAM.links.find(x=>x.member_id===id);modalCard('<p class="small muted">Loading...</p>');
+  const {data,error}=await AU.sb.from('fastaqim_state').select('state,updated_at').eq('user_id',id).maybeSingle();
+  if(error||!data){modalCard(`<p>No activity saved yet.</p><button class="btn-ghost small" id="fvX">Close</button>`);$('fvX').onclick=modalClose;return}
+  const s=data.state||{},today=dkey(),tasks=s.tasks||[],days=s.days||{};
+  const last=data.updated_at?new Date(data.updated_at):null;let streak=0;for(let i=0;i<60;i++){const k=dkey(addDays(new Date(),-i));if(days[k])streak++;else if(i>0)break}
+  const week=[...Array(7)].map((_,i)=>dkey(addDays(new Date(),-6+i)));
+  const doneToday=tasks.filter(t=>t.done&&t.doneAt&&dkey(new Date(t.doneAt))===today),openToday=tasks.filter(t=>!t.done&&(t.top||t.due===today));
+  const az=(s.azkar&&s.azkar[today])?Object.keys(s.azkar[today]).length:0;
+  const goals=(s.goals||[]).map(g=>{const n=g.steps.filter(x=>x.done).length;return `${esc(g.title)} · ${g.steps.length?Math.round(n/g.steps.length*100):0}%`});
+  modalCard(`<p class="label">${esc(l&&l.member_name||'Member')} · read only</p>
+    <p class="small muted">Last active: ${last?last.toLocaleString(LOC(),{weekday:'short',hour:'numeric',minute:'2-digit'}):'—'}</p>
+    <div class="big3" style="width:100%"><div><span class="small muted">Day run</span><b>${streak}</b></div><div><span class="small muted">Done today</span><b>${doneToday.length}</b></div><div><span class="small muted">Adhkar today</span><b>${az}</b></div></div>
+    <div class="row" style="gap:4px;justify-content:center">${week.map(k=>`<span title="${k}" style="width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-size:.7rem;font-weight:700;background:${days[k]?'var(--calm)':'var(--line)'};color:${days[k]?'#fff':'var(--muted)'}">${pd(k).getDate()}</span>`).join('')}</div>
+    <div class="sp-sec">${doneToday.length?`<p class="label">Done today</p>${doneToday.map(t=>`<p class="small">✅ ${esc(t.title)}</p>`).join('')}`:''}
+    ${openToday.length?`<p class="label">Still open today</p>${openToday.slice(0,8).map(t=>`<p class="small">⬜ ${esc(t.title)}</p>`).join('')}`:''}
+    ${goals.length?`<p class="label">Goals</p>${goals.map(g=>`<p class="small">🎯 ${g}</p>`).join('')}`:''}</div>
+    <p class="small muted">Reflections and money stay private.</p><button class="btn-ghost small" id="fvX">Close</button>`);
+  $('fvX').onclick=modalClose}
 
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
@@ -2156,13 +2199,13 @@ $('backupBtn').onclick=backupOpen;
 $('restBtn').onclick=openRestCheck;
 $('caughtBtn').onclick=openCaught;$('scrollModal').onclick=e=>{if(e.target.id==='scrollModal'){$('scrollModal').hidden=true;render()}};
 $('jtX').onclick=jtClose;$('jtToday').onclick=jtOpen;
-function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();renderAdhkar();if(!T.running)drawTimer()}
+function render(){renderName();renderDayCard();renderHeader();renderNow();renderPlanNow();renderPlan();renderEnjoy();renderMemory();renderMindMap();renderGoal();renderToday();renderRoutine();renderWins();renderJournal();renderMoney();renderGoals();renderCal();renderHist();acctRender();famRender();renderAdhkar();if(!T.running)drawTimer()}
 document.querySelectorAll('[data-style]').forEach(b=>b.onclick=()=>{S.coachStyle=b.dataset.style;save();coachOpen();render();renderCoach();toast(strict()?'Brief mode.':'Explain mode.')});
 const I18N=[
 // landing
 ['Your whole life,','حياتك كلها،','Jireenya kee guutuu,'],
 ['one calm plan.','في خطة واحدة هادئة.','karoora tasgabbaa\'aa tokko.'],
-['Built for adults with ADHD. Write it messy. Fastaqim sorts it, schedules it, and gets you started.','مصمَّم للبالغين مع فرط الحركة وتشتت الانتباه. اكتبها كما هي، وفاستقم يرتّبها ويجدولها ويساعدك على البدء.','Namoota gurguddoo ADHD qabaniif kan qophaa\'e. Akkuma jirutti barreessi. Fastaqim ni qindeessa, sagantaa irra kaa\'a, akka jalqabdus si gargaara.'],
+['Built for ADHD brains of every age: kids, teens and adults, diagnosed early or late. Write it messy. Fastaqim sorts it, schedules it, and gets you started.','مصمَّم لكل من لديه فرط الحركة وتشتت الانتباه، في أي عمر: أطفالًا ومراهقين وبالغين، شُخّصوا مبكرًا أو متأخرًا. اكتبها كما هي، وفاستقم يرتّبها ويجدولها ويساعدك على البدء.','Namoota ADHD qaban umurii hundaaf kan qophaa\'e: ijoollee, dargaggoota fi gurguddoo, dafanii ykn turanii kan beekaman. Akkuma jirutti barreessi. Fastaqim ni qindeessa, sagantaa irra kaa\'a, akka jalqabdus si gargaara.'],
 ['Continue with Google','المتابعة باستخدام Google','Google\'n itti fufi'],
 ['or with email','أو بالبريد الإلكتروني','ykn imeelii\'n'],
 ['Sign in','تسجيل الدخول','Seeni'],
@@ -2175,7 +2218,7 @@ const I18N=[
 ['Short and long-term goals','أهداف قصيرة وطويلة المدى','Kaayyoo yeroo gabaabaa fi dheeraa'],
 ['Days built around salah','أيام مبنية حول الصلاة','Guyyoota salaata irratti ijaaraman'],
 ['One reflection a day','تأمل واحد في اليوم','Guyyaatti yaada of-ilaaluu tokko'],
-['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],
+['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],['Family view for parents and guardians','عرض العائلة للوالدين والأوصياء','Ilaalcha maatii warra fi eegdotaaf'],['Family','العائلة','Maatii'],['People I look after','من أرعاهم','Namoota ani kunuunsu'],['View','عرض','Ilaali'],['Unlink','إلغاء الربط','Hidhata kuti'],['Join','انضم','Makami'],['Make a family code','أنشئ رمز العائلة','Koodii maatii uumi'],['Make a new code','أنشئ رمزًا جديدًا','Koodii haaraa uumi'],['I look after someone (parent, guardian, older sibling)','أرعى شخصًا (والد، وصي، أخ أكبر)','Nama tokko nan kunuunsa (warra, eegduu, obboleessa hangafa)'],['Someone looks after me','شخص يرعاني','Namni tokko na kunuunsa'],['PH:Family code','رمز العائلة','Koodii maatii'],
 ['“Starting is the hard part. So that\'s the part we make tiny.”','«البداية هي الجزء الصعب، لذلك نجعلها صغيرة جدًا.»','“Jalqabuun kutaa ulfaataadha. Kanaaf isa xiqqeessina.”'],
 ['Your data is private to your account.','بياناتك خاصة بحسابك فقط.','Odeeffannoon kee herrega kee qofaaf dhuunfaadha.'],
 ['Try it now','جرّبه الآن','Amma yaali'],
