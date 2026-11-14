@@ -574,6 +574,16 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-sub{margin-top:16px!important;font-size:.82rem!important;color:var(--lmuted,var(--muted))}
 #landing .ld-tools{margin-top:40px!important}
 #printArea .pr-wd{min-height:132pt!important}
+#landing .ld-top{padding-top:4px!important;align-items:center!important}
+#landing .ld-top .ld-logo{margin:0!important;align-items:flex-start;text-align:start;line-height:1.05}
+#landing .ld-top .ld-logo .ld-brand{font-size:1.3rem!important;letter-spacing:-.01em}
+#landing .ld-top .ld-logo .ld-name{font-size:.68rem!important;margin-top:1px}
+#landing .ld-top .ld-logo .ld-name.arq{font-size:.95rem!important}
+#landing .ld-right{gap:6px!important}
+#landing .ld-lang-b{padding:0 .55rem!important}
+#landing .ld-top .ld-login{padding:0 .65rem!important}
+#landing .ldt-chip{padding:0 .5rem!important}
+#landing .ld-ayah{margin-top:28px!important}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -646,12 +656,12 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
+    <div class="ld-top"><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div><span class="ld-right"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h">Starting made simple.<br><span>Start in 2 minutes.</span></h1>
     <p class="ld-tag">Small steps. Big change.</p>
     <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
-    <p class="ld-sub"><button type="button" class="ld-adhd" id="ldInfo">Designed with ADHD in mind</button><span aria-hidden="true">·</span><span>Open to everyone.</span></p>
+    <p class="ld-sub"><span>Made for every kind of mind.</span><button type="button" id="ldInfo" hidden></button></p>
     <div class="ld-tools">
       <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
@@ -3026,21 +3036,21 @@ const LNAME={en:'English',ar:'العربية',om:'Oromoo',so:'Soomaali'};
 const AYAH={
  en:['So <u>be steadfast</u> as you are commanded.','Dr. Mustafa Khattab, The Clear Quran',131,'Be steadfast'],
  ar:['«أمر نبيَّه ﷺ ومن معه من المؤمنين <u>أن يستقيموا</u> كما أُمروا، فيسلكوا ما شرعه الله… ولا يزيغوا عن ذلك يمنةً ولا يسرة، ويدوموا على ذلك»','تفسير السعدي',0,'فَاسْتَقِمْ'],
- om:['Akka ajajamtetti <u>gadi dhaabbadhu</u>…','Ghali Apapur Apaghuna',111,'Gadi dhaabbadhu'],
- so:['Ee <u>u toosnow</u> sida lagu faray…','Maxamuud Maxamed Cabduh',46,'U toosnow'],
+ om:['Akka ajajamtetti <u>gadi dhaabbadhu</u>','Ghali Apapur Apaghuna',111,'Gadi dhaabbadhu'],
+ so:['Ee <u>u toosnow</u> sida lagu faray','Maxamuud Maxamed Cabduh',46,'U toosnow'],
  am:['እንደ ታዘዝከውም <u>ቀጥ በል</u>፡፡','Sadiq & Sani',87,'ቀጥ በል'],
  bn:['কাজেই তুমি… <u>সুদৃঢ় হয়ে থাক</u> আল্লাহ যেভাবে তোমাকে আদেশ দিয়েছেন।','Taisirul Quran',161,'সুদৃঢ় হয়ে থাক'],
  de:['So <u>verhalte dich recht</u>, wie dir befohlen wurde.','Bubenheim & Elyas',27,'Verhalte dich recht'],
  es:['<u>Sé recto</u> como se te ha ordenado.','Julio Cortés',83,'Sé recto'],
- fa:['پس… همان‌گونه که فرمان یافته‌ای، <u>استقامت کن</u>…','IslamHouse.com',135,'استقامت کن'],
+ fa:['پس… همان‌گونه که فرمان یافته‌ای، <u>استقامت کن</u>','IslamHouse.com',135,'استقامت کن'],
  fr:['<u>Demeure sur le droit chemin</u> comme il t’a été commandé.','Muhammad Hamidullah',31,'Demeure droit'],
  ha:['Sai ka <u>daidaitu</u> kamar yadda aka umurce ka.','Abubakar Gumi',32,'Ka daidaitu'],
- hi:['अतः… आप <u>सुदृढ़ रहें</u> जैसा आपको आदेश दिया गया है…','Azizul Haque al-Umari',122,'सुदृढ़ रहें'],
+ hi:['अतः… आप <u>सुदृढ़ रहें</u> जैसा आपको आदेश दिया गया है','Azizul Haque al-Umari',122,'सुदृढ़ रहें'],
  id:['Maka <u>tetaplah engkau</u> (di jalan yang benar), sebagaimana telah diperintahkan kepadamu.','Kemenag RI',33,'Tetaplah'],
  it:['<u>Sii dunque retto</u> come ti è stato ordinato.','Hamza Roberto Piccardo',153,'Sii retto'],
  ms:['Hendaklah engkau <u>sentiasa tetap teguh</u> di atas jalan yang betul sebagaimana yang diperintahkan.','Abdullah Basmeih',39,'Tetap teguh'],
  nl:['<u>Wees standvastig</u>, zoals jou is bevolen.','Sofian S. Siregar',144,'Wees standvastig'],
- ps:['نو ته <u>ثابت قدم اوسه</u> لكه څنګه چې تا ته حكم شوى دى…','Zakaria Abulsalam',118,'ثابت قدم اوسه'],
+ ps:['نو ته <u>ثابت قدم اوسه</u> لكه څنګه چې تا ته حكم شوى دى','Zakaria Abulsalam',118,'ثابت قدم اوسه'],
  pt:['<u>Sê firme</u>, pois, tal qual te foi ordenado.','Samir El-Hayek',43,'Sê firme'],
  ru:['<u>Будь же тверд</u> на прямом пути, как тебе велено.','Эльмир Кулиев',45,'Будь твёрд'],
  sw:['Basi, <u>simama sawa sawa</u> kama ulivyo amrishwa.','Ali Muhsin Al-Barwani',49,'Simama sawa sawa'],
@@ -3068,6 +3078,7 @@ const X4=[
 ['Listen on Quran.com','استمع على Quran.com','Quran.com irratti dhaggeeffadhu','Ka dhageyso Quran.com'],
 ['Small steps. Big change.','خطوات صغيرة. تغيير كبير.','Tarkaanfii xixiqqaa. Jijjiirama guddaa.','Tallaabooyin yaryar. Isbeddel weyn.'],
 ['Built for ADHD','مصمَّم لفرط الحركة وتشتت الانتباه (ADHD)','ADHD\'f kan qophaa\'e','Waxaa loo sameeyay ADHD'],
+['Made for every kind of mind.','صُمِّم لكلِّ العقول على اختلافها.','Sammuu gosa hundaaf kan qophaa\'e.','Waxaa loo sameeyay maskax kasta.'],
 ['Designed with ADHD in mind','صُمِّم مع مراعاة ADHD','ADHD yaada keessa galchuun qophaa\'e','Loo naqshadeeyay iyadoo ADHD la tixgelinayo'],
 ['Open to everyone.','متاح للجميع.','Nama hundaaf banaa dha.','Qof walba wuu isticmaali karaa.'],
 ['100% free, always · No ads · 26 languages','مجاني 100% دائمًا · بلا إعلانات · 26 لغة','Yeroo hunda 100% bilisa · Beeksisa hin qabu · Afaan 26','Had iyo jeer 100% bilaash · Xayeysiis ma leh · 26 luqadood'],
