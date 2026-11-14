@@ -517,8 +517,8 @@ html[dir=rtl] .qt-bar{transform:translateX(50%)}
 .ig-wrap{display:grid;gap:12px}@media(min-width:620px){.ig-wrap{grid-template-columns:1fr 1fr}}.ig-col{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface)}.ig-h{font-weight:700;margin:0 0 6px}
 .ig{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:ig}.ig-s{display:grid;grid-template-columns:28px 40px 1fr;align-items:center;gap:6px;counter-increment:ig}.ig-s::before{content:counter(ig);width:26px;height:26px;border-radius:50%;background:var(--calm);color:#fff;display:grid;place-items:center;font-weight:700;font-size:.85rem}.ig-i{width:40px;height:40px;border-radius:12px;background:color-mix(in srgb,var(--calm) 14%,var(--surface));display:grid;place-items:center;font-size:1.25rem}
 .hj{display:block;font-weight:400;font-size:.78rem;color:var(--muted)}.hjd{display:block;font-style:normal;font-size:.62rem;color:var(--muted);line-height:1}
-.ld-today{width:100%;max-width:440px;margin:6px auto 0;padding:12px 14px;border-radius:18px;background:color-mix(in srgb,var(--calm) 9%,var(--surface));border:1.5px solid color-mix(in srgb,var(--calm) 25%,transparent);text-align:center;display:grid;gap:6px}
-.ldt-d{margin:0;display:grid;gap:1px}.ldt-d span{font-size:.85rem;color:var(--muted)}.ldt-n{margin:0;font-size:.95rem}.ldt-n b{color:var(--calm)}
+.ld-today{width:100%;max-width:440px;margin:4px auto 0;text-align:center;display:grid;gap:6px;justify-items:center}.ldt-chip{border:1px solid color-mix(in srgb,var(--calm) 30%,transparent);background:color-mix(in srgb,var(--calm) 7%,var(--surface));border-radius:999px;padding:.32rem .8rem;font-size:.78rem;color:var(--ink);display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:center;min-height:0}.ldt-chip b{color:var(--calm)}.ldt-hj{color:var(--muted)}.ldt-more{display:grid;gap:6px;width:100%;padding:10px;border-radius:16px;background:color-mix(in srgb,var(--calm) 6%,var(--surface))}
+.ldt-d{margin:0;font-size:.8rem;color:var(--muted)}.ldt-n{margin:0;font-size:.95rem}.ldt-n b{color:var(--calm)}
 .ldt-row{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}.ldt-row span{display:grid;padding:5px 2px;border-radius:10px;background:var(--surface)}.ldt-row small{font-size:.66rem;color:var(--muted)}.ldt-row b{font-size:.74rem;white-space:nowrap;font-variant-numeric:tabular-nums}
 .ldt-row span.on{background:var(--calm);color:#fff}.ldt-row span.on small{color:#fff}.ldt-w{margin:0;font-size:.72rem;color:var(--muted)}.ldt-loc{background:none;border:0;padding:0;color:var(--calm);text-decoration:underline;font-size:inherit}
 .ld-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin:14px 0 4px}.ld-lb{min-height:46px;padding:.65rem 1.1rem;border-radius:14px;font-size:1rem;font-weight:600;background:var(--surface);color:var(--ink);border:1.5px solid var(--line)}
@@ -561,6 +561,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
  .pr-foot{position:fixed;bottom:0;background:#fff;padding-top:2pt;inset-inline-end:0;display:flex;align-items:center;gap:6pt;font-size:7.5pt;color:#6b7280}.pr-foot img{width:12mm;height:12mm}
 }
 .ld-ayah .ayt{color:#374151!important;font-size:.95rem!important}.ld-ayah #ayS{color:#a8761c!important;font-size:.74rem!important;font-weight:700;opacity:1!important}
+#landing .ld-tag{margin-top:18px!important}#landing .ld-sub{margin-top:10px!important;margin-bottom:8px!important}#landing .ld-h{margin-top:18px!important}
 .dv-now{position:absolute;inset-inline:0;height:2px;background:#e11d48;pointer-events:none}.dv-now::before{content:"";position:absolute;inset-inline-start:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:#e11d48}
 </style>
 
@@ -3361,7 +3362,7 @@ function locAuto(){if(S.loc)return;let tz='';try{tz=Intl.DateTimeFormat().resolv
 const HMON=['Muharram','Safar','Rabiʿ al-Awwal','Rabiʿ al-Thani','Jumada al-Ula','Jumada al-Akhirah','Rajab','Shaʿban','Ramadan','Shawwal','Dhul-Qiʿdah','Dhul-Hijjah'];
 function hijri(d,o){try{if(LANG==='ar')return new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura-nu-latn',o||{day:'numeric',month:'long',year:'numeric'}).format(d).replace(/\s?هـ$/,'')+(o&&!o.year?'':' هـ');
   const P=Object.fromEntries(new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'}).formatToParts(d).map(x=>[x.type,x.value]));
-  const y=String(P.year||P.relatedYear||'').replace(/\D/g,''),m=HMON[(+P.month||1)-1];if(o&&!o.year)return m;if(o)return m+' '+y+' AH';return P.day+' '+m+' '+y+' AH'}catch(e){return ''}}
+  const y=String(P.year||P.relatedYear||'').replace(/\D/g,''),m=HMON[(+P.month||1)-1];if(o&&o.day&&!o.year)return P.day+' '+m;if(o&&!o.year)return m;if(o)return m+' '+y+' AH';return P.day+' '+m+' '+y+' AH'}catch(e){return ''}}
 const hday=d=>{try{return new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric'}).format(d)}catch(e){return ''}};
 function prayerTimes(date,lat,lng,meth,hanafi){const M=PMETH[meth]||PMETH.mwl,rad=Math.PI/180,dsin=x=>Math.sin(x*rad),dcos=x=>Math.cos(x*rad),dtan=x=>Math.tan(x*rad),
   darcsin=x=>Math.asin(x)/rad,darccos=x=>Math.acos(Math.max(-1,Math.min(1,x)))/rad,darctan2=(y,x)=>Math.atan2(y,x)/rad,darccot=x=>Math.atan(1/x)/rad,fixA=a=>{a=a-360*Math.floor(a/360);return a<0?a+360:a},fixH=a=>{a=a-24*Math.floor(a/24);return a<0?a+24:a};
@@ -3497,10 +3498,12 @@ function instGuide(){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(n
 function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
   const five=['fajr','dhuhr','asr','maghrib','isha'];let nx=five.find(k=>P[k]>now),nt=nx?P[nx]:salahFor(addDays(now,1)).fajr;nx=nx||'fajr';
   const mins=Math.max(0,Math.round((nt-now)/60000)),left=Math.floor(mins/60)+':'+String(mins%60).padStart(2,'0');
-  b.innerHTML=`<p class="ldt-d"><b>${now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}</b><span>🌙 ${hijri(now)}</span></p>
-   <p class="ldt-n">🕌 ${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> · <span dir="ltr">⏳ ${left}</span></p>
+  const open=b.classList.contains('open');
+  b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-expanded="${open}">🕌 ${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> <span dir="ltr">⏳ ${left}</span> <span class="ldt-hj">🌙 ${hijri(now,{day:'numeric',month:'long'})}</span></button>
+   ${open?`<div class="ldt-more"><p class="ldt-d">${now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})} · ${hijri(now)}</p>
    <div class="ldt-row">${five.map(k=>`<span class="${k===nx?'on':''}"><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
-   <p class="ldt-w">📍 ${S.loc.auto?esc(S.loc.auto.split('/').pop().replace(/_/g,' ')):tl('From your location')} · <button class="ldt-loc" id="ldtLoc">${tl('📍 Use my location')}</button></p>`;
+   <p class="ldt-w">📍 ${S.loc.auto?esc(S.loc.auto.split('/').pop().replace(/_/g,' ')):tl('From your location')} · <button class="ldt-loc" id="ldtLoc">${tl('📍 Use my location')}</button></p></div>`:''}`;
+  $('ldtT').onclick=()=>{b.classList.toggle('open');ldToday()};if(!$('ldtLoc'))return;
   $('ldtLoc').onclick=()=>locAsk(ldToday)}
 setInterval(()=>{const l=$('landing');if(l&&!l.hidden)ldToday()},30000);
 
