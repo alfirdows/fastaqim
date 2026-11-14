@@ -287,7 +287,9 @@ button:active{transform:scale(.97)}
 .sp-sec{display:flex;flex-direction:column;gap:6px;width:100%;text-align:left}.sp-it{display:flex;gap:8px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--line)}.sp-it span{flex:1}
 @media (max-width:640px){nav{display:flex!important;overflow-x:auto;scrollbar-width:none}nav::-webkit-scrollbar{display:none}nav button{flex:0 0 auto;min-width:62px}}
 .ld-auth{width:100%;max-width:360px;display:flex;flex-direction:column;gap:8px}
-.ld-auth input{width:100%}
+.ld-auth input{width:100%;padding:.8rem 1rem;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);font:inherit;color:inherit}
+.ld-auth #auF{border:0;background:none}
+.ld-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:.85rem 1rem;border-radius:999px;background:#fff;color:#1f1f1f;border:1.5px solid #dadce0;font-weight:700;font-size:1rem}
 .ld-auth .row{justify-content:center}
 </style>
 
@@ -1860,11 +1862,14 @@ function authForm(msg){
   const box=$('ldAuth');
   if(inArtifact()){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Continue with your Claude account</button>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};$('ldNote').textContent='You\'re signed in through Claude. Your data is private to your account.';return}
   if(!SUPA.url){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Try it now</button><p class="small muted">Accounts are being switched on. Until then, everything saves on this device.</p>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};return}
-  box.innerHTML=`<input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password">
+  box.innerHTML=`<button class="ld-google" id="auG"><svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Continue with Google</button>
+    <p class="small muted" style="margin:2px 0">or with email</p>
+    <input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password">
     <div class="row"><button class="btn-main" id="auIn">Sign in</button><button class="btn-calm" id="auUp">Create account</button></div>
     <button class="btn-ghost small" id="auF">Forgot password?</button>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
   const say=t=>{$('auMsg').textContent=t};
   const creds=()=>{const email=$('auE').value.trim(),password=$('auP').value;if(!/\S+@\S+\.\S+/.test(email)){say('Enter your email.');return null}if(password.length<8){say('Password needs 8 or more characters.');return null}return{email,password}};
+  $('auG').onclick=async()=>{say('Opening Google...');const {error}=await AU.sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)say(error.message)};
   $('auIn').onclick=async()=>{const c=creds();if(!c)return;say('Signing in...');const {error}=await AU.sb.auth.signInWithPassword(c);if(error)say(error.message.includes('Invalid')?'Email or password is wrong.':error.message)};
   $('auUp').onclick=async()=>{const c=creds();if(!c)return;say('Creating your account...');const {data,error}=await AU.sb.auth.signUp({...c,options:{emailRedirectTo:location.origin+location.pathname}});
     if(error)say(error.message);else if(!data.session)say('Check your email and tap the link to confirm. Then sign in here.')};
