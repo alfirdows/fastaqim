@@ -133,7 +133,7 @@ details[open] summary{margin-bottom:10px}
 .msg{max-width:85%;padding:.6rem .9rem;border-radius:16px;overflow-wrap:anywhere}
 .msg.c{align-self:flex-start;background:var(--calm-soft);border-bottom-left-radius:4px}
 .msg.u{align-self:flex-end;background:var(--ink);color:var(--bg);border-bottom-right-radius:4px}
-.modal{position:fixed;inset:0;z-index:30;background:color-mix(in srgb,var(--ink) 55%,transparent);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.modal{position:fixed;inset:0;z-index:60;background:color-mix(in srgb,var(--ink) 55%,transparent);display:grid;place-items:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
 .modal .card{max-width:460px;width:100%;text-align:center;align-items:center;border:2.5px solid var(--accent)}
 .reason-text{font-family:var(--display);font-size:1.3rem;font-weight:600;line-height:1.5;overflow-wrap:anywhere}
 .reason-text[dir=rtl],.ar{font-family:"Amiri","Noto Naskh Arabic","Geeza Pro",serif;font-size:1.7rem;line-height:1.9;font-weight:700}
@@ -319,7 +319,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
       <div class="ld-t" style="--d:.54s"><b>🌐</b><span>English, العربية, Afaan Oromoo</span></div>
     </div>
     <div class="ld-quote"><p>“Starting is the hard part. So that's the part we make tiny.”</p></div>
-    <p class="small muted ld-note" id="ldNote">Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.</p>
+    <p class="small muted ld-note" id="ldNote"><a href="#" class="privLink">Privacy</a></p>
   </div>
 </div>
 <div class="wrap">
@@ -654,6 +654,7 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
     <form class="card" id="nameEdit"><p class="label">Your name</p><div class="inline-form"><input type="text" id="nameEditIn" aria-label="Your name" maxlength="30"><button type="submit">Save</button></div></form>
     <label class="card row" style="justify-content:space-between;padding:14px 20px"><span>🎉 Confetti and sounds</span><input type="checkbox" id="celebIn" aria-label="Confetti and sounds"></label>
     <button class="small" id="backupBtn" style="align-self:center">💾 Back up / restore</button>
+    <a href="#" class="privLink small muted" style="align-self:center">Privacy</a>
     <button class="btn-ghost small" id="resetBtn" style="align-self:center">Reset everything</button>
     <div class="note" id="resetConfirm" hidden>
       <p style="margin-bottom:10px">This deletes all tasks, sparks and wins. Your schedule, money, goals, history, check-ins and reasons stay. Are you sure?</p>
@@ -1875,13 +1876,13 @@ function landingShow(on){$('landing').hidden=!on;document.body.style.overflow=on
 function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 function authForm(msg){
   const box=$('ldAuth');
-  if(inArtifact()){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Continue with your Claude account</button>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};$('ldNote').textContent='You\'re signed in through Claude. Your data is private to your account.';return}
+  if(inArtifact()){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Continue with your Claude account</button>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};return}
   if(!SUPA.url){box.innerHTML=`<button class="btn-main ld-go" id="ldGo">Try it now</button><p class="small muted">Accounts are being switched on. Until then, everything saves on this device.</p>`;$('ldGo').onclick=()=>{S.started=true;save();landingShow(false);render()};return}
   box.innerHTML=`<button class="ld-google" id="auG"><svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></svg>Continue with Google</button>
     <p class="small muted" style="margin:2px 0">or with email</p>
     <input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password">
     <div class="row"><button class="btn-main" id="auIn">Sign in</button><button class="btn-calm" id="auUp">Create account</button></div>
-    <button class="btn-ghost small" id="auF">Forgot password?</button><p class="small muted" style="margin:0">By creating an account you agree that the site owner can see your activity on Fastaqim.</p>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
+    <button class="btn-ghost small" id="auF">Forgot password?</button><p class="small muted" style="margin:0">By signing up you agree to the <a href="#" class="privLink">Privacy policy</a>.</p>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
   const say=t=>{$('auMsg').textContent=t};
   const creds=()=>{const email=$('auE').value.trim(),password=$('auP').value;if(!/\S+@\S+\.\S+/.test(email)){say('Enter your email.');return null}if(password.length<8){say('Password needs 8 or more characters.');return null}return{email,password}};
   $('auG').onclick=async()=>{say('Opening Google...');const {error}=await AU.sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)say(error.message)};
@@ -2016,7 +2017,7 @@ function famRender(){const b=$('famBox');if(!b)return;b.hidden=!(AU.sb&&AU.user)
   const me=AU.user.id,mine=FAM.links.filter(l=>l.guardian_id===me),over=FAM.links.filter(l=>l.member_id===me);
   b.innerHTML=`<h2><span class="h2i" aria-hidden="true">👨‍👩‍👧</span>Family</h2>
     ${FAM.err?`<p class="small muted">Family isn't switched on yet.</p>`:''}
-    ${over.map(l=>`<div class="note small">🔗 Linked to <b>${esc(l.guardian_name||'your guardian')}</b>. They can see your activity: tasks, streak, adhkar and goals. Not your reflections or money (the site owner can see all activity for safety).</div>`).join('')}
+    ${over.map(l=>`<div class="note small">🔗 Linked to <b>${esc(l.guardian_name||'your guardian')}</b>. They can see your activity: tasks, streak, adhkar and goals. Not your reflections or money.</div>`).join('')}
     ${mine.length?`<p class="label">People I look after</p>${mine.map(l=>`<div class="mrow" style="cursor:default"><span>👤 ${esc(l.member_name||'Member')}</span><span class="row" style="gap:6px"><button class="small" data-fv="${l.member_id}">View</button><button class="btn-ghost small" data-fu="${l.member_id}">Unlink</button></span></div>`).join('')}`:''}
     <details ${FAM.code?'open':''}><summary class="small">I look after someone (parent, guardian, older sibling)</summary><div class="wrap" style="gap:8px;padding-top:8px">
       <p class="small muted">Make a code and have them type it on their Fastaqim, in Me → Family. Codes last 7 days.</p>
@@ -2075,6 +2076,15 @@ function admView(id){const r=ADM.rows.find(x=>x.user_id===id);if(!r)return;const
     <p class="label">Recent changes</p>${list((s.hist||[]).slice(0,25),h=>`<p class="small">${new Date(h.at).toLocaleDateString(LOC(),{month:'short',day:'numeric'})} · ${esc(h.act)} ${esc(h.label)}</p>`)}
     </div><button class="btn-ghost small" id="avX">Close</button>`);$('avX').onclick=modalClose}
 
+
+/* ---------- privacy page ---------- */
+function privacyOpen(){modalCard(`<p class="label">Privacy</p><div class="sp-sec small" style="gap:8px">
+  <p><b>What's saved:</b> your name, email, and what you add here (to-dos, plans, money, goals, reflections, adhkar counts).</p>
+  <p><b>Where:</b> in a secure database (Supabase). Fastaqim doesn't sell or share your data.</p>
+  <p><b>Who can see it:</b> you; a family member you link to (activity only); and the site owner, to keep Fastaqim safe and working.</p>
+  <p><b>Delete:</b> ask the owner to delete your account and everything in it.</p></div>
+  <button class="btn-ghost small" id="pvX">Close</button>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
+document.addEventListener('click',e=>{if(e.target.closest('.privLink')){e.preventDefault();privacyOpen()}});
 /* ---------- less text: explanations behind a ? ---------- */
 document.querySelectorAll('.card').forEach(card=>{
   const xs=card.querySelectorAll(':scope > .xp, :scope > p.muted.small:not([id]), :scope > .coach-note, :scope > ul.tips, :scope > p.small:not([id]), :scope > p.label + p.small');
@@ -2247,7 +2257,7 @@ const I18N=[
 ['One reflection a day','تأمل واحد في اليوم','Guyyaatti yaada of-ilaaluu tokko'],
 ['Every edit saved with history','كل تعديل محفوظ مع السجل','Jijjiirama hundi seenaa wajjin ni olkaa\'ama'],['Family view for parents and guardians','عرض العائلة للوالدين والأوصياء','Ilaalcha maatii warra fi eegdotaaf'],['Family','العائلة','Maatii'],['People I look after','من أرعاهم','Namoota ani kunuunsu'],['View','عرض','Ilaali'],['Unlink','إلغاء الربط','Hidhata kuti'],['Join','انضم','Makami'],['Make a family code','أنشئ رمز العائلة','Koodii maatii uumi'],['Make a new code','أنشئ رمزًا جديدًا','Koodii haaraa uumi'],['I look after someone (parent, guardian, older sibling)','أرعى شخصًا (والد، وصي، أخ أكبر)','Nama tokko nan kunuunsa (warra, eegduu, obboleessa hangafa)'],['Someone looks after me','شخص يرعاني','Namni tokko na kunuunsa'],['PH:Family code','رمز العائلة','Koodii maatii'],
 ['“Starting is the hard part. So that\'s the part we make tiny.”','«البداية هي الجزء الصعب، لذلك نجعلها صغيرة جدًا.»','“Jalqabuun kutaa ulfaataadha. Kanaaf isa xiqqeessina.”'],
-['Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.','بياناتك خاصة بحسابك. وللحفاظ على أمان فاستقم، يمكن لمالك الموقع رؤية نشاط الحسابات.','Odeeffannoon kee herrega keetiif dhuunfaadha. Fastaqim nageenyaan eeguuf, abbaan marsariitii sochii herregaa ilaaluu danda\'a.'],['By creating an account you agree that the site owner can see your activity on Fastaqim.','بإنشاء حساب، توافق على أن مالك الموقع يمكنه رؤية نشاطك على فاستقم.','Herrega uumuun, abbaan marsariitii sochii kee Fastaqim irratti akka ilaalu ni eeyyamta.'],['Owner view','عرض المالك','Ilaalcha abbaa'],
+['Your data is private to your account. To keep Fastaqim safe, the site owner can see account activity.','بياناتك خاصة بحسابك. وللحفاظ على أمان فاستقم، يمكن لمالك الموقع رؤية نشاط الحسابات.','Odeeffannoon kee herrega keetiif dhuunfaadha. Fastaqim nageenyaan eeguuf, abbaan marsariitii sochii herregaa ilaaluu danda\'a.'],['Privacy','الخصوصية','Dhuunfaa'],['By signing up you agree to the','بالتسجيل، أنت توافق على','Galmaa\'uun, ni eeyyamta'],['Privacy policy','سياسة الخصوصية','imaammata dhuunfaa'],['Owner view','عرض المالك','Ilaalcha abbaa'],
 ['Try it now','جرّبه الآن','Amma yaali'],
 ['Loading...','جارٍ التحميل...','Fe\'aa jira...'],
 ['PH:Email','البريد الإلكتروني','Imeelii'],
