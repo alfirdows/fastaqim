@@ -639,7 +639,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="c1"><b>🗓️</b><span>Planner</span></div><div class="c2"><b>✅</b><span>To-do</span></div><div class="c2"><b>🕌</b><span>Salah</span></div><div class="c3"><b>🎯</b><span>Goals</span></div>
       <div class="c4"><b>💰</b><span>Money</span></div><div class="c5"><b>📿</b><span>Adhkar</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
-    <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldDl">🖨️ Printables</button></div>
+    <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldRe" hidden>↻ Refresh</button><a class="ld-home" id="ldSaf" href="https://alfirdows.github.io/fastaqim/" target="_blank" rel="noopener" hidden>🧭 Open in browser</a><button type="button" class="ld-home" id="ldDl">🖨️ Printables</button></div>
     <p class="ld-free">Free · No ads · 26 languages</p>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
@@ -3352,6 +3352,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['↻ Refresh','↻ تحديث','↻ Haaromsi','↻ Cusboonaysii'],['🧭 Open in browser','🧭 افتح في المتصفح','🧭 Barbaadduu keessatti bani','🧭 Ku fur biraawsarka'],
 ['🎯 Pick a goal','🎯 اختر هدفًا','🎯 Kaayyoo filadhu','🎯 Dooro hadaf'],['🧩 Make it tiny','🧩 اجعله صغيرًا','🧩 Xiqqeessi','🧩 Yaree'],['🚀 Do it today','🚀 افعله اليوم','🚀 Har\'a hojjedhu','🚀 Maanta samee'],
 ['One question a day: set your intention in the morning, check in at midday, look back at night. Want more? Tap "+ Another one" anytime.','سؤال واحد كل يوم: جدّد نيتك في الصباح، وتوقّف مع نفسك في منتصف اليوم، وراجع يومك في المساء. تريد المزيد؟ اضغط «+ سؤال آخر» متى شئت.','Gaaffii tokko guyyaatti: ganama niyyaa kee haaromsi, guyyaa walakkaa of ilaali, galgala guyyaa kee deebi\'ii ilaali. Dabalataa barbaaddaa? Yeroo barbaadde "+ Kan biraa" tuqi.','Hal su\'aal maalintii: subaxa cusboonaysii niyaddaada, duhurkii is eeg, fiidkiina dib u eeg maalintaada. Ma rabtaa wax dheeraad ah? Taabo "+ Mid kale" waqti kasta.'],
 ['Text size','حجم الخط','Hamma barreeffamaa','Cabbirka qoraalka'],['Smaller text','تصغير الخط','Barreeffama xiqqeessi','Qoraal yaree'],['Bigger text','تكبير الخط','Barreeffama guddisi','Qoraal weynee'],['Back to 100%','العودة إلى 100%','Gara 100%tti deebi\'i','Ku noqo 100%'],['Tap the % to go back to 100%.','اضغط على النسبة للعودة إلى 100%.','100%tti deebi\'uuf % tuqi.','Taabo % si aad ugu noqoto 100%.'],
@@ -3562,7 +3563,7 @@ function renderInstall(){const c=$('instCard');if(!c)return;const sa=window.matc
   $('instHow').onclick=instGuide;if($('instGo'))$('instGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;renderInstall()}}
 function netBadge(){const b=$('offBadge');if(!b)return;b.hidden=navigator.onLine!==false;b.textContent='☁︎ '+tl('Offline. Your changes are saved and will sync.')}
 addEventListener('online',()=>{netBadge();try{SYNC.dirty=true;dbSchedule()}catch(e){}});addEventListener('offline',netBadge);
-if('serviceWorker' in navigator&&!inArtifact()&&location.protocol==='https:')navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&!inArtifact()&&location.protocol==='https:')navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>{r.update();document.addEventListener('visibilitychange',()=>{if(!document.hidden)r.update()})}).catch(()=>{});{let had=!!navigator.serviceWorker.controller,done=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(had&&!done){done=true;location.reload()}had=true})}
 
 /* alerts file: the phone's own calendar rings them even when Fastaqim is closed */
 function icsAlerts(){const R=S.remind||{},b=R.before||0,pad=n=>String(n).padStart(2,'0'),f=d=>d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+'00Z',ev=[],now=new Date();
@@ -3891,7 +3892,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();$('ldRe').hidden=$('ldSaf').hidden=!isStand();$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
