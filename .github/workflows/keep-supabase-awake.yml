@@ -1,0 +1,19 @@
+name: Keep Supabase awake
+# Free Supabase projects pause after 7 days without activity.
+# This pings the database every 3 days so Fastaqim logins keep working.
+on:
+  schedule:
+    - cron: "17 6 */3 * *"
+  workflow_dispatch:
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        env:
+          URL: https://xnxqibdjjrgjqpszvdbe.supabase.co
+          KEY: sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId
+        run: |
+          code=$(curl -s -o /dev/null -w "%{http_code}" "$URL/rest/v1/fastaqim_state?select=user_id&limit=1" -H "apikey: $KEY")
+          echo "Supabase answered $code"
+          if [ "$code" -ge 500 ] || [ "$code" = "000" ]; then exit 1; fi
