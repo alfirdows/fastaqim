@@ -594,7 +594,8 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 .tg-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center}.tg-stats span{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 2px;display:grid}.tg-stats b{font-size:1.15rem}.tg-stats small{font-size:.66rem;color:var(--muted)}
 .tg-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.tg-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--k1,#f97316),var(--k4,#f59e0b));width:var(--w,0%);transition:width .4s}
 .qa-b{border:1px solid var(--line);background:var(--surface);color:var(--calm);border-radius:99px;font-size:.78rem;font-weight:700;padding:.3rem .8rem;min-height:32px;align-self:center}.qa-b.on{background:var(--calm);color:#fff}
-#landing .qa-mini{min-height:0;height:22px;width:22px;padding:0;font-size:.6rem;display:inline-grid;place-items:center;margin-top:4px;border-color:color-mix(in srgb,var(--calm) 40%,transparent)}
+.ld-nrow{display:flex;align-items:center;justify-content:center;gap:6px}.ld-nrow .ld-name{margin:0!important}
+#landing .qa-mini{min-height:0;height:20px;width:20px;padding:0;font-size:.55rem;display:inline-grid;place-items:center;margin:0;flex:none;border-color:color-mix(in srgb,var(--calm) 40%,transparent)}
 #landing .ld-logo{position:relative}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
@@ -663,12 +664,39 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 .zm{display:inline-flex;border:1px solid var(--lline,var(--line));border-radius:99px;overflow:hidden;background:var(--surface)}.zm button{border:0;background:transparent;padding:.18rem .55rem;font-size:.72rem;font-weight:700;color:var(--ink);min-height:28px;min-width:0;border-radius:0}.zm button+button{border-inline-start:1px solid var(--lline,var(--line))}
 .ld-top .ld-login{align-self:start;margin-top:2px}.ld-lang-b,.ld-top .ld-login{height:32px;display:inline-flex;align-items:center}
 .dv-now{position:absolute;inset-inline:0;height:2px;background:#e11d48;pointer-events:none}.dv-now::before{content:"";position:absolute;inset-inline-start:-4px;top:-3px;width:8px;height:8px;border-radius:50%;background:#e11d48}
+
+.scroll-card{position:relative}
+.mc-x{position:sticky;top:-6px;align-self:flex-end;margin:-6px -6px -30px auto;z-index:3;width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 9%,var(--surface));color:var(--ink);font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.ipop>div{position:relative;max-height:calc(100dvh - 36px);overflow-y:auto}
+.ipop .mc-x{margin:-4px -4px -34px auto}
+.scroll-card>.label:first-of-type,.ig2>.label,.pv2>.label{padding:0 36px}
+.ig2{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%}
+.ig2 .ig-h{font-size:.8rem;font-weight:700;color:var(--muted);margin:0}
+.ig2 .ig{margin:2px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;width:100%;text-align:start}
+.ig2 .ig-s{display:flex;align-items:center;gap:10px;font-size:.86rem;line-height:1.35;padding:6px 10px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.ig2 .ig-i{display:none}
+.pv2 .label{margin-bottom:8px}
+.ig2 .ig-sw{font-size:.8rem;margin-top:2px}
+.ldz{width:100%;display:flex;flex-direction:column;align-items:center;margin-top:34px}
+.ldz-c{display:flex;align-items:center;gap:6px;width:100%;max-width:360px;margin-top:10px}
+.ldz-t{flex:1;text-align:center;min-width:0}
+.ldz-ar{font-family:"Amiri Quran","KFGQPC Uthmanic Script HAFS","Amiri","Scheherazade New",serif;font-size:1.6rem;line-height:1.7;margin:0;color:var(--ltext,var(--ink))}
+.ldz-tr{font-size:.8rem;font-weight:700;margin:2px 0 0;color:var(--k2,var(--calm))}
+.ldz-m{font-size:.74rem;margin:2px 0 0;color:var(--lmuted,var(--muted))}
+.ldz-a{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:0;background:var(--lcard,var(--surface));color:var(--lmuted,var(--muted));font-size:1.2rem;box-shadow:0 4px 12px -8px rgba(20,40,70,.35);flex:none}
+.ldz-tap{position:relative;width:116px;height:116px;min-height:0;margin-top:14px;border:0;border-radius:50%;background:var(--lcard,var(--surface));box-shadow:0 10px 24px -14px rgba(20,40,70,.45);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.ldz-tap svg{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px);transform:rotate(-90deg)}
+.ldz-tap circle{fill:none;stroke-width:2.4;stroke:color-mix(in srgb,var(--k1,#f97316) 15%,transparent)}
+.ldz-tap circle.p{stroke:var(--k1,#f97316);stroke-linecap:round;stroke-dasharray:100.5;transition:stroke-dashoffset .25s}
+.ldz-tap b{font:800 1.9rem/1 Poppins,system-ui,sans-serif;color:var(--ltext,var(--ink))}
+.ldz-tap small{font-size:.62rem;color:var(--lmuted,var(--muted));margin-top:4px;font-weight:600}
+.ldz-tot{font-size:.72rem;color:var(--lmuted,var(--muted));margin:8px 0 0}
 </style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><div class="ld-nrow"><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h ld-h1"><span>Start in 2 minutes.</span></h1>
     <p class="ld-sub ld-sub2" id="ldSub2"></p>
@@ -680,6 +708,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="c3"><b>🎯</b><span>Goals</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c4"><b>💰</b><span>Money</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
     <p class="ld-free">Free · No ads · 26 languages</p>
+    <div class="ldz" id="ldZk"></div>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
       <div class="ld-mrow"><span class="ld-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" cx="18" cy="18" r="15"/></svg><b>75%</b></span><span><b>Today</b><br><small>Level 4 · 🔥 6 days</small></span><span class="ld-spark">✦ 128</span></div>
@@ -689,8 +718,8 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
     </div><span class="ld-pop">+1 ✦</span></div>
     <div class="ld-flow"><span>🎯 Pick a goal</span><i aria-hidden="true">›</i><span>🧩 Make it tiny</span><i aria-hidden="true">›</i><span>🚀 Do it today</span></div>
     <p class="ld-sec" id="ldDemo">Try it: tap one</p>
-    <div class="ldd"><div class="ldd-list"><button class="ldd-t" data-d="0"><i></i><span>Dhuhr salah</span></button><button class="ldd-t" data-d="1"><i></i><span>Drink water</span></button><button class="ldd-t" data-d="2"><i></i><span>Make your bed</span></button></div>
-      <div class="ldd-side"><span class="ld-ring big"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="lddP" cx="18" cy="18" r="15"/></svg><b id="lddN">0/3</b></span><span class="ld-spark" id="lddS">✦ 0</span></div></div>
+    <div class="ldd"><div class="ldd-list"><button class="ldd-t" data-d="0"><i></i><span>Fajr salah</span></button><button class="ldd-t" data-d="1"><i></i><span>Morning & evening adhkar</span></button><button class="ldd-t" data-d="2"><i></i><span>Make your bed</span></button><button class="ldd-t" data-d="3"><i></i><span>Reply to that message</span></button></div>
+      <div class="ldd-side"><span class="ld-ring big"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" id="lddP" cx="18" cy="18" r="15"/></svg><b id="lddN">0/4</b></span><span class="ld-spark" id="lddS">✦ 0</span></div></div>
     <p class="ld-done" id="lddMsg" hidden>That feeling? Every day. 👇</p>
     <button class="btn-main ld-go" id="ldStart2">Create account</button>
     <div class="ld-am" id="ldAuthM" hidden><div class="ld-amc"><div class="ld-tabs"><button data-at="in">Sign in</button><button data-at="up">Create account</button><button class="ld-amx" id="ldAmX" aria-label="Close">✕</button></div>
@@ -1967,7 +1996,7 @@ function openCaught(){
     save();c.closest('li').classList.toggle('done',c.checked);c.closest('details').querySelector('summary').textContent=`Make scrolling harder next time (${S.friction.length} of ${FRICTION.length} done)`});
 }
 /* ---------- real rest or stuck? + no "what now" gap ---------- */
-function modalCard(html){$('scrollBody').innerHTML=html;$('scrollModal').hidden=false}
+function modalCard(html){$('scrollBody').innerHTML='<button type="button" class="mc-x" aria-label="Close">✕</button>'+html;$('scrollModal').hidden=false;const x=$('scrollBody').querySelector('.mc-x');x.onclick=modalClose;$('scrollBody').scrollTop=0}
 function modalClose(){$('scrollModal').hidden=true;render()}
 function nextAction(){const t=current(),s=t&&nextStep(t);return t?{text:s?s.text:t.title,task:t.title}:null}
 function whatNext(prev){
@@ -2476,7 +2505,7 @@ function renderAdhkar(){const box=$('azBody');if(!box)return;const C=ADHKAR[AZ.c
     ${LANG==='ar'?'':`<p class="small muted" style="text-align:center">${esc(it.en)}</p>`}
     <div class="row" style="justify-content:center;gap:8px"><button class="btn-calm small" id="czGo">⛶ Focus counter</button><button class="btn-ghost small" id="czFree">📿 Free tasbih</button><button class="btn-ghost small" id="hisnGo">📖 Hisnul Muslim</button></div>
     <button class="tap" id="azTap" aria-label="Count one">${AZ.n}<small>of ${it.n}</small></button>
-    <p class="small muted" style="text-align:center">${esc(it.src)}${done[it.id]?' · done today ✓':''}</p>${qaBtn(it.src)}`;
+    <p class="small muted" style="text-align:center">${esc(it.src)}${done[it.id]?' · done today ✓':''}</p>`;
   $('czGo').onclick=()=>czOpen(false);$('hisnGo').onclick=hisnOpen;$('czFree').onclick=()=>czOpen(true);
   box.querySelectorAll('[data-azc]').forEach(b=>b.onclick=()=>{AZ.cat=b.dataset.azc;AZ.i=0;AZ.n=0;renderAdhkar()});
   box.querySelectorAll('[data-azi]').forEach(b=>b.onclick=()=>{AZ.i=+b.dataset.azi;AZ.n=0;renderAdhkar()});
@@ -2614,10 +2643,10 @@ function blkAdmin(){const b=$('admBox');if(!b||!ADM.rows)return;const d=document
 /* ---------- trackers: salah + templates + make your own ---------- */
 
 /* landing mini demo */
-(()=>{const D=[0,0,0];let sp=0;const T=document.querySelectorAll('.ldd-t');
+(()=>{const D=[0,0,0,0];let sp=0;const T=document.querySelectorAll('.ldd-t');
   const burst=(el)=>{const r=el.getBoundingClientRect(),cs=['#FF8A3D','#22B39A','#5B8DEF','#F5B82E','#A06CF0','#EF5DA8'];for(let i=0;i<14;i++){const b=document.createElement('span');b.className='bz';const a=Math.random()*6.28,d=40+Math.random()*60;b.style.cssText=`left:${r.left+22}px;top:${r.top+r.height/2}px;background:${cs[i%6]};--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px`;document.body.appendChild(b);setTimeout(()=>b.remove(),750)}};
   T.forEach(t=>t.onclick=()=>{const i=+t.dataset.d;D[i]=D[i]?0:1;t.classList.toggle('on',!!D[i]);if(D[i]){sp++;burst(t);if(navigator.vibrate)try{navigator.vibrate(15)}catch(e){}}
-    const n=D.filter(Boolean).length;$('lddN').textContent=n+'/3';$('lddP').style.strokeDashoffset=94.2*(1-n/3);$('lddS').textContent='✦ '+sp;$('lddMsg').hidden=n<3;if(n===3)try{chime()}catch(e){}});
+    const n=D.filter(Boolean).length;$('lddN').textContent=n+'/4';$('lddP').style.strokeDashoffset=94.2*(1-n/4);$('lddS').textContent='✦ '+sp;$('lddMsg').hidden=n<4;if(n===4)try{chime()}catch(e){}});
   if($('lddP'))$('lddP').style.strokeDashoffset=94.2})();
 function ldAuthOpen(t){const m=$('ldAuthM');m.hidden=false;m.dataset.tab=t;m.querySelectorAll('[data-at]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.at===t));setTimeout(()=>{const i=$('auE')||$('ldGo');i&&i.focus()},60)}
 (()=>{const els=document.querySelectorAll('#landing .ld-sec,#landing .ld-phone,#landing .ld-how,#landing .ldd,#ldStart2,#landing .ld-note');els.forEach(e=>e.classList.add('rv'));
@@ -2726,10 +2755,13 @@ function admRender(){const b=$('admBox');if(!b)return;b.hidden=!ADM.rows;if(!ADM
   const chip=r=>r.user_id===AU.user.id?'<span class="small muted">You</span>':r.request==='allowed'?`<span class="row" style="gap:4px">${r.guardian?'<span class="small muted">🛡️</span>':''}<button class="small btn-calm" data-av="${r.user_id}">View</button><button class="btn-ghost small" data-ax="${r.user_id}">Remove</button></span>`:r.request==='pending'?'<span class="small muted">Asked ⏳</span>':`<span class="row" style="gap:4px"><button class="small" data-aq="${r.user_id}">${r.request==='declined'?'Ask again':'Request to view'}</button><button class="small" data-ag="${r.user_id}">Guardian (under 18)</button></span>`;
   b.innerHTML=`<h2><span class="h2i" aria-hidden="true">📊</span>Fastaqim users</h2>
     <div class="big3"><div><span class="small muted">Total</span><b>${R.length}</b></div><div><span class="small muted">New this week</span><b>${R.filter(r=>Date.now()-new Date(r.joined)<wk).length}</b></div><div><span class="small muted">Active this week</span><b>${R.filter(r=>r.last_active&&Date.now()-new Date(r.last_active)<wk).length}</b></div></div>
-    <div>${R.map(r=>`<div class="mrow" style="cursor:default"><span>${avDot(r.avatar,r.name||r.email)} <b>${esc(r.name||'—')}</b><br><span class="small muted">${esc(r.email||'')}</span></span>${chip(r)}</div>`).join('')}</div>
-    <p class="small muted">They see your request in their app and choose Allow or Decline.</p>
+    <p class="label" style="margin-top:6px">Linked accounts</p><div>${(R.filter(r=>r.user_id!==AU.user.id&&(r.request==='allowed'||r.request==='pending')).map(r=>`<div class="mrow" style="cursor:default"><span>${avDot(r.avatar,r.name||r.email)} <b>${esc(r.name||'—')}</b><br><span class="small muted">${esc(r.email||'')}</span></span>${chip(r)}</div>`).join(''))||'<p class="small muted">None yet.</p>'}</div>
+    <p class="label" style="margin-top:6px">Request to view</p><input type="email" id="admE" placeholder="Their email" autocomplete="off"><div class="row" style="gap:6px"><button class="small" id="admQ">Request to view</button><button class="small" id="admG">Guardian (under 18)</button></div>
+    <p class="small muted">Ask them for their email. They choose Allow or Decline.</p>
     <button class="btn-ghost small" id="admR" style="align-self:flex-start">Refresh</button>`;
-  $('admR').onclick=admLoad;
+  $('admR').onclick=admLoad;const fe=()=>{const e=$('admE').value.trim().toLowerCase();const r=e&&R.find(x=>(x.email||'').toLowerCase()===e);if(!r)toast('No account with that email.');return r};
+  $('admQ').onclick=async()=>{const r=fe();if(!r)return;const {error}=await AU.sb.rpc('request_view',{p_user:r.user_id});toast(error?'Couldn\'t send.':'Request sent.');admLoad()};
+  $('admG').onclick=async()=>{const r=fe();if(!r)return;const {error}=await AU.sb.rpc('request_view',{p_user:r.user_id,p_guardian:true});toast(error?'Couldn\'t send.':'Guardian request sent.');admLoad()};
   b.querySelectorAll('[data-aq]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('request_view',{p_user:x.dataset.aq});toast(error?'Couldn\'t send.':'Request sent.');admLoad()});
   b.querySelectorAll('[data-ag]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('request_view',{p_user:x.dataset.ag,p_guardian:true});toast(error?'Couldn\'t send.':'Guardian request sent.');admLoad()});
   b.querySelectorAll('[data-ax]').forEach(x=>x.onclick=async()=>{const {error}=await AU.sb.rpc('remove_view',{p_user:x.dataset.ax});toast(error?'Couldn\'t remove.':'Removed.');admLoad()});
@@ -3144,7 +3176,7 @@ const X4M={};X4.forEach(([en,ar,om,so])=>{const o={ar,om,so};if(en.startsWith('P
 const tl=en=>{if(LANG==='en')return en==='ADHD_DEF'?'ADHD (attention-deficit/hyperactivity disorder) is a neurodevelopmental condition. It affects attention, impulse control and activity level, and especially the "executive functions": planning, starting tasks, sense of time and motivation. It is not laziness or a lack of intelligence. It shows up in children and adults, and it can be managed with the right tools and support.':en;const t=TX[en];return t&&t[LANG]||en};
 
 /* ADHD info popover */
-function ipop(html){const d=document.createElement('div');d.className='ipop';d.innerHTML=`<div role="dialog" aria-modal="true">${html}<button class="btn-calm" data-x>${tl('Got it')}</button></div>`;document.body.appendChild(d);d.onclick=e=>{if(e.target===d||e.target.closest('[data-x]'))d.remove()};const b=d.querySelector('[data-x]');b&&b.focus()}
+function ipop(html){const d=document.createElement('div');d.className='ipop';d.innerHTML=`<div role="dialog" aria-modal="true"><button type="button" class="mc-x" data-x aria-label="Close">✕</button>${html}<button class="btn-calm" data-x>${tl('Got it')}</button></div>`;document.body.appendChild(d);d.onclick=e=>{if(e.target===d||e.target.closest('[data-x]'))d.remove()};const b=d.querySelector('.btn-calm[data-x]');b&&b.focus()}
 function adhdInfoOld(){ipop(`<h3>${tl('What is ADHD?')}</h3><p>${esc(tl('ADHD_DEF'))}</p><p class="small muted">${tl('Fastaqim is built for ADHD and open to everyone.')}</p>`)}
 document.addEventListener('click',e=>{const b=e.target.closest('#ldInfo,.adhd-i');if(b){e.preventDefault();adhdInfo()}
   const s=e.target.closest('[data-at2]');if(s){e.preventDefault();ldAuthOpen(s.dataset.at2)}
@@ -3394,6 +3426,8 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Fajr salah','صلاة الفجر','Salaata Fajrii','Salaadda Subax'],['Morning & evening adhkar','أذكار الصباح والمساء','Zikrii ganamaa fi galgalaa','Adkaarta subaxa iyo galabta'],['Reply to that message','ردّ على تلك الرسالة','Ergaa sanaaf deebii kenni','Ka jawaab fariintaas'],
+['Using an iPhone?','تستخدم iPhone؟','iPhone fayyadamtaa?','Ma isticmaashaa iPhone?'],['Using Android?','تستخدم Android؟','Android fayyadamtaa?','Ma isticmaashaa Android?'],['Dhikr','الذِّكر','Zikrii','Dhikri'],['Tap to count','اضغط للعدّ','Lakkaa\'uuf tuqi','Taabo si aad u tiriso'],['Today','اليوم','Har\'a','Maanta'],['Back','السابق','Duubatti','Dib'],['Next','التالي','Itti aanu','Xiga'],
 ['No internet. Try again later.','لا يوجد إنترنت. حاول لاحقًا.','Interneetiin hin jiru. Booda yaali.','Internet ma jiro. Mar dambe isku day.'],
 ['🎮 Game mode','🎮 وضع اللعبة','🎮 Haala taphaa','🎮 Habka ciyaarta'],['On','مفعّل','Banaa','Shidan'],['Off','متوقف','Cufaa','Damsan'],['Combo','سلسلة','Walitti fufiinsa','Isku xig'],['Points','نقاط','Qabxii','Dhibco'],['Level','المستوى','Sadarkaa','Heer'],
 ['Finish to-dos back to back for a combo. Every finish = points.','أنجز المهام واحدة تلو الأخرى لتصنع سلسلة. كل إنجاز = نقاط.','Walitti fufinsaan hojiiwwan xumuri. Xumura hundaaf qabxii argatta.','Isku xigxiga u dhammee hawlaha si aad u hesho isku xig. Dhammeyn kasta = dhibco.'],
@@ -3642,14 +3676,35 @@ const X40B=[
 X40B.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 let BIP=null;addEventListener('beforeinstallprompt',e=>{e.preventDefault();BIP=e;renderInstall()});
 const isStand=()=>!!(window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone);
-function instGuide(){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),and=/android/i.test(navigator.userAgent);
+function instGuide(alt){const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),and=/android/i.test(navigator.userAgent);
+  alt=alt===true;let showA=and&&!ios;if(alt)showA=!showA;
   const st=(ic,t)=>`<li class="ig-s"><span class="ig-i" aria-hidden="true">${ic}</span><span>${tl(t)}</span></li>`;
-  const I=`<div class="ig-col"><p class="ig-h"> iPhone · Safari</p><ol class="ig">${st('🧭','Open Fastaqim in Safari')}${st('⬆︎','Tap Share ⬆︎ (newer iPhones: tap ⋯ first)')}${st('➕','Tap "Add to Home Screen"')}${st('✅','Tap "Add", then open Fastaqim from the new icon')}</ol></div>`;
-  const A=`<div class="ig-col"><p class="ig-h">🤖 Android · Chrome</p><ol class="ig">${st('🌐','Open Fastaqim in Chrome')}${st('⋮','Tap the menu ⋮')}${st('📲','Tap "Install app" or "Add to Home screen"')}${st('✅','Tap "Install", then open Fastaqim from the new icon')}</ol></div>`;
-  modalCard(`<p class="label">📲 ${tl('Add to Home Screen')}</p><p class="small">${tl('Reminders work from the Fastaqim icon on your Home Screen.')}</p>
-   ${BIP?`<button class="btn-main" id="igGo">${tl('📲 Install now')}</button>`:''}<div class="ig-wrap">${and&&!ios?A+I:I+A}</div>
-   <p class="small muted">${tl('Then turn on 🔔 Reminders in Me.')}</p><button class="btn-ghost small" id="igX">${tl('Close')}</button>`);
-  $('igX').onclick=modalClose;if($('igGo'))$('igGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;modalClose()}}
+  const I=`<ol class="ig">${st('🧭','Open Fastaqim in Safari')}${st('⬆︎','Tap Share ⬆︎ (newer iPhones: tap ⋯ first)')}${st('➕','Tap "Add to Home Screen"')}${st('✅','Tap "Add", then open Fastaqim from the new icon')}</ol>`;
+  const A=`<ol class="ig">${st('🌐','Open Fastaqim in Chrome')}${st('⋮','Tap the menu ⋮')}${st('📲','Tap "Install app" or "Add to Home screen"')}${st('✅','Tap "Install", then open Fastaqim from the new icon')}</ol>`;
+  modalCard(`<div class="ig2"><p class="label">📲 ${tl('Add to Home Screen')}</p><p class="ig-h">${showA?'Android · Chrome':'iPhone · Safari'}</p>
+   ${BIP?`<button class="btn-main" id="igGo">${tl('📲 Install now')}</button>`:''}${showA?A:I}
+   <button class="lnk ig-sw" id="igSw">${showA?tl('Using an iPhone?'):tl('Using Android?')}</button></div>`);
+  $('igSw').onclick=()=>instGuide(!alt);if($('igGo'))$('igGo').onclick=async()=>{BIP.prompt();try{await BIP.userChoice}catch(e){}BIP=null;modalClose()}}
+
+/* ---------- landing: one dhikr card anyone can use, no account ---------- */
+const LZ=[{ar:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ',tr:'SubḥānAllāhi wa biḥamdih',m:['Glory and praise be to Allah','','Ulfinaa fi galateeffannaan Rabbiif haa ta\'u','Ammaan iyo mahad Allaah baa iska leh']},
+ {ar:'الْحَمْدُ لِلَّهِ',tr:'Alḥamdulillāh',m:['All praise is for Allah','','Galanni hundi kan Rabbii','Mahad oo dhan Allaah baa iska leh']},
+ {ar:'اللَّهُ أَكْبَرُ',tr:'Allāhu akbar',m:['Allah is the Greatest','','Rabbiin hunda caala','Allaah baa ugu weyn']},
+ {ar:'لَا إِلَٰهَ إِلَّا اللَّهُ',tr:'Lā ilāha illā Allāh',m:['None is worthy of worship except Allah','','Rabbii malee kan haqaan gabbaramu hin jiru','Ilaah xaq ah ma jiro Allaah mooyee']},
+ {ar:'أَسْتَغْفِرُ اللَّهَ',tr:'Astaghfirullāh',m:['I ask Allah for forgiveness','','Rabbiin dhiifama nan gaafadha','Allaah ayaan dambi dhaaf weydiisanayaa']},
+ {ar:'اللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ',tr:'Allāhumma ṣalli ʿalā Muḥammad',m:['O Allah, send blessings upon Muhammad ﷺ','','Yaa Rabbi, Muhammad ﷺ irratti rahmata buusi','Allahayow, ku naxariiso Muxammad ﷺ']}];
+const LZK='fastaqim.zk';
+function lzGet(){let o={};try{o=JSON.parse(localStorage.getItem(LZK))||{}}catch(e){}if(o.d!==dkey())o={d:dkey(),i:o.i||0,n:{}};return o}
+function lzSave(o){try{localStorage.setItem(LZK,JSON.stringify(o))}catch(e){}}
+function ldZikr(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0)%LZ.length,z=LZ[i],n=o.n[i]||0,li=['en','ar','om','so'].indexOf(LANG),mean=li<0?tl(z.m[0]):z.m[li];
+  const tot=Object.values(o.n).reduce((a,b)=>a+b,0),pct=Math.min(1,(n%33||(n?33:0))/33);
+  box.innerHTML=`<p class="ld-sec">${tl('Dhikr')}</p><div class="ldz-c"><button class="ldz-a" data-zs="-1" aria-label="${tl('Back')}">‹</button>
+   <div class="ldz-t"><p class="ldz-ar notranslate" lang="ar" dir="rtl">${z.ar}</p>${LANG==='ar'?'':`<p class="ldz-tr notranslate">${z.tr}</p><p class="ldz-m">${esc(mean)}</p>`}</div>
+   <button class="ldz-a" data-zs="1" aria-label="${tl('Next')}">›</button></div>
+   <button class="ldz-tap" id="ldzTap" aria-label="${tl('Tap to count')}"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="p" cx="18" cy="18" r="16" style="stroke-dashoffset:${100.5*(1-pct)}"/></svg><b>${n}</b><small>${tl('Tap to count')}</small></button>
+   <p class="ldz-tot">${tl('Today')}: ${tot}</p>`;
+  box.querySelectorAll('[data-zs]').forEach(b=>b.onclick=()=>{const o=lzGet();o.i=((o.i||0)+(+b.dataset.zs)+LZ.length)%LZ.length;lzSave(o);ldZikr()});
+  $('ldzTap').onclick=()=>{const o=lzGet(),i=(o.i||0)%LZ.length;o.n[i]=(o.n[i]||0)+1;lzSave(o);try{navigator.vibrate&&navigator.vibrate(o.n[i]%33===0?[40,60,40]:8)}catch(e){}ldZikr()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
 function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
@@ -3675,10 +3730,10 @@ function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zC
 
 /* Privacy: short, one line each, in the four pinned languages */
 const PRIV2={
- en:['Privacy',['💚 Free · No ads. Your data is never sold or shared.','🔐 What you add is saved safely in your account.','👀 The owner sees only how many people use Fastaqim, and their names and emails.','🤝 Nothing is shared unless you tap Allow. Adults can stop anytime. Under 18 links: only the owner can remove them.','📍 Location stays on your phone. City search and 🌐 translate send only that word or line.','💡 Ideas you send reach only the owner.','🗑️ Delete your account anytime in Me → Account. You have 30 days to restore it.'],'Close'],
- ar:['الخصوصية',['💚 مجاني · بلا إعلانات. لا تُباع بياناتك ولا تُشارَك.','🔐 ما تضيفه محفوظ بأمان في حسابك.','👀 يرى صاحب الموقع عدد المستخدمين وأسماءهم وبريدهم فقط.','🤝 لا يُشارَك شيء إلا إذا ضغطت «سماح». يمكن للبالغ الإيقاف متى شاء. ربط من هم دون 18: لا يزيله إلا صاحب الموقع.','📍 موقعك يبقى على هاتفك. البحث عن مدينة والترجمة 🌐 يرسلان تلك الكلمة أو السطر فقط.','💡 أفكارك تصل إلى صاحب الموقع وحده.','🗑️ احذف حسابك متى شئت من «أنا» ← الحساب، ولديك 30 يومًا لاسترجاعه.'],'إغلاق'],
- om:['Dhuunfaa',['💚 Bilisa · Beeksisa hin qabu. Odeeffannoon kee hin gurguramu, hin qoodamus.','🔐 Wanti ati dabaltu herrega kee keessatti nageenyaan olkaa\'ama.','👀 Abbaan marsariitii baay\'ina fayyadamtootaa, maqaa fi imeelii isaanii qofa arga.','🤝 Yoo "Hayyami" hin tuqne homtuu hin qoodamu. Gurguddoon yeroo barbaadan dhaabuu danda\'u. Walqabsiisa umurii 18 gadii: abbaa marsariitii qofatu haqa.','📍 Bakki kee bilbila kee irra jira. Magaalaa barbaaduu fi hiikkaan 🌐 jecha ykn sarara sana qofa ergu.','💡 Yaadni ati ergitu abbaa marsariitii qofaaf ga\'a.','🗑️ Yeroo barbaadde "Ana" → Herrega keessaa herrega kee haqi. Deebisuuf guyyaa 30 qabda.'],'Cufi'],
- so:['Qarsoodi',['💚 Bilaash · Xayeysiis ma leh. Xogtaada lama iibiyo, lamana wadaago.','🔐 Waxa aad ku darto si ammaan ah ayaa akoonkaaga loogu keydiyaa.','👀 Milkiiluhu wuxuu arkaa oo keliya inta qof ee isticmaasha, magacyadooda iyo iimaylladooda.','🤝 Waxba lama wadaago ilaa aad taabato "Oggolow". Dadka waaweyni way joojin karaan waqti kasta. Xiriirka kuwa ka yar 18: milkiilaha keliya ayaa ka saari kara.','📍 Goobtaadu taleefankaaga ayay ku jirtaa. Raadinta magaalada iyo turjumaadda 🌐 waxay diraan oo keliya ereygaas ama sadarkaas.','💡 Fikradaha aad dirto waxay gaaraan milkiilaha oo keliya.','🗑️ Tirtir akoonkaaga waqti kasta "Aniga" → Akoon. Waxaad haysataa 30 maalmood si aad dib ugu soo celiso.'],'Xir']};
+ en:['Privacy',['💚 Fastaqim is free with no ads. We never sell your data.','🔐 Your data is stored securely and used only to run Fastaqim.','🛠️ Site administrators can access account data to run, support and protect Fastaqim.','🤝 You choose what to share. Guardian links for users under 18 stay in place for their safety.','📍 Your location stays on your device.','🗑️ You can delete your account anytime in Me → Account and restore it within 30 days.'],'Close'],
+ ar:['الخصوصية',['💚 فاستقم مجاني وبلا إعلانات، ولا نبيع بياناتك أبدًا.','🔐 تُحفظ بياناتك بأمان وتُستخدم لتشغيل فاستقم فقط.','🛠️ يمكن لإدارة الموقع الوصول إلى بيانات الحسابات لتشغيل فاستقم ودعمه وحمايته.','🤝 أنت تختار ما تشاركه. ربط وليّ الأمر لمن هم دون 18 يبقى قائمًا حفاظًا على سلامتهم.','📍 موقعك يبقى على جهازك.','🗑️ يمكنك حذف حسابك متى شئت من «أنا» ← الحساب، واسترجاعه خلال 30 يومًا.'],'إغلاق'],
+ om:['Dhuunfaa',['💚 Fastaqim bilisa, beeksisa hin qabu. Odeeffannoo kee gonkumaa hin gurgurru.','🔐 Odeeffannoon kee nageenyaan olkaa\'ama, Fastaqim hojjechiisuuf qofa itti fayyadamna.','🛠️ Bulchitoonni marsariitii Fastaqim hojjechiisuu, deeggaruu fi eeguuf odeeffannoo herregaa argachuu danda\'u.','🤝 Maal akka qooddu ati filatta. Walqabsiisni guddisaa umurii 18 gadiif nageenya isaaniitiif ni tura.','📍 Bakki kee meeshaa kee irra tura.','🗑️ Yeroo barbaadde "Ana" → Herrega keessaa herrega kee haquu, guyyaa 30 keessatti deebisuu dandeessa.'],'Cufi'],
+ so:['Qarsoodi',['💚 Fastaqim waa bilaash, xayeysiis ma leh. Weligeen xogtaada ma iibinno.','🔐 Xogtaada si ammaan ah ayaa loo keydiyaa, waxaana loo isticmaalaa oo keliya socodsiinta Fastaqim.','🛠️ Maamulayaasha goobta waxay geli karaan xogta akoonnada si ay u socodsiiyaan, u taageeraan una ilaaliyaan Fastaqim.','🤝 Adiga ayaa doorta waxa aad wadaagto. Xiriirka waalidka ee kuwa ka yar 18 wuu sii jiraa si loo ilaaliyo badbaadadooda.','📍 Goobtaadu qalabkaaga ayay ku jirtaa.','🗑️ Waxaad tirtiri kartaa akoonkaaga waqti kasta "Aniga" → Akoon, oo dib u soo celin kartaa 30 maalmood gudahood.'],'Xir']};
 function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar';
   modalCard(`<div class="${PRIV2[LANG]?'notranslate':''} pv2" dir="${rtl?'rtl':'ltr'}" lang="${PRIV2[LANG]?LANG:'en'}"><p class="label">🔒 ${P[0]}</p><ul class="pv2-l">${P[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul><button class="btn-ghost small" id="pvX">${P[2]}</button></div>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
 
@@ -3986,7 +4041,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();renderTG();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();try{ldZikr()}catch(e){}renderTG();qtTick();$('ldHome').onclick=()=>instGuide();document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
