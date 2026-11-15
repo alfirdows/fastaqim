@@ -695,12 +695,18 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 .ldz-tap b{font:800 1.9rem/1 Poppins,system-ui,sans-serif;color:var(--ltext,var(--ink))}
 .ldz-tap small{font-size:.62rem;color:var(--lmuted,var(--muted));margin-top:4px;font-weight:600}
 .ldz-tot{font-size:.72rem;color:var(--lmuted,var(--muted));margin:8px 0 0}
+
+#landing .ld-logo{margin-top:12px!important}
+#landing .ld-nrow{margin-top:10px}
+.ldz-chip{font-size:.95rem;gap:4px;display:inline-flex;align-items:center;justify-content:center}
+.ldz-chip b{font-size:.72rem;font-weight:800;color:var(--ltext,var(--ink))}
+.ldz-pop{margin-top:0}
 </style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><div class="ld-nrow"><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><button type="button" class="ldt-chip ldz-chip" id="ldZb" aria-label="Dhikr">📿</button><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><div class="ld-nrow"><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h ld-h1"><span>Start in 2 minutes.</span></h1>
     <p class="ld-sub ld-sub2" id="ldSub2"></p>
@@ -712,7 +718,6 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
       <div class="c3"><b>🎯</b><span>Goals</span></div><div class="c6"><b>🌙</b><span>Journal</span></div><div class="c4"><b>💰</b><span>Money</span></div><div class="c1"><b>🧭</b><span>Guide</span></div>
     </div>
     <p class="ld-free">Free · No ads · 26 languages</p>
-    <div class="ldz" id="ldZk"></div>
     <p class="ld-sec">See it move</p>
     <div class="ld-phone" aria-hidden="true"><div class="ld-scr">
       <div class="ld-mrow"><span class="ld-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15"/><circle class="p" cx="18" cy="18" r="15"/></svg><b>75%</b></span><span><b>Today</b><br><small>Level 4 · 🔥 6 days</small></span><span class="ld-spark">✦ 128</span></div>
@@ -3702,13 +3707,14 @@ function lzGet(){let o={};try{o=JSON.parse(localStorage.getItem(LZK))||{}}catch(
 function lzSave(o){try{localStorage.setItem(LZK,JSON.stringify(o))}catch(e){}}
 function ldZikr(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0)%LZ.length,z=LZ[i],n=o.n[i]||0,li=['en','ar','om','so'].indexOf(LANG),mean=li<0?tl(z.m[0]):z.m[li];
   const tot=Object.values(o.n).reduce((a,b)=>a+b,0),pct=Math.min(1,(n%33||(n?33:0))/33);
-  box.innerHTML=`<p class="ld-sec">${tl('Dhikr')}</p><div class="ldz-c"><button class="ldz-a" data-zs="-1" aria-label="${tl('Back')}">‹</button>
+  box.innerHTML=`<p class="label">📿 ${tl('Dhikr')}</p><div class="ldz-c"><button class="ldz-a" data-zs="-1" aria-label="${tl('Back')}">‹</button>
    <div class="ldz-t"><p class="ldz-ar notranslate" lang="ar" dir="rtl">${z.ar}</p>${LANG==='ar'?'':`<p class="ldz-tr notranslate">${z.tr}</p><p class="ldz-m">${esc(mean)}</p>`}</div>
    <button class="ldz-a" data-zs="1" aria-label="${tl('Next')}">›</button></div>
    <button class="ldz-tap" id="ldzTap" aria-label="${tl('Tap to count')}"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="16"/><circle class="p" cx="18" cy="18" r="16" style="stroke-dashoffset:${100.5*(1-pct)}"/></svg><b>${n}</b><small>${tl('Tap to count')}</small></button>
    <p class="ldz-tot">${tl('Today')}: ${tot}</p>`;
   box.querySelectorAll('[data-zs]').forEach(b=>b.onclick=()=>{const o=lzGet();o.i=((o.i||0)+(+b.dataset.zs)+LZ.length)%LZ.length;lzSave(o);ldZikr()});
-  $('ldzTap').onclick=()=>{const o=lzGet(),i=(o.i||0)%LZ.length;o.n[i]=(o.n[i]||0)+1;lzSave(o);try{navigator.vibrate&&navigator.vibrate(o.n[i]%33===0?[40,60,40]:8)}catch(e){}ldZikr()}}
+  $('ldzTap').onclick=()=>{const o=lzGet(),i=(o.i||0)%LZ.length;o.n[i]=(o.n[i]||0)+1;lzSave(o);try{navigator.vibrate&&navigator.vibrate(o.n[i]%33===0?[40,60,40]:8)}catch(e){}ldZikr();ldZChip()}}
+function ldZChip(){const b=$('ldZb');if(!b)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);b.innerHTML='📿'+(tot?`<b>${tot}</b>`:'');b.setAttribute('aria-label',tl('Dhikr'));b.onclick=()=>{modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
 function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
@@ -4045,7 +4051,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();try{ldZikr()}catch(e){}renderTG();qtTick();$('ldHome').onclick=()=>instGuide();document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();try{ldZChip()}catch(e){}renderTG();qtTick();$('ldHome').onclick=()=>instGuide();document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
