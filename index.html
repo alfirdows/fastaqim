@@ -811,6 +811,11 @@ body.is-guest #syncBadge{display:none!important}
 .gbar{position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--ink);color:var(--bg);font:600 .82rem var(--body)}.gbar span{flex:1}.gbar button{min-height:32px;padding:0 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);background:transparent;color:var(--bg);font:600 .78rem var(--body)}.gbar button[data-gx="up"]{background:var(--accent);color:var(--accent-ink,#1B0F02);border-color:var(--accent)}
 .pv4{font-size:1rem;line-height:1.6;margin:4px 0 6px;color:var(--ink)}
 .fb2{display:flex;flex-direction:column;gap:10px;width:100%}.fb2 textarea{width:100%;box-sizing:border-box;min-height:84px;max-height:30vh;font:16px/1.4 var(--body);border-radius:12px}.fb2 .btn-main{width:100%}
+.tk-rw{flex-basis:100%;order:9;font-size:.72rem;font-weight:600;color:var(--muted);padding-inline-start:34px;margin-top:-4px}.task-head{flex-wrap:wrap}
+.tk-df{display:flex;flex-direction:column;gap:6px;margin:8px 0}.tk-df .seg{display:flex;gap:6px;flex-wrap:wrap}.tk-df .seg button{min-height:36px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .82rem var(--body)}.tk-df .seg button[aria-pressed=true]{background:var(--calm);border-color:var(--calm);color:#fff}
+.en-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;width:100%}.en-b{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:68px;padding:8px 4px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--body)}.en-b.on{border-color:var(--calm);box-shadow:0 0 0 2px color-mix(in srgb,var(--calm) 30%,transparent)}
+.en-ic{width:30px;height:18px}.en-ic rect{fill:none;stroke:currentColor;stroke-width:1.4}.en-ic rect.cap{fill:currentColor;stroke:none}.en-ic rect[class=""]{stroke:none;fill:color-mix(in srgb,currentColor 12%,transparent)}.en-ic rect.on{stroke:none;fill:var(--calm)}
+.en-hd{display:inline-flex;align-items:center;gap:3px}.en-hd b{font-size:.68rem;font-weight:800;color:var(--accent)}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -1312,10 +1317,10 @@ const cheers=['Done.','That counts.','One more off the list.','Logged.','Progres
 const cheer=()=>cheers[Math.floor(Math.random()*cheers.length)];
 function award(n,win){
   const sp=document.querySelector('.sparks');if(sp){sp.classList.remove('bump');void sp.offsetWidth;sp.classList.add('bump')}
-  const before=lvl().n;S.sparks+=n;S.earned+=n;try{stToday().n+=n}catch(e){}const k=dkey();
+  n=Math.max(1,Math.round(n*((typeof enMult==='function')?enMult():1)));const before=lvl().n;S.sparks+=n;S.earned+=n;try{stToday().n+=n}catch(e){}const k=dkey();
   if(lvl().n>before)setTimeout(()=>{toast('Level up! You\'re level '+lvl().n);confetti();chime()},900);S.days[k]=(S.days[k]||0)+1;
   if(win)S.wins.unshift({text:win,at:Date.now()});S.wins=S.wins.slice(0,60);
-  save();renderHeader();
+  save();renderHeader();return n;
 }
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
 function confetti(){
@@ -1342,8 +1347,8 @@ const openTasks=()=>S.tasks.filter(t=>!t.done);
 function current(){const o=openTasks();return o.find(t=>t.top)||o[0]||null}
 function nextStep(t){return t.steps.find(s=>!s.done)||null}
 function completeStep(t,s){
-  s.done=true;award(1,'Did: '+s.text);burstAt(lastTap);
-  if(t.steps.every(x=>x.done)){finishTask(t)}else{toast('+1 star. '+cheer())}
+  s.done=true;const _s=award(tDiff(t),'Did: '+s.text);burstAt(lastTap);
+  if(t.steps.every(x=>x.done)){finishTask(t)}else{toast('+'+_s+'\u00a0⭐ '+tl(cheer()))}
   save();render();
 }
 function burstAt(el,n){if(!el||!el.getBoundingClientRect||S.calm)return;const r=el.getBoundingClientRect(),cs=['#FF8A3D','#22B39A','#5B8DEF','#F5B82E','#A06CF0','#EF5DA8'];for(let i=0;i<(n||12);i++){const b=document.createElement('span');b.className='bz';const a=Math.random()*6.28,d=30+Math.random()*50;b.style.cssText=`left:${r.left+r.width/2}px;top:${r.top+r.height/2}px;background:${cs[i%6]};--x:${Math.cos(a)*d}px;--y:${Math.sin(a)*d}px`;document.body.appendChild(b);setTimeout(()=>b.remove(),750)}}
@@ -1356,11 +1361,11 @@ const BADGES=[['🌱','First start',()=>S.earned>0],['✅','10 tasks done',()=>S
 function renderBadges(){if(!$('badges'))return;S.badges=S.badges||{};let fresh=null;
   $('badges').innerHTML=BADGES.map(([ic,t,f])=>{const on=f();if(on&&!S.badges[t]){S.badges[t]=Date.now();fresh=t}return `<div class="badge${on?' on':''}"><b>${ic}</b><span>${t}</span></div>`}).join('');
   if(fresh){save();toast('🏅 New badge: '+fresh)}}
-function finishTask(t){try{tgHit()}catch(e){}t.done=true;t.doneAt=Date.now();burstAt(lastTap,16);award(5,'Finished: '+t.title);toast('Task finished! +5 stars');confetti();chime()}
+function finishTask(t){try{tgHit()}catch(e){}t.done=true;t.doneAt=Date.now();burstAt(lastTap,16);const _n=award(tReward(t),'Finished: '+t.title);toast(tl('Achievement unlocked!')+' +'+_n+'\u00a0⭐');confetti();chime()}
 
 /* ---------- render ---------- */
 function lvl(){const per=50;return {n:Math.floor(S.earned/per)+1,pct:(S.earned%per)/per*100,left:per-S.earned%per}}
-function renderHeader(){
+function renderHeader(){try{enHdr()}catch(e){}
   $('sparkCount').textContent=S.sparks;{const e=$('starTd');if(e){const n=stToday().n;e.textContent=n?'+'+n+' '+tl('today'):''}}
   const L=lvl();$('levelText').textContent='Level '+L.n+' · '+L.left+' to next';$('xpBar').style.width=L.pct+'%';
   const h=new Date().getHours();
@@ -1559,12 +1564,13 @@ function taskHTML(t){
       <input type="checkbox" data-act="done" ${t.done?'checked':''} aria-label="Finish ${esc(t.title)}">
       <span class="task-title">${uT(t.title)}${t.due&&!t.done?`<br><span class="due ${t.due<dkey()?'late':''}">${t.due===dkey()?'Today':fmtD(t.due)}${t.time?' '+esc(t.time):''}</span>`:''}</span>
       <span class="small muted">${t.steps.length?doneN+'/'+t.steps.length:''}</span>
+      ${t.done?'':`<span class="tk-rw">${tMeta(t)}</span>`}
       <button class="icon-btn" data-act="tmr" title="Timer" aria-label="Timer">⏱</button>
       <button class="star icon-btn" data-act="top" aria-pressed="${!!t.top}" title="${t.top?'Remove from top 3':'Add to top 3'}">★</button>
       <button class="icon-btn" data-act="open" aria-expanded="${!!t.open}" title="Steps">${t.open?'▴':'▾'}</button>
     </div>
     ${t.open?`<ul class="steps">${t.steps.map(s=>`<li class="${s.done?'done':''}"><input type="checkbox" data-act="step" data-s="${s.id}" ${s.done?'checked':''} aria-label="${esc(s.text)}"><span>${esc(s.text)}</span></li>`).join('')}</ul>
-      <div class="inline-form"><input type="date" data-act="due" value="${t.due||''}" aria-label="Day"><input type="time" data-act="tm" value="${t.time||''}" aria-label="Time" style="max-width:120px"><button class="small" data-act="ren">Rename</button></div>
+      ${tPick(t)}<div class="inline-form"><input type="date" data-act="due" value="${t.due||''}" aria-label="Day"><input type="time" data-act="tm" value="${t.time||''}" aria-label="Time" style="max-width:120px"><button class="small" data-act="ren">Rename</button></div>
       <form class="inline-form" data-act="addstep"><input type="text" placeholder="Add a tiny step" aria-label="New step"><button type="submit">Add</button></form>
       <div class="row"><button class="btn-main" data-act="focus" style="font-size:.95rem;padding:.6rem 1rem">Start ${SM()} min</button>${t.steps.length?'':'<button class="small" data-act="breakdown">Break it down for me</button>'}<button class="btn-ghost small" data-act="del">Delete task</button></div>`:''}
   </div>`;
@@ -1584,6 +1590,7 @@ function onTaskEvent(e){
   const t=S.tasks.find(x=>x.id===box.dataset.id);if(!t)return;const act=el.dataset.act;
   if(e.type==='submit'){e.preventDefault();if(act!=='addstep')return;const inp=el.querySelector('input'),v=inp.value.trim();if(!v)return;t.steps.push({id:uid(),text:v,done:false});save();render();const again=document.querySelector(`.task[data-id="${t.id}"] form input`);again&&again.focus();return}
   if(e.type!=='click'&&e.type!=='change')return;
+  if(act==='diff'&&e.type==='click'){t.diff=+el.dataset.d;save();render();return}if(act==='est'&&e.type==='click'){t.est=+el.dataset.m;save();render();return}
   if(act==='tmr'&&e.type==='click'){qtOpen(t.title);return}
   if((act==='due'||act==='tm')&&e.type==='change'){const b=clone(t);if(act==='due')t.due=el.value;else t.time=el.value;H('todo',act==='due'?'moved':'set time',t.title,b,t);save();render();return}
   if(act==='done'&&e.type==='change'){H('todo',t.done?'reopened':'done',t.title,clone(t),Object.assign(clone(t),{done:!t.done}));if(!t.done){t.steps.forEach(s=>s.done=true);finishTask(t)}else{t.done=false;t.doneAt=null}save();render()}
@@ -3090,8 +3097,8 @@ function renderDayCard(){
   const c=$('dayCard');if(!S.name||S.dayCheck[dkey()]){c.hidden=true;return}
   c.hidden=false;const gap=lastActiveGap(),first=todaysBlocks().find(b=>toMin(b.e)>nowMin()&&b.core);
   c.innerHTML=`${gap>=2?`<p class="label">Welcome back</p><p class="step" style="font-family:var(--display);font-size:1.4rem;font-weight:800">${gap} days away. Nothing to catch up on.</p><p class="small muted">Today is day 1 again. The rule is only: never miss twice.</p>`
-    :`<p class="label">Morning check-in</p><p style="font-family:var(--display);font-size:1.3rem;font-weight:800">How's your battery today?</p>`}
-    <div class="row">${[['full','🔋 Full'],['low','🪫 Low'],['survival','😵 Survival']].map(([k,l])=>`<button class="chip" data-batt="${k}">${l}</button>`).join('')}</div>`;
+    :`<p class="label">⚡ ${tl('Energy')}</p><p style="font-family:var(--display);font-size:1.3rem;font-weight:800">${tl('Energy today?')}</p>`}
+    ${enRow()}`;c.querySelectorAll('[data-en]').forEach(b=>b.onclick=()=>enSet(b.dataset.en));
   c.querySelectorAll('[data-batt]').forEach(b=>b.onclick=()=>{const k=b.dataset.batt;S.dayCheck={[dkey()]:k};S.plan.mode=k==='full'?'full':'low';S.plan.modeDay=dkey();award(1,'Checked in');save();render();
     const f=todaysBlocks().find(x=>toMin(x.e)>nowMin()&&(k==='full'||x.core));
     toast(k==='survival'?'Survival day: core blocks only. That\'s a full win.':k==='low'?'Low battery: core blocks only.':'Full day. Let\'s go.');
@@ -4443,6 +4450,32 @@ function guestAsk(){modalCard(`<div class="st-pop"><p class="st-big">🚀</p><p 
   document.addEventListener('submit',e=>{if(!window.GUEST)return;e.preventDefault();e.stopPropagation();guestAsk()},true)})();
 function ldGuestLink(){const h=$('ldHave');if(!h||$('ldGuest'))return;const b=document.createElement('button');b.type='button';b.id='ldGuest';b.className='ld-guest';b.textContent=tl('Browse as guest');b.onclick=guestStart;h.appendChild(b)}
 (function(){let a=null;try{a=sessionStorage.getItem('fastaqim.after');sessionStorage.removeItem('fastaqim.after')}catch(e){}if(a)setTimeout(()=>{try{ldAuthOpen(a)}catch(e){}},900)})();
+
+/* ===== Difficulty × time: harder and longer tasks earn more ⭐ ===== */
+const X44=[["Easy","سهلة","Salphaa","Fudud"],["Medium","متوسطة","Giddugala","Dhexdhexaad"],["Hard","صعبة","Ulfaataa","Adag"],["min","د","daq","daq"],["up to","حتى","hanga","ilaa"],
+["How hard?","ما صعوبتها؟","Hammam ulfaata?","Intee in le'eg ayay adag tahay?"],["How long?","كم تستغرق؟","Hammam fudhata?","Intee in le'eg ayay qaadanaysaa?"],
+["Energy","الطاقة","Humna","Tamar"],["Energy today?","طاقتك اليوم؟","Humni kee har'a?","Tamartaadu maanta?"],["Low","منخفضة","Gadi","Hoose"],["OK","متوسطة","Giddugala","Dhexdhexaad"],["Good","جيدة","Gaarii","Wanaagsan"],["High","عالية","Ol'aanaa","Sare"],
+["Low energy day: every step earns 2x ⭐!","يوم طاقة منخفضة: كل خطوة تكسبك ⭐ مضاعفة!","Guyyaa humna gadi: tarkaanfiin hundi ⭐ dachaa argamsiisa!","Maalin tamar hoose: tallaabo kasta waxay kuu keentaa ⭐ labanlaab!"],
+["Every step earns 1.5x ⭐ today!","كل خطوة اليوم تكسبك ⭐ ×1.5!","Har'a tarkaanfiin hundi ⭐ ×1.5 argamsiisa!","Maanta tallaabo kasta waxay keentaa ⭐ ×1.5!"],
+["Let's go!","هيا بنا!","Haa deemnu!","Aan bilowno!"],["Update anytime.","حدّثها متى شئت.","Yeroo barbaadde haaromsi.","Cusboonaysii goor kasta."]];
+X44.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const tDiff=t=>t&&t.diff>=1&&t.diff<=3?t.diff:2,tEst=t=>(t&&t.est)||15;
+function tReward(t){return tDiff(t)*(1+Math.floor(tEst(t)/5))}
+function tMeta(t){const n=Math.round(tReward(t)*enMult());return `${tl(['Easy','Medium','Hard'][tDiff(t)-1])} · ~${tEst(t)} ${tl('min')} · ${tl('up to')} ${n} ⭐`}
+function tPick(t){const d=tDiff(t),m=tEst(t);return `<div class="tk-df"><span class="small muted">${tl('How hard?')}</span><div class="seg">${[1,2,3].map(x=>`<button type="button" data-act="diff" data-d="${x}" aria-pressed="${x===d}">${tl(['Easy','Medium','Hard'][x-1])}</button>`).join('')}</div>
+  <span class="small muted">${tl('How long?')}</span><div class="seg">${[5,15,25,45,60].map(x=>`<button type="button" data-act="est" data-m="${x}" aria-pressed="${x===m}">${x}</button>`).join('')}</div></div>`}
+/* ===== Energy check-in (private): low energy days earn more ⭐ ===== */
+const EN_L=[['low',1],['ok',2],['good',3],['high',4]];
+function enGet(){const v=S&&S.dayCheck&&S.dayCheck[dkey()];return v==='survival'?'low':v==='full'?'good':v||''}
+function enMult(){const v=enGet();return v==='low'?2:v==='ok'?1.5:1}
+function enIcon(lv){return `<svg class="en-ic" viewBox="0 0 28 16" aria-hidden="true"><rect x="1" y="2" width="22" height="12" rx="3"/><rect x="24" y="6" width="3" height="4" rx="1" class="cap"/>${[0,1,2,3].map(i=>`<rect x="${3.5+i*4.9}" y="4.5" width="3.6" height="7" rx="1" class="${i<lv?'on':''}"/>`).join('')}</svg>`}
+function enMsg(v){return v==='low'?tl('Low energy day: every step earns 2x ⭐!'):v==='ok'?tl('Every step earns 1.5x ⭐ today!'):tl("Let's go!")}
+function enSet(k){S.dayCheck={[dkey()]:k};S.plan.mode=(k==='low'||k==='ok')?'low':'full';S.plan.modeDay=dkey();if(!S.enAw||S.enAw!==dkey()){S.enAw=dkey();award(1,'Checked in')}save();render();toast(enMsg(k))}
+function enRow(){const v=enGet();return `<div class="en-row">${EN_L.map(([k,lv])=>`<button type="button" class="en-b${v===k?' on':''}" data-en="${k}">${enIcon(lv)}<span>${tl(k==='ok'?'OK':k[0].toUpperCase()+k.slice(1))}</span></button>`).join('')}</div>`}
+function enOpen(){modalCard(`<p class="label">⚡ ${tl('Energy')}</p><p class="st-h">${tl('Energy today?')}</p>${enRow()}<p class="small muted">${tl('Update anytime.')}</p>`);
+  $('scrollBody').querySelectorAll('[data-en]').forEach(b=>b.onclick=()=>{enSet(b.dataset.en);modalClose()})}
+function enHdr(){let b=$('enHdr');const q=$('qtHdr');if(!q)return;if(!b){b=document.createElement('button');b.id='enHdr';b.className='icon-btn hd-b en-hd';b.onclick=enOpen;q.before(b)}
+  const v=enGet(),lv=(EN_L.find(x=>x[0]===v)||[0,0])[1],m=enMult();b.innerHTML=enIcon(lv)+(m>1?`<b>${m}x</b>`:'');b.setAttribute('aria-label',tl('Energy'))}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
