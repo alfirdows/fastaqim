@@ -809,6 +809,8 @@ body,button,input,select,textarea{font-family:var(--body);font-variant-numeric:n
 #landing .ld-guest{all:unset;cursor:pointer;margin-top:4px;padding:10px 12px;font:600 .88rem var(--body);color:var(--k2,var(--calm))}
 body.is-guest #syncBadge{display:none!important}
 .gbar{position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--ink);color:var(--bg);font:600 .82rem var(--body)}.gbar span{flex:1}.gbar button{min-height:32px;padding:0 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);background:transparent;color:var(--bg);font:600 .78rem var(--body)}.gbar button[data-gx="up"]{background:var(--accent);color:var(--accent-ink,#1B0F02);border-color:var(--accent)}
+.pv4{font-size:1rem;line-height:1.6;margin:4px 0 6px;color:var(--ink)}
+.fb2{display:flex;flex-direction:column;gap:10px;width:100%}.fb2 textarea{width:100%;box-sizing:border-box;min-height:84px;max-height:30vh;font:16px/1.4 var(--body);border-radius:12px}.fb2 .btn-main{width:100%}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -2858,12 +2860,8 @@ document.querySelectorAll('[data-lz]').forEach(b=>b.onclick=()=>lookSet('zoom',+
 try{const L=JSON.parse(localStorage.getItem('fastaqim.look')||'null');if(L)S.look=S.look||L;lookApply()}catch(e){lookApply()}
 
 /* ---------- feedback ---------- */
-function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 Feedback</p><p class="small muted">Ideas, problems, anything. It goes straight to the person who made Fastaqim.</p>
-  <div class="row" id="fbK" style="gap:6px"><button class="chip" data-fk="idea">💡 Idea</button><button class="chip" data-fk="problem">🛠️ Problem</button><button class="chip" data-fk="other">💬 Other</button></div>
-  <form id="fbForm" class="wrap" style="gap:8px"><textarea id="fbText" rows="4" maxlength="2000" placeholder="Write here" style="width:100%" required></textarea>
-  <div class="row"><button class="btn-main" type="submit">Send</button><button class="btn-ghost small" type="button" id="fbX">Cancel</button></div></form>`);
-  const mark=()=>$('fbK').querySelectorAll('[data-fk]').forEach(b=>b.style.background=b.dataset.fk===kind?'var(--calm-soft)':'');mark();
-  $('fbK').querySelectorAll('[data-fk]').forEach(b=>b.onclick=()=>{kind=b.dataset.fk;mark()});$('fbX').onclick=modalClose;
+function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 ${tl('Suggest an idea')}</p>
+  <form id="fbForm" class="fb2"><textarea id="fbText" rows="3" maxlength="2000" placeholder="${tl('Write here')}" required></textarea><button class="btn-main" type="submit">${tl('Send')}</button></form>`);
   $('fbForm').onsubmit=async e=>{e.preventDefault();const body=$('fbText').value.trim();if(!body)return;let ok=false;
     if(AU.sb&&AU.user){const {error}=await AU.sb.from('fastaqim_feedback').insert({user_id:AU.user.id,email:AU.user.email,name:S.name||'',kind,body,lang:LANG});ok=!error}
     else if(AU.sb){const {error}=await AU.sb.from('fastaqim_feedback').insert({name:'visitor',kind,body,lang:LANG});ok=!error}
@@ -3925,9 +3923,12 @@ const PRIV2={
  ar:['الخصوصية',[['ما نجمعه','بريد حسابك وما تضيفه: المهام والمتابعات والإعدادات.'],['كيف نستخدمه','لتشغيل فاستقم ومزامنة بياناتك فقط. موقعك يبقى على جهازك.'],['المشاركة','لا نبيع بياناتك ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع ولا ملفات تحليلات.'],['خياراتك','عدّل حسابك أو احذفه متى شئت، ويمكنك استرجاعه خلال 30 يومًا.'],['الأطفال والملفات العائلية','يديرها مسؤول العائلة.']],'إغلاق','آخر تحديث','لديك سؤال؟ استخدم «اقترح فكرة».'],
  om:['Dhuunfaa',[['Waan walitti qabnu','Imeelii herrega keetii fi waan ati dabaltu: hojiiwwan, hordoffii fi qindaa\'ina.'],['Akkamitti itti fayyadamna','Fastaqim hojjechiisuu fi odeeffannoo kee walsimsiisuuf qofa. Bakki kee meeshaa kee irra tura.'],['Qooduu','Odeeffannoo kee gonkumaa hin gurgurru, hin qoodnus. Beeksisa, hordoftoota ykn kuukii xiinxalaa hin qabnu.'],['Filannoo kee','Yeroo barbaadde herrega kee gulaali ykn haqi. Guyyaa 30 keessatti deebisuu dandeessa.'],['Ijoollee fi piroofaayilii maatii','Bulchaa maatiitiin bulfama.']],'Cufi','Yeroo dhumaaf haaromfame','Gaaffii qabdaa? "Yaada dhiyeessi" fayyadami.'],
  so:['Qarsoodi',[['Waxa aan ururino','Iimaylka akoonkaaga iyo waxa aad ku darto: hawlaha, raadraacyada iyo dejimaha.'],['Sida aan u isticmaalno','Kaliya si aan u socodsiino Fastaqim oo aan xogtaada isugu xirno. Goobtaadu qalabkaaga ayay ku jirtaa.'],['Wadaagis','Weligeen xogtaada ma iibinno mana wadaagno. Ma jiraan xayeysiis, raadrayaal ama kukiyo falanqeyn.'],['Doorashooyinkaaga','Wax ka beddel ama tirtir akoonkaaga waqti kasta. Waxaad dib u soo celin kartaa 30 maalmood gudahood.'],['Carruurta iyo astaamaha qoyska','Waxaa maamula maamulaha qoyska.']],'Xir','La cusbooneysiiyay','Su\'aal ma qabtaa? Isticmaal "Soo jeedi fikrad".']};
-function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar',d=new Date(2026,10,15).toLocaleDateString(LOC(),{day:'numeric',month:'long',year:'numeric'});
-  modalCard(`<div class="${PRIV2[LANG]?'notranslate':''} pv2" dir="${rtl?'rtl':'ltr'}" lang="${PRIV2[LANG]?LANG:'en'}"><p class="label">🔒 ${P[0]}</p><div class="pv3">${P[1].map(([h,x])=>`<h4>${esc(h)}</h4><p>${esc(x)}</p>`).join('')}</div><p class="pv3-f">${P[3]}: ${esc(d)}<br><button type="button" class="lnk" id="pvFb">${esc(P[4])}</button></p></div>`);
-  $('pvFb').onclick=()=>{modalClose();const f=$('ldFb');if(f&&!$('landing').hidden)f.click();else{const b=document.querySelector('[data-fb],#fbBtn');b&&b.click()}}}
+const PRIV3={en:["Privacy","Your tasks and progress stay private to you. We never sell or share them. No ads or trackers. Delete your account anytime."],
+ ar:["الخصوصية","مهامّك وتقدّمك خاصّة بك. لا نبيعها ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع. احذف حسابك متى شئت."],
+ om:["Dhuunfaa","Hojiileen fi guddinni kee kan kee qofa. Gonkumaa hin gurgurru, hin qoodnu. Beeksisni fi hordoftoonni hin jiran. Yeroo barbaadde herrega kee haqi."],
+ so:["Asturnaanta","Hawlahaaga iyo horumarkaagu adiga keliya ayay kuu gaar yihiin. Weligayo ma iibinno, lamana wadaagno. Xayeysiis iyo raadraac midna ma jiro. Tirtir akoonkaaga goor kasta."]};
+function privacyOpen(){const k=PRIV3[LANG]?LANG:'en',P=PRIV3[k];
+  modalCard(`<div class="${PRIV3[LANG]?'notranslate':''} pv2" dir="${k==='ar'?'rtl':'ltr'}" lang="${k}"><p class="label">🔒 ${P[0]}</p><p class="pv4">${esc(P[1])}</p></div>`)}
 
 /* ADHD explained: short, clinical, positive (DSM-5-TR / ICD-11) */
 const ADHD2={
