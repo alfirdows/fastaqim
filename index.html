@@ -746,6 +746,8 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
 .ldm-top .ldt-more{position:static!important;width:100%!important;margin-top:6px;box-shadow:none!important}
 #landing .ld-lang{order:0}
 .modal,#scrollModal{z-index:95!important}.ipop{z-index:96!important}
+#landing .qa-mini{width:15px!important;height:15px!important;font-size:.42rem!important;border-width:1px!important;position:relative;opacity:.8;padding:0!important}
+#landing .qa-mini::after{content:'';position:absolute;inset:-12px}
 .ldm hr{border:0;border-top:1px solid var(--line);margin:6px 0;width:100%}
 </style>
 
@@ -3783,10 +3785,9 @@ function ldMenu(){const top=document.querySelector('#landing .ld-top'),rt=docume
   const mb=document.createElement('button');mb.type='button';mb.id='ldMb';mb.className='ldt-chip ld-mb';mb.setAttribute('aria-label',tl('Menu'));mb.textContent='☰';top.appendChild(mb);
   const pn=document.createElement('div');pn.id='ldMenu';pn.className='ldm';pn.hidden=true;
   pn.innerHTML=`<div class="ldm-p" role="dialog" aria-modal="true"><div class="ldm-h"><b>Fastaqim</b><button type="button" class="mc-x" data-mx aria-label="Close">✕</button></div><div class="ldm-top"></div><hr>
-   <button class="ldm-i ldm-main" data-mi="up">${tl('Create account')}</button><button class="ldm-i" data-mi="in">${tl('Sign in')}</button><hr>
    <button class="ldm-i" data-mi="home">📲 ${tl('Add to Home Screen')}</button><button class="ldm-i" data-mi="dl">🖨️ ${tl('Print & Save')}</button><hr>
    <button class="ldm-i" data-mi="pv">🔒 ${tl('Privacy')}</button><button class="ldm-i" data-mi="fb">💡 ${tl('Suggest an idea')}</button></div>`;
-  document.body.appendChild(pn);const tp=pn.querySelector('.ldm-top');tp.appendChild($('ldToday'));tp.appendChild($('ldZb'));login.hidden=true;top.prepend(lang);rt.hidden=true;
+  document.body.appendChild(pn);const tp=pn.querySelector('.ldm-top');tp.appendChild($('ldToday'));tp.appendChild($('ldZb'));top.prepend(lang);rt.appendChild(login);rt.appendChild(mb);
   const close=()=>{pn.classList.remove('on');setTimeout(()=>pn.hidden=true,250)};
   mb.onclick=()=>{pn.hidden=false;requestAnimationFrame(()=>pn.classList.add('on'))};
   pn.onclick=e=>{if(e.target===pn||e.target.closest('[data-mx]'))return close();const b=e.target.closest('[data-mi]');if(!b)return;const k=b.dataset.mi;close();
