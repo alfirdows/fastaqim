@@ -753,6 +753,14 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
 .au-rem{display:flex;align-items:center;gap:8px;font-size:.88rem;font-weight:600;align-self:flex-start;cursor:pointer;margin:2px 0}.au-rem input{width:20px;height:20px;accent-color:var(--calm);margin:0}
 .hype{left:12px!important;right:12px!important;margin:0 auto;width:auto;max-width:460px!important;transform:translateY(20px)}.hype.show{transform:none!important}
 body[data-tab]:not([data-tab=now]) #hello,body[data-tab]:not([data-tab=now]) #progStrip{display:none!important}
+#landing #ldHome,#landing #ldDl{display:none!important}
+#landing .ld-row2:not(:has(.ld-home:not([hidden]):not(#ldHome):not(#ldDl))){display:none!important}
+#landing #ldStart2{margin-top:30px!important}
+#landing .ld-have{margin:14px 0 26px!important;display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.88rem}
+#landing .ld-have .lnk{min-height:44px;padding:0 18px;font-size:1rem;display:inline-flex;align-items:center}
+.ld-foot{display:flex;justify-content:center;align-items:center;gap:6px;margin:18px 0 calc(16px + env(safe-area-inset-bottom,0px));font-size:.74rem;color:var(--lmuted,var(--muted))}
+.ld-fl{background:none;border:0;padding:8px 4px;min-height:0;font-size:.74rem;font-weight:600;color:var(--lmuted,var(--muted));text-decoration:underline;text-underline-offset:2px}
+
 .ldm hr{border:0;border-top:1px solid var(--line);margin:6px 0;width:100%}
 </style>
 
@@ -789,7 +797,7 @@ body[data-tab]:not([data-tab=now]) #hello,body[data-tab]:not([data-tab=now]) #pr
     <p class="ld-swap ld-sw-in"><span>No account?</span> <button class="lnk" data-at2="up">Register</button></p><p class="ld-swap ld-sw-up"><span>Already have one?</span> <button class="lnk" data-at2="in">Sign in</button></p>
     <p class="ld-free">Free · No ads.</p></div></div>
     <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldRe" hidden>↻ Refresh</button><a class="ld-home" id="ldSaf" href="x-safari-https://alfirdows.github.io/fastaqim/" hidden>🧭 Open in browser</a><button type="button" class="ld-home" id="ldDl">🖨️ Print & Save</button></div>
-    <div class="ld-note ld-btns" id="ldNote"><button type="button" class="ld-lb privLink">🔒 Privacy</button><button type="button" class="ld-lb" id="ldFb">💡 Suggest an idea</button></div>
+    <p class="ld-foot" id="ldNote"><button type="button" class="ld-fl privLink">Privacy</button><span aria-hidden="true">·</span><button type="button" class="ld-fl" id="ldFb">Suggest an idea</button></p>
   </div>
 </div>
 <div class="wrap">
@@ -2451,7 +2459,7 @@ $('sortGo').onclick=sortGo;
 const SUPA={url:'https://xnxqibdjjrgjqpszvdbe.supabase.co',key:'sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId'};/* filled in after Supabase setup: Project URL + anon/publishable key (both public by design) */
 const AU={sb:null,user:null};
 const inArtifact=()=>!!(window.claude&&window.claude.use)||/claude\.ai|claudeusercontent/.test(location.hostname);
-function landingShow(on){$('landing').hidden=!on;if(on)try{ldToday()}catch(e){}document.body.style.overflow=on?'hidden':'';if(on&&window.ldIntro)ldIntro()}
+function landingShow(on){$('landing').hidden=!on;try{lookApply()}catch(e){}if(on)try{ldToday()}catch(e){}document.body.style.overflow=on?'hidden':'';if(on&&window.ldIntro)ldIntro()}
 function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
 function authForm(msg){
   const box=$('ldAuth');
@@ -2782,7 +2790,7 @@ const COLORS=[['teal','#2B8577'],['blue','#2F6FB5'],['navy','#2C3E7A'],['purple'
 function lookApply(){const L=S.look||{},r=document.documentElement;
   if(L.color&&L.color!=='teal')r.dataset.color=L.color;else delete r.dataset.color;
   r.dataset.theme=L.mode||'light';
-  document.body.style.zoom=L.zoom&&L.zoom!==1?L.zoom:'';try{look2Apply()}catch(e){}try{localStorage.setItem('fastaqim.look',JSON.stringify(L))}catch(e){}}
+  {const lh=$('landing');document.body.style.zoom=L.zoom&&L.zoom!==1&&!(lh&&!lh.hidden)?L.zoom:''}try{look2Apply()}catch(e){}try{localStorage.setItem('fastaqim.look',JSON.stringify(L))}catch(e){}}
 function renderLook(){document.querySelectorAll('[data-sm]').forEach(b=>b.setAttribute('aria-pressed',SM()===+b.dataset.sm));if(!$('lkColor'))return;const L=S.look||{};
   $('lkColor').innerHTML=COLORS.map(([k,c])=>`<button class="swatch${(L.color||'teal')===k?' on':''}" data-lc="${k}" style="background:${c}" aria-label="${k}"></button>`).join('');
   document.querySelectorAll('[data-lm]').forEach(b=>b.setAttribute('aria-pressed',(L.mode||'light')===b.dataset.lm));
@@ -3491,6 +3499,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Suggest an idea','اقترح فكرة','Yaada dhiyeessi','Soo jeedi fikrad'],
 ['Remember me','تذكّرني','Na yaadadhu','I xasuuso'],
 ['Already have an account?','لديك حساب بالفعل؟','Herrega qabdaa?','Akoon ma haysataa?'],
 ["Why: a no is useful information. A smaller step lowers the effort needed to begin.","السبب: الرفض معلومة مفيدة. الخطوة الأصغر تقلّل الجهد اللازم للبدء.","Sababa: lakki odeeffannoo gaarii dha. Tarkaanfiin xiqqaan humna jalqabuuf barbaachisu ni hir'isa.","Sababta: diiddu waa xog faa'iido leh. Tallaabo yar waxay yareysaa dadaalka loo baahan yahay si loo bilaabo."],
@@ -3821,6 +3830,7 @@ function ldMenu(){const top=document.querySelector('#landing .ld-top'),rt=docume
 function ldTiles(){const T=document.querySelectorAll('#landing .ld-tools>div');T.forEach((d,i)=>{d.setAttribute('role','button');d.tabIndex=0;d.classList.add('ld-tap');
   d.onclick=()=>{if(i===2){$('ldMb').click();setTimeout(()=>$('ldtT').click(),280)}else if(i===3)$('ldZb').click();else ldAuthOpen('up')}});
   const cta=$('ldStart2');if(cta&&!$('ldHave')){const p=document.createElement('p');p.id='ldHave';p.className='ld-have';p.innerHTML=`<span>${tl('Already have an account?')}</span> <button type="button" class="lnk" id="ldHaveB">${tl('Sign in')}</button>`;cta.after(p);$('ldHaveB').onclick=()=>ldAuthOpen('in')}}
+(function(){try{const k='fastaqim.zfix66';if(!localStorage.getItem(k)){localStorage.setItem(k,'1');const L=JSON.parse(localStorage.getItem('fastaqim.look')||'{}');if(L.zoom&&L.zoom!==1){L.zoom=1;localStorage.setItem('fastaqim.look',JSON.stringify(L))}if(S&&S.look&&S.look.zoom&&S.look.zoom!==1){S.look.zoom=1;save()}}}catch(e){}})();
 function ldZChip(){const b=$('ldZb');if(!b)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);b.innerHTML='📿 <span class="ldm-lbl">'+tl('Dhikr')+'</span>'+(tot?` <b>${tot}</b>`:'');b.setAttribute('aria-label',tl('Dhikr'));b.onclick=()=>{const pn=$('ldMenu');if(pn){pn.classList.remove('on');pn.hidden=true}modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
