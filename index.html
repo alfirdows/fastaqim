@@ -761,6 +761,25 @@ body[data-tab]:not([data-tab=now]) #hello,body[data-tab]:not([data-tab=now]) #pr
 .ld-foot{display:flex;justify-content:center;align-items:center;gap:6px;margin:18px 0 calc(16px + env(safe-area-inset-bottom,0px));font-size:.74rem;color:var(--lmuted,var(--muted))}
 .ld-fl{background:none;border:0;padding:8px 4px;min-height:0;font-size:.74rem;font-weight:600;color:var(--lmuted,var(--muted));text-decoration:underline;text-underline-offset:2px}
 
+.pv3{text-align:start;width:100%;display:flex;flex-direction:column;gap:2px}
+.pv3 h4{font-size:.86rem;font-weight:800;margin:10px 0 0;color:var(--ink)}
+.pv3 p{font-size:.84rem;line-height:1.5;margin:0;color:var(--muted)}
+.pv3-f{font-size:.74rem;color:var(--muted);margin:14px 0 0;text-align:start;width:100%}.pv3-f .lnk{font-size:.74rem;padding:0;min-height:0}
+.pfb{position:fixed;inset:0;z-index:97;background:rgba(5,12,22,.5);display:flex;align-items:center;justify-content:center;padding:16px}
+.pfb-c{background:var(--surface);color:var(--ink);border-radius:22px;width:min(340px,100%);padding:14px 18px 18px;display:flex;flex-direction:column;align-items:center;gap:6px;max-height:calc(100dvh - 32px);overflow-y:auto}
+.pfb-h{align-self:stretch;display:flex;justify-content:flex-end}.pfb-h .mc-x{position:static;margin:0}
+.pfb-t{font-size:1.1rem;font-weight:800;margin:0;text-align:center}.pfb-s{font-size:.85rem;color:var(--muted);margin:0}
+.pfb-d{direction:ltr;display:flex;gap:14px;margin:12px 0 2px}.pfb-d i{width:14px;height:14px;border-radius:50%;border:2px solid var(--calm)}.pfb-d i.on{background:var(--calm)}
+.pfb-d.sh{animation:pfsh .35s}@keyframes pfsh{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.pfb-e{min-height:1.2em;font-size:.8rem;color:#C0392B;margin:0;text-align:center}
+.pfb-k{direction:ltr;display:grid;grid-template-columns:repeat(3,64px);gap:10px;margin-top:4px}.pfb-k button{width:64px;height:64px;min-height:0;border-radius:50%;border:1px solid var(--line);background:color-mix(in srgb,var(--ink) 4%,var(--surface));font-size:1.4rem;font-weight:700;color:var(--ink);padding:0}
+.pfb-f{margin:8px 0 0;text-align:center}
+.pfb-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:12px;width:100%}.pfb-p{display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:1px solid var(--line);border-radius:16px;padding:12px 6px;min-height:0;font-weight:700;color:var(--ink)}.pfb-p .av,.pfb-p>span:first-child{transform:scale(1.4);margin:6px 0}
+.pf-sec{display:flex;flex-direction:column;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.pf-code{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pf-code b{font-size:1.05rem;letter-spacing:.1em}
+.pf-m{display:flex;flex-direction:column;gap:8px;width:100%}.pf-del,.pf-del2{color:#C0392B!important}.pf-del2{background:#C0392B!important;border-color:#C0392B!important;color:#fff!important}
+.ld-copy{font-size:.7rem;color:var(--lmuted,var(--muted));opacity:.8;text-align:center;margin:-8px 0 calc(18px + env(safe-area-inset-bottom,0px))}
+.ld-hy{font-weight:800;font-size:1rem;color:var(--k2,var(--calm));margin:8px 0 0;text-align:center}
 .ldm hr{border:0;border-top:1px solid var(--line);margin:6px 0;width:100%}
 </style>
 
@@ -770,6 +789,7 @@ body[data-tab]:not([data-tab=now]) #hello,body[data-tab]:not([data-tab=now]) #pr
     <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><button type="button" class="ldt-chip ldz-chip" id="ldZb" aria-label="Dhikr">📿</button><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><div class="ld-nrow"><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h ld-h1"><span>Start in 2 minutes.</span></h1>
+    <p class="ld-hy" id="ldHy"></p>
     <p class="ld-sub ld-sub2" id="ldSub2"></p>
     
     <button class="btn-main ld-go ld-go1" id="ldStart">Create account</button>
@@ -797,7 +817,7 @@ body[data-tab]:not([data-tab=now]) #hello,body[data-tab]:not([data-tab=now]) #pr
     <p class="ld-swap ld-sw-in"><span>No account?</span> <button class="lnk" data-at2="up">Register</button></p><p class="ld-swap ld-sw-up"><span>Already have one?</span> <button class="lnk" data-at2="in">Sign in</button></p>
     <p class="ld-free">Free · No ads.</p></div></div>
     <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldRe" hidden>↻ Refresh</button><a class="ld-home" id="ldSaf" href="x-safari-https://alfirdows.github.io/fastaqim/" hidden>🧭 Open in browser</a><button type="button" class="ld-home" id="ldDl">🖨️ Print & Save</button></div>
-    <p class="ld-foot" id="ldNote"><button type="button" class="ld-fl privLink">Privacy</button><span aria-hidden="true">·</span><button type="button" class="ld-fl" id="ldFb">Suggest an idea</button></p>
+    <p class="ld-foot" id="ldNote"><button type="button" class="ld-fl privLink">Privacy</button><span aria-hidden="true">·</span><button type="button" class="ld-fl" id="ldFb">Suggest an idea</button></p><p class="ld-copy notranslate" dir="ltr" id="ldCopy">© 2026 Fastaqim</p>
   </div>
 </div>
 <div class="wrap">
@@ -2469,8 +2489,8 @@ function authForm(msg){
     <p class="small muted" style="margin:2px 0">or with email</p>
     <input type="email" id="auE" placeholder="Email" autocomplete="email" aria-label="Email"><input type="password" id="auP" placeholder="Password (8+ characters)" autocomplete="current-password" aria-label="Password"><label class="au-rem"><input type="checkbox" id="auRem"${localStorage.getItem('fastaqim.rem')==='0'?'':' checked'}> <span>Remember me</span></label>
     <div class="row"><button class="btn-main" id="auIn">Sign in</button><button class="btn-calm" id="auUp">Create account</button></div>
-    <button class="btn-ghost small" id="auF">Forgot password?</button><p class="small muted" style="margin:0">By signing up you agree to the <a href="#" class="privLink">Privacy policy</a>.</p>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
-  const say=t=>{$('auMsg').textContent=t};$('auRem').onchange=e=>{try{localStorage.setItem('fastaqim.rem',e.target.checked?'1':'0')}catch(_){}};
+    <button class="btn-ghost small" id="auF">Forgot password?</button><button class="btn-ghost small" id="auFam">👨‍👩‍👧 Family sign in</button><p class="small muted" style="margin:0">By signing up you agree to the <a href="#" class="privLink">Privacy policy</a>.</p>${msg?`<p class="small" id="auMsg" style="font-weight:700">${esc(msg)}</p>`:'<p class="small" id="auMsg"></p>'}`;
+  const say=t=>{$('auMsg').textContent=t};$('auFam').onclick=()=>{$('ldAuthM').hidden=true;famOpen()};$('auRem').onchange=e=>{try{localStorage.setItem('fastaqim.rem',e.target.checked?'1':'0')}catch(_){}};
   const creds=()=>{const email=$('auE').value.trim(),password=$('auP').value;if(!/\S+@\S+\.\S+/.test(email)){say('Enter your email.');return null}if(password.length<8){say('Password needs 8 or more characters.');return null}return{email,password}};
   $('auG').onclick=async()=>{say('Opening Google...');const {error}=await AU.sb.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname}});if(error)say(error.message)};
   $('auIn').onclick=async()=>{const c=creds();if(!c)return;say('Signing in...');const {error}=await AU.sb.auth.signInWithPassword(c);if(error)say(error.message.includes('Invalid')?'Email or password is wrong.':error.message)};
@@ -2489,7 +2509,7 @@ async function cloudInit(user){
     SYNC.ref={set:async o=>{const {error}=await AU.sb.from('fastaqim_state').upsert({user_id:user.id,state:o.state,updated_at:new Date().toISOString()});if(error)throw error}};
     SYNC.state='on';syncBadge();if(!remote||(S.savedAt||0)>(remote.savedAt||0)){SYNC.dirty=true;dbPush()}
   }catch(e){SYNC.state='local';syncBadge();toast('Couldn\'t reach your account. Saving on this device for now.')}
-  lifeFix();render();delCheck();
+  lifeFix();render();delCheck();try{pfAfterInit()}catch(e){}
 }
 /* ---------- act as a linked account (they tapped Allow on the owner's request) ---------- */
 const ACT={id:null,name:'',by:''};
@@ -2524,10 +2544,11 @@ function accMenu(){const L=accList();const me=AU.user&&AU.user.id;
     <p class="small muted">Each person signs in here once. After that, switching needs no password.</p>
     <div class="row"><button class="btn-calm" id="accNew">+ Add account</button><button class="btn-ghost small" id="accX">Close</button></div>`);
   $('scrollBody').querySelectorAll('[data-acc]').forEach(b=>b.onclick=async()=>{if(ACT.id){ACT.id=null;actBar()}accSwitch(b.dataset.acc)});$('scrollBody').querySelectorAll('[data-act]').forEach(b=>b.onclick=()=>actSwitch(b.dataset.act));if($('accBack'))$('accBack').onclick=actBack;$('accNew').onclick=()=>accAdd();$('accX').onclick=modalClose}
-function acctRender(){const av=$('avatarBtn');if(av){av.hidden=!AU.user;if(AU.user){av.innerHTML=avHTML(S.avatar,(ACT.id?ACT.name:S.name)||AU.user.email||'?');av.onclick=accMenu}}
+function acctRender(){if(FAM.token){famAcct();return}const av=$('avatarBtn');if(av){av.hidden=!AU.user;if(AU.user){av.innerHTML=avHTML(S.avatar,(ACT.id?ACT.name:S.name)||AU.user.email||'?');av.onclick=accMenu}}
   const b=$('acctBox');if(!b)return;
   b.innerHTML=AU.user?`<p class="label">Account</p><p class="small">${esc(AU.user.email||'')}</p><div class="row"><button class="btn-calm small" id="acSw">🔁 Switch account</button><button class="small" id="acPw">Change password</button><button class="btn-ghost small" id="acOut">Sign out</button></div><button class="btn-ghost small" id="acDel" style="align-self:flex-start;color:#C0392B">Delete my account</button>`:'';
   if(!AU.user)return;
+  if(!ACT.id){b.insertAdjacentHTML('beforeend',pfSection());pfWire()}
   {const L=accList(),me=L.find(a=>a.id===AU.user.id);if(me&&S.uid===AU.user.id&&me.name!==S.name){me.name=S.name||'';accSave(L)}}
   $('acSw').onclick=accMenu;
   $('acOut').onclick=async()=>{await accFlush();const id=AU.user.id;await AU.sb.auth.signOut({scope:'local'});accSave(accList().filter(a=>a.id!==id));try{localStorage.removeItem(KEY)}catch(e){}
@@ -2545,10 +2566,11 @@ const REMST={getItem:k=>{try{return localStorage.getItem(k)??sessionStorage.getI
 async function authBoot(){
   if(inArtifact()){if(!S.started&&!S.name){authForm();landingShow(true)}return}
   if(!SUPA.url){if(!S.started){authForm();landingShow(true)}return}
-  let hasTok=false;try{hasTok=[...Object.keys(localStorage),...Object.keys(sessionStorage)].some(k=>/^sb-.*-auth-token$/.test(k))}catch(e){}
+  let hasTok=false;try{hasTok=[...Object.keys(localStorage),...Object.keys(sessionStorage)].some(k=>/^sb-.*-auth-token$/.test(k)||k==='fastaqim.fam')}catch(e){}
   if(hasTok&&S.started)landingShow(false);else{landingShow(true);$('ldAuth').innerHTML='<p class="small muted">Loading...</p>'}
   try{await loadScript('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2');AU.sb=window.supabase.createClient(SUPA.url,SUPA.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storage:REMST}})}
   catch(e){if(hasTok&&S.started)return;$('ldAuth').innerHTML='<p class="small">Couldn\'t connect. Check your internet and refresh.</p>';return}
+  if(await famBoot())return;
   AU.sb.auth.onAuthStateChange((ev,session)=>{
     if(session&&session.user)accRemember(session);
     if(ev==='PASSWORD_RECOVERY'){landingShow(false);pwModal();}
@@ -3499,6 +3521,10 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+["You opened it. That's a win!","فتحته؟ هذا إنجاز!","Banteetta. Kun milkaa'ina!","Waad furtay. Taasi waa guul!"],
+["One step today. Let's go!","خطوة واحدة اليوم. هيا بنا!","Har'a tarkaanfii tokko. Haa deemnu!","Hal tallaabo maanta. Aan bilowno!"],
+["Small. Steady. Unstoppable.","صغير. ثابت. لا يتوقف.","Xiqqaa. Itti fufaa. Kan hin dhaabbanne.","Yar. Joogto ah. Aan la joojin karin."],
+["Allah loves small, steady deeds. Keep going!","يحبّ الله العمل الدائم وإن قلّ. استمر!","Rabbiin hojii xiqqaa itti fufaa jaallata. Itti fufi!","Allaah wuxuu jecel yahay camal yar oo joogto ah. Sii wad!"],
 ['Suggest an idea','اقترح فكرة','Yaada dhiyeessi','Soo jeedi fikrad'],
 ['Remember me','تذكّرني','Na yaadadhu','I xasuuso'],
 ['Already have an account?','لديك حساب بالفعل؟','Herrega qabdaa?','Akoon ma haysataa?'],
@@ -3831,6 +3857,9 @@ function ldTiles(){const T=document.querySelectorAll('#landing .ld-tools>div');T
   d.onclick=()=>{if(i===2){$('ldMb').click();setTimeout(()=>$('ldtT').click(),280)}else if(i===3)$('ldZb').click();else ldAuthOpen('up')}});
   const cta=$('ldStart2');if(cta&&!$('ldHave')){const p=document.createElement('p');p.id='ldHave';p.className='ld-have';p.innerHTML=`<span>${tl('Already have an account?')}</span> <button type="button" class="lnk" id="ldHaveB">${tl('Sign in')}</button>`;cta.after(p);$('ldHaveB').onclick=()=>ldAuthOpen('in')}}
 (function(){try{const k='fastaqim.zfix66';if(!localStorage.getItem(k)){localStorage.setItem(k,'1');const L=JSON.parse(localStorage.getItem('fastaqim.look')||'{}');if(L.zoom&&L.zoom!==1){L.zoom=1;localStorage.setItem('fastaqim.look',JSON.stringify(L))}if(S&&S.look&&S.look.zoom&&S.look.zoom!==1){S.look.zoom=1;save()}}}catch(e){}})();
+const LDHY=[["You opened it. That's a win!", "فتحته؟ هذا إنجاز!", "Banteetta. Kun milkaa'ina!", "Waad furtay. Taasi waa guul!"], ["One step today. Let's go!", "خطوة واحدة اليوم. هيا بنا!", "Har'a tarkaanfii tokko. Haa deemnu!", "Hal tallaabo maanta. Aan bilowno!"], ["Small. Steady. Unstoppable.", "صغير. ثابت. لا يتوقف.", "Xiqqaa. Itti fufaa. Kan hin dhaabbanne.", "Yar. Joogto ah. Aan la joojin karin."], ["Allah loves small, steady deeds. Keep going!", "يحبّ الله العمل الدائم وإن قلّ. استمر!", "Rabbiin hojii xiqqaa itti fufaa jaallata. Itti fufi!", "Allaah wuxuu jecel yahay camal yar oo joogto ah. Sii wad!"]];
+const LDHY_ON=false;// held until Tasnim picks the final lines
+function ldHype(){const e=$('ldHy');if(!e)return;if(!LDHY_ON){e.hidden=true;return}const d=new Date(),i=Math.floor((d-new Date(d.getFullYear(),0,0))/864e5)%LDHY.length,r=LDHY[i],k=['en','ar','om','so'].indexOf((LANG||'en').split('-')[0]);e.textContent=k>0?r[k]:tl(r[0]);e.classList.toggle('notranslate',k>0)}
 function ldZChip(){const b=$('ldZb');if(!b)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);b.innerHTML='📿 <span class="ldm-lbl">'+tl('Dhikr')+'</span>'+(tot?` <b>${tot}</b>`:'');b.setAttribute('aria-label',tl('Dhikr'));b.onclick=()=>{const pn=$('ldMenu');if(pn){pn.classList.remove('on');pn.hidden=true}modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
@@ -3857,12 +3886,13 @@ function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zC
 
 /* Privacy: short, one line each, in the four pinned languages */
 const PRIV2={
- en:['Privacy',['💚 Fastaqim is free with no ads. We never sell your data.','🔐 Your data is stored securely and used only to run Fastaqim.','🛠️ Site administrators can access account data to run, support and protect Fastaqim.','🤝 You choose what to share. Guardian links for users under 18 stay in place for their safety.','📍 Your location stays on your device.','🍪 No ads, trackers or analytics cookies. We store only what keeps you signed in and saves your settings.','🗑️ You can delete your account anytime in Me → Account and restore it within 30 days.'],'Close'],
- ar:['الخصوصية',['💚 فاستقم مجاني وبلا إعلانات، ولا نبيع بياناتك أبدًا.','🔐 تُحفظ بياناتك بأمان وتُستخدم لتشغيل فاستقم فقط.','🛠️ يمكن لإدارة الموقع الوصول إلى بيانات الحسابات لتشغيل فاستقم ودعمه وحمايته.','🤝 أنت تختار ما تشاركه. ربط وليّ الأمر لمن هم دون 18 يبقى قائمًا حفاظًا على سلامتهم.','📍 موقعك يبقى على جهازك.','🍪 لا إعلانات ولا أدوات تتبّع ولا ملفات تحليلات. نحفظ فقط ما يُبقيك مسجّلًا ويحفظ إعداداتك.','🗑️ يمكنك حذف حسابك متى شئت من «أنا» ← الحساب، واسترجاعه خلال 30 يومًا.'],'إغلاق'],
- om:['Dhuunfaa',['💚 Fastaqim bilisa, beeksisa hin qabu. Odeeffannoo kee gonkumaa hin gurgurru.','🔐 Odeeffannoon kee nageenyaan olkaa\'ama, Fastaqim hojjechiisuuf qofa itti fayyadamna.','🛠️ Bulchitoonni marsariitii Fastaqim hojjechiisuu, deeggaruu fi eeguuf odeeffannoo herregaa argachuu danda\'u.','🤝 Maal akka qooddu ati filatta. Walqabsiisni guddisaa umurii 18 gadiif nageenya isaaniitiif ni tura.','📍 Bakki kee meeshaa kee irra tura.','🍪 Beeksisa, hordoftoota ykn kuukii xiinxalaa hin qabnu. Kan si seensisee tursiisuu fi qindaa\'ina kee olkaa\'u qofa kuufna.','🗑️ Yeroo barbaadde "Ana" → Herrega keessaa herrega kee haquu, guyyaa 30 keessatti deebisuu dandeessa.'],'Cufi'],
- so:['Qarsoodi',['💚 Fastaqim waa bilaash, xayeysiis ma leh. Weligeen xogtaada ma iibinno.','🔐 Xogtaada si ammaan ah ayaa loo keydiyaa, waxaana loo isticmaalaa oo keliya socodsiinta Fastaqim.','🛠️ Maamulayaasha goobta waxay geli karaan xogta akoonnada si ay u socodsiiyaan, u taageeraan una ilaaliyaan Fastaqim.','🤝 Adiga ayaa doorta waxa aad wadaagto. Xiriirka waalidka ee kuwa ka yar 18 wuu sii jiraa si loo ilaaliyo badbaadadooda.','📍 Goobtaadu qalabkaaga ayay ku jirtaa.','🍪 Ma jiraan xayeysiis, raadrayaal ama kukiyo falanqeyn. Waxaan keydinaa oo keliya waxa kugu haya gudaha iyo dejimahaaga.','🗑️ Waxaad tirtiri kartaa akoonkaaga waqti kasta "Aniga" → Akoon, oo dib u soo celin kartaa 30 maalmood gudahood.'],'Xir']};
-function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar';
-  modalCard(`<div class="${PRIV2[LANG]?'notranslate':''} pv2" dir="${rtl?'rtl':'ltr'}" lang="${PRIV2[LANG]?LANG:'en'}"><p class="label">🔒 ${P[0]}</p><ul class="pv2-l">${P[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul><button class="btn-ghost small" id="pvX">${P[2]}</button></div>`);$('pvX').onclick=()=>{$('scrollModal').hidden=true}}
+ en:['Privacy',[['What we collect','Your account email and what you add: tasks, trackers and settings.'],['How we use it','Only to run Fastaqim and keep your data synced. Your location stays on your device.'],['Sharing','We never sell or share your data. No ads, trackers or analytics cookies.'],['Your choices','Edit or delete your account anytime. You can restore it within 30 days.'],['Children & family profiles','Managed by the parent or guardian.']],'Close','Last updated','Questions? Use Suggest an idea.'],
+ ar:['الخصوصية',[['ما نجمعه','بريد حسابك وما تضيفه: المهام والمتابعات والإعدادات.'],['كيف نستخدمه','لتشغيل فاستقم ومزامنة بياناتك فقط. موقعك يبقى على جهازك.'],['المشاركة','لا نبيع بياناتك ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع ولا ملفات تحليلات.'],['خياراتك','عدّل حسابك أو احذفه متى شئت، ويمكنك استرجاعه خلال 30 يومًا.'],['الأطفال والملفات العائلية','يديرها الوالد أو الوصي.']],'إغلاق','آخر تحديث','لديك سؤال؟ استخدم «اقترح فكرة».'],
+ om:['Dhuunfaa',[['Waan walitti qabnu','Imeelii herrega keetii fi waan ati dabaltu: hojiiwwan, hordoffii fi qindaa\'ina.'],['Akkamitti itti fayyadamna','Fastaqim hojjechiisuu fi odeeffannoo kee walsimsiisuuf qofa. Bakki kee meeshaa kee irra tura.'],['Qooduu','Odeeffannoo kee gonkumaa hin gurgurru, hin qoodnus. Beeksisa, hordoftoota ykn kuukii xiinxalaa hin qabnu.'],['Filannoo kee','Yeroo barbaadde herrega kee gulaali ykn haqi. Guyyaa 30 keessatti deebisuu dandeessa.'],['Ijoollee fi piroofaayilii maatii','Maatii ykn guddisaan bulfama.']],'Cufi','Yeroo dhumaaf haaromfame','Gaaffii qabdaa? "Yaada dhiyeessi" fayyadami.'],
+ so:['Qarsoodi',[['Waxa aan ururino','Iimaylka akoonkaaga iyo waxa aad ku darto: hawlaha, raadraacyada iyo dejimaha.'],['Sida aan u isticmaalno','Kaliya si aan u socodsiino Fastaqim oo aan xogtaada isugu xirno. Goobtaadu qalabkaaga ayay ku jirtaa.'],['Wadaagis','Weligeen xogtaada ma iibinno mana wadaagno. Ma jiraan xayeysiis, raadrayaal ama kukiyo falanqeyn.'],['Doorashooyinkaaga','Wax ka beddel ama tirtir akoonkaaga waqti kasta. Waxaad dib u soo celin kartaa 30 maalmood gudahood.'],['Carruurta iyo astaamaha qoyska','Waxaa maamula waalidka ama mas\'uulka.']],'Xir','La cusbooneysiiyay','Su\'aal ma qabtaa? Isticmaal "Soo jeedi fikrad".']};
+function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar',d=new Date(2026,10,15).toLocaleDateString(LOC(),{day:'numeric',month:'long',year:'numeric'});
+  modalCard(`<div class="${PRIV2[LANG]?'notranslate':''} pv2" dir="${rtl?'rtl':'ltr'}" lang="${PRIV2[LANG]?LANG:'en'}"><p class="label">🔒 ${P[0]}</p><div class="pv3">${P[1].map(([h,x])=>`<h4>${esc(h)}</h4><p>${esc(x)}</p>`).join('')}</div><p class="pv3-f">${P[3]}: ${esc(d)}<br><button type="button" class="lnk" id="pvFb">${esc(P[4])}</button></p></div>`);
+  $('pvFb').onclick=()=>{modalClose();const f=$('ldFb');if(f&&!$('landing').hidden)f.click();else{const b=document.querySelector('[data-fb],#fbBtn');b&&b.click()}}}
 
 /* ADHD explained: short, clinical, positive (DSM-5-TR / ICD-11) */
 const ADHD2={
@@ -4139,6 +4169,129 @@ Object.assign(SPEC,{
    return{title:tl('White days (13, 14, 15)'),sub:tl('Dates follow the Umm al-Qura calendar and may differ by a day where you live.'),blocks:[{k:'table',cols:[[tl('Month'),.4,'t'],[tl('Date'),.44,'t'],[tl('Fasted'),.16,'c']],rows}]}},
  khatm:()=>({title:tl('Quran khatm plan'),sub:'',blocks:[{k:'table',cols:[[tl('Juz'),.14,'t'],[tl('Planned date'),.66,'f'],[tl('Done'),.2,'c']],rows:Array.from({length:30},(_,i)=>[String(i+1),'',''])}]})});
 
+/* ---------- family profiles: kids sign in with the family code + their own PIN (checked in the database) ---------- */
+const PF={rows:null,code:null,skip:false};
+const FAM={token:null,id:null,name:''};
+const FAMK='fastaqim.fam';
+const X41=[
+['Family profiles','الملفات العائلية','Piroofaayilii maatii','Astaamaha qoyska'],
+['+ Add profile','+ أضف ملفًا','+ Piroofaayilii dabali','+ Ku dar astaan'],
+['Family sign in','دخول العائلة','Seensa maatii','Galitaanka qoyska'],
+['Family code','رمز العائلة','Koodii maatii','Koodka qoyska'],
+['Ask your parent for the family code.','اطلب رمز العائلة من والدك أو والدتك.','Koodii maatii maatii kee gaafadhu.','Waalidkaa weydii koodka qoyska.'],
+['Code not found. Check it with your parent.','الرمز غير موجود. تحقّق منه مع والديك.','Koodiin hin argamne. Maatii keetiin mirkaneessi.','Koodka lama helin. La hubi waalidkaa.'],
+['Who are you?','من أنت؟','Ati eenyu?','Yaad tahay?'],
+['Enter your PIN','أدخل رمزك','PIN kee galchi','Geli PIN-kaaga'],
+['Wrong PIN.','رمز خاطئ.','PIN dogoggora.','PIN khaldan.'],
+['tries left','محاولات متبقية','yaaliiwwan hafan','isku day ayaa haray'],
+['Too many tries. Wait 15 minutes or ask your parent.','محاولات كثيرة. انتظر 15 دقيقة أو اسأل والديك.','Yaaliin baay\'ee dha. Daqiiqaa 15 eegi ykn maatii kee gaafadhu.','Isku day badan. Sug 15 daqiiqo ama weydii waalidkaa.'],
+['Forgot your PIN? Ask your parent.','نسيت رمزك؟ اسأل والديك.','PIN kee irraanfatte? Maatii kee gaafadhu.','Ma ilowday PIN-kaaga? Weydii waalidkaa.'],
+['Choose a 4-digit PIN','اختر رمزًا من 4 أرقام','PIN lakkoofsa 4 filadhu','Dooro PIN 4 god ah'],
+['Enter it again','أدخله مرة أخرى','Irra deebi\'ii galchi','Mar kale geli'],
+['PINs did not match. Start again.','الرمزان غير متطابقين. ابدأ من جديد.','PIN-oonni wal hin simne. Irra deebi\'ii jalqabi.','PIN-yadu isma waafaqin. Dib u bilow.'],
+['Profile name','اسم الملف','Maqaa piroofaayilii','Magaca astaanta'],
+['Next','التالي','Itti aanu','Xiga'],
+['Reset PIN','إعادة تعيين الرمز','PIN haaromsi','Dib u deji PIN'],
+['Manage','إدارة','Bulchi','Maamul'],
+['Open','افتح','Bani','Fur'],
+['Rename','إعادة التسمية','Maqaa jijjiiri','Magac beddel'],
+['Move to own account','انقل إلى حساب خاص','Gara herrega ofii isaatti dabarsi','U wareeji akoon gaar ah'],
+['Delete profile','احذف الملف','Piroofaayilii haqi','Tirtir astaanta'],
+['Their email','بريده الإلكتروني','Imeelii isaanii','Iimaylkooda'],
+['Send','أرسل','Ergi','Dir'],
+['Cancel','إلغاء','Haqi','Jooji'],
+['Waiting for','بانتظار','Eegaa jira','Sugaya'],
+['Copy','نسخ','Garagalchi','Koobi'],
+['Copied.','تم النسخ.','Garagalfameera.','Waa la koobiyay.'],
+['New code','رمز جديد','Koodii haaraa','Kood cusub'],
+['A new code signs every child out. They sign in again with the new code.','الرمز الجديد يُخرج جميع الأطفال. يدخلون مجددًا بالرمز الجديد.','Koodiin haaraan ijoollee hunda ni baasa. Koodii haaraan irra deebi\'anii seenu.','Koodka cusub wuxuu ka saarayaa carruurta oo dhan. Waxay mar kale ku galayaan koodka cusub.'],
+['Kids sign in with this code and their own PIN. They never use your email or password.','يدخل الأطفال بهذا الرمز ورمزهم الخاص. لا يستخدمون بريدك أو كلمة مرورك أبدًا.','Ijoolleen koodii kanaa fi PIN ofii isaaniitiin seenu. Gonkumaa imeelii ykn jecha icciitii kee hin fayyadaman.','Carruurtu waxay ku galaan koodkan iyo PIN-kooda. Weligood ma isticmaalaan iimaylkaaga ama furaha sirtaada.'],
+['Ask them to sign in to Fastaqim with this email. Everything moves to their account when they accept.','اطلب منه تسجيل الدخول إلى فاستقم بهذا البريد. ينتقل كل شيء إلى حسابه عند الموافقة.','Imeelii kanaan Fastaqim akka seenan gaafadhu. Yeroo fudhatan wanti hundi gara herrega isaaniitti ce\'a.','Ka codso inay Fastaqim ku galaan iimaylkan. Wax walba waxay u guuraan akoonkooda marka ay aqbalaan.'],
+['A family profile is waiting for you','ملف عائلي بانتظارك','Piroofaayiliin maatii si eegaa jira','Astaan qoys ayaa ku sugaysa'],
+['Move it into this account? It replaces what is saved here now.','نقله إلى هذا الحساب؟ سيحلّ محلّ المحفوظ هنا الآن.','Herrega kanatti ce\'u? Waan amma asitti olkaa\'ame bakka bu\'a.','Ma u wareejinaa akoonkan? Waxay beddeli doontaa waxa hadda halkan ku kaydsan.'],
+['Move it here','انقله هنا','As ce\'isi','Halkan u soo wareeji'],
+['Not now','ليس الآن','Amma miti','Hadda maya'],
+['Delete this profile and all its history?','حذف هذا الملف وكل سجله؟','Piroofaayilii kana fi seenaa isaa hunda haqi?','Tirtir astaantan iyo taariikhdeeda oo dhan?'],
+['Delete','احذف','Haqi','Tirtir'],
+['Done','تم','Xumurameera','Waa la sameeyay'],
+['Saved.','تم الحفظ.','Olkaa\'ameera.','Waa la kaydiyay.'],
+['Couldn\'t save. Check your internet.','تعذّر الحفظ. تحقّق من الإنترنت.','Olkaa\'uu hin dandeenye. Interneetii kee ilaali.','Lama kaydin karin. Hubi internetkaaga.'],
+['Back to my plan','العودة إلى خطتي','Gara karoora kootti','Ku noqo qorshahayga'],
+['Editing','تعديل','Gulaaluu','Wax ka beddelaya'],
+['Sign out','تسجيل الخروج','Ba\'i','Ka bax'],
+['Signed in with the family code','داخل برمز العائلة','Koodii maatiitiin seente','Waxaad ku gashay koodka qoyska'],
+];
+X41.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const fmtCode=c=>c?c.slice(0,4)+'-'+c.slice(4):'';
+/* parent side */
+async function pfLoad(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.from('fastaqim_profiles').select('id,name,avatar,transfer_email').eq('owner',AU.user.id).order('created_at');if(error)throw error;PF.rows=data||[]}catch(e){PF.rows=null}}
+async function pfAfterInit(){if(ACT.id||FAM.token)return;await pfLoad();if(PF.rows&&PF.rows.length)try{const {data}=await AU.sb.rpc('family_code');PF.code=data||null}catch(e){}acctRender();if(PF.skip){PF.skip=false;return}pfClaimCheck()}
+async function pfOpen(id){await accFlush();
+  const {data,error}=await AU.sb.from('fastaqim_profiles').select('name,state').eq('id',id).maybeSingle();if(error||!data){toast(tl('Couldn\'t save. Check your internet.'));return}
+  ACT.id='pf:'+id;ACT.pf=id;ACT.name=data.name;S=Object.assign(freshS(),clone(data.state||{}));S.uid='pf:'+id;S.started=true;S.name=S.name||data.name;lifeFix();
+  SYNC.ref={set:async o=>{const {error}=await AU.sb.from('fastaqim_profiles').update({state:o.state,updated_at:new Date().toISOString()}).eq('id',id);if(error)throw error}};
+  SYNC.state='on';modalClose();render();actBar();const b=$('actBar');if(b){b.innerHTML=`<span>✏️ ${tl('Editing')} <b>${esc(data.name)}</b></span><button class="small" id="actBk">${tl('Back to my plan')}</button>`;$('actBk').onclick=pfBack}acctRender()}
+async function pfBack(){await accFlush();ACT.id=null;ACT.pf=null;actBar();modalClose();PF.skip=true;await cloudInit(AU.user)}
+function pfPad(title,sub,onDone,extra){let v='';let o=$('pfBox');if(!o){o=document.createElement('div');o.id='pfBox';o.className='pfb';document.body.appendChild(o)}
+  o.innerHTML=`<div class="pfb-c" role="dialog" aria-modal="true"><div class="pfb-h"><button type="button" class="mc-x" data-pfx aria-label="Close">✕</button></div><p class="pfb-t">${esc(title)}</p><p class="pfb-s">${esc(sub)}</p><div class="pfb-d" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="pfb-e" role="alert"></p>
+    <div class="pfb-k">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k=>k===''?'<span></span>':`<button type="button" data-k="${k}" aria-label="${k==='⌫'?'Delete':k}">${k}</button>`).join('')}</div>${extra||''}</div>`;o.hidden=false;
+  const dots=()=>o.querySelectorAll('.pfb-d i').forEach((d,i)=>d.classList.toggle('on',i<v.length));
+  const api={err:t=>{o.querySelector('.pfb-e').textContent=t;const d=o.querySelector('.pfb-d');d.classList.remove('sh');void d.offsetWidth;d.classList.add('sh');try{navigator.vibrate&&navigator.vibrate([30,40,30])}catch(_){}v='';dots()},close:()=>{o.hidden=true}};
+  o.querySelector('[data-pfx]').onclick=api.close;
+  o.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k==='⌫')v=v.slice(0,-1);else if(v.length<4)v+=k;dots();if(v.length===4){const p=v;setTimeout(()=>onDone(p,api),120)}});return api}
+function pfNewPin(title,cb){pfPad(title,tl('Choose a 4-digit PIN'),(p1,a1)=>{pfPad(title,tl('Enter it again'),(p2,a2)=>{if(p1!==p2){pfNewPin(title,cb);setTimeout(()=>{const e=$('pfBox').querySelector('.pfb-e');if(e)e.textContent=tl('PINs did not match. Start again.')},50);return}a2.close();cb(p1)})})}
+function pfAdd(){modalCard(`<p class="label">${tl('+ Add profile')}</p><input type="text" id="pfN" maxlength="40" placeholder="${tl('Profile name')}" autocomplete="off"><button class="btn-main" id="pfNGo">${tl('Next')}</button>`);
+  $('pfNGo').onclick=()=>{const n=$('pfN').value.trim();if(!n){$('pfN').focus();return}modalClose();
+    pfNewPin(n,async pin=>{const id=crypto.randomUUID();
+      const {error}=await AU.sb.from('fastaqim_profiles').insert({id,owner:AU.user.id,name:n,state:{name:n,started:true,savedAt:Date.now()}});
+      const r2=error?null:await AU.sb.rpc('set_profile_pin',{p_id:id,p_pin:pin});
+      if(error||(r2&&r2.error)){toast(tl('Couldn\'t save. Check your internet.'));return}
+      await pfLoad();try{const {data}=await AU.sb.rpc('family_code');PF.code=data}catch(e){}acctRender();toast(tl('Saved.'))})}}
+function pfManage(id){const r=(PF.rows||[]).find(x=>x.id===id);if(!r)return;
+  modalCard(`<p class="label">${esc(r.name)}</p><div class="pf-m"><button class="btn-main" id="pfOp">✏️ ${tl('Open')}</button><button class="btn-ghost" id="pfRn">${tl('Rename')}</button><button class="btn-ghost" id="pfCp">🔒 ${tl('Reset PIN')}</button>
+    <button class="btn-ghost" id="pfMv">📤 ${tl('Move to own account')}</button>${r.transfer_email?`<p class="small muted">${tl('Waiting for')} ${esc(r.transfer_email)} · <button class="lnk" id="pfMvX">${tl('Cancel')}</button></p>`:''}
+    <button class="btn-ghost pf-del" id="pfDl">🗑️ ${tl('Delete profile')}</button></div>`);
+  const upd=async o=>{const {error}=await AU.sb.from('fastaqim_profiles').update(o).eq('id',id);if(error){toast(tl('Couldn\'t save. Check your internet.'));return false}await pfLoad();acctRender();toast(tl('Saved.'));return true};
+  $('pfOp').onclick=()=>pfOpen(id);
+  $('pfRn').onclick=()=>{modalCard(`<p class="label">${tl('Rename')}</p><input type="text" id="pfRnI" maxlength="40" value="${esc(r.name)}"><button class="btn-main" id="pfRnGo">${tl('Done')}</button>`);$('pfRnGo').onclick=async()=>{const n=$('pfRnI').value.trim();if(n&&await upd({name:n}))modalClose()}};
+  $('pfCp').onclick=()=>{modalClose();pfNewPin(r.name,async pin=>{const {error}=await AU.sb.rpc('set_profile_pin',{p_id:id,p_pin:pin});toast(error?tl('Couldn\'t save. Check your internet.'):tl('Saved.'))})};
+  $('pfMv').onclick=()=>{modalCard(`<p class="label">📤 ${tl('Move to own account')}</p><p class="small">${tl('Ask them to sign in to Fastaqim with this email. Everything moves to their account when they accept.')}</p><input type="email" id="pfEm" placeholder="${tl('Their email')}" autocomplete="off"><button class="btn-main" id="pfEmGo">${tl('Send')}</button>`);
+    $('pfEmGo').onclick=async()=>{const e=$('pfEm').value.trim().toLowerCase();if(!/\S+@\S+\.\S+/.test(e)){$('pfEm').focus();return}if(await upd({transfer_email:e}))modalClose()}};
+  if($('pfMvX'))$('pfMvX').onclick=async()=>{if(await upd({transfer_email:null}))modalClose()};
+  $('pfDl').onclick=()=>{modalCard(`<p class="label">${tl('Delete this profile and all its history?')}</p><div class="row"><button class="btn-main pf-del2" id="pfDlY">${tl('Delete')}</button><button class="btn-ghost small" id="pfDlN">${tl('Cancel')}</button></div>`);
+    $('pfDlN').onclick=modalClose;$('pfDlY').onclick=async()=>{const {error}=await AU.sb.from('fastaqim_profiles').delete().eq('id',id);if(error){toast(tl('Couldn\'t save. Check your internet.'));return}modalClose();await pfLoad();acctRender()}}}
+async function pfClaimCheck(){try{const {data,error}=await AU.sb.rpc('pending_profiles');if(error||!data||!data.length)return;const r=data[0];
+  modalCard(`<p class="label">👨‍👩‍👧 ${tl('A family profile is waiting for you')}</p><p><b>${esc(r.name)}</b></p><p class="small">${tl('Move it into this account? It replaces what is saved here now.')}</p><div class="row"><button class="btn-main" id="pcY">${tl('Move it here')}</button><button class="btn-ghost small" id="pcN">${tl('Not now')}</button></div>`);
+  $('pcN').onclick=modalClose;$('pcY').onclick=async()=>{const {error}=await AU.sb.rpc('claim_profile',{p_id:r.id});if(error){toast(tl('Couldn\'t save. Check your internet.'));return}modalClose();try{localStorage.removeItem(KEY)}catch(e){}S=freshS();PF.skip=true;await cloudInit(AU.user);toast(tl('Saved.'))}}catch(e){}}
+function pfSection(){if(!AU.user||ACT.id||!PF.rows)return '';
+  return `<div class="pf-sec"><p class="label">👨‍👩‍👧 ${tl('Family profiles')}</p>${PF.rows.map(r=>`<div class="mrow" style="cursor:default"><span>${avDot(r.avatar,r.name)} <b>${esc(r.name)}</b>${r.transfer_email?' <span class="small muted">📤</span>':''}</span><button class="small" data-pfm="${r.id}">${tl('Manage')}</button></div>`).join('')}
+    ${PF.rows.length&&PF.code?`<div class="pf-code"><span class="small muted">${tl('Family code')}</span><b dir="ltr" class="notranslate">${fmtCode(PF.code)}</b><button class="small" id="pfCopy">${tl('Copy')}</button><button class="small btn-ghost" id="pfNewC">${tl('New code')}</button></div><p class="small muted">${tl('Kids sign in with this code and their own PIN. They never use your email or password.')}</p>`:''}
+    <button class="btn-calm small" id="pfAddB" style="align-self:flex-start">${tl('+ Add profile')}</button></div>`}
+function pfWire(){if(!$('pfAddB'))return;$('pfAddB').onclick=pfAdd;document.querySelectorAll('[data-pfm]').forEach(x=>x.onclick=()=>pfManage(x.dataset.pfm));
+  if($('pfCopy'))$('pfCopy').onclick=async()=>{try{await navigator.clipboard.writeText(fmtCode(PF.code));toast(tl('Copied.'))}catch(e){}};
+  if($('pfNewC'))$('pfNewC').onclick=()=>{modalCard(`<p class="label">${tl('New code')}</p><p class="small">${tl('A new code signs every child out. They sign in again with the new code.')}</p><div class="row"><button class="btn-main" id="ncY">${tl('New code')}</button><button class="btn-ghost small" id="ncN">${tl('Cancel')}</button></div>`);
+    $('ncN').onclick=modalClose;$('ncY').onclick=async()=>{const {data,error}=await AU.sb.rpc('family_code',{p_new:true});if(error){toast(tl('Couldn\'t save. Check your internet.'));return}PF.code=data;modalClose();acctRender()}}}
+/* child side: family code -> pick profile -> PIN. The database checks the PIN and locks after 5 wrong tries. */
+function famStore(){return localStorage.getItem('fastaqim.rem')==='0'?sessionStorage:localStorage}
+function famOpen(){modalCard(`<p class="label">👨‍👩‍👧 ${tl('Family sign in')}</p><input type="text" id="fmC" dir="ltr" maxlength="12" placeholder="${tl('Family code')}" autocomplete="off" autocapitalize="characters" spellcheck="false" style="text-transform:uppercase;letter-spacing:.12em;text-align:center"><button class="btn-main" id="fmGo">${tl('Next')}</button><p class="small muted">${tl('Ask your parent for the family code.')}</p><p class="small" id="fmE" role="alert"></p>`);
+  $('fmGo').onclick=async()=>{const code=$('fmC').value.trim();if(code.length<6){$('fmC').focus();return}const {data,error}=await AU.sb.rpc('family_list',{p_code:code});
+    if(error||!data||!data.length){$('fmE').textContent=tl('Code not found. Check it with your parent.');return}
+    modalCard(`<p class="label">${tl('Who are you?')}</p><div class="pfb-g">${data.map(r=>`<button type="button" class="pfb-p" data-fp="${r.id}">${avHTML(r.avatar,r.name)}<span>${esc(r.name)}</span></button>`).join('')}</div>`);
+    $('scrollBody').querySelectorAll('[data-fp]').forEach(b=>b.onclick=()=>{const r=data.find(x=>x.id===b.dataset.fp);modalClose();
+      pfPad(r.name,tl('Enter your PIN'),async(pin,api)=>{const {data:res,error:e2}=await AU.sb.rpc('family_login',{p_code:code,p_id:r.id,p_pin:pin});
+        if(e2||!res){api.err(tl('Couldn\'t save. Check your internet.'));return}
+        if(!res.ok){api.err(res.err==='locked'?tl('Too many tries. Wait 15 minutes or ask your parent.'):res.err==='pin'?`${tl('Wrong PIN.')} ${res.left} ${tl('tries left')}`:tl('Code not found. Check it with your parent.'));return}
+        api.close();try{famStore().setItem(FAMK,res.token)}catch(_){}await famStart(res.token)},`<p class="small muted pfb-f">${tl('Forgot your PIN? Ask your parent.')}</p>`)})}}
+async function famStart(token){const {data,error}=await AU.sb.rpc('fam_get',{p_token:token});
+  if(error)return 'net';if(!data){try{localStorage.removeItem(FAMK);sessionStorage.removeItem(FAMK)}catch(e){}return 'gone'}
+  FAM.token=token;FAM.id=data.id;FAM.name=data.name;S=Object.assign(freshS(),clone(data.state||{}));S.uid='fam:'+data.id;S.started=true;S.name=S.name||data.name;lifeFix();
+  SYNC.ref={set:async o=>{const {data:ok,error}=await AU.sb.rpc('fam_set',{p_token:token,p_state:o.state});if(error)throw error;if(!ok){famOut(true)}}};
+  SYNC.state='on';syncBadge();landingShow(false);render();famAcct();return 'ok'}
+async function famOut(gone){try{if(!gone&&FAM.token)await AU.sb.rpc('fam_logout',{p_token:FAM.token})}catch(e){}try{localStorage.removeItem(FAMK);sessionStorage.removeItem(FAMK);localStorage.removeItem(KEY)}catch(e){}location.reload()}
+function famAcct(){if(!FAM.token)return;const av=$('avatarBtn');if(av){av.hidden=false;av.innerHTML=avHTML(S.avatar,FAM.name);av.onclick=()=>{modalCard(`<p class="label">${esc(FAM.name)}</p><p class="small muted">${tl('Signed in with the family code')}</p><button class="btn-ghost" id="fmOut">${tl('Sign out')}</button>`);$('fmOut').onclick=()=>famOut(false)}}
+  const b=$('acctBox');if(b){b.innerHTML=`<p class="label">${esc(FAM.name)}</p><p class="small muted">${tl('Signed in with the family code')}</p><button class="btn-ghost small" id="fmOut2" style="align-self:flex-start">${tl('Sign out')}</button>`;$('fmOut2').onclick=()=>famOut(false)}}
+async function famBoot(){let t=null;try{t=localStorage.getItem(FAMK)||sessionStorage.getItem(FAMK)}catch(e){}if(!t)return false;const r=await famStart(t);if(r==='ok'||r==='net'){if(r==='net'){FAM.token=t;landingShow(false);render()}return true}return false}
+
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
   if(!tv){if(n.__en!=null&&n.nodeValue!==n.__en)n.nodeValue=n.__en;const pe=n.parentElement;if(pe&&RTL.includes(LANG)&&/^[^\u0600-\u06FF]*[A-Za-z]/.test(k)&&pe.childNodes.length===1&&!pe.hasAttribute('dir'))pe.setAttribute('dir','auto');return}
@@ -4168,7 +4321,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();try{ldZChip();ldMenu();ldTiles()}catch(e){console.error(e)}renderTG();qtTick();$('ldHome').onclick=()=>instGuide();document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();try{ldZChip();ldMenu();ldTiles();ldHype();if($('ldCopy'))$('ldCopy').textContent='© '+new Date().getFullYear()+' Fastaqim'}catch(e){console.error(e)}renderTG();qtTick();$('ldHome').onclick=()=>instGuide();document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
