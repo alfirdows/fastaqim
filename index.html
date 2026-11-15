@@ -846,6 +846,29 @@ nav[role=tablist] button[aria-selected=true]{background:var(--calm)!important;bo
 .au-guest{all:unset;cursor:pointer;display:block;margin:12px auto 0;padding:8px 12px;font:600 .88rem var(--body);color:var(--calm);text-align:center}
 .goog-te-banner-frame,.skiptranslate>iframe,#goog-gt-tt,.goog-te-balloon-frame,.goog-tooltip,#gtEl{display:none!important}body{top:0!important}
 .ldz-i{all:unset;cursor:pointer;margin:6px auto 0;display:block;font:600 .75rem var(--body);color:var(--k2,var(--calm))}.ldz-info{margin:6px 0 0;padding:8px 10px;border-radius:12px;background:var(--bg);font:500 .8rem/1.5 var(--body);color:var(--ink);text-align:start}.ldz-info small{color:var(--muted)}.hisn-st{margin-inline-start:4px}
+.cat-bar{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.cat-bar button,.cat-day .seg button{flex:none;min-height:36px;padding:0 12px;border-radius:99px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 .8rem var(--body)}.cat-bar button[aria-pressed=true],.cat-day .seg button[aria-pressed=true]{background:var(--calm);border-color:var(--calm);color:#fff}
+.cat-day .seg{display:flex;gap:6px;align-items:center;margin:8px 0 4px;flex-wrap:wrap}.cat-cal{position:relative;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:99px;border:1px solid var(--line);background:var(--surface)}.cat-cal input{position:absolute;inset:0;opacity:0;width:100%;height:100%}
+/* v74 task rows: title gets the full line, meta + buttons on the line below */
+.task-head{gap:8px}.task-head .task-title{flex:1 1 calc(100% - 40px);overflow-wrap:break-word;word-break:normal;hyphens:none}
+.task-head .tk-rw{flex:1 1 100%;order:5;margin:-4px 0 0;padding-inline-start:30px}
+.task-head>.small.muted{order:6;font-size:.75rem;padding-inline-start:30px}
+.task-head>.icon-btn[data-act="tmr"]{margin-inline-start:auto}
+.task-head>.icon-btn{order:7;min-width:36px;min-height:36px;padding:0 8px;display:inline-flex;align-items:center;justify-content:center}
+.cat-day .seg{display:flex!important;flex-wrap:nowrap!important;background:none!important;padding:0!important;gap:6px!important;width:100%}
+.cat-day .seg button{flex:1 1 0!important;min-width:0;padding:0 6px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cat-day .cat-cal{flex:none}
+/* v74 toasts sit above the Feedback button, never on it */
+.toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))!important}.hype{bottom:calc(128px + env(safe-area-inset-bottom,0px))!important}
+/* v74 kid mode */
+body.kid-b{--calm:#1c7ed6;--accent:#f59f00}body.kid-g{--calm:#d6336c;--accent:#ae3ec9}
+body.kid .card{border-radius:22px;border:2px solid color-mix(in srgb,var(--calm) 28%,var(--line))}
+body.kid-b .card{background:linear-gradient(180deg,var(--surface),#eef6ff)}body.kid-g .card{background:linear-gradient(180deg,var(--surface),#fff0f6)}
+body.kid .task{border-radius:16px;border-width:2px}body.kid .task-head input[type=checkbox]{width:28px;height:28px}
+body.kid .btn-main{border-radius:16px}
+.kd-g{display:grid;grid-template-columns:1fr 1fr;gap:10px}.kd-g button{display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 8px;border-radius:16px;border:2px solid var(--line);background:var(--surface);font:700 .95rem var(--body);color:var(--ink)}.kd-g button i{font-style:normal;font-size:1.8rem}.kd-g button.on{border-color:var(--calm);background:color-mix(in srgb,var(--calm) 10%,var(--surface))}
+.kd-coin{position:fixed;left:50%;top:38%;z-index:130;display:flex;flex-direction:column;align-items:center;gap:2px;pointer-events:none;opacity:0;transform:translateX(-50%);animation:kdc 1.4s ease-out forwards}.kd-coin svg{width:64px;height:64px}.kd-coin b{font:800 1.1rem var(--body);color:#c98a00}
+@keyframes kdc{0%{opacity:0;transform:translate(-50%,24px) rotateY(0)}25%{opacity:1;transform:translate(-50%,0) rotateY(360deg)}100%{opacity:0;transform:translate(-50%,-80px) rotateY(360deg)}}
+@media (prefers-reduced-motion:reduce){.kd-coin{animation:none;opacity:1}}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -1603,7 +1626,7 @@ function taskHTML(t){
       <button class="icon-btn" data-act="open" aria-expanded="${!!t.open}" title="Steps">${t.open?'▴':'▾'}</button>
     </div>
     ${t.open?`<ul class="steps">${t.steps.map(s=>`<li class="${s.done?'done':''}"><input type="checkbox" data-act="step" data-s="${s.id}" ${s.done?'checked':''} aria-label="${esc(s.text)}"><span>${esc(s.text)}</span></li>`).join('')}</ul>
-      ${tPick(t)}<div class="inline-form"><input type="date" data-act="due" value="${t.due||''}" aria-label="Day"><input type="time" data-act="tm" value="${t.time||''}" aria-label="Time" style="max-width:120px"><button class="small" data-act="ren">Rename</button></div>
+      ${tPick(t)}<div class="inline-form"><input type="date" data-act="due" value="${t.due||''}" aria-label="Day"><input type="time" data-act="tm" value="${t.time||''}" aria-label="Time" style="max-width:120px"><button class="small" data-act="ren">Rename</button><button class="small" data-act="pup" aria-label="Move up">▲</button><button class="small" data-act="pdn" aria-label="Move down">▼</button></div>
       <form class="inline-form" data-act="addstep"><input type="text" placeholder="Add a tiny step" aria-label="New step"><button type="submit">Add</button></form>
       <div class="row"><button class="btn-main" data-act="focus" style="font-size:.95rem;padding:.6rem 1rem">Start ${SM()} min</button>${t.steps.length?'':'<button class="small" data-act="breakdown">Break it down for me</button>'}<button class="btn-ghost small" data-act="del">Delete task</button></div>`:''}
   </div>`;
@@ -1623,6 +1646,7 @@ function onTaskEvent(e){
   const t=S.tasks.find(x=>x.id===box.dataset.id);if(!t)return;const act=el.dataset.act;
   if(e.type==='submit'){e.preventDefault();if(act!=='addstep')return;const inp=el.querySelector('input'),v=inp.value.trim();if(!v)return;t.steps.push({id:uid(),text:v,done:false});save();render();const again=document.querySelector(`.task[data-id="${t.id}"] form input`);again&&again.focus();return}
   if(e.type!=='click'&&e.type!=='change')return;
+  if(act==='pup'&&e.type==='click'){prioMove(t,-1);return}if(act==='pdn'&&e.type==='click'){prioMove(t,1);return}
   if(act==='diff'&&e.type==='click'){t.diff=+el.dataset.d;save();render();return}if(act==='est'&&e.type==='click'){t.est=+el.dataset.m;save();render();return}
   if(act==='tmr'&&e.type==='click'){qtOpen(t.title);return}
   if((act==='due'||act==='tm')&&e.type==='change'){const b=clone(t);if(act==='due')t.due=el.value;else t.time=el.value;H('todo',act==='due'?'moved':'set time',t.title,b,t);save();render();return}
@@ -1632,14 +1656,14 @@ function onTaskEvent(e){
     if(act==='top'){if(!t.top&&S.tasks.filter(x=>x.top&&!x.done).length>=3){toast('Top 3 is full. Unstar one first.');return}t.top=!t.top;save();render()}
     else if(act==='open'){t.open=!t.open;render()}
     else if(act==='breakdown'){t.steps=breakdown(t.title).map(x=>({id:uid(),text:x,done:false}));save();render();toast('Broken into '+t.steps.length+' small steps.')}
-    else if(act==='ren'){modalCard(`<p class="label">Rename</p><input type="text" id="rnT" value="${esc(t.title)}" aria-label="Title"><div class="row"><button class="btn-main" id="rnS">Save</button><button class="btn-ghost small" id="rnX">Cancel</button></div>`);$('rnS').onclick=()=>{const b=clone(t);t.title=$('rnT').value.trim()||t.title;H('todo','renamed',t.title,b,t);save();modalClose()};$('rnX').onclick=modalClose}
+    else if(act==='ren'){modalCard(`<p class="label">Rename</p><input type="text" id="rnT" value="${esc(t.title)}" aria-label="Title"><div class="row"><button class="btn-main" id="rnS">Save</button><button class="btn-ghost small" id="rnX">Cancel</button></div>`);$('rnS').onclick=()=>{const b=clone(t);t.title=$('rnT').value.trim()||t.title;t.cat=catOf(t.title);H('todo','renamed',t.title,b,t);save();modalClose()};$('rnX').onclick=modalClose}
     else if(act==='del'){H('todo','deleted',t.title,t,null);S.tasks=S.tasks.filter(x=>x!==t);save();render();toast('Deleted.')}
     else if(act==='focus'){const s=nextStep(t);startTimer(SM(),{taskId:t.id,stepId:s&&s.id,label:s?s.text:t.title,kick:true})}
   }
 }
 ['click','change','submit'].forEach(ev=>{$('topList').addEventListener(ev,onTaskEvent);$('laterList').addEventListener(ev,onTaskEvent)});
 $('dumpForm').onsubmit=e=>{e.preventDefault();const v=$('dumpInput').value.trim();if(!v)return;
-  const tops=S.tasks.filter(x=>x.top&&!x.done).length;const nt={id:uid(),title:v,top:false,done:false,steps:[],open:false};S.tasks.push(nt);H('todo','added',v,null,nt);if(!S.ft1){S.ft1=1;setTimeout(()=>star(1,tl('First task added!')),400)}
+  const tops=S.tasks.filter(x=>x.top&&!x.done).length;const nt={id:uid(),title:v,top:false,done:false,steps:[],open:false};nt.cat=catOf(v);S.tasks.push(nt);H('todo','added',v,null,nt);if(nt.cat!=='other'){const c=TCATS.find(x=>x[0]===nt.cat);setTimeout(()=>toast(tl('Added to')+' '+c[1]+' '+tl(c[2])),900)}if(!S.ft1){S.ft1=1;setTimeout(()=>star(1,tl('First task added!')),400)}
   $('dumpInput').value='';save();render();toast(tops<3?'Added. Star it if it\'s a top 3.':'Added to Later.')};
 
 /* ---------- timer ---------- */
@@ -4597,20 +4621,20 @@ function pinEdit(){const c=pinCfg();
 /* ☰ menu */
 function apMenu(){let m=$('apMenu');if(!m){m=document.createElement('div');m.id='apMenu';m.className='apm';document.body.appendChild(m);m.onclick=e=>{if(e.target===m)m.hidden=true}}
   const c=tabsCfg(),signed=typeof AU!=='undefined'&&AU.user,fam=typeof FAM!=='undefined'&&FAM.token;
-  m.innerHTML=`<div class="apm-p" role="dialog" aria-modal="true"><div class="apm-h"><b class="notranslate">Fastaqim</b><button type="button" class="mc-x" data-ax aria-label="Close">✕</button></div>
-   <p class="apm-s">${tl('Tabs')}</p><div class="apm-g">${c.o.map(k=>`<button type="button" data-at="${k}">${esc(tabLabel(k))}</button>`).join('')}</div>
+  m.innerHTML=`<div class="apm-p" role="dialog" aria-modal="true"><div class="apm-h"><b class="notranslate">Fastaqim</b><button type="button" class="mc-x" data-fax aria-label="Close">✕</button></div>
+   <p class="apm-s">${tl('Tabs')}</p><div class="apm-g">${c.o.map(k=>`<button type="button" data-fat="${k}">${esc(tabLabel(k))}</button>`).join('')}</div>
    <p class="apm-s">${tl('Tools')}</p>
    <button class="apm-i" data-am="hisn">📖 ${tl('Hisnul Muslim')}</button><button class="apm-i" data-am="sal">🕌 ${tl('Salah times')}</button><button class="apm-i" data-am="zk">📿 ${tl('Dhikr')}</button>
    <button class="apm-i" data-am="qt">⏱ ${tl('Timer')}</button><button class="apm-i" data-am="cal">📅 ${tl('Calendar')}</button><button class="apm-i" data-am="en">⚡ ${tl('Energy')}</button><hr>
-   <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
+   <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="kid">🧒 ${tl('Kid mode')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
    <button class="apm-i" data-am="pv">🔒 ${tl('Privacy')}</button><button class="apm-i" data-am="fb">💡 ${tl('Suggest an idea')}</button>
    ${window.GUEST?`<button class="apm-i apm-o" data-am="gx">↩ ${tl('Exit guest mode')}</button>`:signed||fam?`<button class="apm-i apm-o" data-am="out">↩ ${tl('Sign out')}</button>`:''}</div>`;
   m.hidden=false;
-  m.querySelector('[data-ax]').onclick=()=>{m.hidden=true};
-  m.querySelectorAll('[data-at]').forEach(b=>b.onclick=()=>{m.hidden=true;show(b.dataset.at)});
+  m.querySelector('[data-fax]').onclick=()=>{m.hidden=true};
+  m.querySelectorAll('[data-fat]').forEach(b=>b.onclick=()=>{m.hidden=true;show(b.dataset.fat)});
   m.querySelectorAll('[data-am]').forEach(b=>b.onclick=async()=>{const k=b.dataset.am;m.hidden=true;
     if(k==='hisn')hisnOpen();else if(k==='sal')salPop();else if(k==='zk')zkOpen();else if(k==='qt')qtOpen();else if(k==='cal')$('calHdr').click();else if(k==='en')enOpen();
-    else if(k==='pin')pinEdit();else if(k==='arr')tabsArrange();else if(k==='th')thmOpen();else if(k==='lang')langOpen();else if(k==='pv')privacyOpen();else if(k==='fb')fbOpen();
+    else if(k==='pin')pinEdit();else if(k==='arr')tabsArrange();else if(k==='th')thmOpen();else if(k==='kid')kidOpen();else if(k==='lang')langOpen();else if(k==='pv')privacyOpen();else if(k==='fb')fbOpen();
     else if(k==='gx')guestExit();else if(k==='out')apSignOut()})}
 async function apSignOut(){try{if(typeof FAM!=='undefined'&&FAM.token){famOut();return}}catch(e){}
   try{if(typeof accFlush==='function')await accFlush()}catch(e){}try{await AU.sb.auth.signOut({scope:'local'})}catch(e){}location.reload()}
@@ -4650,6 +4674,71 @@ function pickReason(i){const t=typeof current==='function'?current():null,rel=!!
 function zkOpen(){modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}
 const X49=[["Source and benefit","المصدر والفضل","Madda fi faayidaa","Isha iyo faa'iidada"],["Stop","إيقاف","Dhaabi","Jooji"]];
 X49.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ===== Schedules by category: each with yesterday / today / tomorrow / any date. Items sort themselves. ===== */
+const TCATS=[['clean','🧹','Cleaning',/clean|tidy|laundry|wash|vacuum|dishes|trash|bed|room|desk|mop|dust|organi[sz]e|ترتيب|نظف|تنظيف|غسيل/i],
+ ['cook','🍳','Cooking',/cook|bake|meal|dinner|lunch|breakfast|recipe|prep|طبخ|غداء|عشاء|فطور/i],
+ ['grocery','🛒','Grocery',/buy|grocer|milk|eggs|bread|rice|shop|market|store|اشتر|حليب|خبز|بقالة/i],
+ ['study','📚','Class & homework',/homework|study|class|lecture|exam|quiz|chem|math|physics|biology|history|essay|assignment|revise|course|واجب|مذاكرة|درس|امتحان|كيمياء|رياضيات/i],
+ ['research','🔎','Research',/research|read about|look up|find out|compare|article|paper|بحث/i],
+ ['work','💼','Work',/work|email|meeting|client|report|session notes|invoice|office|shift|عمل|اجتماع|بريد/i],
+ ['deen','🕌','Deen',RELRX],
+ ['health','🩺','Health',/doctor|dentist|meds|medicine|pharmacy|gym|walk|run|workout|sleep|water|appointment|طبيب|دواء|رياضة/i],
+ ['errand','📦','Errands',/post|bank|pay|bill|call|book|renew|pick up|drop off|return|اتصل|فاتورة|بنك/i]];
+const X50=[["Cleaning","التنظيف","Qulqullina","Nadaafad"],["Cooking","الطبخ","Nyaata bilcheessuu","Karinta"],["Grocery","المشتريات","Gabaa","Raashinka"],["Class & homework","الدراسة والواجبات","Kutaa fi hojii manaa","Fasalka iyo layliga"],["Research","البحث","Qorannoo","Cilmi-baaris"],["Work","العمل","Hojii","Shaqo"],["Deen","الدين","Diinii","Diinta"],["Health","الصحة","Fayyaa","Caafimaad"],["Errands","المشاوير","Ergaa","Shaqooyin dibadda"],["Other","أخرى","Kan biraa","Kale"],["All","الكل","Hunda","Dhammaan"],["Yesterday","أمس","Kaleessa","Shalay"],["Tomorrow","غدًا","Boru","Berri"],["Added to","أُضيفت إلى","Itti dabalame","Lagu daray"],["Nothing here for this day.","لا شيء لهذا اليوم.","Guyyaa kanaaf homtuu hin jiru.","Maalintan waxba ma jiraan."],["Move up","تحريك للأعلى","Ol kaasi","Kor u qaad"],["Move down","تحريك للأسفل","Gadi buusi","Hoos u dhig"],["Schedules","الجداول","Sagantaalee","Jadwallada"]];
+X50.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function catOf(title){const c=TCATS.find(c=>c[3].test(title||''));return c?c[0]:'other'}
+function catFix(){(S.tasks||[]).forEach(t=>{if(!t.cat)t.cat=catOf(t.title)})}
+const CV={cat:'',day:0};
+function catDate(){const d=new Date();d.setDate(d.getDate()+CV.day);return dkey(d)}
+function catRender(){const sec=$('tab-today');if(!sec)return;catFix();let bar=$('catBar');
+  if(!bar){const card=document.createElement('div');card.className='card';card.id='catCard';card.innerHTML=`<h2><span class="h2i" aria-hidden="true">🗂️</span>${tl('Schedules')}</h2><div id="catBar" class="cat-bar"></div><div id="catDay" class="cat-day"></div><div id="catView" class="wrap" style="gap:10px"></div>`;
+    const tops=$('topList').closest('.card');tops.after(card);bar=$('catBar');['click','change','submit'].forEach(ev=>$('catView').addEventListener(ev,onTaskEvent))}
+  const used=TCATS.filter(c=>S.tasks.some(t=>t.cat===c[0])).concat(S.tasks.some(t=>t.cat==='other')?[['other','📌','Other']]:[]);
+  bar.innerHTML=`<button type="button" data-fcv="" aria-pressed="${!CV.cat}">${tl('All')}</button>`+used.map(c=>`<button type="button" data-fcv="${c[0]}" aria-pressed="${CV.cat===c[0]}">${c[1]} ${tl(c[2])}</button>`).join('');
+  bar.querySelectorAll('[data-fcv]').forEach(b=>b.onclick=()=>{CV.cat=b.dataset.fcv;CV.day=0;catRender()});
+  const day=$('catDay'),view=$('catView');if(!CV.cat){day.innerHTML='';view.innerHTML='';return}
+  const dk=catDate();day.innerHTML=`<div class="seg">${[[-1,'Yesterday'],[0,'Today'],[1,'Tomorrow']].map(([v,l])=>`<button type="button" data-fcd="${v}" aria-pressed="${CV.day===v}">${tl(l)}</button>`).join('')}<label class="cat-cal">📅<input type="date" id="catPick" value="${dk}" aria-label="${tl('Calendar')}"></label></div>`;
+  day.querySelectorAll('[data-fcd]').forEach(b=>b.onclick=()=>{CV.day=+b.dataset.fcd;catRender()});
+  $('catPick').onchange=e=>{const v=e.target.value;if(!v)return;const a=new Date(v+'T00:00:00'),t=new Date();t.setHours(0,0,0,0);CV.day=Math.round((a-t)/864e5);catRender()};
+  const today=dkey(),L=S.tasks.filter(t=>t.cat===CV.cat&&((t.due||(t.done&&t.doneAt?dkey(new Date(t.doneAt)):today))===dk));
+  view.innerHTML=L.length?L.map(taskHTML).join(''):`<p class="muted small">${tl('Nothing here for this day.')}</p>`}
+{const _rt=renderToday;renderToday=function(){_rt.apply(this,arguments);try{catRender()}catch(e){}}}
+/* "Just this" follows the clock: a task due now comes first, then your own order, then top 3 */
+if(!S.prio)S.prio=[];
+jtTasks=function(){const o=openTasks(),k=dkey(),n=nowMin(),tm=t=>t.due===k&&t.time?toMin(t.time):null;
+  const now=o.filter(t=>tm(t)!=null&&tm(t)<=n+15).sort((a,b)=>tm(b)-tm(a)),pr=S.prio||[];
+  const rest=o.filter(t=>!now.includes(t)).sort((a,b)=>{const ia=pr.indexOf(a.id),ib=pr.indexOf(b.id);if(ia>=0||ib>=0)return (ia<0?999:ia)-(ib<0?999:ib);return (b.top?1:0)-(a.top?1:0)});return now.concat(rest)};
+function prioMove(t,dir){const ids=jtTasks().map(x=>x.id);const i=ids.indexOf(t.id),j=i+dir;if(i<0||j<0||j>=ids.length)return;[ids[i],ids[j]]=[ids[j],ids[i]];S.prio=ids;save();render()}
+
+/* ===== Kid mode: colorful look, coin animation, vibration only (no sounds) ===== */
+const X51=[["Kid mode","وضع الأطفال","Haala daa'immanii","Habka carruurta"],
+["Bright colors, coins for every star, bigger buttons.","ألوان زاهية، عملة لكل نجمة، وأزرار أكبر.","Halluu ifaa, saantima urjii hundaaf, qabduu gurguddaa.","Midabo dhalaalaya, qadaadiic xiddig kasta, badhammo waaweyn."],
+["Turn on","تشغيل","Banaa","Shid"],["Turn off","إيقاف","Cufi","Dami"],
+["Pick a style","اختر شكلًا","Akkaataa filadhu","Dooro qaab"],
+["Boy","ولد","Ilma dhiiraa","Wiil"],["Girl","بنت","Intala","Gabar"],
+["Only asked in kid mode.","يُسأل فقط في وضع الأطفال.","Haala daa'immanii qofatti gaafatama.","Waxaa la weydiiyaa habka carruurta oo keliya."],
+["Kid mode is on","وضع الأطفال مفعّل","Haalli daa'immanii baneera","Habka carruurta waa shidan yahay"],
+["Kid mode is off","وضع الأطفال متوقف","Haalli daa'immanii cufameera","Habka carruurta waa dansan yahay"]];
+X51.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function kidOn(){return !!(S&&S.kid&&S.kid.on)}
+function kidApply(){const b=document.body;if(!b)return;const k=S&&S.kid||{};b.classList.toggle('kid',!!k.on);b.classList.toggle('kid-g',!!k.on&&k.g==='g');b.classList.toggle('kid-b',!!k.on&&k.g!=='g')}
+function kidSet(on,g){S.kid=Object.assign({},S.kid,{on:!!on},g?{g}:{});save();kidApply();toast(tl(on?'Kid mode is on':'Kid mode is off'));try{render()}catch(e){}}
+function kidOpen(){const k=S.kid||{};
+  modalCard(`<p class="label">🧒 ${tl('Kid mode')}</p><p class="small muted" style="margin:0 0 12px">${tl('Bright colors, coins for every star, bigger buttons.')}</p>
+   ${k.on?`<button type="button" class="btn-ghost" data-kd="off" style="width:100%">${tl('Turn off')}</button>`:''}
+   <p class="label" style="margin-top:6px">${tl('Pick a style')}</p>
+   <div class="kd-g"><button type="button" data-kd="b" class="${k.on&&k.g!=='g'?'on':''}"><i>🚀</i><span>${tl('Boy')}</span></button><button type="button" data-kd="g" class="${k.on&&k.g==='g'?'on':''}"><i>🌸</i><span>${tl('Girl')}</span></button></div>
+   <p class="small muted" style="margin:10px 0 0;text-align:center">${tl('Only asked in kid mode.')}</p>`);
+  $('scrollBody').querySelectorAll('[data-kd]').forEach(b=>b.onclick=()=>{const v=b.dataset.kd;modalClose();if(v==='off')kidSet(false);else kidSet(true,v)})}
+/* one coin rises and fades once per award (no bounce, no loop) */
+function kidCoin(n){if(!kidOn())return;try{if(navigator.vibrate)navigator.vibrate([20,40,20])}catch(e){}
+  const c=document.createElement('div');c.className='kd-coin';c.setAttribute('aria-hidden','true');
+  c.innerHTML='<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#f5b301" stroke="#c98a00" stroke-width="3"/><path d="M20 9l3.2 6.6 7.2 1-5.2 5.1 1.2 7.2L20 25.5l-6.4 3.4 1.2-7.2-5.2-5.1 7.2-1z" fill="#fff6d6"/></svg><b>+'+n+'</b>';
+  document.body.appendChild(c);setTimeout(()=>c.remove(),1500)}
+{const _aw=award;award=function(){const g=_aw.apply(this,arguments);try{kidCoin(g)}catch(e){}return g}}
+{const _rh=renderHeader;renderHeader=function(){_rh.apply(this,arguments);try{kidApply()}catch(e){}}}
+setTimeout(()=>{try{kidApply()}catch(e){}},0);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
