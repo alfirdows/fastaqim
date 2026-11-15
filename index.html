@@ -806,6 +806,9 @@ body,button,input,select,textarea{font-family:var(--body);font-variant-numeric:n
 #landing .ld-go,#landing .ld-mbtn{color:var(--kink,#1B0F02)!important}
 .thg{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%}.thg button{all:unset;box-sizing:border-box;cursor:pointer;border:1.5px solid var(--line);border-radius:14px;padding:10px;display:flex;flex-direction:column;gap:8px;font:600 .85rem "Inter","IBM Plex Sans Arabic",system-ui,sans-serif;color:var(--ink);background:var(--surface)}.thg button.on{border-color:var(--calm);box-shadow:0 0 0 2px color-mix(in srgb,var(--calm) 35%,transparent)}.thg i{display:flex;height:34px;border-radius:9px;overflow:hidden}.thg i b{flex:1}
 .ld-tht{display:flex;align-items:center;justify-content:center;gap:8px;margin:12px 0 0;font:500 .72rem "Inter",system-ui,sans-serif;color:var(--lmuted)}.ld-tht button{all:unset;cursor:pointer;width:26px;height:26px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--lline)}.ld-tht button.on{box-shadow:0 0 0 2px var(--ltext)}
+#landing .ld-guest{all:unset;cursor:pointer;margin-top:4px;padding:10px 12px;font:600 .88rem var(--body);color:var(--k2,var(--calm))}
+body.is-guest #syncBadge{display:none!important}
+.gbar{position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:8px;padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));background:var(--ink);color:var(--bg);font:600 .82rem var(--body)}.gbar span{flex:1}.gbar button{min-height:32px;padding:0 12px;border-radius:99px;border:1px solid color-mix(in srgb,var(--bg) 40%,transparent);background:transparent;color:var(--bg);font:600 .78rem var(--body)}.gbar button[data-gx="up"]{background:var(--accent);color:var(--accent-ink,#1B0F02);border-color:var(--accent)}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -1298,7 +1301,7 @@ if(!S.reasonsV2){S.reasonsV2=true;[
 ].forEach(r=>{if(!S.reasons.some(x=>x.text===r.text))S.reasons.push({id:uid(),text:r.text,note:r.note})})}
 const strict=()=>S.coachStyle==='strict';
 const SM=()=>S.starter||2;
-function save(){S.savedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(typeof dbSchedule==='function')dbSchedule()}
+function save(){if(window.GUEST)return;S.savedAt=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(typeof dbSchedule==='function')dbSchedule()}
 
 /* ---------- feedback ---------- */
 let toastT;
@@ -4391,7 +4394,7 @@ function gCarry(){if(!inApp())return;const o=gGet();let carried=0;try{if(localSt
   if(carried>0){award(carried,tl('Stars'));toast('+'+carried+' ⭐ '+tl('carried over'))}}
 if(typeof pfAfterInit==='function'){const _pfa=pfAfterInit;pfAfterInit=function(){const r=_pfa.apply(this,arguments);setTimeout(gCarry,600);return r}}
 /* landing hooks */
-function ldStarsInit(){ldStarChip();try{ldThmTmp()}catch(e){}if($('ldLang'))$('ldLang').onclick=e=>{e.preventDefault();langOpen()};const l=$('landing');if(l&&!l.hidden)setTimeout(()=>{if(!$('landing').hidden)star(1,tl("Step 1 done!"),'visit')},1400)}
+function ldStarsInit(){ldStarChip();setTimeout(()=>{try{ldGuestLink()}catch(e){}},50);try{ldThmTmp()}catch(e){}if($('ldLang'))$('ldLang').onclick=e=>{e.preventDefault();langOpen()};const l=$('landing');if(l&&!l.hidden)setTimeout(()=>{if(!$('landing').hidden)star(1,tl("Step 1 done!"),'visit')},1400)}
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#ldtT');if(t&&t.querySelector('b')&&!$('ldToday').classList.contains('open'))setTimeout(()=>star(1,tl('Salah times checked.'),'salah'),300)},true);
 document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('.ldd-t');if(t&&t.classList.contains('on'))star(1,tl('That counts!'),'demo'+t.dataset.d)});
 
@@ -4413,6 +4416,32 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 function ldThmTmp(){const h=document.querySelector('#landing .ld-h1');if(!h||$('ldTht'))return;const d=document.createElement('div');d.id='ldTht';d.className='ld-tht';
   d.innerHTML=`<span>${tl('Try a theme')}</span>`+PRESETS.filter(p=>p[0]!=='night').map(([k,n,o,a,b])=>`<button type="button" data-thp="${k}" aria-label="${tl(n)}" style="background:linear-gradient(135deg,${a} 50%,${b} 50%)"></button>`).join('');
   h.after(d);d.querySelectorAll('[data-thp]').forEach(b=>b.onclick=()=>thmSet(b.dataset.thp));thmApply()}
+
+/* ===== Guest mode: look around with sample data. Read-only, nothing is saved. ===== */
+const X43=[["Guest","ضيف","Keessummaa","Marti"],["Browse as guest","تصفّح كضيف","Akka keessummaatti ilaali","Ka daawo marti ahaan"],
+["Guest mode","وضع الضيف","Haala keessummaa","Habka martida"],["Exit","خروج","Ba'i","Ka bax"],
+["Create a free account to start","أنشئ حسابًا مجانيًا لتبدأ","Jalqabuuf herrega bilisaa uumi","Samee akoon bilaash ah si aad u bilowdo"],
+["This is a sample. Nothing here is saved.","هذه عيّنة للتجربة. لا يُحفظ شيء هنا.","Kun fakkeenya. Asitti homtuu hin olkaa'amu.","Kani waa tusaale. Halkan waxba lagama kaydiyo."]];
+X43.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+window.GUEST=false;
+function guestStart(){window.GUEST=true;const o=freshS();Object.assign(o,{name:tl('Guest'),started:true,sparks:128,earned:128,look:(S&&S.look)||{}});
+  const d=new Date();for(let i=1;i<=6;i++){const x=new Date(d);x.setDate(d.getDate()-i);o.days[x.toISOString().slice(0,10)]=3}
+  if(o.tasks[0]&&o.tasks[0].steps[0]){o.tasks[0].steps[0].done=true;o.tasks[0].steps[1].done=true}
+  S=o;try{trkFix()}catch(e){}landingShow(false);try{render();show('now')}catch(e){}
+  let g=$('guestBar');if(!g){g=document.createElement('div');g.id='guestBar';g.className='gbar';document.body.prepend(g)}
+  g.innerHTML=`<span>👀 ${tl('Guest mode')}</span><button type="button" data-gx="up">${tl('Create account')}</button><button type="button" data-gx="out">${tl('Exit')}</button>`;
+  g.querySelector('[data-gx="up"]').onclick=()=>guestAsk();g.querySelector('[data-gx="out"]').onclick=guestExit;document.body.classList.add('is-guest');
+  toast(tl('This is a sample. Nothing here is saved.'))}
+function guestExit(then){window.GUEST=false;try{if(then)sessionStorage.setItem('fastaqim.after',then)}catch(e){}location.reload()}
+function guestAsk(){modalCard(`<div class="st-pop"><p class="st-big">🚀</p><p class="st-h">${tl('Create a free account to start')}</p><button class="btn-main" id="gaUp">${tl('Create account')}</button><button class="btn-ghost" id="gaIn">${tl('Sign in')}</button></div>`);
+  $('gaUp').onclick=()=>guestExit('up');$('gaIn').onclick=()=>guestExit('in')}
+(function(){const ok=t=>t.closest('nav [data-tab],[data-tab],[data-act="open"],summary,.mc-x,#guestBar,#scrollModal .st-pop,#landing,[data-mx],.modal [data-close]');
+  const inApp=t=>!t.closest('#landing')&&!t.closest('#scrollModal')&&!t.closest('.modal')&&!t.closest('#guestBar');
+  document.addEventListener('click',e=>{if(!window.GUEST)return;const t=e.target;if(!(t instanceof Element))return;const c=t.closest('button,input,select,textarea,label,a,[role="button"],[data-act]');if(!c||ok(c)||!inApp(c))return;e.preventDefault();e.stopPropagation();guestAsk()},true);
+  document.addEventListener('focusin',e=>{if(!window.GUEST)return;const t=e.target;if(t.matches&&t.matches('input,textarea,select')&&inApp(t)){t.blur();guestAsk()}},true);
+  document.addEventListener('submit',e=>{if(!window.GUEST)return;e.preventDefault();e.stopPropagation();guestAsk()},true)})();
+function ldGuestLink(){const h=$('ldHave');if(!h||$('ldGuest'))return;const b=document.createElement('button');b.type='button';b.id='ldGuest';b.className='ld-guest';b.textContent=tl('Browse as guest');b.onclick=guestStart;h.appendChild(b)}
+(function(){let a=null;try{a=sessionStorage.getItem('fastaqim.after');sessionStorage.removeItem('fastaqim.after')}catch(e){}if(a)setTimeout(()=>{try{ldAuthOpen(a)}catch(e){}},900)})();
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
