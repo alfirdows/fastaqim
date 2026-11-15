@@ -668,7 +668,9 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 .scroll-card{position:relative}
 .mc-x{position:sticky;top:-6px;align-self:flex-end;margin:-6px -6px -30px auto;z-index:3;width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 9%,var(--surface));color:var(--ink);font-size:.95rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
 .ipop>div{position:relative;max-height:calc(100dvh - 36px);overflow-y:auto}
-.ipop .mc-x{margin:-4px -4px -34px auto;position:sticky;top:-6px}
+.ipop .mc-x{margin:-4px -4px -34px 0;margin-inline-start:auto;margin-inline-end:-4px;position:sticky;top:-6px}
+.ipop h3{padding-inline-end:40px}
+.ip-src{font-size:.74rem!important;line-height:1.7!important}.ip-src a{color:var(--calm);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
 .mc-bar{position:sticky;top:-20px;align-self:stretch;margin:-20px -20px -42px;padding:8px 8px 0;height:50px;z-index:3;display:flex;justify-content:flex-end;pointer-events:none;border-radius:var(--r) var(--r) 0 0;transition:background .2s}
 .mc-bar.sc{background:linear-gradient(var(--surface) 78%,transparent)}
 .mc-bar .mc-x{pointer-events:auto;position:static;margin:0;box-shadow:0 2px 8px -3px rgba(0,0,0,.25)}
@@ -844,7 +846,7 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
           <p>What you're describing isn't laziness. It's a <b>task-initiation</b> problem, one of the core executive-function difficulties in ADHD. Lazy means you don't want to. You clearly do. You care, you know, and starting still won't happen. Three things are going on:</p>
           <ol>
             <li><b>Knowing and doing run on different systems.</b> ADHD is a problem of doing what you know, not of knowing what to do. You can know a consequence perfectly and still not get the "go" signal that turns knowledge into movement. In ADHD that signal is weaker and less reliable.</li>
-            <li><b>Far-off outcomes weigh less in the moment.</b> With ADHD, the future gets discounted steeply. A reward or punishment later, even the biggest ones, feels lighter right now than the discomfort of starting. That's why fear sometimes works (it feels like now) and why distant rewards often don't. It's not about how much you believe.</li>
+            <li><b>Far-off outcomes weigh less in the moment.</b> With ADHD, the future gets discounted steeply. A reward or punishment later, even the biggest ones, weighs less right now than the discomfort of starting. That's why fear sometimes works (it is right now) and why distant rewards often don't. It's not about how much you believe.</li>
             <li><b>No motivation at first is normal.</b> For most people, motivation comes <i>after</i> starting, not before. If you wait for it, you wait forever. Action first, motivation second.</li>
           </ol>
           <p>You've already found the treatment yourself: <b>just stand, just takbir, just one rakah</b>. Once you're in, you finish. So we only ever ask for the next tiny step, make the reward immediate, and lean on outside structure like a timer, a person or this page, not willpower.</p>
@@ -895,7 +897,7 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
     <div class="card" id="dontCareCard">
       <h2><span class="h2i" aria-hidden="true">⚡</span>"I know. I just don't care."</h2>
       <div class="coach-note">
-        <p>That feeling is common with ADHD, and it isn't laziness or a character flaw. With ADHD, the future often has two settings: <b>now</b> and <b>not now</b>. A consequence next week doesn't send any signal today, so knowing never turns into feeling. Then the deadline gets close, panic arrives, and suddenly you can work. That's not proof you only care at the last minute. It's proof urgency works on you.</p>
+        <p>That is common with ADHD, and it isn't laziness or a character flaw. With ADHD, the future often has two settings: <b>now</b> and <b>not now</b>. A consequence next week doesn't send any signal today, so knowing never turns into action. Then the deadline gets close, panic arrives, and suddenly you can work. That's not proof you only care at the last minute. It's proof urgency works on you.</p>
         <p>So don't wait to care. <b>Borrow an engine</b> on purpose, or pull the deadline closer so it shows up as "now".</p>
       </div>
       <p class="label">Pick an engine</p>
@@ -1102,7 +1104,7 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
           <li><b>Make the step so small it is almost silly.</b> "Clean room" is a project. "Pick up 5 things" is a step.</li>
           <li><b>Rewards need to be now, not later.</b> Far-off rewards don't pull much with ADHD. Sparks give you a small hit right away.</li>
           <li><b>Body doubling.</b> Working "next to" someone, even a timer that talks to you, helps you stay in the chair.</li>
-          <li><b>Three things, not thirty.</b> A long list feels like a wall. Three is a day you can finish.</li>
+          <li><b>Three things, not thirty.</b> A long list looks like a wall. Three is a day you can finish.</li>
           <li><b>No shame.</b> Shame makes the next start harder. Every restart counts.</li>
           <li><b>Anchors beat alarms.</b> Without a fixed schedule, "after I eat" works better than "at 1pm". The habit rides on something you already do.</li>
           <li><b>Sparks:</b> +2 for starting a timer, +1 for each step or rhythm habit, +5 for finishing a task, +1 for every 5 focused minutes. Every 50 sparks earned is a new level, and levels never go down, even when you spend.</li>
@@ -1396,10 +1398,10 @@ const WHY={no:'Why: a no is information. Shrinking the step lowers the activatio
   tired:'Why: matching the step to your energy keeps the day from becoming a zero, which protects tomorrow.',
   point:'Why: motivation tends to follow action. Waiting for it first is the trap.',
   bored:'Why: ADHD runs on interest. Novelty, a time challenge or a lecture adds the stimulation boring tasks lack.',
-  feel:'Why: behavioural activation. Feelings follow actions more reliably than the other way round.',
+  feel:'Why: behavioural activation. Motivation follows action more reliably than the other way round.',
   over:'Why: fewer open loops means less load on working memory, so your brain stops freezing.',
   where:'Why: a concrete physical action skips the planning step, which is where ADHD usually stalls.',
-  anx:'Why: lowering the standard lowers the threat signal, so starting feels safer.',
+  anx:'Why: lowering the standard lowers the threat signal, so starting is easier.',
   scroll:'Why: distance adds friction, and friction works better than willpower.',
   heavy:'Why: you\'ve noticed this heaviness comes when you go to do good. Seeking refuge, then a very small action, answers it without waiting for it to lift.'};
 const ASK={
@@ -1443,7 +1445,7 @@ $('coachFree').onsubmit=e=>{e.preventDefault();const v=$('coachFreeIn').value.tr
 function kickWith(label){const t=current(),s=t&&nextStep(t);startTimer(SM(),{taskId:t&&t.id,stepId:s&&s.id,label,kick:true})}
 function renderCoach(){
   if(!CO.log.length)coachOpen();
-  $('coachIntro').textContent=S.coachStyle==='bal'?'Balanced: honest about the next step, kind when it\'s a hard moment. Your call every time.':strict()?'Direct: honest, no sugarcoating. Your call every time. I give the smartest next step and why it works.':'Gentle: no pressure. Say no as often as you need. The step keeps getting smaller until it feels doable.';
+  $('coachIntro').textContent=S.coachStyle==='bal'?'Balanced: honest about the next step, kind when it\'s a hard moment. Your call every time.':strict()?'Direct: honest, no sugarcoating. Your call every time. I give the smartest next step and why it works.':'Gentle: no pressure. Say no as often as you need. The step keeps getting smaller until it is doable.';
   document.querySelectorAll('[data-style]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.style===S.coachStyle));
   $('chat').innerHTML=CO.log.map(m=>`<div class="msg ${m.c?'c':'u'}${m.c===2?' why':''}">${esc(m.t)}</div>`).join('')+(CO.ask&&CO.ask[0]?`<div class="msg c">${esc(CO.ask[0])}</div>`:'');
   $('coachAsk').innerHTML=CO.ask?CO.ask[1].map(([l],i)=>`<button class="chip" style="border-color:var(--calm)" data-ask="${i}">${esc(l)}</button>`).join(''):'';
@@ -1633,11 +1635,11 @@ function seedPlan(){
     const out=[
     B('05:45','06:00','Fajr, then 1 ayah','faith',1,'Just wudu. Just stand. Just takbir. Then one ayah before you lie back down. Salah gives you five anchors a day you didn\'t have to invent. Sample times: swap in your city\'s.'),
     B('06:00','07:30','Back to sleep is allowed','rest',0,'Sleep after Fajr is fine. The alarm for 7:30 is the real start of the day.'),
-    B('07:30','07:45','Feet on the floor, water, curtains open. No phone.','life',1,'The phone charges across the room, so getting up to switch off the alarm is step one. Daylight in the first hour helps mood and makes the night easier.','Feet on the floor and water. That\'s it.'),
+    B('07:30','07:45','Feet on the floor, water, curtains open. No phone.','life',1,'The phone charges across the room, so getting up to switch off the alarm is step one. Daylight in the first hour helps energy and makes the night easier.','Feet on the floor and water. That\'s it.'),
     B('07:45','08:15','Wash, get dressed, eat something','life',1,'No phone until you\'re dressed. Getting dressed tells your brain the day has started, even if you\'re staying home.'),
     B('08:15','08:30','Pick today\'s top 3 and the first tiny step','focus',1,'Three things, not thirty. For the first one, decide the very first physical move now: "open the laptop", "get the folder".'),
     B('08:30','09:30','Focus 1: top task #1, in Just this mode','focus',1,'Hardest thing first, while your head is clearest. Phone in another room. You only have to do "Just stand up". After that you usually keep going.','Focus: 25 minutes on task #1, then stop'),
-    B('09:30','09:45','Walk outside for 10 minutes','rest',0,'Movement and daylight are two of the most reliable mood lifters there are. Ten minutes counts. Pair it with tasbih if you like.'),
+    B('09:30','09:45','Walk outside for 10 minutes','rest',0,'Movement and daylight are two of the most reliable energy boosters there are. Ten minutes counts. Pair it with tasbih if you like.'),
     B('09:45','11:00','Focus 2: top task #2, with a body double','focus',0,'Work alongside someone: a friend on video, a library, a café, or the buddy timer here.'),
     B('11:00','11:30','Scroll window #1: 30 minutes, timer on','rest',0,'You\'re allowed to scroll. Here, with an alarm. Not in the gaps all day. A fence works better than a ban.')];
     if(variant==='sun')out.push(B('11:30','12:10','Weekly review + check-in','transition',1,'Look at the week ahead, pick the 3 big things, fill in the check-in on this page. Then we change one thing.'));
@@ -1648,11 +1650,11 @@ function seedPlan(){
       B('13:15','14:00','Lunch, away from the screen','life',1,''));
     else out.push(
       B('12:10','12:25','Dhuhr + 10 Astaghfirullah','faith',1,'Before you stand up from your work, write one line: where you stopped and the next step.'),
-      B('12:25','13:15','Lunch, away from the screen','life',1,'Eat even if you don\'t feel hungry. Low mood and some ADHD medications both quiet appetite, so lunch is scheduled on purpose.'));
+      B('12:25','13:15','Lunch, away from the screen','life',1,'Eat even if you don\'t have an appetite. Some ADHD medications both quiet appetite, so lunch is scheduled on purpose.'));
     out.push(
     B(variant==='fri'?'14:00':'13:15','14:30','Focus 3: top task #3','focus',0,'If #3 is already done, use this for the rest of #1. If you\'re fading, do a 25-minute round and call it.'),
     B('14:30','14:50','Asr + 1 page of Quran','faith',1,'One page takes about 4 minutes. Time it with Small deeds once and the "it will take long" thought loses its grip.'),
-    B('14:50','16:30','Out of the house: errands, appointments, learn something you like','life',0,'Getting out of the house at least once a day matters, especially on low-mood days. Batch errands into one trip.'),
+    B('14:50','16:30','Out of the house: errands, appointments, learn something you like','life',0,'Getting out of the house at least once a day matters, especially on low-energy days. Batch errands into one trip.'),
     B('16:30','16:45','Shutdown: tick, move leftovers, write tomorrow\'s first step','transition',1,'Nothing stays half-open in your head. Every leftover gets a day or gets dropped.'),
     B('16:50','17:05','Maghrib','faith',1,''),
     B('17:05','18:30','Free time: people, family, something fun','rest',0,'Things you enjoy aren\'t a prize you earn. They\'re part of what keeps the rest running.'),
@@ -1661,7 +1663,7 @@ function seedPlan(){
     B('19:30','20:00','Scroll window #2: 30 minutes, timer on','rest',0,'Last scroll of the day. When the alarm goes, the phone goes on the charger in another room.'),
     B('20:00','21:30','Hobby, family, or Quran with meaning','rest',0,''),
     B('21:30','22:00','Wind-down: phone charges outside the room, dhikr before sleep','life',1,'Staying up late to get "your" time back is common with ADHD. The phone leaving the room is the real bedtime. Lie down and do your evening dhikr.'),
-    B('22:30','22:45','Lights out','rest',1,'A steady sleep time helps focus, mood and anxiety more than anything else on this page.'));
+    B('22:30','22:45','Lights out','rest',1,'A steady sleep time helps focus, energy and anxiety more than anything else on this page.'));
     return out};
   return {tpl:{day:{name:'My day',blocks:day('day')},fri:{name:'Friday',blocks:day('fri')},sun:{name:'Sunday: review day',blocks:day('sun')}},
     week:['sun','day','day','day','day','fri','day'],sample:true,v:2,times:true,mode:'full',modeDay:''};
@@ -1814,7 +1816,7 @@ const engines=[
   {k:'Novelty',a:'New beats important. Change where you work (café, library, another room), change the tool (paper instead of laptop), or do the task in a weird order: start in the middle.',btn:'Start 2 minutes somewhere new',go:()=>kickCurrent(SM())},
   {k:'Challenge',a:'Turn it into a game. How many can you do in 5 minutes? Can you beat yesterday? Can you do the first part badly on purpose, fast?',btn:'5-minute challenge',go:()=>kickCurrent(5)},
   {k:'People',a:'Do it next to someone. A friend on a call with the camera on, a sibling in the same room, or the buddy timer here. Other people being there switches on a part of your brain that being alone doesn\'t.',btn:'Open the buddy timer',go:()=>{show('focus')}},
-  {k:'Faith',a:'Pull up one of your reasons. Then make the action tiny enough that it matches how you feel right now, not how you think you should feel.',btn:'Show me a reason',go:()=>showReason()}
+  {k:'Faith',a:'Pull up one of your reasons. Then make the action tiny enough that it matches your energy right now, not the energy you think you should have.',btn:'Show me a reason',go:()=>showReason()}
 ];
 function renderEngines(){
   $('engineChips').innerHTML=engines.map((x,i)=>`<button class="chip" data-i="${i}">${esc(x.k)}</button>`).join('');
@@ -2064,7 +2066,7 @@ function openRestCheck(){
       <button class="btn-calm" id="rcBody">My body is tired<br><span class="small" style="font-weight:400">slept badly, sick, worn out after real effort</span></button>
       <button class="btn-main" id="rcHead">My head doesn't want to<br><span class="small" style="font-weight:400">bored, avoiding, foggy, don't know where to start</span></button>
     </div>
-    <p class="small muted">If you feel this flat most days, even after sleep, tell your doctor or therapist. Low mood can feel exactly like this, and it can be treated.</p>
+    <p class="small muted">If energy stays this low most days, even after sleep, tell your doctor or therapist. Depression can look exactly like this, and it can be treated.</p>
     <button class="btn-ghost small" id="rcX">Close</button>`);
   $('rcX').onclick=modalClose;
   $('rcBody').onclick=()=>{modalCard(`<p class="label">Real rest</p><p class="reason-text" style="font-size:1.4rem">Then rest properly. With an end.</p>
@@ -2612,7 +2614,7 @@ ADHKAR.sleep={t:'Sleep',ic:'🌙',v:'In bed, lights off, phone away.',items:[
  mk('z8',{ar:'اللَّهُ أَكْبَرُ',tr:'Allāhu akbar',en:'Allah is the Greatest.',n:34,src:'al-Bukhārī 3705'})]};
 ADHKAR.waking={t:'Waking up',ic:'☀️',v:'The first words of the day.',items:[
  mk('w1',{ar:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',tr:'Al-ḥamdu lillāhil-ladhī aḥyānā baʿda mā amātanā wa ilayhin-nushūr',en:'All praise is for Allah who gave us life after causing us to die, and to Him is the resurrection.',n:1,src:'al-Bukhārī 6312'})]};
-ADHKAR.ruqyah={t:'Ruqyah & protection',ic:'🛡️',v:'Protection from the evil eye, envy and shayṭān. Morning and evening, or any time you feel heavy. After al-Ikhlāṣ, al-Falaq and an-Nās you can blow lightly into your hands and wipe over your body (al-Bukhārī 5017).',items:[
+ADHKAR.ruqyah={t:'Ruqyah & protection',ic:'🛡️',v:'Protection from the evil eye, envy and shayṭān. Morning and evening, or any time energy is low. After al-Ikhlāṣ, al-Falaq and an-Nās you can blow lightly into your hands and wipe over your body (al-Bukhārī 5017).',items:[
  mk('r1',{ar:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ۝ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ۝ الرَّحْمَٰنِ الرَّحِيمِ ۝ مَالِكِ يَوْمِ الدِّينِ ۝ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ۝ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ۝ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ',tr:'Sūrat al-Fātiḥah',en:'In the name of Allah, the Entirely Merciful, the Especially Merciful. All praise is due to Allah, Lord of the worlds, the Entirely Merciful, the Especially Merciful, Sovereign of the Day of Recompense. It is You we worship and You we ask for help. Guide us to the straight path, the path of those You have blessed, not of those who earned anger or of those who are astray.',n:1,src:'Qur\'an 1 · used as ruqyah: al-Bukhārī 5736'}),
  mk('r2',QZ.kursi,{src:'Qur\'an 2:255 · protection until morning: al-Bukhārī 2311'}),
  mk('r3',{ar:'آمَنَ الرَّسُولُ بِمَا أُنزِلَ إِلَيْهِ مِن رَّبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ ۝ لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا ۚ لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ ۗ رَبَّنَا لَا تُؤَاخِذْنَا إِن نَّسِينَا أَوْ أَخْطَأْنَا ۚ رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِن قَبْلِنَا ۚ رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ ۖ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا ۚ أَنتَ مَوْلَانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ',tr:'Last two āyāt of al-Baqarah',en:'The Messenger has believed in what was revealed to him from his Lord, and so have the believers... Allah does not charge a soul except with what it can bear... Our Lord, do not burden us with what we cannot bear. Pardon us, forgive us and have mercy on us. You are our Protector.',n:1,src:'Qur\'an 2:285–286 · "they will suffice him": al-Bukhārī 5009'}),
@@ -2620,9 +2622,9 @@ ADHKAR.ruqyah={t:'Ruqyah & protection',ic:'🛡️',v:'Protection from the evil 
  mk('r7',{ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ، مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ',tr:'Aʿūdhu bi kalimātillāhit-tāmmah, min kulli shayṭānin wa hāmmah, wa min kulli ʿaynin lāmmah',en:'I seek refuge in the perfect words of Allah from every devil and harmful creature, and from every evil eye.',n:3,src:'al-Bukhārī 3371'}),
  mk('r8',{ar:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ',tr:'Aʿūdhu bi kalimātillāhit-tāmmāti min sharri mā khalaq',en:'I seek refuge in the perfect words of Allah from the evil of what He has created.',n:3,src:'Muslim 2708, 2709'}),
  mk('r9',DZ.bismi,{n:3,src:'Abū Dāwūd 5088, at-Tirmidhī 3388'}),
- mk('r10',{ar:'بِسْمِ اللَّهِ (×3) ۝ أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ',tr:'Bismillāh (3 times), then: Aʿūdhu billāhi wa qudratihi min sharri mā ajidu wa uḥādhir',en:'Hand on the place that hurts. In the name of Allah. I seek refuge in Allah and His power from the evil of what I feel and what I fear.',n:7,src:'Muslim 2202'}),
+ mk('r10',{ar:'بِسْمِ اللَّهِ (×3) ۝ أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ',tr:'Bismillāh (3 times), then: Aʿūdhu billāhi wa qudratihi min sharri mā ajidu wa uḥādhir',en:'Hand on the place that hurts. In the name of Allah. I seek refuge in Allah and His power from the evil of what I find and what I fear.',n:7,src:'Muslim 2202'}),
  mk('r11',{ar:'بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ',tr:'Bismillāhi arqīk, min kulli shay\'in yu\'dhīk, min sharri kulli nafsin aw ʿayni ḥāsid, Allāhu yashfīk, bismillāhi arqīk',en:'In the name of Allah I do ruqyah for you, from everything that harms you, from the evil of every soul or envious eye. May Allah cure you. In the name of Allah I do ruqyah for you. (Jibrīl\'s ruqyah, said over someone else.)',n:3,src:'Muslim 2186'}),
- mk('r12',{ar:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',tr:'Aʿūdhu billāhi minash-shayṭānir-rajīm',en:'I seek refuge in Allah from the accursed shayṭān. Say it when you feel the heaviness or the pull to scroll.',n:3,src:'Qur\'an 16:98 · al-Bukhārī 3282'}),
+ mk('r12',{ar:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',tr:'Aʿūdhu billāhi minash-shayṭānir-rajīm',en:'I seek refuge in Allah from the accursed shayṭān. Say it when energy drops or the pull to scroll comes.',n:3,src:'Qur\'an 16:98 · al-Bukhārī 3282'}),
  mk('r13',{ar:'بِسْمِ اللَّهِ، تَوَكَّلْتُ عَلَى اللَّهِ، وَلَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',tr:'Bismillāh, tawakkaltu ʿalallāh, wa lā ḥawla wa lā quwwata illā billāh',en:'In the name of Allah, I rely on Allah, and there is no power or strength except with Allah. "The shayṭān turns away from him."',n:1,src:'Abū Dāwūd 5095, at-Tirmidhī 3426'}),
  mk('r14',{ar:'اللَّهُمَّ لَا سَهْلَ إِلَّا مَا جَعَلْتَهُ سَهْلًا، وَأَنْتَ تَجْعَلُ الْحَزْنَ إِذَا شِئْتَ سَهْلًا',tr:'Allāhumma lā sahla illā mā jaʿaltahu sahlā, wa anta tajʿalul-ḥazna idhā shi\'ta sahlā',en:'O Allah, nothing is easy except what You make easy, and You make the difficult easy if You wish.',n:1,src:'Ibn Ḥibbān 974'})]};
 ADHKAR.worry={t:'Worry & laziness',ic:'🫶',v:'When stuck, anxious or low on energy.',items:[
@@ -2666,8 +2668,8 @@ const blockedBad=text=>text?blkWords(blkNorm(text),BLOCK_BAD,BLOCK_BAD_AR):null;
 const BAD_EMO=/[🎵🎶🎸🎹🎷🎺🥁🎻🎤🎧📯🪕🪗🪘🍷🍺🍻🥂🍸🍹🥃🍾🍶🐷🐖🐽🥓🎲🃏🎰♠♣♦💀☠😈👿👹👺🎄🎅🤶🎃👻✝☦✡🕉☸☯🔯🕎⛪🛕🕍⛩🍆🍑🖕💋💏💑😘😚😙👙🩲🔞💩🚬🤘💃🕺🪩]/u;
 function blocked(text){if(!text)return null;const t=blkNorm(text);if(quitIntent(text))return (BAD_EMO.test(text)?'emoji':null)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR);return (BAD_EMO.test(text)?'emoji':null)||blkWords(t,[...BLOCK_EN,...BLOCK_OM,...BLK.extra],BLOCK_AR)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR)}
 const BLK_MSG=['Let\'s leave this one out. Fastaqim is for plans that bring you closer to Allah. What could go here instead, like a walk, a nasheed, a lecture or time with family?',
- 'This one won\'t be added. Pick something halal you\'d enjoy instead. You deserve rest that you feel good about after.'];
-function blkWarn(text){const bad=blockedBad(text);modalCard(bad?`<p class="label">🌿 Let's keep it clean</p><p>Curse words and rude words aren't allowed here. Try saying it another way. You can still write how you feel.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`
+ 'This one won\'t be added. Pick something halal you\'d enjoy instead. You deserve rest you are glad about after.'];
+function blkWarn(text){const bad=blockedBad(text);modalCard(bad?`<p class="label">🌿 Let's keep it clean</p><p>Curse words and rude words aren't allowed here. Try saying it another way. You can still write what is on your mind.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`
   :`<p class="label">🌿 Let's swap this one</p><p>${BLK_MSG[Math.random()<.5?0:1]}</p>
   <p class="small muted">If you meant medicine, write "medicine" or its name. Words like "drink water" are fine.</p><div class="row"><button class="btn-calm" id="blkOk">Okay</button></div>`);$('blkOk').onclick=modalClose}
 const BLK_SOFT='#nameCard,#nameEdit,#reasonForm,#jrIn,#coachFree';
@@ -3382,7 +3384,7 @@ const X4B=[
 ['Body doubling.','العمل بجانب شخص.','Nama biratti hojjechuu.','Ka shaqeynta qof agtiisa.'],
 ['Working "next to" someone, even a timer that talks to you, helps you stay in the chair.','العمل «بجانب» شخص، ولو مؤقّت يكلّمك، يساعدك على البقاء في مكانك.','Nama "bira" hojjechuun, sa\'aatii si haasofsiisu illee, teessoo kee irra akka turtu si gargaara.','Ka shaqeynta "agagaarka" qof, xitaa saacad kula hadasha, waxay kaa caawisaa inaad kursiga ku sii jirto.'],
 ['Three things, not thirty.','ثلاثة أشياء، لا ثلاثون.','Wantoota sadi, soddoma miti.','Saddex shay, ma aha soddon.'],
-['A long list feels like a wall. Three is a day you can finish.','القائمة الطويلة كالجدار. ثلاثة يوم تستطيع إنهاءه.','Tarreen dheeraan akka dallaa dha. Sadi guyyaa xumuruu dandeessu dha.','Liis dheer wuxuu u eg yahay derbi. Saddex waa maalin aad dhammeyn karto.'],
+['A long list looks like a wall. Three is a day you can finish.','القائمة الطويلة كالجدار. ثلاثة يوم تستطيع إنهاءه.','Tarreen dheeraan akka dallaa dha. Sadi guyyaa xumuruu dandeessu dha.','Liis dheer wuxuu u eg yahay derbi. Saddex waa maalin aad dhammeyn karto.'],
 ['No shame.','بلا لوم.','Qaanii hin qabu.','Ceeb la\'aan.'],
 ['Shame makes the next start harder. Every restart counts.','اللوم يجعل البداية التالية أصعب. كل بداية جديدة تُحسب.','Qaaniin jalqaba itti aanu ulfeessa. Irra deebi\'anii jalqabuun hundi ni lakkaa\'ama.','Ceebtu waxay adkeysaa bilowga xiga. Dib-u-bilow kasta waa la tiriyaa.'],
 ['Anchors beat alarms.','المحطّات الثابتة أفضل من المنبّهات.','Qabattoon sagalee akeekkachiisaa caalu.','Barxadaha go\'an ayaa ka fiican saacadaha dawanka.'],
@@ -3816,11 +3818,11 @@ function privacyOpen(){const P=PRIV2[LANG]||PRIV2.en,rtl=LANG==='ar';
 
 /* ADHD explained: short, clinical, positive (DSM-5-TR / ICD-11) */
 const ADHD2={
- en:['What is ADHD?','ADHD (attention-deficit/hyperactivity disorder) is a neurodevelopmental condition: a difference in how the brain develops, present from birth and strongly hereditary. It affects attention, impulse control and activity level, and the "executive functions": planning, starting tasks, sense of time and motivation. Signs start in childhood. Diagnosis can happen at any age. It is not laziness and not a lack of intelligence. With the right understanding, tools and support, people with ADHD do very well.'],
- ar:['ما هو ADHD؟','اضطراب فرط الحركة وتشتت الانتباه (ADHD) حالة نمائية عصبية: اختلاف في نموّ الدماغ يولد به الإنسان، وله عامل وراثي قوي. يؤثّر في الانتباه وضبط الاندفاع ومستوى النشاط، وفي «الوظائف التنفيذية»: التخطيط، وبدء المهام، والإحساس بالوقت، والدافعية. تبدأ علاماته في الطفولة، ويمكن تشخيصه في أي عمر. ليس كسلًا ولا نقصًا في الذكاء. ومع الفهم الصحيح والأدوات المناسبة والدعم، ينجح أصحابه نجاحًا كبيرًا.'],
- om:['ADHD maali?','ADHD (rakkoo xiyyeeffannaa fi sochii garmalee) haala guddina sirna narvii ti: garaagarummaa guddina sammuu kan namni ittiin dhalatuu fi dhaalmaan cimaan qabu. Xiyyeeffannaa, of to\'achuu fi hamma sochii, akkasumas "hojiiwwan qindeessaa" irratti dhiibbaa qaba: karoorsuu, hojii jalqabuu, yeroo hubachuu fi kaka\'umsa. Mallattooleen isaa ijoollummaatti jalqabu. Umurii kamittuu adda baafamuu danda\'a. Dhibama hojii ykn dandeettii sammuu xiqqaachuu miti. Hubannoo sirrii, meeshaalee fi deeggarsaan, namoonni ADHD qaban baay\'ee milkaa\'u.'],
- so:['Waa maxay ADHD?','ADHD (cillad xagga feejignaanta iyo firfircoonida xad-dhaafka ah) waa xaalad la xiriirta korriinka maskaxda: kala duwanaansho ku jira sida maskaxdu u korto, oo qofku la dhasho, waxayna si xooggan uga timaaddaa dhaxal. Waxay saameysaa feejignaanta, is-xakamaynta iyo heerka firfircoonida, iyo "hawlaha fulinta": qorsheynta, bilaabidda hawlaha, dareenka waqtiga iyo dhiirigelinta. Calaamadaheedu waxay ka bilowdaan carruurnimada. Waxaa la ogaan karaa da\' kasta. Ma aha caajis, mana aha caqli yari. Fahan sax ah, qalab ku habboon iyo taageero, dadka qaba ADHD aad bay u guuleystaan.']};
-function adhdInfo(){const k=(LANG||'en').split('-')[0],A=ADHD2[k]||ADHD2.en;ipop(`<div class="${ADHD2[k]?'notranslate':''}" dir="${k==='ar'?'rtl':'ltr'}"><h3>${esc(A[0])}</h3><p>${esc(A[1])}</p><p class="ip-src" dir="ltr">DSM-5-TR (American Psychiatric Association) · ICD-11 (WHO, 6A05)</p></div>`)}
+ en:['What is ADHD?','ADHD (Attention-Deficit/Hyperactivity Disorder) is a neurodevelopmental disorder marked by persistent inattention and/or hyperactivity-impulsivity that affects daily functioning. Symptoms begin in childhood, and diagnosis can occur at any age. It involves differences in executive function and in the brain\'s dopamine-based reward and motivation systems. These can make it hard to start and sustain effort, which is often mistaken for laziness. ADHD is highly heritable and lifelong, and it can be effectively managed with treatment and support.'],
+ ar:['ما هو ADHD؟','اضطراب فرط الحركة وتشتت الانتباه (ADHD) اضطراب نمائي عصبي يتّسم بنمط مستمر من تشتت الانتباه و/أو فرط الحركة والاندفاعية، يؤثّر في الأداء اليومي. تبدأ أعراضه في الطفولة، ويمكن تشخيصه في أي عمر. ويرتبط باختلافات في الوظائف التنفيذية وفي أنظمة المكافأة والدافعية في الدماغ المعتمدة على الدوبامين. وقد يصعّب ذلك بدء الجهد والاستمرار فيه، وكثيرًا ما يُظنّ خطأً أنه كسل. وهو اضطراب ذو قابلية وراثية عالية ويستمر مدى الحياة، ويمكن التعامل معه بفعالية بالعلاج والدعم.'],
+ om:['ADHD maali?','ADHD (Attention-Deficit/Hyperactivity Disorder) rakkoo guddina sirna narvii kan xiyyeeffannaa dhabuu fi/ykn sochii garmalee fi of to\'achuu dadhabuu itti fufaa ta\'een beekamu, kan hojii guyyaa guyyaa irratti dhiibbaa qabuudha. Mallattooleen isaa ijoollummaatti jalqabu, umurii kamittuu adda baafamuu danda\'a. Garaagarummaa hojii qindeessaa sammuu fi sirna badhaasaa fi kaka\'umsaa dopamine irratti hundaa\'e waliin walqabata. Kun carraaqqii jalqabuu fi itti fufuu ulfaachisuu danda\'a, yeroo baay\'ee dogoggoraan dhibama jedhamee yaadama. ADHD dhaalmaan cimaa kan qabuu fi umurii guutuu kan turuudha; yaalaa fi deeggarsaan bu\'aa qabeessaan to\'atamuu danda\'a.'],
+ so:['Waa maxay ADHD?','ADHD (Attention-Deficit/Hyperactivity Disorder) waa cillad la xiriirta korriinka maskaxda oo lagu garto feejignaan la\'aan joogto ah iyo/ama firfircooni xad-dhaaf ah iyo degdeg, taas oo saameysa nolosha maalinlaha ah. Calaamadaheedu waxay bilaabmaan carruurnimada, waxaana la ogaan karaa da\' kasta. Waxay la xiriirtaa kala duwanaansho xagga hawlaha fulinta iyo nidaamyada abaalmarinta iyo dhiirigelinta maskaxda ee ku tiirsan dopamine. Tani waxay adkeyn kartaa bilaabidda iyo sii wadidda dadaalka, oo inta badan si khaldan loogu qaato caajis. ADHD waa mid si xooggan loo dhaxlo oo nolosha oo dhan socota, waxaana si wax ku ool ah loo maarayn karaa daaweyn iyo taageero.']};
+function adhdInfo(){const k=(LANG||'en').split('-')[0],A=ADHD2[k]||ADHD2.en;ipop(`<div class="${ADHD2[k]?'notranslate':''}" dir="${k==='ar'?'rtl':'ltr'}"><h3>${esc(A[0])}</h3><p>${esc(A[1])}</p><p class="ip-src" dir="ltr"><a href="https://www.psychiatry.org/patients-families/adhd" target="_blank" rel="noopener">APA (DSM-5-TR) ↗</a> · <a href="https://icd.who.int/browse/2024-01/mms/en#821852937" target="_blank" rel="noopener">WHO ICD-11 (6A05) ↗</a> · <a href="https://www.nimh.nih.gov/health/topics/attention-deficit-hyperactivity-disorder-adhd" target="_blank" rel="noopener">NIMH ↗</a></p></div>`)}
 
 /* ---------- 🎮 to-do game mode: combo, points, levels (vibration only) ---------- */
 function tgState(){S.tg=S.tg||{on:false,pts:0,combo:0,last:0,best:0};return S.tg}
