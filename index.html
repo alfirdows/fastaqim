@@ -590,6 +590,12 @@ section.wrap{width:100%}.wrap>*,.card{min-width:0}#azBody{width:100%;align-self:
 #landing .ld-note{gap:8px!important}
 .dl-c .dl-sec{margin:5px 0;padding:4px 10px;border-width:1px}.dl-c .dl-sec summary{font-size:.86rem;padding:6px 0;text-align:start}.dl-c .dl-it{padding:5px 0}.dl-c .dl-n{font-size:.82rem}.dl-c .chip{font-size:.72rem;padding:.25rem .6rem;min-height:30px}
 .ip-src{font-size:.68rem;color:var(--muted);margin-top:6px}
+.tg-card{gap:8px}.tg-top{display:flex;justify-content:space-between;align-items:center;gap:8px}.tg-top b{font-size:1rem}.tg-on{border-color:var(--calm)!important;background:color-mix(in srgb,var(--calm) 12%,var(--surface))!important}
+.tg-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center}.tg-stats span{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:6px 2px;display:grid}.tg-stats b{font-size:1.15rem}.tg-stats small{font-size:.66rem;color:var(--muted)}
+.tg-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.tg-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--k1,#f97316),var(--k4,#f59e0b));width:var(--w,0%);transition:width .4s}
+.qa-b{border:1px solid var(--line);background:var(--surface);color:var(--calm);border-radius:99px;font-size:.78rem;font-weight:700;padding:.3rem .8rem;min-height:32px;align-self:center}.qa-b.on{background:var(--calm);color:#fff}
+#landing .qa-mini{min-height:0;height:22px;width:22px;padding:0;font-size:.6rem;display:inline-grid;place-items:center;margin-top:4px;border-color:color-mix(in srgb,var(--calm) 40%,transparent)}
+#landing .ld-logo{position:relative}
 
 .hd-tools{display:inline-flex;gap:4px}.hd-b{font-size:1.15rem;width:40px;height:40px;border-radius:12px}
 .modal{z-index:85}.toast{z-index:96}
@@ -662,7 +668,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
   <div class="ld">
-    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p></div>
+    <div class="ld-top"><span class="ld-lang notranslate" id="ldLang"><span class="ld-lang-b">🌐 <b id="ldLangC">English</b></span></span><span class="ld-right"><span class="ld-today" id="ldToday"></span><button class="ld-login" id="ldLogin">Sign in</button></span></div><div class="ld-logo notranslate"><p class="ld-brand" translate="no">Fastaqim</p><p class="ld-name" id="ldName"></p><button type="button" class="qa-b qa-mini" data-qa="11:112" aria-label="Listen · Saad Al-Ghamdi">▶</button></div>
     <div class="ld-ayah notranslate" translate="no"><p class="ar ayq" lang="ar" dir="rtl"><bdi dir="ltr" class="orn">&#xFD3F;</bdi><u>فَٱسْتَقِمْ</u> كَمَآ أُمِرْتَ<bdi dir="ltr" class="orn">&#xFD3E;</bdi></p><p class="ayt" id="ayT" dir="auto"></p><span class="ay-meta"><a class="ay-listen" id="ayL" href="https://quran.com/11:112" target="_blank" rel="noopener" aria-label="Listen on Quran.com"><small id="ayS"></small><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-1v-6h3M4 13v5a2 2 0 0 0 2 2h1v-6H4"/></svg></a></span></div>
     <h1 class="ld-h ld-h1"><span>Start in 2 minutes.</span></h1>
     <p class="ld-sub ld-sub2" id="ldSub2"></p>
@@ -908,6 +914,7 @@ html,body{overflow-x:hidden;max-width:100%}#landing{overflow-x:hidden}#landing *
 
   <!-- TODAY -->
   <section id="tab-today" class="wrap" style="gap:20px" hidden>
+    <div class="card tg-card" id="tgCard"></div>
     <div class="card">
       <h2><span class="h2i" aria-hidden="true">🧠</span>Brain dump</h2>
       <p class="muted small">Get it out of your head. Then star up to 3 things for today. The rest can wait.</p>
@@ -1195,7 +1202,7 @@ const BADGES=[['🌱','First start',()=>S.earned>0],['✅','10 tasks done',()=>S
 function renderBadges(){if(!$('badges'))return;S.badges=S.badges||{};let fresh=null;
   $('badges').innerHTML=BADGES.map(([ic,t,f])=>{const on=f();if(on&&!S.badges[t]){S.badges[t]=Date.now();fresh=t}return `<div class="badge${on?' on':''}"><b>${ic}</b><span>${t}</span></div>`}).join('');
   if(fresh){save();toast('🏅 New badge: '+fresh)}}
-function finishTask(t){t.done=true;t.doneAt=Date.now();burstAt(lastTap,16);award(5,'Finished: '+t.title);toast('Task finished! +5 sparks');confetti();chime()}
+function finishTask(t){try{tgHit()}catch(e){}t.done=true;t.doneAt=Date.now();burstAt(lastTap,16);award(5,'Finished: '+t.title);toast('Task finished! +5 sparks');confetti();chime()}
 
 /* ---------- render ---------- */
 function lvl(){const per=50;return {n:Math.floor(S.earned/per)+1,pct:(S.earned%per)/per*100,left:per-S.earned%per}}
@@ -2469,7 +2476,7 @@ function renderAdhkar(){const box=$('azBody');if(!box)return;const C=ADHKAR[AZ.c
     ${LANG==='ar'?'':`<p class="small muted" style="text-align:center">${esc(it.en)}</p>`}
     <div class="row" style="justify-content:center;gap:8px"><button class="btn-calm small" id="czGo">⛶ Focus counter</button><button class="btn-ghost small" id="czFree">📿 Free tasbih</button><button class="btn-ghost small" id="hisnGo">📖 Hisnul Muslim</button></div>
     <button class="tap" id="azTap" aria-label="Count one">${AZ.n}<small>of ${it.n}</small></button>
-    <p class="small muted" style="text-align:center">${esc(it.src)}${done[it.id]?' · done today ✓':''}</p>`;
+    <p class="small muted" style="text-align:center">${esc(it.src)}${done[it.id]?' · done today ✓':''}</p>${qaBtn(it.src)}`;
   $('czGo').onclick=()=>czOpen(false);$('hisnGo').onclick=hisnOpen;$('czFree').onclick=()=>czOpen(true);
   box.querySelectorAll('[data-azc]').forEach(b=>b.onclick=()=>{AZ.cat=b.dataset.azc;AZ.i=0;AZ.n=0;renderAdhkar()});
   box.querySelectorAll('[data-azi]').forEach(b=>b.onclick=()=>{AZ.i=+b.dataset.azi;AZ.n=0;renderAdhkar()});
@@ -3387,6 +3394,10 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['No internet. Try again later.','لا يوجد إنترنت. حاول لاحقًا.','Interneetiin hin jiru. Booda yaali.','Internet ma jiro. Mar dambe isku day.'],
+['🎮 Game mode','🎮 وضع اللعبة','🎮 Haala taphaa','🎮 Habka ciyaarta'],['On','مفعّل','Banaa','Shidan'],['Off','متوقف','Cufaa','Damsan'],['Combo','سلسلة','Walitti fufiinsa','Isku xig'],['Points','نقاط','Qabxii','Dhibco'],['Level','المستوى','Sadarkaa','Heer'],
+['Finish to-dos back to back for a combo. Every finish = points.','أنجز المهام واحدة تلو الأخرى لتصنع سلسلة. كل إنجاز = نقاط.','Walitti fufinsaan hojiiwwan xumuri. Xumura hundaaf qabxii argatta.','Isku xigxiga u dhammee hawlaha si aad u hesho isku xig. Dhammeyn kasta = dhibco.'],
+['Level up!','ارتقيت مستوى!','Sadarkaa ol baate!','Heer ayaad korortay!'],['Listen · Saad Al-Ghamdi','استمع · سعد الغامدي','Dhaggeeffadhu · Saad Al-Ghamdi','Dhegeyso · Saad Al-Ghamdi'],
 ['One question a day: plan your morning, check in at midday, look back at night. Want more? Tap "+ Another one" anytime.','سؤال واحد كل يوم: خطّط لصباحك، وتوقّف مع نفسك في منتصف اليوم، وراجع يومك في المساء. تريد المزيد؟ اضغط «+ سؤال آخر» متى شئت.','Gaaffii tokko guyyaatti: ganama karoorfadhu, guyyaa walakkaa of ilaali, galgala guyyaa kee deebi\'ii ilaali. Dabalataa barbaaddaa? Yeroo barbaadde "+ Kan biraa" tuqi.','Hal su\'aal maalintii: subaxa qorshee, duhurkii is eeg, fiidkiina dib u eeg maalintaada. Ma rabtaa wax dheeraad ah? Taabo "+ Mid kale" waqti kasta.'],
 ['Start now. Win today.','ابدأ الآن، وانجح اليوم.','Amma jalqabi. Har\'a mo\'adhu.','Hadda bilow. Maanta guulayso.'],
 ['Free · No ads.','مجاني · بلا إعلانات.','Bilisa · Beeksisa hin qabu.','Bilaash · Xayeysiis ma leh.'],
@@ -3679,6 +3690,28 @@ const ADHD2={
  so:['Waa maxay ADHD?','ADHD (cillad xagga feejignaanta iyo firfircoonida xad-dhaafka ah) waa xaalad la xiriirta korriinka maskaxda: kala duwanaansho ku jira sida maskaxdu u korto, oo qofku la dhasho, waxayna si xooggan uga timaaddaa dhaxal. Waxay saameysaa feejignaanta, is-xakamaynta iyo heerka firfircoonida, iyo "hawlaha fulinta": qorsheynta, bilaabidda hawlaha, dareenka waqtiga iyo dhiirigelinta. Calaamadaheedu waxay ka bilowdaan carruurnimada; dad badan se waxaa la ogaadaa goor dambe, iyagoo dhalinyaro ama waaweyn ah. Ma aha caajis, mana aha caqli yari. Fahan sax ah, qalab ku habboon iyo taageero, dadka qaba ADHD aad bay u guuleystaan.']};
 function adhdInfo(){const k=(LANG||'en').split('-')[0],A=ADHD2[k]||ADHD2.en;ipop(`<div class="${ADHD2[k]?'notranslate':''}" dir="${k==='ar'?'rtl':'ltr'}"><h3>${esc(A[0])}</h3><p>${esc(A[1])}</p><p class="ip-src" dir="ltr">DSM-5-TR (American Psychiatric Association) · ICD-11 (WHO, 6A05)</p></div>`)}
 
+/* ---------- 🎮 to-do game mode: combo, points, levels (vibration only) ---------- */
+function tgState(){S.tg=S.tg||{on:false,pts:0,combo:0,last:0,best:0};return S.tg}
+function renderTG(){const c=$('tgCard');if(!c)return;const G=tgState(),lv=1+Math.floor(G.pts/100),into=G.pts%100;const live=G.combo&&Date.now()-G.last<15*60000;
+  c.innerHTML=`<div class="tg-top"><b>${tl('🎮 Game mode')}</b><button class="chip ${G.on?'tg-on':''}" id="tgT" aria-pressed="${G.on}">${G.on?tl('On'):tl('Off')}</button></div>
+   ${G.on?`<div class="tg-stats"><span><b>${lv}</b><small>${tl('Level')}</small></span><span><b>×${live?G.combo:0}</b><small>${tl('Combo')}</small></span><span><b>${G.pts}</b><small>${tl('Points')}</small></span></div><div class="tg-bar"><i style="--w:${into}%"></i></div>`:''}
+   <p class="small muted" style="margin:0">${tl('Finish to-dos back to back for a combo. Every finish = points.')}</p>`;
+  $('tgT').onclick=()=>{G.on=!G.on;save();renderTG()}}
+function tgHit(){const G=tgState();if(!G.on)return;const now=Date.now();G.combo=(G.combo&&now-G.last<15*60000)?G.combo+1:1;G.last=now;const lv0=Math.floor(G.pts/100);G.pts+=10*Math.min(G.combo,5);G.best=Math.max(G.best,G.combo);
+  try{navigator.vibrate&&navigator.vibrate(G.combo>=3?[60,40,60,40,120]:[50])}catch(e){}
+  if(Math.floor(G.pts/100)>lv0)setTimeout(()=>toast('🏆 '+tl('Level up!')+' '+tl('Level')+' '+(1+Math.floor(G.pts/100))),900);else if(G.combo>=2)setTimeout(()=>toast('🔥 '+tl('Combo')+' ×'+G.combo),900);
+  save();setTimeout(renderTG,50)}
+/* ---------- Saad Al-Ghamdi recitation (free, EveryAyah) ---------- */
+const QA={a:null,list:[],i:0,key:''},SURA_N={1:7,112:4,113:5,114:6};
+function qaParse(src){const m=String(src||'').match(/Qur'an (\d+)(?::(\d+)(?:[–-](\d+))?)?/);if(!m)return null;const s=+m[1];let a=m[2]?+m[2]:1,b=m[3]?+m[3]:(m[2]?a:(SURA_N[s]||1));return{s,a,b,key:s+':'+a+(b!==a?'-'+b:'')}}
+function qaBtn(src){const q=qaParse(src);return q?`<button type="button" class="qa-b" data-qa="${q.key}">▶ ${tl('Listen · Saad Al-Ghamdi')}</button>`:''}
+const qaUrl=(s,a)=>'https://everyayah.com/data/Ghamadi_40kbps/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3';
+function qaStop(){if(QA.a){QA.a.pause()}QA.key='';document.querySelectorAll('[data-qa]').forEach(b=>{b.classList.remove('on');b.textContent=b.classList.contains('qa-mini')?'▶':'▶ '+tl('Listen · Saad Al-Ghamdi')})}
+function qaPlay(key,btn){if(QA.key===key&&QA.a&&!QA.a.paused){qaStop();return}qaStop();const [s,r]=key.split(':'),[a,b]=r.split('-').map(Number);QA.list=[];for(let i=a;i<=(b||a);i++)QA.list.push(qaUrl(+s,i));QA.i=0;QA.key=key;
+  if(!QA.a){QA.a=new Audio();QA.a.preload='auto';QA.a.onended=()=>{QA.i++;if(QA.i<QA.list.length){QA.a.src=QA.list[QA.i];QA.a.play().catch(()=>{})}else qaStop()}}
+  QA.a.src=QA.list[0];QA.a.play().catch(()=>{toast(tl('No internet. Try again later.'));qaStop()});document.querySelectorAll(`[data-qa="${key}"]`).forEach(x=>{x.classList.add('on');x.textContent=x.classList.contains('qa-mini')?'⏸':'⏸ '+tl('Listen · Saad Al-Ghamdi')})}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-qa]');if(b){e.preventDefault();e.stopPropagation();qaPlay(b.dataset.qa,b)}},true);
+
 /* ---------- daily inspiration: Sahih hadith, Sunni scholars, then well-known wise people (verified attributions only) ---------- */
 const NB={en:'Prophet Muhammad ﷺ',ar:'النبي ﷺ',om:'Nabi Muhammad ﷺ',so:'Nabi Muxammad ﷺ'};
 const QUOTES=[
@@ -3953,7 +3986,7 @@ new MutationObserver(ms=>{if(i18nBusy||LANG==='en')return;ms.forEach(m=>{if(m.ty
 
 $('sprintGo').onclick=sprintStart;$('sprintBar').onclick=()=>show('now');sprintTick();
 renderDeeds();renderEnjoy();renderStuck();renderEngines();renderPlaybook();renderCheckin();render();renderCoach();syncBadge();dbInit();authBoot();
-locAuto();zLookFill();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
+locAuto();zLookFill();renderTG();qtTick();$('ldHome').onclick=instGuide;document.addEventListener('click',e=>{if(e.target.closest('[data-zmo]'))zoomOpen()});$('ldDl').onclick=dlOpen;$('dlBtn').onclick=dlOpen;$('prBtn').onclick=printOpen;$('ldHome').hidden=isStand();if($('ldName')){$('ldName').setAttribute('role','link');$('ldName').tabIndex=0;$('ldName').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')}}if($('ayT'))$('ayT').onclick=()=>{const l=$('ayL');if(l)window.open(l.href,'_blank','noopener')};$('ldRe').hidden=$('ldSaf').hidden=!isStand();if(!/iphone|ipad|ipod/i.test(navigator.userAgent)){$('ldSaf').href='https://alfirdows.github.io/fastaqim/';$('ldSaf').target='_blank';$('ldSaf').rel='noopener'}$('ldRe').onclick=async()=>{try{const r=await navigator.serviceWorker.getRegistration();if(r)await r.update()}catch(e){}location.reload()};netBadge();icsWire();setInterval(remindTick,30000);remindTick();
 $('qtHdr').onclick=()=>qtOpen();$('qtBar').onclick=()=>qtOpen();$('calHdr').onclick=()=>{CAL.view='day';CAL.off=0;show('plan');renderCal();setTimeout(()=>$('calCard').scrollIntoView({behavior:'smooth',block:'start'}),60)};
 })();
 </script>
