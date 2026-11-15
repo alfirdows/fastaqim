@@ -739,6 +739,13 @@ html,body,button,a,[role=button],input,select,textarea,label,summary{touch-actio
 .ldm-i{min-height:44px;text-align:start;justify-content:flex-start;padding:0 12px;border-radius:12px;border:0;background:transparent;color:var(--ink);font-size:.92rem;font-weight:600;display:flex;align-items:center;gap:8px}
 .ldm-i:active{background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .ldm-main{background:linear-gradient(90deg,#f97316,#f59e0b);color:#fff;justify-content:center;font-weight:800}
+.ldm-top{display:flex;flex-direction:column;gap:6px;position:relative}
+.ldm-top .ld-today{display:block!important;width:100%!important;max-width:none!important;margin:0!important;position:relative!important}
+.ldm-top .ldt-chip{width:100%;height:44px!important;min-height:44px;border-radius:12px!important;justify-content:flex-start!important;padding:0 12px!important;font-size:.92rem!important;font-weight:600;gap:8px!important;background:color-mix(in srgb,var(--calm) 7%,var(--surface))!important;border:1px solid var(--line)!important}
+.ldm-top .ldt-chip b{margin-inline-start:auto;color:var(--calm)}
+.ldm-top .ldt-more{position:static!important;width:100%!important;margin-top:6px;box-shadow:none!important}
+#landing .ld-lang{order:0}
+.modal,#scrollModal{z-index:95!important}.ipop{z-index:96!important}
 .ldm hr{border:0;border-top:1px solid var(--line);margin:6px 0;width:100%}
 </style>
 
@@ -3474,6 +3481,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
+['Salah times','أوقات الصلاة','Yeroo salaataa','Waqtiyada salaadda'],
 ['Done. Now make every day like this. 👇','تمّ. اجعل كل يومٍ هكذا. 👇','Xumurameera. Guyyaa hunda akkana godhi. 👇','Waa dhammaatay. Maalin kasta sidan ka dhig. 👇'],['Well done.','أحسنت.','Baay\'ee gaarii.','Si fiican ayaad u qabatay.'],['Low energy','طاقة منخفضة','Humni koo xiqqaa dha','Tamar yar'],['Too big','كبيرة جدًا','Baay\'ee guddaa dha','Aad bay u weyn tahay'],['No motivation','لا دافع عندي','Fedhii hin qabu','Dhiirrigelin ma hayo'],
 ['Free count','عدّ حرّ','Lakkoofsa bilisaa','Tirin xor ah'],
 ['Reset','إعادة','Haaromsi','Dib u bilow'],['Undo','تراجع','Deebisi','Ka noqo'],['Menu','القائمة','Baafata','Liiska'],['Sign in','تسجيل الدخول','Seeni','Gal'],['Create account','إنشاء حساب','Herrega uumi','Samee akoon'],['Suggest an idea','اقترح فكرة','Yaada dhiyeessi','Soo jeedi fikrad'],['Privacy','الخصوصية','Dhuunfaa','Qarsoodi'],['Add to Home Screen','أضف إلى الشاشة الرئيسية','Gara Home Screen dabali','Ku dar shaashadda hore'],
@@ -3612,7 +3620,7 @@ function locAsk(cb){const L=S.loc||{},A=L.adj||{},five=['fajr','dhuhr','asr','ma
    <p class="small muted">${tl('Minutes + or − for each salah')}</p><div class="ldt-row">${five.map(k=>`<label><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><input type="number" step="1" min="-30" max="30" data-adj="${k}" value="${A[k]||0}" style="width:100%;text-align:center;padding:4px"></label>`).join('')}</div></div></details>`:''}
    <p class="small muted">${tl('Calculated times. Always follow your local masjid.')}</p>
    <button class="btn-ghost small" id="lcX">${P?tl('Done'):tl('Close')}</button>`);
-   $('lcX').onclick=done;$('lcG').onclick=()=>locGPS(draw);
+   $('lcX').onclick=done;{const mx=$('scrollBody').querySelector('.mc-x');if(mx)mx.onclick=done};$('lcG').onclick=()=>locGPS(draw);
    const go=async()=>{const q=$('lcQ').value.trim();if(q.length<2)return;$('lcR').innerHTML=`<p class="small muted">…</p>`;
      try{const r=await fetch('https://geocoding-api.open-meteo.com/v1/search?count=6&format=json&language='+(LANG==='ar'?'ar':'en')+'&name='+encodeURIComponent(q));const j=await r.json();const R=j.results||[];
        $('lcR').innerHTML=R.length?R.map((c,i)=>`<button class="chip" data-lc="${i}" style="justify-content:flex-start">📍 ${esc([c.name,c.admin1,c.country].filter(Boolean).join(', '))}</button>`).join(''):`<p class="small muted">${tl('No city found. Check the spelling.')}</p>`;
@@ -3771,27 +3779,27 @@ function lzTap(e){const sb=$('scrollBody'),o=lzGet(),i=(o.i||0)%(LZ.length+1);o.
   ldZChip()}
 document.addEventListener('pointerdown',e=>{const sb=$('scrollBody');if(!sb||!$('ldZk')||!sb.contains(e.target)||$('scrollModal').hidden)return;if(e.target.closest('[data-zsel],[data-zs],[data-zr],[data-zu],.mc-x,.mc-bar button'))return;e.preventDefault();lzTap(e)});
 function ldMenu(){const top=document.querySelector('#landing .ld-top'),rt=document.querySelector('#landing .ld-right');if(!top||!rt||$('ldMb'))return;
-  rt.prepend($('ldToday'));const lang=$('ldLang'),login=$('ldLogin');
+  const lang=$('ldLang'),login=$('ldLogin');
   const mb=document.createElement('button');mb.type='button';mb.id='ldMb';mb.className='ldt-chip ld-mb';mb.setAttribute('aria-label',tl('Menu'));mb.textContent='☰';top.appendChild(mb);
   const pn=document.createElement('div');pn.id='ldMenu';pn.className='ldm';pn.hidden=true;
-  pn.innerHTML=`<div class="ldm-p" role="dialog" aria-modal="true"><div class="ldm-h"><b>Fastaqim</b><button type="button" class="mc-x" data-mx aria-label="Close">✕</button></div><div class="ldm-lang"></div>
+  pn.innerHTML=`<div class="ldm-p" role="dialog" aria-modal="true"><div class="ldm-h"><b>Fastaqim</b><button type="button" class="mc-x" data-mx aria-label="Close">✕</button></div><div class="ldm-top"></div><hr>
    <button class="ldm-i ldm-main" data-mi="up">${tl('Create account')}</button><button class="ldm-i" data-mi="in">${tl('Sign in')}</button><hr>
    <button class="ldm-i" data-mi="home">📲 ${tl('Add to Home Screen')}</button><button class="ldm-i" data-mi="dl">🖨️ ${tl('Print & Save')}</button><hr>
    <button class="ldm-i" data-mi="pv">🔒 ${tl('Privacy')}</button><button class="ldm-i" data-mi="fb">💡 ${tl('Suggest an idea')}</button></div>`;
-  document.body.appendChild(pn);pn.querySelector('.ldm-lang').appendChild(lang);login.hidden=true;
+  document.body.appendChild(pn);const tp=pn.querySelector('.ldm-top');tp.appendChild($('ldToday'));tp.appendChild($('ldZb'));login.hidden=true;top.prepend(lang);rt.hidden=true;
   const close=()=>{pn.classList.remove('on');setTimeout(()=>pn.hidden=true,250)};
   mb.onclick=()=>{pn.hidden=false;requestAnimationFrame(()=>pn.classList.add('on'))};
   pn.onclick=e=>{if(e.target===pn||e.target.closest('[data-mx]'))return close();const b=e.target.closest('[data-mi]');if(!b)return;const k=b.dataset.mi;close();
     setTimeout(()=>{if(k==='up')ldAuthOpen('up');else if(k==='in')ldAuthOpen('in');else if(k==='home')instGuide();else if(k==='dl')dlOpen();else if(k==='pv')document.querySelector('#landing .privLink').click();else if(k==='fb')$('ldFb').click()},120)}}
-function ldZChip(){const b=$('ldZb');if(!b)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);b.innerHTML='📿'+(tot?`<b>${tot}</b>`:'');b.setAttribute('aria-label',tl('Dhikr'));b.onclick=()=>{modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}}
+function ldZChip(){const b=$('ldZb');if(!b)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);b.innerHTML='📿 <span class="ldm-lbl">'+tl('Dhikr')+'</span>'+(tot?` <b>${tot}</b>`:'');b.setAttribute('aria-label',tl('Dhikr'));b.onclick=()=>{const pn=$('ldMenu');if(pn){pn.classList.remove('on');pn.hidden=true}modalCard('<div class="ldz ldz-pop" id="ldZk"></div>');ldZikr()}}
 
 /* ---------- landing: today's date (Gregorian + Hijri) and salah times for everyone, guests too ---------- */
 function ldToday(){const b=$('ldToday');if(!b)return;locAuto();const now=new Date(),P=salahFor(now);
-  if(!P){b.classList.remove('open');b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-label="${tl('Salah times')}">🕌</button>`;$('ldtT').onclick=()=>locAsk(ldToday);return}
+  if(!P){b.classList.remove('open');b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-label="${tl('Salah times')}">🕌 <span class="ldm-lbl">${tl('Salah times')}</span></button>`;$('ldtT').onclick=()=>locAsk(ldToday);return}
   const five=['fajr','dhuhr','asr','maghrib','isha'];let nx=five.find(k=>P[k]>now),nt=nx?P[nx]:salahFor(addDays(now,1)).fajr;nx=nx||'fajr';
   const mins=Math.max(0,Math.round((nt-now)/60000)),left=Math.floor(mins/60)+':'+String(mins%60).padStart(2,'0');
   const open=b.classList.contains('open');
-  b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-expanded="${open}" aria-label="${tl(SAL.find(s=>s[0]===nx)[1])} ${fmtHM(nt)}">🕌 <b>${fmtHM(nt)}</b></button>
+  b.innerHTML=`<button class="ldt-chip" id="ldtT" aria-expanded="${open}" aria-label="${tl(SAL.find(s=>s[0]===nx)[1])} ${fmtHM(nt)}">🕌 <span class="ldm-lbl">${tl('Salah times')}</span> <b>${fmtHM(nt)}</b></button>
    ${open?`<div class="ldt-more"><p class="ldt-d">${tl(SAL.find(s=>s[0]===nx)[1])} <b>${fmtHM(nt)}</b> · <span dir="ltr">⏳ ${left}</span></p><p class="ldt-d">📅 ${now.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long',year:'numeric'})}<br>🌙 ${hijri(now)}</p><div class="ldt-row">${five.map(k=>`<span class="${k===nx?'on':''}"><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b>${fmtHM(P[k])}</b></span>`).join('')}</div>
    <p class="ldt-w">📍 ${esc(locName())} · ${esc(methName())} · <button class="ldt-loc" id="ldtLoc">${tl('Change')}</button></p></div>`:''}`;
   $('ldtT').onclick=e=>{e.stopPropagation();b.classList.toggle('open');ldToday()};if($('ldtLoc'))$('ldtLoc').onclick=()=>locAsk(ldToday)}
