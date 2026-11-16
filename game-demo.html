@@ -10,6 +10,7 @@ html,body{margin:0;height:100%;background:#eef2f6;font-family:Inter,system-ui,-a
 #wrap{position:relative;max-width:420px;margin:10px auto 0;padding:0 10px}
 canvas{display:block;width:100%;border-radius:22px;touch-action:none;box-shadow:0 12px 30px -18px rgba(15,23,42,.5)}
 .hud{position:absolute;top:10px;left:20px;right:20px;display:flex;justify-content:space-between;pointer-events:none}
+#pz{pointer-events:auto;border:0;border-radius:99px;background:rgba(255,255,255,.92);font:800 .95rem Inter,system-ui;width:36px;height:32px}
 .hud b{background:rgba(255,255,255,.92);border-radius:99px;padding:6px 12px;font:800 .95rem Inter,system-ui;display:inline-flex;align-items:center;gap:6px}
 .ov{position:absolute;inset:0 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border-radius:22px;background:rgba(255,255,255,.88)}
 .ov h1{margin:0;font:800 1.5rem Inter,system-ui}.ov p{margin:0;font:500 .9rem/1.4 Inter,system-ui;color:#475569;max-width:260px}
@@ -20,9 +21,8 @@ canvas{display:block;width:100%;border-radius:22px;touch-action:none;box-shadow:
 </style></head><body>
 <div class="top"><button data-t="adult" class="on">Default</button><button data-t="boy">Kid · Boy</button><button data-t="girl">Kid · Girl</button></div>
 <div id="wrap"><canvas id="c" width="400" height="600"></canvas>
-<div class="hud"><b id="hc">🪙 0</b><b id="hd">0 m</b></div>
-<div class="ov" id="ov"><h1>Road Run</h1><p>Swipe or tap left and right. Grab coins, dodge cones.</p><p class="tk" id="tkLine">On the site, every finished task gives you one run.<span id="tix" hidden></span></p><button id="go">Start</button></div></div>
-<p class="note">Demo for review. No music, no voices, no people or animals. Vibration only. Coins become stars: 10 coins = 1 ⭐.</p>
+<div class="hud"><b id="hc">🪙 0</b><span style="display:flex;gap:6px"><b id="hd">0 m</b><button id="pz" aria-label="Pause" hidden>⏸</button></span></div>
+<div class="ov" id="ov"><h1>Road Run</h1><p>Swipe or tap left and right. Grab coins, dodge cones.</p><button id="go">Start</button></div></div>
 <div class="acc"><a class="p" href="./?go=up">Create account</a><div class="row2"><a class="s" href="./?go=guest">👀 Browse as guest</a><a class="s" href="./?go=family">👨‍👩‍👧 Family sign in</a></div><a class="s" href="./?go=in" style="border:0;background:none;padding:6px;font-weight:600;color:#10956B">Already have an account? Sign in</a></div>
 <script>
 const cv=document.getElementById('c'),x=cv.getContext('2d'),W=400,H=600;
@@ -30,7 +30,7 @@ const TH={
  adult:{sleek:1,road:'#2f3640',edge:'#e2e8f0',side:'#d1fae5',side2:'#a7f3d0',car:'#14a37a',car2:'#0a5c45',line:'#f8fafc',deco:'tree',btn:'#10956B'},
  boy:{road:'#334155',edge:'#fbbf24',side:'#bbf7d0',side2:'#86efac',car:'#2563eb',car2:'#1e40af',line:'#fde047',deco:'flag',btn:'#2563eb'},
  girl:{road:'#7c6a8a',edge:'#f9a8d4',side:'#fce7f3',side2:'#fbcfe8',car:'#db2777',car2:'#9d174d',line:'#fff1f2',deco:'flower',btn:'#db2777',crown:1}};
-let T=TH.adult,G=null,tix=Infinity,raf=0;
+let T=TH.adult,G=null,raf=0;
 const L=[W*0.32,W*0.5,W*0.68],RL=W*0.22,RR=W*0.78;
 function laneX(i){return L[i]}
 function reset(){G={lane:1,cx:L[1],sp:4.2,d:0,coins:[],cones:[],deco:[],t:0,c:0,alive:true,shake:0,pops:[]};for(let i=0;i<8;i++)G.deco.push({y:i*80,s:i%2})}
@@ -87,9 +87,13 @@ function frame(){const g=G;g.t++;
  document.getElementById('hc').textContent='🪙 '+g.c;document.getElementById('hd').textContent=Math.floor(g.d)+' m';
  raf=requestAnimationFrame(frame)}
 function end(){cancelAnimationFrame(raf);const st=Math.floor(G.c/10);const o=document.getElementById('ov');o.style.display='flex';
- o.querySelector('h1').textContent='Nice run!';o.querySelector('p').textContent=G.c+' coins · '+Math.floor(G.d)+' m'+(st?' · +'+st+' ⭐':'');
- document.getElementById('go').textContent=tix?'Play again':'Finish a task to play';document.getElementById('go').disabled=!tix}
-function start(){if(!tix)return;tix--;reset();document.getElementById('ov').style.display='none';cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}
+ o.querySelector('h1').textContent='Nice run!';o.querySelector('p').textContent=G.c+' coins · '+Math.floor(G.d)+' m';
+ document.getElementById('go').textContent='Play again';document.getElementById('pz').hidden=true}
+function start(){if(G&&G.paused){resume();return}reset();document.getElementById('ov').style.display='none';cancelAnimationFrame(raf);raf=requestAnimationFrame(frame);document.getElementById('pz').hidden=false}
+function pause(){if(!G||!G.alive||G.paused||document.getElementById('ov').style.display==='flex')return;G.paused=true;cancelAnimationFrame(raf);const o=document.getElementById('ov');o.style.display='flex';o.querySelector('h1').textContent='Paused';o.querySelector('p').textContent=G.c+' coins · '+Math.floor(G.d)+' m';document.getElementById('go').textContent='Resume';document.getElementById('pz').hidden=true}
+function resume(){G.paused=false;document.getElementById('ov').style.display='none';document.getElementById('pz').hidden=false;cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}
+document.addEventListener('visibilitychange',()=>{if(document.hidden)pause()});addEventListener('blur',pause);addEventListener('pagehide',pause);
+document.getElementById('pz').onclick=pause;
 document.getElementById('go').onclick=start;
 function move(d){if(!G||!G.alive)return;G.lane=Math.max(0,Math.min(2,G.lane+d));vib(8)}
 let sx=null;cv.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
