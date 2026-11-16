@@ -16,34 +16,48 @@ canvas{display:block;width:100%;border-radius:22px;touch-action:none;box-shadow:
 .ov button{border:0;border-radius:16px;padding:14px 28px;font:800 1.05rem Inter,system-ui;color:#fff;background:var(--c,#10956B)}
 .tk{font:700 .85rem Inter,system-ui;color:#0f172a}
 .note{max-width:400px;margin:10px auto;padding:0 16px;font:500 .78rem/1.45 Inter,system-ui;color:#64748b;text-align:center}
-.acc{max-width:400px;margin:14px auto 24px;padding:0 16px;display:flex;flex-direction:column;gap:8px}.acc a{display:block;text-align:center;text-decoration:none;border-radius:14px;padding:13px;font:700 .95rem Inter,system-ui}.acc .p{background:#10956B;color:#fff}.acc .s{border:1.5px solid #d6dde6;background:#fff;color:#0f172a}.acc .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acc{max-width:400px;margin:14px auto 24px;padding:0 16px;display:flex;flex-direction:column;gap:8px}.acc a{display:block;text-align:center;text-decoration:none;border-radius:14px;padding:13px;font:700 .95rem Inter,system-ui}.acc .p{background:#10956B;color:#fff}.acc .s{border:1.5px solid #d6dde6;background:#fff;color:#0f172a}.acc .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}.acc .row2 a{font-size:.82rem;padding:12px 6px;white-space:nowrap}
 </style></head><body>
 <div class="top"><button data-t="adult" class="on">Default</button><button data-t="boy">Kid · Boy</button><button data-t="girl">Kid · Girl</button></div>
 <div id="wrap"><canvas id="c" width="400" height="600"></canvas>
 <div class="hud"><b id="hc">🪙 0</b><b id="hd">0 m</b></div>
-<div class="ov" id="ov"><h1>Road Run</h1><p>Every finished task gives you a run. Swipe or tap left and right. Grab coins, dodge cones.</p><p class="tk">🎟️ Runs left today: <span id="tix">3</span></p><button id="go">Start</button></div></div>
+<div class="ov" id="ov"><h1>Road Run</h1><p>Swipe or tap left and right. Grab coins, dodge cones.</p><p class="tk" id="tkLine">On the site, every finished task gives you one run.<span id="tix" hidden></span></p><button id="go">Start</button></div></div>
 <p class="note">Demo for review. No music, no voices, no people or animals. Vibration only. Coins become stars: 10 coins = 1 ⭐.</p>
 <div class="acc"><a class="p" href="./?go=up">Create account</a><div class="row2"><a class="s" href="./?go=guest">👀 Browse as guest</a><a class="s" href="./?go=family">👨‍👩‍👧 Family sign in</a></div><a class="s" href="./?go=in" style="border:0;background:none;padding:6px;font-weight:600;color:#10956B">Already have an account? Sign in</a></div>
 <script>
 const cv=document.getElementById('c'),x=cv.getContext('2d'),W=400,H=600;
 const TH={
- adult:{road:'#3b4252',edge:'#e2e8f0',side:'#d1fae5',side2:'#a7f3d0',car:'#10956B',car2:'#0b6e4f',line:'#f8fafc',deco:'tree',btn:'#10956B'},
+ adult:{sleek:1,road:'#2f3640',edge:'#e2e8f0',side:'#d1fae5',side2:'#a7f3d0',car:'#14a37a',car2:'#0a5c45',line:'#f8fafc',deco:'tree',btn:'#10956B'},
  boy:{road:'#334155',edge:'#fbbf24',side:'#bbf7d0',side2:'#86efac',car:'#2563eb',car2:'#1e40af',line:'#fde047',deco:'flag',btn:'#2563eb'},
  girl:{road:'#7c6a8a',edge:'#f9a8d4',side:'#fce7f3',side2:'#fbcfe8',car:'#db2777',car2:'#9d174d',line:'#fff1f2',deco:'flower',btn:'#db2777',crown:1}};
-let T=TH.adult,G=null,tix=3,raf=0;
+let T=TH.adult,G=null,tix=Infinity,raf=0;
 const L=[W*0.32,W*0.5,W*0.68],RL=W*0.22,RR=W*0.78;
 function laneX(i){return L[i]}
 function reset(){G={lane:1,cx:L[1],sp:4.2,d:0,coins:[],cones:[],deco:[],t:0,c:0,alive:true,shake:0,pops:[]};for(let i=0;i<8;i++)G.deco.push({y:i*80,s:i%2})}
 function spawn(){const r=Math.random();const ln=Math.floor(Math.random()*3);
  if(r<0.55){for(let k=0;k<4;k++)G.coins.push({l:ln,y:-40-k*48})}else{G.cones.push({l:ln,y:-40});if(G.d>300&&Math.random()<.35)G.cones.push({l:(ln+1+Math.floor(Math.random()*2))%3,y:-40})}}
 function vib(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
-function drawCar(cx,cy){const w=44,h=72;x.save();x.translate(cx,cy);
+function drawCar(cx,cy){if(T.sleek)return drawSleek(cx,cy);const w=44,h=72;x.save();x.translate(cx,cy);
  x.fillStyle='rgba(0,0,0,.18)';x.beginPath();x.ellipse(0,h/2-4,w/2+4,8,0,0,7);x.fill();
  x.fillStyle=T.car;rr(-w/2,-h/2,w,h,14);x.fill();x.fillStyle=T.car2;rr(-w/2+6,-h/2+14,w-12,20,6);x.fill();
  x.fillStyle='#e0f2fe';rr(-w/2+8,-h/2+16,w-16,14,4);x.fill();x.fillStyle='#fef9c3';x.fillRect(-w/2+5,-h/2+2,8,5);x.fillRect(w/2-13,-h/2+2,8,5);
  x.fillStyle='#111827';[-1,1].forEach(s=>{rr(s*(w/2)-(s>0?2:4),-h/2+10,6,14,3);x.fill();rr(s*(w/2)-(s>0?2:4),h/2-24,6,14,3);x.fill()});
  if(T.crown){x.fillStyle='#fbbf24';x.beginPath();x.moveTo(-10,6);x.lineTo(-10,-4);x.lineTo(-5,2);x.lineTo(0,-6);x.lineTo(5,2);x.lineTo(10,-4);x.lineTo(10,6);x.closePath();x.fill()}
  else{x.fillStyle='#fff';x.font='bold 14px Inter,system-ui';x.textAlign='center';x.fillText('★',0,12)}
+ x.restore()}
+/* default: a sleek sports car seen from above */
+function drawSleek(cx,cy){const w=40,h=88;x.save();x.translate(cx,cy);
+ x.fillStyle='rgba(0,0,0,.25)';x.beginPath();x.ellipse(0,6,w/2+5,h/2+2,0,0,7);x.fill();
+ x.fillStyle='#0b0f14';[[-1,-26],[1,-26],[-1,22],[1,22]].forEach(([s,y])=>{rr(s*(w/2)-(s>0?3:5),y,8,18,3);x.fill()});
+ const g=x.createLinearGradient(-w/2,0,w/2,0);g.addColorStop(0,T.car2);g.addColorStop(.5,T.car);g.addColorStop(1,T.car2);x.fillStyle=g;
+ x.beginPath();x.moveTo(-w/2+8,-h/2);x.quadraticCurveTo(0,-h/2-6,w/2-8,-h/2);x.quadraticCurveTo(w/2+1,-h/2+8,w/2,-h/2+26);x.lineTo(w/2,h/2-12);x.quadraticCurveTo(w/2,h/2,w/2-10,h/2);x.lineTo(-w/2+10,h/2);x.quadraticCurveTo(-w/2,h/2,-w/2,h/2-12);x.lineTo(-w/2,-h/2+26);x.quadraticCurveTo(-w/2-1,-h/2+8,-w/2+8,-h/2);x.fill();
+ x.fillStyle='#0f172a';x.beginPath();x.moveTo(-w/2+6,-h/2+22);x.quadraticCurveTo(0,-h/2+14,w/2-6,-h/2+22);x.lineTo(w/2-8,-h/2+38);x.lineTo(-w/2+8,-h/2+38);x.closePath();x.fill();
+ x.fillStyle='rgba(255,255,255,.14)';x.beginPath();x.moveTo(-w/2+9,-h/2+23);x.lineTo(-2,-h/2+18);x.lineTo(-w/2+11,-h/2+36);x.fill();
+ x.fillStyle=T.car2;rr(-w/2+8,-h/2+40,w-16,22,6);x.fill();
+ x.fillStyle='#0f172a';rr(-w/2+8,h/2-22,w-16,9,4);x.fill();
+ x.fillStyle='#e2e8f0';rr(-w/2+5,-h/2+3,9,3,2);x.fill();rr(w/2-14,-h/2+3,9,3,2);x.fill();
+ x.fillStyle='#ef4444';rr(-w/2+5,h/2-4,10,3,2);x.fill();rr(w/2-15,h/2-4,10,3,2);x.fill();
+ x.fillStyle=T.car2;rr(-w/2-5,-h/2+30,6,4,2);x.fill();rr(w/2-1,-h/2+30,6,4,2);x.fill();
  x.restore()}
 function rr(a,b,w,h,r){x.beginPath();x.roundRect?x.roundRect(a,b,w,h,r):x.rect(a,b,w,h)}
 function drawCoin(cx,cy,t){const s=Math.abs(Math.cos(t/9+cy/60));x.save();x.translate(cx,cy);x.scale(Math.max(.15,s),1);
@@ -74,7 +88,7 @@ function frame(){const g=G;g.t++;
  raf=requestAnimationFrame(frame)}
 function end(){cancelAnimationFrame(raf);const st=Math.floor(G.c/10);const o=document.getElementById('ov');o.style.display='flex';
  o.querySelector('h1').textContent='Nice run!';o.querySelector('p').textContent=G.c+' coins · '+Math.floor(G.d)+' m'+(st?' · +'+st+' ⭐':'');
- document.getElementById('tix').textContent=tix;document.getElementById('go').textContent=tix?'Play again':'Finish a task to play';document.getElementById('go').disabled=!tix}
+ document.getElementById('go').textContent=tix?'Play again':'Finish a task to play';document.getElementById('go').disabled=!tix}
 function start(){if(!tix)return;tix--;reset();document.getElementById('ov').style.display='none';cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}
 document.getElementById('go').onclick=start;
 function move(d){if(!G||!G.alive)return;G.lane=Math.max(0,Math.min(2,G.lane+d));vib(8)}
