@@ -879,6 +879,19 @@ body.kid .btn-main{border-radius:16px}
 .hud{align-items:flex-start!important}.hud .level{text-align:start}
 .card:has(#azTap),.card:has(#deedBody #tap){cursor:pointer;-webkit-user-select:none;user-select:none}
 .lgl-h{padding:0 6px!important;margin:18px 0 6px!important}.lgl-h small{font:500 .72rem var(--body);text-transform:none;letter-spacing:0;color:var(--muted)}.lgl button:has(.lgl-e){padding:8px 6px}
+/* v79 my own tab */
+.mine-l{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.mine-l li{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1.5px solid var(--line);border-radius:14px;background:var(--surface);font-weight:600}
+.mine-l li span{flex:1;min-width:0;overflow-wrap:break-word}.mine-l li.on{border-color:var(--calm);background:color-mix(in srgb,var(--calm) 8%,var(--surface))}.mine-l li.on span{color:var(--muted);text-decoration:line-through}
+.mine-c{all:unset;box-sizing:border-box;width:28px;height:28px;border-radius:9px;border:2px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-weight:800;color:#fff;cursor:pointer;flex:none}
+.mine-l li.on .mine-c{background:var(--calm);border-color:var(--calm)}
+.mine-x{all:unset;cursor:pointer;color:var(--muted);font-size:.85rem;padding:6px;flex:none}
+.mn-e{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}.mn-e button{all:unset;cursor:pointer;text-align:center;font-size:1.3rem;padding:6px 0;border-radius:10px;border:1.5px solid var(--line)}.mn-e button.on{border-color:var(--calm);background:color-mix(in srgb,var(--calm) 12%,var(--surface))}
+#mineF .btn-main{font-size:1.4rem;line-height:1;min-width:48px}
+.kd-bit{position:fixed;left:50%;top:42%;width:12px;height:12px;border-radius:50%;z-index:129;pointer-events:none;animation:kdb 1s ease-out forwards}
+@keyframes kdb{0%{transform:translate(-50%,0) scale(.6);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),var(--dy)) scale(1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.kd-bit{display:none}}
+.kd-snd{display:flex;align-items:center;gap:10px;margin-top:12px;font:600 .9rem var(--body);justify-content:center}.kd-snd input{width:22px;height:22px}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -4749,6 +4762,18 @@ function kidCoin(n){if(!kidOn())return;try{if(navigator.vibrate)navigator.vibrat
 {const _aw=award;award=function(){const g=_aw.apply(this,arguments);try{kidCoin(g)}catch(e){}return g}}
 {const _rh=renderHeader;renderHeader=function(){_rh.apply(this,arguments);try{kidApply()}catch(e){}}}
 setTimeout(()=>{try{kidApply()}catch(e){}},0);
+/* kid mode extras: soft "pop" made from noise (no notes, no instrument, no voice), colorful coin burst, kid profiles start in kid mode */
+const X55=[["Pop sound (no music)","صوت فرقعة (بدون موسيقى)","Sagalee pop (muuziqaa malee)","Cod pop ah (muusig la'aan)"]];
+X55.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+let KAC=null;
+function kidPop(){if(!kidOn()||(S.kid&&S.kid.snd===false))return;try{KAC=KAC||new (window.AudioContext||window.webkitAudioContext)();const a=KAC,n=Math.floor(a.sampleRate*.09),buf=a.createBuffer(1,n,a.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<n;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/n,4);const s=a.createBufferSource();s.buffer=buf;const f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=1800;const g=a.createGain();g.gain.value=.35;s.connect(f);f.connect(g);g.connect(a.destination);s.start()}catch(e){}}
+const KCOL=['#f5b301','#ff6b6b','#4dabf7','#51cf66','#cc5de8','#ff922b'];
+function kidBurst(){if(!kidOn())return;for(let i=0;i<6;i++){const c=document.createElement('i');c.className='kd-bit';c.style.setProperty('--dx',(Math.cos(i*1.047)*90).toFixed(0)+'px');c.style.setProperty('--dy',(Math.sin(i*1.047)*90-40).toFixed(0)+'px');c.style.background=KCOL[i];document.body.appendChild(c);setTimeout(()=>c.remove(),1100)}}
+{const _kc=kidCoin;kidCoin=function(n){_kc(n);if(kidOn()){kidPop();kidBurst()}}}
+{const _ko=kidOpen;kidOpen=function(){_ko();const B=$('scrollBody');if(!B||!kidOn())return;const l=document.createElement('label');l.className='kd-snd';l.innerHTML=`<input type="checkbox" ${S.kid.snd===false?'':'checked'}><span>🔈 ${tl('Pop sound (no music)')}</span>`;l.querySelector('input').onchange=e=>{S.kid.snd=e.target.checked;save();if(e.target.checked)kidPop()};B.appendChild(l)}}
+/* a child's family profile opens in kid mode the first time (they pick boy or girl) */
+setTimeout(()=>{try{if(typeof FAM!=='undefined'&&FAM.token&&!S.kid){S.kid={on:false};kidOpen()}}catch(e){}},1500);
 
 /* ===== v74: clear language names, translation fallback ===== */
 const X52=[["Couldn't load this language right now. Showing English.","تعذّر تحميل هذه اللغة الآن. نعرض الإنجليزية.","Afaan kana amma fe'uu hin dandeenye. Afaan Ingiliffaa agarsiisna.","Luqaddan hadda lama soo rari karin. Waxaa la tusayaa Ingiriisi."]];
@@ -4779,6 +4804,58 @@ setTimeout(()=>{try{ldFamLink()}catch(e){}},700);
 {const _sl=setLang;setLang=function(){const r=_sl.apply(this,arguments);setTimeout(()=>{try{const f=$('ldFam');if(f)f.textContent='👨‍👩‍👧 '+tl('Family sign in')}catch(e){}},0);return r}}
 setTimeout(()=>{try{const q=new URLSearchParams(location.search),g=q.get('go');if(!g)return;history.replaceState(null,'',location.pathname+location.hash);
   if(inApp())return;if(g==='up'||g==='in')ldAuthOpen(g);else if(g==='guest')guestStart();else if(g==='family')famOpen()}catch(e){}},600);
+
+/* ===== My own tab: replace Money (or any tab) with a personal list, e.g. Play ===== */
+const X54=[["Make my own tab","أنشئ تبويبي الخاص","Kutaa kiyya uumi","Samee tab adiga kuu gaar ah"],
+["Name","الاسم","Maqaa","Magac"],["Icon","الأيقونة","Mallattoo","Calaamad"],
+["Put it in place of","ضعه مكان","Bakka kanaa kaa'i","Ku beddel"],["Nothing, just add it","لا شيء، أضفه فقط","Homaa, dabaluu qofa","Waxba, ku dar oo keliya"],
+["Create","إنشاء","Uumi","Samee"],["Remove this tab","احذف هذا التبويب","Kutaa kana haqi","Tirtir tab-kan"],
+["Add something","أضف شيئًا","Waan tokko dabali","Wax ku dar"],["Ticks reset every day.","العلامات تتجدد كل يوم.","Mallattoon guyyaa guyyaan haaromu.","Calaamadaha maalin walba way cusboonaadaan."],
+["Play","لعب","Taphaa","Ciyaar"],["My tab","تبويبي","Kutaa kiyya","Tab-kayga"],["Edit","تعديل","Gulaali","Wax ka beddel"],
+["Done for today!","تمّ لليوم!","Har'aaf xumurameera!","Maanta waa la dhammeeyay!"]];
+X54.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const MINE_EMO=['🎮','⚽','🏀','🚲','🧩','🎨','✏️','📚','🧸','🌸','🚀','⭐','🏡','🍳','🌳','🕌'];
+if(!TABS.includes('mine'))TABS.push('mine');
+function mineOn(){return !!(S.mine&&S.mine.n)}
+function mineEnsure(){const nav=document.querySelector('nav[role=tablist]');if(!nav)return;let b=nav.querySelector('[data-tab="mine"]');
+  if(!b){b=document.createElement('button');b.setAttribute('role','tab');b.dataset.tab='mine';b.setAttribute('aria-selected','false');b.onclick=()=>show('mine');nav.appendChild(b)}
+  b.innerHTML=`<span class="ni" aria-hidden="true">${esc((S.mine&&S.mine.e)||'⭐')}</span>`;b.appendChild(document.createTextNode((S.mine&&S.mine.n)||tl('My tab')));b.classList.add('notranslate');
+  if(!$('tab-mine')){const sec=document.createElement('section');sec.id='tab-mine';sec.className='wrap';sec.style.gap='20px';sec.hidden=true;const ref=$('tab-wins');ref.parentNode.insertBefore(sec,ref.nextSibling)}
+  if(!mineOn())b.hidden=true}
+{const _ta=tabsApply;tabsApply=function(){mineEnsure();_ta.apply(this,arguments);const b=document.querySelector('nav [data-tab="mine"]');if(b&&!mineOn())b.hidden=true}}
+{const _sh=show;show=function(tab){const m=$('tab-mine');if(tab!=='mine'){if(m)m.hidden=true;return _sh.apply(this,arguments)}
+  document.body.dataset.tab='mine';document.querySelectorAll('nav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab==='mine'));
+  ['now','plan','today','money','goals','focus','enjoy','wins'].forEach(t=>{const s=$('tab-'+t);if(s)s.hidden=true});if(m)m.hidden=false;mineRender();window.scrollTo({top:0})}}
+function mineDay(){const k=dkey();S.mine.d=S.mine.d&&S.mine.d.k===k?S.mine.d:{k,t:{}};return S.mine.d.t}
+function mineRender(){const sec=$('tab-mine');if(!sec||!mineOn())return;const M=S.mine,t=mineDay();
+  sec.innerHTML=`<div class="card"><h2><span class="h2i" aria-hidden="true">${esc(M.e)}</span><span class="notranslate">${esc(M.n)}</span></h2>
+   <form class="inline-form" id="mineF"><input type="text" id="mineIn" maxlength="60" placeholder="${esc(tl('Add something'))}" aria-label="${esc(tl('Add something'))}"><button class="btn-main" type="submit">+</button></form>
+   <ul class="mine-l">${(M.items||[]).map((it,i)=>`<li class="${t[it.id]?'on':''}"><button type="button" class="mine-c" data-mt="${i}" aria-pressed="${!!t[it.id]}">${t[it.id]?'✓':''}</button><span class="notranslate">${esc(it.text)}</span><button type="button" class="mine-x" data-mx2="${i}" aria-label="Delete">✕</button></li>`).join('')}</ul>
+   <p class="small muted" style="margin:0">${tl('Ticks reset every day.')}</p>
+   <button type="button" class="btn-ghost small" id="mineEd" style="align-self:flex-start">✏️ ${tl('Edit')}</button></div>`;
+  $('mineF').onsubmit=e=>{e.preventDefault();const v=$('mineIn').value.trim();if(!v)return;if(typeof blocked==='function'&&blocked(v)){blkWarn(v);return}
+    M.items=(M.items||[]).concat({id:'m'+Date.now(),text:v});save();mineRender()};
+  sec.querySelectorAll('[data-mt]').forEach(b=>b.onclick=()=>{const it=M.items[+b.dataset.mt];if(t[it.id]){delete t[it.id];save();mineRender();return}
+    t[it.id]=1;save();star(1,it.text.slice(0,40),'mine:'+it.id);if(M.items.every(x=>t[x.id]))toast(tl('Done for today!'));mineRender()});
+  sec.querySelectorAll('[data-mx2]').forEach(b=>b.onclick=()=>{M.items.splice(+b.dataset.mx2,1);save();mineRender()});
+  $('mineEd').onclick=mineMake}
+function mineMake(){const M=S.mine||{n:'',e:'🎮'},c=tabsCfg(),opts=c.o.filter(k=>!['now','wins','mine'].includes(k));let pick=M.e||'🎮';
+  modalCard(`<p class="label">⭐ ${tl('Make my own tab')}</p>
+   <label class="small muted">${tl('Name')}</label><input type="text" id="mnN" maxlength="16" value="${esc(M.n||tl('Play'))}" style="width:100%">
+   <p class="small muted" style="margin:10px 0 4px">${tl('Icon')}</p><div class="mn-e">${MINE_EMO.map(e=>`<button type="button" data-me="${e}" class="${e===pick?'on':''}">${e}</button>`).join('')}</div>
+   ${M.n?'':`<p class="small muted" style="margin:10px 0 4px">${tl('Put it in place of')}</p><select id="mnR" style="width:100%"><option value="">${tl('Nothing, just add it')}</option>${opts.map(k=>`<option value="${k}" ${k==='money'?'selected':''}>${esc(tabLabel(k))}</option>`).join('')}</select>`}
+   <button type="button" class="btn-main" id="mnGo" style="width:100%;margin-top:12px">${tl(M.n?'Edit':'Create')}</button>
+   ${M.n?`<button type="button" class="btn-ghost small" id="mnDel" style="width:100%;margin-top:8px">${tl('Remove this tab')}</button>`:''}`);
+  const B=$('scrollBody');B.querySelectorAll('[data-me]').forEach(b=>b.onclick=()=>{pick=b.dataset.me;B.querySelectorAll('[data-me]').forEach(x=>x.classList.toggle('on',x===b))});
+  $('mnGo').onclick=()=>{const n=$('mnN').value.trim()||tl('Play');if(typeof blocked==='function'&&blocked(n)){blkWarn(v);return}
+    const fresh=!S.mine||!S.mine.n;S.mine=Object.assign({items:[]},S.mine,{n,e:pick});
+    if(fresh){const r=$('mnR')&&$('mnR').value,cf=tabsCfg();cf.o=cf.o.filter(k=>k!=='mine');const at=r?cf.o.indexOf(r)+1:cf.o.length;cf.o.splice(at,0,'mine');if(r&&!cf.h.includes(r))cf.h.push(r);S.tabs=cf}
+    save();modalClose();tabsApply();show('mine')};
+  if($('mnDel'))$('mnDel').onclick=()=>{const cf=tabsCfg();cf.h=cf.h.filter(k=>k!=='money');S.tabs=cf;S.mine=null;save();modalClose();tabsApply();show('now')}}
+/* "Make my own tab" sits at the bottom of Arrange tabs */
+{const _tr=tabsArrange;tabsArrange=function(){_tr.apply(this,arguments);const B=$('scrollBody');if(!B||$('mnAdd'))return;const b=document.createElement('button');b.type='button';b.id='mnAdd';b.className='btn-main';b.style.cssText='width:100%;margin-top:10px';b.textContent=(mineOn()?'✏️ ':'+ ')+tl(mineOn()?'Edit':'Make my own tab');b.onclick=mineMake;B.appendChild(b)}}
+setTimeout(()=>{try{mineEnsure();tabsApply()}catch(e){}},0);
+{const _tc=tabsCfg;tabsCfg=function(){const c=_tc.apply(this,arguments);if(!mineOn()){c.o=c.o.filter(k=>k!=='mine');c.h=c.h.filter(k=>k!=='mine')}return c}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
