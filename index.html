@@ -877,6 +877,7 @@ body.kid .btn-main{border-radius:16px}
 .lgl-e{display:block;font:500 .72rem var(--body);color:var(--muted);margin-top:1px}
 .VIpgJd-ZVi9od-aZ2wEe-wOHMyf,.VIpgJd-ZVi9od-aZ2wEe-OiiCO,.VIpgJd-ZVi9od-ORHb-OEVmcd,.VIpgJd-yAWNEb-L7lbkb{display:none!important}
 .hud{align-items:flex-start!important}.hud .level{text-align:start}
+.card:has(#azTap),.card:has(#deedBody #tap){cursor:pointer;-webkit-user-select:none;user-select:none}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -4760,6 +4761,10 @@ langOpen=function(){const row=([k,l],more)=>{const e=more?lgEn(k):'';return `<bu
 setTimeout(()=>{try{if(PIN.includes(LANG)||inArtifact())return;const h=document.documentElement;if(h.classList.contains('translated-ltr')||h.classList.contains('translated-rtl'))return;
   try{localStorage.setItem('fastaqim.lang','en');sessionStorage.setItem('fastaqim.lgfail','1')}catch(e){}gtCookie('');location.reload()}catch(e){}},12000);
 setTimeout(()=>{try{if(sessionStorage.getItem('fastaqim.lgfail')){sessionStorage.removeItem('fastaqim.lgfail');toast(tl("Couldn't load this language right now. Showing English."))}}catch(e){}},800);
+/* dhikr counters: a tap anywhere in the box counts (buttons and links keep their own job) */
+document.addEventListener('click',e=>{const t=e.target;if(!t.closest)return;if(t.closest('button,a,input,select,textarea,label,summary,audio,[data-act],[contenteditable]'))return;
+  const card=t.closest('.card');if(!card)return;const tap=card.querySelector('#azTap')||card.querySelector('#deedBody #tap');if(!tap||tap.contains(t))return;
+  if(String(getSelection&&getSelection())!=='')return;tap.click()});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
