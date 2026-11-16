@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="robots" content="noindex"><title>Fastaqim Road Run (demo)</title>
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:#eef2f6;font-family:Inter,system-ui,-apple-system,sans-serif;color:#0f172a;overscroll-behavior:none}
+.top{display:flex;gap:6px;justify-content:center;padding:10px 10px 0;flex-wrap:wrap}
+.top button{border:1.5px solid #d6dde6;background:#fff;border-radius:99px;padding:7px 12px;font:600 .8rem Inter,system-ui;color:#0f172a}
+.top button.on{background:#0f172a;color:#fff;border-color:#0f172a}
+#wrap{position:relative;max-width:420px;margin:10px auto 0;padding:0 10px}
+canvas{display:block;width:100%;border-radius:22px;touch-action:none;box-shadow:0 12px 30px -18px rgba(15,23,42,.5)}
+.hud{position:absolute;top:10px;left:20px;right:20px;display:flex;justify-content:space-between;pointer-events:none}
+.hud b{background:rgba(255,255,255,.92);border-radius:99px;padding:6px 12px;font:800 .95rem Inter,system-ui;display:inline-flex;align-items:center;gap:6px}
+.ov{position:absolute;inset:0 10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;text-align:center;border-radius:22px;background:rgba(255,255,255,.88)}
+.ov h1{margin:0;font:800 1.5rem Inter,system-ui}.ov p{margin:0;font:500 .9rem/1.4 Inter,system-ui;color:#475569;max-width:260px}
+.ov button{border:0;border-radius:16px;padding:14px 28px;font:800 1.05rem Inter,system-ui;color:#fff;background:var(--c,#10956B)}
+.tk{font:700 .85rem Inter,system-ui;color:#0f172a}
+.note{max-width:400px;margin:10px auto;padding:0 16px;font:500 .78rem/1.45 Inter,system-ui;color:#64748b;text-align:center}
+</style></head><body>
+<div class="top"><button data-t="adult" class="on">Default</button><button data-t="boy">Kid · Boy</button><button data-t="girl">Kid · Girl</button></div>
+<div id="wrap"><canvas id="c" width="400" height="600"></canvas>
+<div class="hud"><b id="hc">🪙 0</b><b id="hd">0 m</b></div>
+<div class="ov" id="ov"><h1>Road Run</h1><p>Every finished task gives you a run. Swipe or tap left and right. Grab coins, dodge cones.</p><p class="tk">🎟️ Runs left today: <span id="tix">3</span></p><button id="go">Start</button></div></div>
+<p class="note">Demo for review. No music, no voices, no people or animals. Vibration only. Coins become stars: 10 coins = 1 ⭐.</p>
+<script>
+const cv=document.getElementById('c'),x=cv.getContext('2d'),W=400,H=600;
+const TH={
+ adult:{road:'#3b4252',edge:'#e2e8f0',side:'#d1fae5',side2:'#a7f3d0',car:'#10956B',car2:'#0b6e4f',line:'#f8fafc',deco:'tree',btn:'#10956B'},
+ boy:{road:'#334155',edge:'#fbbf24',side:'#bbf7d0',side2:'#86efac',car:'#2563eb',car2:'#1e40af',line:'#fde047',deco:'flag',btn:'#2563eb'},
+ girl:{road:'#7c6a8a',edge:'#f9a8d4',side:'#fce7f3',side2:'#fbcfe8',car:'#db2777',car2:'#9d174d',line:'#fff1f2',deco:'flower',btn:'#db2777',crown:1}};
+let T=TH.adult,G=null,tix=3,raf=0;
+const L=[W*0.32,W*0.5,W*0.68],RL=W*0.22,RR=W*0.78;
+function laneX(i){return L[i]}
+function reset(){G={lane:1,cx:L[1],sp:4.2,d:0,coins:[],cones:[],deco:[],t:0,c:0,alive:true,shake:0,pops:[]};for(let i=0;i<8;i++)G.deco.push({y:i*80,s:i%2})}
+function spawn(){const r=Math.random();const ln=Math.floor(Math.random()*3);
+ if(r<0.55){for(let k=0;k<4;k++)G.coins.push({l:ln,y:-40-k*48})}else{G.cones.push({l:ln,y:-40});if(G.d>300&&Math.random()<.35)G.cones.push({l:(ln+1+Math.floor(Math.random()*2))%3,y:-40})}}
+function vib(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
+function drawCar(cx,cy){const w=44,h=72;x.save();x.translate(cx,cy);
+ x.fillStyle='rgba(0,0,0,.18)';x.beginPath();x.ellipse(0,h/2-4,w/2+4,8,0,0,7);x.fill();
+ x.fillStyle=T.car;rr(-w/2,-h/2,w,h,14);x.fill();x.fillStyle=T.car2;rr(-w/2+6,-h/2+14,w-12,20,6);x.fill();
+ x.fillStyle='#e0f2fe';rr(-w/2+8,-h/2+16,w-16,14,4);x.fill();x.fillStyle='#fef9c3';x.fillRect(-w/2+5,-h/2+2,8,5);x.fillRect(w/2-13,-h/2+2,8,5);
+ x.fillStyle='#111827';[-1,1].forEach(s=>{rr(s*(w/2)-(s>0?2:4),-h/2+10,6,14,3);x.fill();rr(s*(w/2)-(s>0?2:4),h/2-24,6,14,3);x.fill()});
+ if(T.crown){x.fillStyle='#fbbf24';x.beginPath();x.moveTo(-10,6);x.lineTo(-10,-4);x.lineTo(-5,2);x.lineTo(0,-6);x.lineTo(5,2);x.lineTo(10,-4);x.lineTo(10,6);x.closePath();x.fill()}
+ else{x.fillStyle='#fff';x.font='bold 14px Inter,system-ui';x.textAlign='center';x.fillText('★',0,12)}
+ x.restore()}
+function rr(a,b,w,h,r){x.beginPath();x.roundRect?x.roundRect(a,b,w,h,r):x.rect(a,b,w,h)}
+function drawCoin(cx,cy,t){const s=Math.abs(Math.cos(t/9+cy/60));x.save();x.translate(cx,cy);x.scale(Math.max(.15,s),1);
+ x.fillStyle='#f5b301';x.beginPath();x.arc(0,0,13,0,7);x.fill();x.lineWidth=3;x.strokeStyle='#c98a00';x.stroke();
+ if(s>.4){x.fillStyle='#fff6d6';x.font='bold 13px Inter,system-ui';x.textAlign='center';x.fillText('★',0,5)}x.restore()}
+function drawCone(cx,cy){x.save();x.translate(cx,cy);x.fillStyle='rgba(0,0,0,.15)';x.beginPath();x.ellipse(0,18,20,6,0,0,7);x.fill();
+ x.fillStyle='#f97316';x.beginPath();x.moveTo(-16,18);x.lineTo(0,-22);x.lineTo(16,18);x.closePath();x.fill();
+ x.fillStyle='#fff';x.fillRect(-9,-2,18,6);x.fillStyle='#ea580c';rr(-20,14,40,7,3);x.fill();x.restore()}
+function drawDeco(d){const left=d.s?W*0.1:W*0.9;x.save();x.translate(left,d.y);
+ if(T.deco==='flower'){[[0,0],[10,14],[-8,18]].forEach(([a,b],i)=>{x.fillStyle=i%2?'#f472b6':'#c084fc';for(let k=0;k<5;k++){x.beginPath();x.arc(a+Math.cos(k*1.26)*6,b+Math.sin(k*1.26)*6,5,0,7);x.fill()}x.fillStyle='#fde047';x.beginPath();x.arc(a,b,3.5,0,7);x.fill()})}
+ else if(T.deco==='flag'){x.fillStyle='#64748b';x.fillRect(-1,-14,3,30);x.fillStyle=d.s?'#ef4444':'#22c55e';x.beginPath();x.moveTo(2,-14);x.lineTo(20,-8);x.lineTo(2,-2);x.fill()}
+ else{x.fillStyle='#34d399';x.beginPath();x.arc(0,0,14,0,7);x.fill();x.fillStyle='#059669';x.beginPath();x.arc(5,4,9,0,7);x.fill()}
+ x.restore()}
+function frame(){const g=G;g.t++;
+ if(g.alive){g.sp=Math.min(9,4.2+g.d/900);g.d+=g.sp/6;if(g.t%Math.max(26,Math.round(70-g.d/40))===0)spawn()}
+ const mv=g.alive?g.sp:0;g.cx+=(L[g.lane]-g.cx)*.25;
+ x.fillStyle=T.side;x.fillRect(0,0,W,H);for(let i=0;i<12;i++){x.fillStyle=i%2?T.side:T.side2;x.fillRect(0,((i*60+g.d*6)%720)-60,RL-6,60);x.fillRect(RR+6,((i*60+g.d*6)%720)-60,W-RR,60)}
+ x.fillStyle=T.edge;x.fillRect(RL-6,0,6,H);x.fillRect(RR,0,6,H);x.fillStyle=T.road;x.fillRect(RL,0,RR-RL,H);
+ x.fillStyle=T.line;for(let k=0;k<2;k++){const lx=RL+(RR-RL)*(k+1)/3-2;for(let y=-40;y<H;y+=60)x.fillRect(lx,(y+g.d*6)%660-40,4,30)}
+ g.deco.forEach(d=>{d.y+=mv;if(d.y>H+30)d.y-=8*80;drawDeco(d)});
+ const py=H-90;
+ g.coins.forEach(c=>{c.y+=mv;if(!c.got&&g.alive&&c.l===g.lane&&Math.abs(c.y-py)<34){c.got=1;g.c++;vib(12);g.pops.push({x:L[c.l],y:py-40,t:0})}if(!c.got)drawCoin(L[c.l],c.y,g.t)});
+ g.cones.forEach(o=>{o.y+=mv;if(g.alive&&o.l===g.lane&&Math.abs(o.y-py)<40){g.alive=false;g.shake=12;vib([60,40,60]);setTimeout(end,700)}drawCone(L[o.l],o.y)});
+ g.coins=g.coins.filter(c=>c.y<H+40&&!c.got);g.cones=g.cones.filter(o=>o.y<H+40);
+ x.save();if(g.shake>0){x.translate((Math.random()-.5)*g.shake,0);g.shake*=.85}drawCar(g.cx,py);x.restore();
+ g.pops.forEach(p=>{p.t++;x.globalAlpha=Math.max(0,1-p.t/30);x.fillStyle='#c98a00';x.font='800 18px Inter,system-ui';x.textAlign='center';x.fillText('+1',p.x,p.y-p.t);x.globalAlpha=1});g.pops=g.pops.filter(p=>p.t<30);
+ document.getElementById('hc').textContent='🪙 '+g.c;document.getElementById('hd').textContent=Math.floor(g.d)+' m';
+ raf=requestAnimationFrame(frame)}
+function end(){cancelAnimationFrame(raf);const st=Math.floor(G.c/10);const o=document.getElementById('ov');o.style.display='flex';
+ o.querySelector('h1').textContent='Nice run!';o.querySelector('p').textContent=G.c+' coins · '+Math.floor(G.d)+' m'+(st?' · +'+st+' ⭐':'');
+ document.getElementById('tix').textContent=tix;document.getElementById('go').textContent=tix?'Play again':'Finish a task to play';document.getElementById('go').disabled=!tix}
+function start(){if(!tix)return;tix--;reset();document.getElementById('ov').style.display='none';cancelAnimationFrame(raf);raf=requestAnimationFrame(frame)}
+document.getElementById('go').onclick=start;
+function move(d){if(!G||!G.alive)return;G.lane=Math.max(0,Math.min(2,G.lane+d));vib(8)}
+let sx=null;cv.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+cv.addEventListener('touchend',e=>{const ex=e.changedTouches[0].clientX;if(sx==null)return;const dx=ex-sx;if(Math.abs(dx)>25)move(dx>0?1:-1);else{const r=cv.getBoundingClientRect();move(ex<r.left+r.width/2?-1:1)}sx=null});
+cv.addEventListener('mousedown',e=>{const r=cv.getBoundingClientRect();move(e.clientX<r.left+r.width/2?-1:1)});
+addEventListener('keydown',e=>{if(e.key==='ArrowLeft')move(-1);if(e.key==='ArrowRight')move(1)});
+function setT(k){T=TH[k];document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t===k));document.getElementById('go').style.setProperty('--c',T.btn);if(!G||!G.alive){reset();frame();cancelAnimationFrame(raf)}}
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>setT(b.dataset.t));
+window.__demo={start,move,setT,G:()=>G};
+reset();frame();cancelAnimationFrame(raf);
+</script></body></html>
