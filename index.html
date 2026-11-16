@@ -991,6 +991,163 @@ body:has(#scrollModal.tm-sheet:not([hidden])) #toast{display:none!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
 .ldz-sel{border-color:color-mix(in srgb,var(--k2,var(--calm)) 45%,var(--line))!important;background:color-mix(in srgb,var(--k2,var(--calm)) 9%,var(--surface))!important}
 .ldz-tr{color:var(--k2,var(--calm))!important}.ldz-u{color:var(--k2,var(--calm))!important;border-color:var(--k2,var(--calm))!important}
+/* v89 */
+/* small tap glow right at the finger */
+.zt-glow{width:56px!important;height:56px!important;margin:-28px 0 0 -28px!important;background:radial-gradient(circle,rgba(16,149,107,.45) 0%,rgba(34,179,154,.2) 45%,transparent 70%)!important;animation:ztg .6s ease-out forwards!important}
+/* number + label fit inside the ring */
+#ldzTap small{font-size:.62rem!important;line-height:1.25!important;text-align:center;white-space:normal!important;max-width:64px;display:block;margin-top:1px}
+#ldzTap b{line-height:1!important}
+.ldz-ar{text-wrap:balance}.ldz-tr{text-wrap:balance;hyphens:none;-webkit-hyphens:none}
+/* wholesome round */
+.zk-steps{display:flex;gap:6px;justify-content:center;margin:2px 0 0}
+.zk-steps i{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:700 .7rem/1 var(--body);font-style:normal;border:1.5px solid color-mix(in srgb,var(--k2,var(--calm)) 40%,var(--line));color:var(--muted);background:var(--surface)}
+.zk-steps i.d{background:var(--k2,var(--calm));border-color:var(--k2,var(--calm));color:#fff}
+.zk-steps i.c{border-color:var(--k2,var(--calm));color:var(--k2,var(--calm));box-shadow:0 0 0 3px color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)}
+.zk-sw{animation:zksw .45s ease-out}@keyframes zksw{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* auto count */
+.za{display:flex;flex-direction:column;align-items:center;gap:6px;margin:8px 0 0}
+.za-b{min-height:36px;padding:0 14px;border-radius:99px;border:1.5px solid color-mix(in srgb,var(--k2,var(--calm)) 50%,var(--line));background:transparent;color:var(--k2,var(--calm));font-weight:700;font-size:.85rem;white-space:nowrap}
+.za-b.on{background:var(--k2,var(--calm));color:#fff;border-color:var(--k2,var(--calm))}
+.za-l{margin:0;font-size:.8rem;font-weight:700;color:var(--muted)}.za-r{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.za-r .chip{min-height:34px;padding:0 12px}
+.za-m{background:none;border:0;color:var(--k2,var(--calm));font-weight:700;font-size:.82rem;min-height:32px;text-decoration:underline;text-underline-offset:3px}
+/* Jannah garden */
+.zg-j .zg-h{fill:#BFE3C8}.zg-j .zg-h2{fill:#DDEFE0}
+.zg-new{animation:zgn .9s cubic-bezier(.2,.9,.3,1.2) both;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes zgn{from{opacity:0;transform:scale(.6) translateY(6px)}to{opacity:1;transform:none}}
+.zg-cap{margin:4px 0 0;font-size:.74rem;color:var(--muted);text-align:center;line-height:1.4}.zg-cap b{color:var(--k2,var(--calm))}
+/* virtue strip */
+.zv{margin:10px 0 2px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--k2,var(--calm)) 7%,var(--surface));border:1px solid color-mix(in srgb,var(--k2,var(--calm)) 18%,var(--line))}
+.zv-t{margin:6px 0 0;font-size:.8rem;font-weight:600;text-align:center}.zv-s{margin:2px 0 0;font-size:.68rem;color:var(--muted);text-align:center}
+.zv-foam{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;align-items:center;min-height:22px}
+.zv-foam i{width:var(--s);height:var(--s);border-radius:50%;background:#fff;border:1.2px solid #9CC9DE;transition:transform .35s,opacity .35s}
+.zv-foam i.pop{transform:scale(.35);opacity:.35;background:#9CC9DE}
+.zv-bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden}.zv-bar span{display:block;height:100%;background:var(--k2,var(--calm));border-radius:99px;transition:width .3s}
+.zv-ck{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px;font-size:.8rem}
+.zv-ck li{display:flex;gap:8px;align-items:center;color:var(--muted)}.zv-ck li.on{color:var(--ink);font-weight:600}
+.zv-ck i{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;font:700 .65rem/1 var(--body);font-style:normal;flex:none}
+.zv-ck li.on i{background:var(--k2,var(--calm));border-color:var(--k2,var(--calm));color:#fff}
+.zv-x{display:flex;align-items:center;justify-content:center;gap:10px}
+.zv-x span{display:flex;flex-direction:column;align-items:center;min-width:84px}.zv-x small{font-size:.66rem;color:var(--muted);text-align:center}.zv-x b{font-size:1.3rem;font-weight:800}
+.zv-x span.g b{color:var(--k2,var(--calm))}.zv-x em{font-style:normal;font-weight:800;color:var(--muted)}
+/* name under the logo: bigger, mushaf font */
+#landing .ld-logo .ld-name.arq{font-size:1.75rem!important;line-height:1.55!important;-webkit-text-stroke:.3px currentColor}
+/* headline orange a little darker */
+#landing .ld-h span{background-image:linear-gradient(90deg,color-mix(in srgb,var(--k1) 84%,#000),color-mix(in srgb,var(--k4) 82%,#000))!important}
+/* Ramadan / Eid decor (top only, never over content) */
+.dec{display:flex;justify-content:center;pointer-events:none;margin:-4px 0 -6px}.dec-svg{width:100%;max-width:420px;height:auto;display:block}
+.apbar+.pinbar+.dec,.pinbar+.dec{margin:0 0 4px}
+/* theme previews: mini first page */
+.tm-pg{position:relative;display:flex!important;flex-direction:column;align-items:center;gap:3px;padding:8px 6px 9px!important;overflow:hidden}
+.tm-dec{position:absolute;inset:0 0 auto 0;opacity:.95}.tm-dec svg{width:100%;height:auto}
+.tm-pg .tm-hd{font:800 .78rem/1.1 var(--display)!important;margin-top:10px;letter-spacing:-.01em}
+.tm-sub{font-size:.52rem;font-weight:700;line-height:1.2}
+.tm-h1{font-size:.5rem;font-weight:800;line-height:1.2;color:transparent;text-align:center;max-width:100%}
+.tm-tl{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;width:100%;margin-top:2px}
+.tm-tl i{display:grid;place-items:center;height:22px;border-radius:5px;border-bottom:2.5px solid;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.tm-tl em{display:grid;place-items:center;width:15px;height:15px;border-radius:4px;font-size:.55rem;font-style:normal}
+.tm-go{width:56%;height:8px;border-radius:99px;margin-top:3px}
+/* timer pill: time · pause · stop */
+#qtBar{display:flex;align-items:center;gap:4px;padding:4px 4px 4px 6px!important}
+#qtBar[hidden]{display:none!important}
+#qtBar .qb-t{all:unset;cursor:pointer;color:inherit;font-weight:700;font-size:.9rem;padding:4px 6px;display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px;max-width:58vw}
+#qtBar .qb-t small{flex-basis:100%;font-size:.66rem;font-weight:600;opacity:.8}
+#qtBar .qb-l{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:32vw}
+#qtBar .qb-c{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:.85rem;display:grid;place-items:center;flex:none}
+#qtBar .qb-x{background:rgba(255,255,255,.28)}
+/* reasons */
+#reasonModal .card{position:relative}
+.rs-x{position:absolute;top:10px;inset-inline-end:10px;width:36px;height:36px;min-height:0;padding:0;border-radius:50%}
+.rs-cnt{margin:0;font-size:.75rem;color:var(--muted);text-align:center}
+#reasonModal .row{flex-wrap:wrap;gap:8px}
+/* user page top: centered name, no top ☰ (menu is in the bottom bar), icon-only chips */
+#apBar.ap2 #apMb{display:none!important}
+#apBar.ap2 .ap-bw{display:flex;flex-direction:column;align-items:flex-start;line-height:1.1;min-width:0}
+#apBar.ap2 .ap-nm{font-size:.82rem;font-weight:700;color:color-mix(in srgb,var(--calm) 80%,#000);white-space:nowrap}
+#apBar.ap2 .ap-nm.arq{font-family:"Fastaqim Quran","Scheherazade New",serif;font-weight:400;font-size:1.35rem;line-height:1.3;-webkit-text-stroke:.25px currentColor}
+.wrap header .brand .hd-name{display:none!important}
+.pin2{gap:8px!important}.pin2 .pin-c{min-height:40px;padding:0 14px;font-size:1.05rem;display:inline-flex;align-items:center;gap:6px}
+.pin2 .pin-c span,.pin2 .pin-c b{font-size:.85rem;font-weight:700}
+/* dashboard motion like the preview */
+.dz-ring .f{transition:stroke-dashoffset .9s cubic-bezier(.2,.9,.3,1.2)}
+.dz-st{position:relative;overflow:visible!important}.dz-st.pop{animation:dzp .5s cubic-bezier(.2,.9,.3,1.4)}
+@keyframes dzp{40%{transform:scale(1.18)}}
+.dz-pop{position:absolute;top:-8px;inset-inline-end:-6px;background:var(--k4,#F5B82E);color:#1B0F02;font-weight:900;font-size:.75rem;border-radius:99px;padding:3px 8px;white-space:nowrap;pointer-events:none;animation:dzpp 1.6s ease-out forwards}
+@keyframes dzpp{0%{opacity:0;transform:translateY(6px) scale(.8)}20%{opacity:1;transform:none}75%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+.dz-ck.done span{text-decoration:line-through;text-decoration-thickness:2px;color:var(--muted);transition:color .3s}
+.dz-ck input:checked{animation:dzp .4s}
+.dz-dots button.just i,.sr-c.just{animation:dzp .45s cubic-bezier(.2,.9,.3,1.4)}
+/* salah row */
+.sr{display:grid;grid-template-columns:repeat(6,1fr);gap:2px;align-items:stretch}
+.sr-c{all:unset;box-sizing:border-box;position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:6px 0 18px;border-radius:12px;color:var(--ink);min-width:0;cursor:default}
+button.sr-c{cursor:pointer}
+.sr-c svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;color:var(--muted)}
+.sr-c small{font-size:.62rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.sr-c b{font-size:.78rem;font-weight:800;white-space:nowrap}
+.sr-c.sun{opacity:.7}
+.sr-c.cur{background:color-mix(in srgb,var(--k2,var(--calm)) 12%,transparent);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--k2,var(--calm)) 45%,transparent)}
+.sr-c.cur svg,.sr-c.cur small{color:var(--k2,var(--calm))}
+.sr-c.nx:not(.cur){background:color-mix(in srgb,#E8833A 9%,transparent)}
+.sr-c em{position:absolute;bottom:3px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.6rem;font-weight:800;border-radius:99px;padding:1px 5px;white-space:nowrap}
+.sr-since{background:#0F9D6E;color:#fff}.sr-in{background:#E8833A;color:#fff}
+.sr-c.on svg{color:#0F9D6E}.sr-ok{position:absolute;top:2px;inset-inline-end:4px;width:14px;height:14px;border-radius:50%;background:#0F9D6E;color:#fff;font:800 .55rem/14px var(--body);font-style:normal;text-align:center}
+.dz-sal2{padding-bottom:8px!important}
+#ldToday .sr{margin:6px 0 2px}
+/* Adhkar hub */
+.ah{display:flex;flex-direction:column;gap:10px;text-align:start}
+.ah-t{margin:0;text-align:center;font-weight:800;font-size:1.05rem}
+.ah-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ah-big{display:flex;flex-direction:column;align-items:center;gap:4px;padding:16px 8px;border-radius:18px;border:1px solid var(--line);background:var(--surface);min-height:0;text-align:center}
+.ah-big b{font-size:.95rem}.ah-big small{font-size:.72rem;color:var(--muted);font-weight:500;line-height:1.3}
+.ah-ic{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.3rem;background:color-mix(in srgb,var(--k2,var(--calm)) 12%,transparent);flex:none}
+.ah-r{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:16px;border:1px solid var(--line);background:var(--surface);min-height:0;text-align:start;color:inherit;text-decoration:none;width:100%;box-sizing:border-box}
+.ah-r>span:nth-child(2){flex:1;display:flex;flex-direction:column;min-width:0}.ah-r b{font-size:.92rem}.ah-r small{font-size:.74rem;color:var(--muted);font-weight:500}
+.ah-r small.nc{color:#B4691C;font-weight:700}.ah-r small.ok{color:#0F9D6E;font-weight:700}
+.ah-r i{font-style:normal;color:var(--muted);font-size:1.2rem}[dir=rtl] .ah-r i{transform:scaleX(-1)}
+.ah-bk{align-self:flex-start;background:none;border:0;color:var(--k2,var(--calm));font-weight:700;min-height:32px;padding:0}
+.ar-dots{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.ar-dots button{width:30px;height:30px;min-height:0;padding:0;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);font-size:.72rem;font-weight:700}
+.ar-dots button.d{background:#0F9D6E;border-color:#0F9D6E;color:#fff}.ar-dots button.c{border-color:var(--k2,var(--calm));box-shadow:0 0 0 3px color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)}
+.ar-ar{font-family:"Fastaqim Quran","Scheherazade New",serif;line-height:2;text-align:center;margin:4px 0 0}
+.ar-tr{margin:0;text-align:center;font-style:italic;color:var(--k2,var(--calm));font-size:.85rem}.ar-m{margin:0;text-align:center;font-size:.85rem;color:var(--muted)}
+.ar-tap{align-self:center;width:96px;height:96px;min-height:0;border-radius:50%;border:3px solid var(--k2,var(--calm));background:var(--surface);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ar-tap b{font-size:1.8rem;font-weight:800;line-height:1}.ar-tap small{font-size:.72rem;color:var(--muted)}.ar-tap.pulse{animation:dzp .35s}
+.ar-src{margin:0;text-align:center;font-size:.72rem;color:var(--muted)}
+.ah-v{margin:0;padding-inline-start:20px;display:grid;gap:12px}.ah-v li p{margin:0 0 2px;font-size:.86rem}.ah-v li p[lang=ar]{font-family:"Fastaqim Quran",serif;font-size:1.2rem}
+.ah-src,.ah-sub{display:inline-block;font-size:.7rem;font-weight:700;color:#A8761C;background:color-mix(in srgb,#E9C46A 22%,transparent);border-radius:99px;padding:2px 8px}
+.ah-sub{background:none;padding:0;color:var(--muted);margin:6px 0 0;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em}
+.ah-my{display:flex;gap:6px;align-items:stretch}
+.ah-myc{flex:1;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);min-height:44px;text-align:start;color:inherit;text-decoration:none;min-width:0}
+.ah-myc span{overflow:hidden;text-overflow:ellipsis}.ah-myc.ok{border-color:#0F9D6E;background:color-mix(in srgb,#0F9D6E 8%,var(--surface))}.ah-myc i{font-style:normal;color:var(--muted)}
+.ah-del{width:44px;min-height:44px;padding:0;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--muted)}
+.ah-add{display:flex;gap:6px;flex-wrap:wrap}.ah-add input{flex:1 1 140px;min-width:0}.ah-add input[type=number]{flex:0 0 72px}.ah-add .btn-main{flex:0 0 auto}
+/* recipes, nasheeds */
+.rc-new{align-self:center}
+.rc-i{border:1px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface)}.rc-i summary{font-weight:700;cursor:pointer}
+.rc-h{margin:8px 0 2px;font-size:.75rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}.rc-i ul,.rc-i ol{margin:0;padding-inline-start:20px;font-size:.9rem}
+.rc-a{display:flex;gap:6px;margin-top:8px}.rc-a .arm{background:#b42318;color:#fff;border-color:#b42318}
+.rc-f{display:flex;flex-direction:column;gap:8px}.rc-f label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.85rem}.rc-f label small{font-weight:500;color:var(--muted)}
+.ns-pl{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#0b0f14}.ns-pl:empty{display:none}.ns-pl iframe{width:100%;height:100%;border:0}
+.ns-i{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:14px;border:1px solid var(--line);background:var(--surface);margin-bottom:6px}
+.ns-i.on{border-color:var(--k2,var(--calm))}.ns-i>span{flex:1;display:flex;flex-direction:column;min-width:0}.ns-i small{color:var(--muted);font-size:.75rem}
+.ns-b{width:40px;height:40px;min-height:0;padding:0;border-radius:50%;border:0;background:var(--k2,var(--calm));color:#fff;flex:none}
+.ns-x{width:36px;height:36px;min-height:0;padding:0;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--muted);flex:none}
+.ns-c{justify-content:center;gap:8px}.ns-add summary{font-weight:700;color:var(--k2,var(--calm));cursor:pointer;text-align:center}.ns-add form{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.st-strk{margin:2px 0 6px;font-weight:800;font-size:1rem;text-align:center}
+
+.ldz-ar,.ar-ar{font-family:"Fastaqim Quran","Scheherazade New",serif!important;line-height:1.9!important}
+.tm-c{width:108px!important}.tm-pg{width:108px!important;height:auto!important;min-height:132px}
+.tm-tl i{height:20px}
+.tm-sheet #scrollBody{overflow-x:hidden!important}.tm-sheet #scrollBody .tm-row{width:100%;max-width:100%;align-self:stretch;box-sizing:border-box;min-width:0}
+.ah{width:100%;align-self:stretch;box-sizing:border-box}
+.ah input,.ah textarea{width:100%;min-height:46px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font:inherit;font-size:1rem;background:var(--surface);color:var(--ink);box-sizing:border-box}
+.ah textarea{min-height:110px;resize:vertical;font-weight:400}
+.ah-add input{width:auto}.rc-i,.ns-i,.ah-my,.ah-r{width:100%;box-sizing:border-box}
+#qtBar .qb-t{flex-wrap:wrap;white-space:nowrap}#qtBar .qb-c svg{width:16px;height:16px;display:block}
+#qtBar .qb-t{display:flex;flex-direction:column;align-items:flex-start;gap:0;max-width:62vw}
+#qtBar .qb-1{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+#qtBar .qb-l{max-width:none}
+.ah-r i{display:inline-block}html[dir=rtl] .ah-r i,.ah-r i:dir(rtl){transform:scaleX(-1)}
+#landing .ld-logo .ld-name.arq{font-size:2.2rem!important;line-height:1.45!important;-webkit-text-stroke:.5px currentColor;margin-top:0!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -4995,7 +5152,7 @@ thmOpen=function(){const cur=(S.look&&S.look.preset)||'calm';
    <div class="tm-row">${PRESETS.map(([k,n,o,a,b])=>`<button type="button" data-thp="${k}" class="tm-c ${cur===k?'on':''}" aria-pressed="${cur===k}">${thmMini(k,a,b)}<span class="tm-n">${esc(tl(n))}</span></button>`).join('')}</div>
    <button type="button" class="btn-main" id="tmOk" style="width:100%;margin-top:10px">${tl('Done')}</button>`);
   const M=$('scrollModal');M.classList.add('tm-sheet');const B=$('scrollBody');
-  const on=B.querySelector('.tm-c.on');if(on)setTimeout(()=>on.scrollIntoView({inline:'center',block:'nearest'}),30);
+  const on=B.querySelector('.tm-c.on');
   B.querySelectorAll('[data-thp]').forEach(b=>b.onclick=()=>{thmSet(b.dataset.thp);try{thmApply()}catch(e){}B.querySelectorAll('[data-thp]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}});
   $('tmOk').onclick=modalClose}
 {const _mcl=modalClose;modalClose=function(){const M=$('scrollModal');if(M)M.classList.remove('tm-sheet');return _mcl.apply(this,arguments)}}
@@ -5035,6 +5192,11 @@ function dashRender(){const sec=$('tab-now');if(!sec)return;let c=$('dashCard');
 {const _gs=guestStart;guestStart=function(){try{sessionStorage.setItem('fastaqim.guestOn','1')}catch(e){}return _gs.apply(this,arguments)}}
 {const _ge=guestExit;guestExit=function(){try{sessionStorage.removeItem('fastaqim.guestOn')}catch(e){}return _ge.apply(this,arguments)}}
 setTimeout(()=>{try{if(!inApp()&&sessionStorage.getItem('fastaqim.guestOn')&&!(typeof AU!=='undefined'&&AU.user))guestStart()}catch(e){}},700);
+/* runs finished in the game come back as stars: to-do steps done in Task run, dhikr counted in Dhikr run */
+function gameQRun(){try{if(window.GUEST||!S)return;let q=S.gameQ||[];try{const ls=JSON.parse(localStorage.getItem(KEY)||'null');if(ls&&ls.gameQ&&ls.gameQ.length&&!q.length)q=ls.gameQ}catch(e){}if(!q.length)return;S.gameQ=[];save();let z=0;
+  q.forEach(it=>{try{if(it.z)z+=it.z;else if(it.t){const t=(S.tasks||[]).find(x=>x.id===it.t),s=t&&(t.steps||[]).find(x=>x.id===it.s);if(t&&s&&!s.done)completeStep(t,s)}}catch(e){}});
+  if(z>=10)star(Math.floor(z/10),'🏎️ '+tl('Dhikr')+' × '+z);save();render()}catch(e){console.error(e)}}
+setTimeout(gameQRun,1500);addEventListener('pageshow',()=>setTimeout(gameQRun,600));
 
 /* ===== Dhikr counter: every tap shows where you tapped (warm light + 8-point star), the number rolls, and a small Jannah garden fills with light as the round grows (no animals) ===== */
 function zgSvg(p,done){const L=11,on=Math.round(p*L),ram=(()=>{try{return hijParts().m===9}catch(e){return false}})();
@@ -5072,6 +5234,343 @@ function zkLabels(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0
   const t=box.querySelector('.ldz-tot');if(t)t.textContent=n?`${tl('All dhikr today')}: ${tot}`:tl('Tap anywhere to count');box.querySelectorAll('.zt-ghost').forEach(g=>g.remove())}
 {const _lz3=ldZikr;ldZikr=function(){const r=_lz3.apply(this,arguments);try{zkLabels()}catch(e){}return r}}
 {const _lt3=lzTap;lzTap=function(){const r=_lt3.apply(this,arguments);try{zkLabels()}catch(e){}return r}}
+
+/* ===== v89: overnight batch ===== */
+const X89=[
+["Wholesome round","جولة الأذكار الجامعة","Marsaa zikrii guutuu","Wareegga dhikriga oo dhan"],
+["Auto count","عدّ تلقائي","Ofumaan lakkaa'i","Tirin toos ah"],["Stop auto","أوقف العدّ التلقائي","Ofumaan lakkaa'uu dhaabi","Jooji tirinta toos"],
+["Pick your pace","اختر سرعتك","Saffisa kee filadhu","Dooro xawaarahaaga"],["Measure my pace","قِس سرعتي","Saffisa koo safari","Cabbir xawaarahayga"],
+["Say it once, then tap Done.","قُلها مرة واحدة، ثم اضغط «تم».","Al tokko jedhi, achii «Xumurameera» tuqi.","Hal mar dheh, kadib taabo «Dhammaatay»."],
+["Your garden today","حديقتك اليوم","Mukni kee har'a","Beertaada maanta"],["Next","التالي","Itti aanu","Xiga"],["Garden complete for today","اكتملت حديقتك اليوم","Mukni kee har'a guutameera","Beertaadu maanta way dhammaystirantay"],
+["Grass","عشب","Marga","Caws"],["Flowers","أزهار","Daraaraa","Ubaxyo"],["River of water","نهر من ماء","Laga bishaanii","Webi biyo ah"],["Tree","شجرة","Muka","Geed"],["Fruit","ثمار","Firii","Midho"],
+["Palace","قصر","Masaraa","Qasri"],["Palms","نخيل","Meexxii","Geedo timir"],["River of milk","نهر من لبن","Laga aannanii","Webi caano ah"],["River of honey","نهر من عسل","Laga damma","Webi malab ah"],
+["Light","نور","Ifa","Iftiin"],["Stars","نجوم","Urjiilee","Xiddigo"],["Trees","أشجار","Mukkeen","Geedo"],
+["Sins wiped, even like sea foam","تُحطّ الخطايا وإن كانت مثل زبد البحر","Dogoggorri ni haqama, yoo akka hoomaa galaanaa ta'e illee","Dembiyada waa la tirtiraa, xitaa haddii ay la mid yihiin xumbada badda"],
+["Your salawat","صلاتك على النبي ﷺ","Salawaata kee","Salawaadkaaga"],["Allah's salawat on you","صلاة الله عليك","Salawaata Rabbiin sirratti","Salawaadka Allaah ee adiga"],
+["Like freeing 10 slaves","كعدل عشر رقاب","Akka garboota 10 bilisa baasuu","Sida xoreynta 10 addoon"],["100 good deeds written","تُكتب لك مائة حسنة","Gaariin 100 siif barreeffama","Boqol xasanaad ayaa laguu qoraa"],
+["100 sins erased","تُمحى عنك مائة سيئة","Badiin 100 sirraa haqama","Boqol dembi ayaa lagaa tirtiraa"],["Protection from Shaytan today","حرز من الشيطان يومك","Har'a Sheyxaana irraa eegumsa","Ka ilaalin Shaydaanka maantadaas"],
+["Paused while you're here","متوقف ما دمتَ هنا","Yeroo ati asitti jirtutti dhaabbateera","Waa la hakiyay inta aad halkan joogto"],
+["Another reason","سبب آخر","Sababa biraa","Sabab kale"],
+["Adhkar","الأذكار","Azkaara","Adkaarta"],["Tasbih","التسبيح","Tasbiiha","Tasbiixa"],["A simple dhikr counter","عدّاد ذكر بسيط","Lakkoftuu zikrii salphaa","Tiriye dhikri fudud"],
+["Ruqyah","الرقية الشرعية","Ruqyaa","Ruqyada"],["From the Qur'an and Sunnah","من القرآن والسنة","Qur'aanaa fi Sunnaa irraa","Quraanka iyo Sunnada"],
+["Duas","الأدعية","Du'aawwan","Ducooyinka"],["Hisnul Muslim: audio and book","حصن المسلم: صوت وكتاب","Hisnul Muslim: sagalee fi kitaaba","Xisnul Muslim: cod iyo buug"],
+["Adhkar by time","الأذكار حسب الوقت","Azkaara akka yeroo","Adkaarta waqtiga"],["Virtues","الفضائل","Faayidaalee","Fadliyada"],["What each dhikr earns","ما يكسبه كل ذكر","Zikriin tokkoon tokkoon maal argamsiisa","Waxa dhikri kastaa kasbado"],
+["My adhkar","أذكاري","Azkaara koo","Adkaartayda"],["Add your own","أضف أذكارك","Kan kee dabali","Ku dar kuwaaga"],["Not completed yet","لم تكتمل بعد","Ammallee hin xumuramne","Weli lama dhammaystirin"],
+["Done today","تمّت اليوم","Har'a xumurameera","Maanta waa la dhammeeyay"],["Add","أضف","Dabali","Ku dar"],["Dhikr text","نص الذكر","Barreeffama zikrii","Qoraalka dhikriga"],["Times","عدد المرات","Al meeqa","Imisa jeer"],
+["Delete","حذف","Haqi","Tirtir"],["Tap again to delete","اضغط مرة أخرى للحذف","Haquuf irra deebi'ii tuqi","Mar kale taabo si aad u tirtirto"],["Morning, evening, salah, sleep","الصباح، المساء، الصلاة، النوم","Ganama, galgala, salaata, hirriba","Subax, fiid, salaad, hurdo"],["since adhan","منذ الأذان","azaana booda","tan iyo aadaanka"],["Sunrise","الشروق","Ba'uu aduu","Qorrax ka soo bax"],
+["Recipes","الوصفات","Qophii nyaataa","Cuntooyinka"],["Nasheeds","الأناشيد","Nashiidaa","Nashiidooyinka"],["Saved & watch later","المحفوظات والمشاهدة لاحقًا","Kan olkaa'e fi booda ilaalchuu","Kaydsan & daawo goor dambe"],
+["Recipe name","اسم الوصفة","Maqaa qophii","Magaca cuntada"],["Ingredients","المكونات","Wantoota barbaachisan","Waxyaabaha loo baahan yahay"],["Steps","الخطوات","Tarkaanfiiwwan","Tallaabooyinka"],
+["Save","حفظ","Olkaa'i","Kaydi"],["Edit","تعديل","Gulaali","Wax ka beddel"],["No recipes yet","لا وصفات بعد","Ammallee qophiin hin jiru","Weli cunto lama kaydin"],["One per line","واحد في كل سطر","Sararri tokko tokko","Mid sadar kasta"],
+["YouTube link","رابط يوتيوب","Liinkii YouTube","Xiriirka YouTube"],["Name","الاسم","Maqaa","Magaca"],["Munshid","المنشد","Munshida","Munshidka"],["Add a nasheed","أضف نشيدًا","Nashiidaa dabali","Ku dar nashiid"],
+["Paste a YouTube link first.","الصق رابط يوتيوب أولًا.","Dura liinkii YouTube maxxansi.","Marka hore dhig xiriir YouTube."],["No nasheeds yet","لا أناشيد بعد","Ammallee nashiidaan hin jiru","Weli nashiid ma jiro"],
+["Open","فتح","Bani","Fur"],["Your own links","روابطك","Liinkiiwwan kee","Xiriiradaada"],["Pick one for me","اختر لي واحدًا","Tokko naaf filadhu","Mid ii dooro"],["Link","الرابط","Liinkii","Xiriirka"],["Title","العنوان","Mata duree","Cinwaan"],
+["YouTube: Watch later","يوتيوب: المشاهدة لاحقًا","YouTube: Booda ilaali","YouTube: Daawo goor dambe"],["YouTube: Liked videos","يوتيوب: الفيديوهات المعجب بها","YouTube: Viidiyoowwan jaallatte","YouTube: Muuqaallada aad jeclaatay"],
+["Instagram: Saved","إنستغرام: المحفوظات","Instagram: Kan olkaa'e","Instagram: Kaydsan"],["Watch one, then remove it.","شاهد واحدًا، ثم احذفه.","Tokko ilaali, achii haqi.","Mid daawo, kadibna tirtir."],
+["Done","تم","Xumurameera","Dhammaatay"],["Stop","إيقاف","Dhaabi","Jooji"],["Resume","استئناف","Itti fufi","Sii wad"],["Pause","إيقاف مؤقت","Yeroof dhaabi","Hakad"]];
+X89.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const LI4=()=>Math.max(0,['en','ar','om','so'].indexOf(LANG));
+
+/* ---------- streak: any productive action on any page counts (guest, first page or signed in) ---------- */
+const ACTK='fastaqim.days';
+function actGet(){try{return JSON.parse(localStorage.getItem(ACTK))||{}}catch(e){return {}}}
+function actMark(){try{const o=actGet(),k=dkey();if(!o[k]){o[k]=1;const ks=Object.keys(o).sort();while(ks.length>400)delete o[ks.shift()];localStorage.setItem(ACTK,JSON.stringify(o))}}catch(e){}
+  try{if(S&&S.days&&!window.GUEST&&inApp()&&!S.days[dkey()]){S.days[dkey()]=1}}catch(e){}}
+streak=function(){const A=actGet(),D=(S&&S.days)||{},on=k=>!!(D[k]||A[k]);let n=0,d=new Date();if(!on(dkey(d)))d.setDate(d.getDate()-1);while(on(dkey(d))){n++;d.setDate(d.getDate()-1)}return n};
+{const _st=star;star=function(){try{actMark()}catch(e){}return _st.apply(this,arguments)}}
+{const _aw=award;award=function(){try{actMark()}catch(e){}return _aw.apply(this,arguments)}}
+{const _lt=lzTap;lzTap=function(){try{actMark()}catch(e){}return _lt.apply(this,arguments)}}
+{const _so=ldStarOpen;ldStarOpen=function(){const r=_so.apply(this,arguments);try{const b=$('scrollBody').querySelector('.st-pop .small');if(b){const s=streak();b.insertAdjacentHTML('afterend',`<p class="st-strk">🔥 ${s} ${tl('days')}</p>`)}}catch(e){}return r}}
+
+/* ---------- dhikr counter ---------- */
+/* wholesome round: one of each, in this order, as one round */
+LZ.push({ar:'جولة الأذكار الجامعة',tr:'Wholesome round',m:['Wholesome round','','',''],seq:[
+ {ar:'أَسْتَغْفِرُ اللَّهَ',tr:'Astaghfirullāh',m:['I ask Allah for forgiveness','','Rabbiin dhiifama nan gaafadha','Allaah ayaan dambi dhaaf weydiisanayaa']},
+ {ar:'سُبْحَانَ اللَّهِ',tr:'SubḥānAllāh',m:['Glory be to Allah','','Rabbiin qulqulluu dha','Allaah waa ka nasahan yahay']},
+ {ar:'الْحَمْدُ لِلَّهِ',tr:'Alḥamdulillāh',m:['All praise is for Allah','','Galanni hundi kan Rabbii','Mahad oo dhan Allaah baa iska leh']},
+ {ar:'لَا إِلَٰهَ إِلَّا اللَّهُ',tr:'Lā ilāha illā Allāh',m:['None is worthy of worship except Allah','','Rabbii malee kan haqaan gabbaramu hin jiru','Ilaah xaq ah ma jiro Allaah mooyee']},
+ {ar:'اللَّهُ أَكْبَرُ',tr:'Allāhu akbar',m:['Allah is the Greatest','','Rabbiin hunda caala','Allaah baa ugu weyn']},
+ {ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',tr:'Lā ḥawla wa lā quwwata illā billāh',m:['There is no power and no strength except with Allah','','Humnii fi jabinni Rabbiin malee hin jiru','Awood iyo xoog midna ma jiro Allaah mooyee']},
+ {ar:'اللَّهُمَّ صَلِّ عَلَىٰ نَبِيِّنَا مُحَمَّدٍ',tr:'Allāhumma ṣalli ʿalā nabiyyinā Muḥammad',m:['O Allah, send blessings upon our Prophet Muhammad ﷺ','','Yaa Rabbi, Nabiyyii keenya Muhammad ﷺ irratti rahmata buusi','Allahayow, ku naxariiso Nabigeenna Muxammad ﷺ']}]});
+const ZW=LZ.length-1;
+/* the old "Free count" slot moved up by one: carry its count over once */
+try{if(!localStorage.getItem('fastaqim.zk10')){const o=JSON.parse(localStorage.getItem(LZK)||'null');if(o&&o.n){if(o.i===ZW)o.i=ZW+1;if(o.n[ZW]!=null){o.n[ZW+1]=(o.n[ZW+1]||0)+o.n[ZW];delete o.n[ZW]}localStorage.setItem(LZK,JSON.stringify(o))}localStorage.setItem('fastaqim.zk10','1')}}catch(e){}
+/* duas broken by meaning */
+const ZBR={6:{ar:['لَا إِلَٰهَ إِلَّا أَنتَ سُبْحَانَكَ','إِنِّي كُنتُ مِنَ الظَّالِمِينَ'],tr:['Lā ilāha illā anta subḥānaka','innī kuntu minaẓ‑ẓālimīn']},
+ 4:{ar:['لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ','لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ','وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ'],tr:['Lā ilāha illallāhu waḥdahu lā sharīka lah,','lahul‑mulku wa lahul‑ḥamd,','wa huwa ʿalā kulli shayʾin qadīr']}};
+function zkIdx(){const o=lzGet();return {o,i:(o.i||0)%(LZ.length+1)}}
+zkLabels=function(){const box=$('ldZk');if(!box)return;const {o,i}=zkIdx(),n=o.n[i]||0,tot=Object.values(o.n).reduce((a,c)=>a+c,0),z=LZ[i];
+  const B=box.querySelector('#ldzTap'),sm=B&&B.querySelector('small'),nb=B&&B.querySelector('b');
+  if(z&&z.seq){const L=z.seq.length,k=n%L,it=z.seq[k],r=Math.floor(n/L);box.classList.add('zk-seq');
+    const ar=box.querySelector('.ldz-ar'),tr=box.querySelector('.ldz-tr'),m=box.querySelector('.ldz-m');
+    if(ar){ar.textContent=it.ar;ar.classList.remove('zk-sw');void ar.offsetWidth;ar.classList.add('zk-sw')}if(tr)tr.textContent=it.tr;if(m)m.textContent=LI4()===0?it.m[0]:(it.m[LI4()]||tl(it.m[0]));
+    let st=box.querySelector('.zk-steps');if(!st){st=document.createElement('div');st.className='zk-steps';const t=box.querySelector('.ldz-t');if(t)t.before(st)}
+    st.innerHTML=z.seq.map((_,j)=>`<i class="${j<k?'d':j===k?'c':''}">${j<k?'✓':j+1}</i>`).join('');
+    if(nb)nb.textContent=r;if(sm)sm.innerHTML=`${tl('round')}<br>${k+1}/${L}`;const p=B&&B.querySelector('.p');if(p)p.style.strokeDashoffset=100.5*(1-k/L);
+    const ib=box.querySelector('.ldz-i');if(ib)ib.hidden=true}
+  else{box.classList.remove('zk-seq');const s0=box.querySelector('.zk-steps');if(s0)s0.remove();
+    if(sm){const r=Math.floor((n-1)/33)+1,inr=n?(n%33||33):0;sm.innerHTML=n>33?`<span dir="ltr">${inr}/33</span><br>${tl('round')} ${r}`:tl('of 33')}
+    const br=ZBR[i];if(br){const ar=box.querySelector('.ldz-ar'),tr=box.querySelector('.ldz-tr');if(ar&&!ar.dataset.br){ar.innerHTML=br.ar.map(esc).join('<br>');ar.dataset.br=1}if(tr&&!tr.dataset.br){tr.innerHTML=br.tr.map(esc).join('<br>');tr.dataset.br=1}}}
+  const t=box.querySelector('.ldz-tot');if(t)t.textContent=n||tot?`${tl('All dhikr today')}: ${tot}`:tl('Tap anywhere to count');box.querySelectorAll('.zt-ghost').forEach(g=>g.remove());
+  const sel=box.querySelector('[data-zsel]');if(sel){const op=sel.querySelector(`option[value="${ZW}"]`);if(op)op.textContent='🌿 '+tl('Wholesome round')}
+  try{zkAutoUi()}catch(e){}};
+/* round finished in the wholesome set */
+{const _lt=lzTap;lzTap=function(){const r=_lt.apply(this,arguments);try{const {o,i}=zkIdx();if(i===ZW){const n=o.n[i]||0;if(n&&n%7===0){try{navigator.vibrate&&navigator.vibrate([25,50,25])}catch(e){}star(1,'🌿 '+tl('Wholesome round'),null,true)}}}catch(e){}return r}}
+
+/* auto count at the person's own pace (never faster than 1.5 s) */
+const ZA={iv:0,on:false,meas:0};
+function zaPace(i){try{const o=JSON.parse(localStorage.getItem('fastaqim.zkAuto')||'{}');return o[i]||0}catch(e){return 0}}
+function zaSetPace(i,s){try{const o=JSON.parse(localStorage.getItem('fastaqim.zkAuto')||'{}');o[i]=s;localStorage.setItem('fastaqim.zkAuto',JSON.stringify(o))}catch(e){}}
+function zaStop(){clearInterval(ZA.iv);ZA.on=false;try{zkAutoUi()}catch(e){}}
+function zaStart(sec){zaStop();ZA.on=true;ZA.sec=sec;const tick=()=>{const B=$('ldzTap');if(!B||!$('ldZk')||$('scrollModal').hidden){zaStop();return}const R=B.getBoundingClientRect();lzTap({clientX:R.left+R.width/2,clientY:R.top+R.height/2,target:B})};ZA.iv=setInterval(tick,sec*1000);zkAutoUi()}
+function zkAutoUi(){const box=$('ldZk');if(!box)return;let w=box.querySelector('.za');if(!w){w=document.createElement('div');w.className='za';const rr=box.querySelector('.ldz-rr');if(rr)rr.after(w);else return}
+  const {i}=zkIdx();if(i===LZ.length){w.innerHTML='';return}const pace=zaPace(i);
+  if(ZA.on){w.innerHTML=`<button type="button" class="za-b on" data-za="stop">⏸ ${tl('Stop auto')} · <span dir="ltr">${ZA.sec}s</span></button>`}
+  else if(ZA.meas){w.innerHTML=`<p class="small muted">${tl('Say it once, then tap Done.')}</p><button type="button" class="za-b on" data-za="mdone">✓ ${tl('Done')}</button>`}
+  else if(w.dataset.open){w.innerHTML=`<p class="za-l">${tl('Pick your pace')}</p><div class="za-r">${[2,3,4,6,10].map(s=>`<button type="button" class="chip${pace===s?' on':''}" data-zs="${s}" dir="ltr">${s}s</button>`).join('')}${pace&&![2,3,4,6,10].includes(pace)?`<button type="button" class="chip on" data-zs="${pace}" dir="ltr">${pace}s</button>`:''}</div><button type="button" class="za-m" data-za="meas">⏱ ${tl('Measure my pace')}</button>`}
+  else w.innerHTML=`<button type="button" class="za-b" data-za="open">▶ ${tl('Auto count')}${pace?` · <span dir="ltr">${pace}s</span>`:''}</button>`;
+  w.onpointerdown=e=>e.stopPropagation();
+  w.onclick=e=>{e.stopPropagation();const b=e.target.closest('[data-za],[data-zs]');if(!b)return;const k=b.dataset.za;
+    if(b.dataset.zs){const s=+b.dataset.zs;zaSetPace(i,s);delete w.dataset.open;zaStart(s);return}
+    if(k==='open'){w.dataset.open=1;zkAutoUi()}else if(k==='stop'){zaStop()}else if(k==='meas'){ZA.meas=Date.now();delete w.dataset.open;zkAutoUi()}
+    else if(k==='mdone'){const s=Math.max(1.5,Math.round((Date.now()-ZA.meas)/100)/10+.3);ZA.meas=0;zaSetPace(i,s);zaStart(s)}}}
+{const _mcl=modalClose;modalClose=function(){try{zaStop();ZA.meas=0}catch(e){}return _mcl.apply(this,arguments)}}
+
+/* garden that grows toward Jannah through the whole day (it never resets each round) */
+const ZG=[[1,'Grass','🌱'],[4,'Flowers','🌸'],[8,'River of water','💧'],[12,'Tree','🌳'],[18,'Tree','🌳'],[25,'Fruit','🍇'],[33,'Palace','🏰'],[45,'Palms','🌴'],[60,'Flowers','🌼'],[80,'River of milk','🥛'],[100,'River of honey','🍯'],[130,'Light','✨'],[170,'Stars','⭐'],[220,'Trees','🌳'],[300,'Light','🌟']];
+function zgTree(x,s,c,fr){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-2 0 Q-1 -14 -3 -26 L3 -26 Q1 -14 2 0z" fill="#8a5a3b"/><circle cx="0" cy="-34" r="13" fill="${c}"/><circle cx="-10" cy="-27" r="9" fill="${c}"/><circle cx="10" cy="-27" r="9" fill="${c}"/><circle cx="0" cy="-42" r="9" fill="${c}" opacity=".9"/>${fr?`<g class="zg-fr"><circle cx="-6" cy="-32" r="2.6" fill="#E4572E"/><circle cx="7" cy="-36" r="2.6" fill="#F2B134"/><circle cx="2" cy="-26" r="2.6" fill="#E4572E"/><circle cx="-11" cy="-24" r="2.4" fill="#F2B134"/><circle cx="11" cy="-25" r="2.4" fill="#E4572E"/></g>`:''}</g>`}
+function zgPalm(x,s){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-1.5 0 Q2 -18 0 -34 L3 -34 Q5 -18 1.5 0z" fill="#9a6a44"/><g transform="translate(1.5 -34)" fill="none" stroke="#2f8a57" stroke-width="3.2" stroke-linecap="round"><path d="M0 0 q-10 -6 -20 2"/><path d="M0 0 q10 -6 20 2"/><path d="M0 0 q-6 -10 -15 -10"/><path d="M0 0 q6 -10 15 -10"/><path d="M0 0 q0 -8 1 -14"/></g><circle cx="0" cy="-31" r="2.2" fill="#b7791f"/><circle cx="3.5" cy="-31" r="2.2" fill="#b7791f"/></g>`}
+function zgFlowers(xs){return xs.map((x,j)=>{const c=['#F28DB2','#F5C04A','#ffffff','#C58AF0'][j%4];return `<g transform="translate(${x} ${103+(j%2)})"><path d="M0 0 V-7" stroke="#3E9B5F" stroke-width="1.4"/><circle cy="-9" r="2.1" fill="${c}"/><circle cx="-2.2" cy="-7.5" r="1.7" fill="${c}"/><circle cx="2.2" cy="-7.5" r="1.7" fill="${c}"/><circle cy="-8.3" r="1" fill="#E6A23C"/></g>`}).join('')}
+function zgRiver(y,c,edge){return `<path class="zg-rv" d="M-4 ${y} C40 ${y-4} 80 ${y+4} 120 ${y} S200 ${y-4} 240 ${y} S300 ${y+3} 324 ${y}" stroke="${edge}" stroke-width="5.4" fill="none" stroke-linecap="round"/><path class="zg-rv" d="M-4 ${y} C40 ${y-4} 80 ${y+4} 120 ${y} S200 ${y-4} 240 ${y} S300 ${y+3} 324 ${y}" stroke="${c}" stroke-width="3.6" fill="none" stroke-linecap="round"/>`}
+function zgJannah(tot,fresh){const on=k=>tot>=ZG[k][0],nw=k=>fresh===k?' zg-new':'';let g='';
+  g+=`<defs><radialGradient id="zgL" cx="50%" cy="60%" r="55%"><stop offset="0" stop-color="#FFE7A3" stop-opacity=".9"/><stop offset="1" stop-color="#FFE7A3" stop-opacity="0"/></radialGradient></defs>`;
+  if(on(14))g+=`<rect class="${nw(14)}" x="0" y="0" width="320" height="130" fill="url(#zgL)" opacity=".55"/>`;
+  if(on(12))g+=`<g class="zg-sk${nw(12)}">${[[24,20],[70,12],[118,26],[200,14],[250,28],[298,16],[160,8],[140,40],[226,44]].map(([a,b])=>`<path transform="translate(${a} ${b})" d="M0-4.5 1.2-1.2 4.5 0 1.2 1.2 0 4.5-1.2 1.2-4.5 0-1.2-1.2z" fill="#E9B949"/>`).join('')}</g>`;
+  if(on(11))g+=`<g class="${nw(11)}"><ellipse cx="160" cy="74" rx="78" ry="44" fill="url(#zgL)"/>${[-60,-35,-12,12,35,60].map(a=>`<path d="M160 58 L${(160+Math.sin(a*Math.PI/180)*90).toFixed(1)} ${(58-Math.cos(a*Math.PI/180)*60).toFixed(1)}" stroke="#F6D77A" stroke-width="2" opacity=".55"/>`).join('')}</g>`;
+  if(on(6)){const lit=on(11);g+=`<g class="zg-pal${nw(6)}" opacity="${lit?1:.55}"><rect x="128" y="74" width="64" height="30" rx="2" fill="#F3EFE3" stroke="#D9C8A0"/><path d="M146 74 Q160 46 174 74z" fill="${lit?'#E9B949':'#E8DFC6'}" stroke="#D9C8A0"/><rect x="157.6" y="44" width="4.8" height="6" fill="${lit?'#E9B949':'#D9C8A0'}"/><rect x="122" y="62" width="7" height="42" fill="#EEE7D4" stroke="#D9C8A0"/><path d="M120.5 62 L125.5 52 L130.5 62z" fill="${lit?'#E9B949':'#E8DFC6'}"/><rect x="191" y="62" width="7" height="42" fill="#EEE7D4" stroke="#D9C8A0"/><path d="M189.5 62 L194.5 52 L199.5 62z" fill="${lit?'#E9B949':'#E8DFC6'}"/>${[136,148,160,172,184].map(x=>`<path d="M${x-3.5} 104 V91 Q${x} 85 ${x+3.5} 91 V104z" fill="${lit?'#F6D77A':'#D9C8A0'}"/>`).join('')}</g>`}
+  if(on(13))g+=`<g class="${nw(13)}">${zgTree(98,.62,'#7BC48F',on(5))}${zgTree(222,.62,'#7BC48F',on(5))}</g>`;
+  g+=`<path class="zg-h2" d="M0 104 Q80 94 160 102 T320 100 V130 H0z"/><path class="zg-h" d="M0 108 Q90 100 170 106 T320 104 V130 H0z"/>`;
+  if(on(0))g+=`<g class="zg-gr${nw(0)}">${[...Array(16)].map((_,j)=>{const x=8+j*20;return `<path d="M${x} 108 q1 -6 3 -8 M${x+3} 108 q0 -7 -2 -9 M${x+6} 108 q-1 -5 2 -7" stroke="#4FA36A" stroke-width="1.3" fill="none"/>`}).join('')}</g>`;
+  if(on(2))g+=`<g class="${nw(2)}">${zgRiver(113,'#6EC1E4','#3E95C2')}</g>`;
+  if(on(9))g+=`<g class="${nw(9)}">${zgRiver(119,'#FBF8EF','#D8D0BC')}</g>`;
+  if(on(10))g+=`<g class="${nw(10)}">${zgRiver(125,'#F1B53B','#C98A16')}</g>`;
+  if(on(3))g+=`<g class="${nw(3)}">${zgTree(56,1,'#3E9B5F',on(5))}</g>`;
+  if(on(4))g+=`<g class="${nw(4)}">${zgTree(266,1,'#3E9B5F',on(5))}</g>`;
+  if(on(5)&&fresh===5)g+=`<g class="zg-new"></g>`;
+  if(on(7))g+=`<g class="${nw(7)}">${zgPalm(18,1)}${zgPalm(304,1)}</g>`;
+  if(on(1))g+=`<g class="${nw(1)}">${zgFlowers([84,94,104,112])}</g>`;
+  if(on(8))g+=`<g class="${nw(8)}">${zgFlowers([208,218,228,238,246])}</g>`;
+  const top=on(11)||on(12)||on(14)?0:on(6)?38:on(3)?52:70;return `<svg viewBox="0 ${top} 320 ${130-top}" class="zg-svg zg-j" aria-hidden="true">${g}</svg>`}
+const ZGS={last:-1};
+zgRender=function(){const box=$('ldZk');if(!box)return;const o=lzGet(),tot=Object.values(o.n).reduce((a,c)=>a+c,0);let g=box.querySelector('.zg');
+  if(!g){g=document.createElement('div');g.className='zg';box.appendChild(g)}
+  const k=ZG.filter(x=>tot>=x[0]).length-1;const fresh=ZGS.last>=-1&&k>ZGS.last&&ZGS.seen?k:-1;ZGS.last=k;ZGS.seen=1;
+  const nx=ZG[k+1];g.innerHTML=zgJannah(tot,fresh)+`<p class="zg-cap"><b>🌿 ${tl('Your garden today')}</b> <span dir="ltr">${k+1}/${ZG.length}</span>${nx?` · ${tl('Next')}: ${nx[2]} ${tl(nx[1])} <span dir="ltr">(${nx[0]})</span>`:` · ${tl('Garden complete for today')} ✨`}</p>`;
+  if(fresh>=0)try{navigator.vibrate&&navigator.vibrate([15,40,15])}catch(e){}
+  try{zvRender()}catch(e){}};
+/* virtue you can see while counting (only where a sahih hadith gives the number) */
+function zvRender(){const box=$('ldZk');if(!box)return;const {o,i}=zkIdx(),n=o.n[i]||0;let v=box.querySelector('.zv');
+  let h='';
+  if(i===0){const pop=Math.min(20,Math.floor(n/5));h=`<div class="zv-foam">${[...Array(20)].map((_,j)=>`<i class="${j<pop?'pop':''}" style="--s:${6+(j*7)%9}px"></i>`).join('')}</div><p class="zv-t">${tl('Sins wiped, even like sea foam')} · <b dir="ltr">${Math.min(n,100)}/100</b></p><p class="zv-s">${LI4()===1?'صحيح البخاري 6405، صحيح مسلم 2691':'Sahih al-Bukhari 6405, Sahih Muslim 2691'}</p>`}
+  else if(i===4){const ok=n>=100;h=`<div class="zv-bar"><span style="width:${Math.min(100,n)}%"></span></div><ul class="zv-ck">${['Like freeing 10 slaves','100 good deeds written','100 sins erased','Protection from Shaytan today'].map(t=>`<li class="${ok?'on':''}"><i>${ok?'✓':''}</i>${tl(t)}</li>`).join('')}</ul><p class="zv-s"><b dir="ltr">${Math.min(n,100)}/100</b> · ${LI4()===1?'صحيح البخاري 3293، صحيح مسلم 2691':'Sahih al-Bukhari 3293, Sahih Muslim 2691'}</p>`}
+  else if(i===8){h=`<div class="zv-x"><span><small>${tl('Your salawat')}</small><b dir="ltr">${n}</b></span><em>× 10</em><span class="g"><small>${tl("Allah's salawat on you")}</small><b dir="ltr">${n*10}</b></span></div><p class="zv-s">${LI4()===1?'صحيح مسلم 408':'Sahih Muslim 408'}</p>`}
+  if(!h){if(v)v.remove();return}
+  if(!v){v=document.createElement('div');v.className='zv';const g=box.querySelector('.zg');if(g)g.before(v);else box.appendChild(v)}v.innerHTML=h}
+
+/* ---------- name under the logo, orange, theme previews, Ramadan & Eid ---------- */
+Object.assign(THK.ramadan,{k1:'#C9971C',k2:'#1D5C7A',k4:'#E9C46A'});Object.assign(THK.eid,{k1:'#D4A021',k2:'#0F7A6B',k4:'#F4C95D'});
+{const r=PRESETS.find(p=>p[0]==='ramadan');if(r){Object.assign(r[2],{color:'navy',c1:'#1D5C7A',c2:'#C9971C'});r[3]='#1D5C7A';r[4]='#C9971C'}
+ const e=PRESETS.find(p=>p[0]==='eid');if(e){Object.assign(e[2],{color:'green',c1:'#0F7A6B',c2:'#D4A021'});e[3]='#0F7A6B';e[4]='#D4A021'}}
+try{if(S&&S.look&&(S.look.preset==='ramadan'||S.look.preset==='eid')){const p=PRESETS.find(q=>q[0]===S.look.preset);Object.assign(S.look,p[2],{preset:p[0]});lookApply()}}catch(e){}
+const DEC={ramadan:(w)=>`<svg viewBox="0 0 320 54" class="dec-svg" aria-hidden="true" preserveAspectRatio="xMidYMin meet">${[[40,26],[92,16],[228,16],[280,26]].map(([x,l])=>`<g transform="translate(${x} 0)"><line x1="0" y1="0" x2="0" y2="${l}" stroke="#B88A1C" stroke-width="1"/><g transform="translate(0 ${l})"><path d="M-5 0h10l-2 4h-6z" fill="#C9971C"/><path d="M-7 4 Q-9 13 -6 20 H6 Q9 13 7 4z" fill="#E9C46A" stroke="#B88A1C" stroke-width="1"/><path d="M-3 7 Q-4 13 -2 18 M3 7 Q4 13 2 18" stroke="#B88A1C" stroke-width=".8" fill="none"/><circle cy="13" r="2.4" fill="#FFF3C4"/><path d="M-4 20h8l-2 3h-4z" fill="#C9971C"/></g></g>`).join('')}<g transform="translate(160 18)"><path d="M6 -12 A13 13 0 1 0 6 12 A10 10 0 1 1 6 -12z" fill="#E9C46A"/></g>${[[132,10],[190,8],[200,26],[120,28]].map(([x,y])=>`<path transform="translate(${x} ${y})" d="M0-3.5 1-1 3.5 0 1 1 0 3.5-1 1-3.5 0-1-1z" fill="#E9C46A"/>`).join('')}</svg>`,
+ eid:()=>`<svg viewBox="0 0 320 44" class="dec-svg" aria-hidden="true" preserveAspectRatio="xMidYMin meet"><path d="M0 4 Q80 22 160 6 T320 4" stroke="#B88A1C" stroke-width="1" fill="none"/>${[...Array(15)].map((_,j)=>{const x=10+j*21.4,y=4+Math.sin(j/14*Math.PI*2)*(-6)+(j%7===3?8:j%7<3?(j%7)*3+4:(6-j%7)*3+4);const c=['#0F7A6B','#D4A021','#E07A5F','#5B8DEF'][j%4];return `<path transform="translate(${x.toFixed(1)} ${(8+Math.sin(j/14*Math.PI)*8).toFixed(1)})" d="M-6 0 H6 L0 11z" fill="${c}"/>`}).join('')}<g transform="translate(160 30)"><path d="M5 -9 A10 10 0 1 0 5 9 A7.5 7.5 0 1 1 5 -9z" fill="#D4A021"/></g></svg>`};
+function decApply(){const L=(S&&S.look)||{},eff=(typeof thmEff==='function'?thmEff():L.preset)||'calm';document.querySelectorAll('.dec').forEach(d=>d.remove());const f=DEC[eff];if(!f)return;
+  const lt=document.querySelector('#landing .ld-top');if(lt){const d=document.createElement('div');d.className='dec dec-'+eff;d.innerHTML=f();lt.after(d)}
+  const pb=$('pinBar')||$('apBar');if(pb&&inApp()){const d=document.createElement('div');d.className='dec dec-'+eff;d.innerHTML=f();pb.after(d)}}
+{const _ta=thmApply;thmApply=function(){const r=_ta.apply(this,arguments);try{decApply()}catch(e){}return r}}
+thmMini=function(k,a,b){const t=THK[k]||{},k1=t.k1||'#FF8A3D',k2=t.k2||'#22B39A',k4=t.k4||'#F5B82E',dark=k==='night',bg=dark?'#141b2d':'#f6f8f7',card=dark?'#1f2a44':'#fff',ink=dark?'#e8ecf5':'#18212b';
+  const ks={c1:k1,c2:k2,c3:'#5B8DEF',c4:k4,c5:'#A06CF0',c6:'#EF5DA8'},tiles=[['c2','✅'],['c1','🗓️'],['c2','🕌'],['c5','📿'],['c3','🎯'],['c6','🌙'],['c4','💰'],['c1','🧭']];
+  const dec=DEC[k]?`<span class="tm-dec">${DEC[k]()}</span>`:'';
+  return `<span class="tm-pg" style="background:${bg}">${dec}<span class="tm-hd" style="color:${ink}">Fastaqim</span><span class="tm-sub" style="color:${k2}">${LANG==='ar'?'فَٱسْتَقِمْ':esc((AYAH[LANG]||AYAH.en)[3])}</span>
+   <span class="tm-h1" style="background:linear-gradient(90deg,color-mix(in srgb,${k1} 85%,#000),color-mix(in srgb,${k4} 85%,#000));-webkit-background-clip:text;background-clip:text">${esc(tl("You're here. That's a win!"))}</span>
+   <span class="tm-tl">${tiles.map(([c,e])=>`<i style="background:${card};border-bottom-color:${ks[c]}"><em style="background:color-mix(in srgb,${ks[c]} 22%,transparent)">${e}</em></i>`).join('')}</span>
+   <span class="tm-go" style="background:linear-gradient(135deg,${k1},${k4})"></span></span>`};
+setTimeout(()=>{try{decApply()}catch(e){}},400);
+
+/* ---------- timer: one close (✕), Stop on the top pill, pauses while you are on the site ---------- */
+{const _qo=qtOpen;qtOpen=function(){const r=_qo.apply(this,arguments);try{const x=$('scrollBody').querySelector('[data-q="x"]');if(x)x.remove()}catch(e){}return r}}
+{const _mc=modalCard;modalCard=function(){const r=_mc.apply(this,arguments);try{const x=$('scrollBody').querySelector('[data-q="x"]');if(x)x.remove()}catch(e){}return r}}
+function qtPause(q,auto){if(!q||q.paused)return;if(q.mode==='up')q.acc+=(Date.now()-q.t0)/1000;else q.left=(q.end-Date.now())/1000;q.paused=true;q.autoP=!!auto;save()}
+function qtResume(q){if(!q||!q.paused)return;if(q.mode==='up')q.t0=Date.now();else q.end=Date.now()+q.left*1000;q.paused=false;q.autoP=false;save()}
+function qtStopNow(){const q=S.qt;if(!q)return;const sec=q.mode==='up'?qtNow():(q.total-qtNow());S.qt=null;try{qtEarn(q,sec,false)}catch(e){}save();qtTick()}
+(function(){const b=$('qtBar');if(b&&b.tagName==='BUTTON'){const d=document.createElement('div');d.id='qtBar';d.className=b.className;d.hidden=true;b.replaceWith(d)}})();
+qtTick=function(){clearInterval(QT.iv);const bar=$('qtBar');if(!bar)return;if(!S.qt){bar.hidden=true;return}
+  const run=()=>{const q=S.qt;if(!q){clearInterval(QT.iv);bar.hidden=true;return}const v=qtNow();bar.hidden=false;
+    const sig=(q.paused?'p':'r')+(q.autoP?'a':'')+(q.label||'');if(bar.dataset.sig!==sig){bar.dataset.sig=sig;
+      bar.innerHTML=`<button type="button" class="qb-t" data-qb="open"><span class="qb-1">⏱ <b dir="ltr"></b>${q.label?' · <span class="qb-l">'+esc(q.label).slice(0,24)+'</span>':''}</span>${q.autoP?`<small>${tl("Paused while you're here")}</small>`:''}</button><button type="button" class="qb-c" data-qb="${q.paused?'res':'pau'}" aria-label="${tl(q.paused?'Resume':'Pause')}">${q.paused?'<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>':'<svg viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg>'}</button><button type="button" class="qb-c qb-x" data-qb="stop" aria-label="${tl('Stop')}"><svg viewBox="0 0 24 24"><rect x="6.5" y="6.5" width="11" height="11" rx="2" fill="currentColor"/></svg></button>`}
+    const tb=bar.querySelector('.qb-t b');if(tb)tb.textContent=qfmt(v);
+    if(q.mode!=='up'&&!q.paused&&v<=0){S.qt=null;save();clearInterval(QT.iv);bar.hidden=true;qtDone(q)}};
+  bar.onclick=e=>{const b=e.target.closest('[data-qb]');if(!b)return;e.stopPropagation();const k=b.dataset.qb,q=S.qt;if(k==='open')qtOpen();else if(k==='pau'){qtPause(q,false);qtTick()}else if(k==='res'){qtResume(q);qtTick()}else if(k==='stop'){qtStopNow()}};
+  run();QT.iv=setInterval(run,500)};
+/* while the person taps around the site, a task timer waits; it runs again when they leave to do the task */
+document.addEventListener('pointerdown',e=>{try{const q=S&&S.qt;if(!q||q.paused||q.isBrk||!inApp())return;if(e.target.closest('#qtBar,#scrollModal'))return;qtPause(q,true);qtTick()}catch(err){}},true);
+document.addEventListener('visibilitychange',()=>{try{const q=S&&S.qt;if(document.hidden&&q&&q.paused&&q.autoP){qtResume(q);qtTick()}}catch(e){}});
+
+/* ---------- reasons: show the next one, and the next ---------- */
+if(!S.reasonsV3){S.reasonsV3=true;[
+ {text:'وَسَارِعُوا إِلَىٰ مَغْفِرَةٍ مِّن رَّبِّكُمْ وَجَنَّةٍ عَرْضُهَا السَّمَاوَاتُ وَالْأَرْضُ أُعِدَّتْ لِلْمُتَّقِينَ',note:'Āl ʿImrān 3:133 · "And hasten to forgiveness from your Lord and a garden as wide as the heavens and earth, prepared for the righteous." (Saheeh International)'},
+ {text:'وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ۚ وَإِنَّ اللَّهَ لَمَعَ الْمُحْسِنِينَ',note:'Al-ʿAnkabūt 29:69 · "And those who strive for Us, We will surely guide them to Our ways. And indeed, Allah is with the doers of good." (Saheeh International)'},
+ {text:'إِنَّ مَعَ الْعُسْرِ يُسْرًا',note:'Ash-Sharḥ 94:6 · "Indeed, with hardship [will be] ease." (Saheeh International)'}
+].forEach(r=>{if(!(S.reasons||[]).some(x=>x.text===r.text))(S.reasons=S.reasons||[]).push({id:uid(),text:r.text,note:r.note})});try{if(!window.GUEST)save()}catch(e){}}
+(function(){const row=$('reasonGo')&&$('reasonGo').parentElement;if(!row||$('reasonNext'))return;const b=document.createElement('button');b.id='reasonNext';b.className='btn-calm';b.type='button';row.insertBefore(b,$('reasonClose'));b.onclick=()=>{showReason()};
+  const c=$('reasonClose');if(c){c.textContent='✕';c.setAttribute('aria-label',tl('Close'));c.classList.add('rs-x')}})();
+{const _sr=showReason;showReason=function(){const r=_sr.apply(this,arguments);try{const b=$('reasonNext');if(b)b.textContent='↻ '+tl('Another reason');const L=S.reasons.length;let c=$('reasonCnt');if(!c){c=document.createElement('p');c.id='reasonCnt';c.className='rs-cnt';$('reasonNote').after(c)}c.textContent=L>1?`${((S.reasonIx+L-1)%L)+1} / ${L}`:'';const g=$('reasonGo');if(g)g.textContent=tl('Start 2 minutes')}catch(e){}return r}}
+
+/* ---------- text size: scale the text itself (no page zoom), so cards never run off the screen ---------- */
+{const _la=lookApply;lookApply=function(){const r=_la.apply(this,arguments);try{const z=parseFloat(document.body.style.zoom)||1,lh=$('landing');document.body.style.zoom='';const L=(S&&S.look)||{},zz=L.zoom&&L.zoom!==1&&!(lh&&!lh.hidden)?L.zoom:1;document.documentElement.style.fontSize=zz!==1?(zz*100)+'%':''}catch(e){}return r}}
+setTimeout(()=>{try{lookApply()}catch(e){}},0);
+
+/* ---------- user page top: one menu (bottom bar), name under Fastaqim, icon-only salah and dhikr ---------- */
+function apTop(){const b=$('apBar');if(!b)return;b.classList.add('ap2');const br=b.querySelector('.ap-brand');if(br&&!b.querySelector('.ap-nm')){const w=document.createElement('span');w.className='ap-bw';br.before(w);w.appendChild(br);const nm=document.createElement('span');nm.className='ap-nm notranslate';w.appendChild(nm)}
+  const nm=b.querySelector('.ap-nm');if(nm){const h=$('hdName'),ar=h?h.classList.contains('arq'):LANG==='ar';nm.textContent=h&&h.textContent?h.textContent:(ar?'فَٱسْتَقِمْ':(AYAH[LANG]||AYAH.en)[3]);nm.classList.toggle('arq',ar);nm.setAttribute('lang',ar?'ar':'');nm.dir=ar?'rtl':'auto'}}
+{const _ar=apRefresh;apRefresh=function(){const r=_ar.apply(this,arguments);try{apTop()}catch(e){}return r}}
+{const _pr=pinRender;pinRender=function(){const r=_pr.apply(this,arguments);try{const p=$('pinBar');if(!p)return r;p.classList.add('pin2');p.querySelectorAll('.pin-c').forEach(c=>{if(c.id==='pinSal'){const t=c.querySelector('span[dir]');c.innerHTML=`🕌${t?` <span dir="ltr">${t.textContent}</span>`:''}`;c.setAttribute('aria-label',tl('Salah times'))}else if(c.id==='pinZk'){const o=lzGet(),tot=Object.values(o.n).reduce((a,x)=>a+x,0);c.innerHTML=`📿${tot?` <b>${tot}</b>`:''}`;c.setAttribute('aria-label',tl('Dhikr'))}})}catch(e){}return r}}
+setTimeout(()=>{try{apRefresh()}catch(e){}},500);
+
+/* ---------- Today dashboard moves like the first-page preview (ring fills, step strikes, +⭐ pops, dots fill) ---------- */
+const DZA={p:null,sp:null};
+{const _dr=dashRender;dashRender=function(){const c0=$('dashCard'),pOld=DZA.p,spOld=DZA.sp;const r=_dr.apply(this,arguments);try{const c=$('dashCard');if(!c)return r;
+  const sec=$('tab-now');if(sec&&sec.firstElementChild!==c){const en=sec.querySelector('#enCard,.en-card');sec.insertBefore(c,sec.firstChild)}
+  const p=Math.max(0,Math.min(100,Math.round(todayPct()))),f=c.querySelector('.dz-ring .f');
+  if(f){const C=2*Math.PI*26,from=pOld==null?0:pOld;f.style.transition='none';f.style.strokeDashoffset=(C*(1-from/100)).toFixed(1);void f.getBoundingClientRect();requestAnimationFrame(()=>{f.style.transition='stroke-dashoffset .9s cubic-bezier(.2,.9,.3,1.2)';f.style.strokeDashoffset=(C*(1-p/100)).toFixed(1)})}
+  const pb=c.querySelector('.dz-r b');if(pb&&pOld!=null&&pOld!==p){let v=pOld;const st=Date.now();const t=()=>{const k=Math.min(1,(Date.now()-st)/800);pb.textContent=Math.round(pOld+(p-pOld)*k)+'%';if(k<1)requestAnimationFrame(t)};t()}
+  const sp=S.sparks||0;if(spOld!=null&&sp>spOld){const s=c.querySelector('.dz-st');if(s){s.classList.remove('pop');void s.offsetWidth;s.classList.add('pop');const pp=document.createElement('span');pp.className='dz-pop';pp.textContent='+'+(sp-spOld)+' ⭐';s.appendChild(pp);setTimeout(()=>pp.remove(),1600)}}
+  DZA.p=p;DZA.sp=sp;
+  const ck=c.querySelector('[data-dz="step"]');if(ck)ck.addEventListener('change',()=>{const l=ck.closest('.dz-ck');if(l)l.classList.add('done')});
+  c.querySelectorAll('[data-dz="sal"]').forEach(b=>b.addEventListener('click',()=>{DZA.just=b.dataset.i},true));
+  if(DZA.just!=null){const b=c.querySelector(`[data-dz="sal"][data-i="${DZA.just}"]`);if(b&&b.classList.contains('on'))b.classList.add('just');DZA.just=null}
+  try{salRowInto(c)}catch(e){}
+  }catch(e){console.error(e)}return r}}
+
+/* ---------- salah row: short, with icons, and time since the adhan in a clear color ---------- */
+const SIC={fajr:'<path d="M12 4l1.2 2.8L16 8l-2.8 1.2L12 12l-1.2-2.8L8 8l2.8-1.2z"/><path d="M5 13l.7 1.5L7 15l-1.3.6L5 17l-.6-1.4L3 15l1.4-.5zM19 11l.6 1.3 1.4.6-1.4.6-.6 1.4-.6-1.4-1.4-.6 1.4-.6z"/>',
+ sunrise:'<path d="M4 18h16M7 18a5 5 0 0 1 10 0M12 4v4M9.5 6.5L12 4l2.5 2.5M5 13l1.5 1M19 13l-1.5 1"/>',
+ dhuhr:'<circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>',
+ asr:'<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4"/>',
+ maghrib:'<path d="M4 18h16M7 18a5 5 0 0 1 10 0M12 4v5M9.5 6.5L12 9l2.5-2.5"/>',
+ isha:'<path d="M15 4a7 7 0 1 0 5 11.5A6 6 0 0 1 15 4z"/><path d="M19 4l.5 1.2 1.2.5-1.2.5L19 7.4l-.5-1.2-1.2-.5 1.2-.5z"/>'};
+function hmShort(d){try{return new Intl.DateTimeFormat(LOC(),{hour:'numeric',minute:'2-digit'}).formatToParts(d).filter(x=>x.type!=='dayPeriod').map(x=>x.value).join('').trim()}catch(e){return fmtHM(d)}}
+function salRowHTML(P,now,opts){opts=opts||{};const ks=['fajr','sunrise','dhuhr','asr','maghrib','isha'],five=['fajr','dhuhr','asr','maghrib','isha'];
+  let cur=null;five.forEach(k=>{if(P[k]<=now)cur=k});if(cur==='isha'&&P.fajr&&now<P.fajr)cur=null;
+  const nx=five.find(k=>P[k]>now)||'fajr',nt=P[nx]>now?P[nx]:null;const hm=ms=>{const m=Math.max(0,Math.floor(ms/60000));return Math.floor(m/60)+':'+String(m%60).padStart(2,'0')};
+  const sv=opts.sv||[];return `<div class="sr">${ks.map(k=>{const i=five.indexOf(k),isCur=k===cur,isNx=k===nx;
+   return `<${opts.check&&i>=0?'button type="button" data-dz="sal" data-i="'+i+'"':'span'} class="sr-c${isCur?' cur':''}${isNx?' nx':''}${k==='sunrise'?' sun':''}${i>=0&&sv[i]?' on':''}" ${opts.check&&i>=0?`aria-pressed="${!!sv[i]}"`:''}>
+     <svg viewBox="0 0 24 24" aria-hidden="true">${SIC[k]}</svg><small>${tl(SAL.find(s=>s[0]===k)[1])}</small><b dir="ltr">${hmShort(P[k])}</b>${i>=0&&sv[i]?'<i class="sr-ok">✓</i>':''}
+     ${isCur?`<em class="sr-since" dir="ltr">+${hm(now-P[k])}</em>`:isNx&&nt?`<em class="sr-in" dir="ltr">−${hm(nt-now)}</em>`:''}</${opts.check&&i>=0?'button':'span'}>`}).join('')}</div>`}
+function salRowInto(c){const box=c.querySelector('.dz-sal');if(!box)return;let P=null;try{P=salahFor(new Date())}catch(e){}if(!P)return;
+  const sT=dzTrk('salah'),day=trkDay(),sv=sT&&Array.isArray(day[sT.id])?day[sT.id]:[0,0,0,0,0];
+  box.classList.add('dz-sal2');box.innerHTML=`<p class="dz-l">🕌 ${esc(tl('Salah'))}</p>${salRowHTML(P,new Date(),{check:true,sv})}`;
+  box.querySelectorAll('[data-dz="sal"]').forEach(b=>b.onclick=()=>{const T=dzTrkMake('salah'),i=+b.dataset.i,v=(Array.isArray(trkDay()[T.id])?trkDay()[T.id]:[0,0,0,0,0]).slice();v[i]=v[i]?0:1;if(v[i]){try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}DZA.just=i}trkSet(T,v);dashRender()})}
+setInterval(()=>{try{const c=$('dashCard');if(c&&!document.hidden&&document.body.dataset.tab==='now')salRowInto(c)}catch(e){}},30000);
+{const _lt=ldToday;ldToday=function(){const r=_lt.apply(this,arguments);try{const b=$('ldToday'),row=b&&b.querySelector('.ldt-row');if(row){const P=salahFor(new Date());if(P){const d=document.createElement('div');d.innerHTML=salRowHTML(P,new Date());row.replaceWith(d.firstChild)}}}catch(e){}return r}}
+{const _sp=typeof salPop==='function'?salPop:null;if(_sp)salPop=function(){const r=_sp.apply(this,arguments);try{const row=$('scrollBody').querySelector('.sp2-r');const P=salahFor(new Date());if(row&&P){const d=document.createElement('div');d.innerHTML=salRowHTML(P,new Date());row.replaceWith(d.firstChild)}}catch(e){}return r}}
+
+/* ---------- Adhkar hub ---------- */
+function myAz(){S.myAz=S.myAz||[];return S.myAz}
+function adHub(){const done=azDone(),cats=Object.entries(ADHKAR);
+  modalCard(`<div class="ah"><p class="ah-t">📿 ${tl('Adhkar')}</p>
+   <div class="ah-2"><button type="button" class="ah-big" data-ah="ruq"><span class="ah-ic">🛡️</span><b>${tl('Ruqyah')}</b><small>${tl("From the Qur'an and Sunnah")}</small></button><button type="button" class="ah-big" data-ah="tas"><span class="ah-ic">📿</span><b>${tl('Tasbih')}</b><small>${tl('A simple dhikr counter')}</small></button></div>
+   <button type="button" class="ah-r" data-ah="whole"><span class="ah-ic">🌿</span><span><b>${tl('Wholesome round')}</b><small dir="rtl" lang="ar" class="notranslate" style="text-align:start">أستغفر الله · سبحان الله · الحمد لله …</small></span><i>›</i></button>
+   <button type="button" class="ah-r" data-ah="cats"><span class="ah-ic">🌅</span><span><b>${tl('Adhkar by time')}</b><small>${(()=>{const d=cats.filter(([k,c])=>c.items.every(x=>done[x.id])).length;return d?`✓ ${d}/${cats.length} · ${tl('Done today')}`:tl('Morning, evening, salah, sleep')})()}</small></span><i>›</i></button>
+   <button type="button" class="ah-r" data-ah="duas"><span class="ah-ic">🤲</span><span><b>${tl('Duas')}</b><small>${tl('Hisnul Muslim: audio and book')}</small></span><i>›</i></button>
+   <button type="button" class="ah-r" data-ah="vir"><span class="ah-ic">✨</span><span><b>${tl('Virtues')}</b><small>${tl('What each dhikr earns')}</small></span><i>›</i></button>
+   <button type="button" class="ah-r" data-ah="mine"><span class="ah-ic">✍️</span><span><b>${tl('My adhkar')}</b><small>${myAz().length?myAz().length+' ·':''} ${tl('Add your own')}</small></span><i>›</i></button></div>`);
+  $('scrollBody').querySelectorAll('[data-ah]').forEach(b=>b.onclick=()=>{const k=b.dataset.ah;
+    if(k==='tas')zkOpen();else if(k==='whole'){const o=lzGet();o.i=ZW;lzSave(o);zkOpen()}else if(k==='cats')adCats();else if(k==='duas'){modalClose();hisnOpen()}else if(k==='vir')adVir();else if(k==='mine')adMine();
+    else if(k==='ruq'){adRead('ruqyah',0)}})}
+function adBack(){return `<button type="button" class="ah-bk" data-ahb>‹ ${tl('Adhkar')}</button>`}
+function adBind(){const b=$('scrollBody').querySelector('[data-ahb]');if(b)b.onclick=adHub}
+function adCats(){const done=azDone();modalCard(`<div class="ah">${adBack()}<p class="ah-t">🌅 ${tl('Adhkar by time')}</p>${Object.entries(ADHKAR).map(([k,c])=>{const n=c.items.filter(x=>done[x.id]).length,all=n===c.items.length;
+   return `<button type="button" class="ah-r" data-ac="${k}"><span class="ah-ic">${c.ic}</span><span><b>${esc(tl(c.t))}</b><small class="${all?'ok':'nc'}">${all?'✓ '+tl('Done today'):(n?`${n}/${c.items.length} · `:'')+tl('Not completed yet')}</small></span><i>›</i></button>`}).join('')}</div>`);adBind();
+  $('scrollBody').querySelectorAll('[data-ac]').forEach(b=>b.onclick=()=>adRead(b.dataset.ac,0))}
+const ADR={n:0};
+function adRead(cat,i){const C=ADHKAR[cat];if(!C)return;const it=C.items[i],done=azDone();ADR.n=0;
+  modalCard(`<div class="ah ar-rd">${adBack()}<p class="ah-t">${C.ic} ${esc(tl(C.t))}</p>
+   <div class="ar-dots">${C.items.map((x,j)=>`<button type="button" data-ri="${j}" class="${j===i?'c':''}${done[x.id]?' d':''}">${done[x.id]?'✓':j+1}</button>`).join('')}</div>
+   <p class="ar-ar notranslate" dir="rtl" lang="ar" style="font-size:${it.ar.length>220?'1.25rem':it.ar.length>110?'1.45rem':'1.8rem'}">${it.ar}</p>
+   ${LANG==='ar'?'':`<p class="ar-tr notranslate">${esc(it.tr)}</p><p class="ar-m">${esc(LANG==='en'?it.en:tl(it.en))}</p>`}
+   <button type="button" class="ar-tap" id="arTap"><b>0</b><small>/ ${it.n||1}</small></button>
+   <p class="ar-src">${esc(it.src||'')}${done[it.id]?' · ✓ '+tl('Done today'):''}</p></div>`);adBind();
+  const B=$('scrollBody');B.querySelectorAll('[data-ri]').forEach(b=>b.onclick=()=>adRead(cat,+b.dataset.ri));
+  $('arTap').onclick=()=>{ADR.n++;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}const tb=$('arTap').querySelector('b');tb.textContent=ADR.n;$('arTap').classList.remove('pulse');void $('arTap').offsetWidth;$('arTap').classList.add('pulse');
+    if(ADR.n>=(it.n||1)){done[it.id]=true;S.azDays=S.azDays||{};S.azDays[dkey()]=1;try{award(1,(it.tr||'').slice(0,40))}catch(e){}save();try{actMark()}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}
+      setTimeout(()=>{if(i<C.items.length-1)adRead(cat,i+1);else adCats()},450)}}}
+function adVir(){const k=LI4();modalCard(`<div class="ah">${adBack()}<p class="ah-t">✨ ${tl('Virtues')}</p><ol class="ah-v">${LZ.slice(0,9).map((z,j)=>{const f=ZINFO[j];if(!f)return '';return `<li><p class="notranslate" dir="rtl" lang="ar">${z.ar}</p><p>${esc(k===1?f[1]:k?f[k]:f[0])}</p><span class="ah-src">${esc(k===1?f[5]:f[4])}</span></li>`}).join('')}</ol></div>`);adBind()}
+function adMine(){const L=myAz(),c=(S.myAzN||{})[dkey()]||{};modalCard(`<div class="ah">${adBack()}<p class="ah-t">✍️ ${tl('My adhkar')}</p>
+   ${L.map((x,j)=>`<div class="ah-my"><button type="button" class="ah-myc" data-mt="${j}"><span dir="auto">${esc(x.t)}</span><b dir="ltr">${c[x.id]||0}/${x.n}</b></button><button type="button" class="ah-del" data-md="${j}" aria-label="${tl('Delete')}">✕</button></div>`).join('')}
+   <form class="ah-add" id="ahAdd"><input id="ahT" maxlength="200" placeholder="${tl('Dhikr text')}" dir="auto"><input id="ahN" type="number" min="1" max="1000" value="33" aria-label="${tl('Times')}"><button class="btn-main">${tl('Add')}</button></form></div>`);adBind();
+  $('ahAdd').onsubmit=e=>{e.preventDefault();const t=$('ahT').value.trim();if(!t)return;if(typeof blocked==='function'&&blocked(t)){toast(tl('That message cannot be saved here.'));return}myAz().push({id:uid(),t,n:Math.max(1,+$('ahN').value||33)});save();adMine()};
+  $('scrollBody').querySelectorAll('[data-md]').forEach(b=>b.onclick=()=>{myAz().splice(+b.dataset.md,1);save();adMine()});
+  $('scrollBody').querySelectorAll('[data-mt]').forEach(b=>b.onclick=()=>{const x=L[+b.dataset.mt];S.myAzN=S.myAzN||{};const d=S.myAzN[dkey()]=S.myAzN[dkey()]||{};Object.keys(S.myAzN).forEach(k=>{if(k!==dkey())delete S.myAzN[k]});d[x.id]=(d[x.id]||0)+1;
+    try{navigator.vibrate&&navigator.vibrate(d[x.id]>=x.n?[20,40,20]:10)}catch(e){}if(d[x.id]===x.n)try{star(1,'📿 '+x.t.slice(0,30))}catch(e){}save();try{actMark()}catch(e){}b.querySelector('b').textContent=d[x.id]+'/'+x.n;b.classList.toggle('ok',d[x.id]>=x.n)})}
+
+/* ---------- Recipes ---------- */
+function recOpen(edit){S.recipes=S.recipes||[];const R=S.recipes;
+  if(edit!=null){const r=edit>=0?R[edit]:{t:'',ing:'',st:'',url:''};
+    modalCard(`<div class="ah rc"><p class="ah-t">🍲 ${tl('Recipes')}</p><form id="rcF" class="rc-f"><input id="rcT" maxlength="80" placeholder="${tl('Recipe name')}" value="${esc(r.t)}" dir="auto" required>
+      <label>${tl('Ingredients')} <small>${tl('One per line')}</small><textarea id="rcI" rows="5" dir="auto">${esc(r.ing)}</textarea></label>
+      <label>${tl('Steps')} <small>${tl('One per line')}</small><textarea id="rcS" rows="5" dir="auto">${esc(r.st)}</textarea></label>
+      <input id="rcU" type="url" placeholder="${tl('Link (optional)')}" value="${esc(r.url||'')}"><button class="btn-main">${tl('Save')}</button></form></div>`);
+    $('rcF').onsubmit=e=>{e.preventDefault();const o={id:r.id||uid(),t:$('rcT').value.trim(),ing:$('rcI').value.trim(),st:$('rcS').value.trim(),url:$('rcU').value.trim()};if(!o.t)return;
+      if(typeof blocked==='function'&&blocked(o.t+' '+o.ing+' '+o.st)){toast(tl('That message cannot be saved here.'));return}if(edit>=0)R[edit]=o;else R.unshift(o);save();recOpen()};return}
+  modalCard(`<div class="ah rc"><p class="ah-t">🍲 ${tl('Recipes')}</p><button type="button" class="btn-main rc-new" data-rn>＋ ${tl('Add')}</button>
+    ${R.length?R.map((r,j)=>`<details class="rc-i"><summary dir="auto">${esc(r.t)}</summary>${r.ing?`<p class="rc-h">${tl('Ingredients')}</p><ul dir="auto">${r.ing.split('\n').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}${r.st?`<p class="rc-h">${tl('Steps')}</p><ol dir="auto">${r.st.split('\n').filter(Boolean).map(x=>`<li>${esc(x)}</li>`).join('')}</ol>`:''}${r.url&&/^https?:/.test(r.url)?`<a href="${esc(r.url)}" target="_blank" rel="noopener">🔗 ${tl('Open')}</a>`:''}<div class="rc-a"><button type="button" class="chip" data-re="${j}">✏️ ${tl('Edit')}</button><button type="button" class="chip" data-rd="${j}">✕ ${tl('Delete')}</button></div></details>`).join(''):`<p class="small muted" style="text-align:center">${tl('No recipes yet')}</p>`}</div>`);
+  const B=$('scrollBody');B.querySelector('[data-rn]').onclick=()=>recOpen(-1);B.querySelectorAll('[data-re]').forEach(b=>b.onclick=()=>recOpen(+b.dataset.re));
+  B.querySelectorAll('[data-rd]').forEach(b=>{let arm=0;b.onclick=()=>{if(!arm){arm=1;b.textContent='✕ '+tl('Tap again to delete');b.classList.add('arm');return}R.splice(+b.dataset.rd,1);save();recOpen()}})}
+
+/* ---------- Nasheeds (YouTube links, played here: name, munshid, play/pause, loop) ---------- */
+const NS={cur:-1,loop:false,all:false,pl:null};
+function ytId(u){const m=String(u||'').match(/(?:youtu\.be\/|v=|\/shorts\/|\/embed\/|\/live\/)([\w-]{11})/);return m?m[1]:''}
+function nsList(){S.nasheeds=S.nasheeds||[];return S.nasheeds}
+function nsLoadApi(cb){if(window.YT&&YT.Player){cb();return}const p=window.onYouTubeIframeAPIReady;window.onYouTubeIframeAPIReady=()=>{p&&p();cb()};if(!document.getElementById('ytApi')){const s=document.createElement('script');s.id='ytApi';s.src='https://www.youtube.com/iframe_api';document.head.appendChild(s)}}
+function nsPlay(i){const L=nsList(),x=L[i];if(!x)return;NS.cur=i;nsRender();const host=$('nsPl');if(!host)return;
+  nsLoadApi(()=>{try{if(NS.pl&&NS.pl.loadVideoById&&NS.plHost===host){NS.pl.loadVideoById(x.id);return}host.innerHTML='<div id="nsYt"></div>';NS.plHost=host;
+    NS.pl=new YT.Player('nsYt',{host:'https://www.youtube-nocookie.com',videoId:x.id,playerVars:{playsinline:1,rel:0,modestbranding:1},events:{onReady:e=>{try{e.target.playVideo()}catch(_){}},onStateChange:e=>{if(e.data===0){if(NS.loop){NS.pl.seekTo(0);NS.pl.playVideo()}else if(NS.all&&nsList().length>1){nsPlay((NS.cur+1)%nsList().length)}}try{nsBtns()}catch(_){}}}})}catch(e){}})}
+function nsBtns(){const st=NS.pl&&NS.pl.getPlayerState?NS.pl.getPlayerState():-1;document.querySelectorAll('[data-nsp]').forEach(b=>{const on=+b.dataset.nsp===NS.cur&&st===1;b.textContent=on?'⏸':'▶';b.closest('.ns-i').classList.toggle('on',+b.dataset.nsp===NS.cur)})}
+function nsOpen(){modalCard(`<div class="ah ns"><p class="ah-t">🔊 ${tl('Nasheeds')}</p><div id="nsPl" class="ns-pl"></div><div id="nsL"></div>
+   <details class="ns-add"${nsList().length?'':' open'}><summary>＋ ${tl('Add a nasheed')}</summary><form id="nsF"><input id="nsU" type="url" placeholder="${tl('YouTube link')}" required><input id="nsN" maxlength="80" placeholder="${tl('Name')}" dir="auto"><input id="nsM" maxlength="60" placeholder="${tl('Munshid')}" dir="auto"><button class="btn-main">${tl('Add')}</button></form></details></div>`);
+  NS.pl=null;NS.plHost=null;nsRender();
+  $('nsF').onsubmit=e=>{e.preventDefault();const id=ytId($('nsU').value);if(!id){toast(tl('Paste a YouTube link first.'));return}const n=$('nsN').value.trim(),m=$('nsM').value.trim();if(typeof blocked==='function'&&blocked(n+' '+m)){toast(tl('That message cannot be saved here.'));return}
+    nsList().push({id,n:n||'YouTube',m});save();$('nsU').value=$('nsN').value=$('nsM').value='';nsRender()}}
+function nsRender(){const box=$('nsL');if(!box)return;const L=nsList();
+  box.innerHTML=(L.length?L.map((x,i)=>`<div class="ns-i${i===NS.cur?' on':''}"><button type="button" class="ns-b" data-nsp="${i}" aria-label="Play">▶</button><span><b dir="auto">${esc(x.n)}</b><small dir="auto">${esc(x.m||'')}</small></span><button type="button" class="ns-x" data-nsd="${i}" aria-label="${tl('Delete')}">✕</button></div>`).join(''):`<p class="small muted" style="text-align:center">${tl('No nasheeds yet')}</p>`)
+   +(L.length?`<div class="row ns-c"><button type="button" class="chip${NS.loop?' on':''}" data-nsl>🔂 ${tl('Loop')}</button><button type="button" class="chip${NS.all?' on':''}" data-nsa>🔁 ${tl('Play all')}</button></div>`:'');
+  box.querySelectorAll('[data-nsp]').forEach(b=>b.onclick=()=>{const i=+b.dataset.nsp;if(i===NS.cur&&NS.pl&&NS.pl.getPlayerState){const st=NS.pl.getPlayerState();if(st===1)NS.pl.pauseVideo();else NS.pl.playVideo();setTimeout(nsBtns,200);return}nsPlay(i)});
+  box.querySelectorAll('[data-nsd]').forEach(b=>b.onclick=()=>{const i=+b.dataset.nsd;nsList().splice(i,1);if(NS.cur===i){NS.cur=-1;try{NS.pl&&NS.pl.stopVideo()}catch(e){}}save();nsRender()});
+  const l=box.querySelector('[data-nsl]');if(l)l.onclick=()=>{NS.loop=!NS.loop;nsRender()};const a=box.querySelector('[data-nsa]');if(a)a.onclick=()=>{NS.all=!NS.all;nsRender()};try{nsBtns()}catch(e){}}
+
+/* ---------- Saved & watch later: one place to jump to your saved lists ---------- */
+function svOpen(){S.saved=S.saved||[];const L=S.saved;
+  const fixed=[['▶️','YouTube: Watch later','https://www.youtube.com/playlist?list=WL'],['👍','YouTube: Liked videos','https://www.youtube.com/playlist?list=LL']];
+  modalCard(`<div class="ah sv"><p class="ah-t">🔖 ${tl('Saved & watch later')}</p><p class="small muted" style="text-align:center;margin:0">${tl('Watch one, then remove it.')}</p>
+   ${fixed.map(([i,t,u])=>`<a class="ah-r" href="${u}" target="_blank" rel="noopener"><span class="ah-ic">${i}</span><span><b>${tl(t)}</b></span><i>↗</i></a>`).join('')}
+   <p class="ah-sub">${tl('Your own links')}</p>
+   ${L.map((x,j)=>`<div class="ah-my"><a class="ah-myc" href="${esc(x.u)}" target="_blank" rel="noopener"><span dir="auto">${esc(x.t)}</span><i>↗</i></a><button type="button" class="ah-del" data-sd="${j}" aria-label="${tl('Delete')}">✕</button></div>`).join('')}
+   ${L.length>1?`<button type="button" class="btn-calm" data-spk style="width:100%">🎲 ${tl('Pick one for me')}</button>`:''}
+   <form class="ah-add" id="svF"><input id="svT" maxlength="60" placeholder="${tl('Title')}" dir="auto"><input id="svU" type="url" placeholder="${tl('Link')}" required><button class="btn-main">${tl('Add')}</button></form></div>`);
+  const B=$('scrollBody');$('svF').onsubmit=e=>{e.preventDefault();const u=$('svU').value.trim();if(!/^https?:\/\//.test(u))return;const t=$('svT').value.trim()||u.replace(/^https?:\/\/(www\.)?/,'').slice(0,40);if(typeof blocked==='function'&&blocked(t)){toast(tl('That message cannot be saved here.'));return}L.push({t,u});save();svOpen()};
+  B.querySelectorAll('[data-sd]').forEach(b=>b.onclick=()=>{L.splice(+b.dataset.sd,1);save();svOpen()});
+  const pk=B.querySelector('[data-spk]');if(pk)pk.onclick=()=>{const x=L[Math.floor(Math.random()*L.length)];window.open(x.u,'_blank','noopener')}}
+
+/* ---------- menu: new places + bottom-bar Dhikr opens the Adhkar hub ---------- */
+{const _am=apMenu;apMenu=function(){const r=_am.apply(this,arguments);try{const m=$('apMenu'),z=m.querySelector('[data-am="zk"]');if(z&&!m.querySelector('[data-am="rec"]')){
+  z.textContent='📿 '+tl('Adhkar');z.onclick=e=>{e.stopPropagation();m.hidden=true;adHub()};
+  const add=(k,t,fn)=>{const b=document.createElement('button');b.className='apm-i';b.dataset.am=k;b.textContent=t;b.onclick=e=>{e.stopPropagation();m.hidden=true;fn()};return b};
+  const g=m.querySelector('[data-am="game"]');[add('sv','🔖 '+tl('Saved & watch later'),svOpen),add('ns','🔊 '+tl('Nasheeds'),nsOpen),add('rec','🍲 '+tl('Recipes'),()=>recOpen())].forEach(b=>z.after(b))}}catch(e){}return r}}
+{const _bn=bnav;bnav=function(){const r=_bn.apply(this,arguments);try{const b=$('bNav');if(b&&!b.dataset.v89){b.dataset.v89=1;b.addEventListener('click',e=>{const x=e.target.closest('[data-bn="zk"]');if(x){e.stopImmediatePropagation();adHub()}},true)}}catch(e){}return r}}
+/* theme sheet: center the current theme inside its row only (the sheet itself never shifts sideways) */
+{const _to=thmOpen;thmOpen=function(){const r=_to.apply(this,arguments);const fix=()=>{try{const B=$('scrollBody'),row=B.querySelector('.tm-row'),on=B.querySelector('.tm-c.on');B.scrollLeft=0;const M=$('scrollModal');if(M)M.scrollLeft=0;document.documentElement.scrollLeft=0;if(row&&on)row.scrollLeft=on.offsetLeft-row.offsetLeft-(row.clientWidth-on.clientWidth)/2}catch(e){}};setTimeout(fix,40);setTimeout(fix,120);return r}}
+/* language switch: new parts relabel at once too */
+{const _lr=langRelabel;langRelabel=function(){_lr.apply(this,arguments);try{apTop()}catch(e){}try{pinRender()}catch(e){}try{if($('ldZk'))ldZikr()}catch(e){}try{qtTick()}catch(e){}try{const b=$('reasonNext');if(b)b.textContent='↻ '+tl('Another reason')}catch(e){}}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
