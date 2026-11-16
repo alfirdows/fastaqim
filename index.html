@@ -938,6 +938,21 @@ body.kid .task-head input[type=checkbox]{width:30px!important;height:30px!import
 .dz-ch{flex:1;min-width:0;background:var(--bg);border:0;border-radius:12px;min-height:44px;font-weight:800;font-size:.92rem;border-bottom:3px solid var(--calm);white-space:nowrap}
 .dz-ch.w{border-bottom-color:#4dabf7}.dz-ch.q{border-bottom-color:var(--calm)}.dz-ch.m{border-bottom-color:#e8b400}
 body.kid .dz-dots i{width:40px;height:40px}
+/* visual theme picker (bottom sheet, page visible above) */
+#scrollModal.tm-sheet{align-items:flex-end!important;background:rgba(0,0,0,.18)!important}
+#scrollModal.tm-sheet #scrollBody{margin:0 auto!important;max-height:none!important;width:100%!important;max-width:520px!important;border-radius:22px 22px 0 0!important;padding-bottom:calc(14px + env(safe-area-inset-bottom))!important}
+.tm-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 2px 8px;-webkit-overflow-scrolling:touch}
+.tm-c{flex:none;width:92px;scroll-snap-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;background:none;border:0;padding:0;min-height:0}
+.tm-pg{display:flex;flex-direction:column;gap:5px;width:92px;height:118px;border-radius:14px;padding:7px;border:2px solid var(--line);box-sizing:border-box;transition:border-color .2s,box-shadow .2s}
+.tm-c.on .tm-pg{border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 18%,transparent)}
+.tm-tb{display:flex;justify-content:space-between}.tm-tb i{width:16px;height:6px;border-radius:9px;opacity:.35}.tm-tb i+i{opacity:1;width:22px}
+.tm-hd{font:900 .8rem/1 var(--display,Inter),sans-serif;text-align:center}
+.tm-cd{display:flex;flex-direction:column;gap:4px;border-radius:7px;padding:5px;border-inline-start:4px solid}
+.tm-cd i{height:4px;border-radius:4px;width:80%}.tm-cd em{height:9px;border-radius:9px}
+.tm-cd.g{flex-direction:row;justify-content:space-between}.tm-cd.g b{width:9px;height:9px;border-radius:50%;border:2px solid;box-sizing:border-box}
+.tm-n{font-size:.75rem;font-weight:700;text-align:center;line-height:1.2;max-width:92px}
+.tm-c.on .tm-n{font-weight:900}
+body:has(#scrollModal.tm-sheet:not([hidden])) #toast{display:none!important}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -4920,6 +4935,38 @@ function bnav(){let b=$('bNav');if(!inApp()){if(b)b.hidden=true;document.body.cl
 /* every popup: 🏠 at the top left, ✕ stays at the top right */
 {const _mc=modalCard;modalCard=function(){const r=_mc.apply(this,arguments);try{if(inApp()){const bar=$('scrollBody').querySelector('.mc-bar');if(bar&&!bar.querySelector('.mc-h')){const h=document.createElement('button');h.type='button';h.className='mc-x mc-h';h.setAttribute('aria-label',tl('Home'));h.textContent='🏠';h.onclick=goHome;bar.insertBefore(h,bar.firstChild)}}}catch(e){}return r}}
 setTimeout(()=>{try{bnav()}catch(e){}},300);
+/* language switch re-labels everything built earlier with tl(): first-page menu, dhikr chip, open menus, bottom bar (no refresh needed) */
+const LDM_K={home:['📲','Add to Home Screen'],th:['🎨','Theme'],dl:['🖨️','Print & Save'],game:['🏎️','Game'],pv:['🔒','Privacy'],fb:['💡','Suggest an idea']};
+function ldmGame(){const pn=$('ldMenu');if(!pn||pn.querySelector('[data-mi="game"]'))return;const dl=pn.querySelector('[data-mi="dl"]');if(!dl)return;
+  const g=document.createElement('button');g.className='ldm-i';g.dataset.mi='game';g.onclick=e=>{e.stopPropagation();location.href='./game-demo.html?v='+Date.now().toString(36)};dl.after(g)}
+function langRelabel(){try{render()}catch(e){}try{renderHeader()}catch(e){}try{renderTG()}catch(e){}try{renderNotif&&renderNotif()}catch(e){}try{ldGuestLbl()}catch(e){}try{ldmGame();document.querySelectorAll('#ldMenu [data-mi]').forEach(b=>{const k=LDM_K[b.dataset.mi];if(k)b.textContent=k[0]+' '+tl(k[1])});const mb=$('ldMb');if(mb)mb.setAttribute('aria-label',tl('Menu'))}catch(e){}
+  try{ldZChip()}catch(e){}try{const a=$('apMenu');if(a&&!a.hidden)apMenu()}catch(e){}try{bnav()}catch(e){}try{mineEnsure()}catch(e){}
+  try{if(typeof dashRender==='function'&&inApp())dashRender()}catch(e){}try{const h=$('ldHave');if(h){const sp=h.querySelector('span');if(sp)sp.textContent=tl('Already have an account?');const hb=$('ldHaveB');if(hb)hb.textContent=tl('Sign in')}const f=$('ldFam');if(f)f.textContent='👨‍👩‍👧 '+tl('Family sign in')}catch(e){}}
+function langRelabel2(){try{const g=$('guestBar');if(g){const sp=g.querySelector('span');if(sp)sp.textContent='👀 '+tl('Guest mode');const u=g.querySelector('[data-gx="up"]');if(u)u.textContent=tl('Create account');const o=g.querySelector('[data-gx="out"]');if(o)o.textContent=tl('Exit')}}catch(e){}
+  try{const b=$('ldGuest');if(b)b.textContent=tl('Browse as guest')}catch(e){}
+  try{const h=document.querySelector('#catCard h2');if(h)h.innerHTML='<span class="h2i" aria-hidden="true">🗂️</span>'+esc(tl('Schedules'))}catch(e){}
+  try{ldToday()}catch(e){}try{const h=$('hypeBox');if(h)h.remove()}catch(e){}try{const t=$('toast');if(t)t.classList.remove('show')}catch(e){}
+  try{if(window.GUEST&&S&&S.name&&S.name!==tl('Guest')&&['Guest','ضيف','Keessummaa','Marti'].includes(S.name)){S.name=tl('Guest');renderHeader()}}catch(e){}}
+{const _lr=langRelabel;langRelabel=function(){_lr();langRelabel2()}}
+{const _sl=setLang;setLang=function(){const r=_sl.apply(this,arguments);langRelabel();setTimeout(langRelabel,50);return r}}
+setTimeout(langRelabel,800);
+/* Theme picker: visual mini-page previews in a bottom sheet; tap = apply instantly, page stays visible above (no Special days popup) */
+const X58=[["Tap a theme. The page changes right away.","اضغط على مظهر، وتتغيّر الصفحة فورًا.","Bifa tokko tuqi. Fuulli battaluma jijjiirama.","Taabo muuqaal. Boggu isla markiiba wuu isbeddelayaa."],["Done","تم","Xumurameera","Dhammaatay"]];
+X58.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function thmMini(k,a,b){const t=THK[k]||{},main=t.k2||a,acc=t.k1||b,dark=k==='night',bg=dark?'#141b2d':'#f6f8f7',card=dark?'#1f2a44':'#fff',ink=dark?'#e8ecf5':'#18212b';
+  return `<span class="tm-pg" style="background:${bg}"><span class="tm-tb"><i style="background:${ink}"></i><i style="background:${main}"></i></span><span class="tm-hd" style="color:${ink}">F</span>
+   <span class="tm-cd" style="background:${card};border-color:${acc}"><i style="background:${ink};opacity:.5"></i><em style="background:${acc}"></em></span>
+   <span class="tm-cd g" style="background:${card};border-color:${main}"><b style="border-color:${main};background:${main}"></b><b style="border-color:${main};background:${main}"></b><b style="border-color:${main}"></b><b style="border-color:${main}"></b></span></span>`}
+thmOpen=function(){const cur=(S.look&&S.look.preset)||'calm';
+  modalCard(`<p class="label">🎨 ${tl('Theme')}</p><p class="small muted" style="margin:0 0 8px">${tl('Tap a theme. The page changes right away.')}</p>
+   <div class="tm-row">${PRESETS.map(([k,n,o,a,b])=>`<button type="button" data-thp="${k}" class="tm-c ${cur===k?'on':''}" aria-pressed="${cur===k}">${thmMini(k,a,b)}<span class="tm-n">${esc(tl(n))}</span></button>`).join('')}</div>
+   <button type="button" class="btn-main" id="tmOk" style="width:100%;margin-top:10px">${tl('Done')}</button>`);
+  const M=$('scrollModal');M.classList.add('tm-sheet');const B=$('scrollBody');
+  const on=B.querySelector('.tm-c.on');if(on)setTimeout(()=>on.scrollIntoView({inline:'center',block:'nearest'}),30);
+  B.querySelectorAll('[data-thp]').forEach(b=>b.onclick=()=>{thmSet(b.dataset.thp);try{thmApply()}catch(e){}B.querySelectorAll('[data-thp]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}});
+  $('tmOk').onclick=modalClose}
+{const _mcl=modalClose;modalClose=function(){const M=$('scrollModal');if(M)M.classList.remove('tm-sheet');return _mcl.apply(this,arguments)}}
+{const _mc2=modalCard;modalCard=function(){const M=$('scrollModal');if(M)M.classList.remove('tm-sheet');return _mc2.apply(this,arguments)}}
 
 
 let i18nBusy=false;
