@@ -4648,7 +4648,7 @@ function apMenu(){let m=$('apMenu');if(!m){m=document.createElement('div');m.id=
    <p class="apm-s">${tl('Tabs')}</p><div class="apm-g">${c.o.map(k=>`<button type="button" data-fat="${k}">${esc(tabLabel(k))}</button>`).join('')}</div>
    <p class="apm-s">${tl('Tools')}</p>
    <button class="apm-i" data-am="hisn">📖 ${tl('Hisnul Muslim')}</button><button class="apm-i" data-am="sal">🕌 ${tl('Salah times')}</button><button class="apm-i" data-am="zk">📿 ${tl('Dhikr')}</button>
-   <button class="apm-i" data-am="qt">⏱ ${tl('Timer')}</button><button class="apm-i" data-am="cal">📅 ${tl('Calendar')}</button><button class="apm-i" data-am="en">⚡ ${tl('Energy')}</button><hr>
+   <button class="apm-i" data-am="game">🏎️ ${tl('Game')}</button><button class="apm-i" data-am="qt">⏱ ${tl('Timer')}</button><button class="apm-i" data-am="cal">📅 ${tl('Calendar')}</button><button class="apm-i" data-am="en">⚡ ${tl('Energy')}</button><hr>
    <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="kid">🧒 ${tl('Kid mode')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
    <button class="apm-i" data-am="pv">🔒 ${tl('Privacy')}</button><button class="apm-i" data-am="fb">💡 ${tl('Suggest an idea')}</button>
    ${window.GUEST?`<button class="apm-i apm-o" data-am="gx">↩ ${tl('Exit guest mode')}</button>`:signed||fam?`<button class="apm-i apm-o" data-am="out">↩ ${tl('Sign out')}</button>`:''}</div>`;
@@ -4656,7 +4656,7 @@ function apMenu(){let m=$('apMenu');if(!m){m=document.createElement('div');m.id=
   m.querySelector('[data-fax]').onclick=()=>{m.hidden=true};
   m.querySelectorAll('[data-fat]').forEach(b=>b.onclick=()=>{m.hidden=true;show(b.dataset.fat)});
   m.querySelectorAll('[data-am]').forEach(b=>b.onclick=async()=>{const k=b.dataset.am;m.hidden=true;
-    if(k==='hisn')hisnOpen();else if(k==='sal')salPop();else if(k==='zk')zkOpen();else if(k==='qt')qtOpen();else if(k==='cal')$('calHdr').click();else if(k==='en')enOpen();
+    if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36);return}if(k==='hisn')hisnOpen();else if(k==='sal')salPop();else if(k==='zk')zkOpen();else if(k==='qt')qtOpen();else if(k==='cal')$('calHdr').click();else if(k==='en')enOpen();
     else if(k==='pin')pinEdit();else if(k==='arr')tabsArrange();else if(k==='th')thmOpen();else if(k==='kid')kidOpen();else if(k==='lang')langOpen();else if(k==='pv')privacyOpen();else if(k==='fb')fbOpen();
     else if(k==='gx')guestExit();else if(k==='out')apSignOut()})}
 async function apSignOut(){try{if(typeof FAM!=='undefined'&&FAM.token){famOut();return}}catch(e){}
@@ -4856,6 +4856,7 @@ function mineMake(){const M=S.mine||{n:'',e:'🎮'},c=tabsCfg(),opts=c.o.filter(
 {const _tr=tabsArrange;tabsArrange=function(){_tr.apply(this,arguments);const B=$('scrollBody');if(!B||$('mnAdd'))return;const b=document.createElement('button');b.type='button';b.id='mnAdd';b.className='btn-main';b.style.cssText='width:100%;margin-top:10px';b.textContent=(mineOn()?'✏️ ':'+ ')+tl(mineOn()?'Edit':'Make my own tab');b.onclick=mineMake;B.appendChild(b)}}
 setTimeout(()=>{try{mineEnsure();tabsApply()}catch(e){}},0);
 {const _tc=tabsCfg;tabsCfg=function(){const c=_tc.apply(this,arguments);if(!mineOn()){c.o=c.o.filter(k=>k!=='mine');c.h=c.h.filter(k=>k!=='mine')}return c}}
+TX["Game"]=Object.assign(TX["Game"]||{},{ar:"اللعبة",om:"Tapha",so:"Ciyaar"});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
