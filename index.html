@@ -1507,7 +1507,7 @@ function ladder(){const t=current(),s=t&&nextStep(t),base=s?s.text:t?t.title:'on
   return [base,'Just 2 minutes of: '+base,'Just put what you need for it in front of you','Just stand up and go to where it happens','Say the first physical action out loud, then do only that']}
 const pick=a=>a[Math.floor(Math.random()*a.length)];
 const replies={
-  no:['Okay. A no tells me the step is still too big. Smaller: {s}.','Noted. Let\'s lower the activation cost: {s}.','Still no. Then less friction: {s}.','I\'ll keep shrinking it until yes is easy. {s}.'],
+  no:['Okay. A no tells me the step is still too big. Smaller: {s}.','Noted. Let\'s lower the activation cost: {s}.','Still no. Then an easier start: {s}.','I\'ll keep shrinking it until yes is easy. {s}.'],
   later:['Later works when it has a cue. Implementation intention: "When ___, I\'ll start." Or the 2-minute start now: {s}.','"Later" with no time tends to drift. Pick the exact time, or do 2 minutes now: {s}.'],
   cant:['Your brain is looking at the whole task. The ask is only the first action: {s}.','This is about step size, not ability. {s}.'],
   tired:['Tiredness is real. Match the step to the energy you have: {s}.','Low-energy day, small dose. {s}. Then check in with yourself again.'],
@@ -1546,7 +1546,7 @@ const WHY={no:'Why: a no is useful information. A smaller step lowers the effort
   over:'Why: fewer open tasks means less load on working memory, so the next step is clearer.',
   where:'Why: a concrete physical action skips the planning step, where ADHD often stalls.',
   anx:'Why: a lower standard reduces the fear of doing it wrong, so starting is easier.',
-  scroll:'Why: distance adds friction, and friction works better than willpower.',
+  scroll:'Why: putting it out of reach works better than willpower.',
   heavy:'Why: you\'ve noticed this heaviness comes when you go to do good. Seeking refuge, then a very small action, answers it without waiting for it to lift.'};
 const ASK={
   over:['Want to empty your head onto the list first?',[['Yes, open brain dump',()=>{show('today');setTimeout(()=>$('dumpInput')&&$('dumpInput').focus(),60)}],['No, keep going',()=>coachSay('Okay. Just the step above.')]]],
@@ -2177,7 +2177,7 @@ function openCaught(){
     </div>
     <details style="width:100%;text-align:left"><summary>Make scrolling harder next time (${S.friction.length} of ${FRICTION.length} done)</summary>
       <ul class="steps">${FRICTION.map(([id,txt])=>`<li class="${S.friction.includes(id)?'done':''}"><input type="checkbox" data-fr="${id}" ${S.friction.includes(id)?'checked':''} aria-label="${esc(txt)}"><span>${esc(txt)}</span></li>`).join('')}</ul>
-      <p class="small muted" style="margin-top:8px">Each one you set up is +2 stars. Friction works better than self-control because it acts before the urge does.</p></details>
+      <p class="small muted" style="margin-top:8px">Each one you set up is +2 stars. Changing your space works better than self-control because it acts before the urge does.</p></details>
     <p class="small muted">Caught yourself ${caughtWeek()} time${caughtWeek()===1?'':'s'} this week. Every catch counts.</p>
     <button class="btn-ghost small" id="scClose">Close</button>`;
   $('scrollModal').hidden=false;
@@ -2189,7 +2189,7 @@ function openCaught(){
   $('scDhikr').onclick=()=>{close();show('enjoy');D.on=DEEDS[0];D.n=0;D.seqI=0;D.stepI=0;D.t0=Date.now();renderDeeds();setTimeout(()=>$('deedCard').scrollIntoView({behavior:reduce?'auto':'smooth'}),60)};
   $('scRest').onclick=()=>{$('scrollModal').hidden=true;startTimer(10,{label:'Real rest. Phone in another room.',rest:true,awarded:true})};
   $('scrollBody').querySelectorAll('[data-fr]').forEach(c=>c.onchange=()=>{const id=c.dataset.fr;
-    if(c.checked&&!S.friction.includes(id)){S.friction.push(id);award(2,'Friction: '+FRICTION.find(x=>x[0]===id)[1]);toast('+2 stars. That one keeps working while you sleep.')}
+    if(c.checked&&!S.friction.includes(id)){S.friction.push(id);award(2,'Made it easier: '+FRICTION.find(x=>x[0]===id)[1]);toast('+2 stars. That one keeps working while you sleep.')}
     else if(!c.checked)S.friction=S.friction.filter(x=>x!==id);
     save();c.closest('li').classList.toggle('done',c.checked);c.closest('details').querySelector('summary').textContent=`Make scrolling harder next time (${S.friction.length} of ${FRICTION.length} done)`});
 }
@@ -4765,6 +4765,12 @@ setTimeout(()=>{try{if(sessionStorage.getItem('fastaqim.lgfail')){sessionStorage
 document.addEventListener('click',e=>{const t=e.target;if(!t.closest)return;if(t.closest('button,a,input,select,textarea,label,summary,audio,[data-act],[contenteditable]'))return;
   const card=t.closest('.card');if(!card)return;const tap=card.querySelector('#azTap')||card.querySelector('#deedBody #tap');if(!tap||tap.contains(t))return;
   if(String(getSelection&&getSelection())!=='')return;tap.click()});
+/* no "friction" wording (old saved wins renamed on display) */
+const X53=[["Still no. Then an easier start: {s}.","لا بأس. نبدأ بشيء أسهل: {s}.","Ammas lakki? Jalqaba salphaa: {s}.","Weli maya? Bilow ka fudud: {s}."],
+["Why: putting it out of reach works better than willpower.","لماذا: إبعاده عن متناول يدك أنفع من قوة الإرادة.","Maaliif: fagootti kaa'uun fedhii jabaa caalaa hojjeta.","Sababta: in aad meel fog dhigto ayaa ka shaqeeya awoodda doonista."],
+["Each one you set up is +2 stars. Changing your space works better than self-control because it acts before the urge does.","كل واحدة تجهّزها = +2 نجمة. تغيير المكان حولك أنفع من ضبط النفس لأنه يسبق الرغبة.","Tokkoon tokkoon isaa urjii +2. Naannoo kee jijjiiruun of to'achuu caalaa hojjeta, sababni isaa fedhii dura hojjeta.","Mid kasta oo aad diyaariso waa +2 xiddig. Beddelidda meeshaada ayaa ka shaqeeya is-xakamaynta, maxaa yeelay waxay ka horreysaa rabitaanka."]];
+X53.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+try{(S.wins||[]).forEach(w=>{if(w&&typeof w.text==='string')w.text=w.text.replace(/^Friction: /,'Made it easier: ')})}catch(e){}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
