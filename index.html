@@ -938,6 +938,7 @@ body.kid .task-head input[type=checkbox]{width:30px!important;height:30px!import
 .dz-ch{flex:1;min-width:0;background:var(--bg);border:0;border-radius:12px;min-height:44px;font-weight:800;font-size:.92rem;border-bottom:3px solid var(--calm);white-space:nowrap}
 .dz-ch.w{border-bottom-color:#4dabf7}.dz-ch.q{border-bottom-color:var(--calm)}.dz-ch.m{border-bottom-color:#e8b400}
 body.kid .dz-dots i{width:40px;height:40px}
+body[data-tab=now]:has(#dashCard) #progStrip,body[data-tab=now]:has(#dashCard) .hud .level{display:none!important}
 /* visual theme picker (bottom sheet, page visible above) */
 #scrollModal.tm-sheet{align-items:flex-end!important;background:rgba(0,0,0,.18)!important}
 #scrollModal.tm-sheet #scrollBody{margin:0 auto!important;max-height:none!important;width:100%!important;max-width:520px!important;border-radius:22px 22px 0 0!important;padding-bottom:calc(14px + env(safe-area-inset-bottom))!important}
@@ -4968,6 +4969,40 @@ thmOpen=function(){const cur=(S.look&&S.look.preset)||'calm';
 {const _mcl=modalClose;modalClose=function(){const M=$('scrollModal');if(M)M.classList.remove('tm-sheet');return _mcl.apply(this,arguments)}}
 {const _mc2=modalCard;modalCard=function(){const M=$('scrollModal');if(M)M.classList.remove('tm-sheet');return _mc2.apply(this,arguments)}}
 
+/* ===== Today dashboard: the user page looks like the first-page preview (ring, level, stars, next step, salah dots, trackers) ===== */
+const X57=[["Today","اليوم","Har'a","Maanta"],["Level","المستوى","Sadarkaa","Heerka"],["days","أيام","guyyaa","maalmood"],["Next step","الخطوة التالية","Tarkaanfii itti aanu","Tallaabada xigta"],
+["Start for 2 minutes","ابدأ دقيقتين","Daqiiqaa 2f jalqabi","Bilow 2 daqiiqo"],["Salah","الصلاة","Salaata","Salaadda"],["Water","الماء","Bishaan","Biyo"],["Quran","القرآن","Qur'aana","Quraan"],
+["Spent today","المصروف اليوم","Har'a baase","Maanta la bixiyay"],["Add a first step in To-do","أضف خطوة أولى في المهام","Hojiiwwan keessatti tarkaanfii jalqabaa dabali","Ku dar tallaabo koowaad Hawlaha"],
+["Fajr","الفجر","Fajrii","Fajar"],["Dhuhr","الظهر","Zuhrii","Duhur"],["Asr","العصر","Asrii","Casar"],["Maghrib","المغرب","Magribii","Maqrib"],["Isha","العشاء","Ishaa","Cishe"],
+["pages","صفحات","fuula","bog"],["cups","أكواب","kubbaayyaa","koob"]];
+X57.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const SAL5=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
+function dzTrk(type){trkFix();let t=S.trackers.find(x=>type==='salah'?x.type==='salah':x.type==='count'&&(TRK_T[type].name===x.name||x.emoji===TRK_T[type].emoji));return t||null}
+function dzTrkMake(type){let t=dzTrk(type);if(!t){t=Object.assign({id:uid()},TRK_T[type]);S.trackers.push(t);save()}return t}
+function dashRing(p){const r=26,c=2*Math.PI*r;return `<svg viewBox="0 0 64 64" class="dz-ring" aria-hidden="true"><circle cx="32" cy="32" r="${r}" class="b"/><circle cx="32" cy="32" r="${r}" class="f" stroke-dasharray="${c.toFixed(1)}" stroke-dashoffset="${(c*(1-p/100)).toFixed(1)}"/></svg>`}
+let dzMore=false;
+function dashRender(){const sec=$('tab-now');if(!sec)return;let c=$('dashCard');
+  if(!c){c=document.createElement('div');c.id='dashCard';c.className='dz';const ref=$('nowCard');sec.insertBefore(c,ref||sec.firstChild)}
+  const day=trkDay(),p=Math.max(0,Math.min(100,Math.round(todayPct()))),L=lvl(),st=streak(),t=current(),s=t&&nextStep(t),txt=s?s.text:t?t.title:'';
+  const sT=dzTrk('salah'),sv=sT&&Array.isArray(day[sT.id])?day[sT.id]:[0,0,0,0,0],wT=dzTrk('water'),qT=dzTrk('quran'),wv=wT?+day[wT.id]||0:0,qv=qT?+day[qT.id]||0:0;
+  const spent=(S.money&&S.money.items||[]).filter(i=>i.kind==='expense'&&i.date===dkey()).reduce((a,i)=>a+(+i.amount||0),0);
+  const nc=$('nowCard');if(nc)nc.hidden=!!t&&!dzMore;
+  c.innerHTML=`<div class="dz-top"><div class="dz-r">${dashRing(p)}<b>${p}%</b></div><div class="dz-t"><b>${esc(tl('Today'))}</b><span>${esc(tl('Level'))} ${L.n} · 🔥 ${st} ${esc(tl('days'))}</span></div><button type="button" class="dz-st" data-dz="me" aria-label="Stars"><i>⭐</i><b>${S.sparks||0}</b></button></div>
+   ${t?`<div class="dz-c dz-next"><p class="dz-l">🚀 ${esc(tl('Next step'))}</p><label class="dz-ck"><input type="checkbox" data-dz="step"><span class="notranslate" dir="auto">${esc(txt)}</span></label><div class="dz-row"><button type="button" class="dz-go" data-dz="go">${esc(tl('Start for 2 minutes'))}</button><button type="button" class="dz-more" data-dz="more" aria-expanded="${dzMore}" aria-label="More">${dzMore?'▴':'⋯'}</button></div></div>`:''}
+   <div class="dz-c dz-sal"><p class="dz-l">🕌 ${esc(tl('Salah'))}</p><div class="dz-dots">${SAL5.map((n,i)=>`<button type="button" data-dz="sal" data-i="${i}" class="${sv[i]?'on':''}" aria-pressed="${!!sv[i]}"><i>${sv[i]?'✓':''}</i><small>${esc(tl(n))}</small></button>`).join('')}</div></div>
+   <div class="dz-chips"><button type="button" class="dz-ch w" data-dz="w">💧 <b>${wv}/8</b></button><button type="button" class="dz-ch q" data-dz="q">📖 <b>${qv}/2</b></button><button type="button" class="dz-ch m" data-dz="money">💰 <b dir="ltr">${spent?'−'+spent:0}</b></button></div>`;
+  c.querySelectorAll('[data-dz]').forEach(b=>{const k=b.dataset.dz;const fn=()=>{
+    if(k==='me')show('wins');else if(k==='money')show('money');else if(k==='go'){try{kickCurrent(2)}catch(e){$('go2')&&$('go2').click()}}
+    else if(k==='more'){dzMore=!dzMore;dashRender()}
+    else if(k==='step'){setTimeout(()=>{if(s)completeStep(t,s);else if($('didIt'))$('didIt').click();render()},350)}
+    else if(k==='sal'){const T=dzTrkMake('salah'),i=+b.dataset.i,v=(Array.isArray(trkDay()[T.id])?trkDay()[T.id]:[0,0,0,0,0]).slice();v[i]=v[i]?0:1;if(v[i])try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}trkSet(T,v);dashRender()}
+    else if(k==='w'||k==='q'){const T=dzTrkMake(k==='w'?'water':'quran'),g=T.goal,n=+trkDay()[T.id]||0;trkSet(T,n>=g?0:n+1);dashRender()}};
+    if(b.tagName==='INPUT')b.onchange=fn;else b.onclick=fn})}
+{const _rn=renderNow;renderNow=function(){const r=_rn.apply(this,arguments);try{dashRender()}catch(e){console.error(e)}return r}}
+/* keep guests in guest mode when they come back from the game or reload in the same visit */
+{const _gs=guestStart;guestStart=function(){try{sessionStorage.setItem('fastaqim.guestOn','1')}catch(e){}return _gs.apply(this,arguments)}}
+{const _ge=guestExit;guestExit=function(){try{sessionStorage.removeItem('fastaqim.guestOn')}catch(e){}return _ge.apply(this,arguments)}}
+setTimeout(()=>{try{if(!inApp()&&sessionStorage.getItem('fastaqim.guestOn')&&!(typeof AU!=='undefined'&&AU.user))guestStart()}catch(e){}},700);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
