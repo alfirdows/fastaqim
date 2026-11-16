@@ -892,6 +892,23 @@ body.kid .btn-main{border-radius:16px}
 @keyframes kdb{0%{transform:translate(-50%,0) scale(.6);opacity:1}100%{transform:translate(calc(-50% + var(--dx)),var(--dy)) scale(1);opacity:0}}
 @media (prefers-reduced-motion:reduce){.kd-bit{display:none}}
 .kd-snd{display:flex;align-items:center;gap:10px;margin-top:12px;font:600 .9rem var(--body);justify-content:center}.kd-snd input{width:22px;height:22px}
+/* v81 bottom bar: Home on every page */
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:90;display:grid;grid-template-columns:repeat(5,1fr);background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:6px 4px calc(6px + env(safe-area-inset-bottom,0px))}
+.bnav button{all:unset;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 0;border-radius:12px;font:600 .68rem var(--body);color:var(--muted);min-height:44px;justify-content:center}
+.bnav button i{font-style:normal;font-size:1.25rem;line-height:1}.bnav button.on{color:var(--calm)}.bnav button.on i{transform:none}
+body.has-bnav{padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+body.has-bnav .hype{bottom:calc(74px + env(safe-area-inset-bottom,0px))!important}
+body.has-bnav .toast{bottom:calc(132px + env(safe-area-inset-bottom,0px))!important}
+.mc-bar .mc-h{pointer-events:auto;margin-inline-end:auto}
+/* v81 round tap checkmarks like the first-page preview */
+#app input[type=checkbox]:not(.ta-s input):not([role=switch]),.wrap input[type=checkbox]:not(.ta-s input){-webkit-appearance:none;appearance:none;flex:none;width:26px;height:26px;margin:0;border-radius:50%;border:2px solid color-mix(in srgb,var(--calm) 55%,var(--line));background:var(--surface) center/16px no-repeat;cursor:pointer;transition:background-color .15s,border-color .15s}
+#app input[type=checkbox]:checked:not(.ta-s input),.wrap input[type=checkbox]:checked:not(.ta-s input){background-color:var(--calm);border-color:var(--calm);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M5 12.5l4.2 4.2L19 7' fill='none' stroke='white' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")}
+.steps input[type=checkbox]{width:22px!important;height:22px!important;background-size:13px!important}
+body.kid .task-head input[type=checkbox]{width:30px!important;height:30px!important}
+/* Arabic name under the logo: big, dark, Uthmani, no underline */
+#landing .ld-logo .ld-name{font-size:1.2rem!important;text-decoration:none!important;color:#0a4d46!important;font-weight:700;margin-top:2px!important}
+#landing .ld-logo .ld-name.arq{font-size:2.15rem!important;line-height:1.45!important;font-weight:400!important;color:#0a4d46!important}
+.hd-name.arq{font-size:1.45rem!important;color:#0a4d46!important;line-height:1.3}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -4857,6 +4874,23 @@ function mineMake(){const M=S.mine||{n:'',e:'🎮'},c=tabsCfg(),opts=c.o.filter(
 setTimeout(()=>{try{mineEnsure();tabsApply()}catch(e){}},0);
 {const _tc=tabsCfg;tabsCfg=function(){const c=_tc.apply(this,arguments);if(!mineOn()){c.o=c.o.filter(k=>k!=='mine');c.h=c.h.filter(k=>k!=='mine')}return c}}
 TX["Game"]=Object.assign(TX["Game"]||{},{ar:"اللعبة",om:"Tapha",so:"Ciyaar"});
+
+/* ===== Home everywhere: a fixed bottom bar on the user page + a 🏠 in every popup ===== */
+const X56=[["Home","الرئيسية","Mana","Hoyga"],["Menu","القائمة","Baafata","Menu"]];
+X56.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function goHome(){try{const m=$('scrollModal');if(m&&!m.hidden)m.hidden=true;const a=$('apMenu');if(a)a.hidden=true}catch(e){}show('now');window.scrollTo({top:0,behavior:'smooth'})}
+function bnav(){let b=$('bNav');if(!inApp()){if(b)b.hidden=true;document.body.classList.remove('has-bnav');return}
+  if(!b){b=document.createElement('div');b.id='bNav';b.className='bnav';b.setAttribute('role','navigation');b.setAttribute('aria-label','Main');document.body.appendChild(b);
+    b.onclick=e=>{const x=e.target.closest('[data-bn]');if(!x)return;const k=x.dataset.bn;
+      if(k==='home')goHome();else if(k==='zk'){try{zkOpen()}catch(err){}}else if(k==='todo'){show('today')}else if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36)}else if(k==='menu'){apMenu()}}}
+  const cur=document.body.dataset.tab||'now';
+  b.innerHTML=[['home','🏠','Home'],['todo','✅','To-do'],['zk','📿','Dhikr'],['game','🏎️','Game'],['menu','☰','Menu']].map(([k,i,l])=>`<button type="button" data-bn="${k}" class="${(k==='home'&&cur==='now')||(k==='todo'&&cur==='today')?'on':''}"><i aria-hidden="true">${i}</i><span>${esc(tl(l))}</span></button>`).join('');
+  b.hidden=false;document.body.classList.add('has-bnav')}
+{const _rh=renderHeader;renderHeader=function(){_rh.apply(this,arguments);try{bnav()}catch(e){}}}
+{const _sh=show;show=function(){const r=_sh.apply(this,arguments);try{bnav()}catch(e){}return r}}
+/* every popup: 🏠 at the top left, ✕ stays at the top right */
+{const _mc=modalCard;modalCard=function(){const r=_mc.apply(this,arguments);try{if(inApp()){const bar=$('scrollBody').querySelector('.mc-bar');if(bar&&!bar.querySelector('.mc-h')){const h=document.createElement('button');h.type='button';h.className='mc-x mc-h';h.setAttribute('aria-label',tl('Home'));h.textContent='🏠';h.onclick=goHome;bar.insertBefore(h,bar.firstChild)}}}catch(e){}return r}}
+setTimeout(()=>{try{bnav()}catch(e){}},300);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
