@@ -43,7 +43,7 @@ button.pill{cursor:pointer}
 .dk small{font:600 .75rem Inter,system-ui;color:#64748b}
 .worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .world{border:2px solid #e2e8f0;border-radius:16px;padding:0;overflow:hidden;background:#fff;cursor:pointer;display:flex;flex-direction:column}
-.world canvas{width:100%;height:64px;display:block}.world span{font:800 .75rem Inter,system-ui;padding:6px 2px;color:#0f172a}
+.world canvas{width:100%;height:64px;display:block}.world span{font:800 .7rem/1.2 Inter,system-ui;padding:6px 2px;color:#0f172a;overflow-wrap:anywhere}
 .world.on{border-color:#0f172a;box-shadow:0 0 0 3px rgba(15,23,42,.15)}
 .how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
 .how div{background:#f1f5f9;border-radius:14px;padding:8px 4px;text-align:center;font:700 .74rem/1.3 Inter,system-ui;color:#334155}
@@ -72,6 +72,7 @@ button.pill{cursor:pointer}
 <div class="pw" id="pw"></div>
 <div class="hint" id="hint" hidden></div>
 <div class="card" id="menu"><div class="sheet" id="menuS"></div></div>
+<script src="game/three-lib.js?v=160"></script>
 <script>
 "use strict";
 /* ---------- language (same choice as the site) ---------- */
@@ -134,9 +135,9 @@ let WD=WORLDS[ST.world]||WORLDS.gold;
 /* ---------- canvas + projection (own pseudo-3D road) ---------- */
 const cv=document.getElementById('cv'),x=cv.getContext('2d');let W=0,H=0,DPR=1;
 function size(){DPR=Math.min(2,devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;x.setTransform(DPR,0,0,DPR,0,0)}size();addEventListener('resize',size);
-const CAM=6,FAR=46,GAP=1.45;const HZ=()=>H*.34,BOT=()=>H*.86,U=()=>Math.min(W*.2,H*.13);
+const CAM=6,FAR=90,GAP=1.45;const HZ=()=>H*.34,BOT=()=>H*.86,U=()=>Math.min(W*.2,H*.13);
 const sc=d=>CAM/(Math.max(-4.5,d)+CAM);
-const P=(X,d,h=0)=>{const s=sc(d),u=U();return {x:W/2+X*GAP*u*s,y:HZ()+(BOT()-HZ())*s-h*u*s,s:u*s}};
+let P=(X,d,h=0)=>{const s=sc(d),u=U();return {x:W/2+X*GAP*u*s,y:HZ()+(BOT()-HZ())*s-h*u*s,s:u*s}};
 const rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
 /* ---------- game state ---------- */
 let G=null,state='menu',raf=0,last=0;
@@ -379,4 +380,5 @@ $('pz').onclick=pause;document.addEventListener('visibilitychange',()=>{if(docum
 const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL();sndB.onclick=()=>{ST.snd=!ST.snd;stSave();sndL();if(ST.snd)SFX.plip()};
 /* for automated checks */window.__g={G:()=>G,state:()=>state,move,jump,duck,begin:()=>begin(tasksWithSteps()),setMode:m=>{ST.mode=m},finish};
 showMenu();
-</script></body></html>
+</script>
+<script src="game/r3d.js?v=1"></script></body></html>
