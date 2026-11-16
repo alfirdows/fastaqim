@@ -243,7 +243,7 @@ function acquire(k){const pool=POOL[k]||(POOL[k]=[]);for(const m of pool)if(!m.u
  if(['mag','shield','x2','boost'].includes(k))m._ring=m.children[1];WG.add(m);pool.push(m);return m}
 
 /* ---------- per-frame sync ---------- */
-let frame=0,tPrev=0,carRoll=0,carYaw=0,sq=1,wSpin=0;const tv=new T.Vector3();
+let frame=0,tPrev=0,carRoll=0,carYaw=0,sq=1,wSpin=0,pY=0,landT=0;const tv=new T.Vector3();
 function sync(t,noW){const g=G,dt=Math.min(.05,Math.max(0,t-tPrev));tPrev=t;frame++;
  if(!noW&&(curW!==ST.world||!WG))buildWorld(ST.world);
  const dist=g?g.dist:t*6,sp=g?g.speed*(g.boost>0?1.6:1):6;
@@ -253,7 +253,7 @@ function sync(t,noW){const g=G,dt=Math.min(.05,Math.max(0,t-tPrev));tPrev=t;fram
  /* car */
  const cx=(g?g.x:0)*LS,cy=g?g.y:0,tgt=g?[-1,0,1][g.lane]*LS:0,dv=tgt-cx;carRoll+=(dv*.12-carRoll)*Math.min(1,dt*10);carYaw+=(-dv*.2-carYaw)*Math.min(1,dt*10);
  const u=car.userData,ducking=g&&g.duck>0;sq+=((ducking?.6:1)-sq)*Math.min(1,dt*18);
- car.position.set(cx,cy+(g&&state==='play'&&cy===0?Math.sin(t*22)*.006:0),0);car.rotation.set(cy>0?-Math.min(.12,(g.vy||0)*.008):0,carYaw,carRoll);u.body.scale.set(1+(1-sq)*.12,sq,1+(1-sq)*.08);
+ car.position.set(cx,cy+(g&&state==='play'&&cy===0?Math.sin(t*22)*.006:0),0);car.rotation.set(cy>0?-Math.min(.12,(g.vy||0)*.008):0,carYaw,carRoll);if(pY>.05&&cy===0)landT=.3;pY=cy;landT=Math.max(0,landT-dt);const lb=landT>0?Math.sin((1-landT/.3)*Math.PI)*.16:0;u.body.scale.set(1+(1-sq)*.12+lb*.45,sq*(1-lb),1+(1-sq)*.08+lb*.3);
  wSpin-=sp*dt/.22;for(const w of u.wh)w.rotation.x=wSpin;
  car.visible=!(g&&g.inv>0&&g.boost<=0&&Math.floor(g.t*14)%2);
  blob.position.x=cx;const bs=1-Math.min(.5,cy*.18);blob.scale.set(bs,1,bs);blob.material.opacity=1-Math.min(.6,cy*.2);
