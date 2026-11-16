@@ -969,6 +969,7 @@ body:has(#scrollModal.tm-sheet:not([hidden])) #toast{display:none!important}
 .zt-bit{position:absolute;width:9px;height:9px;margin:-4px;border-radius:2px;pointer-events:none;z-index:3;animation:ztb 1.05s ease-out forwards}
 @keyframes ztb{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
 .ldz-plus{direction:ltr;unicode-bidi:isolate}
+#scrollBody:has(#ldZk) .ldz-plus{display:none!important}
 .zg{width:100%;max-width:340px;margin:6px auto 0;pointer-events:none}
 .zg-svg{width:100%;display:block}
 .zg-str{fill:none;stroke:#c9b48a;stroke-width:1.2}
@@ -980,6 +981,11 @@ body:has(#scrollModal.tm-sheet:not([hidden])) #toast{display:none!important}
 .zg-f{fill:none;stroke:#cfd8cc;stroke-width:3.4;stroke-linecap:round;transition:stroke .4s}.zg-f.on{stroke:#2e9b57}.zg-d{fill:#c98a3a}
 .zg-fl circle{fill:#d9d4c7;transition:fill .4s}.zg-fl .c{fill:#fff}.zg-fl.on circle{fill:#ff8fb8}.zg-fl.on .c{fill:#ffe08a}
 .zg-svg.done .zg-l.on path,.zg-svg.done .zg-s.on,.zg-svg.done .zg-p .bd{filter:drop-shadow(0 0 3px rgba(34,179,154,.9))}
+.ldz-rr{display:flex;gap:10px;justify-content:center;align-items:center;margin:6px 0 0}
+.zk-u{white-space:nowrap;min-height:36px;padding:0 14px;border-radius:99px;border:0;background:var(--line,#e2e8f0);color:var(--ink);font-weight:800;font-size:.9rem;direction:ltr}
+.zk-r{white-space:nowrap;min-height:36px;padding:0 14px;border-radius:99px;border:1.5px solid #e5a3a3;background:transparent;color:#b42318;font-weight:700;font-size:.85rem}
+.zk-r.arm{background:#b42318;color:#fff;border-color:#b42318}
+.zk-u:disabled,.zk-r:disabled{opacity:.4}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -5045,10 +5051,27 @@ function zgRender(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0
 {const _lt=lzTap;lzTap=function(e){const B=$('ldzTap'),prev=B&&B.querySelector('b')?B.querySelector('b').textContent:'';_lt.apply(this,arguments);
   try{const sb=$('scrollBody'),r=sb.getBoundingClientRect(),X=e.clientX-r.left,Y=e.clientY-r.top+sb.scrollTop;
     const gl=document.createElement('span');gl.className='zt-glow';gl.style.left=X+'px';gl.style.top=Y+'px';sb.appendChild(gl);setTimeout(()=>gl.remove(),1100);
-    const s=document.createElement('span');s.className='zt-star';s.style.left=X+'px';s.style.top=Y+'px';s.innerHTML='<svg viewBox="-12 -12 24 24"><path d="M0-11 3.2-7.7 7.8-7.8 7.7-3.2 11 0 7.7 3.2 7.8 7.8 3.2 7.7 0 11-3.2 7.7-7.8 7.8-7.7 3.2-11 0-7.7-3.2-7.8-7.8-3.2-7.7z"/></svg>';sb.appendChild(s);setTimeout(()=>s.remove(),900);
-    if(B&&prev!==''){const gh=document.createElement('b');gh.className='zt-ghost';gh.textContent=prev;gh.setAttribute('aria-hidden','true');const nb0=B.querySelector('b');gh.style.top=nb0.offsetTop+'px';gh.style.height=nb0.offsetHeight+'px';B.appendChild(gh);setTimeout(()=>gh.remove(),600);const nb=B.querySelector('b');nb.classList.remove('zt-in');void nb.offsetWidth;nb.classList.add('zt-in')}
+    if(B){const nb=B.querySelector('b');nb.classList.remove('zt-in');void nb.offsetWidth;nb.classList.add('zt-in')}
     zgRender();const o=lzGet(),i=(o.i||0)%(LZ.length+1),n=o.n[i]||0;
-    if(n>0&&n%33===0){for(let k=0;k<14;k++){const c=document.createElement('span');c.className='zt-bit';const a=k/14*6.283;c.style.left=X+'px';c.style.top=Y+'px';c.style.setProperty('--dx',(Math.cos(a)*120).toFixed(0)+'px');c.style.setProperty('--dy',(Math.sin(a)*120).toFixed(0)+'px');c.style.background=['#10956B','#22b39a','#7ee2c0','#0f7c5c','#c8f5e3'][k%5];sb.appendChild(c);setTimeout(()=>c.remove(),1100)}}}catch(err){}}}
+    void n;}catch(err){}}}
+/* Undo (−1, quiet) and Reset (to 0, asks first) are two different buttons */
+const X59=[["Undo one","تراجع عن واحدة","Tokko deebisi","Ka noqo mid"],["Reset to 0","تصفير العدّاد","Gara 0 deebisi","Eber ka dhig"],["Tap again to reset","اضغط مرة أخرى للتصفير","Irra deebi'ii tuqi","Mar kale taabo"]];
+X59.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function zkBtns(){const box=$('ldZk');if(!box)return;const rr=box.querySelector('.ldz-rr');if(!rr)return;const o=lzGet(),i=(o.i||0)%(LZ.length+1),n=o.n[i]||0;
+  rr.innerHTML=`<button type="button" class="zk-u" data-zu ${n?'':'disabled'} aria-label="${tl('Undo one')}">↶ −1</button><button type="button" class="zk-r" data-zr ${n?'':'disabled'}>⟲ ${tl('Reset to 0')}</button>`;
+  rr.querySelector('.zk-u').onclick=()=>{const o=lzGet(),i=(o.i||0)%(LZ.length+1);if(!o.n[i])return;o.n[i]--;lzSave(o);ldZikr();ldZChip();try{navigator.vibrate&&navigator.vibrate(6)}catch(e){}};
+  const R=rr.querySelector('.zk-r');let arm=null;R.onclick=()=>{if(!arm){R.classList.add('arm');R.textContent='⟲ '+tl('Tap again to reset');arm=setTimeout(()=>{arm=null;if(R.isConnected){R.classList.remove('arm');R.textContent='⟲ '+tl('Reset to 0')}},3000);return}
+    clearTimeout(arm);const o=lzGet(),i=(o.i||0)%(LZ.length+1);o.n[i]=0;lzSave(o);ldZikr();ldZChip();try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}}}
+{const _lz2=ldZikr;ldZikr=function(){const r=_lz2.apply(this,arguments);try{zkBtns()}catch(e){}return r}}
+{const _lt2=lzTap;lzTap=function(){const r=_lt2.apply(this,arguments);try{zkBtns()}catch(e){}return r}}
+/* one clear number: this dhikr's count, the round under it, and the all-dhikr total named plainly */
+const X60=[["All dhikr today","كل الأذكار اليوم","Zikrii hunda har'a","Dhikriga oo dhan maanta"],["of 33","من 33","33 keessaa","ka mid ah 33"],["round","الجولة","marsaa","wareeg"]];
+X60.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function zkLabels(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0)%(LZ.length+1),n=o.n[i]||0,tot=Object.values(o.n).reduce((a,c)=>a+c,0);
+  const sm=box.querySelector('#ldzTap small');if(sm){const r=Math.floor((n-1)/33)+1,inr=n?(n%33||33):0;sm.textContent=n>33?`${inr} ${tl('of 33')} · ${tl('round')} ${r}`:`${tl('of 33')}`}
+  const t=box.querySelector('.ldz-tot');if(t)t.textContent=n?`${tl('All dhikr today')}: ${tot}`:tl('Tap anywhere to count');box.querySelectorAll('.zt-ghost').forEach(g=>g.remove())}
+{const _lz3=ldZikr;ldZikr=function(){const r=_lz3.apply(this,arguments);try{zkLabels()}catch(e){}return r}}
+{const _lt3=lzTap;lzTap=function(){const r=_lt3.apply(this,arguments);try{zkLabels()}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
