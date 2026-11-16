@@ -4773,6 +4773,12 @@ const X53=[["Still no. Then an easier start: {s}.","لا بأس. نبدأ بشي
 X53.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 try{(S.wins||[]).forEach(w=>{if(w&&typeof w.text==='string')w.text=w.text.replace(/^Friction: /,'Made it easier: ')})}catch(e){}
 TX['auto']=Object.assign(TX['auto']||{},{ar:'تلقائي',om:'ofumaan',so:'toos'});
+/* first page: Family sign in sits next to Browse as guest; deep links ?go=up|in|guest|family */
+function ldFamLink(){const h=$('ldHave');if(!h||$('ldFam'))return;const b=document.createElement('button');b.type='button';b.id='ldFam';b.className='ld-guest';b.textContent='👨‍👩‍👧 '+tl('Family sign in');b.onclick=()=>famOpen();h.appendChild(b)}
+setTimeout(()=>{try{ldFamLink()}catch(e){}},700);
+{const _sl=setLang;setLang=function(){const r=_sl.apply(this,arguments);setTimeout(()=>{try{const f=$('ldFam');if(f)f.textContent='👨‍👩‍👧 '+tl('Family sign in')}catch(e){}},0);return r}}
+setTimeout(()=>{try{const q=new URLSearchParams(location.search),g=q.get('go');if(!g)return;history.replaceState(null,'',location.pathname+location.hash);
+  if(inApp())return;if(g==='up'||g==='in')ldAuthOpen(g);else if(g==='guest')guestStart();else if(g==='family')famOpen()}catch(e){}},600);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);

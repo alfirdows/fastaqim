@@ -16,12 +16,14 @@ canvas{display:block;width:100%;border-radius:22px;touch-action:none;box-shadow:
 .ov button{border:0;border-radius:16px;padding:14px 28px;font:800 1.05rem Inter,system-ui;color:#fff;background:var(--c,#10956B)}
 .tk{font:700 .85rem Inter,system-ui;color:#0f172a}
 .note{max-width:400px;margin:10px auto;padding:0 16px;font:500 .78rem/1.45 Inter,system-ui;color:#64748b;text-align:center}
+.acc{max-width:400px;margin:14px auto 24px;padding:0 16px;display:flex;flex-direction:column;gap:8px}.acc a{display:block;text-align:center;text-decoration:none;border-radius:14px;padding:13px;font:700 .95rem Inter,system-ui}.acc .p{background:#10956B;color:#fff}.acc .s{border:1.5px solid #d6dde6;background:#fff;color:#0f172a}.acc .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 </style></head><body>
 <div class="top"><button data-t="adult" class="on">Default</button><button data-t="boy">Kid · Boy</button><button data-t="girl">Kid · Girl</button></div>
 <div id="wrap"><canvas id="c" width="400" height="600"></canvas>
 <div class="hud"><b id="hc">🪙 0</b><b id="hd">0 m</b></div>
 <div class="ov" id="ov"><h1>Road Run</h1><p>Every finished task gives you a run. Swipe or tap left and right. Grab coins, dodge cones.</p><p class="tk">🎟️ Runs left today: <span id="tix">3</span></p><button id="go">Start</button></div></div>
 <p class="note">Demo for review. No music, no voices, no people or animals. Vibration only. Coins become stars: 10 coins = 1 ⭐.</p>
+<div class="acc"><a class="p" href="./?go=up">Create account</a><div class="row2"><a class="s" href="./?go=guest">👀 Browse as guest</a><a class="s" href="./?go=family">👨‍👩‍👧 Family sign in</a></div><a class="s" href="./?go=in" style="border:0;background:none;padding:6px;font-weight:600;color:#10956B">Already have an account? Sign in</a></div>
 <script>
 const cv=document.getElementById('c'),x=cv.getContext('2d'),W=400,H=600;
 const TH={
