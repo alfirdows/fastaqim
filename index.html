@@ -954,6 +954,31 @@ body[data-tab=now]:has(#dashCard) #progStrip,body[data-tab=now]:has(#dashCard) .
 .tm-n{font-size:.75rem;font-weight:700;text-align:center;line-height:1.2;max-width:92px}
 .tm-c.on .tm-n{font-weight:900}
 body:has(#scrollModal.tm-sheet:not([hidden])) #toast{display:none!important}
+/* dhikr tap feedback: warm light + star at the finger, rolling number, garden that fills */
+#scrollBody .cz-glow{display:none!important}
+.zt-glow{position:absolute;width:240px;height:240px;margin:-120px 0 0 -120px;border-radius:50%;pointer-events:none;z-index:1;background:radial-gradient(circle,rgba(245,184,46,.55) 0%,rgba(245,184,46,.25) 30%,color-mix(in srgb,var(--k2,var(--calm)) 12%,transparent) 55%,transparent 72%);animation:ztg 1.05s ease-out forwards}
+@keyframes ztg{0%{opacity:0;transform:scale(.25)}18%{opacity:1}100%{opacity:0;transform:scale(1.15)}}
+.zt-star{position:absolute;width:34px;height:34px;margin:-17px 0 0 -17px;pointer-events:none;z-index:3;animation:zts .85s ease-out forwards}
+.zt-star svg{width:100%;height:100%;fill:#f5b82e;filter:drop-shadow(0 0 6px rgba(245,184,46,.8))}
+@keyframes zts{0%{opacity:0;transform:scale(.3) rotate(0)}25%{opacity:1;transform:scale(1.1) rotate(22deg)}100%{opacity:0;transform:scale(1.6) rotate(45deg)}}
+.ldz-tap b{position:relative}
+.ldz-tap .zt-ghost{position:absolute;left:50%;transform:translateX(-50%);font:800 1.6rem/1 Poppins,system-ui,sans-serif;color:var(--ltext,var(--ink));opacity:.35;pointer-events:none;animation:ztgh .55s ease-out forwards}
+@keyframes ztgh{to{opacity:0;transform:translateX(-50%) scale(1.7)}}
+.ldz-tap b.zt-in{animation:ztin .32s cubic-bezier(.2,.9,.3,1.3)}
+@keyframes ztin{from{transform:scale(.6);opacity:.3}to{transform:scale(1);opacity:1}}
+.zt-bit{position:absolute;width:9px;height:9px;margin:-4px;border-radius:2px;pointer-events:none;z-index:3;animation:ztb 1.05s ease-out forwards}
+@keyframes ztb{from{transform:translate(0,0) rotate(0);opacity:1}to{transform:translate(var(--dx),var(--dy)) rotate(200deg);opacity:0}}
+.ldz-plus{direction:ltr;unicode-bidi:isolate}
+.zg{width:100%;max-width:340px;margin:6px auto 0;pointer-events:none}
+.zg-svg{width:100%;display:block}
+.zg-str{fill:none;stroke:#c9b48a;stroke-width:1.2}
+.zg-l line{stroke:#a88b52;stroke-width:1.2}.zg-l path{fill:#d8ccb4;transition:fill .4s}.zg-l .gl{fill:rgba(245,184,46,.35)}.zg-l.on path{fill:#f5b82e}
+.zg-s{fill:#e6dcc8;transition:fill .5s}.zg-s.on{fill:#f5b82e}
+.zg-h{fill:color-mix(in srgb,var(--k2,var(--calm)) 55%,#fff)}.zg-h2{fill:color-mix(in srgb,var(--k2,var(--calm)) 28%,#fff)}
+.zg-tr{fill:none;stroke:#9a6b3f;stroke-width:4;stroke-linecap:round}
+.zg-f{fill:none;stroke:#cfd8cc;stroke-width:3.4;stroke-linecap:round;transition:stroke .4s}.zg-f.on{stroke:#2e9b57}.zg-d{fill:#c98a3a}
+.zg-fl circle{fill:#d9d4c7;transition:fill .4s}.zg-fl .c{fill:#fff}.zg-fl.on circle{fill:#ff8fb8}.zg-fl.on .c{fill:#ffe08a}
+.zg-svg.done .zg-l.on path,.zg-svg.done .zg-s.on{filter:drop-shadow(0 0 3px rgba(245,184,46,.9))}
 /* dhikr follows the theme color */
 .ldz-plus{color:var(--k2,var(--calm))!important}.ldz-tap circle{stroke:color-mix(in srgb,var(--k2,var(--calm)) 18%,transparent)!important}.ldz-tap circle.p{stroke:var(--k2,var(--calm))!important}
 .ldz-badge,#scrollBody .cz-badge{background:var(--k2,var(--calm))!important;color:#fff!important}
@@ -5003,6 +5028,25 @@ function dashRender(){const sec=$('tab-now');if(!sec)return;let c=$('dashCard');
 {const _gs=guestStart;guestStart=function(){try{sessionStorage.setItem('fastaqim.guestOn','1')}catch(e){}return _gs.apply(this,arguments)}}
 {const _ge=guestExit;guestExit=function(){try{sessionStorage.removeItem('fastaqim.guestOn')}catch(e){}return _ge.apply(this,arguments)}}
 setTimeout(()=>{try{if(!inApp()&&sessionStorage.getItem('fastaqim.guestOn')&&!(typeof AU!=='undefined'&&AU.user))guestStart()}catch(e){}},700);
+
+/* ===== Dhikr counter: every tap shows where you tapped (warm light + 8-point star), the number rolls, and a small Jannah garden fills with light as the round grows (no animals) ===== */
+function zgSvg(p,done){const L=11,on=Math.round(p*L),lan=[...Array(L)].map((_,i)=>{const t=i/(L-1),xx=14+t*292,yy=18+Math.sin(t*Math.PI)*16;return `<g class="zg-l ${i<on?'on':''}" transform="translate(${xx.toFixed(1)} ${yy.toFixed(1)})"><line x1="0" y1="-6" x2="0" y2="0"/><path d="M-4 0h8l-1 9h-6z"/><circle cx="0" cy="5" r="${i<on?7:0}" class="gl"/></g>`}).join('');
+  const fr=Math.max(0,Math.round(p*7)),fronds=[...Array(7)].map((_,i)=>{const a=-90+(i-3)*26;return `<path class="zg-f ${i<fr?'on':''}" d="M0 0 q ${(Math.cos(a*Math.PI/180)*22).toFixed(1)} ${(Math.sin(a*Math.PI/180)*22-8).toFixed(1)} ${(Math.cos(a*Math.PI/180)*36).toFixed(1)} ${(Math.sin(a*Math.PI/180)*14+10).toFixed(1)}"/>`}).join('');
+  const fl=[40,70,100,220,250,282].map((xx,i)=>`<g class="zg-fl ${p>=(i+1)/7?'on':''}" transform="translate(${xx} 104)"><circle r="4.5"/><circle r="2" class="c"/></g>`).join('');
+  const st=[[30,40],[80,30],[130,46],[190,36],[240,48],[296,30],[160,22]].map(([a,b],i)=>`<path class="zg-s ${p>=(i+1)/8?'on':''}" transform="translate(${a} ${b})" d="M0-5 1.4-1.4 5 0 1.4 1.4 0 5-1.4 1.4-5 0-1.4-1.4z"/>`).join('');
+  return `<svg viewBox="0 0 320 120" class="zg-svg ${done?'done':''}" aria-hidden="true"><path class="zg-str" d="M14 18 Q160 50 306 18"/>${st}${lan}
+   <path class="zg-h2" d="M0 108 Q80 92 160 104 T320 100 V120 H0z"/><path class="zg-h" d="M0 112 Q90 100 170 110 T320 108 V120 H0z"/>
+   <g transform="translate(160 106)"><path class="zg-tr" d="M0 0 Q4 -24 1 -${(18+p*24).toFixed(0)}"/><g transform="translate(1 -${(18+p*24).toFixed(0)})">${fronds}<circle r="${(2+p*2).toFixed(1)}" class="zg-d"/></g></g>${fl}</svg>`}
+function zgRender(){const box=$('ldZk');if(!box)return;const o=lzGet(),i=(o.i||0)%(LZ.length+1),n=o.n[i]||0,p=Math.min(1,(n%33||(n?33:0))/33);let g=box.querySelector('.zg');
+  if(!g){g=document.createElement('div');g.className='zg';box.appendChild(g)}g.innerHTML=zgSvg(p,n>0&&n%33===0)}
+{const _lz=ldZikr;ldZikr=function(){const r=_lz.apply(this,arguments);try{zgRender()}catch(e){}return r}}
+{const _lt=lzTap;lzTap=function(e){const B=$('ldzTap'),prev=B&&B.querySelector('b')?B.querySelector('b').textContent:'';_lt.apply(this,arguments);
+  try{const sb=$('scrollBody'),r=sb.getBoundingClientRect(),X=e.clientX-r.left,Y=e.clientY-r.top+sb.scrollTop;
+    const gl=document.createElement('span');gl.className='zt-glow';gl.style.left=X+'px';gl.style.top=Y+'px';sb.appendChild(gl);setTimeout(()=>gl.remove(),1100);
+    const s=document.createElement('span');s.className='zt-star';s.style.left=X+'px';s.style.top=Y+'px';s.innerHTML='<svg viewBox="-12 -12 24 24"><path d="M0-11 3.2-7.7 7.8-7.8 7.7-3.2 11 0 7.7 3.2 7.8 7.8 3.2 7.7 0 11-3.2 7.7-7.8 7.8-7.7 3.2-11 0-7.7-3.2-7.8-7.8-3.2-7.7z"/></svg>';sb.appendChild(s);setTimeout(()=>s.remove(),900);
+    if(B&&prev!==''){const gh=document.createElement('b');gh.className='zt-ghost';gh.textContent=prev;gh.setAttribute('aria-hidden','true');const nb0=B.querySelector('b');gh.style.top=nb0.offsetTop+'px';gh.style.height=nb0.offsetHeight+'px';B.appendChild(gh);setTimeout(()=>gh.remove(),600);const nb=B.querySelector('b');nb.classList.remove('zt-in');void nb.offsetWidth;nb.classList.add('zt-in')}
+    zgRender();const o=lzGet(),i=(o.i||0)%(LZ.length+1),n=o.n[i]||0;
+    if(n>0&&n%33===0){for(let k=0;k<14;k++){const c=document.createElement('span');c.className='zt-bit';const a=k/14*6.283;c.style.left=X+'px';c.style.top=Y+'px';c.style.setProperty('--dx',(Math.cos(a)*120).toFixed(0)+'px');c.style.setProperty('--dy',(Math.sin(a)*120).toFixed(0)+'px');c.style.background=['#f5b82e','#22b39a','#ff8a3d','#a06cf0','#5b8def'][k%5];sb.appendChild(c);setTimeout(()=>c.remove(),1100)}}}catch(err){}}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
