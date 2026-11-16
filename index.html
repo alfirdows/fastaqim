@@ -1148,6 +1148,80 @@ button.sr-c{cursor:pointer}
 #qtBar .qb-l{max-width:none}
 .ah-r i{display:inline-block}html[dir=rtl] .ah-r i,.ah-r i:dir(rtl){transform:scaleX(-1)}
 #landing .ld-logo .ld-name.arq{font-size:2.2rem!important;line-height:1.45!important;-webkit-text-stroke:.5px currentColor;margin-top:0!important}
+/* v90: Saved & watch later */
+.sv2{display:flex;flex-direction:column;gap:10px}
+.sv-f{display:flex;flex-direction:column;gap:6px}
+.sv-fr{display:flex;gap:6px}.sv-fr input{flex:1 1 auto;min-width:0;width:auto}.sv-fr .btn-main,.sv-fr .btn-calm{flex:0 0 auto;min-height:46px;padding:0 14px;white-space:nowrap}
+.sv-e{text-align:center;margin:8px 0}
+.sv-win{margin:0;text-align:center;font-weight:700;color:#0F9D6E;background:color-mix(in srgb,#0F9D6E 9%,transparent);border-radius:12px;padding:8px}
+.sv-pick{border:1.5px solid color-mix(in srgb,var(--k1,#F2A33A) 55%,var(--line));background:color-mix(in srgb,var(--k1,#F2A33A) 7%,var(--surface));border-radius:18px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.sv-pl{margin:0;font-weight:800;font-size:.85rem}
+.sv-pr{display:flex;gap:6px}.sv-pr button{flex:1;min-height:44px}
+.sv-tabs{display:flex;gap:6px;align-items:center}
+.sv-tabs [data-st]{border:1px solid var(--line);background:var(--surface);color:inherit;border-radius:99px;min-height:38px;padding:0 12px;font-weight:700;font-size:.85rem}
+.sv-tabs [data-st] b{display:inline-block;min-width:20px;margin-inline-start:4px;padding:0 6px;border-radius:99px;background:color-mix(in srgb,var(--muted) 15%,transparent);font-size:.75rem}
+.sv-tabs [data-st].on{background:var(--k2,var(--calm));border-color:transparent;color:#fff}.sv-tabs [data-st].on b{background:rgba(255,255,255,.25)}
+.sv-sort{margin-inline-start:auto;border:0;background:none;color:var(--muted);font-weight:700;font-size:.8rem;min-height:38px;padding:0 4px}
+.sv-l{display:flex;flex-direction:column;gap:6px}
+.sv-i{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:6px;min-width:0}
+.sv-i.big{border:0;background:none;padding:0}
+.sv-a{flex:1;display:flex;align-items:center;gap:10px;min-width:0;color:inherit;text-decoration:none}
+.sv-th{position:relative;flex:none;width:88px;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:var(--sc);display:grid;place-items:center}
+.sv-i.big .sv-th{width:120px}
+.sv-th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sv-th i{font-style:normal;font-weight:900;color:#fff;font-size:1.1rem}.sv-th img+i{display:none}
+.sv-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.sv-tx b{font-size:.9rem;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+.sv-tx small{color:var(--muted);font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sv-tx em{font-style:normal;font-weight:700;color:var(--muted)}
+.sv-bt{display:flex;flex-direction:column;gap:4px;flex:none}
+.sv-ok,.sv-del{width:38px;height:34px;min-height:0;padding:0;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-weight:800}
+.sv-ok{color:#0F9D6E;border-color:color-mix(in srgb,#0F9D6E 40%,var(--line))}.sv-ok.on{color:var(--muted);border-color:var(--line)}
+.sv-del.arm{width:auto;max-width:96px;padding:0 6px;font-size:.66rem;line-height:1.15;color:#C2410C;border-color:#F3A47A;background:#FFF4ED}
+.sv-i.dn .sv-tx b{color:var(--muted)}
+/* v90: small round dhikr button, bottom corner of every page */
+.fab-zk{position:fixed;z-index:85;inset-inline-end:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:50px;height:50px;min-height:0;padding:0;border-radius:50%;border:1.5px solid color-mix(in srgb,#0F9D6E 45%,var(--line));background:var(--surface);box-shadow:0 6px 18px -6px rgba(15,23,42,.35);display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.fab-zk span{font-size:24px;line-height:1}
+.fab-zk b{position:absolute;top:-5px;inset-inline-end:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#0F9D6E;color:#fff;font:800 .68rem/20px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px var(--surface)}
+.fab-zk:active{transform:scale(.94)}
+body.has-bnav .fab-zk{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+body.has-fab:not(.has-bnav){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
+body.has-bnav.has-fab{padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))}
+body.has-bnav .hype{bottom:calc(140px + env(safe-area-inset-bottom,0px))!important}
+
+/* v90: theme picker grid */
+.tm-sheet .tm-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 10px;overflow:visible!important;scroll-snap-type:none;padding:4px 2px 4px}
+.tm-sheet .tm-c{width:auto!important;min-width:0;flex:initial}
+.tm-ic{position:relative;width:100%;aspect-ratio:1/1;border-radius:22px;border:1.5px solid var(--line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 9px;box-sizing:border-box;overflow:hidden;box-shadow:0 4px 12px -8px rgba(15,23,42,.35)}
+.tm-ic .tm-dec{position:absolute;inset:0 0 auto 0;opacity:.9;pointer-events:none}.tm-ic .tm-dec svg{width:100%;height:auto}
+.tm-w{font:800 .72rem/1 var(--display);letter-spacing:-.01em;position:relative}
+.tm-g{display:grid;grid-template-columns:1fr 1fr;gap:5px;width:78%;position:relative}
+.tm-g i{display:grid;place-items:center;aspect-ratio:1/1;border-radius:9px;border-bottom:3px solid;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.tm-g em{display:grid;place-items:center;width:62%;aspect-ratio:1/1;border-radius:6px;font-style:normal;font-size:.72rem;line-height:1}
+.tm-bar{width:58%;height:6px;border-radius:99px;position:relative}
+.tm-c.on .tm-ic{border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--ink) 20%,transparent)}
+.tm-sheet .tm-n{max-width:100%;font-size:.74rem;overflow-wrap:anywhere}
+/* v90: user page header */
+#apBar.ap3{display:flex!important;flex-direction:column;align-items:stretch;gap:10px}
+#apBar.ap3 .ap-r{order:1;align-self:flex-end;display:flex;align-items:center;gap:0;margin:0;background:var(--surface);border:1px solid var(--line);border-radius:99px;padding:3px;box-shadow:0 4px 14px -8px rgba(15,23,42,.3);max-width:100%}
+#apBar.ap3 .ap-r .pinbar{display:contents!important}
+#apBar.ap3 .ap-r .pin-c,#apBar.ap3 .ap-r .ap-c{position:relative;border:0!important;background:transparent!important;box-shadow:none!important;height:36px;min-height:36px;min-width:0;padding:0 10px;border-radius:99px;font:700 .86rem/1 Inter,"IBM Plex Sans Arabic",system-ui,sans-serif;color:var(--ink);gap:5px;margin:0}
+#apBar.ap3 .ap-r .pin-c{font-size:.86rem}
+#apBar.ap3 .ap-r :is(#pinZk,.ap-c)::before{content:'';position:absolute;inset-inline-start:0;top:10px;bottom:10px;width:1px;background:var(--line)}
+#apBar.ap3 .ap-r .ap-c svg{width:16px;height:16px}
+#apBar.ap3 .ap-bw{order:2;display:flex!important;flex-direction:column;align-items:center!important;text-align:center;gap:4px;margin:0 0 4px;min-width:0}
+#apBar.ap3 .ap-brand{font:800 2.3rem/1.1 Poppins,var(--display),system-ui,sans-serif!important;letter-spacing:-.01em;color:var(--ink)!important}
+#apBar.ap3 .ap-nm{font:700 1.2rem/1.2 var(--body)!important;color:color-mix(in srgb,var(--k2,var(--calm)) 80%,#000)!important;white-space:normal}
+#apBar.ap3 .ap-nm.arq{font-family:"Fastaqim Quran","Scheherazade New",serif!important;font-weight:400!important;font-size:2.1rem!important;line-height:1.45!important;-webkit-text-stroke:.45px currentColor}
+body.has-bnav .hd-tools,#enHdr{display:none!important}
+#dateLabel span{font-weight:700}
+#dateLabel span:first-child{color:color-mix(in srgb,var(--k2,var(--calm)) 82%,#000)}
+#dateLabel span+span{color:#A8761C}
+body.has-bnav header>.hud{flex:1 1 100%;width:100%;justify-content:flex-start}
+#dashCard .dz-chips{flex-wrap:wrap}
+#dashCard .dz-ch.en svg{width:22px;height:13px;vertical-align:-2px}
+.fab-zk{transition:opacity .2s ease}
+.fab-zk.fab-away{opacity:0;pointer-events:none}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5571,6 +5645,99 @@ function svOpen(){S.saved=S.saved||[];const L=S.saved;
 {const _to=thmOpen;thmOpen=function(){const r=_to.apply(this,arguments);const fix=()=>{try{const B=$('scrollBody'),row=B.querySelector('.tm-row'),on=B.querySelector('.tm-c.on');B.scrollLeft=0;const M=$('scrollModal');if(M)M.scrollLeft=0;document.documentElement.scrollLeft=0;if(row&&on)row.scrollLeft=on.offsetLeft-row.offsetLeft-(row.clientWidth-on.clientWidth)/2}catch(e){}};setTimeout(fix,40);setTimeout(fix,120);return r}}
 /* language switch: new parts relabel at once too */
 {const _lr=langRelabel;langRelabel=function(){_lr.apply(this,arguments);try{apTop()}catch(e){}try{pinRender()}catch(e){}try{if($('ldZk'))ldZikr()}catch(e){}try{qtTick()}catch(e){}try{const b=$('reasonNext');if(b)b.textContent='↻ '+tl('Another reason')}catch(e){}}}
+
+/* ===== v90: Saved & watch later as one general list (any link + note) · small round 📿 quick-dhikr button on every page ===== */
+const X90=[["Paste a link","الصق رابطًا","Liinkii maxxansi","Ku dheji xiriir"],["Paste","لصق","Maxxansi","Dheji"],["Note (optional)","ملاحظة (اختياري)","Yaadannoo (yoo barbaachise)","Xusuus (ikhtiyaari)"],
+["To watch","للمشاهدة","Kan ilaalamu","In la daawado"],["Done","تم","Xumurameera","Dhammaatay"],["Newest","الأحدث","Haaraa","Kuwa ugu cusub"],["Oldest","الأقدم","Moofaa","Kuwa ugu da'da weyn"],
+["Watch one today","شاهد واحدًا اليوم","Har'a tokko ilaali","Maanta mid daawo"],["Open","فتح","Bani","Fur"],["Another","غيره","Kan biraa","Mid kale"],["Mark as done","تمّت المشاهدة","Akka xumurametti mallatteessi","U calaamadee dhammaad"],
+["Done ✓","تمّ ✓","Xumurame ✓","Dhammaaday ✓"],["Move back","أرجعه","Deebisi","Dib u celi"],["One done today. Keep going!","واحد اليوم تمّ. استمر!","Har'a tokko xumurame. Itti fufi!","Maanta mid ayaa dhammaaday. Sii wad!"],
+["Nothing saved yet. Paste any link: videos, posts, articles.","لا شيء محفوظ بعد. الصق أي رابط: فيديو، منشور، مقال.","Ammaaf homtuu hin olkaa'amne. Liinkii kamiyyuu maxxansi: viidiyoo, maxxansa, barreeffama.","Weli waxba lama kaydin. Ku dheji xiriir kasta: muuqaal, qoraal, maqaal."],
+["That doesn't look like a link.","هذا لا يبدو رابطًا.","Kun liinkii hin fakkaatu.","Taasi uma ekaan xiriir."],["Saved","تم الحفظ","Olkaa'ameera","Waa la kaydiyay"],["Dhikr","ذكر","Zikrii","Dhikri"],["Nothing done yet.","لم يكتمل شيء بعد.","Ammaaf homtuu hin xumuramne.","Weli waxba lama dhammaystirin."]];
+X90.forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ---------- Saved & watch later ---------- */
+const SVSRC=[[/(^|\.)(youtube\.com|youtu\.be)$/,'YouTube','#E62117','▶'],[/(^|\.)instagram\.com$/,'Instagram','linear-gradient(135deg,#F58529,#DD2A7B 55%,#8134AF)','◎'],[/(^|\.)tiktok\.com$/,'TikTok','#111827','T'],
+ [/(^|\.)(x\.com|twitter\.com)$/,'X','#111827','𝕏'],[/(^|\.)(facebook\.com|fb\.watch)$/,'Facebook','#1877F2','f'],[/(^|\.)(snapchat\.com)$/,'Snapchat','#F7D600','S'],[/(^|\.)(pinterest\.)/,'Pinterest','#E60023','P']];
+function svHost(u){try{return new URL(u).hostname.replace(/^www\.|^m\./,'')}catch(e){return ''}}
+function svSrc(u){const h=svHost(u);for(const [re,n,c,i] of SVSRC)if(re.test(h))return {n,c,i};return {n:h||'Link',c:'var(--k2,var(--calm))',i:(h[0]||'🔗').toUpperCase()}}
+function svList(){if(!Array.isArray(S.saved))S.saved=[];if(S.saved.some(x=>!x.id))S.saved=S.saved.map(x=>x.id?x:{id:uid(),u:x.u,t:x.t||'',note:'',at:Date.now(),done:0});return S.saved}
+function svTitle(x){if(x.t)return x.t;try{const U=new URL(x.u),p=decodeURIComponent(U.pathname).split('/').filter(Boolean).pop()||'';const s=p.replace(/[-_]+/g,' ').replace(/\.\w{2,4}$/,'').trim();return s&&s.length>3&&!/^\w{8,}$/.test(s)?s.slice(0,70):svSrc(x.u).n}catch(e){return x.u}}
+function svThumb(x){const y=ytId(x.u);if(y)return 'https://i.ytimg.com/vi/'+y+'/mqdefault.jpg';return x.th||''}
+async function svMeta(x){const h=svHost(x.u);let eps=[];if(ytId(x.u))eps=['https://www.youtube.com/oembed?format=json&url='+encodeURIComponent(x.u)];else if(/tiktok\.com$/.test(h))eps=['https://www.tiktok.com/oembed?url='+encodeURIComponent(x.u)];else return;
+ eps.push('https://noembed.com/embed?url='+encodeURIComponent(x.u));
+ for(const e of eps){try{const r=await fetch(e);if(!r.ok)continue;const j=await r.json();if(j&&j.title){let ch=0;if(!x.t&&!(typeof blocked==='function'&&blocked(j.title))){x.t=String(j.title).slice(0,120);ch=1}if(!x.th&&j.thumbnail_url&&!ytId(x.u)){x.th=j.thumbnail_url;ch=1}if(ch){save();if($('svBox'))svRender()}return}}catch(e){}}}
+let SVV={tab:'w',old:false};
+function svPick(L){const d=dkey(),W=L.filter(x=>!x.done);if(!W.length)return null;let p=S.svPick;if(!p||p.d!==d||!W.some(x=>x.id===p.id)){p={d,id:W[Math.floor(Math.random()*W.length)].id};S.svPick=p;save()}return W.find(x=>x.id===p.id)}
+function svCard(x,big){const s=svSrc(x.u),th=svThumb(x),t=svTitle(x);
+ return `<div class="sv-i${big?' big':''}${x.done?' dn':''}" data-id="${x.id}"><a class="sv-a" href="${esc(x.u)}" target="_blank" rel="noopener"><span class="sv-th" style="--sc:${s.c}">${th?`<img src="${esc(th)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">`:''}<i>${esc(s.i)}</i></span>
+  <span class="sv-tx"><b dir="auto">${esc(t)}</b><small><em style="--sc:${s.c}">${esc(s.n)}</em>${x.note?` · <span dir="auto">${esc(x.note)}</span>`:''}</small></span></a>
+  ${big?'':`<span class="sv-bt">${x.done?`<button type="button" class="sv-ok on" data-sb="${x.id}" aria-label="${tl('Move back')}">↺</button>`:`<button type="button" class="sv-ok" data-sk="${x.id}" aria-label="${tl('Mark as done')}">✓</button>`}<button type="button" class="sv-del" data-sx="${x.id}" aria-label="${tl('Delete')}">✕</button></span>`}</div>`}
+function svRender(){const box=$('svBox');if(!box)return;const L=svList(),W=L.filter(x=>!x.done),D=L.filter(x=>x.done),d=dkey();
+ const doneToday=D.some(x=>x.done&&dkey(new Date(x.done))===d),pk=svPick(L);
+ let rows=(SVV.tab==='w'?W:D).slice();rows.sort((a,b)=>SVV.tab==='d'?(b.done-a.done):(SVV.old?a.at-b.at:b.at-a.at));
+ box.innerHTML=(L.length?`${doneToday?`<p class="sv-win">⭐ ${tl('One done today. Keep going!')}</p>`:''}
+  ${pk&&!doneToday?`<div class="sv-pick"><p class="sv-pl">🎯 ${tl('Watch one today')}</p>${svCard(pk,true)}<div class="sv-pr"><button type="button" class="btn-main" data-sk="${pk.id}">✓ ${tl('Done')}</button>${W.length>1?`<button type="button" class="btn-calm" data-sn>↻ ${tl('Another')}</button>`:''}</div></div>`:''}
+  <div class="sv-tabs" role="tablist"><button type="button" role="tab" class="${SVV.tab==='w'?'on':''}" data-st="w">${tl('To watch')} <b>${W.length}</b></button><button type="button" role="tab" class="${SVV.tab==='d'?'on':''}" data-st="d">${tl('Done')} <b>${D.length}</b></button>
+   ${SVV.tab==='w'&&W.length>1?`<button type="button" class="sv-sort" data-so>⇅ ${tl(SVV.old?'Oldest':'Newest')}</button>`:''}</div>
+  <div class="sv-l">${rows.length?rows.map(x=>svCard(x)).join(''):`<p class="small muted sv-e">${tl(SVV.tab==='w'?'Nothing saved yet. Paste any link: videos, posts, articles.':'Nothing done yet.')}</p>`}</div>`
+  :`<p class="small muted sv-e">${tl('Nothing saved yet. Paste any link: videos, posts, articles.')}</p>`);
+ const find=id=>L.find(x=>x.id===id);
+ box.querySelectorAll('[data-sk]').forEach(b=>b.onclick=()=>{const x=find(b.dataset.sk);if(!x)return;x.done=Date.now();try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}try{star(1,'🔖 '+tl('Done ✓'),'sv'+x.id)}catch(e){}try{actMark()}catch(e){}save();svRender()});
+ box.querySelectorAll('[data-sb]').forEach(b=>b.onclick=()=>{const x=find(b.dataset.sb);if(x){x.done=0;save();svRender()}});
+ box.querySelectorAll('[data-sx]').forEach(b=>{let arm=0;b.onclick=()=>{if(!arm){arm=1;b.classList.add('arm');b.textContent=tl('Tap again to delete');setTimeout(()=>{if(b.isConnected){arm=0;b.classList.remove('arm');b.textContent='✕'}},3000);return}const i=L.findIndex(x=>x.id===b.dataset.sx);if(i>=0)L.splice(i,1);save();svRender()}});
+ box.querySelectorAll('[data-st]').forEach(b=>b.onclick=()=>{SVV.tab=b.dataset.st;svRender()});
+ const so=box.querySelector('[data-so]');if(so)so.onclick=()=>{SVV.old=!SVV.old;svRender()};
+ const sn=box.querySelector('[data-sn]');if(sn)sn.onclick=()=>{const W2=L.filter(x=>!x.done&&x.id!==(S.svPick&&S.svPick.id));if(W2.length){S.svPick={d,id:W2[Math.floor(Math.random()*W2.length)].id};save();svRender()}}}
+function svOpen(){svList();modalCard(`<div class="ah sv2"><p class="ah-t">🔖 ${tl('Saved & watch later')}</p>
+  <form class="sv-f" id="svF"><div class="sv-fr"><input id="svU" type="text" inputmode="url" autocapitalize="off" autocorrect="off" spellcheck="false" autocomplete="off" placeholder="${tl('Paste a link')}">${navigator.clipboard&&navigator.clipboard.readText?`<button type="button" class="btn-calm sv-pb" id="svP">📋 ${tl('Paste')}</button>`:''}</div>
+   <div class="sv-fr"><input id="svN" maxlength="80" placeholder="${tl('Note (optional)')}" dir="auto"><button class="btn-main">${tl('Add')}</button></div></form>
+  <div id="svBox"></div></div>`);
+ svRender();
+ const p=$('svP');if(p)p.onclick=async()=>{try{const t=(await navigator.clipboard.readText()||'').trim();const m=t.match(/https?:\/\/\S+/);if(m)$('svU').value=m[0];else toast(tl("That doesn't look like a link."))}catch(e){}};
+ $('svF').onsubmit=e=>{e.preventDefault();let u=$('svU').value.trim();const m=u.match(/https?:\/\/\S+/);if(!m){toast(tl("That doesn't look like a link."));return}u=m[0];const note=$('svN').value.trim();
+  if(typeof blocked==='function'&&blocked(note)){toast(tl('That message cannot be saved here.'));return}
+  const L=svList();if(L.some(x=>x.u===u&&!x.done)){$('svU').value='';$('svN').value='';return}
+  const x={id:uid(),u,t:'',note,at:Date.now(),done:0};L.unshift(x);save();$('svU').value='';$('svN').value='';SVV.tab='w';svRender();toast('🔖 '+tl('Saved'));svMeta(x)};
+ svList().filter(x=>!x.t&&!x.done).slice(0,8).forEach(x=>svMeta(x))}
+
+/* ---------- small round 📿 button in the corner of every page ---------- */
+function fabZk(){let b=$('fabZk');if(!b){b=document.createElement('button');b.type='button';b.id='fabZk';b.className='fab-zk notranslate';b.onclick=()=>{try{zkOpen()}catch(e){}};document.body.appendChild(b);document.body.classList.add('has-fab')}
+ let n=0;try{const o=lzGet();for(const k in o.n)n+=+o.n[k]||0}catch(e){}
+ b.setAttribute('aria-label',tl('Dhikr')+(n?' '+n:''));b.innerHTML='<span aria-hidden="true">📿</span>'+(n?`<b>${n>999?'999+':n}</b>`:'');
+ const m=$('scrollModal');b.hidden=!!(m&&!m.hidden)}
+{const _mc=modalClose;modalClose=function(){const r=_mc.apply(this,arguments);try{fabZk()}catch(e){}return r}}
+{const _mk=modalCard;modalCard=function(){const r=_mk.apply(this,arguments);try{const b=$('fabZk');if(b)b.hidden=true}catch(e){}return r}}
+{const _lr=langRelabel;langRelabel=function(){const r=_lr.apply(this,arguments);try{fabZk()}catch(e){}return r}}
+setTimeout(()=>{try{fabZk();const m=$('scrollModal');if(m)new MutationObserver(()=>fabZk()).observe(m,{attributes:true,attributeFilter:['hidden']})}catch(e){}},300);
+
+/* ---------- greeting line under the name: "You can do it!" (Tasnim's pick, 16 Nov) ---------- */
+TX['You can do it!']=Object.assign(TX['You can do it!']||{},{ar:'أنت تقدر!',om:'Ni dandeessa!',so:'Waad kari kartaa!'});
+{const _rh2=renderHeader;renderHeader=function(){const r=_rh2.apply(this,arguments);try{const h=document.querySelector('#hello .hl2');if(h)h.textContent=tl('You can do it!')}catch(e){}return r}}
+
+/* ---------- theme picker: a grid of icon tiles, all visible at once (no sideways slide) ---------- */
+thmMini=function(k,a,b){const t=THK[k]||{},k1=t.k1||'#FF8A3D',k2=t.k2||'#22B39A',k4=t.k4||'#F5B82E',dark=k==='night',bg=dark?'#141b2d':'#f6f8f7',card=dark?'#1f2a44':'#fff',ink=dark?'#e8ecf5':'#18212b';
+  const tiles=[[k2,'✅'],[k1,'🗓️'],[k2,'🕌'],['#A06CF0','📿']],dec=DEC[k]?`<span class="tm-dec">${DEC[k]()}</span>`:'';
+  return `<span class="tm-ic" style="background:${bg}">${dec}<span class="tm-w" style="color:${ink}">Fastaqim</span>
+   <span class="tm-g">${tiles.map(([c,e])=>`<i style="background:${card};border-bottom-color:${c}"><em style="background:color-mix(in srgb,${c} 22%,transparent)">${e}</em></i>`).join('')}</span>
+   <span class="tm-bar" style="background:linear-gradient(90deg,${k1},${k4})"></span></span>`};
+
+/* ---------- user page header: one tidy corner cluster (salah · dhikr · stars · language) + centered logo like the first page ---------- */
+function apTop3(){const b=$('apBar');if(!b)return;b.classList.add('ap3');const r=b.querySelector('.ap-r'),pb=$('pinBar');
+ if(r&&pb&&pb.parentNode!==r)r.insertBefore(pb,r.firstChild);
+ const lg=$('apLang');if(r&&lg&&r.lastElementChild!==lg)r.appendChild(lg);
+ document.querySelectorAll('#apBar .dec').forEach(d=>b.after(d))}
+{const _at=apTop;apTop=function(){const x=_at.apply(this,arguments);try{apTop3()}catch(e){}return x}}
+{const _pr3=pinRender;pinRender=function(){const x=_pr3.apply(this,arguments);try{apTop3()}catch(e){}return x}}
+{const _da=decApply;decApply=function(){const x=_da.apply(this,arguments);try{apTop3()}catch(e){}return x}}
+setTimeout(()=>{try{apTop3()}catch(e){}},400);
+
+/* ---------- energy check-in lives in Now (chip next to water / Quran / money) ---------- */
+{const _dr=dashRender;dashRender=function(){const x=_dr.apply(this,arguments);try{const ch=document.querySelector('#dashCard .dz-chips');const dc=document.getElementById('dayCard');if(ch&&!ch.querySelector('[data-dz="en"]')&&(!dc||dc.hidden)){const v=typeof enGet==='function'?enGet():null,L=(EN_L.find(e=>e[0]===v)||[])[1];
+  const b=document.createElement('button');b.type='button';b.className='dz-ch en';b.dataset.dz='en';b.setAttribute('aria-label',tl('Energy'));b.innerHTML=(L!=null&&typeof enIcon==='function'?enIcon(L):'⚡');b.onclick=()=>{try{enOpen()}catch(e){}};ch.appendChild(b)}}catch(e){}return x}}
+{const _mc4=modalClose;modalClose=function(){const r=_mc4.apply(this,arguments);try{if(inApp())dashRender()}catch(e){}return r}}
+
+/* ---------- corner 📿 steps aside while the page scrolls, so it never sits on what you're reading ---------- */
+{let _ft=0;addEventListener('scroll',()=>{const f=document.getElementById('fabZk');if(!f)return;f.classList.add('fab-away');clearTimeout(_ft);_ft=setTimeout(()=>f.classList.remove('fab-away'),900)},{passive:true})}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
