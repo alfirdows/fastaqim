@@ -1280,6 +1280,23 @@ body.has-bnav>.wrap{padding-top:4px!important}
 .mr-ok{margin:0;font-weight:700;color:#0F9D6E}
 #remCard.rem2 .mr{margin:4px 0 10px;padding:0 0 14px;border-top:0;border-bottom:1px solid var(--line)}
 .mr-x{flex:none;width:36px;height:36px;min-height:36px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-weight:800}
+/* v95: footer with ⭐, no top pill, compact salah box, calmer greeting block */
+.bnav{grid-template-columns:repeat(6,minmax(0,1fr))!important}
+.bnav button span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bnav button i{position:relative}
+.bnav .bn-c{position:absolute;top:-6px;inset-inline-start:62%;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:#E8A317;color:#fff;font:800 .58rem/16px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px var(--surface)}
+body.has-bnav #apBar.ap3 .ap-r{display:none!important}
+body.has-bnav #apBar.ap3{padding-top:6px!important}
+.st-top{padding:4px 4px!important;border-radius:14px!important}
+.st-top .sr-c{padding:4px 0 15px!important;gap:0!important;border-radius:10px!important}
+.st-top .sr-c svg{display:none}
+.st-top .sr-c small{font-size:.6rem!important;line-height:1.2}
+.st-top .sr-c b{font-size:.76rem!important;line-height:1.25}
+.st-top .sr-c em{font-size:.56rem!important;bottom:2px!important;padding:0 4px!important}
+.st-top .sr-c .sr-ok{top:-3px!important;width:14px!important;height:14px!important;font-size:.5rem!important}
+#hello .hl2{background:none!important;-webkit-text-fill-color:currentColor!important;color:#C8601A!important;font-weight:800!important}
+#dateLabel span:first-child{color:#475569!important}
+#dateLabel{margin-bottom:2px!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5943,6 +5960,35 @@ function hmStr(t){const d=new Date();d.setHours(Math.floor(t/60),t%60,0,0);try{r
 
 /* ☰ → 🔔 Reminders */
 {const _am3=apMenu;apMenu=function(){const r=_am3.apply(this,arguments);try{const m=$('apMenu'),q=m&&m.querySelector('[data-am="qt"]');if(q&&!m.querySelector('[data-am="rem"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='rem';b.textContent='🔔 '+tl('Reminders');b.onclick=()=>{m.hidden=true;show('wins');setTimeout(()=>{const c=$('remCard');if(c)c.scrollIntoView({block:'start',behavior:'smooth'})},120)};q.before(b)}}catch(e){}return r}}
+
+/* v95: no top pill on the user page: 🌐 lives in ☰, ⭐ gets its own footer button next to Home, 📿 is already in the footer */
+{const _bn=bnav;bnav=function(){const r=_bn.apply(this,arguments);try{const b=$('bNav');if(!b||b.hidden)return r;let s=b.querySelector('[data-bn="st"]');
+  if(!s){s=document.createElement('button');s.type='button';s.dataset.bn='st';s.onclick=e=>{e.stopPropagation();show('wins')};const h=b.querySelector('[data-bn="home"]');if(h)h.after(s);else b.prepend(s)}
+  s.className=(document.body.dataset.tab==='wins')?'on':'';s.innerHTML=`<i aria-hidden="true">⭐<b class="bn-c">${S.sparks||0}</b></i><span>${esc(tl('Stars'))}</span>`;s.setAttribute('aria-label',tl('Stars')+' '+(S.sparks||0))}catch(e){}return r}}
+{const _st2=star;star=function(){const r=_st2.apply(this,arguments);try{setTimeout(bnav,60)}catch(e){}return r}}
+{const _sv2=save;save=function(){const r=_sv2.apply(this,arguments);try{const c=document.querySelector('#bNav [data-bn="st"] .bn-c');if(c&&c.textContent!==String(S.sparks||0))c.textContent=S.sparks||0}catch(e){}return r}}
+
+/* v95: haptics everywhere (iPhone via hidden system switch, Android via vibrate) */
+/* Fastaqim haptics: Android uses navigator.vibrate; iPhone (Safari 18+) gets a real tap from a hidden system switch.
+   Patterns like [on, off, on] become one tap per "on". Older iPhones simply stay silent. */
+(function(){var ios=/iphone|ipad|ipod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ if(!ios&&typeof navigator.vibrate==='function')return;
+ var lb=null,last=0;
+ function mk(){if(lb&&lb.isConnected)return lb;lb=document.createElement('label');lb.setAttribute('aria-hidden','true');
+  lb.style.cssText='position:fixed;left:-200px;top:0;width:1px;height:1px;overflow:hidden;opacity:.01;pointer-events:none;z-index:-1';
+  var i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.tabIndex=-1;lb.appendChild(i);
+  var stop=function(e){e.stopPropagation()};lb.addEventListener('click',stop);i.addEventListener('click',stop);i.addEventListener('change',stop);
+  (document.body||document.documentElement).appendChild(lb);return lb}
+ function tap(){try{mk().click()}catch(e){}}
+ var fn=function(p){var a=Array.isArray(p)?p:[p];if(!a.length||!(+a[0]))return true;var now=Date.now();if(now-last<35)return true;last=now;tap();
+  var t=0;for(var k=1;k<a.length;k++){t+=+a[k-1]||0;if(k%2===0)(function(d){setTimeout(tap,d)})(t)}return true};
+ try{Object.defineProperty(navigator,'vibrate',{value:fn,configurable:true,writable:true})}catch(e){try{navigator.vibrate=fn}catch(_){}}
+ window.fqHaptic=fn})();
+{const _aw=award;award=function(n,win){const before=lvl().n,k=dkey(),first=!(S.days&&S.days[k]);const r=_aw.apply(this,arguments);
+  try{if(lvl().n>before)setTimeout(()=>navigator.vibrate&&navigator.vibrate([30,60,30,60,60]),900);else if(first)navigator.vibrate&&navigator.vibrate([20,50,20,50,20]);else navigator.vibrate&&navigator.vibrate([12,50,12])}catch(e){}return r}}
+document.addEventListener('click',e=>{try{const t=e.target;if(!t||!t.closest)return;if(t.closest('label[aria-hidden="true"]'))return;
+  if(t.closest('.bnav button,.wrap>nav button,#dashCard button,.sr-c,.sq-b,.mr-d button,.apm-i,.apm-g button,.tm-c,.dz-ch'))navigator.vibrate&&navigator.vibrate(8)}catch(_){}},true);
+document.addEventListener('change',e=>{try{const t=e.target;if(t&&t.type==='checkbox'&&!t.hasAttribute('switch'))navigator.vibrate&&navigator.vibrate(t.checked?[14]:[6])}catch(_){}},true);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
