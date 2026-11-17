@@ -326,7 +326,7 @@ function drawCar(t){const g=G,base=P(g.x,0,0),p=P(g.x,0,g.y),s=p.s*(g.duck>0?1:1
  x.fillStyle='rgba(0,0,0,'+(.28-Math.min(.18,g.y*.05))+')';x.beginPath();x.ellipse(base.x,base.y+s*.02,w*.58*(1-Math.min(.4,g.y*.08)),s*.12,0,0,7);x.fill();
  if(g.boost>0){for(let i=0;i<3;i++){x.fillStyle=`rgba(251,146,60,${.5-i*.15})`;x.beginPath();x.ellipse(p.x,p.y+s*.05+i*s*.12,w*.22-i*s*.04,s*.12,0,0,7);x.fill()}}
  x.save();x.translate(p.x,p.y);if(g.inv>0&&g.boost<=0&&Math.floor(g.t*14)%2)x.globalAlpha=.45;const tilt=([-1,0,1][g.lane]-g.x)*.18;x.rotate(tilt);
- const C=WD.carC,kind=WD.car;
+ const C=ST.carC||WD.carC,kind=ST.car||WD.car;
  /* wheels */x.fillStyle='#111827';const wh=kind==='sleek'?h*.32:h*.42;rr(-w*.5,-wh,w*.17,wh,w*.04);x.fill();rr(w*.33,-wh,w*.17,wh,w*.04);x.fill();
  if(kind==='sleek'){/* low sports car seen from behind */const gr=x.createLinearGradient(0,-h,0,0);gr.addColorStop(0,C[0]);gr.addColorStop(1,C[1]);x.fillStyle=gr;
   x.beginPath();x.moveTo(-w*.48,-h*.18);x.lineTo(-w*.48,-h*.55);x.quadraticCurveTo(-w*.46,-h*.72,-w*.3,-h*.78);x.lineTo(w*.3,-h*.78);x.quadraticCurveTo(w*.46,-h*.72,w*.48,-h*.55);x.lineTo(w*.48,-h*.18);x.quadraticCurveTo(w*.48,-h*.04,w*.36,-h*.04);x.lineTo(-w*.36,-h*.04);x.quadraticCurveTo(-w*.48,-h*.04,-w*.48,-h*.18);x.fill();
@@ -408,7 +408,7 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 /* for automated checks */window.__g={G:()=>G,state:()=>state,move,jump,duck,begin:()=>begin(tasksWithSteps()),setMode:m=>{ST.mode=m},finish};
 showMenu();
 </script>
-<script src="game/r3d.js?v=3"></script>
+<script src="game/r3d.js?v=4"></script>
 <script>
 /* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
    Credit never expires. Dhikr and To-do runs are never limited. */
