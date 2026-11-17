@@ -1827,6 +1827,30 @@ body.ch-on #tab-today > .card:not(#chCard):not(:has(#topList)):not(:has(#laterLi
 body.fq-homev #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5){display:block!important;margin-inline:-8px}
 body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6){display:none!important}
 [dir=rtl] .hc-ar{transform:none}.hc-tm.na{color:var(--muted);font-weight:600;font-size:12.5px;border-inline-start-color:var(--line)}
+
+/* v123 task upgrades */
+.tk-x{display:flex;flex-direction:column;gap:10px;margin:8px 0}
+.tk-u{display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--muted);font-weight:600}.tk-u input{max-width:140px}
+.tk-rp{display:flex;flex-direction:column;gap:4px}
+.tk-seg{flex-wrap:wrap;row-gap:6px}
+.tk-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;margin-top:4px}
+.tk-days button{border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);border-radius:10px;padding:6px 0;min-height:0;font-size:12px;font-weight:700}
+.tk-days button[aria-pressed=true]{background:#15835f;border-color:#15835f;color:#fff}
+.tk-help{all:unset;cursor:pointer;align-self:flex-start;background:color-mix(in srgb,#15835f 10%,transparent);color:#15835f;font-weight:800;font-size:14px;padding:9px 14px;border-radius:12px}
+.tk-rl{display:inline-block;font-size:12px;font-weight:700;color:#7c5cd6;margin-top:3px}
+.tk-why{all:unset;cursor:pointer;display:inline-block;margin-top:4px;font-size:12.5px;font-weight:800;color:#c2410c;background:color-mix(in srgb,#c2410c 10%,transparent);border-radius:10px;padding:3px 9px}
+.tkh{display:flex;flex-direction:column;gap:6px;text-align:start}
+.tkh-t{text-align:center;font-weight:700;color:var(--muted);margin:0;overflow-wrap:break-word}
+.tkh-q{text-align:center;font-size:20px;font-weight:800;margin:4px 0 0;color:var(--ink)}
+.tkh-r{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4.5%,transparent)}
+.tkh-i{font-size:24px;flex:none;width:30px;text-align:center}.tkh-x{display:flex;flex-direction:column;gap:2px;min-width:0}.tkh-x b{font-size:15px;color:var(--ink)}.tkh-x small{font-size:13px;color:#15835f;font-weight:600;overflow-wrap:break-word}
+.task .inline-form{flex-wrap:wrap}.task .inline-form input[type=date]{min-width:0;flex:1 1 140px}
+.task,.tk-x,.tk-rp,.tk-df{min-width:0;max-width:100%}
+.task .seg{flex-wrap:wrap;row-gap:6px}
+.task .seg{background:none!important;padding:0!important;gap:6px;box-shadow:none!important}
+.task .seg button{border:1.5px solid var(--line)!important;border-radius:18px!important;background:var(--surface,#fff);color:var(--ink);min-height:36px;padding:0 12px}
+.task .seg button[aria-pressed=true]{background:#15835f!important;border-color:#15835f!important;color:#fff!important}
+.tk-days{display:flex;flex-wrap:wrap;gap:5px}.tk-days button{flex:1 0 auto;padding:7px 6px;font-size:12px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7469,7 +7493,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v122',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v123',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8001,6 +8025,60 @@ document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest
 {const _rdH=renderDayCard;renderDayCard=function(){const r=_rdH.apply(this,arguments);try{const c=$('dayCard');if(c&&!c.hidden&&c.querySelector('[data-en]'))c.hidden=true;hcCard()}catch(e){}return r}}
 GO.cal=GO.month=()=>{goHome&&goHome();setTimeout(()=>{const c=$('hmCal');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})},250)};
 {const _hrv=hubReveal;hubReveal=function(el){try{if(el&&el.closest&&el.closest('#hmCal'))return}catch(e){}return _hrv.apply(this,arguments)}}
+
+/* v123: task upgrades: time range (from-until), any length, repeat options, "Help me with this" (what's in the way + the fix), overdue "Why not done?" */
+[['Until','حتى','Hanga','Ilaa'],['Other','أخرى','Kan biraa','Kale'],['Minutes','دقائق','Daqiiqaa','Daqiiqo'],['Repeat','تكرار','Irra deebi\'i','Ku celi'],['Never','أبدًا','Gonkumaa','Marnaba'],['Daily','يوميًا','Guyyaa guyyaan','Maalin kasta'],
+ ['Weekdays','أيام العمل','Guyyoota hojii','Maalmaha shaqada'],['Weekly','أسبوعيًا','Torban torbaniin','Toddobaad kasta'],['Monthly','شهريًا','Ji\'a ji\'aan','Bil kasta'],['Pick days','اختر الأيام','Guyyoota filadhu','Dooro maalmaha'],
+ ['Help me with this','ساعدني في هذه','Kana irratti na gargaari','Iga caawi tan'],['Not done yet? Why?','لم تُنجز بعد؟ لماذا؟','Ammallee hin xumuramne? Maaliif?','Weli lama dhammayn? Maxaa yeelay?'],
+ ["What's in the way?",'ما الذي يعيقك؟','Maaltu si dhorke?','Maxaa ku hor istaagay?'],['Pick one. You get the fix right away.','اختر واحدًا، وتحصل على الحل فورًا.','Tokko filadhu. Furmaata battalumatti argatta.','Mid dooro. Xalka isla markiiba ayaad helaysaa.'],
+ ['Too big','كبيرة جدًا','Baay\'ee guddaa','Aad u weyn'],['Break it into tiny steps','قسّمها إلى خطوات صغيرة','Tarkaanfii xixiqqootti qoodi','U qaybi tallaabooyin yaryar'],
+ ["Don't know where to start",'لا أعرف من أين أبدأ','Eessaa akkan jalqabu hin beeku','Ma garanayo meel aan ka bilaabo'],['Start a 2-minute timer. Just open it and look.','ابدأ مؤقت دقيقتين. فقط افتحها وانظر.','Sa\'aatii daqiiqaa 2 jalqabi. Bani qofa ilaali.','Bilow saacad 2 daqiiqo ah. Fur oo eeg uun.'],
+ ['No time today','لا وقت اليوم','Har\'a yeroon hin jiru','Maanta waqti ma haysto'],['Move it to tomorrow','انقلها إلى الغد','Boritti dabarsi','U wareeji berri'],
+ ['Low energy','طاقة منخفضة','Humna xiqqaa','Tamar yar'],['Make it Easy, 5 minutes','اجعلها سهلة، ٥ دقائق','Salphisi, daqiiqaa 5','Ka dhig mid fudud, 5 daqiiqo'],
+ ['Kept forgetting','كنت أنساها','Irraanfadheen ture','Waan iloobayay'],['Set a reminder','اضبط تذكيرًا','Yaadachiisa qindeessi','Deji xasuusin'],
+ ["Don't want to",'لا أريد','Hin barbaadu','Ma rabo'],['Pair it with a nasheed or lecture, then start 2 minutes','اقرنها بنشيد أو محاضرة، ثم ابدأ دقيقتين','Nashiidaa ykn barnoota waliin walitti qabsiisi, achii daqiiqaa 2 jalqabi','Ku lammaane nashiid ama muxaadaro, kadib bilow 2 daqiiqo'],
+ ['Not needed anymore','لم تعد مطلوبة','Kana booda hin barbaachisu','Hadda looma baahna'],['Delete it','احذفها','Haqi','Tirtir'],['Moved to tomorrow.','نُقلت إلى الغد.','Boritti dabarfame.','Waxaa loo wareejiyey berri.'],
+ ['Done. Next one is ready.','تمّ. التالية جاهزة.','Xumurame. Kan itti aanu qophaa\'eera.','Waa dhammaatay. Midda xigta waa diyaar.']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function wkS(i){const W={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']};if(W[LANG])return W[LANG][i];try{return new Date(2026,10,15+i).toLocaleDateString(LOC(),{weekday:'short'})}catch(e){return ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][i]}}
+const TKR=[['none','Never'],['daily','Daily'],['weekdays','Weekdays'],['weekly','Weekly'],['monthly','Monthly'],['days','Pick days']];
+function tkNext(t){const r=t.rep;if(!r||r.k==='none')return null;const b=new Date((t.due||dkey())+'T00:00'),n=new Date(b);
+  if(r.k==='daily')n.setDate(n.getDate()+1);else if(r.k==='weekly')n.setDate(n.getDate()+7);else if(r.k==='monthly')n.setMonth(n.getMonth()+1);
+  else{const ok=r.k==='weekdays'?[1,2,3,4,5]:(r.d||[]);if(!ok.length)return null;do{n.setDate(n.getDate()+1)}while(!ok.includes(n.getDay()))}
+  const td=new Date();td.setHours(0,0,0,0);if(n<td&&r.k!=='monthly'){/* catch up to today, never pile up missed copies */const c=new Date(td);if(r.k==='daily')return dkey(c);if(r.k==='weekly'){while(c.getDay()!==b.getDay())c.setDate(c.getDate()+1);return dkey(c)}const ok=r.k==='weekdays'?[1,2,3,4,5]:(r.d||[]);while(!ok.includes(c.getDay()))c.setDate(c.getDate()+1);return dkey(c)}
+  return dkey(n)}
+function tkRepLbl(t){const r=t.rep;if(!r||r.k==='none')return '';if(r.k==='days'){const N=['S','M','T','W','T','F','S'];return '🔁 '+(r.d||[]).map(wkS).join(' ')}return '🔁 '+tl(TKR.find(x=>x[0]===r.k)[1])}
+{const _tpk=tPick;tPick=function(t){let h=_tpk.apply(this,arguments);const m=tEst(t),std=[5,15,25,45,60].includes(m);
+  h=h.replace(/(data-m="60"[^>]*>60<\/button>)/,`$1<button type="button" data-tk="estc" aria-pressed="${!std}">${std?tl('Other'):m}</button>`);
+  const r=(t.rep&&t.rep.k)||'none';
+  h+=`<div class="tk-x"><label class="tk-u">${tl('Until')}<input type="time" data-tk="end" value="${esc(t.end||'')}"></label>
+   <div class="tk-rp"><span class="small muted">${tl('Repeat')}</span><div class="seg tk-seg">${TKR.map(([k,l])=>`<button type="button" data-tk="rep" data-r="${k}" aria-pressed="${k===r}">${tl(l)}</button>`).join('')}</div>
+   ${r==='days'?`<div class="tk-days">${[0,1,2,3,4,5,6].map(i=>{const l=wkS(i);return `<button type="button" data-tk="rd" data-d="${i}" aria-pressed="${(t.rep.d||[]).includes(i)}">${esc(l)}</button>`}).join('')}</div>`:''}</div>
+   <button type="button" class="tk-help" data-tk="help">🧭 ${tl('Help me with this')}</button></div>`;
+  return h}}
+{const _thx=taskHTML;taskHTML=function(t){let h=_thx.apply(this,arguments);try{
+  if(t.time&&t.end&&!t.done){const a=esc(t12(t.time));h=h.replace(new RegExp('(<span class="due[^"]*">[^<]*?)'+a.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),'$1'+a+'–'+esc(t12(t.end)))}
+  h=h.replace(/(<span class="due[^"]*">)Today/,'$1'+esc(tl('Today')));const rl=tkRepLbl(t);if(rl&&!t.done)h=h.replace(/(<span class="task-title">)/,`$1`).replace(/(<\/span>\s*<span class="small muted">)/,`<br><span class="tk-rl">${esc(rl)}</span>$1`);
+  if(t.due&&t.due<dkey()&&!t.done)h=h.replace(/(<\/span>\s*<span class="small muted">)/,`<br><button type="button" class="tk-why" data-tk="why">${tl('Not done yet? Why?')}</button>$1`);
+ }catch(e){}return h}}
+function tkTask(el){const r=el.closest('.task[data-id]');return r&&(S.tasks||[]).find(x=>x.id===r.dataset.id)}
+function tkHelp(t){const W=[['big','🧱','Too big','Break it into tiny steps'],['start','🤷','Don\'t know where to start','Start a 2-minute timer. Just open it and look.'],['time','⏰','No time today','Move it to tomorrow'],['low','🔋','Low energy','Make it Easy, 5 minutes'],['forgot','🙈','Kept forgetting','Set a reminder'],['want','🎧','Don\'t want to','Pair it with a nasheed or lecture, then start 2 minutes'],['drop','🗑️','Not needed anymore','Delete it']];
+  modalCard(`<div class="tkh"><p class="label">🧭 ${tl('Help me with this')}</p><p class="tkh-t notranslate" data-raw dir="auto">${esc(t.title)}</p><p class="tkh-q">${tl("What's in the way?")}</p><p class="small muted" style="text-align:center;margin:0 0 8px">${tl('Pick one. You get the fix right away.')}</p>
+   ${W.map(([k,ic,a,b])=>`<button type="button" class="tkh-r" data-wy="${k}"><span class="tkh-i">${ic}</span><span class="tkh-x"><b>${tl(a)}</b><small>→ ${tl(b)}</small></span></button>`).join('')}</div>`);
+  $('scrollBody').querySelectorAll('[data-wy]').forEach(b=>b.onclick=()=>{const k=b.dataset.wy;try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}t.why=(t.why||[]).concat([{r:k,at:Date.now()}]).slice(-20);
+    if(k==='big'){t.open=true;if(!(t.steps||[]).length){try{t.steps=breakdown(t.title).map(x=>({id:uid(),text:x,done:false}))}catch(e){}}save();modalClose();show('today');setTimeout(()=>{const el=document.querySelector(`.task[data-id="${t.id}"]`);if(el){el.scrollIntoView({block:'center',behavior:'smooth'});const i=el.querySelector('[data-act="addstep"] input');if(i)i.focus()}},250)}
+    else if(k==='start'||k==='want'){save();modalClose();const s=nextStep(t);startTimer(2,{taskId:t.id,stepId:s&&s.id,label:s?s.text:t.title,kick:true})}
+    else if(k==='time'){const d=new Date();d.setDate(d.getDate()+1);t.due=dkey(d);save();modalClose();toast(tl('Moved to tomorrow.'))}
+    else if(k==='low'){t.diff=1;t.est=5;save();modalClose()}
+    else if(k==='forgot'){save();modalClose();setTimeout(()=>GO.reminders(),60)}
+    else if(k==='drop'){const i=S.tasks.indexOf(t);if(i>=0){S.tasks.splice(i,1);if(typeof trashPut==='function')trashPut('task',t)}save();modalClose()}})}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tk]');if(!b||b.tagName==='INPUT')return;const t=tkTask(b);if(!t)return;e.preventDefault();e.stopPropagation();try{navigator.vibrate&&navigator.vibrate(6)}catch(x){}const k=b.dataset.tk;
+  if(k==='help'||k==='why')return tkHelp(t);
+  if(k==='estc'){modalCard(`<div class="hc-ed"><p class="label">⏱ ${tl('How long?')}</p><input id="tkM" type="number" inputmode="numeric" min="1" max="600" value="${tEst(t)}" aria-label="${esc(tl('Minutes'))}"><p class="small muted" style="margin:-4px 0 0">${tl('Minutes')}</p><button type="button" class="btn-main" id="tkMs" style="width:100%">${tl('Save')}</button></div>`);$('tkMs').onclick=()=>{const v=Math.round(+$('tkM').value);if(v>0&&v<=600){t.est=v;save()}modalClose()};setTimeout(()=>{try{$('tkM').select()}catch(e){}},80);return}
+  if(k==='rep'){const r=b.dataset.r;t.rep=r==='none'?null:{k:r,d:r==='days'?((t.rep&&t.rep.d)||[new Date((t.due||dkey())+'T00:00').getDay()]):undefined};if(r!=='none'&&!t.due)t.due=dkey();save();render();return}
+  if(k==='rd'){const i=+b.dataset.d,d=t.rep.d=t.rep.d||[];const j=d.indexOf(i);if(j>=0){if(d.length>1)d.splice(j,1)}else d.push(i);d.sort();save();render();return}},true);
+document.addEventListener('change',e=>{const i=e.target;if(!i.matches||!i.matches('[data-tk="end"]'))return;const t=tkTask(i);if(!t)return;t.end=i.value||'';save();render()},true);
+{const _ftR=finishTask;finishTask=function(t){const r=_ftR.apply(this,arguments);try{if(t&&t.rep&&t.rep.k!=='none'&&!t.repSpawned){const nd=tkNext(t);if(nd){t.repSpawned=1;const c=JSON.parse(JSON.stringify(t));Object.assign(c,{id:uid(),done:false,doneAt:null,due:nd,open:false,repSpawned:0,why:[]});(c.steps||[]).forEach(s=>s.done=false);S.tasks.push(c);save();setTimeout(()=>{try{toast(tl('Done. Next one is ready.')+' '+tkRepLbl(c))}catch(e){}},2600)}}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
