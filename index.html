@@ -1720,6 +1720,48 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .sr-row,.sr-chip{box-sizing:border-box}
 .sr-chip{padding:8px 10px;gap:7px}.sr-chip b{font-size:13.5px;overflow-wrap:break-word;word-break:normal;hyphens:manual;line-height:1.25}
 .sr-rt b{overflow-wrap:break-word}
+
+/* v120 before sleep */
+.ns{display:flex;flex-direction:column}
+.ns-dots{display:flex;justify-content:center;gap:6px;margin:2px 0 4px}.ns-dots i{width:26px;height:5px;border-radius:3px;background:var(--line,#e4e9ed)}.ns-dots i.on{background:#15835f}
+.ns-stp{text-align:center;font-size:12.5px;color:var(--muted);margin:0 0 10px}
+.ns-t{font-size:21px;font-weight:800;margin:0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--ink)}
+.ns-n{background:#15835f;color:#fff;border-radius:12px;font-size:14px;padding:2px 9px}
+.ns-dl{font-size:13.5px;font-weight:600;color:var(--muted);width:100%}
+.ns-s{font-size:14px;color:var(--muted);margin:4px 0 12px}
+.ns-l{background:var(--surface,#fff);border-radius:16px;box-shadow:0 2px 8px #0000000a;padding:2px 14px;margin-bottom:10px}
+.ns-w{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 0}.ns-w+.ns-w{border-top:1px solid var(--line)}
+.ns-wt{flex:1;min-width:0;overflow-wrap:break-word;font-size:15.5px;color:var(--ink)}
+.ns-w small{font-size:11.5px;color:#15835f;font-weight:700;flex:none}
+.ns-no{width:26px;height:26px;border-radius:50%;background:#fde9b0;color:#7a5200;font-weight:800;font-size:13px;display:grid;place-items:center;flex:none}
+.ns-e .ns-no{background:var(--line);color:var(--muted)}
+.ns-x{all:unset;cursor:pointer;width:32px;height:32px;display:grid;place-items:center;color:var(--muted);font-size:14px;flex:none}
+.ns-add,.ns-row{display:flex;gap:8px;align-items:center}.ns-add input,.ns-row input{flex:1;min-width:0;width:0}
+.ns-add .btn-main,.ns-row .btn-main{flex:none;padding-inline:16px}
+.ns-p{background:var(--surface,#fff);border-radius:16px;box-shadow:0 2px 8px #0000000a;padding:10px 14px;margin-bottom:8px}
+.ns-ph{font-weight:800;font-size:15px;margin:0 0 4px;color:var(--ink)}
+.ns-ti{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:15px;color:var(--ink)}.ns-ti+.ns-ti{border-top:1px solid var(--line)}
+.ns-ti i{width:18px;height:18px;border-radius:50%;border:2px solid var(--muted);flex:none;opacity:.6}.ns-ti span{overflow-wrap:break-word;min-width:0}
+.ns-none{font-size:13.5px;color:var(--muted);margin:2px 0}
+.ns-tf{margin-top:6px;display:flex;flex-direction:column;gap:8px}
+.ns-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ns-seg button{border:0;border-radius:12px;padding:9px 4px;min-height:42px;font:inherit;font-size:13px;font-weight:700;background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink)}
+.ns-seg button.on{background:#15835f;color:#fff}
+.ns-dua{background:var(--surface,#fff);border-radius:18px;box-shadow:0 2px 10px #0000000f;padding:18px 16px;text-align:center;margin:10px 0 6px}
+.ns-ar{font-family:"Fastaqim Quran","Scheherazade New",serif;font-size:30px;line-height:1.9;margin:0 0 6px;color:var(--vdg,#0f5e45)}
+.ns-tl{font-style:italic;font-size:14.5px;color:var(--muted);margin:0 0 6px}.ns-mn{font-size:16px;font-weight:600;margin:0 0 8px;color:var(--ink)}
+.ns-src{font-size:12.5px;color:#9a6b00;font-weight:700;margin:0}
+.ns-nav{display:flex;gap:8px;margin-top:16px}.ns-nav>*{flex:1}
+.hm-ns{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:12px;width:100%;margin:10px 0 0;padding:12px 14px;border-radius:18px;cursor:pointer;background:linear-gradient(135deg,#1f2a44,#2d3b63);color:#fff;box-shadow:0 2px 10px #0000001a}
+.hm-ns .i{font-size:26px}.hm-ns .m{flex:1;display:flex;flex-direction:column;gap:2px;text-align:start}.hm-ns b{font-size:16px}.hm-ns small{font-size:13px;opacity:.85}.hm-ns>i{font-style:normal;font-size:22px;opacity:.8}
+[dir=rtl] .hm-ns>i{transform:scaleX(-1)}
+.hm-ns.dn{background:linear-gradient(135deg,#1d4d3d,#256b52)}
+[data-theme=dark] .ns-no{background:#5a4510;color:#ffe08a}[data-theme=dark] .ns-ar{--vdg:#9fe0c4}
+@media (prefers-color-scheme: dark){:root[data-theme="auto"] .ns-no{background:#5a4510;color:#ffe08a}:root[data-theme="auto"] .ns-ar{--vdg:#9fe0c4}}
+.ns{text-align:start}.ns .label,.ns-dots,.ns-stp{text-align:center}
+.ns-n{background:#f5c542;color:#4a3500}.ns-n.ok{background:#15835f;color:#fff}
+.ns-nav>.btn-calm{flex:0 0 auto;padding-inline:22px}.ns-nav>.btn-main{flex:1}
+.ns-add input,.ns-row input{height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);padding:0 12px;font:inherit;font-size:16px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7362,7 +7404,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v119',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v120',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7752,6 +7794,55 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 GO.search=()=>srOpen();
 {const _mc=modalClose;modalClose=function(){try{$('scrollBody').classList.remove('sr-host')}catch(e){}return _mc.apply(this,arguments)}}
 {const _tn=txNode;txNode=function(n){try{if(n.parentElement&&n.parentElement.closest('[data-raw]'))return}catch(e){}return _tn.apply(this,arguments)}}
+
+/* v120: Before sleep, 3 short steps: today's wins -> tomorrow (morning / afternoon / evening) -> sleep dua */
+[['Before sleep','قبل النوم','Hirriba dura','Ka hor hurdada'],["Today's wins",'إنجازات اليوم','Injifannoo har\'aa','Guulaha maanta'],['Tomorrow','غدًا','Boru','Berri'],['Sleep dua','دعاء النوم','Du\'aa hirribaa','Ducada hurdada'],
+ ['Step','الخطوة','Tarkaanfii','Tallaabo'],['of','من','keessaa','ka mid ah'],['Next','التالي','Itti aanu','Xiga'],['Back','رجوع','Duubatti','Dib'],['Add a win','أضف إنجازًا','Injifannoo dabali','Ku dar guul'],['Add','أضف','Dabali','Ku dar'],
+ ['Done today','أنجزته اليوم','Har\'a xumurame','Maanta la dhammeeyey'],['5 to start. Add as many as you like.','٥ للبداية، وأضف ما شئت.','5 jalqabaaf. Hamma barbaadde dabali.','5 bilow ahaan. Ku dar inta aad rabto.'],
+ ['What\'s coming, so there are no surprises.','ما ينتظرك غدًا، حتى لا تتفاجأ.','Waan boru dhufu, akka hin rifanneef.','Waxa berri imanaya, si aan wax kuu yaabin.'],
+ ['Morning','الصباح','Ganama','Subax'],['Afternoon','بعد الظهر','Waaree booda','Galab'],['Evening','المساء','Galgala','Fiid'],['Anytime','في أي وقت','Yeroo kamiyyuu','Wakhti kasta'],
+ ['Add for tomorrow','أضف لغد','Boruuf dabali','Ku dar berri'],['Nothing yet.','لا شيء بعد.','Ammaaf homaa hin jiru.','Weli waxba ma jiraan.'],
+ ['Sleep well','نومًا هنيئًا','Nagaan rafi','Si fiican u seexo'],['Sahih al-Bukhari 6324','صحيح البخاري ٦٣٢٤','Sahiih al-Bukhaarii 6324','Saxiixul Bukhaari 6324'],
+ ['In Your name, O Allah, I die and I live.','','Yaa Rabbi, maqaa keetiin nan du\'a, nan jiraadhas.','Magacaaga Allahow ayaan ku dhimanayaa kuna noolaanayaa.'],
+ ['Say it lying on your right side.','قلها وأنت على جنبك الأيمن.','Cinaacha kee mirgaa irra ciiftee jedhi.','Dheh adigoo dhinacaaga midig u jiifa.'],['3 steps','٣ خطوات','Tarkaanfii 3','3 tallaabo'],['Done ✓','تمّ ✓','Xumurame ✓','Waa la dhammeeyey ✓'],
+ ['That message cannot be saved here.','لا يمكن حفظ هذه الرسالة هنا.','Ergaan kun as kuufamuu hin danda\'u.','Fariintan halkan lagama kaydin karo.']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},ar?{ar,om,so}:{om,so})});
+function bsDay(){const d=new Date();if(d.getHours()<4)d.setDate(d.getDate()-1);return d}
+function bsRec(){S.night=S.night&&typeof S.night==='object'?S.night:{};const k=dkey(bsDay());S.night[k]=S.night[k]||{wins:[],done:false};const ks=Object.keys(S.night).sort();while(ks.length>40)delete S.night[ks.shift()];return S.night[k]}
+function bsAuto(){const d=bsDay(),k=dkey(d),A=[];(S.tasks||[]).forEach(t=>{if(t.done&&t.doneAt&&dkey(new Date(t.doneAt))===k)A.push(t.title)});return A}
+function bsTom(){const d=bsDay();d.setDate(d.getDate()+1);return dkey(d)}
+function bsPart(t){if(t.chunk&&/^(morning|afternoon|evening)$/.test(t.chunk))return t.chunk;const m=/^(\d{1,2}):/.exec(t.time||'');if(!m)return 'any';const h=+m[1];return h<12?'morning':h<17?'afternoon':'evening'}
+const BSL={st:0,part:'morning'};
+function bsOpen(step){if(step!=null)BSL.st=step;const R=bsRec(),st=BSL.st;try{const m=$('apMenu');if(m)m.hidden=true}catch(e){}
+  const dots=`<div class="ns-dots">${[0,1,2].map(i=>`<i class="${i<=st?'on':''}"></i>`).join('')}</div><p class="ns-stp" dir="ltr">${st+1} / 3</p>`;let h='';
+  if(st===0){const A=bsAuto(),W=A.map(t=>({t,a:1})).concat(R.wins.map((t,i)=>({t,i})));const n=W.length;
+    h=`<p class="ns-t">⭐ ${tl("Today's wins")} <b class="ns-n${n>=5?' ok':''}" dir="ltr">${n>=5?n+' ✓':n+' / 5'}</b></p><p class="ns-s">${tl('5 to start. Add as many as you like.')}</p>
+    <div class="ns-l">${W.map((w,j)=>`<div class="ns-w"><span class="ns-no">${j+1}</span><span class="ns-wt notranslate" data-raw dir="auto">${esc(w.t)}</span>${w.a?`<small>${tl('Done today')}</small>`:`<button type="button" class="ns-x" data-nsx="${w.i}" aria-label="${tl('Delete')}">✕</button>`}</div>`).join('')}
+    </div>
+    <form class="ns-add" id="nsF"><span class="ns-no">${n+1}</span><input id="nsI" maxlength="80" dir="auto" placeholder="${esc(tl('Add a win'))}" enterkeyhint="done"><button class="btn-main">${tl('Add')}</button></form>`}
+  else if(st===1){const tk=bsTom(),L=(S.tasks||[]).filter(t=>!t.done&&t.due===tk);const P=[['morning','☀️','Morning'],['afternoon','🌤️','Afternoon'],['evening','🌙','Evening']];const any=L.filter(t=>bsPart(t)==='any');
+    let dl='';try{const d=new Date(tk+'T00:00');dl=d.toLocaleDateString(LOC(),{weekday:'long',day:'numeric',month:'long'})}catch(e){}
+    h=`<p class="ns-t">📅 ${tl('Tomorrow')}<small class="ns-dl notranslate">${esc(dl)}</small></p><p class="ns-s">${tl("What's coming, so there are no surprises.")}</p>
+    ${P.map(([k,ic,l])=>{const its=L.filter(t=>bsPart(t)===k);return `<div class="ns-p"><p class="ns-ph">${ic} ${tl(l)}</p>${its.length?its.map(t=>`<div class="ns-ti"><i></i><span class="notranslate" data-raw dir="auto">${t.time?`<b>${esc(t12(t.time))}</b> `:''}${esc(t.title)}</span></div>`).join(''):`<p class="ns-none">${tl('Nothing yet.')}</p>`}</div>`}).join('')}
+    ${any.length?`<div class="ns-p"><p class="ns-ph">🕒 ${tl('Anytime')}</p>${any.map(t=>`<div class="ns-ti"><i></i><span class="notranslate" data-raw dir="auto">${esc(t.title)}</span></div>`).join('')}</div>`:''}
+    <form class="ns-tf" id="nsT"><div class="ns-seg">${P.map(([k,ic,l])=>`<button type="button" data-nsp="${k}" class="${BSL.part===k?'on':''}">${ic} ${tl(l)}</button>`).join('')}</div><div class="ns-row"><input id="nsTI" maxlength="80" dir="auto" placeholder="${esc(tl('Add for tomorrow'))}" enterkeyhint="done"><button class="btn-main">${tl('Add')}</button></div></form>`}
+  else{h=`<p class="ns-t">🌙 ${tl('Sleep dua')}</p><div class="ns-dua"><p class="ns-ar" dir="rtl" lang="ar">بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا</p>${LANG==='ar'?'':`<p class="ns-tl notranslate" dir="ltr">Bismika Allāhumma amūtu wa aḥyā</p><p class="ns-mn">${tl('In Your name, O Allah, I die and I live.')}</p>`}<p class="ns-src">${tl('Sahih al-Bukhari 6324')}</p></div><p class="ns-s" style="text-align:center">${tl('Say it lying on your right side.')}</p>`}
+  const nav=`<div class="ns-nav">${st>0?`<button type="button" class="btn-calm" data-nsg="${st-1}">${tl('Back')}</button>`:''}${st<2?`<button type="button" class="btn-main" data-nsg="${st+1}">${tl('Next')}</button>`:`<button type="button" class="btn-main" id="nsDone">${tl('Sleep well')} 🌙</button>`}</div>`;
+  modalCard(`<div class="ns"><p class="label">🌙 ${tl('Before sleep')}</p>${dots}${h}${nav}</div>`);
+  const B=$('scrollBody'),hap=()=>{try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}};
+  const ok=v=>{if(typeof blocked==='function'&&blocked(v)){toast(tl('That message cannot be saved here.'));return false}return true};
+  B.querySelectorAll('[data-nsg]').forEach(b=>b.onclick=()=>{hap();bsOpen(+b.dataset.nsg);B.scrollTop=0});
+  B.querySelectorAll('[data-nsx]').forEach(b=>b.onclick=()=>{R.wins.splice(+b.dataset.nsx,1);save();bsOpen()});
+  B.querySelectorAll('[data-nsp]').forEach(b=>b.onclick=()=>{hap();BSL.part=b.dataset.nsp;B.querySelectorAll('[data-nsp]').forEach(x=>x.classList.toggle('on',x===b))});
+  const f=$('nsF');if(f)f.onsubmit=e=>{e.preventDefault();const v=$('nsI').value.trim();if(!v||!ok(v))return;hap();R.wins.push(v);save();bsOpen();setTimeout(()=>{const i=$('nsI');if(i)i.focus()},50)};
+  const tf=$('nsT');if(tf)tf.onsubmit=e=>{e.preventDefault();const v=$('nsTI').value.trim();if(!v||!ok(v))return;hap();S.tasks.push({id:uid(),title:v,top:false,done:false,steps:[],due:bsTom(),chunk:BSL.part});save();bsOpen();setTimeout(()=>{const i=$('nsTI');if(i)i.focus()},50)};
+  const dn=$('nsDone');if(dn)dn.onclick=()=>{hap();R.done=true;save();modalClose();try{star(1,'🌙 '+tl('Before sleep'),'night-'+dkey(bsDay()))}catch(e){}}}
+GO.sleep=GO.night=GO.beforesleep=()=>bsOpen(0);
+{const _hs=hmTrk;hmTrk=function(){const h=_hs.apply(this,arguments);try{const hr=new Date().getHours();if(!(hr>=18||hr<4))return h;const R=bsRec(),n=bsAuto().length+R.wins.length;
+  return `<button type="button" class="hm-ns${R.done?' dn':''}" data-hm="ns"><span class="i">🌙</span><span class="m"><b>${esc(tl('Before sleep'))}</b><small>${R.done?esc(tl('Done ✓')):`⭐ ${n} · 📅 ${esc(tl('Tomorrow'))} · 🤲`}</small></span><i aria-hidden="true">›</i></button>`+h}catch(e){return h}}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="ns"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();bsOpen(0)},true);
+{const _amN=apMenu;apMenu=function(){const r=_amN.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="vd"]');if(s&&!m.querySelector('[data-am="ns"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='ns';b.textContent='🌙 '+tl('Before sleep');b.onclick=()=>{m.hidden=true;bsOpen(0)};s.before(b)}}catch(e){}return r}}
+SRCH_PG.splice(2,0,['🌙','Before sleep','sleep']);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
