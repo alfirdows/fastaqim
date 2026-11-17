@@ -305,12 +305,16 @@ function capThumbs(t){const keep=ST.world,out={},w=180,h=96,cv0=R.domElement;
 
 /* ---------- hook into the game ---------- */
 const pv=new T.Vector3(),pw=new T.Vector3();
-P=(X,d,h=0)=>{pw.set(X*LS,h,-d);pv.copy(pw).project(cam);const dep=Math.max(.6,pw.distanceTo(cam.position));return {x:(pv.x+1)/2*W,y:(1-pv.y)/2*H,s:(H/2)/(Math.tan(cam.fov*Math.PI/360)*dep)}};
-let dead=false;
-draw=function(t){if(dead)return draw2d(t);const n=performance.now();if(lastNow)perf(n-lastNow);lastNow=n;
- try{if(needTh&&state==='menu'&&frame>3){needTh=false;capThumbs(t)}sync(t);if(useBloom&&comp)comp.render();else R.render(scene,cam);overlay(t)}catch(e){console.error(e);fail()}};
+const P3=(X,d,h=0)=>{pw.set(X*LS,h,-d);pv.copy(pw).project(cam);const dep=Math.max(.6,pw.distanceTo(cam.position));return {x:(pv.x+1)/2*W,y:(1-pv.y)/2*H,s:(H/2)/(Math.tan(cam.fov*Math.PI/360)*dep)}};
+P=P3;
+let dead=false,lost=false,errs=0;
+draw=function(t){if(dead||lost)return draw2d(t);const n=performance.now();if(lastNow)perf(n-lastNow);lastNow=n;
+ try{if(needTh&&state==='menu'&&frame>3){needTh=false;capThumbs(t)}sync(t);if(useBloom&&comp)comp.render();else R.render(scene,cam);overlay(t);errs=0}catch(e){console.error(e);if(++errs>3)fail()}};
 function fail(){dead=true;P=P2;el.style.display='none';draw=draw2d}
-el.addEventListener('webglcontextlost',e=>{e.preventDefault();fail()});
+/* iPhone Safari drops the 3D view when the app goes to the background or memory is low: show the flat look for a moment, then bring 3D back */
+el.addEventListener('webglcontextlost',e=>{e.preventDefault();lost=true;P=P2;el.style.display='none'});
+el.addEventListener('webglcontextrestored',()=>{try{try{const pm=new T.PMREMGenerator(R);envT=pm.fromScene(new RoomEnvironment(),.04).texture;pm.dispose();scene.environment=envT}catch(e){}
+ try{mkComp()}catch(e){comp=null;useBloom=false}buildWorld(ST.world);rs();P=P3;el.style.display='block';lost=false}catch(e){console.error(e);fail()}});
 rs();
 document.querySelectorAll('[data-th]').forEach(c=>worldThumb(c,c.dataset.th));
 window.__r3={q:()=>q,setQ,scene,cam,R,meshes:()=>{let n=0;scene.traverseVisible(o=>{if(o.isMesh||o.isSprite)n++});return n},stats:()=>({calls:R.info.render.calls,tris:R.info.render.triangles,geo:R.info.memory.geometries,tex:R.info.memory.textures})};
