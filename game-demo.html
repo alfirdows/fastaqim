@@ -103,6 +103,7 @@ const T={speed:["Speed","السرعة","Saffisa","Xawaare"],s_slow:["Slow","بط
  start:["Start","ابدأ","Jalqabi","Bilow"],paused:["Paused","متوقف","Dhaabbateera","Waa la hakiyay"],resume:["Resume","تابع","Itti fufi","Sii wad"],
  back:["Back to Fastaqim","العودة إلى فاستقم","Gara Fastaqim deebi'i","Ku noqo Fastaqim"],again:["Run again","العب مجددًا","Ammas fiigi","Mar kale orod"],
  best:["Best","الأفضل","Isa caalu","Ugu fiican"],coins:["coins","عملات","saantima","qadaadiic"],dist:["meters","متر","meetira","mitir"],
+ own:['Your number','عدد آخر','Lakkoofsa kee','Tiradaada'],tgtDone:['Target reached! Cross the finish','وصلت للهدف! اعبر خط النهاية','Galma geesse! Sarara qaxxaamuri','Hadafkii waad gaartay! Gudub xariiqda'],
  sayIt:["Say it with each coin","قلها مع كل عملة","Saantima hundaan jedhi","Ku dheh qadaadiic kasta"],
  stepN:["Step","الخطوة","Tarkaanfii","Tallaabo"],of:["of","من","keessaa","ka mid ah"],
  doNow:["Do this step now, then tap Done.","نفّذ هذه الخطوة الآن، ثم اضغط تم.","Tarkaanfii kana amma hojjedhu, achii Xumureera tuqi.","Hadda samee tallaabadan, kadib taabo Waan dhammeeyay."],
@@ -219,7 +220,7 @@ function step(dt){const g=G;g.t+=dt;
 function coin(ob){const g=G,v=g.dbl>0?2:1;g.coins+=v;g.combo++;SFX.plip();vib(5);const p=P(ob.ln-1,0,(ob.h||0)+.5);burst(p.x,p.y,'#fde68a',6);
  if(g.mode==='dhikr'&&g.count<g.target){g.count=Math.min(g.target,g.count+1);g.fl=g.fl.filter(f=>!f.ar);floatT(DZ[ST.dz].ar,p.x,p.y-30,'#fff',true)}
  else{g.fl=g.fl.filter(f=>f.ar||f.life<.5);floatT('+'+v,p.x,p.y-10,'#fde047')}
- if(g.combo>0&&g.combo%25===0)toast(g.combo+' '+tl('combo'))}
+ if(g.mode!=='dhikr'&&g.combo>0&&g.combo%25===0)toast(g.combo+' '+tl('combo'))}
 function bonus(ob){const g=G,v=(ob.k==='gem'?5:3)*(g.dbl>0?2:1);g.coins+=v;SFX.power();vib([8,20,8]);const p=P(ob.ln-1,0,(ob.h||0)+.5);burst(p.x,p.y,ob.k==='gem'?'#67e8f9':'#fde047',14);g.fl=g.fl.filter(f=>f.ar||f.life<.5);floatT('+'+v,p.x,p.y-10,ob.k==='gem'?'#a5f3fc':'#fde047')}
 function power(k){const g=G;SFX.power();vib([10,30,10]);if(k==='mag')g.mag=9;if(k==='shield')g.shield=1;if(k==='x2')g.dbl=10;if(k==='boost'){g.boost=3.2;g.inv=3.4}
  toast({mag:'🧲 ',shield:'🛡️ ',x2:'×2 ',boost:'⚡ '}[k]+tl({mag:'magnet',shield:'shield',x2:'x2',boost:'boost'}[k]))}
@@ -360,7 +361,7 @@ function draw(t){try{x.direction='ltr'}catch(e){}x.save();if(G&&G.shake>0)x.tran
 /* ---------- HUD ---------- */
 const $=id=>document.getElementById(id),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function hud(){const g=G;$('hc').textContent='🪙 '+g.coins;$('hearts').textContent=g.mode==='free'?'❤'.repeat(Math.max(0,g.hearts)):'';$('hearts').hidden=g.mode!=='free';
- if(g.mode==='dhikr'){$('gAr').textContent=DZ[ST.dz].ar;$('gSt').textContent='';$('gN').textContent=g.count+' / '+g.target+(g.count<g.target?' · '+tl('sayIt'):'');$('gP').style.width=(g.count/g.target*100)+'%'}
+ if(g.mode==='dhikr'){$('gAr').textContent=DZ[ST.dz].ar;$('gSt').textContent='';$('gN').textContent=g.count>=g.target?'✓ '+g.count+' / '+g.target+' · '+tl('tgtDone'):g.count+' / '+g.target+' · '+tl('sayIt');$('gN').style.color=g.count>=g.target?'#0b7a55':'';$('gP').style.width=(g.count/g.target*100)+'%'}
  else if(g.mode==='task'){const i=g.steps.findIndex(s=>!s.done);$('gAr').textContent='';$('gSt').textContent=g.task?g.task.title:'';$('gN').textContent=tl('stepN')+' '+Math.min(g.steps.length,g.stepDone+1)+' '+tl('of')+' '+g.steps.length;$('gP').style.width=(g.stepDone/g.steps.length*100)+'%'}
  const pw=[];if(g.mag>0)pw.push(['🧲',g.mag/9]);if(g.dbl>0)pw.push(['×2',g.dbl/10]);if(g.boost>0)pw.push(['⚡',g.boost/3.2]);if(g.shield)pw.push(['🛡️',1]);
  const k=pw.map(p=>p[0]+p[1].toFixed(1)).join();if($('pw').dataset.k!==k){$('pw').dataset.k=k;$('pw').innerHTML=pw.map(p=>`<span>${p[0]}<i><b style="width:${p[1]*100}%"></b></i></span>`).join('')}}
@@ -386,10 +387,10 @@ function showMenu(){if(!showMenu.once){showMenu.once=1;ST.mode='dhikr'}state='me
   <button class="go" id="goB">${tl('start')}</button>${ST.best?`<p style="font-size:.85rem;margin-top:8px">🏆 ${tl('best')}: <b>${ST.best}</b></p>`:''}`);
  document.querySelectorAll('[data-th]').forEach(c=>worldThumb(c,c.dataset.th));
  const opt=()=>{const o=$('opt');try{if(ST.mode==='dhikr')o.innerHTML=`<h2>${tl('pickZ')}</h2><div class="dk z">${DZ.map((d,i)=>`<button data-z="${i}" class="${ST.dz===i?'on':''}"><span class="ar">${d.ar}</span>${LG==='ar'?'':`<small>${esc(d.tr)}</small>`}</button>`).join('')}</div>
-   <h2>${tl('target')}</h2><div class="chips">${[33,100].map(n=>`<button class="chip ${ST.tgt===n?'on':''}" data-n="${n}">${n}</button>`).join('')}</div>`;
+   <h2>${tl('target')}</h2><div class="chips">${[33,100,300,500,1000].map(n=>`<button class="chip ${ST.tgt===n?'on':''}" data-n="${n}">${n}</button>`).join('')}<button class="chip ${[33,100,300,500,1000].includes(ST.tgt)?'':'on'}" id="tgC">${[33,100,300,500,1000].includes(ST.tgt)?'＋ '+tl('own'):ST.tgt}</button></div><div id="tgW" hidden style="display:flex;gap:6px;margin-top:8px"><input id="tgI" type="number" inputmode="numeric" min="1" max="10000" value="${ST.tgt}" style="flex:1;min-height:44px;border:1.5px solid #e2e8f0;border-radius:12px;padding:0 12px;font:700 1rem Inter,system-ui"><button class="chip on" id="tgOk">✓</button></div>`;
   else if(ST.mode==='task')o.innerHTML=`<h2>${tl('pickT')}</h2>${tasks.length?`<div class="dk">${tasks.slice(0,8).map((t,i)=>`<button data-t="${i}" class="${(ST.ti||0)===i?'on':''}"><span dir="auto" style="font:700 .95rem Inter,system-ui;color:#0f172a">${esc(t.title)}</span><small>${t.steps.filter(s=>!s.done).length} ✓</small></button>`).join('')}</div>`:`<div class="empty">${tl('noT')}</div>`}`;
   else o.innerHTML=freeInfo();}catch(e){o.innerHTML=''}
-  o.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();opt()});o.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ST.tgt=+b.dataset.n;stSave();opt()});o.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST.ti=+b.dataset.t;stSave();opt()})};opt();
+  o.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();opt()});o.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ST.tgt=+b.dataset.n;stSave();opt()});{const c=o.querySelector('#tgC');if(c)c.onclick=()=>{const w=$('tgW');w.hidden=false;w.style.display='flex';$('tgI').focus()};const k=o.querySelector('#tgOk');if(k)k.onclick=()=>{const n=Math.round(+$('tgI').value);if(n>=1&&n<=10000){ST.tgt=n;stSave();opt()}}}o.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST.ti=+b.dataset.t;stSave();opt()})};opt();
  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ST.mode=b.dataset.m;stSave();document.querySelectorAll('[data-m]').forEach(q=>q.classList.toggle('on',q===b));opt()});
  document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{ST.world=b.dataset.w;WD=WORLDS[ST.world];stSave();document.querySelectorAll('[data-w]').forEach(q=>q.classList.toggle('on',q===b))});
  document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{ST.spd=b.dataset.sp;stSave();document.querySelectorAll('[data-sp]').forEach(q=>q.classList.toggle('on',q===b))});
@@ -398,7 +399,7 @@ function begin(tasks){SFX.ctx();newRun();const g=G;
  if(g.mode==='task'){const t=tasks[ST.ti||0];if(t){g.task={id:t.id,title:t.title};g.steps=t.steps.filter(s=>!s.done).map(s=>({id:s.id,text:s.text,done:false}))}
   else{g.task={id:null,title:tl('sample')};g.steps=[['Pick up 5 things','التقط 5 أشياء','Wantoota 5 kaasi','Qaado 5 shay'],['Make the bed','رتّب السرير','Siree kee sirreessi','Sariirta hagaaji'],['Open the window','افتح النافذة','Foddaa bani','Fur daaqadda']].map(r=>({text:r[{en:0,ar:1,om:2,so:3}[LG]],done:false}))}
   g.steps.forEach((s,i)=>{const z=45+i*70;g.gates.push(z);g.objs.push({k:'gate',z,i,ln:1})})}
- menuHide();state='play';$('goal').hidden=g.mode==='free';$('hc').hidden=false;$('pz').hidden=false;hud();last=performance.now();loop()}
+ menuHide();state='play';$('goal').hidden=g.mode==='free';$('hc').hidden=g.mode==='dhikr';$('pz').hidden=false;hud();last=performance.now();loop()}
 function pause(){if(state!=='play'||!G)return;state='pause';cancelAnimationFrame(raf);$('pz').hidden=true;
  menuShow(`<h1>⏸ ${tl('paused')}</h1><div class="stats"><div><b>${G.coins}</b><span>🪙 ${tl('coins')}</span></div><div><b>${Math.floor(G.dist)}</b><span>${tl('dist')}</span></div></div><button class="go" id="rB">${tl('resume')}</button><a class="sec" href="./?go=app">${tl('back')}</a>`);
  $('rB').onclick=()=>{menuHide();state='play';G.cd=Math.max(G.cd,0);$('pz').hidden=false;last=performance.now();loop()}}
@@ -448,5 +449,40 @@ addEventListener('pagehide',fqSave);document.addEventListener('visibilitychange'
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const el=$('fqT');if(el)el.hidden=true;const bk=$('back');if(bk&&bk.dataset.t){bk.textContent=bk.dataset.t;delete bk.dataset.t}}catch(e){}return r}}
 (function(){const hc=$('hc');if(hc&&!$('fqT')){const s=document.createElement('span');s.id='fqT';s.hidden=true;s.className=hc.className;s.style.cssText='font-variant-numeric:tabular-nums';hc.after(s)}
  const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}.fq{gap:6px}.fq-big{font-size:1.05rem}.fq-row{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;background:rgba(255,255,255,.7);border-radius:10px;font-weight:600;text-align:start}.fq-row b{white-space:nowrap}.fq-how{font-size:.8rem;font-weight:500;opacity:.9}';document.head.appendChild(st)})();
+
+/* ===== Play rules made clear (Tasnim, 17 Nov): after 15 minutes of game time, one real task first; warnings before any pause ===== */
+Object.assign(T,{
+ br_t:["Time for one real task","حان وقت مهمة حقيقية","Yeroon hojii dhugaa tokkoo ga'eera","Waa waqtigii hal hawl dhab ah"],
+ br_p:["You played 15 minutes. Tick one task in your To-do, then come back and keep playing.","لعبت ١٥ دقيقة. أنجز مهمة واحدة في قائمة المهام، ثم ارجع وأكمل اللعب.","Daqiiqaa 15 taphatte. Hojii tokko xumuriitii deebi'ii itti fufi.","15 daqiiqo ayaad ciyaartay. Hal hawl dhammee, kadib soo noqo oo sii wad."],
+ br_go:["Open my To-do","افتح قائمة المهام","Tarree hojii koo bani","Fur liiskayga hawlaha"],
+ br_did:["I did a task ✓","أنجزت مهمة ✓","Hojii tokko xumureera ✓","Hawl ayaan dhammeeyay ✓"],
+ br_not:["Tick a task in your To-do first","أنجز مهمة في قائمة المهام أولًا","Dura hojii tokko xumuri","Marka hore hawl dhammee"],
+ br_ok:["Great work! Play on 🎉","عمل رائع! أكمل اللعب 🎉","Hojii gaarii! Itti fufi 🎉","Shaqo fiican! Sii ciyaar 🎉"],
+ br_w5:["5 min until your task break","٥ دقائق حتى استراحة المهمة","Daqiiqaa 5 boqonnaa hojiitti","5 daqiiqo ilaa nasashada hawsha"],
+ br_w1:["1 min until your task break","دقيقة حتى استراحة المهمة","Daqiiqaa 1 boqonnaa hojiitti","1 daqiiqo ilaa nasashada hawsha"],
+ fq_w5:["5 min of free play left","باقي ٥ دقائق من اللعب الحر","Tapha bilisaa daqiiqaan 5 hafte","5 daqiiqo oo ciyaar xor ah ayaa hadhay"],
+ fq_w1:["1 min of free play left","باقي دقيقة من اللعب الحر","Tapha bilisaa daqiiqaan 1 hafte","1 daqiiqo oo ciyaar xor ah ayaa hadhay"],
+ rule:["Every 15 min of play: 1 real task","كل ١٥ دقيقة لعب: مهمة حقيقية واحدة","Daqiiqaa 15 taphaa hundaaf: hojii dhugaa 1","15 daqiiqo oo ciyaar ah kasta: 1 hawl dhab ah"],
+ rule_n:["Task break in {n} min","استراحة المهمة بعد {n} د","Boqonnaan hojii daqiiqaa {n} booda","Nasashada hawsha {n} daqiiqo kadib"]});
+const BRK='fastaqim.gbreak',BR_MAX=900;
+function brGet(){try{return Object.assign({s:0,at:Date.now()},JSON.parse(localStorage.getItem(BRK)||'{}'))}catch(e){return {s:0,at:Date.now()}}}
+function brSet(o){try{localStorage.setItem(BRK,JSON.stringify(o))}catch(e){}}
+function brTaskSince(t){try{const S=JSON.parse(localStorage.getItem('launchpad.v1')||'{}');return (S.tasks||[]).some(k=>k.done&&k.doneAt&&k.doneAt>t)}catch(e){return false}}
+let BR=brGet();if(brTaskSince(BR.at)){BR={s:0,at:Date.now()};brSet(BR)}
+function brCard(){state='end';try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}const since=BR.at;
+ menuShow(`<p class="big" style="font-size:2.6rem;margin:0">✅</p><h1>${tl('br_t')}</h1><p style="margin:6px 0 10px">${tl('br_p')}</p>
+  <a class="go" id="brGo" href="./#todo" style="text-align:center;line-height:56px;text-decoration:none">${tl('br_go')}</a><button class="sec" id="brDid">${tl('br_did')}</button>`);
+ $('pz').hidden=true;
+ $('brDid').onclick=()=>{if(brTaskSince(since)){BR={s:0,at:Date.now()};brSet(BR);toast(tl('br_ok'));menuHide();showMenu()}else toast(tl('br_not'))}}
+{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{if(state==='play'&&G&&G.cd<=0){const b0=BR.s;BR.s+=dt;
+   if(b0<BR_MAX-300&&BR.s>=BR_MAX-300)toast('⏱ '+tl('br_w5'));if(b0<BR_MAX-60&&BR.s>=BR_MAX-60){toast('⏱ '+tl('br_w1'));try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}}
+   if(Math.floor(b0)!==Math.floor(BR.s))brSet(BR);
+   if(BR.s>=BR_MAX&&G.mode!=='dhikr'){brSet(BR);brCard()}
+   if(G.mode==='free'&&FQ){const l=fqLeftO(FQ);if(!step.f5&&l<=300&&l>290){step.f5=1;toast('⏱ '+tl('fq_w5'))}if(!step.f1&&l<=60&&l>50){step.f1=1;toast('⏱ '+tl('fq_w1'));try{navigator.vibrate&&navigator.vibrate(30)}catch(e){}}}}}catch(e){}return r}}
+/* a dhikr run is never cut in the middle: the task break shows when you try to start the next run */
+{const _b=begin;begin=function(){BR=brGet();if(brTaskSince(BR.at)){BR={s:0,at:Date.now()};brSet(BR)}if(BR.s>=BR_MAX){brCard();return}step.f5=step.f1=0;return _b.apply(this,arguments)}}
+function ruleLine(){try{const go=$('goB');if(go&&!$('ruleL')){const left=Math.max(0,Math.ceil((BR_MAX-BR.s)/60));const p=document.createElement('p');p.id='ruleL';p.style.cssText='font-size:.8rem;margin-top:8px;color:#475569';p.textContent='⏱ '+tl('rule_n').replace('{n}',left)+' · '+tl('rule');p.style.textAlign='center';go.before(p)}}catch(e){}}
+{const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);ruleLine();return r}}ruleLine();
+addEventListener('pagehide',()=>brSet(BR));
 </script>
 </body></html>
