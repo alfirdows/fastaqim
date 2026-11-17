@@ -155,12 +155,13 @@ function build(){const g=G;
   if(g.finishZ!=null&&z>g.finishZ-6){g.next=z+6;continue}
   if(g.gates.some(q=>Math.abs(q-z)<6)){g.next=z+4;continue}
   const early=g.dist<25,dk=g.mode==='dhikr',r=Math.random();
-  const sp2=dk?4.2:1.1,coinLine=(ln,z0,n,arc)=>{for(let k=0;k<n;k++)g.objs.push({k:'coin',ln,z:z0+k*sp2,h:arc?Math.sin(k/(n-1)*Math.PI)*1.6+.1:0})};
-  if(early||r<(dk?.5:.36)){coinLine(Math.floor(Math.random()*3),z,dk?5:6,false);g.next=z+(dk?5*4.2+rnd(2,5):rnd(8,11));continue}
+  const sp2=dk?1.7:1.15,coinLine=(ln,z0,n,arc)=>{for(let k=0;k<n;k++)g.objs.push({k:'coin',ln,z:z0+k*sp2,h:arc?Math.sin(k/(n-1)*Math.PI)*1.6+.1:0})};
+  if(early||r<(dk?.5:.36)){const n=dk?7:8;coinLine(Math.floor(Math.random()*3),z,n,false);g.next=z+n*sp2+rnd(2,4);continue}
   const free=Math.floor(Math.random()*3);
-  if(r<.58){const ln=pick([0,1,2]);g.objs.push({k:'low',ln,z});if(dk)coinLine(ln,z-.2,1,true);else coinLine(ln,z-2.4,5,true);if(Math.random()<.4)g.objs.push({k:'low',ln:(ln+1)%3,z})}
-  else if(r<.76){const ln=pick([0,1,2]);g.objs.push({k:'high',ln,z});coinLine(ln,z-2,dk?1:4,false)}
-  else{const bl=[0,1,2].filter(v=>v!==free);(Math.random()<.5?bl.slice(0,1):bl).forEach(b=>g.objs.push({k:'block',ln:b,z}));coinLine(free,z-3,dk?2:5,false)}
+  if(r<.58){const ln=pick([0,1,2]);g.objs.push({k:'low',ln,z});coinLine(ln,z-2.4,5,true);if(Math.random()<.4)g.objs.push({k:'low',ln:(ln+1)%3,z})}
+  else if(r<.76){const ln=pick([0,1,2]);g.objs.push({k:'high',ln,z});coinLine(ln,z-2,4,false)}
+  else{const bl=[0,1,2].filter(v=>v!==free);(Math.random()<.5?bl.slice(0,1):bl).forEach(b=>g.objs.push({k:'block',ln:b,z}));coinLine(free,z-3,5,false)}
+  coinLine(free,z+2,dk?4:5,false);
   if(z>g.pwNext){g.objs.push({k:pick(['mag','shield','x2','boost']),ln:free,z:z+5,h:.7});g.pwNext=z+rnd(70,110)}
   g.next=z+rnd(9,13)*(g.speed<9?1.15:1)}
 }
@@ -364,7 +365,7 @@ function showMenu(){state='menu';G=null;$('goal').hidden=true;$('hc').hidden=tru
  const opt=()=>{const o=$('opt');if(ST.mode==='dhikr')o.innerHTML=`<h2>${tl('pickZ')}</h2><div class="dk z">${DZ.map((d,i)=>`<button data-z="${i}" class="${ST.dz===i?'on':''}"><span class="ar">${d.ar}</span>${LG==='ar'?'':`<small>${esc(d.tr)}</small>`}</button>`).join('')}</div>
    <h2>${tl('target')}</h2><div class="chips">${[33,100].map(n=>`<button class="chip ${ST.tgt===n?'on':''}" data-n="${n}">${n}</button>`).join('')}</div>`;
   else if(ST.mode==='task')o.innerHTML=`<h2>${tl('pickT')}</h2>${tasks.length?`<div class="dk">${tasks.slice(0,8).map((t,i)=>`<button data-t="${i}" class="${(ST.ti||0)===i?'on':''}"><span dir="auto" style="font:700 .95rem Inter,system-ui;color:#0f172a">${esc(t.title)}</span><small>${t.steps.filter(s=>!s.done).length} ✓</small></button>`).join('')}</div>`:`<div class="empty">${tl('noT')}</div>`}`;
-  else o.innerHTML='';
+  else o.innerHTML=freeInfo();
   o.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();opt()});o.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ST.tgt=+b.dataset.n;stSave();opt()});o.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST.ti=+b.dataset.t;stSave();opt()})};opt();
  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ST.mode=b.dataset.m;stSave();document.querySelectorAll('[data-m]').forEach(q=>q.classList.toggle('on',q===b));opt()});
  document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{ST.world=b.dataset.w;WD=WORLDS[ST.world];stSave();document.querySelectorAll('[data-w]').forEach(q=>q.classList.toggle('on',q===b))});
@@ -382,4 +383,28 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 /* for automated checks */window.__g={G:()=>G,state:()=>state,move,jump,duck,begin:()=>begin(tasksWithSteps()),setMode:m=>{ST.mode=m},finish};
 showMenu();
 </script>
-<script src="game/r3d.js?v=2"></script></body></html>
+<script src="game/r3d.js?v=2"></script>
+<script>
+/* Free play: 30 minutes a day (Dhikr and Task runs are never limited) */
+Object.assign(T,{fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
+ fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
+ fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
+ fq_more:["Dhikr and Task runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
+ fq_back:["Free play is back tomorrow.","يعود اللعب الحر غدًا.","Tapha bilisaa boru deebi'a.","Ciyaarta xorta ah berri ayay soo laabanaysaa."]});
+const FQK='fastaqim.freeT',FQMAX=1800;
+function fqDay(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+function fqGet(){try{const o=JSON.parse(localStorage.getItem(FQK)||'{}');return o.d===fqDay()?o:{d:fqDay(),s:0}}catch(e){return {d:fqDay(),s:0}}}
+function fqLeft(){return Math.max(0,FQMAX-(fqGet().s||0))}
+let FQ=null;function fqAdd(dt){if(!FQ)FQ=fqGet();if(FQ.d!==fqDay())FQ={d:fqDay(),s:0};FQ.s+=dt;if(!FQ.w||performance.now()-FQ.w>1000){FQ.w=performance.now();try{localStorage.setItem(FQK,JSON.stringify({d:FQ.d,s:Math.round(FQ.s)}))}catch(e){}}}
+function fqMin(){return Math.ceil(fqLeft()/60)}
+function freeInfo(){const l=fqLeft();return l>0?`<div class="fq"><b>⏱ ${tl('fq_rule')}</b><span>${tl('fq_left').replace('{n}',fqMin())}</span></div>`
+  :`<div class="fq done"><b>🌟 ${tl('fq_done')}</b><span>${tl('fq_more')}</span></div>`}
+{const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast('🌟 '+tl('fq_back')+' '+tl('fq_more'));return}FQ=fqGet();return _b.apply(this,arguments)}}
+{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=Math.max(0,FQMAX-FQ.s),el=$('fqT');
+  if(el){const m=Math.floor(left/60),s=Math.floor(left%60);el.textContent='⏱ '+m+':'+String(s).padStart(2,'0');el.hidden=false;const bk=$('back');if(bk&&!bk.dataset.t){bk.dataset.t=bk.textContent;bk.textContent='‹';bk.setAttribute('aria-label',bk.dataset.t)}}
+  if(left<=0){state='end';try{localStorage.setItem(FQK,JSON.stringify({d:FQ.d,s:FQMAX}))}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
+{const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const el=$('fqT');if(el)el.hidden=true;const bk=$('back');if(bk&&bk.dataset.t){bk.textContent=bk.dataset.t;delete bk.dataset.t}}catch(e){}return r}}
+(function(){const hc=$('hc');if(hc&&!$('fqT')){const s=document.createElement('span');s.id='fqT';s.hidden=true;s.className=hc.className;s.style.cssText='font-variant-numeric:tabular-nums';hc.after(s)}
+ const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}';document.head.appendChild(st)})();
+</script>
+</body></html>
