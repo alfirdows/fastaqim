@@ -1180,14 +1180,6 @@ button.sr-c{cursor:pointer}
 .sv-del.arm{width:auto;max-width:96px;padding:0 6px;font-size:.66rem;line-height:1.15;color:#C2410C;border-color:#F3A47A;background:#FFF4ED}
 .sv-i.dn .sv-tx b{color:var(--muted)}
 /* v90: small round dhikr button, bottom corner of every page */
-.fab-zk{position:fixed;z-index:85;inset-inline-end:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:50px;height:50px;min-height:0;padding:0;border-radius:50%;border:1.5px solid color-mix(in srgb,#0F9D6E 45%,var(--line));background:var(--surface);box-shadow:0 6px 18px -6px rgba(15,23,42,.35);display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.fab-zk span{font-size:24px;line-height:1}
-.fab-zk b{position:absolute;top:-5px;inset-inline-end:-5px;min-width:20px;height:20px;padding:0 5px;border-radius:99px;background:#0F9D6E;color:#fff;font:800 .68rem/20px Inter,system-ui,sans-serif;text-align:center;box-shadow:0 0 0 2px var(--surface)}
-.fab-zk:active{transform:scale(.94)}
-body.has-bnav .fab-zk{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
-body.has-fab:not(.has-bnav){padding-bottom:calc(72px + env(safe-area-inset-bottom,0px))}
-body.has-bnav.has-fab{padding-bottom:calc(132px + env(safe-area-inset-bottom,0px))}
-body.has-bnav .hype{bottom:calc(140px + env(safe-area-inset-bottom,0px))!important}
 
 /* v90: theme picker grid */
 .tm-sheet .tm-row{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 10px;overflow:visible!important;scroll-snap-type:none;padding:4px 2px 4px}
@@ -1213,15 +1205,15 @@ body.has-bnav .hype{bottom:calc(140px + env(safe-area-inset-bottom,0px))!importa
 #apBar.ap3 .ap-brand{font:800 2.3rem/1.1 Poppins,var(--display),system-ui,sans-serif!important;letter-spacing:-.01em;color:var(--ink)!important}
 #apBar.ap3 .ap-nm{font:700 1.2rem/1.2 var(--body)!important;color:color-mix(in srgb,var(--k2,var(--calm)) 80%,#000)!important;white-space:normal}
 #apBar.ap3 .ap-nm.arq{font-family:"Fastaqim Quran","Scheherazade New",serif!important;font-weight:400!important;font-size:2.1rem!important;line-height:1.45!important;-webkit-text-stroke:.45px currentColor}
-body.has-bnav .hd-tools,#enHdr{display:none!important}
+.hd-tools,#qtHdr,#calHdr,#enHdr{display:none!important}
+#apBar.ap3 #apMb{display:inline-flex!important;align-items:center;justify-content:center;width:auto;padding:0 12px;font-size:1.1rem}
+#apBar.ap3 .ap-r #apMb::before{content:'';position:absolute;inset-inline-start:0;top:10px;bottom:10px;width:1px;background:var(--line)}
 #dateLabel span{font-weight:700}
 #dateLabel span:first-child{color:color-mix(in srgb,var(--k2,var(--calm)) 82%,#000)}
 #dateLabel span+span{color:#A8761C}
 body.has-bnav header>.hud{flex:1 1 100%;width:100%;justify-content:flex-start}
 #dashCard .dz-chips{flex-wrap:wrap}
 #dashCard .dz-ch.en svg{width:22px;height:13px;vertical-align:-2px}
-.fab-zk{transition:opacity .2s ease}
-.fab-zk.fab-away{opacity:0;pointer-events:none}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -3204,8 +3196,8 @@ const TRK_T={salah:{name:'Salah',emoji:'🕌',type:'salah',goal:5,per:'day'},qur
   meds:{name:'Medication',emoji:'💊',type:'check',goal:1,per:'day'},fast:{name:'Sunnah fast',emoji:'🌙',type:'check',goal:2,per:'week'}};
 const PRAY=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
 function trkFix(){if(!S.trackers){S.trackers=[Object.assign({id:uid()},TRK_T.salah)]}if(!S.trk)S.trk={}}
-const trkDay=(d)=>{const k=dkey(d);return S.trk[k]=S.trk[k]||{}};
-const trkVal=(t,d)=>{const v=(S.trk[dkey(d)]||{})[t.id];return t.type==='salah'?(v||[0,0,0,0,0]):(v||0)};
+const trkDay=(d)=>{const k=dkey(d);if(!S.trk)S.trk={};return S.trk[k]=S.trk[k]||{}};
+const trkVal=(t,d)=>{const v=((S.trk||{})[dkey(d)]||{})[t.id];return t.type==='salah'?(v||[0,0,0,0,0]):(v||0)};
 const trkNum=(t,d)=>{const v=trkVal(t,d);return t.type==='salah'?v.filter(Boolean).length:v===1||v===true?1:t.type==='yesno'?(v===1?1:0):+v||0};
 function trkWeek(t){const now=new Date(),dow=(now.getDay()+6)%7;let sum=0;for(let i=0;i<=dow;i++){const d=new Date(now);d.setDate(now.getDate()-i);sum+=trkNum(t,d)}return sum}
 const trkMet=(t,d)=>trkNum(t,d)>=(t.type==='check'||t.type==='yesno'?1:t.goal);
@@ -5700,15 +5692,8 @@ function svOpen(){svList();modalCard(`<div class="ah sv2"><p class="ah-t">🔖 $
   const x={id:uid(),u,t:'',note,at:Date.now(),done:0};L.unshift(x);save();$('svU').value='';$('svN').value='';SVV.tab='w';svRender();toast('🔖 '+tl('Saved'));svMeta(x)};
  svList().filter(x=>!x.t&&!x.done).slice(0,8).forEach(x=>svMeta(x))}
 
-/* ---------- small round 📿 button in the corner of every page ---------- */
-function fabZk(){let b=$('fabZk');if(!b){b=document.createElement('button');b.type='button';b.id='fabZk';b.className='fab-zk notranslate';b.onclick=()=>{try{zkOpen()}catch(e){}};document.body.appendChild(b);document.body.classList.add('has-fab')}
- let n=0;try{const o=lzGet();for(const k in o.n)n+=+o.n[k]||0}catch(e){}
- b.setAttribute('aria-label',tl('Dhikr')+(n?' '+n:''));b.innerHTML='<span aria-hidden="true">📿</span>'+(n?`<b>${n>999?'999+':n}</b>`:'');
- const m=$('scrollModal');b.hidden=!!(m&&!m.hidden)}
-{const _mc=modalClose;modalClose=function(){const r=_mc.apply(this,arguments);try{fabZk()}catch(e){}return r}}
-{const _mk=modalCard;modalCard=function(){const r=_mk.apply(this,arguments);try{const b=$('fabZk');if(b)b.hidden=true}catch(e){}return r}}
-{const _lr=langRelabel;langRelabel=function(){const r=_lr.apply(this,arguments);try{fabZk()}catch(e){}return r}}
-setTimeout(()=>{try{fabZk();const m=$('scrollModal');if(m)new MutationObserver(()=>fabZk()).observe(m,{attributes:true,attributeFilter:['hidden']})}catch(e){}},300);
+/* ---------- no floating 📿: the 📿 chip in the top pill (beside 🕌) opens quick dhikr (Tasnim, 17 Nov) ---------- */
+function fabZk(){const b=$('fabZk');if(b)b.remove();document.body.classList.remove('has-fab')}
 
 /* ---------- greeting line under the name: "You can do it!" (Tasnim's pick, 16 Nov) ---------- */
 TX['You can do it!']=Object.assign(TX['You can do it!']||{},{ar:'أنت تقدر!',om:'Ni dandeessa!',so:'Waad kari kartaa!'});
@@ -5724,7 +5709,7 @@ thmMini=function(k,a,b){const t=THK[k]||{},k1=t.k1||'#FF8A3D',k2=t.k2||'#22B39A'
 /* ---------- user page header: one tidy corner cluster (salah · dhikr · stars · language) + centered logo like the first page ---------- */
 function apTop3(){const b=$('apBar');if(!b)return;b.classList.add('ap3');const r=b.querySelector('.ap-r'),pb=$('pinBar');
  if(r&&pb&&pb.parentNode!==r)r.insertBefore(pb,r.firstChild);
- const lg=$('apLang');if(r&&lg&&r.lastElementChild!==lg)r.appendChild(lg);
+ const lg=$('apLang'),mb=$('apMb');if(r&&lg&&lg.nextElementSibling!==mb)r.appendChild(lg);if(r&&mb&&r.lastElementChild!==mb)r.appendChild(mb);
  document.querySelectorAll('#apBar .dec').forEach(d=>b.after(d))}
 {const _at=apTop;apTop=function(){const x=_at.apply(this,arguments);try{apTop3()}catch(e){}return x}}
 {const _pr3=pinRender;pinRender=function(){const x=_pr3.apply(this,arguments);try{apTop3()}catch(e){}return x}}
@@ -5736,8 +5721,11 @@ setTimeout(()=>{try{apTop3()}catch(e){}},400);
   const b=document.createElement('button');b.type='button';b.className='dz-ch en';b.dataset.dz='en';b.setAttribute('aria-label',tl('Energy'));b.innerHTML=(L!=null&&typeof enIcon==='function'?enIcon(L):'⚡');b.onclick=()=>{try{enOpen()}catch(e){}};ch.appendChild(b)}}catch(e){}return x}}
 {const _mc4=modalClose;modalClose=function(){const r=_mc4.apply(this,arguments);try{if(inApp())dashRender()}catch(e){}return r}}
 
-/* ---------- corner 📿 steps aside while the page scrolls, so it never sits on what you're reading ---------- */
-{let _ft=0;addEventListener('scroll',()=>{const f=document.getElementById('fabZk');if(!f)return;f.classList.add('fab-away');clearTimeout(_ft);_ft=setTimeout(()=>f.classList.remove('fab-away'),900)},{passive:true})}
+/* ---------- signed-in accounts: refresh bottom bar + header when the first page hides (it never showed on iPhone) ---------- */
+{const _ls=landingShow;landingShow=function(){const r=_ls.apply(this,arguments);try{bnav()}catch(e){}try{apTop3()}catch(e){}return r}}
+setTimeout(()=>{try{const l=$('landing');if(l)new MutationObserver(()=>{try{bnav();apTop3()}catch(e){}}).observe(l,{attributes:true,attributeFilter:['hidden']});bnav();apTop3()}catch(e){}},200);
+/* account state loaded from the cloud can carry started:false, which hid the bottom bar and the name on iPhone: a signed-in account is always started */
+{const _ci=cloudInit;cloudInit=async function(){S.started=true;const r=await _ci.apply(this,arguments);try{if(!S.started){S.started=true;save()}render();bnav();apTop3()}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
