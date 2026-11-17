@@ -1634,6 +1634,8 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 #wzWs,#wzWe{max-width:138px}
 .fq-bar{position:sticky;top:0;z-index:80;display:flex;align-items:center;gap:8px;margin:0 8px;padding:calc(env(safe-area-inset-top,0px) + 4px) 8px 4px;background:var(--surface);border-radius:0 0 16px 16px;box-shadow:0 2px 10px -6px rgba(0,0,0,.3);font:600 14px Inter,system-ui;color:var(--ink)}
 .fq-bar span{flex:1;text-align:center;color:var(--muted)}.fq-bar button{all:unset;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--ink);cursor:pointer}
+
+.apm-ver{text-align:center;font-size:12px;color:var(--muted,#8a95a1);padding:10px 0 4px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7276,7 +7278,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v113',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v114',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7284,7 +7286,7 @@ setTimeout(()=>{try{if(location.hash&&location.hash.length>1||/[?&]go=/.test(loc
   Object.keys(HUBV).forEach(k=>{if(st.hub&&k in st.hub)HUBV[k]=st.hub[k]});if(st.nowv)document.body.dataset.nowv=st.nowv;if(st.setv&&SETP[st.setv])SETV=st.setv;show(st.tab);setTimeout(()=>{try{scrollTo(0,st.y||0)}catch(e){}},60)}catch(e){}},0);
 async function fqCheckNew(){try{if(location.protocol!=='https:'||inArtifact())return;
   if(dkey()!==FQ_DAY0&&!document.querySelector('#scrollModal:not([hidden])')){fqReload();return}
-  const r=await fetch('sw.js',{cache:'no-store'});if(!r.ok)return;const m=/CACHE="([^"]+)"/.exec(await r.text());if(!m||m[1]===FQ_BUILD)return;
+  const r=await fetch('sw.js?fresh='+Date.now(),{cache:'no-store'});if(!r.ok)return;const m=/CACHE="([^"]+)"/.exec(await r.text());if(!m||m[1]===FQ_BUILD)return;
   if(sessionStorage.getItem('fq.rl')===m[1])return;sessionStorage.setItem('fq.rl',m[1]);
   try{const g=await navigator.serviceWorker.getRegistration();if(g)await g.update()}catch(e){}fqReload()}catch(e){}}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)fqCheckNew()});setTimeout(fqCheckNew,1500);
@@ -7458,6 +7460,10 @@ function fqBar(){if(!FQBAR.on||!fqStandalone()||!inApp()||$('fqBar'))return;cons
   let h;try{h=_ht.apply(this,arguments)}finally{if(keep)keep.hidden=false}
   if(W)h=h.replace(new RegExp('(data-id="'+W.id.replace(/[^\w-]/g,'')+'"[\\s\\S]*?<span class="notranslate" dir="auto">)[^<]*'),'$1'+esc(tl('Cups of water')));
   return h}}
+
+/* v114: version label at the bottom of the menu, so it's easy to see the latest version is there */
+{const _amV=apMenu;apMenu=function(){const r=_amV.apply(this,arguments);try{const p=$('apMenu').querySelector('.apm-p');if(p&&!p.querySelector('.apm-ver')){const d=document.createElement('div');d.className='apm-ver';d.textContent=tl('Version')+' '+FQ_BUILD.replace(/\D+/g,'');p.appendChild(d)}}catch(e){}return r}}
+[["Version","الإصدار","Gosa","Nooca"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
