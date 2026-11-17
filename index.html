@@ -1674,6 +1674,20 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 @media (prefers-color-scheme: dark){:root[data-theme="auto"] .vd-ar,:root[data-theme="auto"] .hm-vd .a{--vdg:#9fe0c4}:root[data-theme="auto"] .qb-dial{border-color:#2a3440}:root[data-theme="auto"] .qb-hub{background:#e8edf2}:root[data-theme="auto"] .qb-idx{border-top-color:#e8edf2}:root[data-theme="auto"] .qb-warn{background:#3a2e10;color:#f5d58a}:root[data-theme="auto"] .qb-warn b{color:#ffe3a3}:root[data-theme="auto"] .qb-meter i:not(.on){background:#2a3440}}
 .vd-b{text-align:start}
 .qb-ch{all:unset;cursor:pointer;color:#15835f;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.rp-sh{display:flex;gap:12px;align-items:flex-start;margin:4px 0 12px;position:relative}
+.rp-th{all:unset;cursor:pointer;flex:none;width:96px;border-radius:12px;overflow:hidden;border:2px solid var(--line,#dfe5ea);line-height:0}.rp-th img{width:100%;display:block}
+.rp-x{all:unset;cursor:pointer;position:absolute;left:84px;top:-8px;width:26px;height:26px;border-radius:50%;background:#1b2430;color:#fff;font-size:12px;display:grid;place-items:center}
+[dir=rtl] .rp-x{left:auto;right:84px}
+.rp-n{display:flex;flex-direction:column;gap:4px;font-size:14px;line-height:1.4;color:var(--muted,#5b6673)}.rp-n b{color:var(--ink)}
+.rp-c{all:unset;cursor:pointer;align-self:flex-start;background:var(--bg,#eef1f4);color:var(--ink);border-radius:99px;padding:7px 12px;font-weight:600;font-size:14px;margin-top:4px}
+#rpText{width:100%;box-sizing:border-box;margin-bottom:10px}
+.rp-dr{position:fixed;inset:0;z-index:300;background:#0b1118;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top,0px) + 12px) 14px calc(env(safe-area-inset-bottom,0px) + 14px);color:#fff;gap:10px}
+.rp-dr p{margin:0;text-align:center;font-weight:600}.rp-cv{flex:1;display:grid;place-items:center;min-height:0}.rp-cv canvas{border-radius:12px;touch-action:none;background:#fff}
+.rp-bt{display:flex;gap:10px}.rp-bt button{flex:1}
+.rp-ban{position:fixed;left:12px;right:12px;top:calc(env(safe-area-inset-top,0px) + 12px);z-index:250;background:#1b2430;color:#fff;border-radius:18px;padding:14px 16px;box-shadow:0 10px 30px #0006;display:flex;flex-direction:column;gap:4px;animation:fqFade .3s ease}
+.rp-ban span{color:#b9c3cc;font-size:14px}.rp-ban div{display:flex;gap:8px;margin-top:8px}.rp-ban button{flex:1}
+@keyframes fqFade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.rp-n{text-align:start}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7316,7 +7330,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v116',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v117',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7620,6 +7634,54 @@ GO.verse=()=>vodOpen();GO.ayah=GO.verse;
   return h+`<button type="button" class="hm-vd" data-hm="vd"><span class="l">📖 ${esc(tl('Verse of the day'))}<small>${esc(v.k)}</small></span><span class="ayq a" dir="rtl" lang="ar">${vodAr(v)}</span><span class="t">${esc(tl('Tap to read the meaning'))} ›</span></button>`}}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="vd"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();vodOpen()},true);
 {const _amV2=apMenu;apMenu=function(){const r=_amV2.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="hisn"]');if(s&&!m.querySelector('[data-am="vd"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='vd';b.textContent='📖 '+tl('Verse of the day');b.onclick=()=>{m.hidden=true;vodOpen()};s.before(b)}}catch(e){}return r}}
+/* v117: Report a problem: picture of the page added for you, circle the problem with your finger, shake the phone to open (style 2) */
+[["Report a problem","الإبلاغ عن مشكلة","Rakkoo gabaasi","Soo sheeg dhibaato"],["What went wrong?","ما المشكلة؟","Maaltu dogoggore?","Maxaa khaldamay?"],["Picture of this page","صورة هذه الصفحة","Suuraa fuula kanaa","Sawirka boggan"],
+ ["Added for you. Tap it to circle the problem.","أُضيفت لك. اضغطها لتحديد المشكلة بدائرة.","Siif dabalameera. Rakkoo marsuuf tuqi.","Waa laguu daray. Taabo si aad u wareegsato dhibaatada."],["Circle it","حدّدها بدائرة","Marsi","Wareegso"],["Undo","تراجع","Deebisi","Ka noqo"],["Done","تم","Xumurame","Dhammaad"],
+ ["Draw around the problem with your finger.","ارسم حول المشكلة بإصبعك.","Quba keetiin rakkoo naannoo kaa'i.","Farta ku wareeji dhibaatada."],["You shook your phone","هززت هاتفك","Bilbila kee sochoofte","Telefoonkaaga ayaad ruxday"],["Report a problem on this page?","هل تريد الإبلاغ عن مشكلة في هذه الصفحة؟","Fuula kana irratti rakkoo gabaasuu barbaaddaa?","Ma rabtaa inaad dhibaato ka sheegto boggan?"],
+ ["Shake to report a problem","هزّ الهاتف للإبلاغ عن مشكلة","Rakkoo gabaasuuf bilbila sochoosi","Rux si aad dhibaato u sheegto"],["Thank you! We'll look at it.","شكرًا! سننظر فيها.","Galatoomi! Ni ilaalla.","Mahadsanid! Waan eegi doonnaa."],["Not now","ليس الآن","Amma miti","Hadda maya"],["Yes","نعم","Eeyyee","Haa"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const RP={shot:null,txt:'',busy:false};
+async function rpCapture(){try{await h2cLoad();const W=innerWidth,H=innerHeight;
+  const c=await html2canvas(document.body,{x:scrollX,y:scrollY,width:W,height:H,windowWidth:W,windowHeight:H,scale:Math.min(2,720/W),useCORS:true,logging:false,backgroundColor:getComputedStyle(document.body).backgroundColor||'#fff',ignoreElements:el=>el.id==='toast'||el.id==='scrollModal'||el.id==='rpBan'||el.id==='apMenu'});
+  let q=.62,u=c.toDataURL('image/jpeg',q);while(u.length>440000&&q>.25){q-=.12;u=c.toDataURL('image/jpeg',q)}return u.length<=590000?u:null}catch(e){return null}}
+async function rpOpen(){if(RP.busy)return;RP.busy=true;try{const m=$('apMenu');if(m)m.hidden=true;if(!$('scrollModal').hidden){$('scrollModal').hidden=true;await new Promise(r=>setTimeout(r,300))}
+  RP.txt='';RP.shot=await rpCapture()}finally{RP.busy=false}rpSheet()}
+function rpSheet(){const signed=!!(AU.sb&&AU.user);
+  modalCard(`<div class="rp"><p class="label">🛠️ ${esc(tl('Report a problem'))}</p>
+   ${RP.shot?`<div class="rp-sh"><button type="button" class="rp-th" id="rpTh" aria-label="${esc(tl('Circle it'))}"><img src="${RP.shot}" alt=""></button><button type="button" class="rp-x" id="rpRm" aria-label="${esc(tl('Remove'))}">✕</button>
+     <div class="rp-n"><b>${esc(tl('Picture of this page'))}</b><span>${esc(tl('Added for you. Tap it to circle the problem.'))}</span><button type="button" class="rp-c" id="rpCi">✏️ ${esc(tl('Circle it'))}</button></div></div>`:''}
+   <form id="rpForm"><textarea id="rpText" rows="3" maxlength="2000" placeholder="${esc(tl('What went wrong?'))}" required dir="auto">${esc(RP.txt)}</textarea>
+   <button class="btn-main" type="submit" style="width:100%">${esc(tl('Send'))}</button></form></div>`);
+  const keep=()=>{const t=$('rpText');if(t)RP.txt=t.value};
+  const rm=$('rpRm');if(rm)rm.onclick=()=>{keep();RP.shot=null;rpSheet()};
+  [$('rpTh'),$('rpCi')].forEach(b=>{if(b)b.onclick=()=>{keep();rpDraw()}});
+  $('rpForm').onsubmit=async e=>{e.preventDefault();const body=$('rpText').value.trim();if(!body)return;if(blockedBad(body)||selfHit(body)){blkWarn(body);return}const btn=e.target.querySelector('[type=submit]');btn.disabled=true;
+    const base={kind:'problem',area:'other',body:body+'\n\n['+(document.title||'')+' · '+(location.hash||'#home')+' · v'+FQ_BUILD.replace(/\D+/g,'')+' · '+innerWidth+'×'+innerHeight+']',lang:LANG};if(RP.shot)base.shot=RP.shot;
+    const ok=signed?await fbInsert({...base,user_id:AU.user.id,email:AU.user.email,name:S.name||''}):await fbInsert({...base,name:'visitor'});
+    if(ok){RP.shot=null;RP.txt='';modalClose();toast('📨 '+tl("Thank you! We'll look at it."))}
+    else{btn.disabled=false;toast(tl("That didn't send. Please try again in a bit."))}}}
+function rpDraw(){if(!RP.shot)return;const ov=document.createElement('div');ov.className='rp-dr';ov.innerHTML=`<p>${esc(tl('Draw around the problem with your finger.'))}</p><div class="rp-cv"><canvas></canvas></div><div class="rp-bt"><button type="button" class="btn-calm" id="rpU">↶ ${esc(tl('Undo'))}</button><button type="button" class="btn-main" id="rpD">${esc(tl('Done'))}</button></div>`;
+  document.body.appendChild(ov);const cv=ov.querySelector('canvas'),img=new Image();let strokes=[],cur=null;
+  img.onload=()=>{const box=ov.querySelector('.rp-cv'),mw=box.clientWidth,mh=box.clientHeight,s=Math.min(mw/img.width,mh/img.height);cv.width=img.width;cv.height=img.height;cv.style.width=img.width*s+'px';cv.style.height=img.height*s+'px';draw()};img.src=RP.shot;
+  const ctx=cv.getContext('2d');const draw=()=>{ctx.drawImage(img,0,0);ctx.strokeStyle='#e5484d';ctx.lineWidth=Math.max(5,img.width/90);ctx.lineCap=ctx.lineJoin='round';strokes.forEach(p=>{ctx.beginPath();p.forEach((q,i)=>i?ctx.lineTo(q[0],q[1]):ctx.moveTo(q[0],q[1]));ctx.stroke()})};
+  const pt=e=>{const r=cv.getBoundingClientRect();return [(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]};
+  cv.addEventListener('pointerdown',e=>{e.preventDefault();cv.setPointerCapture(e.pointerId);cur=[pt(e)];strokes.push(cur);draw()});
+  cv.addEventListener('pointermove',e=>{if(!cur)return;e.preventDefault();cur.push(pt(e));draw()});
+  const up=()=>{cur=null};cv.addEventListener('pointerup',up);cv.addEventListener('pointercancel',up);
+  ov.querySelector('#rpU').onclick=()=>{strokes.pop();draw()};
+  ov.querySelector('#rpD').onclick=()=>{if(strokes.length){let q=.62,u=cv.toDataURL('image/jpeg',q);while(u.length>440000&&q>.25){q-=.12;u=cv.toDataURL('image/jpeg',q)}if(u.length<=590000)RP.shot=u}ov.remove();rpSheet()}}
+/* shake to report: phone motion, asks iPhone permission once on the first tap after it's turned on */
+const RPS={t:[],last:0,on:false};
+function rpShakeOn(){if(RPS.on||S.shakeOff)return;RPS.on=true;addEventListener('devicemotion',e=>{const a=e.accelerationIncludingGravity||e.acceleration;if(!a)return;const m=Math.hypot(a.x||0,a.y||0,a.z||0);const now=Date.now();
+  if(m>24){RPS.t=RPS.t.filter(x=>now-x<900);RPS.t.push(now);if(RPS.t.length>=3&&now-RPS.last>4000&&$('scrollModal').hidden&&!document.querySelector('.rp-dr')){RPS.last=now;RPS.t=[];rpBanner()}}})}
+function rpBanner(){if($('rpBan'))return;try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}const d=document.createElement('div');d.id='rpBan';d.className='rp-ban';
+  d.innerHTML=`<b>📳 ${esc(tl('You shook your phone'))}</b><span>${esc(tl('Report a problem on this page?'))}</span><div><button type="button" class="btn-calm" id="rpNo">${esc(tl('Not now'))}</button><button type="button" class="btn-main" id="rpYes">${esc(tl('Yes'))}</button></div>`;
+  document.body.appendChild(d);const close=()=>d.remove();d.querySelector('#rpNo').onclick=close;d.querySelector('#rpYes').onclick=()=>{close();rpOpen()};setTimeout(()=>{if(d.isConnected)close()},8000)}
+document.addEventListener('click',function once(){document.removeEventListener('click',once,true);if(S.shakeOff)return;
+  try{if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){if(!localStorage.getItem('fq.shakeAsked'))return;DeviceMotionEvent.requestPermission().then(p=>{if(p==='granted')rpShakeOn()}).catch(()=>{})}else rpShakeOn()}catch(e){}},true);
+GO.report=()=>rpOpen();GO.problem=GO.report;
+{const _amR=apMenu;apMenu=function(){const r=_amR.apply(this,arguments);try{const m=$('apMenu'),f=m&&m.querySelector('[data-am="fb"]');if(f&&!m.querySelector('[data-am="rp"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='rp';b.textContent='🛠️ '+tl('Report a problem');
+  b.onclick=()=>{try{if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'&&!S.shakeOff){localStorage.setItem('fq.shakeAsked','1');DeviceMotionEvent.requestPermission().then(p=>{if(p==='granted')rpShakeOn()}).catch(()=>{})}}catch(e){}rpOpen()};f.before(b)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
