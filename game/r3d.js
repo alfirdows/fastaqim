@@ -17,7 +17,9 @@ let envT=null;try{const pm=new T.PMREMGenerator(R);envT=pm.fromScene(new RoomEnv
 let comp=null,bloom=null,useBloom=true;
 function mkComp(){comp=new EffectComposer(R);comp.addPass(new RenderPass(scene,cam));bloom=new UnrealBloomPass(new T.Vector2(256,256),.28,.35,1.05);comp.addPass(bloom);comp.addPass(new OutputPass())}
 try{mkComp()}catch(e){comp=null;useBloom=false}
-function fitCam(){const a=innerWidth/innerHeight,D=5.6,half=2.15;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(46,Math.min(80,f))}
+/* camera views: [height, distance behind, look-at distance ahead, look-at height]; 'high' is the default */
+const VIEWS={classic:[3.3,4.6,-9,.4],high:[5.0,3.6,-5.5,0],top:[7.2,2.2,-4.4,0]};const VW=()=>VIEWS[ST.view]||VIEWS.high;
+function fitCam(){const a=innerWidth/innerHeight,v=VW(),D=Math.hypot(v[0],v[1]),half=ST.view==='classic'?2.15:2.45;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(40,Math.min(80,f));cam.userData.vk=ST.view}
 function rs(){const w=innerWidth,h=innerHeight;R.setPixelRatio(PR);R.setSize(w,h,false);cam.aspect=w/h;fitCam();cam.fov=cam.userData.f0;cam.updateProjectionMatrix();if(comp){comp.setPixelRatio(PR);comp.setSize(w,h)}}
 addEventListener('resize',rs);
 
@@ -345,7 +347,7 @@ function sync(t,noW){const g=G,dt=Math.min(.05,Math.max(0,t-tPrev));tPrev=t;fram
   else{m.position.set(X,0,Z);m.scale.setScalar(fade)}}
  for(const k in POOL)for(const m of POOL[k])if(m.userData.used&&m.userData.f!==frame){m.userData.used=false;m.visible=false;if(m.userData.ob)m.userData.ob._m=null;m.userData.ob=null}
  /* camera */
- const sk=g&&g.shake>0?g.shake:0,camX=cx*.5;cam.position.set(camX+(Math.random()-.5)*sk*.7,3.3+cy*.22+(Math.random()-.5)*sk*.45,4.6);cam.lookAt(camX*.55,.4+cy*.18,-9);
+ if(cam.userData.vk!==ST.view){fitCam();cam.fov=cam.userData.f0;cam.updateProjectionMatrix()}const V=VW(),sk=g&&g.shake>0?g.shake:0,camX=cx*.5;cam.position.set(camX+(Math.random()-.5)*sk*.7,V[0]+cy*.22+(Math.random()-.5)*sk*.45,V[1]);cam.lookAt(camX*.55,V[3]+cy*.18,V[2]);
  const fv=cam.userData.f0+(g&&g.boost>0?7:0)+(g?Math.min(4,(sp-6)*.35):0);if(Math.abs(cam.fov-fv)>.05){cam.fov+=(fv-cam.fov)*Math.min(1,dt*4);cam.updateProjectionMatrix()}
  sun.position.set(cx+6,13,12);sun.target.position.set(cx,0,-4);sky.position.copy(cam.position)}
 

@@ -437,7 +437,7 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 showMenu();
 </script>
 <script src="game/gltf-lib.js?v=1"></script>
-<script src="game/r3d.js?v=5"></script>
+<script src="game/r3d.js?v=6"></script>
 <script>
 /* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
    Credit never expires. Dhikr and To-do runs are never limited. */
@@ -518,5 +518,5 @@ function ruleLine(){try{const go=$('goB');if(go&&!$('ruleL')){const left=Math.ma
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);ruleLine();return r}}ruleLine();
 addEventListener('pagehide',()=>brSet(BR));
 </script>
-<script src="game/fun.js?v=3"></script>
+<script src="game/fun.js?v=4"></script>
 </body></html>
