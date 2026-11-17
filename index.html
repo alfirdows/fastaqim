@@ -1406,6 +1406,76 @@ body.fq-lock #toast,body.fq-lock #hypeBox,body.fq-lock .star-toast{display:none!
 .ex-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.ex-t b{font-size:15px}.ex-t small{font-size:12.5px;color:var(--muted)}
 .ex-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 8px}
 .en-ok{margin-top:8px;font-weight:600;color:var(--calm)}
+/* ===== v101 Home design 1 ===== */
+body.fq-app .wrap > header,body.fq-app .wrap > nav{display:none!important}
+body.fq-homev #apBar{display:none!important}
+body.fq-homev #tab-now > :not(#fqHome):not(#dayCard):not(#nameCard):not(#vrAsk){display:none!important}
+body.fq-app:not(.fq-homev) #fqHome{display:none!important}
+body.fq-app[data-nowv=tools] #tab-now > #dashCard,body.fq-app[data-nowv=tools] #tab-now > #dayCard{display:none!important}
+body.fq-homev>.wrap{padding-top:0!important}
+#fqHome{display:flex;flex-direction:column;gap:14px;margin:0 -24px 14px}
+body.fq-homev #dayCard{margin-inline:-8px}
+.hm-hero{background:linear-gradient(165deg,#0B5040 0%,#11725A 60%,#178466 100%);color:#fff;padding:calc(10px + env(safe-area-inset-top,0px)) 18px 62px;border-radius:0 0 30px 30px;text-align:center;position:relative;overflow:hidden}
+.hm-hero:before{content:"";position:absolute;right:-90px;top:-120px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 65%);pointer-events:none}
+.hm-dt{text-align:end;font:600 12px/1.4 Inter,"IBM Plex Sans Arabic",system-ui;color:rgba(255,255,255,.9);position:relative}.hm-dt .h{color:rgba(255,255,255,.62)}
+.hm-bc{position:relative;margin-top:2px}.hm-brand{font:800 30px/1 Poppins,Inter,system-ui;letter-spacing:-.015em}
+.hm-stead{font:700 14.5px Inter,"IBM Plex Sans Arabic",system-ui;color:#F7D488;margin-top:5px}.hm-stead.ar{font-family:FQ,"KFGQPC Uthmanic Script HAFS",serif;font-size:22px;font-weight:400;line-height:1.3;margin-top:2px}
+.hm-hi{margin-top:10px;position:relative}.hm-hi h1{font:800 22px/1.2 Inter,"IBM Plex Sans Arabic",system-ui;letter-spacing:-.01em;color:#fff;margin:0}.hm-hi p{font:600 14px Inter,"IBM Plex Sans Arabic",system-ui;color:rgba(255,255,255,.88);margin-top:3px}
+.hm-loc{margin-top:14px;background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:14px;padding:10px 14px;font:700 14px Inter,"IBM Plex Sans Arabic",system-ui;min-height:44px}
+.hm-tl{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:14px}
+.hm-ln{position:absolute;inset-inline:8.3%;top:10px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}.hm-ln i{position:absolute;inset-inline-start:0;top:0;bottom:0;border-radius:2px;background:#F7D488}
+.hm-p{display:flex;flex-direction:column;align-items:center;position:relative;background:none;border:0;padding:0;color:#fff;min-height:0;font:inherit}
+.hm-p i{width:22px;height:22px;border-radius:50%;background:#2A8A6E;box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.45)}
+.hm-p.ok i{background:#F7D488 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B5040' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:none}
+.hm-p.ms i{background:#C2563D url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round'%3E%3Cpath d='M7 7l10 10M17 7 7 17'/%3E%3C/svg%3E") center/10px no-repeat;box-shadow:none}
+.hm-p.sr{opacity:.62}.hm-p.sr i{transform:scale(.72);background:#1E7A60}
+.hm-p.cur i{background:#fff;box-shadow:inset 0 0 0 5px #0F9D6E,0 0 0 5px rgba(255,255,255,.25)}.hm-p.cur.ok i{box-shadow:0 0 0 5px rgba(255,255,255,.25)}
+.hm-p.nx i{background:#11725A;box-shadow:inset 0 0 0 3px #F7D488}
+.hm-p small{font:600 10.5px Inter,"IBM Plex Sans Arabic",system-ui;color:rgba(255,255,255,.75);margin-top:6px;white-space:nowrap}.hm-p b{font:700 13.5px Inter,system-ui;margin-top:1px}
+.hm-p.cur small,.hm-p.cur b{color:#fff;font-weight:800}.hm-p.nx small,.hm-p.nx b{color:#F7D488}
+.hm-pills{display:flex;justify-content:center;flex-wrap:wrap;gap:8px;margin-top:10px;position:relative}.hm-pills span{font:800 12.5px/28px Inter,"IBM Plex Sans Arabic",system-ui;border-radius:14px;padding:0 12px}
+.hm-p1{background:#fff;color:#0B5040}.hm-p2{background:rgba(247,212,136,.18);color:#F7D488;box-shadow:inset 0 0 0 1px rgba(247,212,136,.55)}
+.hm-card{background:var(--surface,#fff);border-radius:24px;box-shadow:0 1px 2px rgba(16,24,40,.05),0 12px 28px -16px rgba(16,40,32,.28);margin:0 16px}
+.hm-next{margin-top:-62px;position:relative;padding:16px;display:flex;flex-direction:column;gap:14px}
+.hm-nr{display:flex;align-items:center;gap:14px}.hm-ring{position:relative;width:58px;height:58px;flex:none}.hm-ring .b{fill:none;stroke:#EAF2EE;stroke-width:7}.hm-ring .f{fill:none;stroke:#0F9D6E;stroke-width:7;stroke-linecap:round}
+.hm-ring span{position:absolute;inset:0;display:grid;place-items:center;font:800 14px Inter,system-ui;color:var(--ink)}
+.hm-nt{flex:1;min-width:0}.hm-lab{font:800 11px Inter,"IBM Plex Sans Arabic",system-ui;letter-spacing:.09em;text-transform:uppercase;color:#E07524;margin:0}
+.hm-task{font:700 18px/1.28 Inter,"IBM Plex Sans Arabic",system-ui;letter-spacing:-.01em;margin:3px 0 0;color:var(--ink);overflow-wrap:anywhere}
+.hm-ck{flex:none;width:40px;height:40px;min-height:0;padding:0;border-radius:50%;border:2px solid #C9D5D0;background:transparent;color:#0F9D6E;font:900 18px Inter,system-ui}
+.hm-go{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;border-radius:16px;border:0;background:linear-gradient(180deg,#F79A42,#EA7A22);color:#fff;font:800 16.5px Inter,"IBM Plex Sans Arabic",system-ui;box-shadow:0 10px 20px -10px rgba(234,122,34,.95),inset 0 1px 0 rgba(255,255,255,.3);width:100%}
+.hm-trk{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 16px}
+.hm-c{display:flex;align-items:center;gap:9px;padding:10px;border:0;border-radius:20px;background:var(--surface,#fff);box-shadow:0 1px 2px rgba(16,24,40,.05),0 12px 28px -18px rgba(16,40,32,.3);color:var(--ink);text-align:start;min-height:0;font:inherit}
+.hm-c .ib{position:relative;width:36px;height:36px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:18px}
+.hm-c .ib em{position:absolute;right:-6px;bottom:-6px;width:19px;height:19px;border-radius:50%;background:#0F9D6E;color:#fff;font:800 14px/19px Inter,system-ui;font-style:normal;text-align:center;box-shadow:0 0 0 2px var(--surface,#fff)}
+.hm-c .tx{display:flex;flex-direction:column;min-width:0}.hm-c b{font:800 18px/1.1 Inter,system-ui}.hm-c b small{font:700 12.5px Inter;color:#94A39D}.hm-c .tx span{font:600 11.5px Inter,"IBM Plex Sans Arabic",system-ui;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-apps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px 0;padding:16px 6px 14px}
+.hm-t{display:flex;flex-direction:column;align-items:center;gap:7px;background:none;border:0;padding:0;min-height:0;font:600 12.5px Inter,"IBM Plex Sans Arabic",system-ui;color:var(--ink)}
+.hm-t .sq{display:grid;place-items:center}.hm-t span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 2px}
+.hm-t:active .sq{transform:scale(.96)}
+/* hubs and screen bars */
+.hub-bar,.scr-bar{display:flex;align-items:center;gap:10px;padding:calc(4px + env(safe-area-inset-top,0px)) 0 2px}
+.hub-bar b,.scr-bar b{font:800 22px/1.2 Inter,"IBM Plex Sans Arabic",system-ui;letter-spacing:-.01em}
+.hub-back{width:40px;height:40px;min-height:0;padding:0;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);font:700 26px/1 Inter,system-ui;flex:none}
+[dir=rtl] .hub-back{transform:scaleX(-1)}
+section[data-hub=grid] > :not(.hub-bar):not(.hub-grid){display:none!important}
+section[data-hub=one] > :not(.hub-bar):not(.hub-on){display:none!important}
+body.fq-app #apBar .ap-bw,body.fq-app #apBar.ap3 .ap-bw{display:none!important}
+.hub-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hub-t{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:8px;padding:14px 6px 12px;border:0;border-radius:20px;background:var(--surface,#fff);box-shadow:0 1px 2px rgba(16,24,40,.05),0 10px 24px -16px rgba(16,40,32,.3);color:var(--ink);min-height:104px;font:inherit}
+.hub-i{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;font-size:26px;background:color-mix(in srgb,var(--calm) 10%,var(--surface,#fff))}
+.hub-n{font:700 12.5px/1.25 Inter,"IBM Plex Sans Arabic",system-ui;text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+body.fq-app #hypeBox{display:none!important}
+body.fq-homev.has-bnav>.wrap{padding-top:0!important}
+section[data-hub=one] > .hub-noh h2:first-of-type{display:none}
+.hm-c{flex-wrap:wrap;row-gap:6px;padding:10px 10px 9px}.hm-c .tx{display:contents}.hm-c b{flex:1;min-width:0}.hm-c .tx span{flex-basis:100%;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hm-t span{white-space:normal;line-height:1.2;text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:anywhere;font-size:12px}
+.hm-t span.sm{font-size:10.5px;letter-spacing:-.02em;overflow-wrap:normal}
+body.fq-app .sprint-bar{position:relative;top:auto;left:auto;transform:none;display:block;margin:10px auto 0;font:800 14px/1 Inter,system-ui;padding:9px 16px;box-shadow:0 6px 16px -8px rgba(0,0,0,.35)}
+body.fq-app .sprint-bar[hidden]{display:none}
+#apBar .sprint-bar{flex-basis:100%;order:9}
+.sp-s{display:flex;flex-direction:column;gap:12px;text-align:center}.sp-t{font:800 20px Inter,system-ui;margin:0}
+.sp-n{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sp-n div{background:color-mix(in srgb,var(--accent) 12%,var(--surface,#fff));border-radius:16px;padding:12px 6px;display:flex;flex-direction:column}
+.sp-n b{font:800 26px Inter,system-ui}.sp-n small{font-weight:600;color:var(--muted)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -6389,6 +6459,130 @@ const ENJ={on:false};
   c.hidden=false;c.innerHTML=`<p class="label">⚡ ${tl('Energy')}</p><p style="font-family:var(--display);font-size:1.3rem;font-weight:800">${tl('Energy today?')}</p>${enRow()}<p class="small en-ok">✓ ${esc(typeof enMsg==='function'?enMsg(k):'')}</p>`;
   c.querySelectorAll('[data-en]').forEach(b=>b.onclick=()=>enSet(b.dataset.en))}}catch(e){}return r}}
 {const _sh6=show;show=function(){ENJ.on=false;return _sh6.apply(this,arguments)}}
+
+/* ===== v101: Home design 1 (Clear) + app-style screens ===== */
+const FQIC={"now": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#5797fc 0%,#2F7CF6 55%,#0a64f2 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #0a60e8\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path d=\"M6.6 13.2 4 16.4v3l3.2-1.6z\" fill=\"rgba(255,255,255,.55)\"/><path d=\"M17.4 13.2 20 16.4v3l-3.2-1.6z\" fill=\"rgba(255,255,255,.55)\"/><path d=\"M12 2.2c3.4 2 5.3 5.6 5.3 9.8v4.2L15.6 18H8.4l-1.7-1.8V12c0-4.2 1.9-7.8 5.3-9.8z\" fill=\"#fff\"/><circle cx=\"12\" cy=\"9.6\" r=\"2.1\" fill=\"#2576f6\"/><path d=\"M9.8 19.2h4.4L13 22.3h-2z\" fill=\"#FFD66B\"/></svg></div>", "plan": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#f99155 0%,#F2762E 55%,#e95f0e 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #df5b0e\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect x=\"3\" y=\"4.5\" width=\"18\" height=\"16.5\" rx=\"4\" fill=\"rgba(255,255,255,.55)\"/><path d=\"M3 8.5a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v1.5H3z\" fill=\"#fff\"/><rect x=\"7\" y=\"2.5\" width=\"2.4\" height=\"4.4\" rx=\"1.2\" fill=\"#fff\"/><rect x=\"14.6\" y=\"2.5\" width=\"2.4\" height=\"4.4\" rx=\"1.2\" fill=\"#fff\"/><rect x=\"6.2\" y=\"12.6\" width=\"3.4\" height=\"3\" rx=\"1\" fill=\"#fff\"/><rect x=\"10.3\" y=\"12.6\" width=\"3.4\" height=\"3\" rx=\"1\" fill=\"#fff\"/><rect x=\"14.4\" y=\"12.6\" width=\"3.4\" height=\"3\" rx=\"1\" fill=\"#FFD66B\"/><rect x=\"6.2\" y=\"16.6\" width=\"3.4\" height=\"3\" rx=\"1\" fill=\"#fff\"/><rect x=\"10.3\" y=\"16.6\" width=\"3.4\" height=\"3\" rx=\"1\" fill=\"#fff\"/></svg></div>", "todo": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#11d796 0%,#12A877 55%,#0e835d 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #0d7a56\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect x=\"6\" y=\"2.5\" width=\"15.5\" height=\"15.5\" rx=\"4.2\" fill=\"rgba(255,255,255,.55)\"/><rect x=\"2.5\" y=\"6\" width=\"15.5\" height=\"15.5\" rx=\"4.2\" fill=\"#fff\"/><path d=\"m6.4 13.8 2.7 2.7 5.3-5.6\" fill=\"none\" stroke=\"#119f70\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg></div>", "money": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#fdb81c 0%,#E3A008 55%,#bc8407 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #b27d06\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path d=\"M4.5 7.5 15.8 3a1.6 1.6 0 0 1 2.1 1l1 3.5z\" fill=\"rgba(255,255,255,.55)\"/><rect x=\"2.5\" y=\"7\" width=\"19\" height=\"14\" rx=\"4\" fill=\"#fff\"/><path d=\"M15.5 11.5h6v5h-6a2.5 2.5 0 0 1 0-5z\" fill=\"rgba(255,255,255,.55)\"/><circle cx=\"16.3\" cy=\"14\" r=\"1.3\" fill=\"#d99908\"/></svg></div>", "goals": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#f6717e 0%,#EE4B5B 55%,#ea2639 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #ea1c31\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><circle cx=\"11\" cy=\"13\" r=\"9\" fill=\"#fff\"/><circle cx=\"11\" cy=\"13\" r=\"6\" fill=\"#ed4253\"/><circle cx=\"11\" cy=\"13\" r=\"3.2\" fill=\"#fff\"/><path d=\"M11 13 19.5 4.5\" stroke=\"#FFD66B\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"m18 2.6.6 2.9 2.9.6-2.6 2.2-2.6-.5-.5-2.6z\" fill=\"#FFD66B\"/></svg></div>", "focus": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#8083f1 0%,#5B5FE8 55%,#373ce3 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #2e33e2\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><rect x=\"9.6\" y=\"1.8\" width=\"4.8\" height=\"2.8\" rx=\"1.4\" fill=\"rgba(255,255,255,.55)\"/><path d=\"m17.6 5.2 1.6-1.6 1.6 1.6-1.6 1.6z\" fill=\"rgba(255,255,255,.55)\"/><circle cx=\"12\" cy=\"13.5\" r=\"8.5\" fill=\"#fff\"/><path d=\"M12 13.5V8.6a4.9 4.9 0 1 1-4.3 2.5z\" fill=\"#5256e7\" opacity=\".9\"/><circle cx=\"12\" cy=\"13.5\" r=\"1.4\" fill=\"#fff\"/></svg></div>", "enjoy": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#b772eb 0%,#A24FE0 55%,#902cda 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #8b26d6\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path d=\"M10.5 3.5 12.4 9l5.6 2-5.6 2-1.9 5.6L8.6 13 3 11l5.6-2z\" fill=\"#fff\"/><path d=\"m18 13.5.95 2.55L21.5 17l-2.55.95L18 20.5l-.95-2.55L14.5 17l2.55-.95z\" fill=\"#FFD66B\"/><path d=\"m18.2 2.5.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z\" fill=\"rgba(255,255,255,.55)\"/></svg></div>", "me": "<div class=\"sq\" style=\"width:56px;height:56px;border-radius:17px;background:linear-gradient(155deg,#0cd5d4 0%,#0EA5A4 55%,#0b7f7f 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.08),0 8px 16px -9px #0a7675\"><svg viewBox=\"0 0 24 24\" width=\"30\" height=\"30\" aria-hidden=\"true\"><path d=\"M7 2.5h4l2 6.5H9z\" fill=\"rgba(255,255,255,.55)\"/><path d=\"M17 2.5h-4l-2 6.5h4z\" fill=\"rgba(255,255,255,.55)\"/><circle cx=\"12\" cy=\"14.8\" r=\"7\" fill=\"#fff\"/><path d=\"m12 10.6 1.3 2.7 2.9.4-2.1 2 .5 2.9-2.6-1.4-2.6 1.4.5-2.9-2.1-2 2.9-.4z\" fill=\"#FFD66B\"/></svg></div>"};
+[["Next step","الخطوة التالية","Tarkaanfii itti aanu","Tallaabada xigta"],["Start for 2 minutes","ابدأ لدقيقتين","Daqiiqaa 2f jalqabi","Ku bilow 2 daqiiqo"],["Streak","أيام متتالية","Walitti fufiinsa","Isku xigxig"],
+ ["What's one small thing for today?","ما الشيء الصغير الواحد لليوم؟","Har'aaf wanti xiqqaan tokko maali?","Waa maxay hal shay oo yar oo maanta ah?"],["+ Add a to-do","+ أضف مهمة","+ Hojii dabali","+ Ku dar hawl"],
+ ["Set my city for salah times","حدّد مدينتي لمواقيت الصلاة","Yeroo salaataaf magaalaa koo filadhu","Dooro magaaladayda waqtiyada salaadda"],["Back","رجوع","Deebi'i","Dib u noqo"],["Sunrise","الشروق","Ba'a aduu","Qorrax ka soo bax"],
+ ["Did it","تمّ","Hojjedheera","Waan sameeyay"],["Now","الآن","Amma","Hadda"],["Me","أنا","Ana","Aniga"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const HM_IN={en:(p,t)=>`${p} in ${t}`,ar:(p,t)=>`${p} بعد ${t}`,om:(p,t)=>`${p} ${t} booda`,so:(p,t)=>`${p} ${t} kadib`};
+const HMK=[['now','now'],['plan','plan'],['todo','today'],['money','money'],['goals','goals'],['focus','focus'],['enjoy','enjoy'],['me','wins']];
+const HUBV={now:null,wins:null};
+function fqApp(){return typeof inApp==='function'&&inApp()&&document.body.classList.contains('has-bnav')}
+function hmClock(ms){ms=Math.max(0,ms);const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')}
+function hmTabName(k){const n={now:'Now',plan:'Plan',today:'To-do',money:'Money',goals:'Goals',focus:'Focus',enjoy:'Enjoy',wins:'Me'}[k]||k;try{const b=document.querySelector(`nav [data-tab="${k}"]`);if(b){const i=b.querySelector('.ni');const t=(i?b.textContent.replace(i.textContent,''):b.textContent).trim();if(t)return t}}catch(e){}return tl(n)}
+function hmSal(){let P=null;try{P=salahFor(new Date())}catch(e){}
+  if(!P)return `<button type="button" class="hm-loc" data-hm="loc">🕌 ${esc(tl('Set my city for salah times'))}</button>`;
+  const now=new Date(),q=(typeof salQ==='function'?salQ():{})||{},K=['fajr','sunrise','dhuhr','asr','maghrib','isha'],N=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+  let cur=-1,nx=-1;K.forEach((k,i)=>{if(k==='sunrise')return;if(P[k]&&P[k]<=now)cur=i});K.forEach((k,i)=>{if(nx<0&&k!=='sunrise'&&P[k]&&P[k]>now)nx=i});
+  if(P.sunrise&&now>=P.sunrise&&(!P.dhuhr||now<P.dhuhr))cur=-1;
+  const pi=i=>i>1?i-1:i; /* index in the 5 prayers */
+  const cells=K.map((k,i)=>{const sr=k==='sunrise',m=sr?null:q[pi(i)],cls=[sr?'sr':'',m==='on'||m==='late'?'ok':'',m==='miss'?'ms':'',i===cur?'cur':'',i===nx?'nx':''].join(' ');
+    return `<${sr?'div':'button type="button" data-dz="sal" data-i="'+pi(i)+'"'} class="hm-p ${cls}"><i></i><small>${esc(tl(N[i]))}</small><b dir="ltr">${P[k]?hmShort(P[k]):''}</b></${sr?'div':'button'}>`}).join('');
+  const lastDone=Math.max(cur,0),fill=cur<0&&nx>0?(nx-1)/5:Math.max(0,lastDone)/5;
+  const p1=cur>=0?`<span class="hm-p1" data-hmt="up" data-t="${P[K[cur]].getTime()}">${esc(tl(N[cur]))} · <b dir="ltr">${hmClock(now-P[K[cur]])}</b></span>`:'';
+  let nxT=nx>=0?P[K[nx]]:null,nxN=nx>=0?N[nx]:'Fajr';if(!nxT){try{const d=new Date();d.setDate(d.getDate()+1);const P2=salahFor(d);nxT=P2&&P2.fajr}catch(e){}}
+  const p2=nxT?`<span class="hm-p2" data-hmt="down" data-t="${nxT.getTime()}" data-n="${esc(tl(nxN))}">${(HM_IN[LANG]||HM_IN.en)(esc(tl(nxN)),`<b dir="ltr">${hmClock(nxT-now)}</b>`)}</span>`:'';
+  return `<div class="hm-tl"><span class="hm-ln"><i style="width:${Math.round(fill*100)}%"></i></span>${cells}</div><div class="hm-pills">${p1}${p2}</div>`}
+function hmTick(){const h=$('fqHome');if(!h||h.offsetParent===null)return;const now=Date.now();let re=false;
+  h.querySelectorAll('[data-hmt]').forEach(el=>{const t=+el.dataset.t,b=el.querySelector('b');if(!b)return;if(el.dataset.hmt==='up')b.textContent=hmClock(now-t);else{if(t<=now)re=true;b.textContent=hmClock(t-now)}});if(re)hmRender()}
+setInterval(hmTick,1000);
+function hmRender(){try{const sec=$('tab-now');if(!sec)return;let h=$('fqHome');if(!h){h=document.createElement('div');h.id='fqHome';sec.prepend(h)}const spb=$('sprintBar');if(spb&&h.contains(spb))document.body.appendChild(spb);
+  const d=new Date(),hr=d.getHours(),g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening',nm=(S.name||'').trim();
+  const ay=(typeof AYAH!=='undefined'&&(AYAH[LANG]||AYAH.en))||[0,0,0,'Be steadfast'],stead=LANG==='ar'?'فَاسْتَقِمْ كَمَا أُمِرْتَ':ay[3];
+  let gd='';try{gd=new Intl.DateTimeFormat(LOC(),{weekday:'short',day:'numeric',month:'short',year:'numeric'}).format(d)}catch(e){gd=d.toDateString()}
+  const hj=typeof hijri==='function'?hijri(d):'';
+  const t=current(),s=t&&nextStep(t),txt=s?s.text:t?t.title:'',p=Math.max(0,Math.min(100,Math.round(todayPct()))),r=27,C=2*Math.PI*r;
+  const day=trkDay(),wT=dzTrk('water'),qT=dzTrk('quran'),wv=wT?+day[wT.id]||0:0,qv=qT?+day[qT.id]||0:0,wg=wT?wT.goal:8,qg=qT?qT.goal:2,st=typeof streak==='function'?streak():0;
+  h.innerHTML=`<div class="hm-hero"><div class="hm-dt"><div>${esc(gd)}</div><div class="h">${esc(hj)}</div></div>
+   <div class="hm-bc"><div class="hm-brand notranslate">Fastaqim</div><div class="hm-stead${LANG==='ar'?' ar':''}">${esc(stead)}</div></div>
+   <div class="hm-hi"><h1 dir="auto">${esc(tl(g))}${nm?(LANG==='ar'?'، ':', ')+esc(nm):''}</h1><p>${esc(tl('Small step? Still a win!'))}</p></div>${hmSal()}</div>
+   <div class="hm-card hm-next"><div class="hm-nr"><div class="hm-ring"><svg viewBox="0 0 64 64" width="58" height="58"><circle cx="32" cy="32" r="${r}" class="b"/>${p?`<circle cx="32" cy="32" r="${r}" class="f" stroke-dasharray="${(C*p/100).toFixed(1)} 400" transform="rotate(-90 32 32)"/>`:''}</svg><span>${p}%</span></div>
+     <div class="hm-nt"><p class="hm-lab">${esc(tl('Next step'))}</p><p class="hm-task notranslate" dir="auto">${t?esc(txt):esc(tl("What's one small thing for today?"))}</p></div>${t?`<button type="button" class="hm-ck" data-hm="did" aria-label="${esc(tl('Did it'))}">✓</button>`:''}</div>
+     ${t?`<button type="button" class="hm-go" data-hm="go"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5.2 19 12 8 18.8z"/></svg>${esc(tl('Start for 2 minutes'))}</button>`:`<button type="button" class="hm-go" data-hm="add">${esc(tl('+ Add a to-do'))}</button>`}</div>
+   <div class="hm-trk"><button type="button" class="hm-c" data-hm="w"><span class="ib" style="background:#DCEAFF">💧<em>+</em></span><span class="tx"><b>${wv}<small>/${wg}</small></b><span>${esc(tl('Water'))}</span></span></button>
+     <button type="button" class="hm-c" data-hm="q"><span class="ib" style="background:#D6F1E4">📖<em>+</em></span><span class="tx"><b>${qv}<small>/${qg}</small></b><span>${esc(tl('Quran'))}</span></span></button>
+     <button type="button" class="hm-c" data-hm="st"><span class="ib" style="background:#FFF0E3">🔥</span><span class="tx"><b>${st}</b><span>${esc(tl('Streak'))}</span></span></button></div>
+   <div class="hm-card hm-apps">${HMK.map(([ic,tab])=>`<button type="button" class="hm-t" data-hmtab="${tab}">${FQIC[ic]}<span${hmTabName(tab).length>11?' class="sm"':''}>${esc(hmTabName(tab))}</span></button>`).join('')}</div>`;
+  h.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{const k=b.dataset.hm;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
+    if(k==='go'){try{kickCurrent(2)}catch(e){}}else if(k==='add'){show('today');setTimeout(()=>{const i=$('dumpInput');if(i)i.focus()},300)}
+    else if(k==='did'){const tt=current(),ss=tt&&nextStep(tt);if(ss)completeStep(tt,ss);else if(tt)finishTask(tt);save();render()}
+    else if(k==='loc'){try{salPop()}catch(e){}}else if(k==='st')show('wins');
+    else if(k==='w'||k==='q'){const T=dzTrkMake(k==='w'?'water':'quran'),gg=T.goal,n=+trkDay()[T.id]||0;trkSet(T,n>=gg?0:n+1);if(n+1>=gg&&n<gg)try{star(1,(k==='w'?'💧 ':'📖 ')+tl(k==='w'?'Water':'Quran'),'hm-'+k+dkey())}catch(e){}hmRender()}});
+  h.querySelectorAll('[data-hmtab]').forEach(b=>b.onclick=()=>{const k=b.dataset.hmtab;if(k==='now'){HUBV.now=null;document.body.dataset.nowv='tools';show('now');hubRender('now');scrollTo(0,0)}else{if(k==='wins')HUBV.wins=null;show(k)}});try{spPlace()}catch(e){}}catch(e){console.error('hm',e)}}
+/* hubs: a screen with icons; each icon opens one feature on its own screen */
+[["Settings","الإعدادات","Qindaa'ina","Dejinta"],["Reminder","تذكرة","Yaadachiisa","Xusuusin"],["Home Screen","الشاشة الرئيسية","Home Screen","Shaashadda hore"],["Up next","التالي","Kan itti aanu","Kan xiga"],["My goal","هدفي","Kaayyoo koo","Hadafkayga"],["Sort my list","رتّب قائمتي","Tarree koo qindeessi","Habee liiskayga"],["Stuck?","متعثّر؟","Gufatteettaa?","Ma xayirantahay?"],["Owner","المالك","Abbaa qabeenyaa","Milkiilaha"],["How stars work","كيف تعمل النجوم","Urjiileen akkamitti hojjetu","Sida xiddiguhu u shaqeeyaan"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+TX['Streak']=Object.assign(TX['Streak']||{},{ar:'مواظبة'});
+const HUBN={planNowCard:['🗓️','Up next'],goalCard:['🏁','My goal'],sortCard:['✨','Sort my list'],stuckCard:['🧩','Stuck?'],whyCard:['📜','Reminder'],instCard:['📲','Home Screen'],admBox:['🛡️','Owner'],sqCard:['🕌','Salah']};
+function hubCards(k){const sec=$(k==='now'?'tab-now':'tab-'+k);if(!sec)return[];const skip=['fqHome','dashCard','dayCard','nowCard','nameCard','vrAsk','vrMe','acctBox','hubBar'];
+  const kids=[...sec.children].filter(c=>!c.classList.contains('hub-bar')&&!c.classList.contains('hub-grid'));const hi=k==='wins'?kids.findIndex(c=>c.id==='histCard'):-1;
+  const out=[],set=[];
+  kids.forEach((c,i)=>{if(hi>=0&&i>hi&&c.id!=='admBox'){set.push(c);return}
+    if(!c.classList.contains('card')||skip.includes(c.id)||c.hidden||!c.textContent.trim())return;if(!c.dataset.hid)c.dataset.hid=c.id||('h'+k+i);
+    const h2=c.querySelector('h2'),lb=c.querySelector('.label,.sq-h,.st-sub');let ic=(c.querySelector('h2 .h2i')||{}).textContent||'';let t='';
+    if(h2){t=[...h2.childNodes].filter(n=>!(n.classList&&(n.classList.contains('h2i')||n.classList.contains('qbtn')))).map(n=>n.textContent).join('').trim()}else if(c.id==='stBox'){ic='⭐';t=tl('Stars')}else if(lb){t=lb.textContent.trim()}
+    if(!ic){const m=t.match(/^(\p{Extended_Pictographic}️?)\s*/u);if(m){ic=m[1];t=t.slice(m[0].length)}}
+    t=t.split(' · ')[0].replace(/\s*\?$/,'').trim();
+    if(/how stars|stars work|النجوم|urjii|xiddig/i.test(t)&&h2&&!h2.querySelector('.h2i')){ic='ℹ️';t=tl('How stars work')}
+    if(c.classList.contains('st-box')){ic='⭐';t=tl('Stars')}
+    if(/showing up|مستمر|fufiinsaan|sii joogtaa/i.test(t))t=tl('Streak');
+    const o=HUBN[c.id];if(o){ic=o[0];t=tl(o[1])}
+    if(t)out.push({c:[c],id:c.dataset.hid,ic:ic||'•',t})});
+  const acct=$('acctBox');if(k==='wins'){const sc=[acct,...set].filter(x=>x&&x.textContent.trim());if(sc.length)out.push({c:sc,id:'set',ic:'⚙️',t:tl('Settings')})}
+  return out}
+function hubRender(k){try{const sec=$(k==='now'?'tab-now':'tab-'+k);if(!sec)return;const on=fqApp()&&(k!=='now'||document.body.dataset.nowv==='tools');
+  let bar=sec.querySelector(':scope > .hub-bar'),grid=sec.querySelector(':scope > .hub-grid');
+  if(!on){sec.removeAttribute('data-hub');if(bar)bar.remove();if(grid)grid.remove();sec.querySelectorAll(':scope > .hub-on').forEach(c=>c.classList.remove('hub-on'));return}
+  const L=hubCards(k),sel=HUBV[k]&&L.find(x=>x.id===HUBV[k]);
+  if(!bar){bar=document.createElement('div');bar.className='hub-bar';sec.prepend(bar)}
+  const title=k==='now'?'🚀 '+hmTabName('now'):'🏆 '+hmTabName('wins');
+  bar.innerHTML=`<button type="button" class="hub-back" aria-label="${esc(tl('Back'))}">‹</button><b dir="auto">${sel?esc(sel.ic+' '+sel.t):esc(title)}</b>`;
+  bar.querySelector('.hub-back').onclick=()=>{if(sel){HUBV[k]=null;hubRender(k);scrollTo(0,0)}else goHome()};
+  sec.querySelectorAll(':scope > .hub-on').forEach(c=>c.classList.remove('hub-on','hub-noh'));
+  if(sel){sec.dataset.hub='one';sel.c.forEach(c=>c.classList.add('hub-on'));if(sel.c.length===1){const h2=sel.c[0].querySelector('h2');if(h2&&h2.querySelector('.qbtn'))bar.querySelector('b').textContent='';else sel.c[0].classList.add('hub-noh')}if(grid)grid.hidden=true;return}
+  sec.dataset.hub='grid';if(!grid){grid=document.createElement('div');grid.className='hub-grid'}if(grid.previousElementSibling!==bar)bar.after(grid);grid.hidden=false;
+  grid.innerHTML=L.map(x=>`<button type="button" class="hub-t" data-hub="${esc(x.id)}"><span class="hub-i">${x.ic}</span><span class="hub-n" dir="auto">${esc(x.t)}</span></button>`).join('');
+  grid.querySelectorAll('[data-hub]').forEach(b=>b.onclick=()=>{HUBV[k]=b.dataset.hub;hubRender(k);scrollTo(0,0)})}catch(e){console.error('hub',e)}}
+function scrBar(k){const sec=$('tab-'+k);if(!sec||k==='now'||k==='wins')return;let b=sec.querySelector(':scope > .scr-bar');if(!fqApp()){if(b)b.remove();return}
+  if(!b){b=document.createElement('div');b.className='scr-bar';sec.prepend(b)}b.innerHTML=`<button type="button" class="hub-back" aria-label="${esc(tl('Back'))}">‹</button><b>${esc(hmTabName(k))}</b>`;b.querySelector('button').onclick=goHome}
+function appSync(){const app=fqApp(),tab=document.body.dataset.tab||'now';document.body.classList.toggle('fq-app',app);
+  if(tab!=='now')delete document.body.dataset.nowv;document.body.classList.toggle('fq-homev',app&&tab==='now'&&document.body.dataset.nowv!=='tools');
+  if(app&&tab==='now'){hmRender();hubRender('now')}if(app&&tab==='wins')hubRender('wins');if(app)scrBar(tab)}
+{const _sh7=show;show=function(k){if(k!=='now')delete document.body.dataset.nowv;const r=_sh7.apply(this,arguments);try{appSync()}catch(e){}return r}}
+{const _rd3=render;render=function(){const r=_rd3.apply(this,arguments);try{appSync()}catch(e){}return r}}
+goHome=function(){try{const m=$('scrollModal');if(m&&!m.hidden)m.hidden=true;const a=$('apMenu');if(a)a.hidden=true}catch(e){}delete document.body.dataset.nowv;HUBV.now=null;show('now');scrollTo({top:0})};
+/* deep links into a hub open that one feature */
+goCard=function(tab,id,pick){if(tab==='wins'&&fqApp()){const c=$(id);if(c){HUBV.wins=c.dataset.hid||c.id;c.dataset.hid=HUBV.wins}}show(tab);setTimeout(()=>{const c=(pick&&pick())||$(id);if(c){c.scrollIntoView({block:'start',behavior:'smooth'});c.classList.add('go-hl');setTimeout(()=>c.classList.remove('go-hl'),1600)}},250)};
+setTimeout(appSync,300);
+/* sprint chip: tap opens a clear sheet; in the app it sits in the page, never floating over content */
+[["Sprint","سباق","Fiigicha","Orod"],["steps done","خطوات تمّت","tarkaanfiiwwan xumuraman","tallaabooyin la dhammeeyay"],["left","متبقّي","hafe","haray"],
+ ["Finish 3 steps before time runs out and your stars double.","أنهِ 3 خطوات قبل انتهاء الوقت لتتضاعف نجومك.","Osoo yeroon hin dhumin tarkaanfii 3 xumuri, urjiileen kee dachaa ta'u.","Dhammee 3 tallaabo ka hor inta waqtigu dhammaan, xiddigahaaguna way labanlaabmayaan."],
+ ["Go to my next step","اذهب إلى خطوتي التالية","Gara tarkaanfii koo itti aanutti deemi","U gudub tallaabadayda xigta"],["Stop sprint","أوقف السباق","Fiigicha dhaabi","Jooji orodka"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function spSheet(){const s=S.sprint;if(!s){$('sprintBar').hidden=true;return}const got=Math.min(3,s.n||0),left=Math.max(0,s.end-Date.now());
+  modalCard(`<div class="sp-s"><p class="sp-t">⚡ ${esc(tl('Sprint'))}</p><div class="sp-n"><div><b>${got}/3</b><small>${esc(tl('steps done'))}</small></div><div><b dir="ltr" id="spL">${hmClock(left)}</b><small>${esc(tl('left'))}</small></div></div>
+   <p class="small muted">${esc(tl('Finish 3 steps before time runs out and your stars double.'))}</p>
+   <button type="button" class="btn-main" id="spGo">▶ ${esc(tl('Go to my next step'))}</button><button type="button" class="btn-ghost" id="spX">${esc(tl('Stop sprint'))}</button></div>`);
+  const iv=setInterval(()=>{const l=$('spL');if(!l||!S.sprint){clearInterval(iv);return}l.textContent=hmClock(S.sprint.end-Date.now())},1000);
+  $('spGo').onclick=()=>{modalClose();goHome()};$('spX').onclick=()=>{S.sprint=null;save();sprintTick();modalClose();toast(tl('Stop sprint')+' ✓')}}
+{const sb=$('sprintBar');if(sb)sb.onclick=spSheet}
+function spPlace(){const b=$('sprintBar');if(!b)return;b.onclick=spSheet;if(!fqApp()){if(b.parentElement!==document.body)document.body.appendChild(b);return}
+  const home=document.body.classList.contains('fq-homev'),hero=document.querySelector('#fqHome .hm-hero'),ap=$('apBar');
+  const tgt=home&&hero?hero:ap;if(tgt&&b.parentElement!==tgt)tgt.appendChild(b)}
+{const _as=appSync;appSync=function(){_as.apply(this,arguments);try{spPlace()}catch(e){}}}
+/* sprint counts real steps (not stars) */
+{const _cs=completeStep;completeStep=function(t,s){const was=s&&s.done,r=_cs.apply(this,arguments);try{if(S.sprint&&s&&!was&&s.done){S.sprint.n=(S.sprint.n||0)+1;save()}}catch(e){}return r}}
+{const _ft=finishTask;finishTask=function(t){const r=_ft.apply(this,arguments);try{if(S.sprint&&!(t.steps||[]).length){S.sprint.n=(S.sprint.n||0)+1;save()}}catch(e){}return r}}
+sprintTick=function(){clearInterval(SP.t);const b=$('sprintBar');if(!S.sprint){b&&(b.hidden=true);return}
+  const run=()=>{const s=S.sprint,bb=$('sprintBar');if(!s){clearInterval(SP.t);bb&&(bb.hidden=true);return}const left=s.end-Date.now(),got=s.n||0;
+    if(got>=3){const bonus=Math.max(3,S.earned-s.base);S.sprint=null;award(bonus,'Sprint done');confetti();toast(tl('Sprint done! Double stars.'));bb&&(bb.hidden=true);clearInterval(SP.t);save();return}
+    if(left<=0){S.sprint=null;save();bb&&(bb.hidden=true);clearInterval(SP.t);return}
+    if(bb){bb.hidden=false;bb.innerHTML=`⚡ <b>${got}/3</b> · <span dir="ltr">${hmClock(left)}</span>`}};
+  run();SP.t=setInterval(run,1000)};
+setTimeout(()=>{try{sprintTick()}catch(e){}},500);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);

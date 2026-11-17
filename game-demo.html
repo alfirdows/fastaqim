@@ -7,7 +7,7 @@
 [hidden]{display:none!important}
 html,body{margin:0;height:100%;overflow:hidden;background:#0f172a;font-family:Inter,"IBM Plex Sans Arabic",system-ui,-apple-system,sans-serif;color:#0f172a;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none}
 #cv{position:fixed;inset:0;width:100%;height:100%;display:block}
-.bar{position:fixed;top:0;left:0;right:0;padding:calc(env(safe-area-inset-top) + 8px) 10px 0;display:flex;align-items:center;gap:6px;z-index:5;pointer-events:none;direction:ltr}
+.bar{position:fixed;top:0;left:0;right:0;padding:calc(env(safe-area-inset-top) + 8px) 10px 0;display:flex;align-items:center;gap:6px;z-index:12;pointer-events:none;direction:ltr}
 .bar>*{pointer-events:auto}
 .pill{background:rgba(15,23,42,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:99px;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font:800 15px Inter,system-ui;text-decoration:none;white-space:nowrap}
 button.pill{cursor:pointer}
@@ -118,7 +118,7 @@ function queue(item){if(!US||isGuest)return;try{const cur=JSON.parse(localStorag
 function zkAdd(i,n){const k=DZI[i];if(k==null||!n)return;try{const d=new Date(),key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');let o=JSON.parse(localStorage.getItem('fastaqim.zk')||'{}');if(o.d!==key||o.v!==2)o={d:key,i:o.i||0,n:{},v:2};o.n[k]=(o.n[k]||0)+n;localStorage.setItem('fastaqim.zk',JSON.stringify(o))}catch(e){}}
 const kidStyle=US&&US.kid&&US.kid.on?(US.kid.g==='g'?'blos':'toy'):null;
 /* ---------- settings ---------- */
-const ST=(()=>{let o={};try{o=JSON.parse(localStorage.getItem('fastaqim.game')||'{}')}catch(e){}if(!o.sndV2){o.sndV2=1;o.snd=false}return Object.assign({mode:'dhikr',dz:0,tgt:33,world:kidStyle||'gold',snd:false,best:0},o)})();
+const ST=(()=>{let o={};try{o=JSON.parse(localStorage.getItem('fastaqim.game')||'{}')}catch(e){}if(!o.sndV2){o.sndV2=1;o.snd=false}return Object.assign({mode:'dhikr',dz:0,tgt:33,world:kidStyle||'gold',snd:false,best:0,spd:'normal'},o)})();
 const stSave=()=>{try{localStorage.setItem('fastaqim.game',JSON.stringify(ST))}catch(e){}};
 /* ---------- sound: water-drop plip, air whoosh, soft bump (no music, no voices) ---------- */
 const SFX={c:null,ctx(){if(!this.c)try{this.c=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}return this.c},
@@ -146,7 +146,8 @@ const clouds=[...Array(6)].map(()=>({x:Math.random(),y:rnd(.04,.2),w:rnd(.14,.28
 const farB=[...Array(16)].map((_,i)=>({x:i/15+rnd(-.02,.02),w:rnd(.04,.08),h:rnd(.3,1),k:Math.random()}));
 function newRun(){const m=ST.mode;
  G={mode:m,dist:0,speed:m==='dhikr'?6.5:7,maxS:m==='free'?17:m==='dhikr'?10:14,lane:1,x:0,y:0,vy:0,duck:0,hearts:3,inv:0,coins:0,score:0,combo:0,bumps:0,objs:[],next:12,parts:[],fl:[],shake:0,
-  mag:0,shield:0,dbl:0,boost:0,cd:2.4,t:0,count:0,target:m==='dhikr'?ST.tgt:0,finishZ:null,won:false,gates:[],gi:0,steps:[],stepDone:0,task:null,pwNext:60};
+  mag:0,shield:0,dbl:0,boost:0,cd:2.4,t:0,count:0,target:m==='dhikr'?ST.tgt:0,finishZ:null,won:false,gates:[],gi:0,steps:[],stepDone:0,task:null,pwNext:60,bnNext:30};
+ {const f={slow:.75,normal:1,fast:1.3}[ST.spd]||1;G.f=f;G.speed*=f;G.maxS*=f}
  if(m==='task'){const t=G.taskSrc;}
 }
 /* ---------- track builder ---------- */
@@ -162,6 +163,7 @@ function build(){const g=G;
   else if(r<.76){const ln=pick([0,1,2]);g.objs.push({k:'high',ln,z});coinLine(ln,z-2,4,false)}
   else{const bl=[0,1,2].filter(v=>v!==free);(Math.random()<.5?bl.slice(0,1):bl).forEach(b=>g.objs.push({k:'block',ln:b,z}));coinLine(free,z-3,5,false)}
   coinLine(free,z+2,dk?4:5,false);
+  if(z>g.bnNext&&Math.random()<.5){g.objs.push({k:Math.random()<.35?'gem':'star5',ln:free,z:z+3.5,h:Math.random()<.4?1.2:.3});g.bnNext=z+rnd(18,34)}
   if(z>g.pwNext){g.objs.push({k:pick(['mag','shield','x2','boost']),ln:free,z:z+5,h:.7});g.pwNext=z+rnd(70,110)}
   g.next=z+rnd(9,13)*(g.speed<9?1.15:1)}
 }
@@ -178,7 +180,7 @@ function duck(){if(G.cd>0)return;if(G.y>.05)G.vy=-18;G.duck=.75;SFX.duck();vib(8
 /* ---------- update ---------- */
 function step(dt){const g=G;g.t+=dt;
  if(g.cd>0){g.cd-=dt;if(g.cd<=0)toast(tl('go'));return}
- const sp=g.speed*(g.boost>0?1.6:1);g.speed=Math.min(g.maxS,g.speed+.11*dt);g.dist+=sp*dt;
+ const sp=g.speed*(g.boost>0?1.6:1);g.speed=Math.min(g.maxS+Math.min(9*g.f,g.dist/200),g.speed+.12*dt*g.f);g.dist+=sp*dt;
  g.x+=([-1,0,1][g.lane]-g.x)*Math.min(1,dt*14);
  if(g.y>0||g.vy>0){g.vy-=30*dt;g.y=Math.max(0,g.y+g.vy*dt);if(g.y===0)g.vy=0}
  g.duck=Math.max(0,g.duck-dt);g.inv=Math.max(0,g.inv-dt);g.mag=Math.max(0,g.mag-dt);g.dbl=Math.max(0,g.dbl-dt);g.boost=Math.max(0,g.boost-dt);g.shake=Math.max(0,g.shake-dt);
@@ -190,6 +192,7 @@ function step(dt){const g=G;g.t+=dt;
   if(ob.k==='finish'){if(d<.2){ob.hit=true;finish()}continue}
   if(ob.ln!==near)continue;
   if(ob.k==='coin'){if(Math.abs(g.y-(ob.h||0))>1.3)continue;ob.got=true;coin(ob)}
+  else if(ob.k==='gem'||ob.k==='star5'){if(Math.abs(g.y-(ob.h||0))>1.4)continue;ob.got=true;bonus(ob)}
   else if(['mag','shield','x2','boost'].includes(ob.k)){ob.got=true;power(ob.k)}
   else if(g.inv>0||g.boost>0)continue;
   else if(ob.k==='low'&&g.y<.8){ob.hit=true;hurt()}
@@ -206,6 +209,7 @@ function coin(ob){const g=G,v=g.dbl>0?2:1;g.coins+=v;g.combo++;SFX.plip();vib(5)
  if(g.mode==='dhikr'&&g.count<g.target){g.count=Math.min(g.target,g.count+1);g.fl=g.fl.filter(f=>!f.ar);floatT(DZ[ST.dz].ar,p.x,p.y-30,'#fff',true)}
  else{g.fl=g.fl.filter(f=>f.ar||f.life<.5);floatT('+'+v,p.x,p.y-10,'#fde047')}
  if(g.combo>0&&g.combo%25===0)toast(g.combo+' '+tl('combo'))}
+function bonus(ob){const g=G,v=(ob.k==='gem'?5:3)*(g.dbl>0?2:1);g.coins+=v;SFX.power();vib([8,20,8]);const p=P(ob.ln-1,0,(ob.h||0)+.5);burst(p.x,p.y,ob.k==='gem'?'#67e8f9':'#fde047',14);g.fl=g.fl.filter(f=>f.ar||f.life<.5);floatT('+'+v,p.x,p.y-10,ob.k==='gem'?'#a5f3fc':'#fde047')}
 function power(k){const g=G;SFX.power();vib([10,30,10]);if(k==='mag')g.mag=9;if(k==='shield')g.shield=1;if(k==='x2')g.dbl=10;if(k==='boost'){g.boost=3.2;g.inv=3.4}
  toast({mag:'🧲 ',shield:'🛡️ ',x2:'×2 ',boost:'⚡ '}[k]+tl({mag:'magnet',shield:'shield',x2:'x2',boost:'boost'}[k]))}
 function hurt(){const g=G;g.combo=0;if(g.shield){g.shield=0;g.inv=1;SFX.power();const p=P(g.x,0,1);burst(p.x,p.y,'#7cc6ff',22);return}
@@ -280,6 +284,13 @@ function coinAt(X,Y,r,t,z){const k=Math.abs(Math.cos(t*4+z));x.save();x.translat
  x.strokeStyle='#a86f00';x.lineWidth=Math.max(1,r*.12);x.stroke();if(k>.35){x.fillStyle='#fff7d6';x.beginPath();for(let i=0;i<10;i++){const a=i*Math.PI/5-Math.PI/2,rr2=i%2?r*.24:r*.55;x.lineTo(Math.cos(a)*rr2,Math.sin(a)*rr2)}x.fill()}x.restore()}
 function drawObj(ob,d,t){const p=P(ob.ln-1,d,ob.h||0),g0=P(ob.ln-1,d);if(p.s<1.2)return;
  if(ob.k==='coin'){coinAt(p.x,p.y-p.s*.38,Math.max(5,p.s*.3),t,ob.z);return}
+ if(ob.k==='gem'||ob.k==='star5'){const r=Math.max(8,p.s*.32),Y=p.y-p.s*.45+Math.sin(t*5+ob.z)*p.s*.06,gm=ob.k==='gem';
+  const gl=x.createRadialGradient(p.x,Y,0,p.x,Y,r*2);gl.addColorStop(0,gm?'rgba(103,232,249,.55)':'rgba(253,224,71,.55)');gl.addColorStop(1,'rgba(255,255,255,0)');x.fillStyle=gl;x.beginPath();x.arc(p.x,Y,r*2,0,7);x.fill();
+  x.save();x.translate(p.x,Y);if(gm){const sq=Math.abs(Math.cos(t*2.4+ob.z));x.scale(Math.max(.35,sq),1);const g2=x.createLinearGradient(-r,-r,r,r);g2.addColorStop(0,'#ecfeff');g2.addColorStop(.45,'#22d3ee');g2.addColorStop(1,'#0e7490');x.fillStyle=g2;
+   x.beginPath();x.moveTo(-r,-r*.3);x.lineTo(-r*.55,-r*.85);x.lineTo(r*.55,-r*.85);x.lineTo(r,-r*.3);x.lineTo(0,r);x.closePath();x.fill();x.strokeStyle='#ffffff';x.lineWidth=Math.max(1,r*.1);x.stroke();
+   x.fillStyle='rgba(255,255,255,.6)';x.beginPath();x.moveTo(-r*.55,-r*.3);x.lineTo(0,-r*.85);x.lineTo(r*.1,-r*.3);x.closePath();x.fill()}
+  else{x.rotate(Math.sin(t*2+ob.z)*.25);const g2=x.createLinearGradient(-r,-r,r,r);g2.addColorStop(0,'#fff7c2');g2.addColorStop(.5,'#facc15');g2.addColorStop(1,'#d97706');x.fillStyle=g2;x.beginPath();for(let i=0;i<10;i++){const a=i*Math.PI/5-Math.PI/2,rr=i%2?r*.45:r*1.05;x.lineTo(Math.cos(a)*rr,Math.sin(a)*rr)}x.closePath();x.fill();x.strokeStyle='#fff';x.lineWidth=Math.max(1,r*.1);x.stroke()}
+  x.restore();return}
  if(['mag','shield','x2','boost'].includes(ob.k)){const r=Math.max(10,p.s*.36),Y=p.y-p.s*.5+Math.sin(t*4)*p.s*.05,col={mag:'#ef4444',shield:'#3b82f6',x2:'#f59e0b',boost:'#8b5cf6'}[ob.k];
   const gl=x.createRadialGradient(p.x,Y,0,p.x,Y,r*2.2);gl.addColorStop(0,col+'aa');gl.addColorStop(1,col+'00');x.fillStyle=gl;x.beginPath();x.arc(p.x,Y,r*2.2,0,7);x.fill();
   x.fillStyle=col;x.beginPath();x.arc(p.x,Y,r,0,7);x.fill();x.strokeStyle='#fff';x.lineWidth=Math.max(2,r*.14);x.stroke();
@@ -359,6 +370,7 @@ function showMenu(){state='menu';G=null;$('goal').hidden=true;$('hc').hidden=tru
   <div class="modes">${[['dhikr','📿'],['task','✅'],['free','🎮']].map(([k,i])=>`<button class="mode ${ST.mode===k?'on':''}" data-m="${k}"><i>${i}</i>${tl('m_'+k)}<small>${tl('d_'+k)}</small></button>`).join('')}</div>
   <div id="opt"></div>
   <h2>${tl('world')}</h2><div class="worlds">${['gold','toy','blos'].map(k=>`<button class="world ${ST.world===k?'on':''}" data-w="${k}"><canvas data-th="${k}"></canvas><span>${tl('w_'+k)}</span></button>`).join('')}</div>
+  <h2>${tl('speed')}</h2><div class="chips" id="spdC">${['slow','normal','fast'].map(k=>`<button class="chip ${ST.spd===k?'on':''}" data-sp="${k}">${tl('s_'+k)}</button>`).join('')}</div><p style="font-size:.8rem;margin:4px 0 0;color:#64748b">${tl('sp_note')}</p>
   <h2>${tl('how')}</h2><div class="how"><div><b>⇆</b>${tl('h1')}</div><div><b>⤒</b>${tl('h2')}</div><div><b>⤓</b>${tl('h3')}</div></div>
   <button class="go" id="goB">${tl('start')}</button>${ST.best?`<p style="font-size:.85rem;margin-top:8px">🏆 ${tl('best')}: <b>${ST.best}</b></p>`:''}`);
  document.querySelectorAll('[data-th]').forEach(c=>worldThumb(c,c.dataset.th));
@@ -369,6 +381,7 @@ function showMenu(){state='menu';G=null;$('goal').hidden=true;$('hc').hidden=tru
   o.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();opt()});o.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ST.tgt=+b.dataset.n;stSave();opt()});o.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST.ti=+b.dataset.t;stSave();opt()})};opt();
  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ST.mode=b.dataset.m;stSave();document.querySelectorAll('[data-m]').forEach(q=>q.classList.toggle('on',q===b));opt()});
  document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{ST.world=b.dataset.w;WD=WORLDS[ST.world];stSave();document.querySelectorAll('[data-w]').forEach(q=>q.classList.toggle('on',q===b))});
+ document.querySelectorAll('[data-sp]').forEach(b=>b.onclick=()=>{ST.spd=b.dataset.sp;stSave();document.querySelectorAll('[data-sp]').forEach(q=>q.classList.toggle('on',q===b))});
  $('goB').onclick=()=>begin(tasks);last=performance.now();loop()}
 function begin(tasks){SFX.ctx();newRun();const g=G;
  if(g.mode==='task'){const t=tasks[ST.ti||0];if(t){g.task={id:t.id,title:t.title};g.steps=t.steps.filter(s=>!s.done).map(s=>({id:s.id,text:s.text,done:false}))}
@@ -386,7 +399,8 @@ showMenu();
 <script src="game/r3d.js?v=2"></script>
 <script>
 /* Free play: 30 minutes a day (Dhikr and Task runs are never limited) */
-Object.assign(T,{fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
+Object.assign(T,{speed:["Speed","السرعة","Saffisa","Xawaare"],s_slow:["Slow","بطيء","Suuta","Tartiib"],s_normal:["Normal","عادي","Giddu-galeessa","Caadi"],s_fast:["Fast","سريع","Ariifataa","Degdeg"],sp_note:["Gets faster as you go.","تزداد السرعة كلما تقدمت.","Yeroo itti fuftu saffisa dabala.","Way sii dheereysaa markaad sii socoto."],gem:["Gem","جوهرة","Dhagaa gatii qabu","Dhagax qaali ah"],star5:["Star","نجمة","Urjii","Xiddig"],
+ fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
  fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
  fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
  fq_more:["Dhikr and Task runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
