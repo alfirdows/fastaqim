@@ -1863,6 +1863,38 @@ body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z
 .tr-r .btn-calm{flex:none;padding:8px 12px;min-height:0;font-size:13.5px}
 .tr-all{all:unset;cursor:pointer;display:block;text-align:center;margin:14px auto 0;color:#c2410c;font-weight:700;font-size:14px}.tr-all.arm{background:#c2410c;color:#fff;border-radius:12px;padding:8px 14px}
 #fqUndo{width:max-content;min-width:min(92vw,340px)}
+
+/* v125 levels, history, recap, what's new */
+.lv{margin:6px 0 4px}.lv-b{display:flex;align-items:center;gap:12px}
+.lv-n{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#f5c542,#e39a1c);color:#3d2a00;display:flex;flex-direction:column;align-items:center;justify-content:center;flex:none}
+.lv-n small{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.lv-n b{font-size:24px;line-height:1}
+.lv-m{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.lv-t{display:flex;justify-content:space-between;align-items:baseline}.lv-t b{font-size:16px;color:var(--ink)}.lv-t small{font-weight:800;color:#15835f}
+.lv-bar{display:block;height:9px;border-radius:5px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}.lv-bar i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,#15835f,#2bb07f)}
+.lv-s{font-size:12.5px;color:var(--muted)}
+.lv-hub{all:unset;box-sizing:border-box;cursor:pointer;grid-column:1/-1;background:var(--surface,#fff);border-radius:18px;padding:12px 14px;box-shadow:0 2px 10px #0000000d;display:flex;flex-direction:column;gap:4px;text-align:start}
+.lv-wk{font-size:13.5px;font-weight:800;color:#15835f;align-self:flex-end}
+.st-ern{font-size:12.5px;color:var(--muted);margin:-2px 0 6px;padding-inline-start:4px}
+.st-14{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:3px;align-items:end;height:96px;margin:4px 0 6px}
+.st-c{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:2px}.st-c i{display:block;width:100%;max-width:16px;border-radius:4px 4px 2px 2px;background:#f5c542;min-height:3px}
+.st-c b{font-size:9.5px;color:var(--muted);order:-1}.st-c small{font-size:9.5px;color:var(--muted)}
+.st-c i{flex:none}.st-c{position:relative}
+.st-btns{display:flex;gap:8px;margin-top:8px}.st-btns .btn-calm{flex:1;font-size:13.5px;padding:9px 6px}
+.sta-d{display:flex;justify-content:space-between;align-items:center;font-weight:800;font-size:14px;margin:14px 2px 6px;color:var(--ink)}.sta-d b{color:#9a6b00}
+.wk{text-align:start}.wk-r{text-align:center;color:var(--muted);font-size:13.5px;margin:0 0 10px}
+.wk-s{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}.wk-s span{background:color-mix(in srgb,var(--ink) 4.5%,transparent);border-radius:14px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}.wk-s b{font-size:18px;color:var(--ink)}.wk-s small{font-size:11.5px;color:var(--muted)}
+.wk-best{text-align:center;font-size:14px;margin:4px 0 8px;color:var(--ink)}
+.wk-hm{display:grid;grid-template-rows:repeat(7,1fr);grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:3px;margin:6px 0}
+.wk-hm i,.wk-lg i{display:block;aspect-ratio:1;border-radius:4px}
+.h0{background:color-mix(in srgb,var(--ink) 8%,transparent)}.h1{background:#bfe8d4}.h2{background:#7fd0aa}.h3{background:#2bb07f}.h4{background:#15835f}.hf{background:transparent;border:1px dashed var(--line)}
+.wk-hm i.td{outline:2px solid #f5c542;outline-offset:1px}
+.wk-lg{display:flex;align-items:center;justify-content:flex-end;gap:4px;margin-bottom:8px}.wk-lg i{width:12px}.wk-lg small{font-size:11px;color:var(--muted)}
+.wn{display:flex;flex-direction:column;gap:6px;text-align:start}.wn-r{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4.5%,transparent)}.wn-r span{font-size:22px}.wn-r b{font-size:14.5px;font-weight:600;color:var(--ink)}
+.hm-wn{position:relative;margin:10px 0 0}
+.hm-wnb{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:12px;width:100%;padding:12px 44px 12px 14px;border-radius:18px;background:linear-gradient(135deg,#fff6db,#ffe9a8);color:#3d2a00;box-shadow:0 2px 10px #0000000d}
+[dir=rtl] .hm-wnb{padding:12px 14px 12px 44px}
+.hm-wnb.wk2{background:linear-gradient(135deg,#e3f6ee,#c9eedd);color:#0d4a36}
+.hm-wnb .i{font-size:24px}.hm-wnb .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:start}.hm-wnb b{font-size:15.5px}.hm-wnb small{font-size:12.5px;opacity:.85;overflow-wrap:break-word}.hm-wnb>i{font-style:normal;font-size:20px;opacity:.6}
+.hm-wnx{position:absolute;top:50%;inset-inline-end:8px;transform:translateY(-50%);border:0;background:#0000000f;color:#3d2a00;width:28px;height:28px;min-height:0;border-radius:50%;padding:0;font-size:12px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7505,7 +7537,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v124',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v125',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8155,6 +8187,67 @@ function qaParse(raw){let s=' '+raw+' ',due=null,time='',end='',rep=null;const t
   if(!due&&!time&&!rep)return null;return {title:title||raw,due:due?dkey(due):'',time,end,rep}}
 {const _svQ=save;save=function(){try{if(TRS.snap&&!TRS.mute){(S.tasks||[]).forEach(t=>{if(TRS.snap.has(t.id)||t.qa||t.due||t.time||t.src)return;t.qa=1;const p=qaParse(t.title);if(!p||!p.title)return;t.title=p.title;if(p.due)t.due=p.due;if(p.time)t.time=p.time;if(p.end)t.end=p.end;if(p.rep)t.rep=p.rep;
    setTimeout(()=>{try{const d=new Date(t.due+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'});undoBar('📅 '+tl('Added for')+' '+d+(t.time?' · '+t12(t.time)+(t.end?'–'+t12(t.end):''):'')+(t.rep?' '+tkRepLbl(t):''))}catch(e){}},400)})}}catch(e){}return _svQ.apply(this,arguments)}}
+
+/* v125: Stars daily history + "Earlier" explained + levels (in Me and Stars) + weekly recap with heatmap + What's new + Home Screen icon badge */
+[['Level','المستوى','Sadarkaa','Heer'],['to Level','للمستوى','gara Sadarkaa','ilaa Heerka'],['Last 14 days','آخر ١٤ يومًا','Guyyoota 14 darban','14-kii maalmood ee la soo dhaafay'],['All history','كل السجل','Seenaa hunda','Taariikhda oo dhan'],
+ ['Stars from before this list started (Nov 16, 2026).','نجوم من قبل بدء هذه القائمة (١٦ نوفمبر ٢٠٢٦).','Urjii tarreen kun jalqabuun dura (Sadaasa 16, 2026).','Xiddigo ka horreeyey bilowga liiskan (Nofembar 16, 2026).'],
+ ['Your week','أسبوعك','Torban kee','Toddobaadkaaga'],['Weekly recap','ملخص الأسبوع','Cuunfaa torbanii','Soo koobidda toddobaadka'],['stars','نجوم','urjii','xiddigood'],['to-dos done','مهام منجزة','to-do xumuraman','hawlo la dhammeeyey'],
+ ['active days','أيام نشطة','guyyoota hojii','maalmo firfircoon'],['Best day','أفضل يوم','Guyyaa hunda caalu','Maalinta ugu fiican'],['Last 12 weeks','آخر ١٢ أسبوعًا','Torban 12 darban','12-kii toddobaad ee la soo dhaafay'],
+ ['Every green square is a day you showed up.','كل مربع أخضر يوم حضرتَ فيه.','Iskuweerri magariisni hundi guyyaa ati argamte dha.','Afargees kasta oo cagaaran waa maalin aad timid.'],['Less','أقل','Xiqqaa','Ka yar'],['More','أكثر','Baay\'ee','Ka badan'],
+ ["What's new",'الجديد','Maaltu haaraa','Waxa cusub'],['See all','عرض الكل','Hunda ilaali','Dhammaan arag'],['This week','هذا الأسبوع','Torban kana','Toddobaadkan'],
+ ['Search everything from the top bar','ابحث في كل شيء من الشريط العلوي','Waan hunda gubbaa irraa barbaadi','Wax walba ka raadi baarka sare'],['Before sleep: wins, tomorrow, sleep dua','قبل النوم: إنجازاتك، الغد، دعاء النوم','Hirriba dura: injifannoo, boru, du\'aa hirribaa','Ka hor hurdada: guulaha, berri, ducada hurdada'],
+ ['Chunks: one chunk of your day at a time','أجزاء اليوم: جزء واحد في كل مرة','Kutaawwan: yeroo tokkotti kutaa tokko','Qaybo: hal qayb oo maalintaada ah mar kasta'],['Calendar on Home: add and edit right there','التقويم في الرئيسية: أضف وعدّل مباشرة','Kaalaandarii Mana irratti: achumaan dabali fi gulaali','Jadwal Hoyga ku yaal: halkaas ku dar oo wax ka beddel'],
+ ['Repeat to-dos, from–until times, Help me with this','تكرار المهام، من–إلى، ساعدني في هذه','To-do irra deebi\'i, yeroo irraa–hanga, Kana irratti na gargaari','Ku celi hawlaha, waqti ilaa, Iga caawi tan'],['Undo and Recently deleted','تراجع والمحذوفة مؤخرًا','Deebisi fi Dhiyeenyatti kan haqame','Ka noqo iyo Dhawaan la tirtiray'],
+ ['Type "Dentist tomorrow 3pm" and it\'s scheduled','اكتب «طبيب الأسنان غدا» ويُجدول تلقائيًا','"Shaqo boru 9am" barreessi, ni qindaa\'a','Qor "Shaqo berri 9am" waana la qorsheeyaa'],['Qibla, Verse of the day, Report a problem','القبلة، آية اليوم، الإبلاغ عن مشكلة','Qiblaa, Aayaa guyyaa har\'aa, Rakkoo gabaasi','Qiblada, Aayadda maanta, Soo sheeg dhibaato'],
+ ['Levels and a weekly recap','المستويات وملخص أسبوعي','Sadarkaalee fi cuunfaa torbanii','Heerar iyo soo koobid toddobaadle']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const LVL=[0,20,50,100,175,275,400,550,750,1000];
+function lvTot(){const T=S.sts||{},lg=Object.values(T).reduce((a,b)=>a+b,0);return Math.max(S.earned||0,lg)}
+function lvInfo(n){let L=1,a=0,b=20;for(let i=1;;i++){const lo=i<=LVL.length?LVL[i-1]:1000+300*(i-LVL.length),hi=i<LVL.length?LVL[i]:1000+300*(i-LVL.length+1);if(n<hi){L=i;a=lo;b=hi;break}}return {L,a,b,p:Math.round(100*(n-a)/(b-a))}}
+function lvHTML(){const n=lvTot(),v=lvInfo(n);return `<div class="lv"><div class="lv-b"><span class="lv-n"><small>${tl('Level')}</small><b>${v.L}</b></span><span class="lv-m"><span class="lv-t"><b>⭐ ${n}</b><small dir="ltr">${v.p}%</small></span><span class="lv-bar"><i style="width:${v.p}%"></i></span><small class="lv-s">${v.b-n} ⭐ ${tl('to Level')} ${v.L+1}</small></span></div></div>`}
+function dayStats(){const M={};const bump=(k,f,n)=>{M[k]=M[k]||{s:0,t:0};M[k][f]+=n};(S.stl||[]).forEach(x=>bump(dkey(new Date(x.at)),'s',x.n||0));(S.tasks||[]).forEach(t=>{if(t.done&&t.doneAt)bump(dkey(new Date(t.doneAt)),'t',1)});
+  Object.keys(S.days||{}).forEach(k=>{if(/^\d{4}-\d\d-\d\d$/.test(k)){M[k]=M[k]||{s:0,t:0};M[k].a=1}});return M}
+{const _stc=stCard;stCard=function(){const r=_stc.apply(this,arguments);try{const c=$('stBox');if(!c)return r;
+  const er=[...c.querySelectorAll('.st-r')].find(x=>x.textContent.includes('🗂'));if(er&&!c.querySelector('.st-ern'))er.insertAdjacentHTML('afterend',`<p class="st-ern">🗂 ${tl('Stars from before this list started (Nov 16, 2026).')}</p>`);
+  if(!c.querySelector('.lv'))c.querySelector('.st-hd').insertAdjacentHTML('afterend',lvHTML());
+  const M=dayStats(),days=[];for(let i=13;i>=0;i--){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-i);days.push(d)}const mx=Math.max(1,...days.map(d=>(M[dkey(d)]||{}).s||0));
+  const h=`<p class="st-sub">${tl('Last 14 days')}</p><div class="st-14">${days.map(d=>{const v=(M[dkey(d)]||{}).s||0;return `<span class="st-c" title="${v}"><i style="height:${v?Math.max(8,Math.round(v/mx*100)):3}%"></i><b>${v||''}</b><small>${d.getDate()}</small></span>`}).join('')}</div>
+   <div class="st-btns"><button type="button" class="btn-calm" data-stx="all">🗂 ${tl('All history')}</button><button type="button" class="btn-calm" data-stx="wk">📊 ${tl('Weekly recap')}</button></div>`;
+  const old=c.querySelector('.st-14w');if(old)old.remove();c.insertAdjacentHTML('beforeend',`<div class="st-14w">${h}</div>`)}catch(e){}return r}}
+function stAll(){const L=S.stl||[],G={};L.forEach(x=>{const k=dkey(new Date(x.at));(G[k]=G[k]||[]).push(x)});const tm=d=>new Intl.DateTimeFormat(LOC(),{hour:'numeric',minute:'2-digit'}).format(new Date(d));
+  modalCard(`<div class="sta"><p class="label">🗂 ${tl('All history')}</p>${Object.keys(G).sort().reverse().map(k=>{const s=G[k].reduce((a,x)=>a+(x.n||0),0);return `<p class="sta-d"><span>${esc(new Date(k+'T00:00').toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'}))}</span><b>+${s} ⭐</b></p><ul class="st-hist">${G[k].map(x=>{const so=STSRC.find(z=>z[0]===x.s)||STSRC[9];return `<li><span class="st-n">+${x.n} ⭐</span><span class="st-t" dir="auto">${so[1]} ${esc(String(x.t||'').replace(/^(Did|Finished): /,'').replace(/^[\p{Extended_Pictographic}‍️×\s]+/u,'')||tl(so[2]))}</span><time>${tm(x.at)}</time></li>`}).join('')}</ul>`}).join('')||`<p class="muted" style="text-align:center">${tl('Nothing here.')}</p>`}</div>`)}
+function wkRange(off){const e=new Date();e.setHours(0,0,0,0);e.setDate(e.getDate()-e.getDay()-7*off);const s=new Date(e);s.setDate(e.getDate()-0);const st=new Date(s),en=new Date(s);en.setDate(st.getDate()+6);return [st,en]}
+function wkOpen(){const M=dayStats(),today=new Date();today.setHours(0,0,0,0);const [st]=wkRange(0),days=[];for(let i=0;i<7;i++){const d=new Date(st);d.setDate(st.getDate()+i);days.push(d)}
+  const sum=f=>days.reduce((a,d)=>a+((M[dkey(d)]||{})[f]||0),0),act=days.filter(d=>{const m=M[dkey(d)];return m&&(m.s||m.t||m.a)}).length;let best=null,bv=0;days.forEach(d=>{const m=M[dkey(d)]||{},v=(m.s||0)+(m.t||0)*3;if(v>bv){bv=v;best=d}});
+  const W=12,g0=new Date(st);g0.setDate(g0.getDate()-7*(W-1));const cells=[];for(let i=0;i<W*7;i++){const d=new Date(g0);d.setDate(g0.getDate()+i);const m=M[dkey(d)]||{},v=(m.s||0)+(m.t||0)*3+(m.a?1:0);cells.push({d,v,fut:d>today})}
+  const mx=Math.max(1,...cells.map(c=>c.v)),lvl=v=>!v?0:v<mx*.25?1:v<mx*.5?2:v<mx*.75?3:4;const fm=d=>d.toLocaleDateString(LOC(),{month:'short',day:'numeric'});const en=new Date(st);en.setDate(st.getDate()+6);
+  modalCard(`<div class="wk"><p class="label">📊 ${tl('Weekly recap')}</p><p class="wk-r notranslate">${esc(tl('This week'))} · ${esc(fm(st))} – ${esc(fm(en))}</p>
+   <div class="wk-s"><span><b>⭐ ${sum('s')}</b><small>${tl('stars')}</small></span><span><b>✅ ${sum('t')}</b><small>${tl('to-dos done')}</small></span><span><b>🔥 ${act}/7</b><small>${tl('active days')}</small></span></div>
+   ${best?`<p class="wk-best">🏆 ${tl('Best day')}: <b class="notranslate">${esc(best.toLocaleDateString(LOC(),{weekday:'long'}))}</b></p>`:''}
+   ${lvHTML()}
+   <p class="st-sub">${tl('Last 12 weeks')}</p><div class="wk-hm" dir="ltr">${cells.map(c=>`<i class="h${c.fut?'f':lvl(c.v)}${dkey(c.d)===dkey(today)?' td':''}"></i>`).join('')}</div>
+   <div class="wk-lg" dir="ltr"><small>${tl('Less')}</small><i class="h0"></i><i class="h1"></i><i class="h2"></i><i class="h3"></i><i class="h4"></i><small>${tl('More')}</small></div>
+   <p class="small muted" style="text-align:center">${tl('Every green square is a day you showed up.')}</p></div>`)}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-stx]');if(!b)return;e.preventDefault();b.dataset.stx==='all'?stAll():wkOpen()});
+{const _hrL=hubRender;hubRender=function(k){const r=_hrL.apply(this,arguments);try{if(k==='wins'){const g=document.querySelector('#tab-wins > .hub-grid');if(g&&!g.querySelector('.lv-hub')){g.insertAdjacentHTML('afterbegin',`<button type="button" class="lv-hub" data-stx="wk">${lvHTML()}<span class="lv-wk">📊 ${tl('Weekly recap')} ›</span></button>`)}}}catch(e){}return r}}
+GO.recap=GO.week=()=>wkOpen();GO.level=GO.history=()=>stAll();
+/* What's new */
+const WN_V=125,WN=[['🔍','Search everything from the top bar'],['🌙','Before sleep: wins, tomorrow, sleep dua'],['🧩','Chunks: one chunk of your day at a time'],['📅','Calendar on Home: add and edit right there'],['🔁','Repeat to-dos, from–until times, Help me with this'],['🗑️','Undo and Recently deleted'],['✍️','Type "Dentist tomorrow 3pm" and it\'s scheduled'],['🧭','Qibla, Verse of the day, Report a problem'],['📊','Levels and a weekly recap']];
+function wnOpen(){S.wnSeen=WN_V;save();modalCard(`<div class="wn"><p class="label">✨ ${tl("What's new")}</p>${WN.map(([i,t])=>`<div class="wn-r"><span>${i}</span><b>${tl(t)}</b></div>`).join('')}</div>`)}
+{const _hsW=hmTrk;hmTrk=function(){let h=_hsW.apply(this,arguments);try{
+  if((S.wnSeen||0)<WN_V&&S.name)h=`<div class="hm-wn"><button type="button" class="hm-wnb" data-hm="wn"><span class="i">✨</span><span class="m"><b>${esc(tl("What's new"))}</b><small>${WN.slice(0,3).map(x=>x[0]).join(' ')} ${esc(tl(WN[0][1]))}</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-hm="wnx" aria-label="✕">✕</button></div>`+h;
+  const dw=new Date().getDay(),[st]=wkRange(0),wk=dkey(st);if((dw===0||dw===1||dw===5)&&S.wkSeen!==wk){const M=dayStats();let s=0,t=0;const [ps]=wkRange(dw===5?0:1);for(let i=0;i<7;i++){const d=new Date(ps);d.setDate(ps.getDate()+i);const m=M[dkey(d)]||{};s+=m.s||0;t+=m.t||0}
+   if(s||t)h+=`<div class="hm-wn"><button type="button" class="hm-wnb wk2" data-hm="wk"><span class="i">📊</span><span class="m"><b>${esc(tl('Your week'))}</b><small>⭐ ${s} · ✅ ${t}</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-hm="wkx" aria-label="✕">✕</button></div>`}
+ }catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="wn"],[data-hm="wnx"],[data-hm="wk"],[data-hm="wkx"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();const k=b.dataset.hm;
+  if(k==='wn')wnOpen();else if(k==='wnx'){S.wnSeen=WN_V;save();render()}else{const [st]=wkRange(0);S.wkSeen=dkey(st);save();if(k==='wk')wkOpen();else render()}},true);
+GO.new=GO.whatsnew=()=>wnOpen();
+{const _amW=apMenu;apMenu=function(){const r=_amW.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="fb"]');if(s&&!m.querySelector('[data-am="wn"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='wn';b.textContent='✨ '+tl("What's new");b.onclick=()=>{m.hidden=true;wnOpen()};s.after(b)}}catch(e){}return r}}
+SRCH_PG.push(['📊','Weekly recap','recap'],['✨',"What's new",'new']);
+/* Home Screen icon badge: number of to-dos due today or earlier, not done */
+function fqBadge(){try{if(!('setAppBadge' in navigator))return;const k=dkey(),n=(S.tasks||[]).filter(t=>!t.done&&t.due&&t.due<=k).length;if(n&&!S.badgeOff)navigator.setAppBadge(n).catch(()=>{});else navigator.clearAppBadge&&navigator.clearAppBadge().catch(()=>{})}catch(e){}}
+{const _svB=save;save=function(){const r=_svB.apply(this,arguments);try{fqBadge()}catch(e){}return r}}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')fqBadge()});setTimeout(fqBadge,1500);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
