@@ -7330,7 +7330,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v117',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v118',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7565,23 +7565,23 @@ function qbOpen(){qbStop();const L=S.loc||{};const has=L.lat!=null&&L.lng!=null;
     $('qbCity').onclick=()=>locAsk(()=>setTimeout(qbOpen,150));return}
   const B=qbBear(L.lat,L.lng),dec=magDecl(L.lat,L.lng),km=qbDist(L.lat,L.lng),ticks=(LANG==='ar'?[['ش',0],['ق',90],['ج',180],['غ',270]]:[['N',0],['E',90],['S',180],['W',270]]).map(([t,a],i)=>[t,a,i]);
   modalCard(`<div class="qb"><p class="label">🧭 ${esc(tl('Qibla'))}</p>
-   <p class="qb-loc"><button type="button" class="qb-ch" id="qbCh">📍 ${esc(L.name||tl('Location'))} ✎</button> · ${N(B)}° ${esc(tl('from North'))} · ${N(km)} ${esc(tl('km to Makkah'))}</p>
+   <p class="qb-loc"><button type="button" class="qb-ch" id="qbCh">📍 ${esc(L.name||tl('My location'))} ✎</button> · ${N(B)}° ${esc(tl('from North'))} · ${N(km)} ${esc(tl('km to Makkah'))}</p>
    <div class="qb-dial" id="qbDial"><i class="qb-idx"></i><div class="qb-rot" id="qbRot">${ticks.map(([t,a,i])=>`<span class="qb-t${i===0?' n':''}" style="transform:rotate(${a}deg) translateY(calc(var(--qr) * -1)) rotate(${-a}deg) rotate(calc(var(--h,0) * 1deg))">${t}</span>`).join('')}
      <div class="qb-arr" style="transform:rotate(${B}deg)"><i></i></div><span class="qb-kb" style="transform:rotate(${B}deg) translateY(calc(var(--qr) * -1)) rotate(${-B}deg) rotate(calc(var(--h,0) * 1deg))">🕋</span></div><i class="qb-hub"></i></div>
    <p class="qb-st" id="qbSt"></p>
    <div id="qbAcc" hidden><div class="qb-meter"><i></i><i></i><i></i><i></i></div><p class="qb-ml"><span id="qbAl"></span><span id="qbAv"></span></p></div>
    <div class="qb-warn" id="qbW" hidden></div>
    <button type="button" class="btn-main" id="qbGo" style="width:100%">🧭 ${esc(tl('Start compass'))}</button>
-   <p class="qb-fine">${esc(tl('Magnetic correction for your city'))}<span dir="ltr" style="display:block">${dec>=0?'+':'−'}${Math.abs(dec).toFixed(1)}°</span>${esc(tl('For full certainty, check with your local masjid.'))}</p></div>`);
+   <p class="qb-fine"><span id="qbCor" hidden>${esc(tl('Magnetic correction for your city'))}<span dir="ltr" style="display:block">${dec>=0?'+':'−'}${Math.abs(dec).toFixed(1)}°</span></span>${esc(tl('For full certainty, check with your local masjid.'))}</p></div>`);
   const rot=$('qbRot'),st=$('qbSt'),W=$('qbW'),dial=$('qbDial');let got=false,lastOk=false,hs=[];
   const warn=(t,b)=>{if(!t){W.hidden=true;return}W.hidden=false;W.innerHTML='<b>⚠ '+esc(tl(b||'May be off'))+'</b>'+esc(tl(t))};
   const acc=a=>{$('qbAcc').hidden=false;const lv=a==null||a<0?0:a<=5?4:a<=15?3:a<=25?2:1,lab=lv===4?'good':lv===3?'medium':lv===0?'unknown':'low';
     $('qbAcc').querySelectorAll('.qb-meter i').forEach((x,i)=>x.className=i<lv?(lv>=3?'on g':'on'):'');$('qbAl').textContent=tl('Compass accuracy')+': '+tl(lab);$('qbAv').textContent=a!=null&&a>=0?'±'+Math.round(a)+'°':'';return lv};
   const h=e=>{let hd=null,a=null;
-    if(typeof e.webkitCompassHeading==='number'&&!isNaN(e.webkitCompassHeading)){hd=e.webkitCompassHeading;a=e.webkitCompassAccuracy}
-    else if(e.absolute&&e.alpha!=null){hd=(360-e.alpha)%360}
+    let cor=0;if(typeof e.webkitCompassHeading==='number'&&!isNaN(e.webkitCompassHeading)){hd=e.webkitCompassHeading;a=e.webkitCompassAccuracy}
+    else if(e.absolute&&e.alpha!=null){hd=(360-e.alpha)%360;cor=dec}
     if(hd==null)return;got=true;$('qbGo').hidden=true;
-    const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;const T=(hd+dec+so+360)%360;
+    const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;const T=(hd+cor+so+360)%360;const fc=$('qbCor');if(fc)fc.hidden=!cor;
     hs.push(T);if(hs.length>12)hs.shift();const spread=hs.length>6?Math.max(...hs.map(v=>Math.abs(((v-hs[0]+540)%360)-180))):0;
     rot.style.transform='rotate('+(-T)+'deg)';rot.style.setProperty('--h',T);
     let d=((B-T+540)%360)-180;const ok=Math.abs(d)<=5;dial.classList.toggle('ok',ok);
