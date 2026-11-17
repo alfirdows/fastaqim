@@ -118,14 +118,14 @@ function queue(item){if(!US||isGuest)return;try{const cur=JSON.parse(localStorag
 function zkAdd(i,n){const k=DZI[i];if(k==null||!n)return;try{const d=new Date(),key=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');let o=JSON.parse(localStorage.getItem('fastaqim.zk')||'{}');if(o.d!==key||o.v!==2)o={d:key,i:o.i||0,n:{},v:2};o.n[k]=(o.n[k]||0)+n;localStorage.setItem('fastaqim.zk',JSON.stringify(o))}catch(e){}}
 const kidStyle=US&&US.kid&&US.kid.on?(US.kid.g==='g'?'blos':'toy'):null;
 /* ---------- settings ---------- */
-const ST=(()=>{let o={};try{o=JSON.parse(localStorage.getItem('fastaqim.game')||'{}')}catch(e){}return Object.assign({mode:'dhikr',dz:0,tgt:33,world:kidStyle||'gold',snd:true,best:0},o)})();
+const ST=(()=>{let o={};try{o=JSON.parse(localStorage.getItem('fastaqim.game')||'{}')}catch(e){}if(!o.sndV2){o.sndV2=1;o.snd=false}return Object.assign({mode:'dhikr',dz:0,tgt:33,world:kidStyle||'gold',snd:false,best:0},o)})();
 const stSave=()=>{try{localStorage.setItem('fastaqim.game',JSON.stringify(ST))}catch(e){}};
 /* ---------- sound: water-drop plip, air whoosh, soft bump (no music, no voices) ---------- */
 const SFX={c:null,ctx(){if(!this.c)try{this.c=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}return this.c},
- plip(){if(!ST.snd)return;const c=this.ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type='sine';o.frequency.setValueAtTime(700,t);o.frequency.exponentialRampToValueAtTime(1500,t+.09);g.gain.setValueAtTime(.08,t);g.gain.exponentialRampToValueAtTime(.001,t+.1);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.11)},
+ plip(){if(!ST.snd)return;const _n=performance.now();if(this._p&&_n-this._p<140)return;this._p=_n;const c=this.ctx();if(!c)return;const o=c.createOscillator(),g=c.createGain(),t=c.currentTime;o.type='sine';o.frequency.setValueAtTime(700,t);o.frequency.exponentialRampToValueAtTime(1500,t+.09);g.gain.setValueAtTime(.025,t);g.gain.exponentialRampToValueAtTime(.001,t+.1);o.connect(g);g.connect(c.destination);o.start(t);o.stop(t+.11)},
  noise(d,f0,f1,v,type){if(!ST.snd)return;const c=this.ctx();if(!c)return;const n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);for(let i=0;i<n;i++)a[i]=(Math.random()*2-1)*Math.sin(Math.PI*i/n);
   const s=c.createBufferSource();s.buffer=b;const f=c.createBiquadFilter();f.type=type||'bandpass';f.Q.value=1.2;const t=c.currentTime;f.frequency.setValueAtTime(f0,t);f.frequency.exponentialRampToValueAtTime(f1,t+d);const g=c.createGain();g.gain.value=v;s.connect(f);f.connect(g);g.connect(c.destination);s.start()},
- whoosh(){this.noise(.16,600,2400,.22)},jump(){this.noise(.22,400,3000,.25)},duck(){this.noise(.2,2200,500,.2)},bump(){this.noise(.22,300,90,.6,'lowpass')},power(){this.noise(.35,500,4000,.25)}};
+ whoosh(){this.noise(.12,600,1800,.05)},jump(){this.noise(.14,500,1600,.06)},duck(){this.noise(.14,1600,500,.05)},bump(){this.noise(.16,260,90,.14,'lowpass')},power(){this.noise(.22,500,2000,.07)}};
 const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 /* ---------- worlds ---------- */
 const WORLDS={

@@ -1380,6 +1380,32 @@ body.has-bnav #apBar.ap3{padding-top:6px!important}
 /* v99 one overlay at a time, no background movement */
 #scrollModal,#scrollBody,#apMenu,.apm-p{overscroll-behavior:contain}
 body.fq-lock #toast,body.fq-lock #hypeBox,body.fq-lock .star-toast{display:none!important}
+/* v99b reward shop */
+#rewardList{display:flex;flex-direction:column;gap:10px}
+.rw{display:flex;align-items:center;gap:10px;padding:10px;border:1.5px solid var(--line);border-radius:16px;background:var(--surface)}
+.rw-m{flex:1;min-width:0;display:flex;align-items:center;gap:12px;background:none;border:0;padding:0;text-align:start;color:inherit;font:inherit;min-height:0}
+.rw-i{flex:none;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:color-mix(in srgb,var(--accent,#F2A33A) 16%,var(--surface))}
+.rw-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}.rw-tx b{font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rw-tx small{font-size:12.5px;color:var(--muted)}
+.rw-bar{height:6px;border-radius:4px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}.rw-bar i{display:block;height:100%;background:var(--accent,#F2A33A);border-radius:4px}
+.rw-a{display:flex;align-items:center;gap:6px;flex:none}.rw-a .btn-main{padding:.45rem .9rem;font-size:.9rem;min-height:38px}
+.rw-need{font-size:.8rem;color:var(--muted);background:none;border:0;padding:0 4px;min-height:0;white-space:nowrap}
+.rw-x{width:34px;height:34px;min-height:0;padding:0;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--muted)}
+.rw-ex{opacity:.5;border-style:dashed}
+.rw-add{align-self:stretch;min-height:46px}
+.rw-u{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));z-index:97;display:flex;align-items:center;gap:14px;max-width:min(92vw,420px);background:#1F2A26;color:#fff;border-radius:14px;padding:10px 12px 10px 16px;box-shadow:0 12px 28px -12px rgba(0,0,0,.5);font-size:14px}
+.rw-u span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rw-u button{flex:none;background:none;border:0;color:#F7C24A;font-weight:800;font-size:14px;min-height:0;padding:4px 6px}
+.rwf{display:flex;flex-direction:column;gap:10px}.rwf label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:14px}.rwf input{font-size:16px}
+.rwf-h{font-weight:600;font-size:14px}.rwf-i{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.rwf-i button{height:48px;min-height:0;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-size:24px;padding:0}.rwf-i button.on{border-color:var(--calm);box-shadow:0 0 0 2px var(--calm) inset;background:color-mix(in srgb,var(--calm) 10%,var(--surface))}
+.rwf-b{display:flex;flex-wrap:wrap;gap:8px}.rwf-b .btn-main{flex:1 1 100%;min-height:50px}.rwf-b .btn-ghost,.rwf-b .btn-calm{flex:1}
+.rwf{text-align:start}.rwf .label{text-align:center}
+.rw-tx b{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;line-height:1.25}
+/* v99c one grey example in empty lists */
+.ex-row{display:flex;align-items:center;gap:12px;padding:12px;border:1.5px dashed var(--line);border-radius:16px;opacity:.55;pointer-events:none}
+.ex-i{width:40px;height:40px;flex:none;border-radius:12px;display:grid;place-items:center;font-size:22px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.ex-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.ex-t b{font-size:15px}.ex-t small{font-size:12.5px;color:var(--muted)}
+.ex-tag{flex:none;font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:2px 8px}
+.en-ok{margin-top:8px;font-weight:600;color:var(--calm)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -1828,17 +1854,12 @@ const $=id=>document.getElementById(id);
 function seed(){
   const st=(t)=>({id:uid(),text:t,done:false});
   const o={
-    sparks:0, days:{}, wins:[], examples:true,
-    tasks:[
-      {id:uid(),title:'Clean my room',top:true,done:false,example:true,steps:[st('Put on a nasheed or a lecture'),st('Pick up 5 things from the floor'),st('Clear the desk'),st('Make the bed')]},
-      {id:uid(),title:'Reply to the email I keep avoiding',top:true,done:false,example:true,steps:[st('Open the email'),st('Write one ugly first sentence'),st('Press send')]},
-      {id:uid(),title:'Write my session notes',top:true,done:false,example:true,steps:[st('Open the notes template'),st('Write the first client\'s notes, rough is fine'),st('Finish the rest')]},
-      {id:uid(),title:'Book a dentist appointment',top:false,done:false,example:true,steps:[]}
-    ],
-    rewards:[{id:uid(),text:'Watch one episode guilt-free',cost:15},{id:uid(),text:'Favorite snack or coffee',cost:25},{id:uid(),text:'Buy that small thing I want',cost:100}],
-    routine:seedRoutine(), routineDone:{}
+    sparks:0, days:{}, wins:[], examples:false,
+    tasks:[],
+    rewards:[],
+    routine:[], routineDone:{}
   };
-  o.goalId=o.rewards[1].id;return o;
+  o.goalId=null;return o;
 }
 function seedRoutine(){
   const it=t=>({id:uid(),text:t});
@@ -1853,8 +1874,9 @@ let S;
 try{S=JSON.parse(localStorage.getItem(KEY));}catch(e){}
 let fresh=false;if(!S||!Array.isArray(S.tasks)){S=seed();fresh=true}
 if(S.name==null)S.name=fresh?'':'Tasnim';
-if(!S.routine){S.routine=seedRoutine();S.routineDone={}}
+if(!S.routine){S.routine=[];S.routineDone={}}
 if(S.earned==null)S.earned=S.sparks;
+if(!S.reasons&&fresh){S.reasons=[];S.reasonsV2=true;S.reasonsV3=true}
 if(!S.reasons)S.reasons=[{id:uid(),text:'قُلْ أَذَٰلِكَ خَيْرٌ أَمْ جَنَّةُ الْخُلْدِ الَّتِي وُعِدَ الْمُتَّقُونَ',note:'Al-Furqan 25:15 · "Say, is that better, or the Garden of Eternity which is promised to the righteous?"'}];
 if(S.reasonIx==null)S.reasonIx=0;
 if(!S.coachStyle)S.coachStyle='bal';if(!S.coachV3){S.coachStyle='bal';S.coachV3=true}
@@ -6302,6 +6324,71 @@ new MutationObserver(lockSync).observe(document.body,{attributes:true,subtree:tr
 {const _t=toast;toast=function(){if(ovOpen()){LK.q={f:toast,a:[...arguments]};return}return _t.apply(this,arguments)}}
 if(typeof starToast==='function'){const _s=starToast;starToast=function(){if(ovOpen()){LK.q={f:starToast,a:[...arguments]};return}return _s.apply(this,arguments)}}
 {const _h=hype;hype=function(){if(ovOpen())return;return _h.apply(this,arguments)}}
+
+/* v99b: Reward shop starts empty. One grey "Example", then the person adds their own (name, stars, icon). ✕ removes one, with Undo. */
+[["Example","مثال","Fakkeenya","Tusaale"],["+ Add reward","+ أضف مكافأة","+ Badhaasa dabali","+ Ku dar abaal-marin"],["Reward","المكافأة","Badhaasa","Abaal-marin"],["Stars it costs","كم نجمة","Urjii meeqa","Immisa xiddig"],
+ ["Pick an icon","اختر أيقونة","Mallattoo filadhu","Dooro calaamad"],["Save","حفظ","Olkaa'i","Kaydi"],["Delete","حذف","Haqi","Tirtir"],["Removed","تم الحذف","Haqameera","Waa la tirtiray"],["Undo","تراجع","Deebisi","Ka noqo"],
+ ["Claim","استلم","Fudhadhu","Qaado"],["Need","تحتاج","Barbaachisa","Waxaad u baahan tahay"],["Aim","هدفي","Kaayyoo","Hadaf"],["Ice cream with family","آيس كريم مع العائلة","Aayis kiriimii maatii wajjin","Jalaato qoyska la jira"],
+ ["Your own rewards, your own price. Tap one to edit it.","مكافآتك أنت، وبالسعر الذي تختاره. اضغط على أي واحدة لتعديلها.","Badhaasa kee, gatii kee. Gulaaluuf tokko tuqi.","Abaal-marinadaada, qiimahaaga. Taabo mid si aad u beddesho."],
+ ["Enjoy it. You earned it.","استمتع بها، فقد استحققتها.","Itti gammadi. Ati argatteetta.","Ku raaxayso. Adigaa mudan."],["Add a name and a star cost.","أضف اسمًا وعدد النجوم.","Maqaa fi gatii urjii dabali.","Ku dar magac iyo qiimaha xiddigaha."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const RW_ICONS=['🎁','🍦','☕','🍫','🧁','🍕','🍔','🛍️','📚','🎮','📱','👟','🛋️','🎨','✈️','🏞️','⚽','🚲','🧩','🌙'];
+function rwMig(){try{if(S.rwMig)return;const D={'Watch one episode guilt-free':15,'Favorite snack or coffee':25,'Buy that small thing I want':100};
+  const before=(S.rewards||[]).length;S.rewards=(S.rewards||[]).filter(r=>D[r.text]!==r.cost);if(S.goalId&&!S.rewards.some(r=>r.id===S.goalId))S.goalId=null;S.rwMig=1;if(before!==S.rewards.length)save()}catch(e){}}
+function rwRender(){rwMig();const box=$('rewardList');if(!box)return;const card=box.closest('.card');
+  const f=$('rewardForm');if(f)f.hidden=true;if(card){const h=card.querySelector(':scope > p.muted.small');if(h&&!h.dataset.rw){h.dataset.rw=1;h.textContent=tl('Your own rewards, your own price. Tap one to edit it.')}}
+  const R=S.rewards||[],sp=S.sparks||0;
+  box.innerHTML=(R.length?R.map(r=>{const can=sp>=r.cost,pct=Math.min(100,Math.round(sp/r.cost*100));return `<div class="rw" data-id="${r.id}">
+     <button type="button" class="rw-m" data-rwe="${r.id}"><span class="rw-i">${r.icon||'🎁'}</span><span class="rw-tx"><b dir="auto">${S.goalId===r.id?'🎯 ':''}${esc(r.text)}</b><small>⭐ ${r.cost}${can?'':' · '+esc(tl('Need'))+' '+(r.cost-sp)}</small><span class="rw-bar"><i style="width:${pct}%"></i></span></span></button>
+     <div class="rw-a">${can?`<button type="button" class="btn-main" data-rwc="${r.id}">${esc(tl('Claim'))}</button>`:''}<button type="button" class="rw-x" data-rwx="${r.id}" aria-label="${esc(tl('Delete'))}">✕</button></div></div>`}).join('')
+   :`<div class="rw rw-ex" aria-hidden="true"><span class="rw-m"><span class="rw-i">🍦</span><span class="rw-tx"><b>${esc(tl('Ice cream with family'))}</b><small>⭐ 30 · ${esc(tl('Example'))}</small></span></span></div>`)
+   +`<button type="button" class="btn-calm rw-add" id="rwAdd">${esc(tl('+ Add reward'))}</button>`;
+  $('rwAdd').onclick=()=>rwEdit();
+  box.querySelectorAll('[data-rwe]').forEach(b=>b.onclick=()=>rwEdit(b.dataset.rwe));
+  box.querySelectorAll('[data-rwc]').forEach(b=>b.onclick=()=>{const r=R.find(x=>x.id===b.dataset.rwc);if(!r||S.sparks<r.cost)return;S.sparks-=r.cost;if(S.goalId===r.id)S.goalId=null;S.wins.unshift({text:'Claimed reward: '+r.text,at:Date.now()});save();render();toast('🎉 '+tl('Enjoy it. You earned it.'));try{confetti()}catch(e){}});
+  box.querySelectorAll('[data-rwx]').forEach(b=>b.onclick=()=>{const i=R.findIndex(x=>x.id===b.dataset.rwx);if(i<0)return;const r=R[i],wasGoal=S.goalId===r.id;S.rewards.splice(i,1);if(wasGoal)S.goalId=null;save();render();
+    rwUndo(tl('Removed')+': '+r.text,()=>{S.rewards.splice(Math.min(i,S.rewards.length),0,r);if(wasGoal)S.goalId=r.id;save();render()})})}
+function rwUndo(msg,fn){let u=$('rwU');if(u)u.remove();u=document.createElement('div');u.id='rwU';u.className='rw-u';u.innerHTML=`<span dir="auto">${esc(msg)}</span><button type="button">${esc(tl('Undo'))}</button>`;document.body.appendChild(u);
+  const t=setTimeout(()=>u.remove(),5000);u.querySelector('button').onclick=()=>{clearTimeout(t);u.remove();fn()}}
+function rwEdit(id){const r=id?(S.rewards||[]).find(x=>x.id===id):null;let icon=r?(r.icon||'🎁'):'🎁';
+  modalCard(`<div class="rwf"><p class="label">🛍️ ${esc(tl(r?'Reward':'+ Add reward'))}</p>
+   <label>${esc(tl('Reward'))}<input type="text" id="rwN" maxlength="50" value="${r?esc(r.text):''}" placeholder="${esc(tl('Ice cream with family'))}" dir="auto"></label>
+   <label>${esc(tl('Stars it costs'))}<input id="rwC" type="number" inputmode="numeric" min="1" max="9999" value="${r?r.cost:''}" placeholder="30"></label>
+   <p class="rwf-h">${esc(tl('Pick an icon'))}</p><div class="rwf-i">${RW_ICONS.map(e=>`<button type="button" data-ic="${e}" class="${e===icon?'on':''}">${e}</button>`).join('')}</div>
+   <p class="small" id="rwE" style="color:#B42318"></p>
+   <div class="rwf-b"><button type="button" class="btn-main" id="rwS">${esc(tl('Save'))}</button>${r?`<button type="button" class="btn-ghost" id="rwD">${esc(tl('Delete'))}</button>`:''}${r?`<button type="button" class="btn-calm" id="rwG">🎯 ${esc(tl('Aim'))}</button>`:''}</div></div>`);
+  const sb=$('scrollBody');sb.querySelectorAll('[data-ic]').forEach(b=>b.onclick=()=>{icon=b.dataset.ic;sb.querySelectorAll('[data-ic]').forEach(x=>x.classList.toggle('on',x===b))});
+  $('rwS').onclick=()=>{const t=$('rwN').value.trim(),c=parseInt($('rwC').value,10);if(!t||!(c>0)){$('rwE').textContent=tl('Add a name and a star cost.');return}
+    if(typeof blocked==='function'&&blocked(t)){$('rwE').textContent=tl('That message cannot be saved here.');return}
+    S.rewards=S.rewards||[];if(r){r.text=t;r.cost=c;r.icon=icon}else S.rewards.push({id:uid(),text:t,cost:c,icon});S.rewards.sort((a,b)=>a.cost-b.cost);save();modalClose()};
+  if(r){$('rwD').onclick=()=>{modalClose();setTimeout(()=>{const b=document.querySelector(`[data-rwx="${r.id}"]`);if(b)b.click()},50)};$('rwG').onclick=()=>{S.goalId=S.goalId===r.id?null:r.id;save();modalClose()}}}
+{const _rd=render;render=function(){const x=_rd.apply(this,arguments);try{rwRender()}catch(e){console.error(e)}return x}}
+GO.rewards=()=>goCard('wins','rewardList');GO.shop=GO.rewards;
+
+/* v99c: nothing is pre-filled. Example tasks and the untouched starter routine are removed once;
+   empty lists show ONE grey "Example" so it is clear what goes there. */
+const SEED_RT={'When I wake up':['Drink a glass of water','Open the curtains'],'After I eat':['Put my dish away','5-minute tidy'],'When I sit down to my phone':['Look at my top 3 first'],'Before bed':["Pick tomorrow's first tiny step",'Phone on charge away from bed']};
+function noAuto(){try{if(S.noAuto)return;let ch=0;
+  if((S.tasks||[]).some(t=>t.example)){S.tasks=S.tasks.filter(t=>!t.example);ch=1}S.examples=false;
+  if(Array.isArray(S.routine)){const keep=S.routine.filter(a=>{const sd=SEED_RT[a.anchor];return !(sd&&a.items.every(i=>sd.includes(i.text)))});if(keep.length!==S.routine.length){S.routine=keep;ch=1}}
+  S.noAuto=1;if(ch)save()}catch(e){}}
+function exRow(icon,title,sub){return `<div class="ex-row" aria-hidden="true"><span class="ex-i">${icon}</span><span class="ex-t"><b>${esc(title)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span><span class="ex-tag">${esc(tl('Example'))}</span></div>`}
+[["Clean my room","نظّف غرفتي","Kutaa koo qulqulleessi","Nadiifi qolkayga"],["Pick up 5 things from the floor","التقط 5 أشياء من الأرض","Wantoota 5 lafa irraa kaasi","Ka qaad 5 shay sagxadda"],["When I wake up","عندما أستيقظ","Yeroo ka'u","Marka aan toosto"],["Drink a glass of water","اشرب كوب ماء","Bishaan burcuqqoo tokko dhugi","Cab koob biyo ah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function exStates(){try{
+  const tl0=$('topList');if(tl0&&!(S.tasks||[]).some(t=>!t.done)&&!tl0.querySelector('.task,.ex-row')&&!tl0.textContent.trim())tl0.innerHTML=exRow('🧹',tl('Clean my room'),'1. '+tl('Pick up 5 things from the floor'));
+  else if(tl0&&!(S.tasks||[]).length&&!tl0.querySelector('.ex-row')){tl0.insertAdjacentHTML('afterbegin',exRow('🧹',tl('Clean my room'),'1. '+tl('Pick up 5 things from the floor')))}
+  const rl=$('routineList');if(rl&&!(S.routine||[]).length&&!rl.querySelector('.ex-row'))rl.insertAdjacentHTML('afterbegin',exRow('🌅',tl('When I wake up'),tl('Drink a glass of water')));
+  const rs=$('reasonList');if(rs&&!(S.reasons||[]).length&&!rs.querySelector('.ex-row'))rs.innerHTML=exRow('🌿','قُلْ أَذَٰلِكَ خَيْرٌ أَمْ جَنَّةُ الْخُلْدِ','Qur\'an, Surah Al-Furqan 25:15');
+}catch(e){console.error(e)}}
+{const _rd2=render;render=function(){noAuto();const x=_rd2.apply(this,arguments);exStates();return x}}
+
+/* v99d: tapping an energy level no longer makes the page jump: the card stays in place showing the choice until you leave the page */
+const ENJ={on:false};
+{const _es=enSet;enSet=function(k){ENJ.on=true;return _es.apply(this,arguments)}}
+{const _rdc=renderDayCard;renderDayCard=function(){const r=_rdc.apply(this,arguments);try{const c=$('dayCard');if(c&&c.hidden&&ENJ.on&&S.dayCheck&&S.dayCheck[dkey()]){const k=S.dayCheck[dkey()];
+  c.hidden=false;c.innerHTML=`<p class="label">⚡ ${tl('Energy')}</p><p style="font-family:var(--display);font-size:1.3rem;font-weight:800">${tl('Energy today?')}</p>${enRow()}<p class="small en-ok">✓ ${esc(typeof enMsg==='function'?enMsg(k):'')}</p>`;
+  c.querySelectorAll('[data-en]').forEach(b=>b.onclick=()=>enSet(b.dataset.en))}}catch(e){}return r}}
+{const _sh6=show;show=function(){ENJ.on=false;return _sh6.apply(this,arguments)}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
