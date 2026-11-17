@@ -1913,6 +1913,16 @@ body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z
 .tmm-n{margin-top:auto;height:10px;margin-inline:0;display:flex;justify-content:center;align-items:center}.tmm-n i{width:22%;height:4px;border-radius:2px}
 .tmm-dec{position:absolute;top:1px;inset-inline:0;text-align:center;font-size:7px;font-style:normal;color:#f5c542;z-index:1;letter-spacing:2px}
 .tmm{aspect-ratio:3/4}.tmm-t{grid-template-columns:repeat(4,1fr)}
+
+/* v128 */
+.tk-one{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--ink);margin:6px 0}
+.tk-1 .steps li:not(.tk-nx):not(.done){opacity:.4}.tk-1 .steps li.tk-nx{font-weight:700;background:color-mix(in srgb,#15835f 8%,transparent);border-radius:10px}
+.tk-nxl{display:flex;align-items:center;gap:8px;margin:8px 0 2px;padding:8px 10px;border-radius:12px;background:color-mix(in srgb,#15835f 8%,transparent)}
+.tk-nxl b{flex:1;min-width:0;font-size:14.5px;color:var(--ink);overflow-wrap:break-word}
+.tk-nxl button{border:0;background:#15835f;color:#fff;width:34px;height:34px;min-height:0;border-radius:50%;font-weight:900;padding:0;flex:none}
+.tk-ev{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}.tk-ev input{width:80px!important;text-align:center}
+.tk-ev .seg button{border:1.5px solid var(--line);border-radius:18px;background:var(--surface,#fff);color:var(--ink);min-height:40px;padding:0 14px}.tk-ev .seg button[aria-pressed=true]{background:#15835f;border-color:#15835f;color:#fff}
+.dl-rs{display:flex;justify-content:center;align-items:center;min-height:48px;border-radius:24px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);font-weight:700;cursor:pointer;width:100%;box-sizing:border-box}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7555,7 +7565,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v127',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v128',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8271,7 +8281,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 [['Worship','العبادة','Waaqeffannaa','Cibaado'],['Plan my day','خطّط يومي','Guyyaa koo karoorsi','Qorshee maalintayda'],['Extras','إضافات','Dabalataa','Dheeraad'],['Help & more','مساعدة والمزيد','Gargaarsaa fi kan biroo','Caawin iyo wax kale'],
  ['Pin to Tabs','ثبّت في التبويبات','Tabs irratti qabsiisi','Ku dheji Tabs'],['Edit','تعديل','Gulaali','Wax ka beddel'],['Tap ☆ to pin a tool to the top of the menu.','اضغط ☆ لتثبيت أداة أعلى القائمة.','Meeshaa gubbaa irratti qabsiisuuf ☆ tuqi.','Taabo ☆ si aad qalab ugu dhejiso korka liiska.'],['Done','تمّ','Xumurame','Waa la dhammeeyey']
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
-const AMG=[['Worship',['sal','qb','zk','vd','hisn']],['Plan my day',['rem','cal','qt','bsl','en']],['Extras',['guide','sv','ns','rec','game']],['Help & more',['set2','trash','wn','rp','fb','out','gx']]];
+const AMG=[['Worship',['sal','qb','zk','vd','hisn']],['Plan my day',['rem','cal','qt','bsl','en']],['Extras',['guide','sv','ns','rec','game']],['Help & more',['set2','trash','dl','wn','rp','fb','out','gx']]];
 {const _amG=apMenu;apMenu=function(){const r=_amG.apply(this,arguments);try{const m=$('apMenu'),p=m&&m.querySelector('.apm-p');if(!p)return r;
   p.classList.add('apm-s2');p.querySelectorAll('.apm-more,.apm-hr2,.apm-gh').forEach(x=>x.remove());p.querySelectorAll('hr').forEach(x=>x.remove());
   const ver=p.querySelector('.apm-ver'),seen=new Set();let anchor=[...p.querySelectorAll('.apm-s')][1]||p.querySelector('.apm-g');if(!anchor)return r;
@@ -8300,6 +8310,38 @@ function thmHero(){try{const k=(typeof thmEff==='function'?thmEff():(S.look||{})
 setTimeout(thmHero,0);
 thmMini=function(k){const h=THH[k]||THH.calm,t=THK[k]||{},acc=t.k1||'#FF8A3D',dark=k==='night',bg=dark?'#121a2c':'#eef1f3',card=dark?'#1f2a44':'#fff',ink=dark?'#e8ecf5':'#18212b',deco=k==='ramadan'?'<i class="tmm-dec">🌙 ⭐ 🏮</i>':k==='eid'?'<i class="tmm-dec">⭐ ⭐ ⭐</i>':'';
   return `<span class="tmm" style="background:${bg}">${deco}<span class="tmm-h" style="background:linear-gradient(165deg,${h[0]},${h[1]} 60%,${h[2]})"><b>Fastaqim</b><i style="background:${t.k4||'#F5C46B'}"></i></span><span class="tmm-c" style="background:${card}"><i style="background:${acc}"></i><em style="background:${ink};opacity:.25"></em></span><span class="tmm-t">${[t.k2||h[1],acc,t.k4||'#F5B82E',h[2]].map(c=>`<i style="background:${c}"></i>`).join('')}</span><span class="tmm-n" style="background:${card}"><i style="background:${h[1]}"></i></span></span>`};
+
+/* v128: one step at a time (per task), repeat every N days/weeks, Download my data (+ restore from file), "Catch up later" name */
+[['One step at a time','خطوة واحدة في كل مرة','Yeroo tokkotti tarkaanfii tokko','Hal tallaabo mar kasta'],['Every…','كل…','Hunda…','Kasta…'],['Every','كل','Hunda','Kasta'],['days','أيام','guyyaa','maalmood'],['weeks','أسابيع','torbanoota','toddobaadyo'],
+ ['Download my data','تنزيل بياناتي','Daataa koo buusi','Soo dejiso xogtayda'],['A file with everything you saved. Keep it safe.','ملف فيه كل ما حفظته. احتفظ به في مكان آمن.','Faayila waan ati olkaa\'te hunda qabu. Nageenyaan kaa\'i.','Fayl ay ku jiraan wax kasta oo aad keydisay. Si ammaan ah u hay.'],
+ ['Download','تنزيل','Buusi','Soo dejiso'],['Restore from a file','الاستعادة من ملف','Faayila irraa deebisi','Ka soo celi fayl'],['This replaces what is on this phone with the file. Continue?','سيستبدل هذا ما على الهاتف بمحتوى الملف. متابعة؟','Kun waan bilbila kana irra jiru faayilichaan bakka buusa. Itti fuftaa?','Tani waxay ku beddeshaa waxa taleefankan ku jira faylka. Sii wad?'],
+ ['Restored. Welcome back.','تمّت الاستعادة. أهلًا بعودتك.','Deebi\'eera. Baga deebite.','Waa la soo celiyey. Ku soo dhowow.'],["That file didn't work.",'لم ينجح هذا الملف.','Faayilli sun hin hojjenne.','Faylkaas ma shaqayn.'],['Catch up later','للمتابعة لاحقًا','Booda itti deebi\'i','Goor dambe la soco']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+TKR.splice(5,0,['every','Every…']);
+{const _tkn=tkNext;tkNext=function(t){const r=t.rep;if(r&&r.k==='every'){const n=new Date((t.due||dkey())+'T00:00'),step=(r.n||2)*(r.u==='w'?7:1);n.setDate(n.getDate()+step);const td=new Date();td.setHours(0,0,0,0);while(n<td)n.setDate(n.getDate()+step);return dkey(n)}return _tkn.apply(this,arguments)}}
+{const _trl=tkRepLbl;tkRepLbl=function(t){const r=t.rep;if(r&&r.k==='every')return '🔁 '+tl('Every')+' '+(r.n||2)+' '+tl(r.u==='w'?'weeks':'days');return _trl.apply(this,arguments)}}
+{const _tpk2=tPick;tPick=function(t){let h=_tpk2.apply(this,arguments);try{if(t.rep&&t.rep.k==='every')h=h.replace(/(data-r="every" aria-pressed=")(?:true|false)(">)[^<]*/,`$1true$2${esc(tkRepLbl(t).replace('🔁 ',''))}`);
+  if((t.steps||[]).length>1)h=`<label class="tk-one"><input type="checkbox" data-tk="one" ${t.one?'checked':''}> ${tl('One step at a time')}</label>`+h}catch(e){}return h}}
+{const _thx2=taskHTML;taskHTML=function(t){let h=_thx2.apply(this,arguments);try{if(t.one&&(t.steps||[]).length>1&&!t.done){const nx=(t.steps||[]).find(s=>!s.done);h=h.replace('<div class="task ','<div class="task tk-1 ');if(nx)h=h.replace(new RegExp('<li class="([^"]*)"><input type="checkbox" data-act="step" data-s="'+nx.id+'"'),'<li class="$1 tk-nx"><input type="checkbox" data-act="step" data-s="'+nx.id+'"');
+  if(!t.open&&nx)h=h.replace(/(<\/div>\s*)(<\/div>\s*)$/,`$1<div class="tk-nxl"><span>👉</span><b class="notranslate" data-raw dir="auto">${esc(nx.text)}</b><button type="button" data-tk="nxd" data-s="${nx.id}" aria-label="✓">✓</button></div>$2`)}}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tk="nxd"]');if(!b)return;e.preventDefault();e.stopPropagation();const t=tkTask(b);if(!t)return;const s=(t.steps||[]).find(x=>x.id===b.dataset.s);if(!s)return;try{navigator.vibrate&&navigator.vibrate(10)}catch(x){}
+  const inp=document.querySelector(`.task[data-id="${t.id}"] [data-act="step"][data-s="${s.id}"]`);if(inp){inp.click();return}s.done=true;if(t.steps.every(x=>x.done)){finishTask(t)}else{try{award(1,'✅ '+s.text)}catch(x){}}save();render()},true);
+document.addEventListener('change',e=>{const i=e.target;if(!i.matches||!i.matches('[data-tk="one"]'))return;const t=tkTask(i);if(!t)return;t.one=i.checked;save();render()},true);
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tk="rep"][data-r="every"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();const t=tkTask(b);if(!t)return;const r=t.rep&&t.rep.k==='every'?t.rep:{n:2,u:'d'};
+  modalCard(`<div class="hc-ed"><p class="label">🔁 ${tl('Repeat')}</p><div class="tk-ev"><span>${tl('Every')}</span><input id="evN" type="number" inputmode="numeric" min="1" max="365" value="${r.n||2}"><div class="seg"><button type="button" data-u="d" aria-pressed="${r.u!=='w'}">${tl('days')}</button><button type="button" data-u="w" aria-pressed="${r.u==='w'}">${tl('weeks')}</button></div></div><button type="button" class="btn-main" id="evS" style="width:100%">${tl('Save')}</button></div>`);
+  let u=r.u||'d';$('scrollBody').querySelectorAll('[data-u]').forEach(x=>x.onclick=()=>{u=x.dataset.u;$('scrollBody').querySelectorAll('[data-u]').forEach(y=>y.setAttribute('aria-pressed',y===x))});
+  $('evS').onclick=()=>{const n=Math.round(+$('evN').value);if(n>=1&&n<=365){t.rep={k:'every',n,u};if(!t.due)t.due=dkey();save()}modalClose()}},true);
+/* Download my data */
+function dlOpen(){try{const m=$('apMenu');if(m)m.hidden=true}catch(e){}
+  modalCard(`<div class="hc-ed" style="text-align:center"><p class="label">💾 ${tl('Download my data')}</p><p class="small muted">${tl('A file with everything you saved. Keep it safe.')}</p><button type="button" class="btn-main" id="dlGo" style="width:100%">⬇️ ${tl('Download')}</button>
+   <label class="dl-rs">📂 ${tl('Restore from a file')}<input id="dlIn" type="file" accept="application/json,.json" hidden></label></div>`);
+  $('dlGo').onclick=()=>{try{const data=JSON.stringify({app:'fastaqim',v:FQ_BUILD,at:new Date().toISOString(),state:S},null,1);const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'application/json'}));a.download='fastaqim-my-data-'+dkey()+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},2000)}catch(e){toast(tl("That file didn't work."))}};
+  $('dlIn').onchange=e=>{const f=e.target.files&&e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const j=JSON.parse(rd.result),st=j.state||j;if(!st||!Array.isArray(st.tasks))throw 0;if(!confirm(tl('This replaces what is on this phone with the file. Continue?')))return;const uid0=S.uid;S=st;if(uid0)S.uid=uid0;S.savedAt=Date.now();TRS.snap=null;save();TRS.snap=trSnap();modalClose();render();undoBar(tl('Restored. Welcome back.'))}catch(x){toast(tl("That file didn't work."))}};rd.readAsText(f)}}
+GO.data=GO.download=GO.export=()=>dlOpen();
+{const _amD=apMenu;apMenu=function(){const r=_amD.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="trash"]');if(s&&!m.querySelector('[data-am="dl"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='dl';b.textContent='💾 '+tl('Download my data');b.onclick=()=>{m.hidden=true;dlOpen()};s.after(b)}
+  const sv=m&&m.querySelector('[data-am="sv"]');if(sv)sv.textContent='🔖 '+tl('Catch up later')}catch(e){}return r}}
+SRCH_PG.push(['💾','Download my data','data']);{const i=SRCH_PG.findIndex(x=>x[2]==='am:sv');if(i>=0)SRCH_PG[i][1]='Catch up later'}
+{const _svO=svOpen;svOpen=function(){const r=_svO.apply(this,arguments);try{const t=$('scrollBody').querySelector('.ah-t');if(t)t.textContent='🔖 '+tl('Catch up later')}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
