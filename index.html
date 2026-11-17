@@ -1992,6 +1992,57 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .fq-tw.on{color:var(--ink);font-weight:700}
 .fq-tw>input[type=time]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;opacity:0!important;margin:0!important;border:0!important;padding:0!important}
 .fq-tw{height:46px;align-self:start;flex-grow:0}
+
+/* ===== v132 daily check-in ===== */
+.ci-card{padding:14px 14px 12px;display:flex;flex-direction:column;gap:10px;border:1.5px solid color-mix(in srgb,#1f9d6b 35%,transparent)}
+.ci-h{display:flex;align-items:center;gap:12px}
+.ci-ring{--p:0;width:48px;height:48px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(#1f9d6b calc(var(--p)*1%),color-mix(in srgb,var(--ink) 10%,transparent) 0)}
+.ci-ring b{width:38px;height:38px;border-radius:50%;background:var(--surface,#fff);display:grid;place-items:center;font-size:.72rem;color:var(--ink)}
+.ci-t{margin:0;font-weight:800;font-size:1.02rem;color:var(--ink)}.ci-st{margin:0;color:#c98a00;font-weight:700;font-size:.85rem;min-height:1em}
+.ci-rows{display:flex;flex-direction:column;gap:6px}
+.ci-r{display:grid;grid-template-columns:1fr auto;gap:6px}
+.ci-s{display:flex;align-items:center;justify-content:space-between;gap:8px;min-height:42px;padding:6px 12px;border-radius:12px;border:0;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;color:var(--ink);text-align:start}
+.ci-s b{font-weight:700;font-size:.92rem}.ci-s span{font-size:.8rem;color:var(--muted);font-weight:600;white-space:nowrap}
+.ci-s.on{background:color-mix(in srgb,#1f9d6b 13%,transparent)}.ci-s.on span{color:#16805a}
+.ci-s.late{background:color-mix(in srgb,#f5a524 15%,transparent)}.ci-s.late span{color:#a96a00}
+.ci-s.miss{background:color-mix(in srgb,#e5484d 10%,transparent)}.ci-s.miss span{color:#c4353a}
+.ci-s.exc{background:color-mix(in srgb,#d46ba5 12%,transparent)}.ci-s.exc span{color:#a24a7c}
+.ci-r.fut .ci-s{opacity:.6}
+.ci-k{min-height:42px;min-width:92px;padding:4px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);font:inherit;font-size:.95rem;color:var(--ink);display:flex;align-items:center;justify-content:center;gap:4px}
+.ci-k small{font-size:.66rem;font-weight:700;color:var(--muted);line-height:1.1;text-align:start}
+.ci-k.on{background:#1f9d6b;border-color:#1f9d6b;color:#fff}.ci-k.on small{color:#fff}
+.ci-k:disabled{opacity:.4}.ci-k.na{border:0;background:transparent;min-width:92px}
+.ci-az{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"i t g" "b b b";gap:4px 10px;align-items:center;padding:10px 12px;border-radius:14px;border:0;background:color-mix(in srgb,#f5a524 12%,transparent);font:inherit;color:var(--ink);text-align:start}
+.ci-azi{grid-area:i;font-size:22px}.ci-azt{grid-area:t;display:flex;flex-direction:column}.ci-azt b{font-size:.95rem}.ci-azt small{color:var(--muted);font-size:.78rem}.ci-go{grid-area:g;font-size:1.3rem;color:var(--muted)}
+.ci-bar{grid-area:b;height:6px;border-radius:9px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}.ci-bar i{display:block;height:100%;background:#e39b17;border-radius:9px}
+.ci-az.done{background:color-mix(in srgb,#1f9d6b 13%,transparent)}.ci-az.done .ci-bar i{background:#1f9d6b}
+.ci-m{display:flex;flex-direction:column;gap:10px;text-align:center}.ci-ar{font-size:1.45rem;line-height:2.1;margin:0}
+.ci-pl{display:flex;align-items:center;justify-content:center;gap:10px}
+.ci-src a{color:var(--calm);font-weight:700;text-decoration:none;font-size:.85rem}
+.ci-done{position:relative;overflow:hidden;width:100%}.ci-done i{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(255,255,255,.35);transition:width .2s linear}.ci-done span{position:relative}
+.ci-done:disabled{opacity:.75}
+.ci-az-m{display:flex;flex-direction:column;gap:10px;text-align:start}.ci-tip{margin:-4px 0 0;color:var(--muted);font-size:.85rem;text-align:center}
+.ci-z{position:relative;padding:12px 12px 14px;border-radius:16px;background:var(--surface,#fff);border:1.5px solid var(--line);cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.ci-z:active{transform:scale(.99)}
+.ci-z.dn{border-color:#1f9d6b;background:color-mix(in srgb,#1f9d6b 7%,var(--surface,#fff))}
+.ci-z.pw{border-color:color-mix(in srgb,#e39b17 60%,transparent)}
+.ci-z.slow{animation:ciSlow .35s}@keyframes ciSlow{0%,100%{transform:none}30%{transform:translateX(-4px)}60%{transform:translateX(4px)}}
+.ci-zh{display:flex;align-items:center;gap:6px;justify-content:flex-end}
+.ci-zc{margin-inline-end:auto;font-weight:800;font-size:.85rem;color:#16805a;background:color-mix(in srgb,#1f9d6b 12%,transparent);padding:2px 10px;border-radius:99px}
+.ci-za,.ci-zu{border:0;width:34px;height:34px;min-height:0;border-radius:50%;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);font-size:.9rem;padding:0}
+.ci-za.on{background:#1f9d6b;color:#fff}
+.ci-zar{font-size:1.25rem;line-height:2;margin:6px 0 2px;text-align:center}.ci-ztr{margin:0;color:var(--muted);font-size:.8rem;text-align:center}
+.ci-zs{margin:4px 0 0;font-size:.7rem;color:var(--muted);text-align:center}
+.ci-zb{position:absolute;left:12px;right:12px;bottom:6px;height:3px;border-radius:9px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}.ci-zb i{display:block;height:100%;background:#1f9d6b}
+.ci-more summary{list-style:none;cursor:pointer;text-align:center;font-weight:800;color:var(--calm);padding:10px;border-radius:12px;background:color-mix(in srgb,var(--calm) 8%,transparent)}
+.ci-more summary::-webkit-details-marker{display:none}.ci-more[open]{display:flex;flex-direction:column;gap:10px}
+.sq-b.exc i{background:color-mix(in srgb,#d46ba5 18%,transparent)}
+.sis-card{display:flex;flex-direction:column;gap:8px}
+.fq-dic{display:inline-flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;width:1.15em!important;height:1.2em!important;border-radius:.22em!important;background:#fff!important;box-shadow:0 0 0 1px rgba(0,0,0,.12)!important;overflow:hidden!important;vertical-align:-.18em!important;line-height:1!important;font-style:normal!important;font-family:-apple-system,system-ui,sans-serif!important}
+.fq-dic i{display:block!important;width:100%!important;background:#e5484d!important;color:#fff!important;font-style:normal!important;font-size:.3em!important;font-weight:800!important;padding:.12em 0!important;text-transform:uppercase!important;text-align:center!important;letter-spacing:.02em!important}
+.fq-dic b{font-size:.58em!important;font-weight:700!important;color:#1b2430!important;margin-top:.08em!important}
+.cal-week .hjd{font-size:.68rem;white-space:nowrap;line-height:1.25;display:block}
+.cal-week .its.emp{min-height:0}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7633,7 +7684,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v131',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v132',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8463,9 +8514,9 @@ function fqVV(){try{const sa=fqStandalone(),de=document.documentElement,vv=windo
   FQV.kb=fqEd(document.activeElement)&&!!vv&&vv.height<innerHeight*0.85||fqEd(document.activeElement)&&sa&&(screen.height-(vv?vv.height:innerHeight))>150;
   de.classList.toggle('fq-kb',sa&&FQV.kb);
   let H=vv?vv.height:innerHeight;
-  if(sa&&!FQV.kb){const por=matchMedia('(orientation: portrait)').matches,sh=por?Math.max(screen.height,screen.width):Math.min(screen.height,screen.width);if(sh>H&&sh-H<500)H=sh}
+  let stale=false;if(sa&&!FQV.kb){const por=matchMedia('(orientation: portrait)').matches,sh=por?Math.max(screen.height,screen.width):Math.min(screen.height,screen.width);if(sh-innerHeight>60&&sh-innerHeight<500){H=sh;stale=true}}
   de.style.setProperty('--fqvh',H+'px');
-  if(bn){if(sa&&!FQV.kb){const h=bn.offsetHeight||64;bn.style.top=(H-h)+'px';bn.style.bottom='auto'}else{bn.style.top='';bn.style.bottom=''}}
+  if(bn){if(stale){const z=parseFloat(document.body.style.zoom)||1,h=bn.offsetHeight||64;bn.style.top=(H/z-h)+'px';bn.style.bottom='auto'}else{bn.style.top='';bn.style.bottom=''}}
   de.classList.toggle('fq-sa',sa);de.classList.toggle('fq-scr',scrollY>6)}catch(e){}}
 ['resize','orientationchange','scroll','pageshow'].forEach(ev=>addEventListener(ev,()=>requestAnimationFrame(fqVV),{passive:true}));
 if(window.visualViewport){visualViewport.addEventListener('resize',()=>requestAnimationFrame(fqVV));visualViewport.addEventListener('scroll',()=>requestAnimationFrame(fqVV))}
@@ -8573,6 +8624,104 @@ const FQTW={t:0};function fqTimeWrap(root){(root||document).querySelectorAll('in
   if(i.style.maxWidth){w.style.maxWidth=i.style.maxWidth}const up=()=>{l.textContent=i.value?t12(i.value):'🕒 '+tl('Time');w.classList.toggle('on',!!i.value)};i.addEventListener('input',up);i.addEventListener('change',up);up()})}
 new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1&&(n.matches('input[type=time]')||n.querySelector&&n.querySelector('input[type=time]'))){clearTimeout(FQTW.t);FQTW.t=setTimeout(()=>fqTimeWrap(document),0);return}}).observe(document.body,{childList:true,subtree:true});
 setTimeout(()=>fqTimeWrap(document),300);
+
+/* ===================== v132: Daily Fastaqim check-in (pinned on Home, can't be closed) =====================
+   Salah ×5 (On time / Late / Missed; "Excused" only for sisters, set privately in Name & picture)
+   Ayat al-Kursi after each salah (an-Nasa'i al-Kubra 9848, graded sahih) with Saad al-Ghamdi audio
+   Morning adhkar minimum (10), extras optional; taps that are faster than reading don't count
+   Stars: honest, reversible; extra for 100× dhikr; bonus when today beats yesterday */
+[["Daily check-in","التسجيل اليومي","Galmee guyyaa","Diiwaanka maalinlaha"],["Ayat al-Kursi","آية الكرسي","Aayatal Kursii","Aayadda Kursiga"],["after","بعد","booda","kadib"],
+ ["Morning adhkar","أذكار الصباح","Zikrii ganamaa","Adkaarta subaxa"],["Excused","معذورة","Dhiifama","Cudur-daar"],["Keep going","تابع","Itti fufi","Sii wad"],
+ ["Extra, if you have energy","إضافي، إن كان عندك طاقة","Dabalataa, yoo humna qabaatte","Dheeraad ah, haddii aad tamar leedahay"],["Power dhikr","ذكر مضاعف","Zikrii humnaa","Dhikri xoog leh"],
+ ["Take your time with each one.","خذ وقتك مع كل ذكر.","Tokkoon tokkoon isaatiif yeroo fudhadhu.","Waqti sii mid kasta."],["Better than yesterday!","أفضل من أمس!","Kaleessa caala!","Ka fiican shalay!"],
+ ["on time today","في وقتها اليوم","har'a yeroon","maanta waqtigeeda"],["I am","أنا","Ani","Waxaan ahay"],["Brother","أخ","Obboleessa","Walaal (lab)"],["Sister","أخت","Obboleettii","Walaal (dhedig)"],
+ ["Private. Only changes the salah options you see.","خاص. يغيّر فقط خيارات الصلاة التي تراها.","Dhuunfaa. Filannoo salaataa ati argitu qofa jijjiira.","Gaar ah. Waxay beddeshaa kaliya doorashooyinka salaadda aad aragto."],
+ ["Done","تم","Xumurameera","Waa la dhammeeyay"],["Undo","تراجع","Deebisi","Ka noqo"],["Read","اقرأ","Dubbisi","Akhri"],["minimum","الحد الأدنى","xiqqaa","ugu yaraan"],
+ ["Not time yet","لم يحن الوقت بعد","Ammaaf yeroon isaa hin geenye","Weli waqtigii ma gaarin"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const CI_AF={ar:'اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَٰهَ إِلَّا أَنْتَ',tr:'Allāhumma ʿāfinī fī badanī, Allāhumma ʿāfinī fī samʿī, Allāhumma ʿāfinī fī baṣarī, lā ilāha illā ant',en:'O Allah, grant me well-being in my body. O Allah, grant me well-being in my hearing. O Allah, grant me well-being in my sight. There is no god but You.',n:3,src:'Abū Dāwūd 5090'};
+const CI_AFW={ar:'اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ، اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي دِينِي وَدُنْيَايَ وَأَهْلِي وَمَالِي، اللَّهُمَّ اسْتُرْ عَوْرَاتِي وَآمِنْ رَوْعَاتِي، اللَّهُمَّ احْفَظْنِي مِنْ بَيْنِ يَدَيَّ وَمِنْ خَلْفِي وَعَنْ يَمِينِي وَعَنْ شِمَالِي وَمِنْ فَوْقِي، وَأَعُوذُ بِعَظَمَتِكَ أَنْ أُغْتَالَ مِنْ تَحْتِي',tr:'Allāhumma innī asʾalukal-ʿafwa wal-ʿāfiyah fid-dunyā wal-ākhirah…',en:'O Allah, I ask You for pardon and well-being in this world and the next. O Allah, I ask You for pardon and well-being in my religion, my worldly life, my family and my wealth. O Allah, cover my faults and calm my fears. O Allah, guard me from in front of me and behind me, from my right and my left, and from above me, and I seek refuge in Your greatness from being taken unaware from beneath me.',n:1,src:'Abū Dāwūd 5074, Ibn Mājah 3871'};
+function ciQul(){const a=QZ.ikhlas,b=QZ.falaq,c=QZ.nas;return {ar:[a.ar,b.ar,c.ar].join(' ۝ '),tr:'al-Ikhlāṣ, al-Falaq, an-Nās',en:"Say: He is Allah, One… · Say: I seek refuge in the Lord of daybreak… · Say: I seek refuge in the Lord of mankind…",n:3,src:'Abū Dāwūd 5082, at-Tirmidhī 3575',au:['112001','112002','112003','112004','113001','113002','113003','113004','113005','114001','114002','114003','114004','114005','114006']}}
+function ciMin(){const w=(ADHKAR.worry&&ADHKAR.worry.items||[]).find(x=>x.id==='h1')||{};const m12=(ADHKAR.morning.items||[]).find(x=>x.id==='m12')||{};
+  return [Object.assign({id:'c1'},DZ.bismi,{n:3}),Object.assign({id:'c2'},QZ.kursi,{n:1,au:['002255']}),Object.assign({id:'c3'},ciQul()),Object.assign({id:'c4'},DZ.sayyid,{n:1}),Object.assign({id:'c5'},CI_AF),
+   Object.assign({id:'c6'},CI_AFW),Object.assign({id:'c7'},w,{n:1}),Object.assign({id:'c8'},DZ.radi,{n:3}),Object.assign({id:'c9'},m12,{n:3}),Object.assign({id:'c10'},DZ.tahlil,{n:10})]}
+function ciExtra(){const used=['m1','m2','m3','m4','m7','m8','m9','m12','m13'];return (ADHKAR.morning.items||[]).filter(x=>!used.includes(x.id)&&x.n<100).map(x=>Object.assign({},x,{id:'e_'+x.id}))}
+function ciPower(){return [Object.assign({id:'p1'},DZ.tahlil,{n:100,src:'al-Bukhārī 3293, Muslim 2691'}),Object.assign({id:'p2'},DZ.subhan100,{n:100,src:'al-Bukhārī 6405, Muslim 2691'})]}
+function ciD(d){S.ci=S.ci||{};const k=dkey(d);if(!S.ci[k])S.ci[k]={az:{},k:{},aw:{}};const o=S.ci[k];o.az=o.az||{};o.k=o.k||{};o.aw=o.aw||{};return o}
+function ciPeek(d){return (S.ci||{})[dkey(d)]||{az:{},k:{},aw:{}}}
+function ciAw(key,n,txt){const o=ciD();o.awn=o.awn||{};const had=o.aw[key]||0;if((o.awn[key]||0)===n&&(had>0)===(n>0))return 0;if(had){fqUnAward(had,txt);delete o.aw[key]}o.awn[key]=n;if(n>0){o.aw[key]=-1;const g=award(n,txt);o.aw[key]=g;return g}delete o.awn[key];return 0}
+function ciPct(d){const q=salQ(d),o=ciPeek(d),M=ciMin();let got=0,all=5+5+M.length;for(let i=0;i<5;i++){if(q[i]==='on'||q[i]==='late'||q[i]==='exc')got++;if(o.k&&o.k[i]||q[i]==='exc')got++}M.forEach(x=>{if(((o.az||{})[x.id]||0)>=x.n)got++});return Math.round(got/all*100)}
+function ciYest(){const d=new Date();d.setDate(d.getDate()-1);return d}
+let CI_BUSY=false;function ciSync(){if(CI_BUSY)return;CI_BUSY=true;try{if(!inApp())return;const q=salQ(),y=salQ(ciYest()),o=ciD();let better=[];
+  for(let i=0;i<5;i++){const v=q[i];ciAw('sal'+i,v==='on'?3:v==='late'?1:0,'🕌 '+tl(SQ5[i]));const imp=v==='on'&&(y[i]==='late'||y[i]==='miss'||!y[i])&&Object.keys(y).length>0;
+    const was=!!o.aw['imp'+i];ciAw('imp'+i,imp?2:0,'🎉 '+tl(SQ5[i])+' '+tl('on time today'));if(imp&&!was)better.push(tl(SQ5[i]))}
+  const M=ciMin(),allMin=M.every(x=>(o.az[x.id]||0)>=x.n);ciAw('azmin',allMin?5:0,'🌅 '+tl('Morning adhkar'));
+  const pc=ciPct(),py=ciPct(ciYest()),bt=pc>py&&py>0&&pc>=50;const wasB=!!o.aw.better;ciAw('better',bt?5:0,'📈 '+tl('Better than yesterday!'));
+  if(better.length)setTimeout(()=>toast('🎉 '+better.join(', ')+' '+tl('on time today')+'. '+tl('Better than yesterday!')),400);else if(bt&&!wasB)setTimeout(()=>toast('📈 '+tl('Better than yesterday!')+' +5 ⭐'),400);
+  save()}catch(e){console.warn('ci',e)}finally{CI_BUSY=false}}
+function ciHTML(){const P=(()=>{try{return salahFor(new Date())}catch(e){return null}})(),q=salQ(),o=ciPeek(),now=new Date(),M=ciMin(),azN=M.filter(x=>((o.az||{})[x.id]||0)>=x.n).length,pc=ciPct(),st=Object.values(o.aw||{}).reduce((a,b)=>a+Math.max(0,b),0);
+  const rows=SQK.map((k,i)=>{const v=q[i],t=P&&P[k],fut=t&&t>now,kd=o.k&&o.k[i];const sl=v==='on'?['on','✓ '+tl('On time')]:v==='late'?['late','⏰ '+tl('Late')]:v==='miss'?['miss','✕ '+tl('Missed')]:v==='exc'?['exc','🌸 '+tl('Excused')]:['',fut?(t?hmShort(t):''):tl('Tap')];
+    return `<div class="ci-r${fut&&!v?' fut':''}"><button type="button" class="ci-s ${sl[0]}" data-ci="sal" data-i="${i}"><b>${esc(tl(SQ5[i]))}</b><span>${esc(sl[1])}</span></button>${v==='exc'?'<span class="ci-k na"></span>':`<button type="button" class="ci-k${kd?' on':''}" data-ci="k" data-i="${i}" ${(v==='on'||v==='late'||kd)?'':'disabled'} aria-label="${esc(tl('Ayat al-Kursi'))}">${kd?'✓':'📖'} <small>${esc(tl('Ayat al-Kursi'))}</small></button>`}</div>`}).join('');
+  return `<div class="hm-card ci-card" id="ciCard"><div class="ci-h"><div class="ci-ring" style="--p:${pc}"><b>${pc}%</b></div><div class="ci-ht"><p class="ci-t">✅ ${esc(tl('Daily check-in'))}</p><p class="ci-st">${st?'⭐ +'+st:''}</p></div></div>
+   <div class="ci-rows">${rows}</div>
+   <button type="button" class="ci-az${azN===M.length?' done':''}" data-ci="az"><span class="ci-azi">🌅</span><span class="ci-azt"><b>${esc(tl('Morning adhkar'))}</b><small>${azN}/${M.length} · ${esc(tl('minimum'))}</small></span><span class="ci-bar"><i style="width:${Math.round(azN/M.length*100)}%"></i></span><span class="ci-go">›</span></button></div>`}
+{const _hmC=hmTrk;hmTrk=function(){const h=_hmC.apply(this,arguments);try{if(!inApp()||!S.name)return h;return ciHTML()+h}catch(e){return h}}}
+function ciRefresh(){const c=$('ciCard');if(c){const t=document.createElement('div');t.innerHTML=ciHTML();c.replaceWith(t.firstChild)}}
+{const _stC=salTop;salTop=function(){const r=_stC.apply(this,arguments);try{if(!CI_BUSY){ciSync();ciRefresh()}}catch(e){}return r}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  const k=b.dataset.ci,i=+b.dataset.i;if(k==='sal')salMark(i);else if(k==='k')ciKursi(i);else if(k==='az')ciAzOpen()},true);
+/* sisters: "Excused" in the salah choices (private setting) */
+{const _sm=salMark;salMark=function(i){const r=_sm.apply(this,arguments);try{if(S.sister){const g=$('scrollBody').querySelector('.sq-g');if(g&&!g.querySelector('[data-sq="exc"]')){const cur=salQ()[i];const b=document.createElement('button');b.type='button';b.className='sq-b exc'+(cur==='exc'?' sel':'');b.dataset.sq='exc';b.innerHTML='<i>🌸</i>'+esc(tl('Excused'));g.appendChild(b);
+   b.onclick=()=>{S.salQ=S.salQ||{};const k=dkey(),q=Object.assign({},S.salQ[k]||{});q[i]='exc';S.salQ[k]=q;save();modalClose();try{salTop()}catch(x){}}}}}catch(e){}return r}}
+function sisEl(){let c=$('sisCard');if(!c){c=document.createElement('div');c.id='sisCard';c.className='card sis-card'}
+  c.innerHTML=`<p class="label">${esc(tl('I am'))}</p><div class="seg sis-seg"><button type="button" data-sis="0" aria-pressed="${!S.sister}">${esc(tl('Brother'))}</button><button type="button" data-sis="1" aria-pressed="${!!S.sister}">${esc(tl('Sister'))}</button></div><p class="small muted">🔒 ${esc(tl('Private. Only changes the salah options you see.'))}</p>`;
+  c.querySelectorAll('[data-sis]').forEach(b=>b.onclick=()=>{S.sister=b.dataset.sis==='1';save();sisEl()});const a=$('avCard');if(a&&c.previousElementSibling!==a)a.after(c);return c}
+try{const _pf=SETP.prof.f;SETP.prof.f=()=>{const a=_pf();return a.concat([sisEl()])}}catch(e){}
+/* audio: Saad al-Ghamdi (EveryAyah), one or more ayat in a row */
+const CIA={a:null};
+function ciPlay(list,btn){try{if(CIA.a){CIA.a.pause();CIA.a=null;if(btn&&btn.classList.contains('on')){btn.classList.remove('on');return}}let i=0;const a=new Audio();CIA.a=a;if(btn)btn.classList.add('on');
+  const nx=()=>{if(i>=list.length||CIA.a!==a){if(btn)btn.classList.remove('on');CIA.a=null;return}a.src='https://everyayah.com/data/Ghamadi_40kbps/'+list[i++]+'.mp3';a.play().catch(()=>{})};a.onended=nx;nx()}catch(e){}}
+function ciStopAudio(){try{if(CIA.a){CIA.a.pause();CIA.a=null}}catch(e){}}
+/* Ayat al-Kursi after salah: ✓ unlocks after the time it takes to read it */
+function ciKursi(i){const o=ciD();if(o.k[i]){o.k[i]=0;delete o.k[i];ciAw('k'+i,0,'📖 '+tl('Ayat al-Kursi'));save();ciRefresh();return}
+  const it=QZ.kursi,need=15,t0=Date.now();
+  modalCard(`<div class="ci-m"><p class="label">📖 ${esc(tl('Ayat al-Kursi'))} · ${esc(tl('after'))} ${esc(tl(SQ5[i]))}</p><p class="ayq ci-ar" dir="rtl" lang="ar">${esc(it.ar)}</p>
+   <div class="ci-pl"><button type="button" class="vd-pb" id="ciP" aria-label="▶"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button><span class="vd-rc">${esc(tl('Saad al-Ghamdi'))}</span></div>
+   <p class="small muted">${esc(LANG==='ar'?'':it.en||'')}</p><p class="ci-src"><a href="https://quran.com/2/255" target="_blank" rel="noopener">Qur'an 2:255 ↗</a></p>
+   <button type="button" class="btn-main ci-done" id="ciKD" disabled><i id="ciKF"></i><span>✓ ${esc(tl('Done'))}</span></button></div>`);
+  $('ciP').onclick=e=>ciPlay(['002255'],e.currentTarget);const B=$('ciKD'),F=$('ciKF');
+  const tk=setInterval(()=>{const p=Math.min(1,(Date.now()-t0)/(need*1000));if(F)F.style.width=p*100+'%';if(p>=1){clearInterval(tk);if(B)B.disabled=false}},200);
+  B.onclick=()=>{clearInterval(tk);ciStopAudio();const o2=ciD();o2.k[i]=1;const g=ciAw('k'+i,2,'📖 '+tl('Ayat al-Kursi'));save();modalClose();ciRefresh();toast('📖 '+tl('Ayat al-Kursi')+' ✓ +'+g+' ⭐')};
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();clearInterval(tk);ciStopAudio()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
+/* morning adhkar: tap the card to count; too-fast taps don't count; undo per item; keep going if you want */
+const CIZ={last:{},open:false};
+function ciMinGap(x){return Math.max(700,Math.min(12000,String(x.ar||'').replace(/[ً-ْٰ\s]/g,'').length*45))}
+function ciAzOpen(){const o=ciD(),M=ciMin(),E=ciExtra(),PW=ciPower();
+  const card=(x,kind)=>{const c=o.az[x.id]||0,dn=c>=x.n;return `<div class="ci-z${dn?' dn':''}${kind==='p'?' pw':''}" data-cz="${x.id}" role="button" tabindex="0"><div class="ci-zh"><span class="ci-zc" dir="ltr">${c}/${x.n}</span>${x.au?`<button type="button" class="ci-za" data-cza="${x.id}" aria-label="▶">▶</button>`:''}<button type="button" class="ci-zu" data-czu="${x.id}" aria-label="${esc(tl('Undo'))}" ${c?'':'hidden'}>↶</button></div>
+    <p class="ayq ci-zar" dir="rtl" lang="ar">${esc(x.ar||'')}</p>${LANG!=='ar'&&x.tr?`<p class="ci-ztr">${esc(x.tr)}</p>`:''}<p class="ci-zs">${esc(x.src||'')}</p><span class="ci-zb"><i style="width:${Math.min(100,c/x.n*100)}%"></i></span></div>`};
+  modalCard(`<div class="ci-az-m"><p class="label">🌅 ${esc(tl('Morning adhkar'))}</p><p class="ci-tip">${esc(tl('Take your time with each one.'))}</p>${M.map(x=>card(x,'m')).join('')}
+   <details class="ci-more"><summary>${esc(tl('Keep going'))} · ${esc(tl('Extra, if you have energy'))}</summary>${E.map(x=>card(x,'e')).join('')}<p class="label" style="margin-top:12px">⚡ ${esc(tl('Power dhikr'))} · +20 ⭐</p>${PW.map(x=>card(x,'p')).join('')}</details></div>`);
+  const B=$('scrollBody'),ALL=M.concat(E,PW);
+  B.onclick=e=>{const a=e.target.closest('[data-cza]');if(a){e.stopPropagation();const x=ALL.find(y=>y.id===a.dataset.cza);if(x)ciPlay(x.au,a);return}
+    const u=e.target.closest('[data-czu]');if(u){e.stopPropagation();const id=u.dataset.czu,x=ALL.find(y=>y.id===id),o2=ciD();const was=(o2.az[id]||0)>=x.n;o2.az[id]=Math.max(0,(o2.az[id]||0)-1);if(was)ciAzAw(x,false);save();ciAzPaint(id,x);return}
+    const c=e.target.closest('[data-cz]');if(!c)return;const id=c.dataset.cz,x=ALL.find(y=>y.id===id);if(!x)return;const o2=ciD(),n=o2.az[id]||0;if(n>=x.n)return;
+    const now=Date.now(),l=CIZ.last[id]||CIZ.open||0;if(l&&now-l<ciMinGap(x)){c.classList.remove('slow');void c.offsetWidth;c.classList.add('slow');try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(x){}return}
+    CIZ.last[id]=now;o2.az[id]=n+1;try{navigator.vibrate&&navigator.vibrate(10)}catch(x){}if(n+1>=x.n)ciAzAw(x,true);save();ciAzPaint(id,x)};
+  CIZ.open=Date.now()-60000;CIZ.last={};
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();ciStopAudio();ciSync();ciRefresh()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
+function ciAzAw(x,on){const n=x.n>=100?20:x.id.startsWith('e_')?1:2;const g=ciAw('az_'+x.id,on?n:0,'🌅 '+tl('Morning adhkar'));if(on&&g)toast('✓ +'+g+' ⭐')}
+function ciAzPaint(id,x){const c=$('scrollBody').querySelector(`[data-cz="${id}"]`);if(!c)return;const n=ciD().az[id]||0;c.querySelector('.ci-zc').textContent=n+'/'+x.n;c.querySelector('.ci-zb i').style.width=Math.min(100,n/x.n*100)+'%';c.classList.toggle('dn',n>=x.n);const u=c.querySelector('.ci-zu');if(u)u.hidden=!n}
+GO.checkin=GO.check=()=>{goHome();setTimeout(()=>{const c=$('ciCard');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})},200)};GO.morning=()=>ciAzOpen();
+
+/* v132: calendar polish: a real date icon instead of the phone's fixed "JUL 17" emoji; Hijri day shows its month; empty days stay clean */
+function fqDateIc(){const d=new Date();let m='';try{m=d.toLocaleDateString(LOC(),{month:'short'})}catch(e){}return `<span class="fq-dic" aria-hidden="true"><i>${esc(m)}</i><b>${d.getDate()}</b></span>`}
+function fqCalPolish(){try{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:n=>/[\u{1F4C5}\u{1F4C6}]/u.test(n.nodeValue)&&!(n.parentNode&&n.parentNode.closest&&n.parentNode.closest('script,style,title,noscript,input,textarea,select,option,[contenteditable],.notranslate,[data-raw],svg'))?1:3});const L=[];let n;while(n=w.nextNode())L.push(n);
+  L.forEach(t=>{if(t.parentNode&&t.parentNode.closest('.hub-i,.h2i,option')){t.nodeValue=t.nodeValue.replace(/[\u{1F4C5}\u{1F4C6}]\uFE0F?/gu,'🗓️');return}const sp=document.createElement('span');sp.innerHTML=esc(t.nodeValue).replace(/[\u{1F4C5}\u{1F4C6}]️?/gu,fqDateIc());t.replaceWith(...sp.childNodes)});
+  document.querySelectorAll('.cal-week .cal-day').forEach(b=>{const h=b.querySelector('.hjd');if(h&&!h.dataset.m){h.dataset.m=1;try{const dt=new Date(b.dataset.cd+'T12:00');h.textContent=String(hijri(dt,{day:'numeric',month:'long'})).replace(/\s*\d{4}.*$/,'').replace(/\s*هـ$/,'').replace(/[\s-]*(al-Akhirah|al-Akhir|al-Thani|ath-Thani|al-Aakhir)\b/i,' II').replace(/[\s-]*(al-Ula|al-Awwal|al-Oula)\b/i,' I')}catch(e){}}
+   const it=b.querySelector('.its');if(it&&it.textContent.trim()==='—'){it.innerHTML='';it.classList.add('emp')}})}catch(e){}}
+{const FQCP={t:0};new MutationObserver(()=>{clearTimeout(FQCP.t);FQCP.t=setTimeout(fqCalPolish,30)}).observe(document.body,{childList:true,subtree:true,characterData:false})}
+setTimeout(fqCalPolish,300);
+[["Tap","اضغط","Tuqi","Taabo"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
