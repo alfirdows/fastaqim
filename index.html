@@ -1688,6 +1688,38 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .rp-ban span{color:#b9c3cc;font-size:14px}.rp-ban div{display:flex;gap:8px;margin-top:8px}.rp-ban button{flex:1}
 @keyframes fqFade{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
 .rp-n{text-align:start}
+
+/* v119 search */
+.sr{display:flex;flex-direction:column;gap:12px}
+.sr-in{display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--ink) 7%,transparent);border-radius:14px;padding:0 12px;height:46px}
+.sr-in input{flex:1;border:0;background:transparent;font:inherit;font-size:17px;color:var(--ink);outline:none;min-width:0;padding:0;height:44px;-webkit-appearance:none}
+.sr-in input::-webkit-search-cancel-button{display:none}
+.sr-ic{font-size:16px;opacity:.7}
+.sr-clr{border:0;background:color-mix(in srgb,var(--ink) 25%,transparent);color:var(--card,#fff);width:22px;height:22px;min-height:0;border-radius:50%;font-size:11px;padding:0;display:grid;place-items:center}
+.sr-h{margin:6px 2px 4px;font-size:13px;font-weight:700;color:var(--muted);text-transform:none}
+.sr-h span{font-weight:600;opacity:.7}
+.sr-list{display:flex;flex-direction:column;border-radius:14px;overflow:hidden;background:color-mix(in srgb,var(--ink) 4%,transparent)}
+.sr-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border:0;background:transparent;text-align:start;color:var(--ink);font:inherit;min-height:48px;width:100%;border-radius:0}
+.sr-row+.sr-row{border-top:1px solid var(--line)}
+.sr-ri{font-size:18px;width:24px;text-align:center;flex:none}
+.sr-rt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.sr-rt b{font-weight:600;overflow-wrap:anywhere}
+.sr-rt small{color:var(--muted);font-size:12.5px}
+.sr-row i{font-style:normal;color:var(--muted);font-size:20px}
+[dir=rtl] .sr-row i{transform:scaleX(-1)}
+.sr-row mark{background:color-mix(in srgb,#f5c542 55%,transparent);color:inherit;border-radius:3px;padding:0 1px}
+.sr-pg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sr-chip{display:flex;align-items:center;gap:8px;padding:10px 12px;border:0;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink);font:inherit;text-align:start;min-height:46px}
+.sr-chip b{font-weight:600;font-size:14px;overflow-wrap:anywhere}
+.sr-none{text-align:center;padding:26px 0}.sr-big{font-size:34px;margin:0 0 6px;opacity:.5}
+.sr{width:100%;min-width:0;box-sizing:border-box;min-height:min(560px,68vh)}
+.sr-in,.sr-list,.sr-pg{width:100%;box-sizing:border-box;min-width:0}
+.sr-pg{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.sr-in input{width:0}
+.sr-h{text-align:start}
+.sr-row,.sr-chip{box-sizing:border-box}
+.sr-chip{padding:8px 10px;gap:7px}.sr-chip b{font-size:13.5px;overflow-wrap:break-word;word-break:normal;hyphens:manual;line-height:1.25}
+.sr-rt b{overflow-wrap:break-word}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7330,7 +7362,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v118',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v119',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7682,6 +7714,44 @@ document.addEventListener('click',function once(){document.removeEventListener('
 GO.report=()=>rpOpen();GO.problem=GO.report;
 {const _amR=apMenu;apMenu=function(){const r=_amR.apply(this,arguments);try{const m=$('apMenu'),f=m&&m.querySelector('[data-am="fb"]');if(f&&!m.querySelector('[data-am="rp"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='rp';b.textContent='🛠️ '+tl('Report a problem');
   b.onclick=()=>{try{if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'&&!S.shakeOff){localStorage.setItem('fq.shakeAsked','1');DeviceMotionEvent.requestPermission().then(p=>{if(p==='granted')rpShakeOn()}).catch(()=>{})}}catch(e){}rpOpen()};f.before(b)}}catch(e){}return r}}
+
+/* v119: Search (🔍 in the top bar) */
+[['Search','بحث','Barbaadi','Raadi'],['Search your to-dos, notes, goals…','ابحث في مهامك وملاحظاتك وأهدافك…','To-do, yaadannoo, kaayyoo kee barbaadi…','Ka raadi hawlahaaga, qoraalada, yoolalka…'],['Cancel','إلغاء','Dhiisi','Jooji'],
+ ['To-dos','المهام','To-do','Hawlaha'],['Goals','الأهداف','Kaayyoo','Yoolal'],['Journal','اليوميات','Galmee guyyaa','Xusuus-qor'],['Reminders','التذكيرات','Yaadachiistota','Xasuusiyeyaal'],['Saved','المحفوظات','Kan olkaa\'e','La keydiyey'],['Pages','الصفحات','Fuulota','Bogag'],
+ ['No results','لا توجد نتائج','Bu\'aan hin jiru','Natiijo ma jirto'],['Try another word.','جرّب كلمة أخرى.','Jecha biraa yaali.','Isku day eray kale.'],['Done','تمّت','Xumurameera','Dhammaaday'],['Jump to','انتقل إلى','Gara deemi','U gudub']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const SRCH_PG=[['🧭','Qibla','qibla'],['📖','Verse of the day','verse'],['📖','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['👪','Family','family'],['👤','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Suggest an idea','idea']];
+function srAm(k){try{const F={lang:()=>langOpen(),pv:()=>privacyOpen(),zk:()=>zkOpen(),qt:()=>qtOpen(),sv:()=>svOpen(),ns:()=>nsOpen(),rec:()=>recOpen()};if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36);return}if(F[k]){F[k]();return}}catch(e){}try{apMenu();const m=$('apMenu'),b=m&&m.querySelector('[data-am="'+k+'"]');if(m)m.hidden=true;if(b)b.click()}catch(e){}}
+function srNorm(s){return String(s||'').toLowerCase().normalize('NFKD').replace(/[ً-ْٰـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[̀-ͯ]/g,'')}
+function srD(d){try{return new Date(d+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'})}catch(e){return d}}
+function srMark(txt,q){const t=String(txt||'');if(!q)return esc(t);const n=srNorm(t),i=n.indexOf(q);if(i<0||n.length!==t.length)return esc(t);return esc(t.slice(0,i))+'<mark>'+esc(t.slice(i,i+q.length))+'</mark>'+esc(t.slice(i+q.length))}
+function srGo(el){if(!el)return;const sec=el.closest('section[id^="tab-"]');if(sec)show(sec.id.slice(4));setTimeout(()=>{el.scrollIntoView({block:'center',behavior:'smooth'});el.classList.add('go-hl');setTimeout(()=>el.classList.remove('go-hl'),1800)},260)}
+function srItems(){const R=[];
+  (S.tasks||[]).forEach(t=>{const st=(t.steps||[]).map(s=>s.text).join(' · ');R.push({g:'To-dos',ic:t.done?'✅':(t.top?'⭐':'◻️'),t:t.title,sub:[t.due?srD(t.due):'',t.time?t12(t.time):'',t.done?tl('Done'):''].filter(Boolean).join(' · '),x:st,go:()=>{modalClose();show('today');setTimeout(()=>srGo(document.querySelector(`.task[data-id="${t.id}"]`)||$('tab-today')),60)}})});
+  (S.goals||[]).forEach(g=>R.push({g:'Goals',ic:'🎯',t:g.title,sub:g.by||'',x:(g.steps||[]).map(s=>s.text||s.t||'').join(' '),go:()=>{modalClose();show('goals');setTimeout(()=>{const els=[...document.querySelectorAll('#tab-goals *')].filter(e=>e.children.length===0&&e.textContent.trim()===g.title);srGo(els[0]||$('tab-goals'))},60)}}));
+  (S.journal||[]).forEach(j=>R.push({g:'Journal',ic:'📝',t:j.a,sub:j.d?srD(j.d):'',x:j.q||'',go:()=>{modalClose();srGo($('jrCard'))}}));
+  (typeof myRem==='function'?myRem():[]).forEach(r=>R.push({g:'Reminders',ic:'⏰',t:r.t,sub:r.at?t12(r.at):'',go:()=>{modalClose();GO.reminders()}}));
+  (S.saved||[]).forEach(s=>R.push({g:'Saved',ic:'🔖',t:s.t,sub:'',x:s.u,go:()=>{modalClose();setTimeout(svOpen,30)}}));
+  SRCH_PG.forEach(([ic,l,k])=>{const am=k.startsWith('am:');if(!am&&typeof GO[k]!=='function')return;R.push({g:'Pages',ic,t:tl(l),x:l,pg:1,go:()=>{modalClose();setTimeout(()=>am?srAm(k.slice(3)):GO[k](),30)}})});
+  return R}
+function srOpen(){try{const m=$('apMenu');if(m)m.hidden=true}catch(e){}
+  modalCard(`<div class="sr"><div class="sr-in"><span class="sr-ic" aria-hidden="true">🔍</span><input id="srQ" type="search" enterkeyhint="search" autocomplete="off" dir="auto" placeholder="${esc(tl('Search'))}" aria-label="${esc(tl('Search'))}"><button type="button" class="sr-clr" id="srClr" aria-label="✕" hidden>✕</button></div><div id="srR" class="sr-r"></div></div>`);
+  const sb=$('scrollBody');sb.classList.add('sr-host');const I=$('srQ'),O=$('srR'),C=$('srClr');let L=[];
+  const draw=()=>{const raw=I.value.trim(),q=srNorm(raw);C.hidden=!raw;const all=srItems();
+    if(!q){L=all.filter(r=>r.pg);O.innerHTML=`<p class="sr-h">${tl('Jump to')}</p><div class="sr-pg">${L.map((r,i)=>`<button type="button" class="sr-chip" data-sr="${i}"><span>${r.ic}</span><b dir="auto">${esc(r.t)}</b></button>`).join('')}</div>`;return}
+    L=all.filter(r=>srNorm(r.t).includes(q)||srNorm(r.sub).includes(q)||srNorm(r.x).includes(q));
+    if(!L.length){O.innerHTML=`<div class="sr-none"><p class="sr-big">🔍</p><b>${tl('No results')}</b><p class="small muted">${tl('Try another word.')}</p></div>`;return}
+    const grp=['To-dos','Goals','Journal','Reminders','Saved','Pages'];let h='',n=0;
+    grp.forEach(g=>{const its=L.map((r,i)=>[r,i]).filter(([r])=>r.g===g);if(!its.length)return;h+=`<p class="sr-h">${tl(g)} <span>${its.length}</span></p><div class="sr-list">`+its.slice(0,30).map(([r,i])=>`<button type="button" class="sr-row" data-sr="${i}"><span class="sr-ri">${r.ic}</span><span class="sr-rt"><b dir="auto"${r.pg?'':' class="notranslate" translate="no" data-raw'}>${srMark(r.t,q)}</b>${r.sub?`<small dir="auto">${esc(r.sub)}</small>`:''}</span><i aria-hidden="true">›</i></button>`).join('')+'</div>'});
+    O.innerHTML=h};
+  I.oninput=draw;C.onclick=()=>{I.value='';draw();I.focus()};
+  O.onclick=e=>{const b=e.target.closest('[data-sr]');if(!b)return;try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}const r=L[+b.dataset.sr];if(r){sb.classList.remove('sr-host');r.go()}};
+  draw();setTimeout(()=>{try{I.focus()}catch(e){}},80)}
+{const _ti=topIcons;topIcons=function(cls){return _ti.apply(this,arguments).replace('<button type="button" class="tp-b" data-tp="set"',`<button type="button" class="tp-b" data-tp="search" aria-label="${esc(tl('Search'))}"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button><button type="button" class="tp-b" data-tp="set"`)}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tp="search"]');if(!b)return;e.stopImmediatePropagation();e.preventDefault();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}srOpen()},true);
+GO.search=()=>srOpen();
+{const _mc=modalClose;modalClose=function(){try{$('scrollBody').classList.remove('sr-host')}catch(e){}return _mc.apply(this,arguments)}}
+{const _tn=txNode;txNode=function(n){try{if(n.parentElement&&n.parentElement.closest('[data-raw]'))return}catch(e){}return _tn.apply(this,arguments)}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
