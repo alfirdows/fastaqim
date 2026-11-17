@@ -43,7 +43,7 @@ button.pill{cursor:pointer}
 .dk small{font:600 .75rem Inter,system-ui;color:#64748b}
 .worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .world{border:2px solid #e2e8f0;border-radius:16px;padding:0;overflow:hidden;background:#fff;cursor:pointer;display:flex;flex-direction:column}
-.world canvas{width:100%;height:64px;display:block}.world span{font:800 .7rem/1.2 Inter,system-ui;padding:6px 2px;color:#0f172a;overflow-wrap:anywhere}
+.world canvas,.world img{width:100%;height:64px;display:block;object-fit:cover;background:#cfe3f5}.world span{font:800 .7rem/1.2 Inter,system-ui;padding:6px 3px;color:#0f172a;overflow-wrap:normal;word-break:normal;hyphens:none;min-height:2.4em;display:flex;align-items:center;justify-content:center}
 .world.on{border-color:#0f172a;box-shadow:0 0 0 3px rgba(15,23,42,.15)}
 .how{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
 .how div{background:#f1f5f9;border-radius:14px;padding:8px 4px;text-align:center;font:700 .74rem/1.3 Inter,system-ui;color:#334155}
@@ -97,9 +97,9 @@ const T={speed:["Speed","السرعة","Saffisa","Xawaare"],s_slow:["Slow","بط
  pickZ:["Pick a dhikr","اختر الذكر","Zikrii filadhu","Dooro dhikriga"],target:["Target","العدد","Lakkoofsa","Tirada"],
  pickT:["Pick a to-do","اختر مهمة","Hojii tokko filadhu","Dooro hawl"],noT:["No to-dos with steps yet. Try a sample run.","لا توجد مهام بخطوات بعد. جرّب مثالًا.","Hojiin tarkaanfii qabu hin jiru. Fakkeenya yaali.","Weli ma jiraan hawlo tallaabooyin leh. Isku day tusaale."],
  sample:["Sample: tidy the room","مثال: ترتيب الغرفة","Fakkeenya: kutaa qulqulleessi","Tusaale: qolka nadiifi"],
- world:["World","العالم","Addunyaa","Adduunka"],w_gold:["Golden Road","الطريق الذهبي","Karaa Warqee","Waddada Dahabka"],w_toy:["Toy Town","مدينة الألعاب","Magaalaa Meeshaa Taphaa","Magaalada Alaabta"],w_blos:["Blossom Kingdom","مملكة الأزهار","Mootummaa Daraaraa","Boqortooyada Ubaxa"],
- how:["How to play","طريقة اللعب","Akkaataa taphaa","Sida loo ciyaaro"],h1:["Swipe ← → to change lanes","اسحب ← → لتغيير المسار","← → harkisi karaa jijjiiruuf","← → u jiid si aad u beddesho"],
- h2:["Swipe ↑ to jump","اسحب ↑ للقفز","↑ harkisi utaaluuf","↑ u jiid si aad u booddo"],h3:["Swipe ↓ to duck","اسحب ↓ للانخفاض","↓ harkisi gadi jechuuf","↓ u jiid si aad u foorarato"],
+ world:["World","العالم","Addunyaa","Adduunka"],w_gold:["Golden Road","الطريق الذهبي","Karaa Warqee","Waddada Dahabka"],w_toy:["Toy Town","مدينة الألعاب","Magaalaa Meeshaa Taphaa","Magaalada Alaabta"],w_blos:["Blossom Kingdom","مملكة الأزهار","Mootummaa Daraaraa","Boqortooyada Ubaxa"],w_city:["Big City", "المدينة الكبيرة", "Magaalaa Guddaa", "Magaalada Weyn"],w_night:["Night City", "مدينة الليل", "Magaalaa Halkanii", "Magaalada Habeenka"],w_forest:["Pine Forest", "غابة الصنوبر", "Bosona Muka Paayinii", "Kaynta Geedaha"],w_snow:["Snowy Peaks", "القمم الثلجية", "Gaarran Cabbii", "Buuraha Barafka"],w_desert:["Desert Dunes", "كثبان الصحراء", "Gammoojjii", "Saxaraha"],w_autumn:["Autumn Lane", "درب الخريف", "Karaa Birraa", "Waddada Dayrta"],w_sunset:["Sunset Coast", "شاطئ الغروب", "Qarqara Galgalaa", "Xeebta Qorrax-dhaca"],w_canyon:["Red Canyon", "الوادي الأحمر", "Sulula Diimaa", "Dooxada Cas"],w_crystal:["Crystal Valley", "وادي البلّور", "Sulula Kiristaalaa", "Dooxada Kiristaalka"],w_farm:["Green Farm", "المزرعة الخضراء", "Qonna Magariisa", "Beerta Cagaaran"],w_jungle:["Jungle Trail", "درب الغابة الاستوائية", "Karaa Bosonaa", "Jidka Duurka"],w_mountain:["Mountain Pass", "ممر الجبل", "Karaa Gaaraa", "Marinka Buurta"],
+ how:["How to play","طريقة اللعب","Akkaataa taphaa","Sida loo ciyaaro"],h1:["Change lanes","غيّر المسار","Karaa jijjiiri","Beddel waddada"],
+ h2:["Jump","اقفز","Utaali","Bood"],h3:["Duck","انخفض","Gadi jedhi","Foorarso"],
  start:["Start","ابدأ","Jalqabi","Bilow"],paused:["Paused","متوقف","Dhaabbateera","Waa la hakiyay"],resume:["Resume","تابع","Itti fufi","Sii wad"],
  back:["Back to Fastaqim","العودة إلى فاستقم","Gara Fastaqim deebi'i","Ku noqo Fastaqim"],again:["Run again","العب مجددًا","Ammas fiigi","Mar kale orod"],
  best:["Best","الأفضل","Isa caalu","Ugu fiican"],coins:["coins","عملات","saantima","qadaadiic"],dist:["meters","متر","meetira","mitir"],
@@ -142,6 +142,34 @@ const WORLDS={
  gold:{sky:['#5b8fd6','#a9cdeb','#fde6c4'],sun:'#fff3c4',hill:['#7aa06b','#94b57f'],ground:['#7fa565','#93b878'],road:'#3a3f47',road2:'#444a53',edge:'#e8e2d4',line:'#f6f1e3',side:'palm',far:'city',car:'sleek',carC:['#0f8a64','#0a5c45'],obs:'cone'},
  toy:{sky:['#4fb3ff','#9bd8ff','#e6f6ff'],sun:'#fff7b0',hill:['#58c472','#7fd68e'],ground:['#6fd17f','#8fe09b'],road:'#5b6b8c',road2:'#66779a',edge:'#ffd23f',line:'#ffffff',side:'blocks',far:'toys',car:'toy',carC:['#2f7bf6','#1e4fb3'],obs:'block'},
  blos:{sky:['#c9a7f2','#f3c9e8','#fff1f7'],sun:'#fff6e6',hill:['#b9e3c6','#d1efd9'],ground:['#bfe8c9','#d4f2dc'],road:'#b49ac6',road2:'#bea6cf',edge:'#ffffff',line:'#fff5fb',side:'blossom',far:'castle',car:'cute',carC:['#ff6fae','#d63d86'],obs:'heart'}};
+
+/* 12 more worlds built from free CC0 models (Kenney / Quaternius); the flat fallback reuses the closest classic look */
+Object.assign(WORLDS,{
+ city:{kit:'city',sky:['#4d8fe0','#a6cdf0','#e8f1f8'],sun:'#fff6dc',hill:['#8aa0b4','#9db0c2'],ground:['#9aa3ad','#a7afb8'],road:'#33373e',road2:'#3b4048',edge:'#e3e6ea',line:'#ffffff',side:'palm',far:'city',car:'sleek',carC:['#2563eb','#1e3a8a'],obs:'cone',
+  w3:{sun:'#fff3dc',sunI:2.7,hS:'#e2efff',hG:'#8b949e',hI:1,exp:1,sh1:'#cfd4db',sh2:'#b7bdc6',curb:['#e2e5ea','#8d949e'],fogN:60,fogF:220}},
+ night:{kit:'night',sky:['#070d22','#15224a','#36406e'],sun:'#dfe6ff',hill:['#1d2a3f','#24324a'],ground:['#273340','#2d3a48'],road:'#202329',road2:'#272b32',edge:'#f2c14e',line:'#f8f4e3',side:'palm',far:'city',car:'sleek',carC:['#f59e0b','#b45309'],obs:'cone',
+  w3:{sun:'#b9c6ff',sunI:.9,hS:'#4a5a8c',hG:'#1b2233',hI:.75,exp:.95,sh1:'#3b4250',sh2:'#2f3541',curb:['#f2c14e','#2a2d33'],fogN:50,fogF:200}},
+ forest:{kit:'forest',sky:['#5d9de0','#b4d6ef','#eaf3ea'],sun:'#fff3d2',hill:['#4f7f45','#5e8f50'],ground:['#5f8f4e','#6f9d5b'],road:'#43474d',road2:'#4a4f56',edge:'#efe9dc',line:'#f7f3e8',side:'palm',far:'',car:'sleek',carC:['#dc2626','#991b1b'],obs:'cone',
+  w3:{sun:'#fff0cf',sunI:2.6,hS:'#dbeeff',hG:'#5b7d4a',hI:.95,exp:1,sh1:'#a88b63',sh2:'#8f744f',curb:['#7a5a3a','#d8cdb6'],fogN:50,fogF:200}},
+ snow:{kit:'snow',sky:['#7fb2e6','#cfe3f5','#f4f8fc'],sun:'#ffffff',hill:['#e8eef5','#f3f6fa'],ground:['#eef3f8','#f7fafc'],road:'#4a5059',road2:'#525862',edge:'#ffffff',line:'#ffffff',side:'blossom',far:'',car:'sleek',carC:['#0ea5e9','#0369a1'],obs:'cone',
+  w3:{sun:'#ffffff',sunI:2.3,hS:'#eef6ff',hG:'#c9d6e3',hI:1.05,exp:.95,sh1:'#e6edf4',sh2:'#d3dde8',curb:['#d94a4a','#ffffff'],fogN:55,fogF:210}},
+ desert:{kit:'desert',sky:['#4f94d8','#a9cfee','#f6dfb6'],sun:'#fff0c8',hill:['#d9b173','#e4c084'],ground:['#e2c088','#e9ca95'],road:'#4b4540',road2:'#544d47',edge:'#f4e6c9',line:'#fbf3df',side:'palm',far:'',car:'sleek',carC:['#ea580c','#9a3412'],obs:'cone',
+  w3:{sun:'#ffe9bf',sunI:3,hS:'#e6f0ff',hG:'#c9a46a',hI:.95,exp:1,sh1:'#e8cf9e',sh2:'#d6b882',curb:['#c9542e','#f4e6c9'],fogN:70,fogF:240}},
+ autumn:{kit:'autumn',sky:['#6a9fd8','#bcd5ea','#f5e3c9'],sun:'#ffe6bf',hill:['#b07a3a','#c48d47'],ground:['#b58a3c','#c29a4b'],road:'#45403b',road2:'#4d4842',edge:'#f1e6d0',line:'#fbf3e3',side:'palm',far:'',car:'sleek',carC:['#16a34a','#14532d'],obs:'cone',
+  w3:{sun:'#ffe0b0',sunI:2.6,hS:'#f3e6d6',hG:'#a97b3f',hI:.95,exp:1,sh1:'#cbb48c',sh2:'#b59c72',curb:['#b4492b','#f1e6d0'],fogN:55,fogF:210}},
+ sunset:{kit:'sunset',sky:['#3c4f9a','#e9886a','#ffd29a'],sun:'#ffcf8a',hill:['#6a7fb0','#7d8fbd'],ground:['#e7cf9f','#efd9ad'],road:'#3e3a40',road2:'#464248',edge:'#ffe7c4',line:'#fff3df',side:'palm',far:'',car:'sleek',carC:['#e11d48','#9f1239'],obs:'cone',
+  w3:{sun:'#ffc27a',sunI:2.3,hS:'#ffd7b8',hG:'#a98c78',hI:.9,exp:1,sh1:'#efd9ad',sh2:'#dcc28f',curb:['#2f8f9d','#ffffff'],fogN:70,fogF:240}},
+ canyon:{kit:'canyon',sky:['#4a8ad4','#a4c9ea','#f5d3b0'],sun:'#fff0d0',hill:['#a94f2e','#b85d36'],ground:['#c0623a','#cc7046'],road:'#4a3c36',road2:'#52443d',edge:'#f0dcc8',line:'#fbefe2',side:'palm',far:'',car:'sleek',carC:['#0f766e','#134e4a'],obs:'cone',
+  w3:{sun:'#ffe6c0',sunI:2.9,hS:'#e8f0ff',hG:'#a7553a',hI:.95,exp:1,sh1:'#d99a72',sh2:'#c4825a',curb:['#7a3418','#f0dcc8'],fogN:70,fogF:240}},
+ crystal:{kit:'crystal',sky:['#3b2a78','#7f5cc4','#e6c8f5'],sun:'#f5e3ff',hill:['#5a4a96','#6a58a6'],ground:['#6c5aa8','#7a68b6'],road:'#2f2b44',road2:'#37324f',edge:'#e9ddff',line:'#f3ecff',side:'blossom',far:'castle',car:'cute',carC:['#22d3ee','#0e7490'],obs:'cone',
+  w3:{sun:'#f1ddff',sunI:2.2,hS:'#efe2ff',hG:'#5b4c95',hI:1,exp:.95,sh1:'#9d8fd0',sh2:'#8a7cc0',curb:['#c084fc','#ffffff'],fogN:60,fogF:220}},
+ farm:{kit:'farm',sky:['#4f9be3','#a8d3f2','#eef7e6'],sun:'#fff6d6',hill:['#6aa845','#7cb655'],ground:['#79b84f','#89c45d'],road:'#4d4a45',road2:'#55524c',edge:'#f3ead8',line:'#fffaf0',side:'palm',far:'',car:'toy',carC:['#ef4444','#991b1b'],obs:'cone',
+  w3:{sun:'#fff2cf',sunI:2.7,hS:'#e2f1ff',hG:'#79a94f',hI:1,exp:1,sh1:'#c9a978',sh2:'#b39062',curb:['#d24b3a','#ffffff'],fogN:60,fogF:220}},
+ jungle:{kit:'jungle',sky:['#4e9fd6','#a5d4e8','#e3f2e0'],sun:'#fff6d8',hill:['#2f6a35','#3b7a3f'],ground:['#3f7d3a','#4b8a43'],road:'#3f3b36',road2:'#47433d',edge:'#f1e3b5',line:'#fbf3d9',side:'palm',far:'',car:'sleek',carC:['#facc15','#a16207'],obs:'cone',
+  w3:{sun:'#fff0c8',sunI:2.6,hS:'#dff2ff',hG:'#3c6e37',hI:.95,exp:1,sh1:'#9c7a4f',sh2:'#866640',curb:['#e7b52c','#2b3a2b'],fogN:45,fogF:190}},
+ mountain:{kit:'mountain',sky:['#5a93d6','#b3d0ec','#e9eef2'],sun:'#fff7e0',hill:['#8f9aa6','#a3adb7'],ground:['#7d9a62','#8aa66d'],road:'#41454b',road2:'#494d54',edge:'#ecf0f1',line:'#ffffff',side:'palm',far:'',car:'sleek',carC:['#7c3aed','#4c1d95'],obs:'cone',
+  w3:{sun:'#fff3d8',sunI:2.8,hS:'#e3eeff',hG:'#7a8f62',hI:1,exp:1,sh1:'#b8b0a2',sh2:'#a39b8c',curb:['#c0392b','#ecf0f1'],fogN:70,fogF:250}}});
+const WORDER=['gold','toy','blos','city','night','forest','snow','desert','autumn','sunset','canyon','crystal','farm','jungle','mountain'];
 let WD=WORLDS[ST.world]||WORLDS.gold;
 /* ---------- canvas + projection (own pseudo-3D road) ---------- */
 const cv=document.getElementById('cv'),x=cv.getContext('2d');let W=0,H=0,DPR=1;
@@ -234,12 +262,12 @@ function toast(t){const d=document.createElement('div');d.className='toast';d.te
 /* ---------- task mode: gates ---------- */
 function gateHit(ob){const g=G;state='gate';SFX.power();vib([20,40,20]);const s=g.steps[ob.i];
  menuShow(`<p class="big" style="font-size:1.1rem;margin:0">🚩 ${tl('stepN')} ${ob.i+1} ${tl('of')} ${g.steps.length}</p><div class="stepbox"><b dir="auto">${esc(s.text)}</b></div><p>${tl('doNow')}</p>
-  <div class="tmr" id="tm" hidden>2:00</div><button class="go" id="sDone">${tl('done')}</button><button class="sec" id="sTm">⏱ ${tl('timer')}</button><button class="sec" id="sLt">${tl('later')}</button>`);
+  <div class="tmr" id="tm" hidden>2:00</div><button class="go" id="sDone">${tl('done')}</button><button class="sec" id="sLt">${tl('later')}</button>`);
  let tmI=null;const close=()=>{clearInterval(tmI);menuHide();state='play';last=performance.now();loop()};
  $('sDone').onclick=()=>{s.done=true;g.stepDone++;if(g.task&&g.task.id&&s.id)queue({t:g.task.id,s:s.id});confetti(60);toast('⭐ '+tl('nice'));
   if(g.steps.every(q=>q.done)){g.finishZ=g.dist+12;g.objs.push({k:'finish',z:g.finishZ,ln:1})}close()};
  $('sLt').onclick=()=>{if(ob.i===g.steps.length-1||g.steps.slice(ob.i+1).length===0){g.finishZ=g.dist+12;g.objs.push({k:'finish',z:g.finishZ,ln:1})}close()};
- $('sTm').onclick=()=>{const el=$('tm');el.hidden=false;let left=120;clearInterval(tmI);tmI=setInterval(()=>{left--;el.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(left<=0){clearInterval(tmI);vib([60,60,60])}},1000)}}
+{const _t=$('sTm');if(_t)_t.onclick=()=>{const el=$('tm');el.hidden=false;let left=120;clearInterval(tmI);tmI=setInterval(()=>{left--;el.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');if(left<=0){clearInterval(tmI);vib([60,60,60])}},1000)}}}
 /* ---------- endings ---------- */
 function starsFor(){const b=G.bumps;return b===0?3:b<=2?2:1}
 function finish(){const g=G;g.won=true;state='end';confetti(160);SFX.power();vib([30,50,30,50,80]);
@@ -326,7 +354,7 @@ function drawCar(t){const g=G,base=P(g.x,0,0),p=P(g.x,0,g.y),s=p.s*(g.duck>0?1:1
  x.fillStyle='rgba(0,0,0,'+(.28-Math.min(.18,g.y*.05))+')';x.beginPath();x.ellipse(base.x,base.y+s*.02,w*.58*(1-Math.min(.4,g.y*.08)),s*.12,0,0,7);x.fill();
  if(g.boost>0){for(let i=0;i<3;i++){x.fillStyle=`rgba(251,146,60,${.5-i*.15})`;x.beginPath();x.ellipse(p.x,p.y+s*.05+i*s*.12,w*.22-i*s*.04,s*.12,0,0,7);x.fill()}}
  x.save();x.translate(p.x,p.y);if(g.inv>0&&g.boost<=0&&Math.floor(g.t*14)%2)x.globalAlpha=.45;const tilt=([-1,0,1][g.lane]-g.x)*.18;x.rotate(tilt);
- const C=ST.carC||WD.carC,kind=ST.car||WD.car;
+ const C=ST.carC||WD.carC,kind=(ST.car||WD.car).startsWith('k:')?'sleek':(ST.car||WD.car);
  /* wheels */x.fillStyle='#111827';const wh=kind==='sleek'?h*.32:h*.42;rr(-w*.5,-wh,w*.17,wh,w*.04);x.fill();rr(w*.33,-wh,w*.17,wh,w*.04);x.fill();
  if(kind==='sleek'){/* low sports car seen from behind */const gr=x.createLinearGradient(0,-h,0,0);gr.addColorStop(0,C[0]);gr.addColorStop(1,C[1]);x.fillStyle=gr;
   x.beginPath();x.moveTo(-w*.48,-h*.18);x.lineTo(-w*.48,-h*.55);x.quadraticCurveTo(-w*.46,-h*.72,-w*.3,-h*.78);x.lineTo(w*.3,-h*.78);x.quadraticCurveTo(w*.46,-h*.72,w*.48,-h*.55);x.lineTo(w*.48,-h*.18);x.quadraticCurveTo(w*.48,-h*.04,w*.36,-h*.04);x.lineTo(-w*.36,-h*.04);x.quadraticCurveTo(-w*.48,-h*.04,-w*.48,-h*.18);x.fill();
@@ -381,7 +409,7 @@ function showMenu(){if(!showMenu.once){showMenu.once=1;ST.mode='dhikr'}state='me
  menuShow(`<h1>🏁 ${tl('title')}</h1><h2>${tl('pick')}</h2>
   <div class="modes">${[['dhikr','📿'],['task','✅'],['free','🎮']].map(([k,i])=>`<button class="mode ${ST.mode===k?'on':''}" data-m="${k}"><i>${i}</i>${tl('m_'+k)}<small>${tl('d_'+k)}</small></button>`).join('')}</div>
   <div id="opt"></div>
-  <h2>${tl('world')}</h2><div class="worlds">${['gold','toy','blos'].map(k=>`<button class="world ${ST.world===k?'on':''}" data-w="${k}"><canvas data-th="${k}"></canvas><span>${tl('w_'+k)}</span></button>`).join('')}</div>
+  <h2>${tl('world')}</h2><div class="worlds">${WORDER.map(k=>`<button class="world ${ST.world===k?'on':''}" data-w="${k}"><img src="game/worlds/${k}.jpg" alt="" loading="lazy"><span>${tl('w_'+k)}</span></button>`).join('')}</div>
   <h2>${tl('speed')}</h2><div class="chips" id="spdC">${['slow','normal','fast'].map(k=>`<button class="chip ${ST.spd===k?'on':''}" data-sp="${k}">${tl('s_'+k)}</button>`).join('')}</div><p style="font-size:.8rem;margin:4px 0 0;color:#64748b">${tl('sp_note')}</p>
   <h2>${tl('how')}</h2><div class="how"><div><b>⇆</b>${tl('h1')}</div><div><b>⤒</b>${tl('h2')}</div><div><b>⤓</b>${tl('h3')}</div></div>
   <button class="go" id="goB">${tl('start')}</button>${ST.best?`<p style="font-size:.85rem;margin-top:8px">🏆 ${tl('best')}: <b>${ST.best}</b></p>`:''}`);
@@ -408,7 +436,8 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 /* for automated checks */window.__g={G:()=>G,state:()=>state,move,jump,duck,begin:()=>begin(tasksWithSteps()),setMode:m=>{ST.mode=m},finish};
 showMenu();
 </script>
-<script src="game/r3d.js?v=4"></script>
+<script src="game/gltf-lib.js?v=1"></script>
+<script src="game/r3d.js?v=5"></script>
 <script>
 /* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
    Credit never expires. Dhikr and To-do runs are never limited. */
@@ -417,8 +446,12 @@ Object.assign(T,{
  fq_rows:["Free every day|10 min","مجانًا كل يوم|10 دقائق","Guyyaa guyyaan bilisaan|daqiiqaa 10","Bilaash maalin kasta|10 daqiiqo"],
  fq_bankr:["Your saved credit|{h}","رصيدك المحفوظ|{h}","Kuusaa kee|{h}","Kaydkaaga|{h}"],
  fq_maxr:["Most per day|30 min","الحد الأقصى في اليوم|30 دقيقة","Guyyaatti hanga|daqiiqaa 30","Ugu badnaan maalintii|30 daqiiqo"],
- fq_how:["Earn credit: finish 50% of your day 3 days in a row = +20 min, every extra day in a row = +20 min, strong days = +5 min. Saved credit never expires.","اكسب رصيدًا: أنجز 50% من يومك 3 أيام متتالية = 20 دقيقة، وكل يوم متتالٍ بعدها = 20 دقيقة، والأيام القوية = 5 دقائق. الرصيد لا ينتهي.","Kuusaa argadhu: guyyaa 3 walitti aansee %50 guyyaa kee xumuri = daqiiqaa 20, guyyaan dabalataa hundi = daqiiqaa 20, guyyaan cimaan = daqiiqaa 5. Kuusaan hin dhumatu.","Kasbo kayd: dhammee 50% maalintaada 3 maalmood oo xiriir ah = 20 daqiiqo, maalin kasta oo dheeraad ah = 20 daqiiqo, maalmaha xoogga leh = 5 daqiiqo. Kaydku ma dhaco."],
- fq_run:["Your run: {n} of 3 days","سلسلتك: {n} من 3 أيام","Walitti aansuu kee: guyyaa {n} keessaa 3","Taxanahaaga: {n} ka mid ah 3 maalmood"],
+ fq_how:["Earn more play time","اكسب وقت لعب إضافيًا","Yeroo taphaa dabalataa argadhu","Kasbo waqti ciyaar dheeraad ah"],
+ fq_r1:["3 days in a row (50%+)|+20 min","٣ أيام متتالية (٥٠٪+)|+٢٠ د","Guyyaa 3 walitti (%50+)|+20 daq.","3 maalmood oo xiriir (50%+)|+20 daq."],
+ fq_r2:["Each extra day in a row|+20 min","كل يوم متتالٍ بعدها|+٢٠ د","Guyyaa dabalataa hunda|+20 daq.","Maalin kasta oo dheeraad ah|+20 daq."],
+ fq_r3:["Strong day|+5 min","يوم قوي|+٥ د","Guyyaa cimaa|+5 daq.","Maalin xoog leh|+5 daq."],
+ fq_r4:["Saved credit never expires|∞","الرصيد المحفوظ لا ينتهي|∞","Kuusaan hin dhumatu|∞","Kaydku ma dhaco|∞"],
+ fq_run:["Your run: {n} of 3 days","سلسلتك: {n} من 3 أيام","Walitti aansuu: {n}/3","Taxanahaaga: {n}/3"],
  fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
  fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
  fq_more:["Dhikr and To-do runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
@@ -440,7 +473,7 @@ Object.assign(T,{u_h:['h','س',"sa'a.",'saac'],u_min:['min','د','daq.','daq.']}
 function freeInfo(){const o=plGet(),l=fqLeftO(o),run=Math.min(3,plRun(o));const row=(k,v)=>{const [a,b]=tl(k).split('|');return `<div class="fq-row"><span>${a}</span><b>${v||b}</b></div>`};
   return `<div class="fq${l>0?'':' done'}"><b class="fq-big">${l>0?'🎮 '+tl('fq_today').replace('{n}',Math.ceil(l/60)):'🌟 '+tl('fq_done')}</b>
    ${row('fq_rows')}${row('fq_bankr',fqH(o.bank||0))}${row('fq_maxr')}
-   <span class="fq-how">${tl('fq_how')}</span>${(o.bank||0)<60?`<span class="fq-r">${'●'.repeat(run)}${'○'.repeat(3-run)} ${tl('fq_run').replace('{n}',run)}</span>`:''}${l>0?'':`<span>${tl('fq_back')} ${tl('fq_more')}</span>`}</div>`}
+   <span class="fq-how">${tl('fq_how')}</span>${[['fq_r1','🔥'],['fq_r2','➕'],['fq_r3','💪'],['fq_r4','💾']].map(([k,i])=>{const [a,b]=tl(k).split('|');return `<div class="fq-rule"><i>${i}</i><span>${a}</span><b>${b}</b></div>`}).join('')}${(o.bank||0)<60?`<span class="fq-r">${'●'.repeat(run)}${'○'.repeat(3-run)} ${tl('fq_run').replace('{n}',run)}</span>`:''}${l>0?'':`<span>${tl('fq_back')} ${tl('fq_more')}</span>`}</div>`}
 {const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast('🌟 '+tl('fq_back'));return}FQ=plGet();FQ._d=fqDay();FQ._sp=0;return _b.apply(this,arguments)}}
 addEventListener('pagehide',fqSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqSave()});
 {const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=fqLeftO(FQ),el=$('fqT');
@@ -448,7 +481,7 @@ addEventListener('pagehide',fqSave);document.addEventListener('visibilitychange'
   if(left<=0){state='end';fqSave();try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const el=$('fqT');if(el)el.hidden=true;const bk=$('back');if(bk&&bk.dataset.t){bk.textContent=bk.dataset.t;delete bk.dataset.t}}catch(e){}return r}}
 (function(){const hc=$('hc');if(hc&&!$('fqT')){const s=document.createElement('span');s.id='fqT';s.hidden=true;s.className=hc.className;s.style.cssText='font-variant-numeric:tabular-nums';hc.after(s)}
- const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}.fq{gap:6px}.fq-big{font-size:1.05rem}.fq-row{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;background:rgba(255,255,255,.7);border-radius:10px;font-weight:600;text-align:start}.fq-row b{white-space:nowrap}.fq-how{font-size:.8rem;font-weight:500;opacity:.9}';document.head.appendChild(st)})();
+ const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}.fq{gap:6px}.fq-big{font-size:1.05rem}.fq-row{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;background:rgba(255,255,255,.7);border-radius:10px;font-weight:600;text-align:start}.fq-row b{white-space:nowrap}.fq-how{font-size:.8rem;font-weight:800;opacity:.9;margin-top:4px}.fq-rule{display:flex;align-items:center;gap:8px;padding:5px 10px;font:600 .82rem/1.25 Inter,system-ui;text-align:start}.fq-rule i{font-style:normal;width:22px;flex:none;text-align:center}.fq-rule span{flex:1;text-wrap:balance}.fq-rule b{white-space:nowrap;font-weight:800}';document.head.appendChild(st)})();
 
 /* ===== Play rules made clear (Tasnim, 17 Nov): after 15 minutes of game time, one real task first; warnings before any pause ===== */
 Object.assign(T,{

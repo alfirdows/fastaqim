@@ -49,7 +49,7 @@ function vcMats(){if(VCM)return VCM;VCM={std:new T.MeshStandardMaterial({vertexC
  glow:new T.MeshBasicMaterial({vertexColors:true,color:new T.Color(2.6,2.6,2.6),toneMapped:true})};DISP.push(...Object.values(VCM));return VCM}
 function bakeVC(grp,cast=true){grp.updateMatrixWorld(true);const V=vcMats(),by={};
  grp.traverse(o=>{if(!o.isMesh)return;const m=o.material;if(m.transparent||m.map){return}
-  const cls=m.emissiveIntensity>1&&m.emissive&&(m.emissive.r+m.emissive.g+m.emissive.b)>0?'glow':m.side===T.DoubleSide?'ds':(curW==='toy'?'gloss':'std');
+  const cls=m.emissiveIntensity>1&&m.emissive&&(m.emissive.r+m.emissive.g+m.emissive.b)>0?'glow':m.side===T.DoubleSide?'ds':(curW==='toy'||curW==='crystal'?'gloss':'std');
   let g=o.geometry.index?o.geometry.toNonIndexed():o.geometry.clone();g.applyMatrix4(o.matrixWorld);
   for(const k of Object.keys(g.attributes))if(k!=='position'&&k!=='normal')g.deleteAttribute(k);if(!g.attributes.normal)g.computeVertexNormals();
   const n=g.attributes.position.count,c=new Float32Array(n*3),cc=cls==='glow'?m.emissive:m.color;for(let i=0;i<n;i++){c[i*3]=cc.r;c[i*3+1]=cc.g;c[i*3+2]=cc.b}g.setAttribute('color',new T.BufferAttribute(c,3));
@@ -57,6 +57,22 @@ function bakeVC(grp,cast=true){grp.updateMatrixWorld(true);const V=vcMats(),by={
  const out=new T.Group();for(const k in by){const mg=BGU.mergeGeometries(by[k],false);by[k].forEach(g=>g.dispose());DISP.push(mg);const me=new T.Mesh(mg,V[k]);me.castShadow=cast&&k!=='glow';me.receiveShadow=k!=='glow';out.add(me)}
  grp.traverse(o=>{if(o.isMesh&&(o.material.transparent||o.material.map)){const c=o.clone();o.updateMatrixWorld(true);c.matrixAutoUpdate=false;c.matrix.copy(o.matrixWorld);out.add(c)}});
  return out}
+
+/* ---------- real CC0 models (Kenney / Quaternius) loaded on demand ---------- */
+const GL={},GLP={};let gltfL=null;
+function glbFix(root){const seen=new Set();root.traverse(o=>{if(!o.isMesh||seen.has(o.geometry))return;seen.add(o.geometry);const g=o.geometry;
+ for(const k of Object.keys(g.attributes)){const a=g.attributes[k];if(a.array instanceof Float32Array&&!a.normalized)continue;const n=a.count,sz=a.itemSize,f=new Float32Array(n*sz);
+  for(let i=0;i<n;i++)for(let j=0;j<sz;j++)f[i*sz+j]=a.getComponent?a.getComponent(i,j):[a.getX(i),a.getY(i),a.getZ(i),a.getW(i)][j];g.setAttribute(k,new T.BufferAttribute(f,sz))}
+ const m0=o.material;if(m0&&!m0.map&&m0.color){const nm=(m0.name||'').toLowerCase(),NC={leafsdark:'#2e6a3b',leafsgreen:'#4a9a3e',grass:'#58a443',woodbarkdark:'#6e4a32',woodbark:'#8a5a3a'};for(const k in NC)if(nm.startsWith(k)){m0.color.set(NC[k]);break}}
+ const m=o.material;if(m&&m.isMeshBasicMaterial){const nm=new T.MeshStandardMaterial({color:m.color,map:m.map,roughness:.8});o.material=nm}
+ else if(m&&m.isMeshStandardMaterial){m.roughness=Math.max(.5,m.roughness);m.metalness=Math.min(.2,m.metalness)}});return root}
+function glbLoad(names){if(!window.T3G)return Promise.resolve();if(!gltfL){gltfL=new T3G.GLTFLoader();gltfL.setMeshoptDecoder(T3G.MeshoptDecoder)}
+ return Promise.all(names.map(n=>GLP[n]||(GLP[n]=new Promise(r=>gltfL.load('game/models/'+n+'.glb',g=>{GL[n]=glbFix(g.scene);r()},undefined,()=>{GL[n]=null;r()})))))}
+const glbHas=names=>names.every(n=>n in GL);
+/* a fresh copy sized by height (or by length with byLen), standing on y=0, centred */
+function gm(n,size,byLen){const src=GL[n];if(!src)return new T.Group();const o=src.clone(true),w=new T.Group();w.add(o);
+ const b=new T.Box3().setFromObject(o),sz=b.getSize(new T.Vector3()),s=size/(byLen?Math.max(sz.z,sz.x):sz.y);o.scale.setScalar(s);
+ const b2=new T.Box3().setFromObject(o),c=b2.getCenter(new T.Vector3());o.position.set(-c.x,-b2.min.y,-c.z);return w}
 function starShape(r1,r2,n=5){const s=new T.Shape();for(let i=0;i<n*2;i++){const a=i*Math.PI/n+Math.PI/2,r=i%2?r2:r1;i?s.lineTo(Math.cos(a)*r,Math.sin(a)*r):s.moveTo(Math.cos(a)*r,Math.sin(a)*r)}s.closePath();return s}
 function radTex(inner,outer){return cTex(128,128,(g,w)=>{const gr=g.createRadialGradient(64,64,0,64,64,64);gr.addColorStop(0,inner);gr.addColorStop(1,outer);g.fillStyle=gr;g.fillRect(0,0,w,w)})}
 function emojiTex(s,bg){return cTex(128,128,(g)=>{if(bg){g.fillStyle=bg;g.beginPath();g.arc(64,64,60,0,7);g.fill()}g.font='84px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",system-ui';g.textAlign='center';g.textBaseline='middle';g.fillStyle='#fff';g.fillText(s,64,70)})}
@@ -82,7 +98,8 @@ sky.renderOrder=-1;scene.add(sky);
 let carKey='',WG=null,curW=null,roadT,grassT,shT,curbG,slots=[],KITS=[],farG,car=null,carParts=null,blob,shieldM,magM,POOL={},PROTO={},gateTex={};
 function disposeWorld(){if(WG){scene.remove(WG);WG=null}VCM=null;for(const d of DISP)try{d.dispose()}catch(e){}DISP=[];for(const k in MAT)delete MAT[k];POOL={};PROTO={};gateTex={};slots=[];KITS=[];
  if(G)for(const o of G.objs)o._m=null}
-function buildWorld(key){disposeWorld();curW=key;const w=WORLDS[key]||WORLDS.gold,s=W3[key]||W3.gold;WG=new T.Group();scene.add(WG);
+function buildWorld(key){disposeWorld();curW=key;const w=WORLDS[key]||WORLDS.gold,s=W3[key]||w.w3||W3.gold;
+ {const nd=wkNeeds(key);const ck=(ST.car||'').startsWith('k:')?[ST.car.slice(2)]:[];if(!glbHas(nd.concat(ck)))glbLoad(nd.concat(ck)).then(()=>{if(curW===key)curW=null})}WG=new T.Group();scene.add(WG);
  const sk=s.sky||w.sky;SKU.top.value.set(sk[0]);SKU.mid.value.set(sk[1]);SKU.hor.value.set(sk[2]);SKU.sunC.value.set(w.sun);
  scene.fog=new T.Fog(col(sk[2]).lerp(col(sk[1]),.3),s.fogN,s.fogF);
  hemi.color.set(s.hS);hemi.groundColor.set(s.hG);hemi.intensity=s.hI;sun.color.set(s.sun);sun.intensity=s.sunI;R.toneMappingExposure=s.exp;
@@ -142,7 +159,52 @@ function flowers(){const G0=new T.Group(),st=std('#4f9a5b',.8);G0.add(M(new T.Sp
  const fc=['#ff8fb8','#ffffff','#ffd36b','#c9a7f2','#ff6f9f'];for(let i=0;i<9;i++){const a=i*2.4,r=.15+Math.random()*.42,x0=Math.cos(a)*r,z0=Math.sin(a)*r;G0.add(M(cyl(.015,.015,.35,5),st,x0,.4,z0));G0.add(M(sph(.07,10,8),std(fc[i%5],.6),x0,.6,z0))}return G0}
 function fence(c){const G0=new T.Group(),m=std(c,.6);for(let i=0;i<6;i++){G0.add(M(box(.08,.7,.12),m,0,.35,-2.2+i*.88));G0.add(M(new T.ConeGeometry(.07,.12,4),m,0,.76,-2.2+i*.88))}G0.add(M(box(.05,.07,4.8),m,0,.5,0));G0.add(M(box(.05,.07,4.8),m,0,.24,0));return G0}
 function pastelLamp(){const G0=new T.Group(),m=std('#ffffff',.4,.1);G0.add(M(cyl(.04,.06,2.4,10),m,0,1.2,0));G0.add(M(sph(.2,16,12),glow('#fff3c9',2.8),0,2.5,0));G0.add(M(new T.ConeGeometry(.26,.2,12),std('#ff9fc8',.5),0,2.72,0));return G0}
-function kitsFor(k){const out=[],wrap=(fn)=>{const g0=new T.Group();fn(g0);out.push(bakeVC(g0))};
+
+/* ---------- model worlds: which models each world uses and how the roadside is laid out ---------- */
+const BLD=['building_a','building_b','building_c','building_d','building_e','building_f','building_g','building_h'],SKY=['skyscraper_a','skyscraper_b','skyscraper_c'];
+const WK={
+ city:{m:[...BLD,...SKY,'bush','tree_oak'],traffic:'truck'},night:{m:[...BLD,...SKY,'bush'],traffic:'delivery_van'},
+ forest:{m:['tree_pine','tree_pine_tall','bush','rock_small','log','stump'],traffic:'truck'},snow:{m:['tree_pine','tree_pine_tall','rock_large','rock_small'],traffic:'suv'},
+ desert:{m:['cactus','rock_large','rock_small','rock_tall'],traffic:'truck'},autumn:{m:['tree_autumn','tree_oak','fence','bush','log','stump'],traffic:'van'},
+ sunset:{m:['tree_palm','rock_small','bush','bush_large'],traffic:'van'},canyon:{m:['rock_tall','rock_large','rock_small','cactus'],traffic:'truck'},
+ crystal:{m:['crystal','crystal_rock','rock_tall','rock_small'],traffic:'race_car_future'},farm:{m:['tree_fat','tree_oak','fence','flower_red','bush','tractor'],traffic:'tractor'},
+ jungle:{m:['tree_palm','bush_large','tree_dark','bush','log'],traffic:'suv'},mountain:{m:['tree_pine','tree_pine_tall','rock_tall','rock_large'],traffic:'truck'}};
+const wkOf=k=>WK[(WORLDS[k]||{}).kit];
+function wkNeeds(k){const s=wkOf(k);return s?[...s.m,s.traffic]:[]}
+/* recolour a model (snow on trees, autumn leaves) by swapping its materials for tinted copies */
+function tint(g,fn){g.traverse(o=>{if(o.isMesh&&o.material&&!o.material.map){o.material=o.material.clone();fn(o.material.color);DISP.push(o.material)}});return g}
+const isLeaf=c=>c.g>c.r*1.05&&c.g>=c.b*.8;
+const snowy=c=>{if(isLeaf(c)){c.lerp(col('#2f5d46'),.55).lerp(col('#ffffff'),.28)}else if(c.r>.45&&c.g>.35)c.lerp(col('#f3f6fa'),.6)};
+const fall=c=>{if(isLeaf(c))c.set(['#e07a2f','#d9542b','#f0b23a','#c9682e'][Math.floor(Math.random()*4)])};
+const deep=c=>{if(isLeaf(c))c.lerp(col('#2f7a3a'),.55)};
+const crys=c=>{if(!(c.b>c.g&&c.r>c.g))c.lerp(col('#8b7bd8'),.5)};
+function modelKits(k){const out=[],wrap=fn=>{const g0=new T.Group();fn(g0);out.push(bakeVC(g0))},R0=Math.random,pk=a=>a[Math.floor(R0()*a.length)];
+ const put=(g0,o,x,z,ry=0)=>{o.position.set(x,0,z);o.rotation.y=ry;g0.add(o);return o};
+ const kit=WORLDS[k].kit;
+ for(let v=0;v<6;v++)wrap(g0=>{
+  if(kit==='city'||kit==='night'){put(g0,gm(pk(BLD),6+R0()*4),8.2,0,Math.PI/2);if(v%2===0)put(g0,lamp(),2.75,1.6);if(v%3===1)put(g0,gm(kit==='city'?'tree_oak':'bush',kit==='city'?2.6:.7),4.4,-1.2)}
+  else if(kit==='forest'||kit==='snow'||kit==='mountain'){const f=kit==='snow'?snowy:null,tr=n=>f?tint(gm(n,3.6+R0()*2.4),f):gm(n,3.6+R0()*2.4);
+   put(g0,tr(pk(['tree_pine','tree_pine_tall'])),3.9,-1+R0()*2,R0()*6);put(g0,tr(pk(['tree_pine','tree_pine_tall'])),6.6,R0()*2-1,R0()*6);put(g0,tr('tree_pine_tall'),9,R0()*2-1,R0()*6);
+   if(kit==='mountain'&&v%2)put(g0,gm('rock_tall',4+R0()*3),7.8,1.6,R0()*6);else if(kit==='forest'&&v%3===0)put(g0,gm(pk(['log','stump']),.6),4.6,1.8,R0()*6);
+   else put(g0,f?tint(gm('rock_small',.6),f):gm(kit==='forest'?'bush':'rock_small',.7),4.7,1.6,R0()*6)}
+  else if(kit==='desert'){put(g0,gm('cactus',1.6+R0()*1.2),4.2,-1+R0()*2,R0()*6);if(v%2)put(g0,gm('rock_large',1.4+R0()),7.4,R0()*2-1,R0()*6);else put(g0,gm('cactus',2.2+R0()),8.2,0,R0()*6);put(g0,gm('rock_small',.5),5.2,1.7,R0()*6)}
+  else if(kit==='autumn'){put(g0,tint(gm(pk(['tree_autumn','tree_oak']),3.4+R0()*1.6),fall),4.1,-1+R0()*2,R0()*6);put(g0,gm('fence',.9,true),5.4,0,Math.PI/2);if(v%2)put(g0,tint(gm('tree_oak',4.5+R0()),fall),8.2,0,R0()*6);if(v%3===0)put(g0,gm(pk(['log','stump']),.6),3.4,1.8,R0()*6)}
+  else if(kit==='sunset'||kit==='jungle'){const j=kit==='jungle';put(g0,gm('tree_palm',4+R0()*1.6),3.9,-1+R0()*2,R0()*6);if(j){put(g0,tint(gm('bush_large',1.4+R0()*.6),deep),5.6,1.4,R0()*6);put(g0,tint(gm('tree_dark',5+R0()*2),deep),8,0,R0()*6)}
+   else{if(v%2)put(g0,gm('rock_small',.6),4.9,1.6,R0()*6);put(g0,gm('tree_palm',5+R0()*1.5),8.4,0,R0()*6)}}
+  else if(kit==='canyon'){put(g0,gm('rock_tall',4+R0()*4),7.6,R0()*2-1,R0()*6);put(g0,gm(pk(['rock_large','rock_small']),.9+R0()),4.4,R0()*2-1,R0()*6);if(v%3===0)put(g0,gm('cactus',1.6),5.2,1.8,R0()*6)}
+  else if(kit==='crystal'){put(g0,gm('crystal',1.4+R0()*1.6),4.3,-1+R0()*2,R0()*6);put(g0,tint(gm('rock_tall',3+R0()*3),crys),7.8,0,R0()*6);if(v%2)put(g0,gm('crystal_rock',1),5.4,1.7,R0()*6)}
+  else if(kit==='farm'){put(g0,gm('fence',.9,true),5.4,0,Math.PI/2);put(g0,gm(pk(['tree_fat','tree_oak']),3+R0()*1.5),3.9,-1+R0()*2,R0()*6);if(v===2)put(g0,gm('tractor',1.7,true),7.6,0,Math.PI/2+.4);else put(g0,gm('tree_fat',3.5+R0()),8.4,0,R0()*6);put(g0,gm('flower_red',.5),4.8,1.8,R0()*6)}
+ });return out}
+function modelFar(k,g0){const kit=WORLDS[k].kit,R0=Math.random;
+ const add=(o,x,z,ry=0)=>{o.position.set(x,0,z);o.rotation.y=ry;g0.add(o)};
+ if(kit==='city'||kit==='night')for(let i=0;i<20;i++)add(gm(i%3?SKY[i%3]:BLD[i%8],i%3?18+R0()*16:9+R0()*5),(i-10)*10+(R0()-.5)*4,-150-R0()*14,R0()*6);
+ else if(kit==='forest'||kit==='autumn'||kit==='farm')for(let i=0;i<26;i++){const o=gm(kit==='farm'?'tree_fat':kit==='autumn'?'tree_autumn':'tree_pine_tall',9+R0()*6);if(kit==='autumn')tint(o,fall);add(o,(i-13)*8+(R0()-.5)*4,-135-R0()*16,R0()*6)}
+ else if(kit==='desert'||kit==='canyon')for(let i=0;i<9;i++)add(gm('rock_tall',16+R0()*16),(i-4)*28+(R0()-.5)*10,-150-R0()*20,R0()*6);
+ else if(kit==='crystal')for(let i=0;i<9;i++)add(gm('crystal',10+R0()*12),(i-4)*28+(R0()-.5)*10,-150-R0()*20,R0()*6);
+ if(kit==='snow'||kit==='mountain')for(let i=0;i<8;i++){const h=34+R0()*26,m=new T.Group(),r=h*.8;m.add(M(new T.ConeGeometry(r,h,7),std(kit==='snow'?'#dfe7f0':'#8f9aa6',.95),0,h/2,0));
+  m.add(M(new T.ConeGeometry(r*.36,h*.36,7),std('#ffffff',.9),0,h-h*.18+.05,0));add(m,(i-3.5)*38+(R0()-.5)*12,-175-R0()*20,R0()*6)}
+ if(kit==='sunset'||kit==='jungle'&&false){const sea=M(new T.PlaneGeometry(420,90).rotateX(-Math.PI/2),phy('#2f6fae',{roughness:.12,metalness:.1,clearcoat:1}),0,.02,-160);sea.castShadow=false;g0.add(sea)}}
+function kitsFor(k){if(wkOf(k))return glbHas(wkNeeds(k))?modelKits(k):[new T.Group()];const out=[],wrap=(fn)=>{const g0=new T.Group();fn(g0);out.push(bakeVC(g0))};
  const put=(g0,o,x,z,ry=0,s=1)=>{o.position.set(x,0,z);o.rotation.y=ry;o.scale.setScalar(s);g0.add(o)};
  if(k==='gold'){
   for(let v=0;v<6;v++)wrap(g0=>{put(g0,wall('#e6d6b8'),5.3,0);put(g0,palm(3.2+Math.random()*1.3,.25+Math.random()*.3),3.9,-1+Math.random()*2,Math.random()*6);
@@ -155,14 +217,14 @@ function kitsFor(k){const out=[],wrap=(fn)=>{const g0=new T.Group();fn(g0);out.p
   for(let v=0;v<6;v++)wrap(g0=>{put(g0,fence('#ffffff'),5.2,0);put(g0,blossomTree(v%2?P1:P2),3.9,0,Math.random()*6,1+Math.random()*.25);if(v%2===0)put(g0,pastelLamp(),2.75,1.8);
    put(g0,flowers(),4.4,1.8+Math.random()*.4);if(v%3===0)put(g0,blossomTree(v%2?P2:P1),7.6,-1,0,1.3)})}
  return out}
-function farFor(k){const out=new T.Group(),g0=new T.Group(),w=WORLDS[k];
+function farFor(k){const out=new T.Group(),g0=new T.Group(),w=WORLDS[k];if(wkOf(k)&&glbHas(wkNeeds(k)))modelFar(k,g0);
  for(let i=0;i<9;i++){const h=M(sph(1,24,12),std(w.hill[i%2],.95),(i-4)*34+(Math.random()-.5)*12,-3,-118-Math.random()*30);h.scale.set(26+Math.random()*14,9+Math.random()*7,16);h.castShadow=false;g0.add(h)}
  if(k==='gold'){for(let i=0;i<22;i++){const x0=(i-11)*9+(Math.random()-.5)*4,h=4+Math.random()*9,b=house(h,['#f2e8d5','#e5d5b8','#f6efe2'][i%3],Math.random());b.position.set(x0,0,-150-Math.random()*12);b.scale.setScalar(1.6);b.rotation.y=Math.PI/2;g0.add(b)}
   for(const x0 of[-38,26,58]){const m0=minaret(9);m0.position.set(x0,0,-146);m0.scale.setScalar(1.5);g0.add(m0)}}
  else if(k==='toy'){for(let i=0;i<16;i++){const b=blockStack();b.position.set((i-8)*11,0,-140-Math.random()*20);b.scale.setScalar(4+Math.random()*3);g0.add(b)}
   for(let i=0;i<5;i++){const bl=new T.Group(),c=TOYC[i%6];bl.add(M(sph(2,24,18),plastic(c)));const st=M(new T.SphereGeometry(2.02,24,18,0,.5),plastic('#ffffff'));bl.add(st);
    const st2=st.clone();st2.rotation.y=Math.PI;bl.add(st2);bl.add(M(rbox(1,.7,1,.1),std('#b07a3c',.8),0,-3.2,0));bl.children[0].scale.y=1.15;bl.position.set(-50+i*25,16+Math.random()*10,-110-Math.random()*25);bl.userData.b=Math.random()*6;out.add(bl)}}
- else{const c=new T.Group(),wl=std('#fff4f9',.8),r1='#ffb3d1',r2='#c9a7f2',gd=std('#f5c84c',.35,.8);c.add(M(box(16,6,4),wl,0,3,0));
+ else if(!wkOf(k)){const c=new T.Group(),wl=std('#fff4f9',.8),r1='#ffb3d1',r2='#c9a7f2',gd=std('#f5c84c',.35,.8);c.add(M(box(16,6,4),wl,0,3,0));
   for(const [tx,hh,cc] of[[-9,10,r2],[-4,13,r1],[4,13,r1],[9,10,r2],[0,16,r1]]){c.add(M(cyl(1.4,1.5,hh,20),wl,tx,hh/2,0));const d=dome(1.6,cc,gd);d.position.set(tx,hh+.2,0);c.add(d)}
   c.position.set(30,0,-150);c.scale.setScalar(1.4);g0.add(c);
 }
@@ -175,7 +237,8 @@ function farFor(k){const out=new T.Group(),g0=new T.Group(),w=WORLDS[k];
 function plateTex(){return cTex(256,80,(g)=>{g.fillStyle='#f8fafc';g.fillRect(0,0,256,80);g.strokeStyle='#0f172a';g.lineWidth=5;g.strokeRect(4,4,248,72);g.fillStyle='#0f172a';g.font='900 44px Inter,system-ui,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText('FASTAQIM',128,43)})}
 function wheel(r,wd,rim){const g0=new T.Group(),tire=std('#15171b',.85),hub=std(rim,.2,1);const t=M(cyl(r,r,wd,28).rotateZ(Math.PI/2),tire);g0.add(t);const h=M(cyl(r*.62,r*.62,wd+.01,20).rotateZ(Math.PI/2),hub);g0.add(h);
  for(let i=0;i<5;i++){const sp=M(box(wd+.02,r*1.05,r*.16),hub);sp.rotation.x=i*Math.PI/5;g0.add(sp)}g0.add(M(cyl(r*.16,r*.16,wd+.03,10).rotateZ(Math.PI/2),std('#2b2f36',.4,.8)));return g0}
-function mkCar(kind,C){const g0=new T.Group(),body=new T.Group();g0.add(body);
+function mkCar(kind,C){if(kind&&kind.startsWith('k:')){const n=kind.slice(2);if(GL[n]){const g0=new T.Group(),body=gm(n,2.0,true);body.rotation.y=Math.PI;g0.add(body);const wh=[];body.traverse(o=>{if(/^wheel/.test(o.name||''))wh.push(o)});
+  const b=new T.Box3().setFromObject(body);g0.traverse(o=>{if(o.isMesh){o.castShadow=true;if(o.material&&!o.material._fq){o.material=o.material.clone();o.material._fq=1;o.material.color.set('#c4c4c4');o.material.roughness=.42;o.material.metalness=.15;o.material.envMapIntensity=.6;DISP.push(o.material)}}});g0.userData={body,wh:wh.length?wh:[],H0:b.max.y};return g0}kind='sleek'}const g0=new T.Group(),body=new T.Group();g0.add(body);
  const paint=phy(C[0],{metalness:.5,roughness:.32,clearcoat:1,clearcoatRoughness:.04}),paint2=phy(C[1],{metalness:.5,roughness:.35,clearcoat:1}),dark=std('#121418',.55,.3),glass=phy('#0d1622',{roughness:.04,metalness:.4,clearcoat:1}),
   tail=std('#ff2a2a',.3,0,{emissive:'#ff1f1f',emissiveIntensity:2.6}),chrome=std('#e3e7ec',.12,1),plate=new T.MeshStandardMaterial({map:plateTex(),roughness:.5});DISP.push(plate);
  const wh=[];let H0;
@@ -216,6 +279,7 @@ function proto(k){if(PROTO[k])return PROTO[k];const w=WORLDS[curW],g0=new T.Grou
   const sg=new T.Mesh(new T.PlaneGeometry(.34,.34),new T.MeshBasicMaterial({map:ar,transparent:true,color:'#ffffff',toneMapped:false}));sg.position.set(0,hb+.62,.02);DISP.push(sg.material);
   const pn=M(rbox(.46,.42,.06,.06),std('#0f172a',.4),0,hb+.62,-.02);p=bake(g0);p.add(pn,sg);
   for(const xx of[-.7,.7]){const l=M(sph(.06,10,8),glow('#ff3b3b',3.2),xx,hb+.36,0);l.castShadow=false;p.add(l)}}
+ else if(k==='block'&&wkOf(curW)&&GL[wkOf(curW).traffic]){const tn=wkOf(curW).traffic,o=gm(tn,tn==='tractor'?2.4:tn==='race_car_future'?2.6:3.6,true);o.rotation.y=Math.PI;o.position.z=-1.7;g0.add(o);p=g0;p.traverse(m=>{if(m.isMesh){m.castShadow=true;m.receiveShadow=true}})}
  else if(k==='block'){if(w.obs==='cone'){const sk=phy('#f4f1ea',{metalness:.35,roughness:.3,clearcoat:.8}),st=phy('#1d6f8a',{metalness:.3,roughness:.3,clearcoat:.8}),gl=phy('#13202c',{roughness:.05,metalness:.5,clearcoat:1}),dk=std('#23272e',.6,.4);
    g0.add(M(rbox(1.34,1.5,4.4,.24,4),sk,0,1.04,-2.05));g0.add(M(rbox(1.36,.42,4.3,.05),st,0,.5,-2.05));g0.add(M(box(1.37,.05,4.3),std('#d9a93a',.3,.9),0,.74,-2.05));
    g0.add(M(rbox(1.36,.5,3.9,.08),gl,0,1.25,-2.1));g0.add(M(rbox(.86,.66,.05,.06),gl,0,1.22,.16));g0.add(M(rbox(.9,.16,1.6,.06),std('#cfd5dc',.4,.6),0,1.86,-2.05));
