@@ -65,7 +65,15 @@ button.pill{cursor:pointer}
 .pw{position:fixed;left:10px;bottom:calc(env(safe-area-inset-bottom) + 50px);z-index:4;display:flex;flex-direction:column;gap:6px;pointer-events:none;direction:ltr}
 .pw span{background:rgba(15,23,42,.62);color:#fff;border-radius:99px;padding:4px 10px;font:800 13px Inter,system-ui;display:flex;align-items:center;gap:6px}
 .pw i{display:block;width:44px;height:5px;border-radius:5px;background:rgba(255,255,255,.25);overflow:hidden}.pw i b{display:block;height:100%;background:#fde047}
-</style></head><body>
+
+/* dark appearance (follows Fastaqim: Auto / Light / Dark) */
+html.gdk .sheet{background:#111827;color:#E5E7EB}html.gdk .sheet h1{color:#F9FAFB}html.gdk .sheet p{color:#CBD5E1}html.gdk .sheet h2{color:#94A3B8}
+html.gdk .mode,html.gdk .dk button,html.gdk .chip,html.gdk .world{background:#1F2937;border-color:#334155;color:#F1F5F9}
+html.gdk .mode.on,html.gdk .dk button.on{background:#064E3B;border-color:#10B981}html.gdk .chip.on{background:#F1F5F9;color:#0F172A;border-color:#F1F5F9}
+html.gdk .dk .ar{color:#6EE7B7}html.gdk .mode small,html.gdk .dk small{color:#94A3B8}html.gdk .goal>div{background:rgba(17,24,39,.94)}html.gdk .goal .st{color:#F1F5F9}html.gdk .goal .ar{color:#6EE7B7}
+html.gdk .how>div,html.gdk .stats>div,html.gdk .stepbox,html.gdk .empty{background:#1F2937!important;color:#E5E7EB!important;border-color:#334155!important}
+html.gdk .sec{background:#1F2937!important;color:#F1F5F9!important;border-color:#334155!important}
+</style><script>(function(){function a(){var m='auto';try{m=(JSON.parse(localStorage.getItem('fastaqim.look')||'{}').mode)||'auto'}catch(e){}var d=m==='dark'||(m==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches);document.documentElement.classList.toggle('gdk',d)}a();try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',a)}catch(e){}})();</script></head><body>
 <canvas id="cv"></canvas>
 <div class="bar"><a class="pill" id="back" href="./?go=app">‹ Fastaqim</a><span class="sp"></span><span class="pill" id="hc" hidden>🪙 0</span><span class="pill" id="hearts" hidden></span><button class="pill ib" id="snd" aria-label="Sound">🔈</button><button class="pill ib" id="pz" aria-label="Pause" hidden>⏸</button></div>
 <div class="goal" id="goal" hidden><div><div class="ar" id="gAr"></div><div class="st" id="gSt"></div><small id="gN"></small><div class="pb"><i id="gP"></i></div></div></div>
@@ -78,7 +86,8 @@ button.pill{cursor:pointer}
 "use strict";
 /* ---------- language (same choice as the site) ---------- */
 const LG=(()=>{let l='en';try{l=(localStorage.getItem('fastaqim.lang')||'en').split('-')[0]}catch(e){}return ['en','ar','om','so'].includes(l)?l:'en'})();
-const T={
+const T={speed:["Speed","السرعة","Saffisa","Xawaare"],s_slow:["Slow","بطيء","Suuta","Tartiib"],s_normal:["Normal","عادي","Giddu-galeessa","Caadi"],s_fast:["Fast","سريع","Ariifataa","Degdeg"],sp_note:["Gets faster as you go.","تزداد السرعة كلما تقدمت.","Yeroo itti fuftu saffisa dabala.","Way sii dheereysaa markaad sii socoto."],gem:["Gem","جوهرة","Dhagaa gatii qabu","Dhagax qaali ah"],star5:["Star","نجمة","Urjii","Xiddig"],
+ 
  title:["Road Run","سباق الطريق","Fiigicha Karaa","Orodka Waddada"],
  pick:["What is this run for?","لأي شيء هذه الجولة؟","Fiigichi kun maaliif?","Orodkani maxaa loogu talagalay?"],
  m_dhikr:["Dhikr","ذكر","Zikrii","Dhikri"],m_task:["To-do","مهمة","Hojii","Hawl"],m_free:["Free play","لعب حر","Tapha bilisaa","Ciyaar xor ah"],
@@ -399,8 +408,7 @@ showMenu();
 <script src="game/r3d.js?v=2"></script>
 <script>
 /* Free play: 30 minutes a day (Dhikr and Task runs are never limited) */
-Object.assign(T,{speed:["Speed","السرعة","Saffisa","Xawaare"],s_slow:["Slow","بطيء","Suuta","Tartiib"],s_normal:["Normal","عادي","Giddu-galeessa","Caadi"],s_fast:["Fast","سريع","Ariifataa","Degdeg"],sp_note:["Gets faster as you go.","تزداد السرعة كلما تقدمت.","Yeroo itti fuftu saffisa dabala.","Way sii dheereysaa markaad sii socoto."],gem:["Gem","جوهرة","Dhagaa gatii qabu","Dhagax qaali ah"],star5:["Star","نجمة","Urjii","Xiddig"],
- fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
+Object.assign(T,{fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
  fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
  fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
  fq_more:["Dhikr and Task runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],

@@ -1476,6 +1476,69 @@ body.fq-app .sprint-bar[hidden]{display:none}
 .sp-s{display:flex;flex-direction:column;gap:12px;text-align:center}.sp-t{font:800 20px Inter,system-ui;margin:0}
 .sp-n{display:grid;grid-template-columns:1fr 1fr;gap:10px}.sp-n div{background:color-mix(in srgb,var(--accent) 12%,var(--surface,#fff));border-radius:16px;padding:12px 6px;display:flex;flex-direction:column}
 .sp-n b{font:800 26px Inter,system-ui}.sp-n small{font-weight:600;color:var(--muted)}
+.toast{font:600 .8rem/1.3 var(--body)!important;padding:.5rem .85rem!important;border-radius:12px!important;max-width:min(80vw,320px)!important;text-align:center}
+body.has-bnav .toast{bottom:calc(84px + env(safe-area-inset-bottom,0px))!important}
+.fb3{display:flex;flex-direction:column;gap:12px}.fb3 .fb2{display:flex;flex-direction:column;gap:10px}
+.fb-cap{width:100%}.fb-sh{display:flex;align-items:center;gap:10px}.fb-sh img{width:92px;max-height:180px;object-fit:cover;object-position:top;border-radius:12px;border:1px solid var(--line)}
+.fb-my{background:none;border:0;color:var(--calm);font-weight:700;min-height:44px}
+.fb-ok{text-align:center}.fb-big{font-size:2.2rem;margin:0}
+.mi{border:1px solid var(--line);border-radius:16px;padding:10px 12px}.mi p{margin:6px 0 0;overflow-wrap:anywhere}.mi-h{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.mi-s{font:800 12px Inter,"IBM Plex Sans Arabic",system-ui;border-radius:99px;padding:4px 10px;background:#EEF2F7;color:#475569}
+.mi.st-planned .mi-s{background:#FFF1DE;color:#B45309}.mi.st-done .mi-s{background:#DDF5E8;color:#047857}
+.ibm-shot{margin-top:8px;background:color-mix(in srgb,var(--calm) 10%,transparent);border:0;border-radius:10px;padding:6px 10px;font-weight:700;min-height:36px;color:var(--ink)}
+.ib-img{width:100%;border-radius:14px;border:1px solid var(--line)}
+body.fq-app #progStrip{display:none!important}
+.mi{text-align:start}
+.tp-i{display:flex;gap:8px;margin-inline-start:auto}
+.tp-b{height:38px;min-height:0;min-width:38px;padding:0 9px;border-radius:19px;border:0;display:inline-flex;align-items:center;justify-content:center;gap:5px;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink);font:800 12.5px Inter,system-ui}
+.tp-hero{position:absolute;top:calc(10px + env(safe-area-inset-top,0px));inset-inline:14px;justify-content:space-between;z-index:2;margin:0}
+.tp-hero .tp-b{background:rgba(255,255,255,.16);color:#fff}
+.hm-hero .hm-dt{text-align:center;padding-top:4px}
+.hub-bar b,.scr-bar b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sl-r{display:flex;align-items:center;gap:12px;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:12px 2px;min-height:52px;color:var(--ink);font:600 16px Inter,"IBM Plex Sans Arabic",system-ui;text-align:start}
+.sl-r:last-child{border-bottom:0}.sl-i{font-size:20px;width:28px;text-align:center}.sl-t{flex:1}.sl-v{color:var(--muted);font-size:14px}.sl-c{color:var(--muted);font-size:22px}[dir=rtl] .sl-c{transform:scaleX(-1)}
+.apm-q{width:100%;margin:6px 0 4px;border-radius:12px;padding:10px 12px;font-size:16px}
+.dl-c{display:flex;flex-direction:column;gap:10px}.dl-box{background:#FFF4E5;border:1px solid #F5C783;border-radius:14px;padding:10px 12px}.dl-box p{margin:4px 0}
+.dl-y{background:#C0392B!important;border-color:#C0392B!important;color:#fff!important}
+#acDelN{margin-top:-4px}
+#setList{padding:4px 16px}#setList .sl-r{border-radius:0!important;box-shadow:none!important;background:none!important;border:0!important;border-bottom:1px solid var(--line)!important}#setList .sl-r:last-child{border-bottom:0!important}
+.apm-q{margin-top:24px}
+.apm-more{background:none;border:0;color:var(--calm);font-weight:800;min-height:44px;padding:6px 10px;text-align:start}
+.apm-c:not(.apm-s2) .apm-x{display:none!important}.apm-s2 .apm-more{display:none}
+.hm-hero{text-align:start}
+.hm-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;position:relative}
+.hm-top .hm-bc{margin:0;text-align:start}.hm-top .hm-brand{font-size:28px}.hm-top .hm-stead{margin-top:4px}
+.hm-tpw .tp-i{margin:0}.hm-tpw .tp-b{background:rgba(255,255,255,.16);color:#fff}
+.hm-hero .hm-dt{text-align:start;padding-top:0;margin-top:8px;display:flex;flex-wrap:wrap;gap:2px 8px;font-size:12.5px}
+.hm-hero .hm-dt span+span:before{content:"·";margin-inline-end:8px;color:rgba(255,255,255,.5)}
+.hm-hi{text-align:start;margin-top:14px}
+.hm-p.ok.lt i{background-color:#F0A93B}
+.hm-c.met .ib{box-shadow:inset 0 0 0 2px #0F9D6E}
+.hm-trk.n1{grid-template-columns:1fr}.hm-trk.n2{grid-template-columns:1fr 1fr}.hm-trk.n4{grid-template-columns:repeat(2,1fr)}
+.hm-p.cur.ok i{background:#F7D488 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B5040' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:0 0 0 5px rgba(255,255,255,.25)}
+.hm-p.cur.ok.lt i,.hm-p.ok.lt i{background-color:#F0A93B}
+#fqWp{position:fixed;inset:0;z-index:-1;pointer-events:none}
+#fqWp:after{content:"";position:absolute;inset:0;background:var(--bg);opacity:.28}
+#fqWp.dk{filter:brightness(.45) saturate(.85)}#fqWp.dk:after{opacity:.35}
+body.has-wp{background:transparent!important}html:has(body.has-wp){background:var(--bg)}
+.wp-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.wp-t{display:flex;flex-direction:column;align-items:stretch;gap:6px;background:none;border:0;padding:0;min-height:0;color:var(--ink);font:700 12.5px Inter,"IBM Plex Sans Arabic",system-ui}
+.wp-p{display:block;aspect-ratio:9/14;border-radius:14px;border:2px solid var(--line);background-size:cover!important;overflow:hidden}
+.wp-t.on .wp-p{border-color:var(--calm);box-shadow:0 0 0 3px color-mix(in srgb,var(--calm) 30%,transparent)}
+.wp-n{text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ap3g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.ap3b{display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 4px;border-radius:16px;border:2px solid var(--line);background:none;color:var(--ink);min-height:0}
+.ap3b.on{border-color:var(--calm)}.ap3b small{color:var(--muted);font-size:11px;text-align:center}
+.ap3p{display:block;width:100%;aspect-ratio:3/4;border-radius:10px}.ap3p.light{background:linear-gradient(#fff 30%,#EEF2F5 30%)}.ap3p.dark{background:linear-gradient(#1E293B 30%,#0F172A 30%)}.ap3p.auto{background:linear-gradient(90deg,#fff 50%,#0F172A 50%)}
+.ibx-del{margin-inline-start:auto;background:none;border:0;min-height:36px;min-width:36px;font-size:16px;opacity:.7}
+.ibm-del{display:inline-block;margin-top:6px;font:700 11.5px Inter,system-ui;color:#B45309;background:#FFF1DE;border-radius:99px;padding:3px 9px}
+.ibm.st-denied .ibx-s [data-ibs=denied].on{background:#FDE2E1;color:#B42318}
+.mi.st-denied .mi-s{background:#F1F5F9;color:#64748B}
+.mi-x{background:none;border:0;min-height:32px;min-width:32px;color:var(--muted);margin-inline-start:4px}
+/* no dimmed backdrop anywhere: the page stays as it is; panels get a clear edge instead */
+#scrollModal,#scrollModal.tm-sheet,.modal{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#scrollModal .modal-card,#scrollModal>div{box-shadow:0 0 0 1px var(--line),0 24px 60px -16px rgba(15,23,42,.45)!important}
+.apm-h .apm-st{margin-inline-start:8px;margin-inline-end:auto}
+.apm-h{display:flex!important;align-items:center!important;flex-wrap:nowrap!important;gap:8px}.apm-h .mc-x{position:static!important;margin-inline-start:auto!important;transform:none!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -6017,7 +6080,7 @@ function salMark(i){let P=null;try{P=salahFor(new Date())}catch(e){}
   modalCard(`<div class="sq"><p class="label">🕌 ${esc(tl(SQ5[i]))}${P&&P[SQK[i]]?` · <span dir="ltr">${hmShort(P[SQK[i]])}</span>`:''}</p>
    <div class="sq-g"><button type="button" class="sq-b on${cur==='on'?' sel':''}" data-sq="on"><i>✓</i>${esc(tl('On time'))}</button><button type="button" class="sq-b late${cur==='late'?' sel':''}" data-sq="late"><i>⏰</i>${esc(tl('Late'))}</button><button type="button" class="sq-b miss${cur==='miss'?' sel':''}" data-sq="miss"><i>✕</i>${esc(tl('Missed'))}</button></div>
    ${cur?`<button type="button" class="btn-ghost small sq-clr" data-sq="clr">${esc(tl('Clear'))}</button>`:''}
-   <p class="sq-h">${esc(tl('Last 7 days'))}</p>${salQLine()}</div>`);
+   <p class="sq-h">${esc(sqSince())}</p>${salQLine()}</div>`);
   $('scrollBody').querySelectorAll('[data-sq]').forEach(b=>b.onclick=()=>{const v=b.dataset.sq;S.salQ=S.salQ||{};const k=dkey(),q=Object.assign({},S.salQ[k]||{});if(v==='clr')delete q[i];else q[i]=v;S.salQ[k]=q;
     const T=dzTrkMake('salah'),a=(Array.isArray(trkDay()[T.id])?trkDay()[T.id]:[0,0,0,0,0]).slice();a[i]=(v==='on'||v==='late')?1:0;
     if(v==='on'||v==='late'){try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}trkSet(T,a);save();modalClose();try{dashRender()}catch(e){}try{salTop()}catch(e){}
@@ -6044,7 +6107,7 @@ function dzChipLabels(c){if(!c)return;[['w','Glasses of water'],['q','Quran page
 /* salah consistency in Me: last 7 days, on time / late / missed */
 {const _rw=renderWins;renderWins=function(){const r=_rw.apply(this,arguments);try{const t=$('tab-wins');if(!t)return r;let c=$('sqCard');if(!c){c=document.createElement('div');c.id='sqCard';c.className='card sq-card';t.insertBefore(c,t.firstChild)}
   const s=salQStats(7),n=s.on+s.late+s.miss,pc=n?Math.round(s.on/n*100):0;
-  c.innerHTML=`<p class="label">🕌 ${esc(tl('Salah'))} · ${esc(tl('Last 7 days'))}</p>${n?`<p class="sq-pc"><b>${pc}%</b> ${esc(tl('On time'))}</p>`:`<p class="small muted">${esc(tl('Tap a prayer to mark it.'))}</p>`}${salQLine()}`}catch(e){}return r}}
+  c.innerHTML=`<p class="label">🕌 ${esc(tl('Salah'))} · ${esc(sqSince())}</p>${n?`<p class="sq-pc"><b>${pc}%</b> ${esc(tl('On time'))}</p>`:`<p class="small muted">${esc(tl('Tap a prayer to mark it.'))}</p>`}${salQLine()}`}catch(e){}return r}}
 /* live clocks on the top strip: time since the current prayer + countdown to the next, with seconds */
 function hms(ms){const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s).padStart(2,'0')}
 function salTick(){const el=$('salTop');if(!el)return;const now=new Date();let P=null;try{P=salahFor(now)}catch(e){}if(!P)return;
@@ -6284,7 +6347,7 @@ async function ibLoad(){if(!AU.sb||!AU.user)return null;const {data,error}=await
 async function ibOpen(){if(!(typeof ADM!=='undefined'&&ADM.rows)){try{await admLoad()}catch(e){}}
   if(!(ADM&&ADM.rows)){modalCard(`<p class="label">📥 ${esc(tl('Ideas inbox'))}</p><p class="small muted">${esc(tl('Only the owner can open this.'))}</p>`);return}
   modalCard(`<p class="label">📥 ${esc(tl('Ideas inbox'))}</p><p class="small muted">…</p>`);try{await ibLoad()}catch(e){}ibRender()}
-function ibRender(){const R=FB.rows||[],cnt=k=>k==='all'?R.length:R.filter(r=>ibSt(r)===k).length,F=[['all','All'],['new','New'],['planned','Planned'],['done','Done']];
+function ibRender(){const R=FB.rows||[],cnt=k=>k==='all'?R.length:R.filter(r=>ibSt(r)===k).length,F=[['all','All'],['new','New'],['planned','Planned'],['done','Done'],['denied','Denied']];
   const L=IBX.f==='all'?R:R.filter(r=>ibSt(r)===IBX.f),ic=r=>r.kind==='problem'?'🛠️':r.kind==='idea'?'💡':'💬';
   modalCard(`<div class="ibx"><p class="label">📥 ${esc(tl('Ideas inbox'))}</p>
    <div class="ibx-f">${F.map(([k,l])=>`<button type="button" data-ibf="${k}" class="${IBX.f===k?'on':''}">${esc(tl(l))}<b>${cnt(k)}</b></button>`).join('')}</div>
@@ -6315,8 +6378,8 @@ ibRender=function(){const R=FB.rows||[],cnt=k=>k==='all'?R.length:R.filter(r=>ib
    <div class="ibx-f">${F.map(([k,l])=>`<button type="button" data-ibf="${k}" class="${IBX.f===k?'on':''}">${esc(tl(l))} <b>${cnt(k)}</b></button>`).join('')}</div>
    ${L.length?L.map(r=>{const s=ibSt(r),n=who(r);return `<div class="ibm st-${s}"><span class="ibm-av" style="background:hsl(${hue(n)} 55% 45%)">${esc((n[0]||'?').toUpperCase())}</span>
      <div class="ibm-c"><div class="ibm-h"><b dir="auto">${esc(n)}</b><span>${when(r.created_at)}</span></div>
-     <div class="ibm-b"><span class="ibm-k">${r.kind==='problem'?'🛠️ '+esc(tl('Problem')):'💡 '+esc(tl('Idea'))}</span><p class="notranslate" dir="auto">${esc(r.body)}</p></div>
-     <div class="ibx-s">${[['new','New'],['planned','Planned'],['done','Done']].map(([k,l])=>`<button type="button" data-ibs="${k}" data-id="${r.id}" class="${s===k?'on':''}">${s===k&&k==='done'?'✓ ':''}${esc(tl(l))}</button>`).join('')}</div></div></div>`}).join(''):`<p class="small muted ibx-e">${esc(tl('No ideas here yet.'))}</p>`}</div>`);
+     <div class="ibm-b"><span class="ibm-k">${r.kind==='problem'?'🛠️ '+esc(tl('Problem')):'💡 '+esc(tl('Idea'))}</span><p class="notranslate" dir="auto">${esc(r.body)}</p>${r.hidden_by_sender?`<span class="ibm-del">${esc(tl('Deleted by sender'))}</span>`:''}</div>
+     <div class="ibx-s">${[['new','New'],['planned','Planned'],['done','Done'],['denied','Denied']].map(([k,l])=>`<button type="button" data-ibs="${k}" data-id="${r.id}" class="${s===k?'on':''}">${s===k&&k==='done'?'✓ ':''}${esc(tl(l))}</button>`).join('')}<button type="button" class="ibx-del" data-ibd="${r.id}" aria-label="${esc(tl('Delete'))}">🗑</button></div></div></div>`}).join(''):`<p class="small muted ibx-e">${esc(tl('No ideas here yet.'))}</p>`}</div>`);
   const sb=$('scrollBody');
   sb.querySelectorAll('[data-ibf]').forEach(b=>b.onclick=()=>{IBX.f=b.dataset.ibf;ibRender()});
   sb.querySelectorAll('[data-ibs]').forEach(b=>b.onclick=async()=>{const id=+b.dataset.id,k=b.dataset.ibs,r=(FB.rows||[]).find(x=>x.id===id);if(!r||ibSt(r)===k)return;
@@ -6469,17 +6532,17 @@ const FQIC={"now": "<div class=\"sq\" style=\"width:56px;height:56px;border-radi
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 const HM_IN={en:(p,t)=>`${p} in ${t}`,ar:(p,t)=>`${p} بعد ${t}`,om:(p,t)=>`${p} ${t} booda`,so:(p,t)=>`${p} ${t} kadib`};
 const HMK=[['now','now'],['plan','plan'],['todo','today'],['money','money'],['goals','goals'],['focus','focus'],['enjoy','enjoy'],['me','wins']];
-const HUBV={now:null,wins:null};
+const HUBV={now:null,wins:null,plan:null,enjoy:null};const HUBT=['wins','plan','enjoy'];
 function fqApp(){return typeof inApp==='function'&&inApp()&&document.body.classList.contains('has-bnav')}
 function hmClock(ms){ms=Math.max(0,ms);const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')}
 function hmTabName(k){const n={now:'Now',plan:'Plan',today:'To-do',money:'Money',goals:'Goals',focus:'Focus',enjoy:'Enjoy',wins:'Me'}[k]||k;try{const b=document.querySelector(`nav [data-tab="${k}"]`);if(b){const i=b.querySelector('.ni');const t=(i?b.textContent.replace(i.textContent,''):b.textContent).trim();if(t)return t}}catch(e){}return tl(n)}
 function hmSal(){let P=null;try{P=salahFor(new Date())}catch(e){}
   if(!P)return `<button type="button" class="hm-loc" data-hm="loc">🕌 ${esc(tl('Set my city for salah times'))}</button>`;
-  const now=new Date(),q=(typeof salQ==='function'?salQ():{})||{},K=['fajr','sunrise','dhuhr','asr','maghrib','isha'],N=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+  const now=new Date(),q=Object.assign({},(()=>{try{const T=dzTrk('salah'),v=T&&trkDay()[T.id];return Array.isArray(v)?Object.fromEntries(v.map((x,i)=>[i,x?'on':null]).filter(e=>e[1])):{}}catch(e){return{}}})(),(typeof salQ==='function'?salQ():{})||{}),K=['fajr','sunrise','dhuhr','asr','maghrib','isha'],N=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
   let cur=-1,nx=-1;K.forEach((k,i)=>{if(k==='sunrise')return;if(P[k]&&P[k]<=now)cur=i});K.forEach((k,i)=>{if(nx<0&&k!=='sunrise'&&P[k]&&P[k]>now)nx=i});
   if(P.sunrise&&now>=P.sunrise&&(!P.dhuhr||now<P.dhuhr))cur=-1;
   const pi=i=>i>1?i-1:i; /* index in the 5 prayers */
-  const cells=K.map((k,i)=>{const sr=k==='sunrise',m=sr?null:q[pi(i)],cls=[sr?'sr':'',m==='on'||m==='late'?'ok':'',m==='miss'?'ms':'',i===cur?'cur':'',i===nx?'nx':''].join(' ');
+  const cells=K.map((k,i)=>{const sr=k==='sunrise',m=sr?null:q[pi(i)],cls=[sr?'sr':'',m==='on'||m==='late'?'ok':'',m==='late'?'lt':'',m==='miss'?'ms':'',i===cur?'cur':'',i===nx?'nx':''].join(' ');
     return `<${sr?'div':'button type="button" data-dz="sal" data-i="'+pi(i)+'"'} class="hm-p ${cls}"><i></i><small>${esc(tl(N[i]))}</small><b dir="ltr">${P[k]?hmShort(P[k]):''}</b></${sr?'div':'button'}>`}).join('');
   const lastDone=Math.max(cur,0),fill=cur<0&&nx>0?(nx-1)/5:Math.max(0,lastDone)/5;
   const p1=cur>=0?`<span class="hm-p1" data-hmt="up" data-t="${P[K[cur]].getTime()}">${esc(tl(N[cur]))} · <b dir="ltr">${hmClock(now-P[K[cur]])}</b></span>`:'';
@@ -6496,22 +6559,20 @@ function hmRender(){try{const sec=$('tab-now');if(!sec)return;let h=$('fqHome');
   const hj=typeof hijri==='function'?hijri(d):'';
   const t=current(),s=t&&nextStep(t),txt=s?s.text:t?t.title:'',p=Math.max(0,Math.min(100,Math.round(todayPct()))),r=27,C=2*Math.PI*r;
   const day=trkDay(),wT=dzTrk('water'),qT=dzTrk('quran'),wv=wT?+day[wT.id]||0:0,qv=qT?+day[qT.id]||0:0,wg=wT?wT.goal:8,qg=qT?qT.goal:2,st=typeof streak==='function'?streak():0;
-  h.innerHTML=`<div class="hm-hero"><div class="hm-dt"><div>${esc(gd)}</div><div class="h">${esc(hj)}</div></div>
-   <div class="hm-bc"><div class="hm-brand notranslate">Fastaqim</div><div class="hm-stead${LANG==='ar'?' ar':''}">${esc(stead)}</div></div>
+  h.innerHTML=`<div class="hm-hero"><div class="hm-top"><div class="hm-bc"><div class="hm-brand notranslate">Fastaqim</div><div class="hm-stead${LANG==='ar'?' ar':''}">${esc(stead)}</div></div><span class="hm-tpw"></span></div>
+   <div class="hm-dt"><span>${esc(gd)}</span><span class="h">${esc(hj)}</span></div>
    <div class="hm-hi"><h1 dir="auto">${esc(tl(g))}${nm?(LANG==='ar'?'، ':', ')+esc(nm):''}</h1><p>${esc(tl('Small step? Still a win!'))}</p></div>${hmSal()}</div>
    <div class="hm-card hm-next"><div class="hm-nr"><div class="hm-ring"><svg viewBox="0 0 64 64" width="58" height="58"><circle cx="32" cy="32" r="${r}" class="b"/>${p?`<circle cx="32" cy="32" r="${r}" class="f" stroke-dasharray="${(C*p/100).toFixed(1)} 400" transform="rotate(-90 32 32)"/>`:''}</svg><span>${p}%</span></div>
      <div class="hm-nt"><p class="hm-lab">${esc(tl('Next step'))}</p><p class="hm-task notranslate" dir="auto">${t?esc(txt):esc(tl("What's one small thing for today?"))}</p></div>${t?`<button type="button" class="hm-ck" data-hm="did" aria-label="${esc(tl('Did it'))}">✓</button>`:''}</div>
      ${t?`<button type="button" class="hm-go" data-hm="go"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5.2 19 12 8 18.8z"/></svg>${esc(tl('Start for 2 minutes'))}</button>`:`<button type="button" class="hm-go" data-hm="add">${esc(tl('+ Add a to-do'))}</button>`}</div>
-   <div class="hm-trk"><button type="button" class="hm-c" data-hm="w"><span class="ib" style="background:#DCEAFF">💧<em>+</em></span><span class="tx"><b>${wv}<small>/${wg}</small></b><span>${esc(tl('Water'))}</span></span></button>
-     <button type="button" class="hm-c" data-hm="q"><span class="ib" style="background:#D6F1E4">📖<em>+</em></span><span class="tx"><b>${qv}<small>/${qg}</small></b><span>${esc(tl('Quran'))}</span></span></button>
-     <button type="button" class="hm-c" data-hm="st"><span class="ib" style="background:#FFF0E3">🔥</span><span class="tx"><b>${st}</b><span>${esc(tl('Streak'))}</span></span></button></div>
+   ${hmTrk()}
    <div class="hm-card hm-apps">${HMK.map(([ic,tab])=>`<button type="button" class="hm-t" data-hmtab="${tab}">${FQIC[ic]}<span${hmTabName(tab).length>11?' class="sm"':''}>${esc(hmTabName(tab))}</span></button>`).join('')}</div>`;
-  h.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{const k=b.dataset.hm;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
+  h.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{if(b.dataset.hm==='tk'){hmTk(b.dataset.id);return}if(b.dataset.hm==='sts'){HUBV.wins='stBox';show('wins');return}const k=b.dataset.hm;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
     if(k==='go'){try{kickCurrent(2)}catch(e){}}else if(k==='add'){show('today');setTimeout(()=>{const i=$('dumpInput');if(i)i.focus()},300)}
     else if(k==='did'){const tt=current(),ss=tt&&nextStep(tt);if(ss)completeStep(tt,ss);else if(tt)finishTask(tt);save();render()}
     else if(k==='loc'){try{salPop()}catch(e){}}else if(k==='st')show('wins');
     else if(k==='w'||k==='q'){const T=dzTrkMake(k==='w'?'water':'quran'),gg=T.goal,n=+trkDay()[T.id]||0;trkSet(T,n>=gg?0:n+1);if(n+1>=gg&&n<gg)try{star(1,(k==='w'?'💧 ':'📖 ')+tl(k==='w'?'Water':'Quran'),'hm-'+k+dkey())}catch(e){}hmRender()}});
-  h.querySelectorAll('[data-hmtab]').forEach(b=>b.onclick=()=>{const k=b.dataset.hmtab;if(k==='now'){HUBV.now=null;document.body.dataset.nowv='tools';show('now');hubRender('now');scrollTo(0,0)}else{if(k==='wins')HUBV.wins=null;show(k)}});try{spPlace()}catch(e){}}catch(e){console.error('hm',e)}}
+  h.querySelectorAll('[data-hmtab]').forEach(b=>b.onclick=()=>{const k=b.dataset.hmtab;if(k==='now'){HUBV.now=null;document.body.dataset.nowv='tools';show('now');hubRender('now');scrollTo(0,0)}else{if(k in HUBV)HUBV[k]=null;show(k)}});try{spPlace()}catch(e){}}catch(e){console.error('hm',e)}}
 /* hubs: a screen with icons; each icon opens one feature on its own screen */
 [["Settings","الإعدادات","Qindaa'ina","Dejinta"],["Reminder","تذكرة","Yaadachiisa","Xusuusin"],["Home Screen","الشاشة الرئيسية","Home Screen","Shaashadda hore"],["Up next","التالي","Kan itti aanu","Kan xiga"],["My goal","هدفي","Kaayyoo koo","Hadafkayga"],["Sort my list","رتّب قائمتي","Tarree koo qindeessi","Habee liiskayga"],["Stuck?","متعثّر؟","Gufatteettaa?","Ma xayirantahay?"],["Owner","المالك","Abbaa qabeenyaa","Milkiilaha"],["How stars work","كيف تعمل النجوم","Urjiileen akkamitti hojjetu","Sida xiddiguhu u shaqeeyaan"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
@@ -6538,7 +6599,7 @@ function hubRender(k){try{const sec=$(k==='now'?'tab-now':'tab-'+k);if(!sec)retu
   if(!on){sec.removeAttribute('data-hub');if(bar)bar.remove();if(grid)grid.remove();sec.querySelectorAll(':scope > .hub-on').forEach(c=>c.classList.remove('hub-on'));return}
   const L=hubCards(k),sel=HUBV[k]&&L.find(x=>x.id===HUBV[k]);
   if(!bar){bar=document.createElement('div');bar.className='hub-bar';sec.prepend(bar)}
-  const title=k==='now'?'🚀 '+hmTabName('now'):'🏆 '+hmTabName('wins');
+  const title=({now:'🚀',wins:'🏆',plan:'🗓️',enjoy:'✨'}[k]||'')+' '+hmTabName(k);
   bar.innerHTML=`<button type="button" class="hub-back" aria-label="${esc(tl('Back'))}">‹</button><b dir="auto">${sel?esc(sel.ic+' '+sel.t):esc(title)}</b>`;
   bar.querySelector('.hub-back').onclick=()=>{if(sel){HUBV[k]=null;hubRender(k);scrollTo(0,0)}else goHome()};
   sec.querySelectorAll(':scope > .hub-on').forEach(c=>c.classList.remove('hub-on','hub-noh'));
@@ -6546,16 +6607,16 @@ function hubRender(k){try{const sec=$(k==='now'?'tab-now':'tab-'+k);if(!sec)retu
   sec.dataset.hub='grid';if(!grid){grid=document.createElement('div');grid.className='hub-grid'}if(grid.previousElementSibling!==bar)bar.after(grid);grid.hidden=false;
   grid.innerHTML=L.map(x=>`<button type="button" class="hub-t" data-hub="${esc(x.id)}"><span class="hub-i">${x.ic}</span><span class="hub-n" dir="auto">${esc(x.t)}</span></button>`).join('');
   grid.querySelectorAll('[data-hub]').forEach(b=>b.onclick=()=>{HUBV[k]=b.dataset.hub;hubRender(k);scrollTo(0,0)})}catch(e){console.error('hub',e)}}
-function scrBar(k){const sec=$('tab-'+k);if(!sec||k==='now'||k==='wins')return;let b=sec.querySelector(':scope > .scr-bar');if(!fqApp()){if(b)b.remove();return}
+function scrBar(k){const sec=$('tab-'+k);if(!sec||k==='now'||HUBT.includes(k))return;let b=sec.querySelector(':scope > .scr-bar');if(!fqApp()){if(b)b.remove();return}
   if(!b){b=document.createElement('div');b.className='scr-bar';sec.prepend(b)}b.innerHTML=`<button type="button" class="hub-back" aria-label="${esc(tl('Back'))}">‹</button><b>${esc(hmTabName(k))}</b>`;b.querySelector('button').onclick=goHome}
 function appSync(){const app=fqApp(),tab=document.body.dataset.tab||'now';document.body.classList.toggle('fq-app',app);
   if(tab!=='now')delete document.body.dataset.nowv;document.body.classList.toggle('fq-homev',app&&tab==='now'&&document.body.dataset.nowv!=='tools');
-  if(app&&tab==='now'){hmRender();hubRender('now')}if(app&&tab==='wins')hubRender('wins');if(app)scrBar(tab)}
+  if(app&&tab==='now'){hmRender();hubRender('now')}if(app&&HUBT.includes(tab))hubRender(tab);if(app)scrBar(tab)}
 {const _sh7=show;show=function(k){if(k!=='now')delete document.body.dataset.nowv;const r=_sh7.apply(this,arguments);try{appSync()}catch(e){}return r}}
 {const _rd3=render;render=function(){const r=_rd3.apply(this,arguments);try{appSync()}catch(e){}return r}}
 goHome=function(){try{const m=$('scrollModal');if(m&&!m.hidden)m.hidden=true;const a=$('apMenu');if(a)a.hidden=true}catch(e){}delete document.body.dataset.nowv;HUBV.now=null;show('now');scrollTo({top:0})};
 /* deep links into a hub open that one feature */
-goCard=function(tab,id,pick){if(tab==='wins'&&fqApp()){const c=$(id);if(c){HUBV.wins=c.dataset.hid||c.id;c.dataset.hid=HUBV.wins}}show(tab);setTimeout(()=>{const c=(pick&&pick())||$(id);if(c){c.scrollIntoView({block:'start',behavior:'smooth'});c.classList.add('go-hl');setTimeout(()=>c.classList.remove('go-hl'),1600)}},250)};
+goCard=function(tab,id,pick){if(HUBT.includes(tab)&&fqApp()){const c=$(id);if(c){HUBV[tab]=c.dataset.hid||c.id;c.dataset.hid=HUBV[tab]}}show(tab);setTimeout(()=>{const c=(pick&&pick())||$(id);if(c){c.scrollIntoView({block:'start',behavior:'smooth'});c.classList.add('go-hl');setTimeout(()=>c.classList.remove('go-hl'),1600)}},250)};
 setTimeout(appSync,300);
 /* sprint chip: tap opens a clear sheet; in the app it sits in the page, never floating over content */
 [["Sprint","سباق","Fiigicha","Orod"],["steps done","خطوات تمّت","tarkaanfiiwwan xumuraman","tallaabooyin la dhammeeyay"],["left","متبقّي","hafe","haray"],
@@ -6583,6 +6644,246 @@ sprintTick=function(){clearInterval(SP.t);const b=$('sprintBar');if(!S.sprint){b
     if(bb){bb.hidden=false;bb.innerHTML=`⚡ <b>${got}/3</b> · <span dir="ltr">${hmClock(left)}</span>`}};
   run();SP.t=setInterval(run,1000)};
 setTimeout(()=>{try{sprintTick()}catch(e){}},500);
+/* calmer messages: praise/star messages at most once a minute (the star count still updates); others short; never stacked */
+const TQ={last:0,txt:'',at:0};
+{const _t2=toast;toast=function(msg){try{const m=String(msg||''),now=Date.now(),praise=/⭐|\bstar\b|star\.|achievement|step \d+ done|sprint done|نجم|urjii|xiddig|إنجاز|\+\d/i.test(m)&&!/couldn|can't|cannot|error|failed|try again/i.test(m);
+  if(m===TQ.txt&&now-TQ.at<4000)return;if(praise){if(now-TQ.last<60000)return;TQ.last=now}TQ.txt=m;TQ.at=now}catch(e){}
+  const r=_t2.apply(this,arguments);try{clearTimeout(toastT);toastT=setTimeout(()=>$('toast').classList.remove('show'),2000)}catch(e){}return r}}
+/* ===== Guide v2: answers what the person actually typed; a different technique each time, never the same twice in a row ===== */
+const C2={
+ small:["one small thing on your list","شيء صغير واحد من قائمتك","waan xiqqaa tokko tarree kee irraa","hal shay oo yar oo liiskaaga ku jira"],
+ // what they told us
+ a_scroll:["Scrolling pulls hard. That's normal, not a flaw.","التصفّح يشدّ بقوة. هذا طبيعي وليس عيبًا فيك.","Bilbila ilaaluun cimaa harkisa. Kun waan baramaa dha, hir'ina miti.","Isku-rogrogidda taleefanku si xoog leh ayay u jiidataa. Taasi waa caadi, ceeb maaha."],
+ a_study:["Studying for something big. Let's make the next hour count.","تذاكر لشيء مهم. لنجعل الساعة القادمة مثمرة.","Waan guddaaf qo'achaa jirta. Sa'aatii itti aanu haa fayyadamnu.","Waxaad u diyaar garoobaysaa wax weyn. Saacadda xigta aan ka faa'iidaysanno."],
+ a_tired:["Low energy is real information. We'll match the step to it.","انخفاض الطاقة معلومة حقيقية. سنجعل الخطوة على قدرها.","Humni gadi bu'uun odeeffannoo dhugaa ti. Tarkaanfii humna keetiin wal madaalchifna.","Tamar yaraantu waa xog run ah. Tallaabada ayaan la jaanqaadsiinaynaa."],
+ a_over:["That's a lot at once. We'll only look at one piece.","هذا كثير دفعة واحدة. سننظر إلى جزء واحد فقط.","Kun yeroo tokkotti baay'ee dha. Kutaa tokko qofa ilaalla.","Taasi waa wax badan hal mar. Hal qayb oo keliya ayaan eegaynaa."],
+ a_anx:["Worry makes starting harder. A rough first try is enough.","القلق يصعّب البداية. محاولة أولى غير مثالية تكفي.","Yaaddoon jalqabuu ni ulfaachisa. Yaalii jalqabaa hin guutamne gahaa dha.","Walwalku bilowga ayuu adkeeyaa. Isku day hore oo aan dhammayn ayaa ku filan."],
+ a_bored:["Boring tasks need extra star. Let's add some.","المهام المملة تحتاج نجمة إضافية. لنضف شيئًا منها.","Hojiin nama dadhabsiisu kakaasaa dabalataa barbaada. Haa dabalnu.","Hawlaha caajiska ahi waxay u baahan yihiin dhiirigelin dheeraad ah. Aan ku darno."],
+ a_motiv:["Motivation usually shows up after you start, not before.","الحماس غالبًا يأتي بعد البداية، لا قبلها.","Kakaasni yeroo baay'ee erga jalqabdee booda dhufa, dura miti.","Dhiirigelintu badanaa waxay timaadaa markaad bilowdo kadib, ka hor maaha."],
+ a_heavy:["Heaviness when you go to do good is something many people describe.","الثقل عند الإقبال على الخير أمر يذكره كثير من الناس.","Ulfaatinni yeroo waan gaarii hojjechuuf deemtu kan namoonni baay'een himan dha.","Culayska marka aad wax wanaagsan u socoto dad badan ayaa sheega."],
+ a_later:["Later works best with a set time, not a maybe.","\"لاحقًا\" تنجح أكثر بوقت محدد، لا بـ\"ربما\".","\"Booda\" yeroo murtaa'een hojjeta, \"tarii\"n miti.","\"Goor dambe\" waxay si fiican u shaqaysaa waqti go'an, ma aha \"laga yaabee\"."],
+ a_care:["That's a lot to carry. Taking care of them comes first, and that counts as good work too.","هذا حمل ثقيل. رعايتهم تأتي أولًا، وهذا عمل صالح أيضًا.","Kun ba'aa ulfaataa dha. Isaan kunuunsuun dursa, kunis hojii gaarii dha.","Taasi waa culays badan. Daryeelkooda ayaa horreeya, taasina waa camal wanaagsan."],
+ a_any:["Got it. Here's one thing to try.","فهمت. إليك شيئًا واحدًا تجرّبه.","Hubadheera. Waan tokko yaali.","Waan fahmay. Hal shay isku day."],
+ // techniques
+ t_cue:["Tie it to something you already do: right after the next salah, start {s}.","اربطها بشيء تفعله أصلًا: بعد الصلاة القادمة مباشرة، ابدأ {s}.","Waan ati duraanuu hojjettu wajjin walqabsiisi: salaata itti aantu booda battaluma {s} jalqabi.","Ku xir wax aad horeba u samayso: salaadda xigta kadib isla markiiba bilow {s}."],
+ t_body:["Body doubling: sit near someone, or call a friend on mute, and do {s} while they're there.","المرافقة: اجلس قرب أحد، أو اتصل بصديق مع كتم الصوت، وافعل {s} وهو معك.","Hiriyaa wajjin hojjechuu: nama biratti taa'i, yookaan hiriyyaa sagalee dhaamsitee bilbili, {s} hojjedhu.","La-shaqeyn: u dhow qof, ama wac saaxiib adigoo codka xiray, oo samee {s} intuu joogo."],
+ t_bundle:["Pair it: play a lecture or Quran recitation only while you do {s}.","اقرنها بشيء تحبه: شغّل درسًا أو تلاوة فقط أثناء {s}.","Walitti qabsiisi: barnoota yookaan qara'a Qur'aanaa yeroo {s} hojjettu qofa taphachiisi.","Isku lammaane: daar cashar ama tilaawo Quraan oo keliya inta aad samaynayso {s}."],
+ t_race:["Make it a race: how much of {s} can you do before the timer ends?","اجعلها سباقًا: كم تنجز من {s} قبل انتهاء المؤقّت؟","Dorgommii godhi: osoo yeroon hin dhumin {s} hammam hojjechuu dandeessa?","Ka dhig orod: intee ka mid ah {s} ayaad samayn kartaa ka hor inta saacaddu dhammaan?"],
+ t_place:["Change place: move to another room or a quiet corner, then {s}.","غيّر المكان: انتقل إلى غرفة أخرى أو زاوية هادئة، ثم {s}.","Bakka jijjiiri: kutaa biraa yookaan golee callisaa deemi, achii {s}.","Beddel meesha: u gudub qol kale ama gees deggan, kadib {s}."],
+ t_rough:["Aim for a rough version of {s}. A messy first try still counts.","استهدف نسخة أولية من {s}. المحاولة غير المرتبة تُحسب أيضًا.","Akkaataa salphaan {s} yaali. Yaaliin jalqabaa hin qulqullofnes ni lakkaa'ama.","U dhaqaaq nooc qallafsan oo {s}. Isku day hore oo aan habaysnayn wuu tirsamaa."],
+ t_tell:["Tell someone you'll send them a photo when {s} is done.","أخبر أحدًا أنك سترسل له صورة عند إنهاء {s}.","Nama tokkootti himi: yeroo {s} xumurtu suuraa siif ergaa.","U sheeg qof inaad sawir u diri doonto marka {s} dhammaato."],
+ t_count:["Count down 5, 4, 3, 2, 1 and stand up on 1. Then {s}.","عُدّ تنازليًا 5، 4، 3، 2، 1 وقم عند 1. ثم {s}.","5, 4, 3, 2, 1 lakkaa'i, 1 irratti ka'i. Achii {s}.","Tiri 5, 4, 3, 2, 1 oo ku kac 1. Kadib {s}."],
+ t_reward:["Pick a reward from your Reward shop for after {s}.","اختر مكافأة من متجر المكافآت لما بعد {s}.","{s} booda badhaasa Suuqii badhaasaa keessaa filadhu.","Ka dooro abaalmarin Dukaanka abaalmarinta kadib {s}."],
+ t_shrink:["Make it smaller: what's the very first move of {s}? Do only that.","صغّرها: ما أول حركة في {s}؟ افعلها فقط.","Xiqqeessi: sochiin jalqabaa {s} maali? Sana qofa hojjedhu.","Yaree: waa maxay dhaqdhaqaaqa ugu horreeya ee {s}? Kaas keliya samee."],
+ t_phone:["Put the phone in another room, or face down out of reach. Then {s}.","ضع الجوال في غرفة أخرى، أو مقلوبًا بعيدًا عن يدك. ثم {s}.","Bilbila kutaa biraa keessa kaa'i, yookaan garagalchii harka kee irraa fageessi. Achii {s}.","Taleefanka dhig qol kale, ama ku rogo meel aadan gaarin. Kadib {s}."],
+ t_refuge:["Say a'ūdhu billāh and bismillāh, then only {s}.","قل أعوذ بالله وبسم الله، ثم {s} فقط.","A'uuzu billaah fi bismillaah jedhi, achii {s} qofa.","Dheh a'uudu billaah iyo bismillaah, kadib {s} oo keliya."],
+ t_box:["Set an end: work on {s} until the next adhan, then stop even if it's not done.","حدّد نهاية: اعمل على {s} حتى الأذان القادم، ثم توقف ولو لم تنتهِ.","Xumura murteessi: hanga azaana itti aanuutti {s} hojjedhu, achii dhaabi osoo hin xumurinis.","Go'aami dhammaad: ka shaqee {s} ilaa adhaanta xigta, kadib jooji xitaa haddii aan la dhammayn."],
+ t_water:["Drink a glass of water and stand by a window for one minute. Then {s}.","اشرب كوب ماء وقف عند النافذة دقيقة. ثم {s}.","Bishaan kubbaayyaa tokko dhugi, daqiiqaa tokko foddaa biratti dhaabbadhu. Achii {s}.","Cab koob biyo ah oo istaag daaqadda agteeda hal daqiiqo. Kadib {s}."],
+ t_list:["Empty your head onto your to-do list first. Then pick only {s}.","أفرغ ما في رأسك في قائمة المهام أولًا. ثم اختر {s} فقط.","Waan mataa kee keessa jiru hunda tarree hojii irratti barreessi. Achii {s} qofa filadhu.","Ku shub wax kasta oo madaxaaga ku jira liiska hawlaha marka hore. Kadib dooro {s} oo keliya."],
+ t_study:["For studying: open to the page and read only the first heading. That's the whole first step.","للمذاكرة: افتح على الصفحة واقرأ العنوان الأول فقط. هذه هي الخطوة الأولى كلها.","Qo'annaaf: fuula sana bani, mata duree jalqabaa qofa dubbisi. Tarkaanfiin jalqabaa sanuma.","Waxbarasho: fur bogga oo akhri cinwaanka koowaad oo keliya. Taasi waa tallaabada koowaad oo dhan."],
+ t_time:["Put a time on it: write \"{s} at\" a clock time you'll actually be free.","ضع وقتًا: اكتب \"{s} الساعة\" في وقت ستكون فيه متفرغًا فعلًا.","Yeroo itti kenni: \"{s} sa'aatii\" yeroo ati dhugumaan bilisa taatu barreessi.","Waqti u qabo: qor \"{s} saacadda\" waqti aad dhab ahaan firaaqo noqon doonto."],
+ t_care:["If you want, pick one very small thing for today, or rest and make dua for them. Both are fine.","إن أردت، اختر شيئًا صغيرًا جدًا لليوم، أو استرح وادعُ لهم. كلاهما جيد.","Yoo barbaadde, har'aaf waan baay'ee xiqqaa tokko filadhu, yookaan boqodhuu isaaniif du'aa godhi. Lachuu gaarii dha.","Haddii aad rabto, dooro hal shay oo aad u yar maanta, ama naso oo u duceey. Labaduba waa fiican yihiin."],
+ open:["Next step: {s}. Start it, then decide whether to keep going. Ready?","الخطوة التالية: {s}. ابدأ، ثم قرّر هل تكمل. جاهز؟","Tarkaanfii itti aanu: {s}. Jalqabi, achii itti fufuu kee murteessi. Qophiidhaa?","Tallaabada xigta: {s}. Bilow, kadib go'aanso inaad sii wadid. Diyaar ma tahay?"],
+ q_any:["What's in the way most right now?","ما الذي يعيقك أكثر الآن؟","Amma maaltu caalaa si dhorka?","Maxaa hadda sida ugu badan kuu hor taagan?"],
+ q_care:["Want me to keep today light?","هل تريد أن نجعل اليوم خفيفًا؟","Har'a salphaa haa godhu?","Ma rabtaa inaan maanta fududeyno?"],
+ b_light:["Yes, keep it light","نعم، خفيف","Eeyyee, salphaa","Haa, fududee"],b_one:["One small thing","شيء صغير واحد","Waan xiqqaa tokko","Hal shay oo yar"],
+ r_light:["Done. No pressure today. Rest is allowed, and your streak is safe if you tick even one small thing.","تمّ. لا ضغط اليوم. الراحة مسموحة، وسلسلتك محفوظة لو أنجزت شيئًا صغيرًا واحدًا.","Tole. Har'a dhiibbaan hin jiru. Boqonnaan ni hayyamama.","Waa hagaag. Maanta cadaadis ma jiro. Nasashadu waa la oggol yahay."]
+};
+const C2T={scroll:['t_phone','t_place','t_tell','t_bundle','t_box'],study:['t_study','t_box','t_body','t_race','t_cue','t_phone'],tired:['t_water','t_rough','t_shrink','t_box'],over:['t_list','t_shrink','t_box','t_place'],
+ anx:['t_rough','t_shrink','t_refuge','t_body'],bored:['t_bundle','t_race','t_body','t_place'],motiv:['t_count','t_reward','t_body','t_cue','t_race'],heavy:['t_refuge','t_shrink','t_water','t_cue'],
+ later:['t_time','t_cue','t_box'],any:['t_shrink','t_count','t_body','t_bundle','t_race','t_cue','t_reward','t_place']};
+const C2K={care:/\b(sick|ill|hospital|died|death|passed away|funeral|grief|griev|divorce|crying|cry|depress|sad|lonely|hurt)\b|مريض|مرض|مستشفى|توفي|وفاة|مات|حزين|حزن|اكتئاب|وحيد|أبكي|dhukkub|du'e|gadda|aada|xanuun|bukaan|dhimas|murug|ooy/i,
+ study:/exam|test|quiz|study|studying|homework|assignment|essay|revision|revise|class|school|uni|college|امتحان|اختبار|مذاكرة|أذاكر|واجب|دراسة|qormaata|qo'annoo|barnoota|imtixaan|casharka|waxbarasho|shaqo guri/i,
+ scroll:CKW.scroll,tired:CKW.tired,over:CKW.over,anx:CKW.anx,bored:CKW.bored,motiv:CKW.feel,heavy:CKW.heavy,later:CKW.later};
+function c2(k,s){const r=C2[k];if(!r)return'';let t=r[{en:0,ar:1,om:2,so:3}[LANG]]||r[0];return t.replace('{s}',s?(LANG==='ar'?'«'+s+'»':'“'+s+'”'):'')}
+coachOpen=function(){CO.ask=null;CO.log=[];CO.nos=0;CO.lvl=0;CO.rested=false;CO.started=false;CO.used=[];CO.lastT='';CO.lastK='';coachSay(c2('open',c2Step()))};
+function c2Step(){const t=current(),s=t&&nextStep(t);return s?s.text:t?t.title:c2('small')}
+coachFree=function(text){CO.log.push({c:0,t:text});CO.used=CO.used||[];CO.lastT=CO.lastT||'';
+  if(CKW.yes.test(text)&&text.length<25){coachAnswer('yes',null);return}if(CKW.rest.test(text)&&text.length<25){coachAnswer('rest',null);return}
+  const hits=Object.keys(C2K).filter(k=>C2K[k].test(text));
+  if(hits.includes('care')){coachSay(c2('a_care'));coachSay(c2('t_care'));CO.ask=[c2('q_care'),[[c2('b_light'),()=>coachSay(c2('r_light'))],[c2('b_one'),()=>{CO.lvl=Math.min(CO.lvl+2,ladder().length-1);coachSay(c2('t_shrink',c2Step()))}]]];renderCoach();return}
+  const k=hits.find(h=>h!==CO.lastK)||hits[0]||'any';CO.lastK=k;
+  const pool=[...(C2T[k]||[]),...C2T.any];let tk=pool.find(x=>!CO.used.includes(x)&&x!==CO.lastT);if(!tk){CO.used=[];tk=pool.find(x=>x!==CO.lastT)}
+  CO.used.push(tk);CO.lastT=tk;
+  if(k==='study'&&hits.includes('scroll')&&!CO.used.includes('t_phone')){CO.used.pop();CO.used.push('t_phone');tk='t_phone';CO.lastT=tk}
+  coachSay(c2('a_'+k));coachSay(c2(tk,c2Step()));
+  if(k==='any'){CO.ask=[c2('q_any'),[['Tired',()=>coachFree('tired')],['Overwhelmed',()=>coachFree('overwhelmed')],['No motivation',()=>coachFree('no motivation')],['Scrolling',()=>coachFree('scrolling')],['Bored',()=>coachFree('boring')]].map(([l,f])=>[tl(l),()=>{CO.log.pop();f()}])]}
+  else if(ASK[k==='motiv'?'feel':k])CO.ask=ASK[k==='motiv'?'feel':k];
+  renderCoach()};
+{const _sl=setLang;setLang=function(){const r=_sl.apply(this,arguments);try{if(CO.log.length<=1){CO.log=[];coachOpen();renderCoach()}}catch(e){}return r}}
+/* ===== Ideas box v2: screenshot of this page (no gallery photos), honest thank-you, "My ideas" with status ===== */
+[["Add a screenshot of this page","أضف لقطة شاشة لهذه الصفحة","Suuraa fuula kanaa dabali","Ku dar sawirka boggan"],["Remove","إزالة","Haqi","Ka saar"],["Taking screenshot…","جارٍ أخذ لقطة الشاشة…","Suuraa kaasaa jira…","Sawir ayaa la qaadayaa…"],
+ ["Couldn't take the screenshot. You can still send your idea.","تعذّر أخذ لقطة الشاشة. يمكنك إرسال فكرتك مع ذلك.","Suuraan hin kaafamne. Yaada kee garuu erguu dandeessa.","Sawirka lama qaadi karin. Weli waad diri kartaa fikraddaada."],
+ ["Only a screenshot of Fastaqim can be added.","يمكن إضافة لقطة من فاستقم فقط.","Suuraa Fastaqim qofatu dabalama.","Sawir Fastaqim oo keliya ayaa lagu dari karaa."],
+ ["Received. It will be reviewed.","تم الاستلام. ستتم مراجعتها.","Ga'eera. Ni ilaalama.","Waa la helay. Waa la eegi doonaa."],["You can follow it in My ideas.","يمكنك متابعتها في «أفكاري».","\"Yaadota koo\" keessatti hordofuu dandeessa.","Waxaad kala socon kartaa \"Fikradahayga\"."],
+ ["My ideas","أفكاري","Yaadota koo","Fikradahayga"],["Received","وصلت","Ga'eera","Waa la helay"],["Planned","مخطط لها","Karoorfameera","Waa la qorsheeyay"],["Done","تمّ","Xumurameera","Waa la sameeyay"],
+ ["You haven't sent any ideas yet.","لم ترسل أي فكرة بعد.","Ammaaf yaada tokkollee hin ergine.","Weli wax fikrad ah ma aadan dirin."],["Sign in to follow your ideas.","سجّل الدخول لمتابعة أفكارك.","Yaadota kee hordofuuf seeni.","Gal si aad ula socoto fikradahaaga."],
+ ["Suggest an idea","اقترح فكرة","Yaada dhiyeessi","Soo jeedi fikrad"],["Send","إرسال","Ergi","Dir"],["Close","إغلاق","Cufi","Xir"],["Screenshot","لقطة شاشة","Suuraa","Sawir"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const FB2={shot:null,txt:'',lib:null};
+function h2cLoad(){if(window.html2canvas)return Promise.resolve();if(FB2.lib)return FB2.lib;FB2.lib=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/html2canvas-pro@2.5.0/dist/html2canvas-pro.min.js';s.onload=ok;s.onerror=()=>{FB2.lib=null;no()};document.head.appendChild(s)});return FB2.lib}
+async function fbShot(){const t=$('fbText');FB2.txt=t?t.value:FB2.txt;modalClose();await new Promise(r=>setTimeout(r,350));
+  try{toast(tl('Taking screenshot…'));await h2cLoad();const tt=$('toast');if(tt)tt.classList.remove('show');
+    const W=innerWidth,H=innerHeight,c=await html2canvas(document.body,{x:scrollX,y:scrollY,width:W,height:H,windowWidth:W,windowHeight:H,scale:Math.min(2,720/W),useCORS:true,logging:false,backgroundColor:getComputedStyle(document.body).backgroundColor||'#fff',ignoreElements:el=>el.id==='toast'||el.id==='scrollModal'});
+    let q=.62,u=c.toDataURL('image/jpeg',q);while(u.length>440000&&q>.25){q-=.12;u=c.toDataURL('image/jpeg',q)}FB2.shot=u.length<=590000?u:null;if(!FB2.shot)throw 0}
+  catch(e){FB2.shot=null;toast(tl("Couldn't take the screenshot. You can still send your idea."))}
+  fbOpen(true)}
+async function fbInsert(row){if(!AU.sb)return false;let r={...row};for(let i=0;i<2;i++){const {error}=await AU.sb.from('fastaqim_feedback').insert(r);if(!error)return true;if(r.shot&&/shot|column/i.test(error.message||'')){delete r.shot;continue}return false}return false}
+fbOpen=function(keep){if(keep!==true){FB2.shot=null;FB2.txt=''}const signed=!!(AU.sb&&AU.user);
+  modalCard(`<div class="fb3"><p class="label">💡 ${esc(tl('Suggest an idea'))}</p>
+   <form id="fbForm" class="fb2"><textarea id="fbText" rows="4" maxlength="2000" placeholder="${esc(tl('Write here'))}" required dir="auto">${esc(FB2.txt||'')}</textarea>
+   ${FB2.shot?`<div class="fb-sh"><img src="${FB2.shot}" alt="${esc(tl('Screenshot'))}"><button type="button" class="btn-ghost small" id="fbRm">✕ ${esc(tl('Remove'))}</button></div>`:`<button type="button" class="btn-calm fb-cap" id="fbCap">📸 ${esc(tl('Add a screenshot of this page'))}</button>`}
+   <button class="btn-main" type="submit">${esc(tl('Send'))}</button></form>
+   ${signed?`<button type="button" class="fb-my" id="fbMy">📬 ${esc(tl('My ideas'))}</button>`:''}</div>`);
+  const cap=$('fbCap');if(cap)cap.onclick=fbShot;const rm=$('fbRm');if(rm)rm.onclick=()=>{FB2.txt=$('fbText').value;FB2.shot=null;fbOpen(true)};const my=$('fbMy');if(my)my.onclick=myIdeas;
+  $('fbForm').onsubmit=async e=>{e.preventDefault();const body=$('fbText').value.trim();if(!body)return;const btn=e.target.querySelector('[type=submit]');btn.disabled=true;
+    const base={kind:'idea',body,lang:LANG};if(FB2.shot)base.shot=FB2.shot;
+    const ok=AU.sb&&AU.user?await fbInsert({...base,user_id:AU.user.id,email:AU.user.email,name:S.name||''}):await fbInsert({...base,name:'visitor'});
+    if(ok){FB2.shot=null;FB2.txt=''}
+    modalCard(ok?`<div class="fb3 fb-ok"><p class="fb-big">📨</p><p><b>${esc(tl("Received. It will be reviewed."))}</b></p>${signed?`<p class="small muted">${esc(tl('You can follow it in My ideas.'))}</p><button class="btn-main" id="fbMy2">📬 ${esc(tl('My ideas'))}</button>`:''}<button class="btn-calm" id="fbOk">${esc(tl('Close'))}</button></div>`
+      :`<p>${esc(tl("That didn't send. Please try again in a bit."))}</p><button class="btn-calm" id="fbOk">${esc(tl('Close'))}</button>`);
+    $('fbOk').onclick=modalClose;const m2=$('fbMy2');if(m2)m2.onclick=myIdeas}};
+{const fb=$('fbBtn');if(fb)fb.onclick=()=>fbOpen()}
+async function myIdeas(){if(!(AU.sb&&AU.user)){modalCard(`<p>${esc(tl('Sign in to follow your ideas.'))}</p>`);return}
+  modalCard(`<div class="fb3"><p class="label">📬 ${esc(tl('My ideas'))}</p><p class="small muted">…</p></div>`);
+  let rows=[];try{let q=await AU.sb.from('fastaqim_feedback').select('id,body,created_at,status,seen,has_shot').eq('user_id',AU.user.id).order('created_at',{ascending:false}).limit(100);
+    if(q.error)q=await AU.sb.from('fastaqim_feedback').select('*').eq('user_id',AU.user.id).order('created_at',{ascending:false}).limit(100);rows=q.data||[]}catch(e){}
+  rows=rows.filter(r=>!r.hidden_by_sender);const st=r=>r.status||(r.seen?'done':'new'),lab={new:'Received',planned:'Planned',done:'Done',denied:'Not planned'};
+  modalCard(`<div class="fb3"><p class="label">📬 ${esc(tl('My ideas'))}</p>${rows.length?rows.map(r=>`<div class="mi st-${st(r)}"><div class="mi-h"><span class="mi-s">${esc(tl(lab[st(r)]))}</span><span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'})}${r.has_shot||r.shot?' · 📸':''}<button type="button" class="mi-x" data-mix="${r.id}" aria-label="${esc(tl('Delete'))}">✕</button></span></div><p class="notranslate" dir="auto">${esc(r.body)}</p></div>`).join(''):`<p class="small muted">${esc(tl("You haven't sent any ideas yet."))}</p>`}
+   <button class="btn-main" id="miNew">💡 ${esc(tl('Suggest an idea'))}</button></div>`);$('miNew').onclick=()=>fbOpen();
+  $('scrollBody').querySelectorAll('[data-mix]').forEach(b=>b.onclick=()=>{const id=+b.dataset.mix;modalCard(`<div class="fb3"><p><b>${esc(tl('Delete this idea from your list?'))}</b></p><button class="btn-main dl-y" id="mxY">${esc(tl('Delete'))}</button><button class="btn-ghost" id="mxN">${esc(tl('Keep'))}</button></div>`);$('mxN').onclick=myIdeas;$('mxY').onclick=async()=>{let ok=false;try{const {error}=await AU.sb.rpc('fastaqim_feedback_hide',{fid:id});ok=!error}catch(e){}if(!ok)toast(tl("That didn't save. Please try again."));myIdeas()}})}
+try{GO.myideas=()=>myIdeas();GO.idea=()=>fbOpen()}catch(e){}
+/* owner inbox: load without the big screenshots; open a screenshot only when tapped */
+ibLoad=async function(){if(!AU.sb||!AU.user)return null;let q=await AU.sb.from('fastaqim_feedback').select('id,user_id,email,name,kind,body,lang,seen,created_at,status,has_shot,hidden_by_sender').order('created_at',{ascending:false}).limit(500);
+  if(q.error)q=await AU.sb.from('fastaqim_feedback').select('*').order('created_at',{ascending:false}).limit(500);if(q.error)throw q.error;FB.rows=q.data||[];return FB.rows};
+{const _ir=ibRender;ibRender=function(){const r=_ir.apply(this,arguments);try{const sb=$('scrollBody');sb.querySelectorAll('.ibm').forEach(m=>{const b=m.querySelector('[data-id]');const row=b&&(FB.rows||[]).find(x=>x.id===+b.dataset.id);
+  if(row&&(row.has_shot||row.shot)&&!m.querySelector('.ibm-shot')){const x=document.createElement('button');x.type='button';x.className='ibm-shot';x.textContent='📸 '+tl('Screenshot');x.onclick=()=>ibShot(row);const body=m.querySelector('.ibm-b');(body||m).appendChild(x)}})}catch(e){}return r}}
+async function ibShot(row){let u=row.shot;if(!u){try{const {data}=await AU.sb.from('fastaqim_feedback').select('shot').eq('id',row.id).single();u=data&&data.shot}catch(e){}}
+  if(!u||!/^data:image\/jpeg;base64,/.test(u)){toast(tl("That didn't save. Please try again."));return}
+  modalCard(`<div class="fb3"><button type="button" class="btn-ghost small" id="ibBk">‹ ${esc(tl('Ideas inbox'))}</button><img class="ib-img" src="${u}" alt="${esc(tl('Screenshot'))}"><p class="notranslate small" dir="auto">${esc(row.body)}</p></div>`);$('ibBk').onclick=()=>ibRender()}
+/* any old code that scrolls to / focuses something inside a hub opens that feature's own screen first */
+function hubReveal(el){try{if(!fqApp()||!el||!el.closest)return;const sec=el.closest('section[id^=tab-]');if(!sec)return;const k=sec.id.slice(4);if(!(k in HUBV))return;
+  let card=el;while(card&&card.parentElement!==sec)card=card.parentElement;if(!card||card.id==='fqHome'||card.classList.contains('hub-bar')||card.classList.contains('hub-grid'))return;
+  if(k==='now'){if(card.id==='dayCard'&&document.body.dataset.nowv!=='tools')return;document.body.dataset.nowv='tools'}
+  if(!card.dataset.hid)hubCards(k);const id=card.dataset.hid||card.id;const L=hubCards(k),it=L.find(x=>x.c.includes(card));const want=it?it.id:id;
+  if(HUBV[k]===want&&sec.dataset.hub==='one'&&document.body.dataset.tab===k)return;HUBV[k]=want;if(document.body.dataset.tab!==k)show(k);else appSync()}catch(e){}}
+{const _si=Element.prototype.scrollIntoView;Element.prototype.scrollIntoView=function(){hubReveal(this);return _si.apply(this,arguments)}}
+{const _fo=HTMLElement.prototype.focus;HTMLElement.prototype.focus=function(){hubReveal(this);return _fo.apply(this,arguments)}}
+GO.stars=()=>{HUBV.wins='stBox';show('wins')};GO.calendar=()=>goCard('plan','calCard');GO.rewards=GO.shop=()=>{const c=[...document.querySelectorAll('#tab-wins > .card')].find(x=>/reward|مكافآت|badhaasaa|abaalmarin/i.test((x.querySelector('h2')||{}).textContent||''));if(c)c.scrollIntoView({block:'start'});else show('wins')};
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#bNav [data-bn="st"]');if(b&&fqApp())HUBV.wins='stBox'},true);
+/* ===== top icons: 🌐 language (always visible, any language) + ⚙ Settings screen ===== */
+[["Settings","الإعدادات","Qindaa'ina","Dejinta"],["Language","اللغة","Afaan","Luqadda"],["Theme","المظهر","Bifa","Muuqaal"],["Pinned at the top","مثبّت في الأعلى","Olii irratti qabame","Ku dhegan xagga sare"],["Arrange tabs","ترتيب التبويبات","Tartiiba qindeessi","Habee tabsyada"],["Kid mode","وضع الأطفال","Haala ijoollee","Habka carruurta"],["Reminders","التذكيرات","Yaadachiisota","Xasuusin"],["Privacy","الخصوصية","Iccitii","Asturnaanta"],["Family","العائلة","Maatii","Qoyska"],["Search","بحث","Barbaadi","Raadi"],["More","المزيد","Dabalata","Wax kale"],["Tools","الأدوات","Meeshaalee","Qalabka"],
+ ["Delete my account","احذف حسابي","Herrega koo haqi","Tirtir akoonkayga"],["Keep my account","أبقِ حسابي","Herrega koo eegi","Hay akoonkayga"],["Delete","حذف","Haqi","Tirtir"],
+ ["Restorable for 30 days, then deleted for good.","يمكن استعادته خلال 30 يومًا، ثم يُحذف نهائيًا.","Guyyaa 30 keessatti deebi'uu danda'a, achii guutummaatti haqama.","Waa la soo celin karaa 30 maalmood gudahood, kadibna si buuxda ayaa loo tirtiraa."],
+ ["Your account is hidden right away.","يُخفى حسابك فورًا.","Herregni kee battaluma ni dhokata.","Akoonkaaga isla markiiba waa la qariyaa."],
+ ["You have 30 days to change your mind: sign in before {d} and tap Restore.","لديك 30 يومًا لتغيير رأيك: سجّل الدخول قبل {d} واضغط «استعادة».","Yaada kee jijjiiruuf guyyaa 30 qabda: {d} dura seeni, \"Deebisi\" tuqi.","Waxaad haysataa 30 maalmood si aad u beddesho go'aankaaga: gal ka hor {d} oo taabo \"Soo celi\"."],
+ ["After {d}, everything is deleted for good and cannot be restored.","بعد {d} يُحذف كل شيء نهائيًا ولا يمكن استعادته.","{d} booda wanti hundi guutummaatti haqama, deebi'uus hin danda'u.","Kadib {d} wax walba si buuxda ayaa loo tirtiraa, lamana soo celin karo."],
+ ["Account set to delete. Sign in within 30 days to restore.","تم تعيين الحساب للحذف. سجّل الدخول خلال 30 يومًا لاستعادته.","Herregni haqamuuf qophaa'eera. Deebisuuf guyyaa 30 keessatti seeni.","Akoonka waxaa loo diyaariyay tirtir. Gal 30 maalmood gudahood si aad u soo celiso."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const ICO={globe:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 3.8 5.8 3.8 9s-1.2 6.2-3.8 9c-2.6-2.8-3.8-5.8-3.8-9S9.4 5.8 12 3z"/></svg>',
+ gear:'<svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>'};
+function lgShort(){return ({ar:'ع'})[LANG]||String(LANG||'en').slice(0,2).toUpperCase()}
+function topIcons(cls){return `<span class="tp-i ${cls||''}"><button type="button" class="tp-b tp-lg" data-tp="lang" aria-label="Language / اللغة">${ICO.globe}<b class="notranslate">${esc(lgShort())}</b></button><button type="button" class="tp-b" data-tp="set" aria-label="${esc(tl('Settings'))}">${ICO.gear}</button></span>`}
+function setOpen(){try{const m=$('apMenu');if(m)m.hidden=true;const s=$('scrollModal');if(s&&!s.hidden)modalClose()}catch(e){}HUBV.wins='set';show('wins');scrollTo(0,0)}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-tp]');if(!b)return;e.preventDefault();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}if(b.dataset.tp==='lang')langOpen();else setOpen()});
+function tpWire(){if(!fqApp())return;const hero=document.querySelector('#fqHome .hm-hero');if(hero&&!hero.querySelector('.tp-i'))hero.insertAdjacentHTML('afterbegin',topIcons('tp-hero'));
+  document.querySelectorAll('.hub-bar,.scr-bar').forEach(b=>{if(!b.querySelector('.tp-i'))b.insertAdjacentHTML('beforeend',topIcons())})}
+{const _as2=appSync;appSync=function(){_as2.apply(this,arguments);try{tpWire();setListWire()}catch(e){}}}
+{const _hr2=hmRender;hmRender=function(){const r=_hr2.apply(this,arguments);try{tpWire()}catch(e){}return r}}
+{const _hb2=hubRender;hubRender=function(){const r=_hb2.apply(this,arguments);try{tpWire()}catch(e){}return r}}
+/* the Settings screen: a clear list first, then the existing settings */
+function setListWire(){const w=$('tab-wins');if(!w)return;let c=$('setList');const hc=$('histCard');
+  const lgName=(()=>{try{const b=document.querySelector('#apLang b');return ({en:'English',ar:'العربية',om:'Afaan Oromoo',so:'Soomaali'})[LANG]||(b&&b.textContent)||LANG}catch(e){return LANG}})();
+  const apL={auto:'Auto',light:'Light',dark:'Dark'}[(S.look&&S.look.mode)||'auto'],wpL=(WP[(S.look&&S.look.wp)||'plain']||WP.plain).n;
+  const rows=[['lang','🌐','Language',lgName],['ap','🌗','Appearance',tl(apL)],['wp','🖼️','Wallpaper',tl(wpL)],['th','🎨','Theme'],['pin','📌','Pinned at the top'],['arr','↕️','Arrange tabs'],['kid','🧒','Kid mode'],['rem','🔔','Reminders'],['fam','👨‍👩‍👧','Family'],['pv','🔒','Privacy'],['idea','💡','My ideas']];
+  const html=`${rows.map(([k,i,l,v])=>`<button type="button" class="sl-r" data-sl="${k}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span>${v?`<span class="sl-v notranslate">${esc(v)}</span>`:''}<span class="sl-c" aria-hidden="true">›</span></button>`).join('')}`;
+  if(!c){c=document.createElement('div');c.id='setList';c.className='card';}const hk=LANG+lgName+apL+wpL;if(c.dataset.h!==hk){c.innerHTML=html;c.dataset.h=hk;
+    c.querySelectorAll('[data-sl]').forEach(b=>b.onclick=()=>{const k=b.dataset.sl;({lang:langOpen,ap:apOpen,wp:wpOpen,th:thmOpen,pin:pinEdit,arr:tabsArrange,kid:kidOpen,rem:()=>goCard('wins','remCard'),fam:()=>GO.family(),pv:privacyOpen,idea:myIdeas}[k]||(()=>{}))()})}
+  if(hc&&c.previousElementSibling!==hc)hc.after(c);
+  const del=$('acDel');if(del&&!$('acDelN')){const n=document.createElement('p');n.id='acDelN';n.className='small muted';n.textContent=tl('Restorable for 30 days, then deleted for good.');del.after(n)}}
+{const _hc=hubCards;hubCards=function(k){const L=_hc.apply(this,arguments);if(k==='wins'){const s=L.find(x=>x.id==='set');const sl=$('setList');if(s&&sl){s.c=[sl,...s.c.filter(x=>x!==sl)]}}return L}}
+/* delete account: say clearly, in every language, that it can be restored for 30 days */
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#acDel');if(!b)return;e.stopImmediatePropagation();e.preventDefault();
+  const d=new Date(Date.now()+30*864e5).toLocaleDateString(LOC(),{day:'numeric',month:'long',year:'numeric'});
+  modalCard(`<div class="dl-c"><p class="label">⚠️ ${esc(tl('Delete my account'))}</p><p>${esc(tl('Your account is hidden right away.'))}</p>
+   <div class="dl-box"><p>⏳ <b>${esc(tl('You have 30 days to change your mind: sign in before {d} and tap Restore.').replace('{d}',d))}</b></p><p>${esc(tl('After {d}, everything is deleted for good and cannot be restored.').replace('{d}',d))}</p></div>
+   <button class="btn-ghost" id="delNo2">${esc(tl('Keep my account'))}</button><button class="btn-main dl-y" id="delYes2">${esc(tl('Delete'))}</button></div>`);
+  $('delNo2').onclick=modalClose;$('delYes2').onclick=async()=>{S.deletedAt=Date.now();save();SYNC.dirty=true;try{await accFlush()}catch(x){}modalClose();toast(tl('Account set to delete. Sign in within 30 days to restore.'));setTimeout(()=>{const o=$('acOut');if(o)o.click()},1500)}},true);
+/* ☰: shorter: settings moved to ⚙, a search box on top */
+{const _am5=apMenu;apMenu=function(){const r=_am5.apply(this,arguments);try{const m=$('apMenu'),p=m&&m.querySelector('.apm-p');if(!p)return r;
+  ['pin','arr','th','kid','lang','pv'].forEach(k=>{const b=p.querySelector(`[data-am="${k}"]`);if(b)b.remove()});
+  if(!p.querySelector('[data-am="set2"]')){const fb=p.querySelector('[data-am="fb"]');const s=document.createElement('button');s.className='apm-i';s.dataset.am='set2';s.innerHTML='⚙️ '+esc(tl('Settings'));s.onclick=e=>{e.stopPropagation();setOpen()};(fb||p.lastElementChild).before(s)}
+  p.querySelectorAll('hr').forEach((h,i)=>{if(i)h.remove()});
+  if(!p.querySelector('.apm-q')){const h=p.querySelector('.apm-h');const q=document.createElement('input');q.type='search';q.className='apm-q';q.placeholder='🔍 '+tl('Search');q.setAttribute('aria-label',tl('Search'));h.after(q);
+    q.oninput=()=>{const v=q.value.trim().toLowerCase();p.querySelectorAll('.apm-i,[data-fat]').forEach(b=>{b.hidden=!!v&&!b.textContent.toLowerCase().includes(v)});p.querySelectorAll('.apm-s,.apm-g,hr').forEach(x=>{if(x.classList.contains('apm-g'))return;x.hidden=!!v})}}}catch(e){}return r}}
+/* ☰: show the first 6 tools, the rest behind "More" (search still finds everything) */
+{const _am6=apMenu;apMenu=function(){const r=_am6.apply(this,arguments);try{const p=$('apMenu').querySelector('.apm-p');if(!p||p.querySelector('.apm-more'))return r;
+  const hr=p.querySelector('hr'),tools=[...p.querySelectorAll('.apm-i')].filter(b=>!hr||(b.compareDocumentPosition(hr)&Node.DOCUMENT_POSITION_FOLLOWING));
+  const extra=tools.slice(6);if(extra.length<2)return r;extra.forEach(b=>b.classList.add('apm-x'));p.classList.add('apm-c');
+  const mb=document.createElement('button');mb.type='button';mb.className='apm-more';mb.textContent=tl('More')+' ▾';mb.onclick=e=>{e.stopPropagation();p.classList.toggle('apm-c');mb.textContent=tl('More')+(p.classList.contains('apm-c')?' ▾':' ▴')};extra[extra.length-1].after(mb);
+  const q=p.querySelector('.apm-q');if(q)q.addEventListener('input',()=>{p.classList.toggle('apm-s2',!!q.value.trim())})}catch(e){}return r}}
+/* home chips: only trackers the person added themselves (no auto Water/Quran), then streak and stars */
+function hmTrk(){let L=[];try{L=(S.trackers||[]).filter(t=>t.type!=='salah'&&t.per==='day'&&!t.hidden).slice(0,3)}catch(e){}
+  const bg=['#DCEAFF','#D6F1E4','#FCE8F1'];const st=typeof streak==='function'?streak():0;
+  const chips=L.map((t,i)=>{const n=trkNum(t,new Date()),chk=t.type==='check'||t.type==='yesno',met=trkMet(t,new Date());
+    return `<button type="button" class="hm-c${met?' met':''}" data-hm="tk" data-id="${esc(t.id)}"><span class="ib" style="background:${bg[i%3]}">${esc(t.emoji||'•')}${met?'':'<em>+</em>'}</span><span class="tx"><b>${chk?(met?'✓':'—'):n+'<small>/'+t.goal+'</small>'}</b><span class="notranslate" dir="auto">${esc(tl(t.name))}</span></span></button>`});
+  chips.push(`<button type="button" class="hm-c" data-hm="st"><span class="ib" style="background:#FFF0E3">🔥</span><span class="tx"><b>${st}</b><span>${esc(tl('Streak'))}</span></span></button>`);
+  if(chips.length<3)chips.push(`<button type="button" class="hm-c" data-hm="sts"><span class="ib" style="background:#FFF6D6">⭐</span><span class="tx"><b>${S.sparks||0}</b><span>${esc(tl('Stars'))}</span></span></button>`);
+  return `<div class="hm-trk n${chips.length}">${chips.join('')}</div>`}
+function hmTk(id){const t=(S.trackers||[]).find(x=>x.id===id);if(!t)return;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
+  const chk=t.type==='check'||t.type==='yesno';if(chk){trkSet(t,trkNum(t,new Date())?0:1)}else if(t.type==='count'&&!trkMet(t,new Date())){trkSet(t,(+trkVal(t,new Date())||0)+1)}else{goCard('now','trkCard');return}hmRender()}
+{const _tw=tpWire;tpWire=function(){if(!fqApp())return;const w=document.querySelector('#fqHome .hm-tpw');if(w&&!w.querySelector('.tp-i'))w.innerHTML=topIcons();document.querySelectorAll('.hub-bar,.scr-bar').forEach(b=>{if(!b.querySelector('.tp-i'))b.insertAdjacentHTML('beforeend',topIcons())})}}
+/* salah history starts the day the person joined: "Since you joined", never earlier days */
+[["Since you joined","منذ انضمامك","Erga makamtee","Tan iyo markaad ku biirtay"],["Since {d}","منذ {d}","{d} irraa jalqabee","Laga soo bilaabo {d}"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function joinedAt(){try{if(!S.joined){let t=Date.now();try{if(AU&&AU.user&&AU.user.created_at)t=Math.min(t,Date.parse(AU.user.created_at))}catch(e){}
+  [S.salQ,S.trk].forEach(o=>Object.keys(o||{}).forEach(k=>{const v=Date.parse(k);if(!isNaN(v))t=Math.min(t,v)}));S.joined=t;save()}return S.joined}catch(e){return Date.now()}}
+function sqSince(){const d=new Date(joinedAt());if(Date.now()-d<864e5*1.5)return tl('Since you joined');return tl('Since {d}').replace('{d}',d.toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'}))}
+salQStats=function(){let on=0,late=0,miss=0;const j=new Date(joinedAt());j.setHours(0,0,0,0);Object.keys(S.salQ||{}).forEach(k=>{const t=Date.parse(k);if(!isNaN(t)&&t<j.getTime()-864e5)return;Object.values(S.salQ[k]||{}).forEach(v=>{if(v==='on')on++;else if(v==='late')late++;else if(v==='miss')miss++})});return {on,late,miss}};
+/* ===== Appearance follows the phone (Auto) by default; themes keep the chosen mode ===== */
+{try{S.look=S.look||{};if(!S.lookV3){if(!S.look.mode||S.look.mode==='light')S.look.mode='auto';S.lookV3=1;save()}}catch(e){}}
+thmSet=function(k){const p=PRESETS.find(q=>q[0]===k);if(!p)return;const m=(S.look&&S.look.mode)||'auto';S.look=Object.assign({},S.look,p[2],{preset:k,mode:m});save();lookApply();try{renderLook();renderLook2()}catch(e){}};
+{const _la=lookApply;lookApply=function(){const r=_la.apply(this,arguments);try{const L=S.look||{};document.documentElement.dataset.theme=L.mode||'auto';wpApply();
+  document.querySelectorAll('[data-lm]').forEach(b=>b.setAttribute('aria-pressed',(L.mode||'auto')===b.dataset.lm))}catch(e){}return r}}
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{try{lookApply()}catch(e){}})}catch(e){}
+/* ===== Wallpapers (original, drawn in code; no animals, no people). Default: plain ===== */
+[["Wallpaper","الخلفية","Bakgiraawundii","Gidaarka"],["Plain","سادة","Salphaa","Caadi"],["Flowers","زهور","Abaaboo","Ubax"],["Garden","حديقة","Iddoo biqiltuu","Beer"],["Sky","سماء","Samii","Samada"],["Mountains","جبال","Gaarota","Buuro"],["Pattern","زخرفة","Bocquu","Naqshad"],["Dawn","فجر","Barii","Waaberi"],["Sea","بحر","Galaana","Bad"],["Stars at night","نجوم الليل","Urjii halkanii","Xiddigaha habeenka"],
+ ["Tap a wallpaper. The page changes right away.","اضغط على خلفية. تتغير الصفحة فورًا.","Bakgiraawundii tokko tuqi. Fuulli battaluma jijjiirama.","Taabo gidaar. Boggu isla markiiba wuu isbeddelayaa."],["Done","تمّ","Xumurameera","Waa la sameeyay"],
+ ["Appearance","المظهر","Mul'ata","Muuqaalka"],["Auto","تلقائي","Ofumaan","Toos"],["Light","فاتح","Ifaa","Iftiin"],["Dark","داكن","Dukkana","Mugdi"],["Follows your phone","يتبع جهازك","Bilbila kee hordofa","Wuxuu raacaa taleefankaaga"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const svgU=s=>'url("data:image/svg+xml,'+encodeURIComponent(s)+'")';
+const flower=(x,y,r,c,cc)=>{let p='';for(let i=0;i<5;i++){const a=i*72*Math.PI/180;p+=`<ellipse cx="${(x+Math.cos(a)*r*.9).toFixed(1)}" cy="${(y+Math.sin(a)*r*.9).toFixed(1)}" rx="${r*.62}" ry="${r*.62}" fill="${c}"/>`}return p+`<circle cx="${x}" cy="${y}" r="${r*.42}" fill="${cc}"/>`};
+const WP={
+ plain:{n:'Plain',bg:''},
+ flowers:{n:'Flowers',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180"><rect width="180" height="180" fill="#FFF6F7"/>${flower(30,32,9,'#F7B6C8','#F59E0B')}${flower(120,20,7,'#FBCFE8','#FCD34D')}${flower(150,96,10,'#F9A8D4','#F59E0B')}${flower(70,110,8,'#FECDD3','#FBBF24')}${flower(28,150,7,'#F5D0FE','#F59E0B')}${flower(118,160,6,'#FBCFE8','#FCD34D')}<g fill="#A7D7B8" opacity=".9"><ellipse cx="44" cy="44" rx="7" ry="3" transform="rotate(35 44 44)"/><ellipse cx="160" cy="110" rx="8" ry="3" transform="rotate(-30 160 110)"/><ellipse cx="80" cy="122" rx="7" ry="3" transform="rotate(40 80 122)"/></g></svg>`)+' 0 0/180px 180px',dk:'#2A1B22'},
+ garden:{n:'Garden',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><rect width="140" height="140" fill="#EEF8F0"/><g fill="#BFE3C8"><path d="M20 30c14-14 32-10 34 6-16 8-28 6-34-6z"/><path d="M90 20c10 12 6 28-10 30-4-14 0-24 10-30z"/><path d="M100 90c16-6 30 4 26 18-16 2-24-4-26-18z"/><path d="M30 100c4 16-6 28-20 26-2-14 6-22 20-26z"/></g><g fill="#9ED3AE"><path d="M60 70c10-10 22-6 22 6-10 6-18 4-22-6z"/></g></svg>`)+' 0 0/140px 140px',dk:'#152A1E'},
+ sky:{n:'Sky',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ED0F5"/><stop offset="1" stop-color="#EAF6FF"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><g fill="#fff" opacity=".9"><ellipse cx="80" cy="140" rx="70" ry="22"/><ellipse cx="120" cy="125" rx="40" ry="24"/><ellipse cx="300" cy="300" rx="80" ry="22"/><ellipse cx="270" cy="285" rx="40" ry="24"/><ellipse cx="120" cy="520" rx="90" ry="24"/><ellipse cx="160" cy="503" rx="44" ry="26"/></g></svg>`)+' center/cover',dk:'#0F2238'},
+ mountains:{n:'Mountains',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3F1FA"/><stop offset="1" stop-color="#FDF4EC"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><circle cx="300" cy="430" r="40" fill="#FBD38D" opacity=".7"/><path d="M0 560 90 450 160 520 250 420 400 560V800H0z" fill="#C9C3E6"/><path d="M0 640 110 540 200 610 300 530 400 620V800H0z" fill="#A9B8DF"/><path d="M0 720 120 640 230 700 330 650 400 690V800H0z" fill="#8FA9D3"/></svg>`)+' center bottom/cover',dk:'#171A2E'},
+ pattern:{n:'Pattern',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="#F4F8F6"/><g fill="none" stroke="#CFE3DA" stroke-width="1.6"><path d="M40 8 49 31 72 40 49 49 40 72 31 49 8 40 31 31z"/><rect x="24" y="24" width="32" height="32" transform="rotate(45 40 40)"/><rect x="24" y="24" width="32" height="32"/><path d="M0 0 8 8M80 0 72 8M0 80 8 72M80 80 72 72"/></g></svg>`)+' 0 0/80px 80px',dk:'#122520'},
+ dawn:{n:'Dawn',bg:'linear-gradient(170deg,#FDE7D3 0%,#F9D3DE 45%,#E3DDF7 100%)',dk:'linear-gradient(170deg,#2B1E2A,#1E1B33)'},
+ sea:{n:'Sea',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F4FA"/><stop offset=".55" stop-color="#D2ECF4"/><stop offset="1" stop-color="#A9DCE9"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><g fill="none" stroke="#fff" stroke-width="3" opacity=".7"><path d="M0 560q50-14 100 0t100 0 100 0 100 0"/><path d="M0 620q50-14 100 0t100 0 100 0 100 0"/><path d="M0 680q50-14 100 0t100 0 100 0 100 0"/></g></svg>`)+' center bottom/cover',dk:'#0E2230'},
+ night:{n:'Stars at night',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><rect width="160" height="160" fill="#1B2A4A"/><g fill="#FDE68A"><circle cx="20" cy="30" r="1.4"/><circle cx="90" cy="18" r="1"/><circle cx="140" cy="60" r="1.6"/><circle cx="60" cy="90" r="1.1"/><circle cx="120" cy="130" r="1.3"/><circle cx="30" cy="140" r="1"/><circle cx="100" cy="80" r=".9"/></g><path d="M52 40a14 14 0 1 0 12 18 11 11 0 1 1-12-18z" fill="#FDE68A" opacity=".85"/></svg>`)+' 0 0/160px 160px',dk:'#0B1428',dark:1}};
+function isDark(){const m=(S.look&&S.look.mode)||'auto';return m==='dark'||(m==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches)}
+function wpApply(){let el=$('fqWp');const k=(S.look&&S.look.wp)||'plain',w=WP[k];if(!w||!w.bg){if(el)el.remove();document.body.classList.remove('has-wp');return}
+  if(!el){el=document.createElement('div');el.id='fqWp';el.setAttribute('aria-hidden','true');document.body.prepend(el)}
+  const dk=isDark();el.style.background=w.bg;el.dataset.k=k;el.classList.toggle('dk',dk&&!w.dark);document.body.classList.add('has-wp');document.body.classList.toggle('wp-dark',!!w.dark||dk)}
+function wpOpen(){const cur=(S.look&&S.look.wp)||'plain';
+  modalCard(`<p class="label">🖼️ ${esc(tl('Wallpaper'))}</p><p class="small muted" style="margin:0 0 8px">${esc(tl('Tap a wallpaper. The page changes right away.'))}</p>
+   <div class="wp-g">${Object.entries(WP).map(([k,w])=>`<button type="button" class="wp-t${cur===k?' on':''}" data-wp="${k}" aria-pressed="${cur===k}"><span class="wp-p" style='background:${w.bg?w.bg.replace(/'/g,"%27"):"var(--bg)"}'></span><span class="wp-n">${esc(tl(w.n))}</span></button>`).join('')}</div>
+   <button type="button" class="btn-main" id="wpOk" style="width:100%;margin-top:12px">${esc(tl('Done'))}</button>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-wp]').forEach(b=>b.onclick=()=>{S.look=Object.assign({},S.look,{wp:b.dataset.wp});save();wpApply();B.querySelectorAll('[data-wp]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}});$('wpOk').onclick=modalClose}
+function apOpen(){const m=(S.look&&S.look.mode)||'auto';
+  modalCard(`<p class="label">🌗 ${esc(tl('Appearance'))}</p><div class="ap3g">${[['auto','◐','Auto'],['light','☀️','Light'],['dark','🌙','Dark']].map(([k,i,l])=>`<button type="button" class="ap3b${m===k?' on':''}" data-apm="${k}"><span class="ap3p ${k}"></span><b>${i} ${esc(tl(l))}</b>${k==='auto'?`<small>${esc(tl('Follows your phone'))}</small>`:''}</button>`).join('')}</div><button type="button" class="btn-main" id="apOk" style="width:100%;margin-top:12px">${esc(tl('Done'))}</button>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-apm]').forEach(b=>b.onclick=()=>{S.look=Object.assign({},S.look,{mode:b.dataset.apm});save();lookApply();B.querySelectorAll('[data-apm]').forEach(x=>x.classList.toggle('on',x===b))});$('apOk').onclick=modalClose}
+try{GO.wallpaper=wpOpen;GO.appearance=apOpen;GO.settings=setOpen}catch(e){}
+setTimeout(()=>{try{lookApply()}catch(e){}},50);
+[["Denied","مرفوضة","Didamame","La diiday"],["Not planned","غير مخطط لها","Hin karoorfamne","Lama qorsheyn"],["Deleted by sender","حذفها المرسل","Ergaan haqame","Diraha ayaa tirtiray"],["Delete this idea from your list?","حذف هذه الفكرة من قائمتك؟","Yaada kana tarree kee irraa haqii?","Ka tirtir fikraddan liiskaaga?"],["Keep","أبقِها","Eegi","Hay"],
+ ["Delete this idea for good? This can't be undone.","حذف هذه الفكرة نهائيًا؟ لا يمكن التراجع.","Yaada kana guutummaatti haqii? Deebisuun hin danda'amu.","Si buuxda u tirtir fikraddan? Lama soo celin karo."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+{const _ir2=ibRender;ibRender=function(){const r=_ir2.apply(this,arguments);try{const sb=$('scrollBody');sb.querySelectorAll('[data-ibd]').forEach(b=>b.onclick=()=>{const id=+b.dataset.ibd,row=(FB.rows||[]).find(x=>x.id===id);
+  modalCard(`<div class="fb3"><p><b>${esc(tl("Delete this idea for good? This can't be undone."))}</b></p><p class="small muted notranslate" dir="auto">${esc((row&&row.body||'').slice(0,160))}</p><button class="btn-main dl-y" id="ibdY">🗑 ${esc(tl('Delete'))}</button><button class="btn-ghost" id="ibdN">${esc(tl('Keep'))}</button></div>`);
+  $('ibdN').onclick=()=>ibRender();$('ibdY').onclick=async()=>{const {error}=await AU.sb.from('fastaqim_feedback').delete().eq('id',id);if(error){toast(tl("That didn't save. Please try again."));ibRender();return}FB.rows=(FB.rows||[]).filter(x=>x.id!==id);ibBadge();ibRender()}})}catch(e){}return r}}
+/* ⚙ right next to "Fastaqim" in the ☰ header */
+{const _am7=apMenu;apMenu=function(){const r=_am7.apply(this,arguments);try{const h=$('apMenu').querySelector('.apm-h');if(h&&!h.querySelector('.apm-st')){const b=document.createElement('button');b.type='button';b.className='tp-b apm-st';b.setAttribute('aria-label',tl('Settings'));b.innerHTML=ICO.gear;b.onclick=e=>{e.stopPropagation();setOpen()};const t=h.querySelector('b');(t||h.firstChild).after(b)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
