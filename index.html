@@ -1762,6 +1762,31 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .ns-n{background:#f5c542;color:#4a3500}.ns-n.ok{background:#15835f;color:#fff}
 .ns-nav>.btn-calm{flex:0 0 auto;padding-inline:22px}.ns-nav>.btn-main{flex:1}
 .ns-add input,.ns-row input{height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);padding:0 12px;font:inherit;font-size:16px}
+
+/* v121 chunks */
+.ch-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:4px}
+.ch-t{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;gap:3px;padding:11px 12px 10px;border-radius:16px;background:color-mix(in srgb,var(--ink) 4.5%,transparent);border:2px solid transparent;min-height:92px;text-align:start}
+.ch-t.now{border-color:#15835f;background:color-mix(in srgb,#15835f 8%,transparent)}
+.ch-i{font-size:22px;line-height:1}
+.ch-n{display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ch-n b{font-size:15px;font-weight:800;color:var(--ink);overflow-wrap:break-word}
+.ch-n em{font-style:normal;font-size:11px;font-weight:800;background:#15835f;color:#fff;border-radius:8px;padding:1px 7px}
+.ch-t small{font-size:12.5px;color:var(--muted);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow-wrap:break-word}
+.ch-bar{display:block;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden;margin-top:auto}.ch-bar i{display:block;height:100%;background:#15835f;border-radius:3px}
+.ch-new{align-items:center;justify-content:center;border:2px dashed var(--line);background:transparent}.ch-new .ch-i{font-size:20px;color:#15835f;font-weight:800}.ch-new b{color:#15835f!important}
+.ch-back{all:unset;cursor:pointer;color:#15835f;font-weight:800;font-size:14.5px;padding:4px 0;align-self:flex-start}
+.ch-hd{display:flex;align-items:center;gap:12px;margin:6px 0 8px}.ch-bi{font-size:34px;line-height:1}.ch-ht{display:flex;flex-direction:column}.ch-ht b{font-size:22px;font-weight:800;color:var(--ink)}.ch-ht small{color:var(--muted);font-size:14px}
+.ch-card .ch-bar{height:7px;margin:0 0 12px}
+.ch-acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.ch-acts .btn-calm{flex:1}
+.ch-del{all:unset;cursor:pointer;color:#c2410c;font-weight:700;font-size:13.5px;padding:8px 4px}
+.ch-empty{margin:4px 0}
+.ch-nw{display:flex;flex-direction:column;gap:12px}.ch-nw input{height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);padding:0 12px;font:inherit;font-size:16px}
+.ch-ics{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}.ch-ics button{border:2px solid transparent;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent);font-size:20px;padding:0;height:40px;min-height:0}.ch-ics button.on{border-color:#15835f;background:color-mix(in srgb,#15835f 12%,transparent)}
+.ch-pk{display:flex;flex-direction:column;gap:6px}
+.ch-pr{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 4%,transparent);font-size:15px;color:var(--ink);text-align:start}
+.ch-pr i{width:20px;height:20px;border-radius:6px;border:2px solid var(--muted);flex:none;display:grid;place-items:center}.ch-pr span{flex:1;min-width:0;overflow-wrap:break-word}
+.ch-pr.on{background:color-mix(in srgb,#15835f 12%,transparent)}.ch-pr.on i{background:#15835f;border-color:#15835f}.ch-pr.on i::after{content:'✓';color:#fff;font-size:12px;font-weight:900;font-style:normal}
+.ch-t small{-webkit-line-clamp:1}.ch-t .ch-nx{color:var(--ink);opacity:.75}
+body.ch-on #tab-today > .card:not(#chCard):not(:has(#topList)):not(:has(#laterList)):not(:has(#dumpForm)){display:none}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7404,7 +7429,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v120',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v121',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7843,6 +7868,56 @@ GO.sleep=GO.night=GO.beforesleep=()=>bsOpen(0);
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="ns"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();bsOpen(0)},true);
 {const _amN=apMenu;apMenu=function(){const r=_amN.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="vd"]');if(s&&!m.querySelector('[data-am="ns"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='ns';b.textContent='🌙 '+tl('Before sleep');b.onclick=()=>{m.hidden=true;bsOpen(0)};s.before(b)}}catch(e){}return r}}
 SRCH_PG.splice(2,0,['🌙','Before sleep','sleep']);
+
+/* v121: Chunks, one chunk at a time (Morning, Afternoon, Evening, School, Work, Weekend + your own) */
+[['Chunks','أجزاء اليوم','Kutaawwan','Qaybo'],['School','المدرسة','Mana barumsaa','Iskuul'],['Work','العمل','Hojii','Shaqo'],['Weekend','نهاية الأسبوع','Dhuma torbanii','Dhammaadka toddobaadka'],
+ ['now','الآن','amma','hadda'],['left','متبقٍ','hafe','haray'],['All chunks','كل الأجزاء','Kutaawwan hunda','Dhammaan qaybaha'],['New chunk','جزء جديد','Kutaa haaraa','Qayb cusub'],
+ ['Nothing in this chunk yet.','لا شيء في هذا الجزء بعد.','Kutaa kana keessa ammaaf homaa hin jiru.','Weli waxba kuma jiraan qaybtan.'],['Add to-dos to this chunk','أضف مهامًا لهذا الجزء','To-do kutaa kanatti dabali','Ku dar hawlo qaybtan'],
+ ['Add to-dos','أضف مهامًا','To-do dabali','Ku dar hawlo'],['Delete chunk','احذف الجزء','Kutaa haqi','Tirtir qaybta'],['Name','الاسم','Maqaa','Magac'],['Save','حفظ','Olkaa\'i','Keydi'],['Tap to-dos to move them here.','اضغط على المهام لنقلها إلى هنا.','As fiduuf to-do tuqi.','Taabo hawlaha si aad halkan ugu soo raruto.'],
+ ['All done here','تمّ كل شيء هنا','As hundi xumurameera','Halkan wax walba waa dhammaadeen'],['Show chunks','أظهر الأجزاء','Kutaawwan agarsiisi','Tus qaybaha'],['Hide','إخفاء','Dhoksi','Qari'],
+ ['One chunk at a time. Open one, finish it, come back.','جزء واحد في كل مرة. افتحه، أنهِه، ثم ارجع.','Yeroo tokkotti kutaa tokko. Bani, xumuri, deebi\'i.','Hal qayb mar kasta. Fur, dhammee, soo noqo.']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const CHD=[['morning','☀️','Morning'],['afternoon','🌤️','Afternoon'],['evening','🌙','Evening'],['school','📚','School'],['work','💼','Work'],['weekend','🏖️','Weekend']];
+const CHI=['📚','💼','🏠','🛒','🚗','💻','📖','🕌','🍳','🧺','🧹','💡','🎯','🌿','💰','📞'];
+const CH={cur:null};
+function chList(){const M=Array.isArray(S.chunksMine)?S.chunksMine:[];return CHD.map(([k,ic,n])=>({k,ic,n:tl(n)})).concat(M.map(c=>({k:c.id,ic:c.ic,n:c.n,mine:1})))}
+function chNow(){const h=new Date().getHours();return h<12?'morning':h<17?'afternoon':'evening'}
+function chOf(t){if(t.chunk)return t.chunk;if(t.due){try{const d=new Date(t.due+'T00:00').getDay();if(d===0||d===6)return 'weekend'}catch(e){}}const m=/^(\d{1,2}):/.exec(t.time||'');if(m){const h=+m[1];return h<12?'morning':h<17?'afternoon':'evening'}return null}
+function chTasks(k){const td=dkey();return (S.tasks||[]).filter(t=>chOf(t)===k&&(!t.done||(t.doneAt&&dkey(new Date(t.doneAt))===td)))}
+function chCard(){let c=$('chCard');const sec=$('tab-today');if(!sec)return;if(!c){c=document.createElement('div');c.className='card ch-card';c.id='chCard';sec.insertBefore(c,sec.firstChild)}
+  const L=chList(),now=chNow();
+  if(CH.cur){const ch=L.find(x=>x.k===CH.cur);if(!ch){CH.cur=null;return chCard()}const T=chTasks(ch.k),left=T.filter(t=>!t.done).length,pct=T.length?Math.round(100*(T.length-left)/T.length):0;
+    c.innerHTML=`<button type="button" class="ch-back" data-ch="__all">‹ ${tl('All chunks')}</button><div class="ch-hd"><span class="ch-bi">${ch.ic}</span><span class="ch-ht"><b dir="auto">${esc(ch.n)}</b><small>${T.length&&!left?tl('All done here')+' ✓':left+' '+tl('left')}</small></span></div><div class="ch-bar"><i style="width:${pct}%"></i></div>
+     <div class="ch-acts"><button type="button" class="btn-calm" data-chadd>＋ ${tl('Add to-dos')}</button>${ch.mine?`<button type="button" class="ch-del" data-chdel>${tl('Delete chunk')}</button>`:''}</div>`;
+    document.body.classList.add('ch-on')}
+  else{document.body.classList.remove('ch-on');
+    c.innerHTML=`<div class="row" style="justify-content:space-between;align-items:center"><h2><span class="h2i" aria-hidden="true">🧩</span>${tl('Chunks')}</h2></div><p class="muted small">${tl('One chunk at a time. Open one, finish it, come back.')}</p>
+     <div class="ch-grid">${L.map(ch=>{const T=chTasks(ch.k),left=T.filter(t=>!t.done).length,pct=T.length?Math.round(100*(T.length-left)/T.length):0;const nx=T.find(t=>!t.done);
+      return `<button type="button" class="ch-t${ch.k===now?' now':''}" data-ch="${esc(ch.k)}"><span class="ch-i">${ch.ic}</span><span class="ch-n"><b dir="auto">${esc(ch.n)}</b>${ch.k===now?`<em>${tl('now')}</em>`:''}</span><small>${T.length?(left?left+' '+tl('left'):'✓ '+tl('All done here')):'&nbsp;'}</small>${nx?`<small class="ch-nx notranslate" data-raw dir="auto">${esc(nx.title)}</small>`:''}<span class="ch-bar"><i style="width:${pct}%"></i></span></button>`}).join('')}
+      <button type="button" class="ch-t ch-new" data-chnew><span class="ch-i">＋</span><span class="ch-n"><b>${tl('New chunk')}</b></span></button></div>`}
+  chFilter()}
+function chFilter(){const sec=$('tab-today');if(!sec)return;const T=CH.cur?new Set(chTasks(CH.cur).map(t=>t.id)):null;
+  sec.querySelectorAll('.task[data-id]').forEach(el=>{el.style.display=T&&!T.has(el.dataset.id)?'none':''});
+  ['topList','laterList'].forEach(id=>{const box=$(id);if(!box)return;let e=box.querySelector('.ch-empty');const vis=[...box.querySelectorAll('.task[data-id]')].some(x=>x.style.display!=='none');
+    if(T&&!vis){if(!e){e=document.createElement('p');e.className='muted ch-empty';box.appendChild(e)}e.textContent=tl('Nothing in this chunk yet.');box.querySelectorAll(':scope > p.muted:not(.ch-empty)').forEach(p=>p.style.display='none')}
+    else{if(e)e.remove();box.querySelectorAll(':scope > p.muted').forEach(p=>p.style.display='')}})}
+function chNewOpen(){let ic=CHI[0];modalCard(`<div class="ch-nw"><p class="label">🧩 ${tl('New chunk')}</p><input id="chN" maxlength="24" dir="auto" placeholder="${esc(tl('Name'))}"><div class="ch-ics">${CHI.map((x,i)=>`<button type="button" data-ci="${i}" class="${i?'':'on'}">${x}</button>`).join('')}</div><button type="button" class="btn-main" id="chSv" style="width:100%">${tl('Save')}</button></div>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-ci]').forEach(b=>b.onclick=()=>{ic=CHI[+b.dataset.ci];B.querySelectorAll('[data-ci]').forEach(x=>x.classList.toggle('on',x===b))});
+  $('chSv').onclick=()=>{const n=$('chN').value.trim();if(!n)return;if(typeof blocked==='function'&&blocked(n)){toast(tl('That message cannot be saved here.'));return}S.chunksMine=Array.isArray(S.chunksMine)?S.chunksMine:[];const id='c'+uid();S.chunksMine.push({id,ic,n});save();CH.cur=id;modalClose();show('today')};setTimeout(()=>{try{$('chN').focus()}catch(e){}},80)}
+function chAddOpen(){const k=CH.cur,O=(S.tasks||[]).filter(t=>!t.done&&chOf(t)!==k);const ch=chList().find(x=>x.k===k);
+  modalCard(`<div class="ch-pk"><p class="label">${ch?ch.ic:''} ${esc(ch?ch.n:'')}</p><p class="small muted" style="text-align:center">${tl('Tap to-dos to move them here.')}</p>${O.length?O.map(t=>{const o=chOf(t),oc=o&&chList().find(x=>x.k===o);return `<button type="button" class="ch-pr" data-cp="${t.id}"><i></i><span class="notranslate" data-raw dir="auto">${esc(t.title)}</span>${oc?`<small>${oc.ic}</small>`:''}</button>`}).join(''):`<p class="muted" style="text-align:center">${tl('Nothing yet.')}</p>`}<button type="button" class="btn-main" id="chPkD" style="width:100%;margin-top:10px">${tl('Done')}</button></div>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-cp]').forEach(b=>b.onclick=()=>{const t=S.tasks.find(x=>x.id===b.dataset.cp);if(!t)return;try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}if(b.classList.toggle('on')){t._pc=t.chunk;t.chunk=k}else{t.chunk=t._pc;delete t._pc}save()});
+  $('chPkD').onclick=()=>{(S.tasks||[]).forEach(t=>delete t._pc);save();modalClose();show('today')}}
+document.addEventListener('click',e=>{const t=e.target.closest&&e.target.closest('#chCard [data-ch],#chCard [data-chnew],#chCard [data-chadd],#chCard [data-chdel]');if(!t)return;e.preventDefault();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  if(t.dataset.chnew!=null)return chNewOpen();if(t.dataset.chadd!=null)return chAddOpen();
+  if(t.dataset.chdel!=null){const k=CH.cur;S.chunksMine=(S.chunksMine||[]).filter(c=>c.id!==k);(S.tasks||[]).forEach(x=>{if(x.chunk===k)delete x.chunk});save();CH.cur=null;chCard();return}
+  CH.cur=t.dataset.ch==='__all'?null:t.dataset.ch;chCard();const c=$('chCard');if(c)c.scrollIntoView({block:'start',behavior:'smooth'})});
+document.addEventListener('submit',e=>{if(e.target&&e.target.id==='dumpForm'){CH._pre=new Set((S.tasks||[]).map(t=>t.id))}},true);
+document.addEventListener('submit',e=>{if(!(e.target&&e.target.id==='dumpForm')||!CH.cur||!CH._pre)return;const pre=CH._pre;CH._pre=null;let ch=0;(S.tasks||[]).forEach(t=>{if(!pre.has(t.id)&&!t.chunk){t.chunk=CH.cur;ch=1}});if(ch){save();chCard()}});
+{const _rtC=renderToday;renderToday=function(){const r=_rtC.apply(this,arguments);try{chCard()}catch(e){}return r}}
+{const _shC=show;show=function(tab){const r=_shC.apply(this,arguments);try{if(tab==='today')chCard()}catch(e){}return r}}
+GO.chunks=()=>{show('today');setTimeout(()=>{const c=$('chCard');if(c)c.scrollIntoView({block:'start'})},200)};
+SRCH_PG.splice(3,0,['🧩','Chunks','chunks']);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
