@@ -1319,6 +1319,64 @@ body.has-bnav #apBar.ap3{padding-top:6px!important}
 #mrN div{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#mrN button{min-height:40px;border-radius:12px;border:1.5px solid var(--line,#e2e8e5);background:var(--card,#fff);font:700 14px Inter,"IBM Plex Sans Arabic",system-ui;color:inherit}
 #mrN button.on{background:#0F9D6E;border-color:#0F9D6E;color:#fff}
 .go-hl{box-shadow:0 0 0 3px #F7C24A!important;transition:box-shadow .4s}
+/* v98 swipe slide */
+@keyframes swL{from{opacity:.4;transform:translateX(36px)}to{opacity:1;transform:none}}@keyframes swR{from{opacity:.4;transform:translateX(-36px)}to{opacity:1;transform:none}}
+.sw-l{animation:swL .28s ease-out}.sw-r{animation:swR .28s ease-out}
+@media (prefers-reduced-motion:reduce){.sw-l,.sw-r{animation:none}}
+/* v98 ideas inbox */
+.ibx{display:flex;flex-direction:column;gap:12px}
+.ibx-f{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ibx-f button{min-height:44px;border-radius:12px;border:1.5px solid var(--line,#e2e8e5);background:var(--card,#fff);color:inherit;font:600 13px/1.1 Inter,"IBM Plex Sans Arabic",system-ui;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px 2px}
+.ibx-f button b{font-size:15px}.ibx-f button.on{background:#0F7A5C;border-color:#0F7A5C;color:#fff}
+.ibx-i{border:1.5px solid var(--line,#e2e8e5);border-radius:16px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--card,#fff)}
+.ibx-i.st-new{border-color:#F7C24A;background:#FFFBEB}.ibx-i.st-done{opacity:.72}
+.ibx-m{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.ibx-b{font-size:15px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.ibx-s{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.ibx-s button{min-height:38px;border-radius:11px;border:1.5px solid var(--line,#e2e8e5);background:transparent;color:inherit;font:600 13px Inter,"IBM Plex Sans Arabic",system-ui}
+.ibx-i .ibx-s button.on[data-ibs=new]{background:#F7C24A;border-color:#F7C24A;color:#3a2a00}
+.ibx-i .ibx-s button.on[data-ibs=planned]{background:#3B6FD6;border-color:#3B6FD6;color:#fff}
+.ibx-i .ibx-s button.on[data-ibs=done]{background:#0F9D6E;border-color:#0F9D6E;color:#fff}
+.ibx-e{text-align:center;padding:20px 0}.ibx-open{width:100%}
+.ibx{text-align:start}.ibx .label{text-align:center}
+.ibx-f,.ibx-s{grid-template-columns:repeat(4,minmax(0,1fr))}.ibx-s{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ibx-f button,.ibx-s button{overflow-wrap:anywhere;hyphens:auto;line-height:1.15;padding:4px 3px}
+.ibx-f button{font-size:12px}
+.ibx-f,.ibx-s{display:flex!important;flex-wrap:wrap;gap:6px}.ibx-f button,.ibx-s button{flex:1 1 auto;overflow-wrap:normal;hyphens:manual;padding:4px 10px;white-space:nowrap}
+/* v98b "?" explanation box */
+.card.explain > .xp.xpx{display:block;height:auto;overflow:visible;border-radius:14px;background:color-mix(in srgb,var(--calm) 9%,var(--surface));color:var(--ink);padding:10px 12px;margin:4px 0;font-size:.92rem;line-height:1.5}
+.card.explain > ul.xp.xpx{padding-inline-start:28px}
+.card.explain > .xp.xpx + .xp.xpx{margin-top:-2px}
+.qbtn[aria-expanded=true]{background:var(--calm)!important;color:#fff!important}
+/* v98b inbox as messages */
+.ibm{display:flex;gap:10px;align-items:flex-start}
+.ibm-av{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 15px Inter,system-ui}
+.ibm-c{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.ibm-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px}.ibm-h b{font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ibm-h span{font-size:12px;color:var(--muted);flex:none}
+.ibm-b{background:color-mix(in srgb,var(--ink) 6%,var(--surface));border-radius:4px 18px 18px 18px;padding:9px 12px 10px;display:flex;flex-direction:column;gap:3px}
+[dir=rtl] .ibm-b{border-radius:18px 4px 18px 18px}
+.ibm.st-new .ibm-b{background:#FFF4D6;box-shadow:inset 0 0 0 1.5px #F7C24A}
+.ibm-k{font-size:11.5px;font-weight:700;color:var(--muted)}
+.ibm-b p{font-size:15px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere;margin:0}
+.ibm.st-done .ibm-b{opacity:.7}
+.ibm .ibx-s button{min-height:32px;font-size:12.5px;border-radius:99px}
+.ib-dot{position:absolute;top:-4px;inset-inline-end:-8px;min-width:17px;height:17px;padding:0 4px;border-radius:9px;background:#E5484D;color:#fff;font:800 10px/17px Inter,system-ui;font-style:normal;text-align:center;box-shadow:0 0 0 2px #fff}
+#bNav [data-bn="menu"] i{position:relative}
+.ibm .ibx-s button.on[data-ibs=new]{background:#F7C24A;border-color:#F7C24A;color:#3a2a00}
+.ibm .ibx-s button.on[data-ibs=planned]{background:#3B6FD6;border-color:#3B6FD6;color:#fff}
+.ibm .ibx-s button.on[data-ibs=done]{background:#0F9D6E;border-color:#0F9D6E;color:#fff}
+/* v98c stars card */
+.st-box{display:flex;flex-direction:column;gap:8px}
+.st-hd{display:flex;align-items:baseline;gap:8px}.st-big{font:800 30px/1 Inter,system-ui}.st-big b{font-weight:800}
+.st-sub{font-weight:700;font-size:.9rem;margin-top:6px;color:var(--muted)}
+.st-rows{display:flex;flex-direction:column;gap:7px}
+.st-r{display:grid;grid-template-columns:118px 1fr 28px;align-items:center;gap:10px;font-size:.92rem}
+.st-l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-bar{height:10px;border-radius:6px;background:color-mix(in srgb,var(--ink) 7%,transparent);overflow:hidden}.st-bar i{display:block;height:100%;border-radius:6px}
+.st-r b{min-width:24px;text-align:end}
+.st-hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.st-hist li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}.st-hist li:last-child{border:0}
+.st-n{font-weight:800;color:#B7791F;white-space:nowrap}.st-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.st-hist time{font-size:.8rem;color:var(--muted);white-space:nowrap}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -3374,8 +3432,8 @@ function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 ${tl('Suggest
   $('fbForm').onsubmit=async e=>{e.preventDefault();const body=$('fbText').value.trim();if(!body)return;let ok=false;
     if(AU.sb&&AU.user){const {error}=await AU.sb.from('fastaqim_feedback').insert({user_id:AU.user.id,email:AU.user.email,name:S.name||'',kind,body,lang:LANG});ok=!error}
     else if(AU.sb){const {error}=await AU.sb.from('fastaqim_feedback').insert({name:'visitor',kind,body,lang:LANG});ok=!error}
-    else{S.feedbackLocal=(S.feedbackLocal||[]).concat({at:Date.now(),kind,body});save();ok=true}
-    modalCard(ok?'<p class="label">Thank you</p><p>Got it. Every message is read.</p><button class="btn-calm" id="fbOk">Close</button>':'<p>That didn\'t send. Please try again in a bit.</p><button class="btn-calm" id="fbOk">Close</button>');$('fbOk').onclick=modalClose}}
+    else{ok=false}
+    modalCard(ok?'<p class="label">Thank you</p><p>Thank you! Your idea was sent to the Fastaqim team.</p><button class="btn-calm" id="fbOk">Close</button>':'<p>That didn\'t send. Please try again in a bit.</p><button class="btn-calm" id="fbOk">Close</button>');$('fbOk').onclick=modalClose}}
 $('fbBtn').onclick=fbOpen;
 const FB={rows:null};
 async function fbLoad(){if(!AU.sb||!ADM.rows)return;try{const {data,error}=await AU.sb.from('fastaqim_feedback').select('*').order('created_at',{ascending:false}).limit(100);if(error)throw error;FB.rows=data||[]}catch(e){FB.rows=null}fbAdmin()}
@@ -3803,7 +3861,7 @@ const X4=[
 /* filter */
 ['quit-ok','','',''],
 /* visitor feedback */
-['Thank you','شكرًا لك','Galatoomi','Mahadsanid'],['Got it. Every message is read.','وصلت. كل رسالة تُقرأ.','Nu ga\'eera. Ergaan hundi ni dubbifama.','Waa la helay. Fariin kasta waa la akhriyaa.'],
+['Thank you','شكرًا لك','Galatoomi','Mahadsanid'],['Thank you! Your idea was sent to the Fastaqim team.','شكرًا! وصلت فكرتك إلى فريق Fastaqim.','Galatoomi! Yaadni kee garee Fastaqim biratti ergameera.','Mahadsanid! Fikraddaada waxaa loo diray kooxda Fastaqim.'],
 ['Ideas, problems, anything. It goes straight to the person who made Fastaqim.','أفكار أو مشكلات أو أي شيء. تصل مباشرة إلى صاحب فاستقم.','Yaada, rakkoo, waan barbaadde. Kallattiin nama Fastaqim hojjeteef ga\'a.','Fikrado, dhibaatooyin, wax kasta. Si toos ah ayay u gaarayaan qofka sameeyay Fastaqim.'],
 ['Send','أرسل','Ergi','Dir'],['Cancel','إلغاء','Dhiisi','Jooji'],['PH:Write here','اكتب هنا','Asitti barreessi','Halkan ku qor'],['💡 Feedback','💡 ملاحظات','💡 Yaada','💡 Ra\'yi'],['💡 Idea','💡 فكرة','💡 Yaada','💡 Fikrad'],['🛠️ Problem','🛠️ مشكلة','🛠️ Rakkoo','🛠️ Dhibaato'],['💬 Other','💬 أخرى','💬 Kan biraa','💬 Wax kale']
 ];
@@ -6103,6 +6161,130 @@ function goHash(){const k=(location.hash||'').replace(/^#\/?/,'').toLowerCase();
   let n=0;const wait=()=>{if(inApp()&&(typeof S!=='undefined')&&S.started){setTimeout(run,200)}else if(n++<40)setTimeout(wait,300);else{try{sessionStorage.setItem('fq.go',k)}catch(e){}}};wait();return true}
 window.addEventListener('hashchange',goHash);setTimeout(goHash,500);
 {const _ci4=cloudInit;cloudInit=async function(){const r=await _ci4.apply(this,arguments);try{const k=sessionStorage.getItem('fq.go');if(k&&GO[k]){sessionStorage.removeItem('fq.go');setTimeout(()=>GO[k](),400)}}catch(e){}return r}}
+
+/* v98: swipe left/right to move between sections (same order as the Home icons); past the last one opens ☰.
+   Ignores sideways scrollers, text boxes, pop-ups and the iPhone edge-swipe (back) area. */
+const SW={x:0,y:0,t:0,ok:false};
+function swOrder(){try{const c=tabsCfg();return c.o.filter(k=>!c.h.includes(k)&&$('tab-'+k))}catch(e){return ['now','today','wins']}}
+function swBlocked(el){for(let e=el;e&&e!==document.body;e=e.parentElement){if(e.matches&&e.matches('input,textarea,select,[contenteditable],canvas,.bnav,#apMenu,#scrollModal,[role=dialog],.no-swipe'))return true;
+  const cs=getComputedStyle(e);if(/(auto|scroll)/.test(cs.overflowX)&&e.scrollWidth>e.clientWidth+4)return true}return false}
+function swAnyOpen(){const m=$('scrollModal'),a=$('apMenu');return (m&&!m.hidden)||(a&&!a.hidden)||[...document.querySelectorAll('[role=dialog]')].some(d=>d.offsetParent)}
+document.addEventListener('touchstart',e=>{SW.ok=false;if(e.touches.length!==1||!inApp()||swAnyOpen())return;const t=e.touches[0],W=innerWidth;
+  if(t.clientX<28||t.clientX>W-28)return;if(swBlocked(e.target))return;SW.x=t.clientX;SW.y=t.clientY;SW.t=Date.now();SW.ok=true},{passive:true});
+document.addEventListener('touchend',e=>{if(!SW.ok)return;SW.ok=false;const t=e.changedTouches[0],dx=t.clientX-SW.x,dy=t.clientY-SW.y;
+  if(Date.now()-SW.t>700||Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*2)return;
+  if(window.getSelection&&String(window.getSelection()).length)return;
+  const rtl=document.documentElement.dir==='rtl',fwd=rtl?dx>0:dx<0,O=swOrder(),cur=document.body.dataset.tab||'now',i=O.indexOf(cur);if(i<0)return;
+  try{navigator.vibrate&&navigator.vibrate(8)}catch(err){}
+  if(fwd){if(i<O.length-1)swGo(O[i+1],1);else apMenu()}else if(i>0)swGo(O[i-1],-1)},{passive:true});
+function swGo(k,dir){show(k);try{scrollTo(0,0)}catch(e){}const s=$('tab-'+k);if(!s)return;const rtl=document.documentElement.dir==='rtl';s.classList.remove('sw-l','sw-r');void s.offsetWidth;s.classList.add((dir>0)!==rtl?'sw-l':'sw-r');setTimeout(()=>s.classList.remove('sw-l','sw-r'),400)}
+
+/* v98: owner Ideas inbox: every idea and problem, newest first, each with New / Planned / Done. Link: #inbox */
+[["Ideas inbox","صندوق الأفكار","Saanduqa yaadaa","Sanduuqa fikradaha"],["New","جديد","Haaraa","Cusub"],["Planned","مخطط","Karoorfame","Qorshaysan"],["All","الكل","Hunda","Dhammaan"],
+ ["No ideas here yet.","لا توجد أفكار هنا بعد.","Ammaaf yaadni hin jiru.","Weli fikrad halkan ma jirto."],["Only the owner can open this.","هذا للمالك فقط.","Abbaa qofatu banuu danda'a.","Milkiilaha keliya ayaa furi kara."],["That didn't save. Please try again.","لم يُحفظ. حاول مرة أخرى.","Hin olkaa'amne. Irra deebi'ii yaali.","Lama kaydin. Fadlan isku day mar kale."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const IBX={f:'all',cols:true};
+const ibSt=r=>r.status||(r.seen?'done':'new');
+async function ibLoad(){if(!AU.sb||!AU.user)return null;const {data,error}=await AU.sb.from('fastaqim_feedback').select('*').order('created_at',{ascending:false}).limit(500);if(error)throw error;FB.rows=data||[];return FB.rows}
+async function ibOpen(){if(!(typeof ADM!=='undefined'&&ADM.rows)){try{await admLoad()}catch(e){}}
+  if(!(ADM&&ADM.rows)){modalCard(`<p class="label">📥 ${esc(tl('Ideas inbox'))}</p><p class="small muted">${esc(tl('Only the owner can open this.'))}</p>`);return}
+  modalCard(`<p class="label">📥 ${esc(tl('Ideas inbox'))}</p><p class="small muted">…</p>`);try{await ibLoad()}catch(e){}ibRender()}
+function ibRender(){const R=FB.rows||[],cnt=k=>k==='all'?R.length:R.filter(r=>ibSt(r)===k).length,F=[['all','All'],['new','New'],['planned','Planned'],['done','Done']];
+  const L=IBX.f==='all'?R:R.filter(r=>ibSt(r)===IBX.f),ic=r=>r.kind==='problem'?'🛠️':r.kind==='idea'?'💡':'💬';
+  modalCard(`<div class="ibx"><p class="label">📥 ${esc(tl('Ideas inbox'))}</p>
+   <div class="ibx-f">${F.map(([k,l])=>`<button type="button" data-ibf="${k}" class="${IBX.f===k?'on':''}">${esc(tl(l))}<b>${cnt(k)}</b></button>`).join('')}</div>
+   ${L.length?L.map(r=>{const s=ibSt(r);return `<div class="ibx-i st-${s}"><div class="ibx-m"><span>${ic(r)} <b>${esc(r.name||(r.email||'').split('@')[0]||'—')}</b></span><span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'})}</span></div>
+     <p class="ibx-b notranslate" dir="auto">${esc(r.body)}</p>
+     <div class="ibx-s">${[['new','New'],['planned','Planned'],['done','Done']].map(([k,l])=>`<button type="button" data-ibs="${k}" data-id="${r.id}" class="${s===k?'on':''}">${esc(tl(l))}</button>`).join('')}</div></div>`}).join(''):`<p class="small muted ibx-e">${esc(tl('No ideas here yet.'))}</p>`}</div>`);
+  const sb=$('scrollBody');
+  sb.querySelectorAll('[data-ibf]').forEach(b=>b.onclick=()=>{IBX.f=b.dataset.ibf;ibRender()});
+  sb.querySelectorAll('[data-ibs]').forEach(b=>b.onclick=async()=>{const id=+b.dataset.id,k=b.dataset.ibs,r=(FB.rows||[]).find(x=>x.id===id);if(!r||ibSt(r)===k)return;
+    const prev={status:r.status,seen:r.seen};r.status=k;r.seen=k!=='new';const y=sb.scrollTop;ibRender();$('scrollBody').scrollTop=y;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
+    let {error}=await AU.sb.from('fastaqim_feedback').update(IBX.cols?{status:k,seen:k!=='new'}:{seen:k!=='new'}).eq('id',id);
+    if(error&&IBX.cols){IBX.cols=false;({error}=await AU.sb.from('fastaqim_feedback').update({seen:k!=='new'}).eq('id',id))}
+    if(error){Object.assign(r,prev);ibRender();toast(tl("That didn't save. Please try again."))}})}
+/* old in-page list → one button that opens the inbox */
+fbAdmin=function(){const b=$('admBox');if(!b||!FB.rows)return;let d=$('fbInbox');if(!d){d=document.createElement('div');d.id='fbInbox';d.className='sp-sec';b.appendChild(d)}
+  const n=FB.rows.filter(r=>ibSt(r)==='new').length;d.innerHTML=`<button type="button" class="btn-calm ibx-open">📥 ${esc(tl('Ideas inbox'))}${n?` <span class="due">${n} ${esc(tl('New'))}</span>`:''}</button>`;d.querySelector('button').onclick=ibOpen};
+{const _am4=apMenu;apMenu=function(){const r=_am4.apply(this,arguments);try{const m=$('apMenu'),f=m&&m.querySelector('[data-am="fb"]');if(f&&typeof ADM!=='undefined'&&ADM.rows&&!m.querySelector('[data-am="ibx"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='ibx';
+  const n=(FB.rows||[]).filter(x=>ibSt(x)==='new').length;b.innerHTML='📥 '+esc(tl('Ideas inbox'))+(n?` <span class="due">${n}</span>`:'');b.onclick=()=>{m.hidden=true;ibOpen()};f.after(b)}}catch(e){}return r}}
+GO.inbox=()=>ibOpen();GO['feedback-inbox']=GO.inbox;GO.ideas=GO.inbox;
+/* v98b: inbox looks like a messages app: a bubble per idea with sender (or Guest), time and status */
+[["Guest","زائر","Keessummaa","Marti"],["Idea","فكرة","Yaada","Fikrad"],["Problem","مشكلة","Rakkoo","Dhibaato"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+ibRender=function(){const R=FB.rows||[],cnt=k=>k==='all'?R.length:R.filter(r=>ibSt(r)===k).length,F=[['all','All'],['new','New'],['planned','Planned'],['done','Done']];
+  const L=IBX.f==='all'?R:R.filter(r=>ibSt(r)===IBX.f);
+  const who=r=>r.name&&r.name!=='visitor'?r.name:(r.email?(r.email.split('@')[0]):tl('Guest'));
+  const when=d=>{d=new Date(d);const t=new Intl.DateTimeFormat(LOC(),{hour:'numeric',minute:'2-digit'}).format(d);return (new Date().toDateString()===d.toDateString()?'':new Intl.DateTimeFormat(LOC(),{day:'numeric',month:'short'}).format(d)+' · ')+t};
+  const hue=s=>{let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))%360;return h};
+  modalCard(`<div class="ibx"><p class="label">📥 ${esc(tl('Ideas inbox'))}</p>
+   <div class="ibx-f">${F.map(([k,l])=>`<button type="button" data-ibf="${k}" class="${IBX.f===k?'on':''}">${esc(tl(l))} <b>${cnt(k)}</b></button>`).join('')}</div>
+   ${L.length?L.map(r=>{const s=ibSt(r),n=who(r);return `<div class="ibm st-${s}"><span class="ibm-av" style="background:hsl(${hue(n)} 55% 45%)">${esc((n[0]||'?').toUpperCase())}</span>
+     <div class="ibm-c"><div class="ibm-h"><b dir="auto">${esc(n)}</b><span>${when(r.created_at)}</span></div>
+     <div class="ibm-b"><span class="ibm-k">${r.kind==='problem'?'🛠️ '+esc(tl('Problem')):'💡 '+esc(tl('Idea'))}</span><p class="notranslate" dir="auto">${esc(r.body)}</p></div>
+     <div class="ibx-s">${[['new','New'],['planned','Planned'],['done','Done']].map(([k,l])=>`<button type="button" data-ibs="${k}" data-id="${r.id}" class="${s===k?'on':''}">${s===k&&k==='done'?'✓ ':''}${esc(tl(l))}</button>`).join('')}</div></div></div>`}).join(''):`<p class="small muted ibx-e">${esc(tl('No ideas here yet.'))}</p>`}</div>`);
+  const sb=$('scrollBody');
+  sb.querySelectorAll('[data-ibf]').forEach(b=>b.onclick=()=>{IBX.f=b.dataset.ibf;ibRender()});
+  sb.querySelectorAll('[data-ibs]').forEach(b=>b.onclick=async()=>{const id=+b.dataset.id,k=b.dataset.ibs,r=(FB.rows||[]).find(x=>x.id===id);if(!r||ibSt(r)===k)return;
+    const prev={status:r.status,seen:r.seen};r.status=k;r.seen=k!=='new';const y=sb.scrollTop;ibRender();$('scrollBody').scrollTop=y;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}ibBadge();
+    let {error}=await AU.sb.from('fastaqim_feedback').update(IBX.cols?{status:k,seen:k!=='new'}:{seen:k!=='new'}).eq('id',id);
+    if(error&&IBX.cols){IBX.cols=false;({error}=await AU.sb.from('fastaqim_feedback').update({seen:k!=='new'}).eq('id',id))}
+    if(error){Object.assign(r,prev);ibRender();ibBadge();toast(tl("That didn't save. Please try again."))}})};
+/* red dot with the number of new ideas on the footer ☰ (owner only) */
+function ibBadge(){try{const m=document.querySelector('#bNav [data-bn="menu"]');if(!m)return;const n=(typeof ADM!=='undefined'&&ADM.rows&&FB.rows)?FB.rows.filter(r=>ibSt(r)==='new').length:0;
+  let d=m.querySelector('.ib-dot');if(!n){if(d)d.remove();return}if(!d){d=document.createElement('b');d.className='ib-dot';(m.querySelector('i')||m).appendChild(d)}d.textContent=n>99?'99+':n}catch(e){}}
+{const _bn3=bnav;bnav=function(){const r=_bn3.apply(this,arguments);ibBadge();return r}}
+{const _fa=fbAdmin;fbAdmin=function(){const r=_fa.apply(this,arguments);ibBadge();return r}}
+/* "?" help: the explanation used the same class as the XP bar, so it showed as a thin cut-off bar. Give it its own look. */
+function xpFix(){document.querySelectorAll('.card > .xp').forEach(x=>{if(!x.querySelector(':scope > i'))x.classList.add('xpx')})}
+setTimeout(xpFix,300);setTimeout(xpFix,2500);
+/* v98b: "?" explanations that were still English in other languages */
+[["Get it out of your head. Then star up to 3 things for today. The rest can wait.","أخرجه من رأسك. ثم ضع نجمة على 3 أشياء لليوم كحدٍّ أقصى. والباقي يمكنه الانتظار.","Mataa kee keessaa baasi. Achiis wantoota hanga 3 har'aaf urjii itti godhi. Kan hafe ni eeggata.","Madaxaaga ka saar. Kadib xiddig sii ilaa 3 shay maanta. Inta kale way sugi kartaa."],
+ ["To-dos, bills, income, goals, all in one list, in any order. You'll see the sorted version before anything is added: to-dos go on your calendar with small steps, money goes to your budget, goals to Goals.","المهام والفواتير والدخل والأهداف، كلها في قائمة واحدة وبأي ترتيب. سترى النسخة المرتبة قبل إضافة أي شيء: المهام تذهب إلى تقويمك بخطوات صغيرة، والمال إلى ميزانيتك، والأهداف إلى الأهداف.","Hojiiwwan, kaffaltii, galii fi kaayyoo, hunda tarree tokko keessatti, akkaataa barbaadde. Osoo homtuu hin dabalamin dura kan qindaa'e ni argita: hojiiwwan tarkaanfii xixiqqaan kaaleendara kee irra, maalliin baajata kee keessa, kaayyoon Kaayyoo keessa galu.","Hawlaha, biilasha, dakhliga iyo yoolalka, dhammaan hal liis, si kasta oo ay u kala horreeyaan. Waxaad arki doontaa nuqulka la habeeyay ka hor inta aan waxba lagu darin: hawluhu waxay galaan jadwalkaaga iyagoo tallaabooyin yaryar ah, lacagtu miisaaniyaddaada, yoolalkuna Yoolalka."],
+ ["Balanced: honest about the next step, kind when it's a hard moment. Your call every time.","متوازن: صريح بشأن الخطوة التالية، ولطيف في اللحظات الصعبة. والقرار لك دائمًا.","Madaallii: waa'ee tarkaanfii itti aanuu ifa, yeroo ulfaataa keessatti gaarii. Murtoon yeroo hunda kan keeti.","Dheelli tiran: daacad ka ah tallaabada xigta, naxariis leh marka ay adag tahay. Go'aanku mar walba adigaa leh."],
+ ["That is common with ADHD, and it isn't laziness or a character flaw. With ADHD, the future often has two settings: now and not now. A consequence next week doesn't send any signal today, so knowing never turns into action. Then the deadline gets close, panic arrives, and suddenly you can work. That's not proof you only care at the last minute. It's proof urgency works on you. So don't wait to care. Borrow an engine on purpose, or pull the deadline closer so it shows up as \"now\".","هذا شائع مع ADHD، وليس كسلًا ولا عيبًا في الشخصية. مع ADHD يكون للمستقبل غالبًا وضعان: الآن، وليس الآن. العاقبة في الأسبوع القادم لا ترسل أي إشارة اليوم، فلا تتحول المعرفة إلى فعل. ثم يقترب الموعد، ويأتي القلق، وفجأة تستطيع العمل. هذا لا يعني أنك لا تهتم إلا في آخر لحظة، بل يعني أن الإلحاح يعمل معك. فلا تنتظر الاهتمام: استعر محرّكًا عن قصد، أو قرّب الموعد حتى يظهر كأنه «الآن».","Kun ADHD wajjin baramaadha, dadhabbii ykn hir'ina amalaa miti. ADHD wajjin, egereen yeroo baay'ee haala lama qabdi: amma fi amma miti. Bu'aan torban dhufu har'a mallattoo tokkollee hin ergu, kanaaf beekuun gara gochaatti hin jijjiiramu. Achiis yeroon murtaa'e dhihaata, sodaan dhufa, tasa hojjechuu dandeessa. Kun daqiiqaa dhumaa qofa akka itti yaaddu agarsiisuu miti. Ariifachiisummaan akka siif hojjetu agarsiisa. Kanaaf eeguu dhiisi. Maqaa kaayyoon humna ergifadhu, ykn yeroo murtaa'e dhiheessi akka \"amma\" ta'ee mul'atuuf.","Tani waa wax caadi ah oo ADHD la socda, mana aha caajis ama cillad dabeecadeed. ADHD-da, mustaqbalku inta badan wuxuu leeyahay laba xaaladood: hadda iyo hadda maaha. Cawaaqib toddobaadka soo socda dhaca calaamad kuma soo diro maanta, sidaas darteed ogaanshuhu fal uma beddelmo. Kadib waqtigii kama dambaysta ahaa ayaa soo dhowaada, walwal ayaa yimaada, oo si lama filaan ah ayaad u shaqayn kartaa. Taasi caddayn uma aha inaad daqiiqadda ugu dambaysa oo keliya dan ka leedahay. Waa caddayn in degdegtu kugu shaqayso. Haddaba ha sugin. Si ula kac ah u amaaho mishiin, ama waqtiga kama dambaysta ah soo dhowee si uu ugu muuqdo \"hadda\"."],
+ ["Five minutes on Sunday. We're not grading the week. We're adjusting the plan to fit the person, not the other way round. +3 stars.","خمس دقائق يوم الأحد. لسنا نقيّم الأسبوع، بل نعدّل الخطة لتناسب الشخص، لا العكس. +3 نجوم.","Daqiiqaa shan Dilbata. Torban sana hin madaallu. Karoora namaaf akka mijatu sirreessina, faallaa isaa miti. +3 urjii.","Shan daqiiqo Axadda. Toddobaadka ma qiimaynayno. Qorshaha ayaan u habaynaynaa si uu qofka ugu habboonaado, ee ma aha si kale. +3 xiddigood."],
+ ["\"It's going to take long\" is usually a guess, and usually wrong. Pick one. The clock shows how long it really takes.","«سيأخذ وقتًا طويلًا» غالبًا مجرد تخمين، وغالبًا خاطئ. اختر واحدة. الساعة تُظهر كم يستغرق فعلًا.","\"Yeroo dheeraa fudhata\" yeroo baay'ee tilmaama, yeroo baay'ee immoo dogoggora. Tokko filadhu. Sa'aatiin yeroo dhugaan fudhatu siif agarsiisa.","\"Waqti dheer ayay qaadanaysaa\" inta badan waa qiyaas, inta badanna waa khalad. Mid dooro. Saacaddu waxay tusaysaa inta ay dhab ahaan qaadato."],
+ ["You don't need to write everything down. Writing everything is what makes notes useless. Three boxes per chunk, a few words in each. Doodles in the margins are allowed, and they help.","لا تحتاج إلى كتابة كل شيء. كتابة كل شيء هي ما يجعل الملاحظات بلا فائدة. ثلاث خانات لكل جزء، وبضع كلمات في كل خانة. الرسومات الصغيرة في الهامش مسموحة، وتساعد.","Waan hunda barreessuu hin barbaachisu. Waan hunda barreessuutu yaadannoo faayidaa malee taasisa. Kutaa tokkoof saanduqa sadii, tokkoon tokkoon isaanii keessa jechoota muraasa. Fakkii xixiqqaa qarqara irratti kaasuun ni danda'ama, ni gargaaras.","Uma baahnid inaad wax walba qorto. Qorista wax walba ayaa qoraallada ka dhigta kuwo aan faa'iido lahayn. Saddex sanduuq qayb kasta, ereyo yar mid kasta. Sawirro yaryar oo geesaha ah waa la oggol yahay, wayna caawiyaan."],
+ ["On paper, fold a page into three. Visual brain? Turn box 2 into a tiny drawing or an arrow diagram. A picture you made yourself sticks better than a paragraph. Here, the boxes pop up after every chunk, and your notes grow into a mind map below.","على الورق، اطوِ الصفحة إلى ثلاثة أجزاء. تتعلم بالصور؟ حوّل الخانة 2 إلى رسم صغير أو مخطط بالأسهم. الصورة التي ترسمها بنفسك تبقى في الذاكرة أكثر من فقرة. هنا تظهر الخانات بعد كل جزء، وتكبر ملاحظاتك إلى خريطة ذهنية في الأسفل.","Waraqaa irratti, fuula tokko bakka sadiitti dachaasi. Fakkiidhaan ni barattaa? Saanduqa 2 gara fakkii xiqqaa ykn kaasaa xiyyaatti jijjiiri. Fakkiin ofii keetii kaafte keeyyata caalaa yaadatama. Asitti saanduqonni kutaa hunda booda ni mul'atu, yaadannoon kees gadiitti gara kaartaa yaadaatti guddata.","Warqad, bogga u laab saddex qaybood. Ma wax ku bartaa sawirro? Sanduuqa 2 ka dhig sawir yar ama jaantus fallaaro leh. Sawir adigu sameysay ayaa xusuusta kaga dheggan faqrad. Halkan sanduuqyadu waxay soo baxaan qayb kasta kadib, qoraalladaaduna waxay hoos ugu koraan khariidad fikradeed."],
+ ["Short-term: the next 3 months. Long-term: bigger and further out. Every goal gets broken into steps, and the next step can go straight onto today's list.","قصيرة المدى: الأشهر الثلاثة القادمة. طويلة المدى: أكبر وأبعد. كل هدف يُقسَّم إلى خطوات، ويمكن أن تذهب الخطوة التالية مباشرة إلى قائمة اليوم.","Yeroo gabaabaa: ji'oota 3 itti aanan. Yeroo dheeraa: kan guddaa fi fagoo. Kaayyoon hundi tarkaanfiitti qoodama, tarkaanfiin itti aanus kallattiin tarree har'aa irra ka'uu danda'a.","Muddo gaaban: 3-da bilood ee soo socda. Muddo dheer: kuwo waaweyn oo fog. Yool kasta waxaa loo kala qaybiyaa tallaabooyin, tallaabada xigtana si toos ah ayay u geli kartaa liiska maanta."],
+ ["Every add, edit, tick and delete in To-do, Money and Goals is kept here. Tap Restore to bring back how something was before.","كل إضافة وتعديل وعلامة وحذف في المهام والمال والأهداف محفوظ هنا. اضغط «استعادة» لإرجاع الشيء كما كان.","Dabalata, gulaallii, mallattoo fi haquu Hojiiwwan, Maallaqaa fi Kaayyoo keessaa hundi asitti kuufama. Akka duraan ture deebisuuf Deebisi tuqi.","Wax kasta oo lagu daray, la beddelay, la calaamadeeyay ama la tirtiray Hawlaha, Lacagta iyo Yoolalka halkan ayaa lagu hayaa. Taabo Soo celi si aad wax ugu celiso sidii ay ahaayeen."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+try{if(LANG!=='en'&&typeof setLang==='function')setTimeout(()=>{try{setLang(LANG)}catch(e){}},50)}catch(e){}
+/* the "I just don't care" explanation has bold words inside, so it is swapped as a whole per language */
+const DC={ar:['هذا شائع مع ADHD، وليس كسلًا ولا عيبًا في الشخصية. مع ADHD يكون للمستقبل غالبًا وضعان: <b>الآن</b> و<b>ليس الآن</b>. العاقبة في الأسبوع القادم لا ترسل أي إشارة اليوم، فلا تتحول المعرفة إلى فعل. ثم يقترب الموعد، ويأتي القلق، وفجأة تستطيع العمل. هذا لا يعني أنك لا تهتم إلا في آخر لحظة، بل يعني أن الإلحاح يعمل معك.','فلا تنتظر الاهتمام. <b>استعر محرّكًا</b> عن قصد، أو قرّب الموعد حتى يظهر كأنه «الآن».'],
+ om:['Kun ADHD wajjin baramaadha, dadhabbii ykn hir\'ina amalaa miti. ADHD wajjin, egereen yeroo baay\'ee haala lama qabdi: <b>amma</b> fi <b>amma miti</b>. Bu\'aan torban dhufu har\'a mallattoo tokkollee hin ergu, kanaaf beekuun gara gochaatti hin jijjiiramu. Achiis yeroon murtaa\'e dhihaata, sodaan dhufa, tasa hojjechuu dandeessa. Kun daqiiqaa dhumaa qofa akka itti yaaddu agarsiisuu miti. Ariifachiisummaan akka siif hojjetu agarsiisa.','Kanaaf eeguu dhiisi. Kaayyoon <b>humna ergifadhu</b>, ykn yeroo murtaa\'e dhiheessi akka "amma" ta\'ee mul\'atuuf.'],
+ so:['Tani waa wax caadi ah oo ADHD la socda, mana aha caajis ama cillad dabeecadeed. ADHD-da, mustaqbalku inta badan wuxuu leeyahay laba xaaladood: <b>hadda</b> iyo <b>hadda maaha</b>. Cawaaqib toddobaadka soo socda calaamad kuma soo diro maanta, sidaas darteed ogaanshuhu fal uma beddelmo. Kadib waqtigii kama dambaysta ahaa ayaa soo dhowaada, walwal ayaa yimaada, oo si lama filaan ah ayaad u shaqayn kartaa. Taasi caddayn uma aha inaad daqiiqadda ugu dambaysa oo keliya dan ka leedahay. Waa caddayn in degdegtu kugu shaqayso.','Haddaba ha sugin. Si ula kac ah <b>u amaaho mishiin</b>, ama waqtiga kama dambaysta ah soo dhowee si uu ugu muuqdo "hadda".']};
+function dcLang(){try{const ps=document.querySelectorAll('#dontCareCard .coach-note > p');if(ps.length<2)return;ps.forEach(p=>{if(!p.dataset.en)p.dataset.en=p.innerHTML});const t=DC[LANG];ps.forEach((p,i)=>{p.innerHTML=t?t[i]:p.dataset.en})}catch(e){}}
+{const _sl4=setLang;setLang=function(){const r=_sl4.apply(this,arguments);setTimeout(dcLang,0);return r}}setTimeout(dcLang,400);
+
+/* v98c: Stars: total + where they came from + recent history (logged from now on; older stars show as "Earlier") */
+[["Where your stars came from","من أين جاءت نجومك","Urjiileen kee eessaa dhufan","Xiddigahaagu halkay ka yimaadeen"],["Recent","الأحدث","Dhiyoo","Dhowaan"],["stars","نجوم","urjii","xiddigood"],
+ ["Tasks","المهام","Hojiiwwan","Hawlaha"],["Salah","الصلاة","Salaata","Salaadda"],["Dhikr","الذكر","Zikrii","Dhikri"],["Quran","القرآن","Qur'aana","Quraanka"],["Water","الماء","Bishaan","Biyo"],
+ ["Focus","التركيز","Xiyyeeffannaa","Diirad"],["Showing up","الحضور","Argamuu","Imaatinka"],["Journal","اليوميات","Galmee guyyaa","Xusuus-qor"],["Game","اللعبة","Tapha","Ciyaar"],["Other","أخرى","Kan biraa","Kale"],["Earlier","سابقًا","Kanaan dura","Hore"],
+ ["Stars from now on show up here.","النجوم من الآن ستظهر هنا.","Urjiileen amma booda asitti mul'atu.","Xiddigaha hadda kadib halkan ayay ka muuqan doonaan."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const STSRC=[['tasks','✅','Tasks','#0F9D6E'],['salah','🕌','Salah','#11725A'],['dhikr','📿','Dhikr','#7C5CD6'],['quran','📖','Quran','#2F7CF6'],['water','💧','Water','#0EA5E9'],['focus','⏱','Focus','#5B5FE8'],['journal','📝','Journal','#E07524'],['up','🔥','Showing up','#EA7A22'],['game','🏎️','Game','#E5484D'],['other','✨','Other','#94A3B8']];
+function stSrc(key,txt){const t=String(txt||''),k=String(key||'');
+  if(/^(Did|Finished):/.test(t)||/^(t-|task|step)/.test(k))return 'tasks';
+  const R=[['salah',/salah|sal-|prayer|🕌|صلا|salaa|fajr|dhuhr|asr|maghrib|isha|فجر|ظهر|عصر|مغرب|عشاء/i],['dhikr',/📿|dhikr|zikr|ذكر|أذكار|azkar|tasbih|wholesome|🌿/i],['quran',/qur.?an|قرآن|📖|🔖/i],['water',/💧|water|ماء|bishaan|biyo/i],
+    ['focus',/focus|⏱|تركيز|xiyyeeff|diirad/i],['journal',/journal|📝|يوميات/i],['up',/welcome|streak|🔥|مرحب|showed up/i],['game',/🏎|game|لعبة|tapha|ciyaar/i],['tasks',/task|step|✅|مهمة|خطوة|hojii|tarkaanf|hawl|tallaab/i]];
+  for(const [s,re] of R)if(re.test(k)||re.test(t))return s;return 'other'}
+let _stKey='';
+{const _st3=star;star=function(n,txt,key){_stKey=(key||'')+'|'+(txt||'');try{return _st3.apply(this,arguments)}finally{_stKey=''}}}
+{const _aw3=award;award=function(n,win){const g=_aw3.apply(this,arguments);try{const [k,t]=_stKey?_stKey.split('|'):['',''],txt=String(win||t||'').slice(0,60),src=stSrc(k,txt);
+  S.stl=(Array.isArray(S.stl)?S.stl:[]);S.stl.unshift({n:g,at:Date.now(),s:src,t:txt});S.stl=S.stl.slice(0,200);S.sts=S.sts||{};S.sts[src]=(S.sts[src]||0)+g;save();stCard()}catch(e){}return g}}
+function stCard(){try{const sec=$('tab-wins');if(!sec)return;let c=$('stBox');if(!c){c=document.createElement('div');c.className='card st-box';c.id='stBox';sec.prepend(c)}
+  const T=S.sts||{},logged=Object.values(T).reduce((a,b)=>a+b,0),tot=Math.max(S.earned||0,logged),early=Math.max(0,tot-logged);
+  const rows=STSRC.map(([k,i,l,col])=>({k,i,l,col,n:T[k]||0})).filter(r=>r.n>0).sort((a,b)=>b.n-a.n);if(early)rows.push({k:'early',i:'🗂',l:'Earlier',col:'#CBD5E1',n:early});
+  const mx=Math.max(1,...rows.map(r=>r.n)),tm=d=>new Intl.DateTimeFormat(LOC(),{hour:'numeric',minute:'2-digit'}).format(new Date(d)),R=(S.stl||[]).slice(0,5);
+  c.innerHTML=`<div class="st-hd"><span class="st-big">⭐ <b>${S.sparks||0}</b></span><span class="small muted">${esc(tl('stars'))}</span></div>
+   <p class="st-sub">${esc(tl('Where your stars came from'))}</p>
+   ${rows.length?`<div class="st-rows">${rows.map(r=>`<div class="st-r"><span class="st-l">${r.i} ${esc(tl(r.l))}</span><span class="st-bar"><i style="width:${Math.max(6,Math.round(r.n/mx*100))}%;background:${r.col}"></i></span><b>${r.n}</b></div>`).join('')}</div>`:''}
+   <p class="st-sub">${esc(tl('Recent'))}</p>
+   ${R.length?`<ul class="st-hist">${R.map(x=>{const s=STSRC.find(z=>z[0]===x.s)||STSRC[9];return `<li><span class="st-n">+${x.n} ⭐</span><span class="st-t" dir="auto">${s[1]} ${esc(String(x.t||'').replace(/^(Did|Finished): /,'').replace(/^[\p{Extended_Pictographic}\u200d\ufe0f×\s]+/u,'')||tl(s[2]))}</span><time>${tm(x.at)}</time></li>`}).join('')}</ul>`:`<p class="small muted">${esc(tl('Stars from now on show up here.'))}</p>`}`}catch(e){console.error(e)}}
+{const _sh5=show;show=function(t){const r=_sh5.apply(this,arguments);if(t==='wins')stCard();return r}}
+{const _sl5=setLang;setLang=function(){const r=_sl5.apply(this,arguments);setTimeout(stCard,0);return r}}
+setTimeout(stCard,600);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
