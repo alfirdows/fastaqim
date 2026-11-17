@@ -1305,6 +1305,20 @@ body.has-bnav #apBar.ap3{padding-top:6px!important}
 .sk-b{display:flex;flex-direction:column;gap:8px;margin-top:4px}
 .sk-nn{display:block;margin:8px auto 0;background:none;border:0;min-height:36px;color:var(--muted);font-weight:700;font-size:.88rem;text-decoration:underline;text-underline-offset:3px}
 .hype p{font-weight:800!important}
+/* v97 snooze card */
+.rz{display:flex;flex-direction:column;gap:10px}.rz-t{font:800 19px/1.3 Inter,"IBM Plex Sans Arabic",system-ui;margin-top:2px}
+.rz-d{width:100%;min-height:52px;font-size:17px}
+.rz-h{font-weight:700;margin-top:6px}
+.rz-c{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rz-c button{min-height:58px;border-radius:16px;border:1.5px solid var(--line,#e2e8e5);background:var(--card,#fff);font:800 19px/1.1 Inter,system-ui;color:inherit;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px}
+.rz-c button small{font:600 11px Inter,"IBM Plex Sans Arabic",system-ui;opacity:.7}
+.rz-c button:active{transform:scale(.97)}
+.rz-o{display:flex;gap:8px}.rz-o input{flex:1;min-width:0;font-size:16px}.rz-o button{flex:none}
+.rz-n{text-align:center}
+#mrN.mr-ng-r{display:flex;flex-direction:column;gap:6px}#mrN span{font-weight:600;font-size:14px}
+#mrN div{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}#mrN button{min-height:40px;border-radius:12px;border:1.5px solid var(--line,#e2e8e5);background:var(--card,#fff);font:700 14px Inter,"IBM Plex Sans Arabic",system-ui;color:inherit}
+#mrN button.on{background:#0F9D6E;border-color:#0F9D6E;color:#fff}
+.go-hl{box-shadow:0 0 0 3px #F7C24A!important;transition:box-shadow .4s}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -6026,6 +6040,69 @@ const CHEER=[["Look how far you've come! 👏🎉","انظر كم تقدّمت! 
  ["Small steps add up! 💪","الخطوات الصغيرة تتراكم! 💪","Tarkaanfiin xixiqqaan ni walitti dabalamu! 💪","Tallaabooyinka yaryar way isku darsamaan! 💪"],["Keep going! 🚀","استمر! 🚀","Itti fufi! 🚀","Sii wad! 🚀"],["Proud of you! 🎉","فخورون بك! 🎉","Sitti boonna! 🎉","Waan kugu faanaynaa! 🎉"]];
 {const _hy=hype;hype=function(){const was=HY.last,r=_hy.apply(this,arguments);try{const h=$("hypeBox");if(h&&HY.last!==was&&h.classList.contains("show")){S.cheerI=((S.cheerI??-1)+1)%CHEER.length;const row=CHEER[S.cheerI],li={en:0,ar:1,om:2,so:3}[LANG];
   h.querySelector('p').textContent=row[li==null?0:li];if(li==null)h.classList.remove('notranslate');clearTimeout(HY.t);HY.t=setTimeout(()=>h.classList.remove('show'),2500)}}catch(e){}return r}}
+
+/* v97: reminders you can snooze. Tap a reminder → Done, or Snooze 5/10/15/30 or any minutes.
+   A snoozed reminder comes back every N minutes until Done (up to 6 times), so it is never forgotten.
+   "Repeat until done" on My reminders works the same way (alarm-style). */
+[["Done","تم","Xumurameera","Waa la dhammeeyay"],["Snooze","غفوة","Booda yaadachiisi","Dib u dhig"],["min","د","daq","daq"],["Minutes","دقائق","Daqiiqaa","Daqiiqado"],
+ ["Comes back until you tap Done.","يعود حتى تضغط تم.","Hanga Xumurameera tuqxutti deebi'a.","Wuu soo laabanayaa ilaa aad taabato Waa la dhammeeyay."],
+ ["Snoozed","تم التأجيل","Booda yaadachiifama","Dib ayaa loo dhigay"],["Stop reminding","أوقف التذكير","Yaadachiisuu dhaabi","Jooji xasuusinta"],
+ ["Repeat until done","كرّر حتى أنتهي","Hanga xumuramutti irra deebi'i","Ku celi ilaa la dhammeeyo"],["No repeat","بدون تكرار","Irra deebii malee","Ku celin la'aan"],
+ ["every","كل","hunda","kasta"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const SNZ={cols:true};
+const snzRow=(o)=>{if(!SNZ.cols){const c=Object.assign({},o);delete c.ref;delete c.rep;delete c.left_n;delete c.keep;return c}return o};
+async function snzIns(rows){let {error}=await AU.sb.from('push_queue').insert(rows.map(snzRow));
+  if(error&&SNZ.cols&&/ref|rep|left_n|keep|column/i.test(error.message||'')){SNZ.cols=false;({error}=await AU.sb.from('push_queue').insert(rows.map(snzRow)))}if(error)throw error}
+pushItems=(function(_pi){return function(){const out=_pi.apply(this,arguments);try{const nag={};myRem().forEach(r=>{if(r.nag)nag['r-'+r.id+'-']=r.nag});
+  out.forEach(x=>{x.ref=(x.tag||'fq')+'.'+Math.round(x.at/60000).toString(36);const k=Object.keys(nag).find(p=>(x.tag||'').startsWith(p));if(k){x.rep=nag[k];x.left_n=6}})}catch(e){}return out}})(pushItems);
+pushSyncNow=async function(force){try{if(!pushOK()||!S.pushOn)return;const items=pushItems(),h=JSON.stringify([LANG,items.map(x=>[x.at,x.title,x.body,x.rep||0])]),hk='fastaqim.pushH',last=JSON.parse(localStorage.getItem(hk)||'{}');
+  if(!force&&last.h===h&&Date.now()-(last.t||0)<864e5)return;
+  const uidv=AU.user.id;let del=AU.sb.from('push_queue').delete().eq('user_id',uidv).eq('sent',false);if(SNZ.cols)del=del.eq('keep',false);let {error}=await del;
+  if(error&&SNZ.cols){SNZ.cols=false;({error}=await AU.sb.from('push_queue').delete().eq('user_id',uidv).eq('sent',false))}if(error)throw error;
+  for(let i=0;i<items.length;i+=200)await snzIns(items.slice(i,i+200).map(x=>({user_id:uidv,at:new Date(x.at).toISOString(),title:x.title.slice(0,120),body:(x.body||'').slice(0,200),tag:x.tag,url:'./',ref:x.ref||'',rep:x.rep||0,left_n:x.left_n||0,keep:false})));
+  localStorage.setItem(hk,JSON.stringify({h,t:Date.now()}))}catch(e){console.warn('pushSync',e)}};
+async function snzClear(ref){if(!ref||!pushOK()||!SNZ.cols)return;try{await AU.sb.from('push_queue').delete().eq('user_id',AU.user.id).eq('sent',false).eq('ref',ref)}catch(e){}}
+async function snzSet(info,min){min=Math.max(1,Math.min(720,Math.round(min)||0));const ref=info.ref||((info.tag||'fq').split('.')[0]+'.z'+Date.now().toString(36));
+  try{if(!pushOK())throw 0;await snzClear(ref);await snzIns([{user_id:AU.user.id,at:new Date(Date.now()+min*60000).toISOString(),title:(info.title||'Fastaqim').slice(0,120),body:('💤 '+(info.body||'')).slice(0,200),tag:'z-'+ref,url:'./',ref,rep:min,left_n:6,keep:true}]);
+    toast('💤 '+tl('Snoozed')+' · '+min+' '+tl('min'))}catch(e){toast(tl('Turn on reminders on this phone'))}}
+function remSheet(info){if(!info||!info.title)return;const base=(info.ref||info.tag||'').split('.')[0];
+  modalCard(`<div class="rz"><p class="rz-t" dir="auto">${esc(info.title)}</p>${info.body?`<p class="small muted" dir="auto">${esc(info.body.replace(/^💤\s*/,''))}</p>`:''}
+   <button type="button" class="btn-main rz-d" id="rzD">✓ ${esc(tl('Done'))}</button>
+   <p class="rz-h">💤 ${esc(tl('Snooze'))}</p><div class="rz-c">${[5,10,15,30].map(m=>`<button type="button" data-rz="${m}">${m}<small>${esc(tl('min'))}</small></button>`).join('')}</div>
+   <div class="rz-o"><input type="number" id="rzN" min="1" max="720" inputmode="numeric" placeholder="${esc(tl('Minutes'))}"><button type="button" class="btn-calm" id="rzG">${esc(tl('Snooze'))}</button></div>
+   <p class="small muted rz-n">${esc(tl('Comes back until you tap Done.'))}</p></div>`);
+  const sb=$('scrollBody');
+  $('rzD').onclick=async()=>{try{navigator.vibrate&&navigator.vibrate([12,50,12])}catch(e){}modalClose();snzClear(info.ref);
+    if(base.startsWith('t-')){const t=(S.tasks||[]).find(x=>'t-'+x.id===base);if(t&&!t.done){finishTask(t);save();render();return}}
+    toast('✓ '+tl('Done'))};
+  sb.querySelectorAll('[data-rz]').forEach(b=>b.onclick=()=>{modalClose();snzSet(info,+b.dataset.rz)});
+  $('rzG').onclick=()=>{const n=+$('rzN').value;if(!n){$('rzN').focus();return}modalClose();snzSet(info,n)}}
+try{navigator.serviceWorker&&navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.fqRem)setTimeout(()=>remSheet(e.data.fqRem),300)})}catch(e){}
+(function(){const m=/[#&]rem=([^&]+)/.exec(location.hash);if(!m)return;let info=null;try{info=JSON.parse(decodeURIComponent(m[1]))}catch(e){}
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}if(!info)return;
+  let n=0;const go=()=>{const ready=typeof AU!=='undefined'&&AU.user&&S&&S.started;if(ready||n++>20){remSheet(info)}else setTimeout(go,400)};setTimeout(go,600)})();
+/* "Repeat until done" chips on My reminders (Off / 5 / 10 / 15 min) */
+{const _rr2=renderRemind;renderRemind=function(){const r=_rr2.apply(this,arguments);try{const f=$('mrF');if(f&&!$('mrN')){const w=document.createElement('div');w.id='mrN';w.className='mr-ng-r';
+  const opts=[0,5,10,15];w.innerHTML=`<span>🔁 ${esc(tl('Repeat until done'))}</span><div>${opts.map(m=>`<button type="button" data-mrn="${m}" class="${(RMF.nag||0)===m?'on':''}">${m?m+' '+esc(tl('min')):'✕'}</button>`).join('')}</div>`;
+  w.querySelectorAll('[data-mrn]').forEach(b=>b.onclick=()=>{RMF.nag=+b.dataset.mrn;w.querySelectorAll('[data-mrn]').forEach(x=>x.classList.toggle('on',x===b))});
+  const d=f.querySelector('.mr-d');if(d)d.after(w);else f.prepend(w);
+  const sub=f.onsubmit;f.onsubmit=e=>{const before=myRem().length;sub(e);const L=myRem();if(L.length>before&&RMF.nag){L[L.length-1].nag=RMF.nag;save();renderRemind()}}}
+  document.querySelectorAll('#remCard .mr-i').forEach((row,i)=>{const x=myRem()[i];if(x&&x.nag&&!row.querySelector('.mr-ng')){const s=row.querySelector('small');if(s)s.insertAdjacentHTML('beforeend',` <span class="mr-ng">· 🔁 ${x.nag} ${esc(tl('min'))}</span>`)}})}catch(e){console.error(e)}return r}}
+
+/* v97: one-tap links that open a section, e.g. alfirdows.github.io/fastaqim/#reminders */
+const GO={reminders:()=>goCard('wins','remCard'),family:()=>{if(typeof AU!=='undefined'&&AU.user){goCard('wins','acctBox',()=>document.querySelector('#acctBox .pf-sec'))}else famOpen()},
+  account:()=>{if(typeof AU!=='undefined'&&AU.user)goCard('wins','acctBox');else{landingShow(true);ldAuthOpen('in')}},theme:()=>thmOpen(),salah:()=>salPop(),language:()=>langOpen(),dhikr:()=>zkOpen(),hisn:()=>hisnOpen(),timer:()=>qtOpen(),
+  calendar:()=>{const c=$('calHdr');if(c)c.click()},energy:()=>enOpen(),kid:()=>kidOpen(),privacy:()=>privacyOpen(),feedback:()=>fbOpen(),arrange:()=>tabsArrange(),pinned:()=>pinEdit(),
+  home:()=>show('now'),now:()=>show('now'),plan:()=>show('plan'),todo:()=>show('today'),money:()=>show('money'),goals:()=>show('goals'),focus:()=>show('focus'),enjoy:()=>show('enjoy'),me:()=>show('wins'),stars:()=>show('wins'),
+  game:()=>{location.href='./game-demo.html?v='+Date.now().toString(36)}};
+function goCard(tab,id,pick){show(tab);setTimeout(()=>{const c=(pick&&pick())||$(id);if(c){c.scrollIntoView({block:'start',behavior:'smooth'});c.classList.add('go-hl');setTimeout(()=>c.classList.remove('go-hl'),1600)}},250)}
+function goHash(){const k=(location.hash||'').replace(/^#\/?/,'').toLowerCase();if(!k||k.startsWith('rem=')||!GO[k])return false;
+  const run=()=>{try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}try{GO[k]()}catch(e){console.warn('go',k,e)}};
+  if(k==='family'&&!(typeof AU!=='undefined'&&AU.user)&&!inApp()){run();return true}
+  let n=0;const wait=()=>{if(inApp()&&(typeof S!=='undefined')&&S.started){setTimeout(run,200)}else if(n++<40)setTimeout(wait,300);else{try{sessionStorage.setItem('fq.go',k)}catch(e){}}};wait();return true}
+window.addEventListener('hashchange',goHash);setTimeout(goHash,500);
+{const _ci4=cloudInit;cloudInit=async function(){const r=await _ci4.apply(this,arguments);try{const k=sessionStorage.getItem('fq.go');if(k&&GO[k]){sessionStorage.removeItem('fq.go');setTimeout(()=>GO[k](),400)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);

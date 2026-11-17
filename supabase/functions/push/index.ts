@@ -14,6 +14,7 @@ const KEY = secretKey();
 const H: Record<string, string> = { apikey: KEY, "Content-Type": "application/json" };
 if (KEY.startsWith("eyJ")) H.Authorization = "Bearer " + KEY;
 const CONTACT = "https://alfirdows.github.io/fastaqim";
+type Row = { id: number; user_id: string; title: string; body: string; tag: string; url: string; ref?: string; rep?: number; left_n?: number };
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Headers": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS" };
 
 async function db(path: string, opt: RequestInit = {}) {
@@ -46,21 +47,32 @@ Deno.serve(async (req) => {
     const jwk = await vapid();
     const now = new Date().toISOString(), old = new Date(Date.now() - 30 * 60000).toISOString();
     // due in the last 30 minutes and not sent yet (older ones are dropped, never sent late)
-    const due = await db(`push_queue?sent=eq.false&at=lte.${now}&at=gte.${old}&select=id,user_id,title,body,tag,url&order=at.asc&limit=500`);
+    const q = `push_queue?sent=eq.false&at=lte.${now}&at=gte.${old}&order=at.asc&limit=500&select=id,user_id,title,body,tag,url`;
+    // snooze columns (ref, rep, left_n) exist once the snooze setup has run; work without them too
+    let due: Row[], snooze = true;
+    try { due = await db(q + ",ref,rep,left_n"); } catch (_) { snooze = false; due = await db(q); }
     let sent = 0, gone = 0;
     if (due.length) {
-      const users = [...new Set(due.map((d: { user_id: string }) => d.user_id))];
+      const users = [...new Set(due.map((d) => d.user_id))];
       const subs = await db(`push_subs?user_id=in.(${users.join(",")})&select=endpoint,user_id,p256dh,auth`);
       for (const d of due) {
         for (const s of subs.filter((x: { user_id: string }) => x.user_id === d.user_id)) {
           try {
-            const st = await send(s, { title: d.title, body: d.body || "", tag: d.tag || "fq", url: d.url || "./" }, jwk, CONTACT);
+            const st = await send(s, { title: d.title, body: d.body || "", tag: d.tag || "fq", url: d.url || "./", ref: d.ref || "" }, jwk, CONTACT);
             if (st === 404 || st === 410) { gone++; await db(`push_subs?endpoint=eq.${encodeURIComponent(s.endpoint)}`, { method: "DELETE" }); }
             else if (st < 300) sent++;
           } catch (_) { /* one bad subscription never stops the rest */ }
         }
       }
-      await db(`push_queue?id=in.(${due.map((d: { id: number }) => d.id).join(",")})`, { method: "PATCH", body: JSON.stringify({ sent: true }) });
+      // snoozed or "repeat until done": queue the next one until the person taps Done (Done deletes it)
+      const again = snooze ? due.filter((d) => (d.rep || 0) > 0 && (d.left_n || 0) > 0) : [];
+      if (again.length) {
+        await db("push_queue", { method: "POST", body: JSON.stringify(again.map((d) => ({
+          user_id: d.user_id, at: new Date(Date.now() + Math.min(720, d.rep!) * 60000).toISOString(), title: d.title, body: d.body || "",
+          tag: d.tag || "fq", url: d.url || "./", ref: d.ref || "", rep: d.rep, left_n: d.left_n! - 1, keep: true,
+        }))) });
+      }
+      await db(`push_queue?id=in.(${due.map((d) => d.id).join(",")})`, { method: "PATCH", body: JSON.stringify({ sent: true }) });
     }
     // tidy: forget sent or stale rows older than 2 days
     await db(`push_queue?at=lt.${new Date(Date.now() - 2 * 864e5).toISOString()}`, { method: "DELETE" });

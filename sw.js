@@ -1,6 +1,6 @@
 /* Fastaqim offline support: the page is fetched fresh when online (so updates reach everyone) and kept for offline use.
    Your to-dos and calendar live on your phone, so they open without WiFi and sync when you are back online. */
-const CACHE="fastaqim-v96";
+const CACHE="fastaqim-v97";
 const CORE=["./","index.html","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png"];
 const LIBS=["fonts.googleapis.com","fonts.gstatic.com","cdn.jsdelivr.net","unpkg.com"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
@@ -20,5 +20,7 @@ self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET")retu
  e.respondWith(caches.match(req).then(hit=>{const net=fetch(req).then(r=>{if(r&&(r.ok||r.type==="opaque")){const cp=r.clone();caches.open(CACHE).then(c=>c.put(req,cp))}return r}).catch(()=>hit);return hit||net}))});
 /* reminders sent by the server (when set up) */
 self.addEventListener("push",e=>{let d={};try{d=e.data.json()}catch(err){d={title:"Fastaqim",body:e.data?e.data.text():""}}
- e.waitUntil(self.registration.showNotification(d.title||"Fastaqim",{body:d.body||"",icon:"icon-192.png",badge:"icon-192.png",tag:d.tag||"fq",data:{url:d.url||"./"}}))});
-self.addEventListener("notificationclick",e=>{e.notification.close();e.waitUntil(clients.matchAll({type:"window",includeUncontrolled:true}).then(ws=>{for(const w of ws){if("focus" in w)return w.focus()}return clients.openWindow(e.notification.data&&e.notification.data.url||"./")}))});
+ e.waitUntil(self.registration.showNotification(d.title||"Fastaqim",{body:d.body||"",icon:"icon-192.png",badge:"icon-192.png",tag:d.tag||"fq",renotify:true,data:{url:d.url||"./",tag:d.tag||"",ref:d.ref||""}}))});
+/* tapping a reminder opens Fastaqim with a small Done / Snooze card */
+self.addEventListener("notificationclick",e=>{const n=e.notification,d=n.data||{};n.close();const info={title:n.title||"",body:n.body||"",tag:d.tag||n.tag||"",ref:d.ref||""};
+ e.waitUntil(clients.matchAll({type:"window",includeUncontrolled:true}).then(ws=>{for(const w of ws){if("focus" in w){try{w.postMessage({fqRem:info})}catch(err){}return w.focus()}}return clients.openWindow((d.url||"./").split("#")[0]+"#rem="+encodeURIComponent(JSON.stringify(info)))}))});

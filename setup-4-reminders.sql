@@ -34,6 +34,13 @@ drop policy if exists "own push queue" on public.push_queue;
 create policy "own push queue" on public.push_queue for all to authenticated
   using (auth.uid() = user_id) with check (auth.uid() = user_id);
 
+-- snooze and "repeat until done" (safe to run again)
+alter table public.push_queue add column if not exists ref text not null default '';
+alter table public.push_queue add column if not exists rep int not null default 0 check (rep between 0 and 720);
+alter table public.push_queue add column if not exists left_n int not null default 0 check (left_n between 0 and 50);
+alter table public.push_queue add column if not exists keep boolean not null default false;
+create index if not exists push_queue_ref on public.push_queue (user_id, ref) where not sent;
+
 -- server-only settings (no policies: the site can never read this table)
 create table if not exists public.push_cfg (k text primary key, v text not null);
 alter table public.push_cfg enable row level security;
