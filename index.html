@@ -1895,6 +1895,14 @@ body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z
 .hm-wnb.wk2{background:linear-gradient(135deg,#e3f6ee,#c9eedd);color:#0d4a36}
 .hm-wnb .i{font-size:24px}.hm-wnb .m{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;text-align:start}.hm-wnb b{font-size:15.5px}.hm-wnb small{font-size:12.5px;opacity:.85;overflow-wrap:break-word}.hm-wnb>i{font-style:normal;font-size:20px;opacity:.6}
 .hm-wnx{position:absolute;top:50%;inset-inline-end:8px;transform:translateY(-50%);border:0;background:#0000000f;color:#3d2a00;width:28px;height:28px;min-height:0;border-radius:50%;padding:0;font-size:12px}
+
+/* v126 menu groups + pins */
+.apm-gh{margin-top:14px}
+.apm-s .apm-ed{float:inline-end;border:0;background:none;color:#15835f;font:800 .78rem var(--body);text-transform:none;letter-spacing:0;padding:0 4px;min-height:0}
+.apm-pin{min-height:40px;border-radius:12px;border:1.5px solid color-mix(in srgb,#15835f 45%,transparent);background:color-mix(in srgb,#15835f 8%,transparent);color:var(--ink);font:600 .82rem var(--body);display:flex;align-items:center;justify-content:center;gap:4px;padding:0 6px}
+.apm-tip{font-size:12.5px;color:var(--muted);margin:8px 2px 0}
+.apm-i{position:relative}
+.apm-pinb{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);font-size:20px;color:#c99a1c;width:34px;height:34px;display:grid;place-items:center;cursor:pointer}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7537,7 +7545,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v125',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v126',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7895,7 +7903,7 @@ GO.report=()=>rpOpen();GO.problem=GO.report;
  ['To-dos','المهام','To-do','Hawlaha'],['Goals','الأهداف','Kaayyoo','Yoolal'],['Journal','اليوميات','Galmee guyyaa','Xusuus-qor'],['Reminders','التذكيرات','Yaadachiistota','Xasuusiyeyaal'],['Saved','المحفوظات','Kan olkaa\'e','La keydiyey'],['Pages','الصفحات','Fuulota','Bogag'],
  ['No results','لا توجد نتائج','Bu\'aan hin jiru','Natiijo ma jirto'],['Try another word.','جرّب كلمة أخرى.','Jecha biraa yaali.','Isku day eray kale.'],['Done','تمّت','Xumurameera','Dhammaaday'],['Jump to','انتقل إلى','Gara deemi','U gudub']
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
-const SRCH_PG=[['🧭','Qibla','qibla'],['📖','Verse of the day','verse'],['📖','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['👪','Family','family'],['👤','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Suggest an idea','idea']];
+const SRCH_PG=[['🕋','Qibla','qibla'],['📖','Verse of the day','verse'],['📕','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['👪','Family','family'],['👤','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Suggest an idea','idea']];
 function srAm(k){try{const F={lang:()=>langOpen(),pv:()=>privacyOpen(),zk:()=>zkOpen(),qt:()=>qtOpen(),sv:()=>svOpen(),ns:()=>nsOpen(),rec:()=>recOpen()};if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36);return}if(F[k]){F[k]();return}}catch(e){}try{apMenu();const m=$('apMenu'),b=m&&m.querySelector('[data-am="'+k+'"]');if(m)m.hidden=true;if(b)b.click()}catch(e){}}
 function srNorm(s){return String(s||'').toLowerCase().normalize('NFKD').replace(/[ً-ْٰـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[̀-ͯ]/g,'')}
 function srD(d){try{return new Date(d+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'})}catch(e){return d}}
@@ -7974,7 +7982,7 @@ GO.sleep=GO.night=GO.beforesleep=()=>bsOpen(0);
 {const _hs=hmTrk;hmTrk=function(){const h=_hs.apply(this,arguments);try{const hr=new Date().getHours();if(!(hr>=18||hr<4))return h;const R=bsRec(),n=bsAuto().length+R.wins.length;
   return `<button type="button" class="hm-ns${R.done?' dn':''}" data-hm="ns"><span class="i">🌙</span><span class="m"><b>${esc(tl('Before sleep'))}</b><small>${R.done?esc(tl('Done ✓')):`⭐ ${n} · 📅 ${esc(tl('Tomorrow'))} · 🤲`}</small></span><i aria-hidden="true">›</i></button>`+h}catch(e){return h}}}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="ns"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();bsOpen(0)},true);
-{const _amN=apMenu;apMenu=function(){const r=_amN.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="vd"]');if(s&&!m.querySelector('[data-am="ns"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='ns';b.textContent='🌙 '+tl('Before sleep');b.onclick=()=>{m.hidden=true;bsOpen(0)};s.before(b)}}catch(e){}return r}}
+{const _amN=apMenu;apMenu=function(){const r=_amN.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="vd"]');if(s&&!m.querySelector('[data-am="bsl"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='bsl';b.textContent='🌙 '+tl('Before sleep');b.onclick=()=>{m.hidden=true;bsOpen(0)};s.before(b)}}catch(e){}return r}}
 SRCH_PG.splice(2,0,['🌙','Before sleep','sleep']);
 
 /* v121: Chunks, one chunk at a time (Morning, Afternoon, Evening, School, Work, Weekend + your own) */
@@ -8153,7 +8161,7 @@ function trOpen(){trashTidy();const L=S.trash||[];try{const m=$('apMenu');if(m)m
   $('scrollBody').querySelectorAll('[data-tr]').forEach(b=>b.onclick=()=>{const x=(S.trash||[])[+b.dataset.tr];trRestore(x);undoBar(tl('Restored')+' ✓');trOpen()});
   const a=$('trAll');if(a){let armed=false;a.onclick=()=>{if(!armed){armed=true;a.textContent=tl('Delete all now')+' ?';a.classList.add('arm');return}S.trash=[];TRS.mute=true;save();TRS.mute=false;trOpen()}}}
 GO.trash=GO.deleted=GO.recentlydeleted=()=>trOpen();
-{const _amT=apMenu;apMenu=function(){const r=_amT.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="pv"]');if(s&&!m.querySelector('[data-am="trash"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='trash';b.textContent='🗑️ '+tl('Recently deleted');b.onclick=()=>{m.hidden=true;trOpen()};s.before(b)}}catch(e){}return r}}
+{const _amT=apMenu;apMenu=function(){const r=_amT.apply(this,arguments);try{const m=$('apMenu'),s=m&&(m.querySelector('[data-am="pv"]')||m.querySelector('[data-am="set2"]'));if(s&&!m.querySelector('[data-am="trash"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='trash';b.textContent='🗑️ '+tl('Recently deleted');b.onclick=()=>{m.hidden=true;trOpen()};s.before(b)}}catch(e){}return r}}
 SRCH_PG.push(['🗑️','Recently deleted','trash']);
 
 /* quick add: plain words become date, time, range and repeat */
@@ -8248,6 +8256,30 @@ SRCH_PG.push(['📊','Weekly recap','recap'],['✨',"What's new",'new']);
 function fqBadge(){try{if(!('setAppBadge' in navigator))return;const k=dkey(),n=(S.tasks||[]).filter(t=>!t.done&&t.due&&t.due<=k).length;if(n&&!S.badgeOff)navigator.setAppBadge(n).catch(()=>{});else navigator.clearAppBadge&&navigator.clearAppBadge().catch(()=>{})}catch(e){}}
 {const _svB=save;save=function(){const r=_svB.apply(this,arguments);try{fqBadge()}catch(e){}return r}}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')fqBadge()});setTimeout(fqBadge,1500);
+
+/* v126: ☰ grouped by importance (Worship / Plan my day / Extras / Help), every tool visible, and your own pinned tools in Tabs */
+[['Worship','العبادة','Waaqeffannaa','Cibaado'],['Plan my day','خطّط يومي','Guyyaa koo karoorsi','Qorshee maalintayda'],['Extras','إضافات','Dabalataa','Dheeraad'],['Help & more','مساعدة والمزيد','Gargaarsaa fi kan biroo','Caawin iyo wax kale'],
+ ['Pin to Tabs','ثبّت في التبويبات','Tabs irratti qabsiisi','Ku dheji Tabs'],['Edit','تعديل','Gulaali','Wax ka beddel'],['Tap ☆ to pin a tool to the top of the menu.','اضغط ☆ لتثبيت أداة أعلى القائمة.','Meeshaa gubbaa irratti qabsiisuuf ☆ tuqi.','Taabo ☆ si aad qalab ugu dhejiso korka liiska.'],['Done','تمّ','Xumurame','Waa la dhammeeyey']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const AMG=[['Worship',['sal','qb','zk','vd','hisn']],['Plan my day',['rem','cal','qt','bsl','en']],['Extras',['guide','sv','ns','rec','game']],['Help & more',['set2','trash','wn','rp','fb','out','gx']]];
+{const _amG=apMenu;apMenu=function(){const r=_amG.apply(this,arguments);try{const m=$('apMenu'),p=m&&m.querySelector('.apm-p');if(!p)return r;
+  p.classList.add('apm-s2');p.querySelectorAll('.apm-more,.apm-hr2,.apm-gh').forEach(x=>x.remove());p.querySelectorAll('hr').forEach(x=>x.remove());
+  const ver=p.querySelector('.apm-ver'),seen=new Set();let anchor=[...p.querySelectorAll('.apm-s')][1]||p.querySelector('.apm-g');if(!anchor)return r;
+  const pins=(S.mPins||[]);
+  AMG.forEach(([h,keys],gi)=>{const hd=document.createElement('p');hd.className='apm-s apm-gh';hd.textContent=tl(h);anchor.after(hd);anchor=hd;
+    keys.forEach(k=>{const b=p.querySelector(`.apm-i[data-am="${k}"]`);if(!b)return;seen.add(b);b.classList.remove('apm-x');anchor.after(b);anchor=b})});
+  p.querySelectorAll('.apm-i').forEach(b=>{if(!seen.has(b)&&b.dataset.am&&!b.closest('.apm-g')){const ex=[...p.querySelectorAll('.apm-gh')][2];b.classList.remove('apm-x');(ex?[...p.querySelectorAll('.apm-i')].filter(x=>seen.has(x)&&AMG[2][1].includes(x.dataset.am)).pop()||ex:anchor).after(b);seen.add(b)}});
+  [['qb','🕋'],['hisn','📕']].forEach(([k,ic])=>{const b=p.querySelector(`.apm-i[data-am="${k}"]`);if(b&&b.firstChild&&b.firstChild.nodeType===3)b.firstChild.nodeValue=b.firstChild.nodeValue.replace(/^\S+/,ic)});
+  const toolsH=[...p.querySelectorAll('.apm-s:not(.apm-gh)')][1];if(toolsH)toolsH.remove();
+  const g=p.querySelector('.apm-g');if(g){g.querySelectorAll('.apm-pin').forEach(x=>x.remove());pins.forEach(k=>{const src=p.querySelector(`.apm-i[data-am="${k}"]`);if(!src)return;const c=document.createElement('button');c.type='button';c.className='apm-pin';c.textContent=src.textContent;c.onclick=e=>{e.stopPropagation();src.click()};g.appendChild(c)});
+   const tabsH=p.querySelector('.apm-s');if(tabsH&&!tabsH.querySelector('.apm-ed')){tabsH.insertAdjacentHTML('beforeend',` <button type="button" class="apm-ed">✎ ${tl('Edit')}</button>`);tabsH.querySelector('.apm-ed').onclick=e=>{e.stopPropagation();AME.on=!AME.on;amEdit(p)}}}
+  if(AME.on)amEdit(p,true);
+  if(ver)p.appendChild(ver)}catch(e){}return r}}
+const AME={on:false};
+function amEdit(p,keep){const on=AME.on;p.querySelectorAll('.apm-pinb').forEach(x=>x.remove());const ed=p.querySelector('.apm-ed');if(ed)ed.textContent=on?'✓ '+tl('Done'):'✎ '+tl('Edit');
+  let tip=p.querySelector('.apm-tip');if(on&&!tip){tip=document.createElement('p');tip.className='apm-tip';tip.textContent=tl('Tap ☆ to pin a tool to the top of the menu.');p.querySelector('.apm-g').after(tip)}else if(!on&&tip)tip.remove();
+  if(!on)return;const P=S.mPins||[];p.querySelectorAll('.apm-i[data-am]').forEach(b=>{if(['out','gx','set2'].includes(b.dataset.am))return;const k=b.dataset.am,s=document.createElement('span');s.className='apm-pinb'+(P.includes(k)?' on':'');s.textContent=P.includes(k)?'★':'☆';s.setAttribute('role','button');s.setAttribute('aria-label',tl('Pin to Tabs'));
+    s.onclick=e=>{e.stopPropagation();e.preventDefault();S.mPins=(S.mPins||[]).filter(x=>x!==k);if(!P.includes(k))S.mPins.push(k);S.mPins=S.mPins.slice(0,6);save();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}apMenu()};b.appendChild(s)})}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
