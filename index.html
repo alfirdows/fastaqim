@@ -1851,6 +1851,18 @@ body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z
 .task .seg button{border:1.5px solid var(--line)!important;border-radius:18px!important;background:var(--surface,#fff);color:var(--ink);min-height:36px;padding:0 12px}
 .task .seg button[aria-pressed=true]{background:#15835f!important;border-color:#15835f!important;color:#fff!important}
 .tk-days{display:flex;flex-wrap:wrap;gap:5px}.tk-days button{flex:1 0 auto;padding:7px 6px;font-size:12px}
+
+/* v124 undo + recently deleted */
+#fqUndo{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom));transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:9999;display:flex;align-items:center;gap:14px;max-width:min(92vw,420px);background:#1f2933;color:#fff;border-radius:14px;padding:10px 12px 10px 16px;box-shadow:0 8px 24px #0004;font-size:14.5px;transition:opacity .2s,transform .2s}
+#fqUndo.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#fqUndo span{flex:1;min-width:0;overflow-wrap:break-word}
+#fqUndo button{border:0;background:transparent;color:#7ee0b5;font-weight:800;font-size:15px;padding:6px 8px;min-height:0;flex:none}
+.tr-l{display:flex;flex-direction:column;gap:6px}
+.tr-r{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 4.5%,transparent)}
+.tr-i{font-size:20px}.tr-t{flex:1;min-width:0;display:flex;flex-direction:column;text-align:start}.tr-t b{overflow-wrap:break-word;color:var(--ink)}.tr-t small{color:var(--muted);font-size:12.5px}
+.tr-r .btn-calm{flex:none;padding:8px 12px;min-height:0;font-size:13.5px}
+.tr-all{all:unset;cursor:pointer;display:block;text-align:center;margin:14px auto 0;color:#c2410c;font-weight:700;font-size:14px}.tr-all.arm{background:#c2410c;color:#fff;border-radius:12px;padding:8px 14px}
+#fqUndo{width:max-content;min-width:min(92vw,340px)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7493,7 +7505,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v123',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v124',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8079,6 +8091,70 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
   if(k==='rd'){const i=+b.dataset.d,d=t.rep.d=t.rep.d||[];const j=d.indexOf(i);if(j>=0){if(d.length>1)d.splice(j,1)}else d.push(i);d.sort();save();render();return}},true);
 document.addEventListener('change',e=>{const i=e.target;if(!i.matches||!i.matches('[data-tk="end"]'))return;const t=tkTask(i);if(!t)return;t.end=i.value||'';save();render()},true);
 {const _ftR=finishTask;finishTask=function(t){const r=_ftR.apply(this,arguments);try{if(t&&t.rep&&t.rep.k!=='none'&&!t.repSpawned){const nd=tkNext(t);if(nd){t.repSpawned=1;const c=JSON.parse(JSON.stringify(t));Object.assign(c,{id:uid(),done:false,doneAt:null,due:nd,open:false,repSpawned:0,why:[]});(c.steps||[]).forEach(s=>s.done=false);S.tasks.push(c);save();setTimeout(()=>{try{toast(tl('Done. Next one is ready.')+' '+tkRepLbl(c))}catch(e){}},2600)}}}catch(e){}return r}}
+
+/* v124: Undo + Recently deleted (30 days), and Quick add in plain words ("Dentist tomorrow 3pm", "Gym every Monday 6-7pm") */
+[['Recently deleted','المحذوفة مؤخرًا','Dhiyeenyatti kan haqame','Dhawaan la tirtiray'],['Deleted','حُذفت','Haqameera','Waa la tirtiray'],['Undo','تراجع','Deebisi','Ka noqo'],['Restore','استعادة','Deebisi','Soo celi'],
+ ['Kept for 30 days, then deleted for good.','تُحفظ ٣٠ يومًا ثم تُحذف نهائيًا.','Guyyaa 30 ni kuufama, achii guutummaan haqama.','30 maalmood ayaa la hayaa, kadib si buuxda ayaa loo tirtiraa.'],
+ ['days left','يومًا متبقيًا','guyyaa hafe','maalmood ayaa haray'],['Nothing here.','لا شيء هنا.','As homaa hin jiru.','Halkan waxba ma jiraan.'],['Restored','تمّت الاستعادة','Deebi\'eera','Waa la soo celiyey'],['Delete all now','احذف الكل الآن','Amma hunda haqi','Hadda tirtir dhammaan'],
+ ['Added for','أُضيفت لـ','Kanaaf dabalame','Waxaa loogu daray']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function trashPut(kind,o){S.trash=Array.isArray(S.trash)?S.trash:[];if(o&&o.id&&S.trash.some(x=>x.o&&x.o.id===o.id))return;S.trash.unshift({k:kind,o:JSON.parse(JSON.stringify(o)),at:Date.now()});trashTidy()}
+function trashTidy(){const lim=Date.now()-30*864e5;S.trash=(S.trash||[]).filter(x=>x.at>lim).slice(0,300)}
+const TRS={snap:null,mute:false,tap:0};addEventListener('pointerdown',()=>{TRS.tap=Date.now()},true);addEventListener('keydown',()=>{TRS.tap=Date.now()},true);
+function trSnap(){const m=new Map();(S.tasks||[]).forEach((t,i)=>m.set(t.id,{t:JSON.parse(JSON.stringify(t)),i}));(S.goals||[]).forEach((g,i)=>{if(g&&g.id)m.set('g:'+g.id,{g:JSON.parse(JSON.stringify(g)),i})});return m}
+function undoBar(msg,fn){let u=$('fqUndo');if(!u){u=document.createElement('div');u.id='fqUndo';u.setAttribute('role','status');document.body.appendChild(u)}
+  u.innerHTML=`<span>${esc(msg)}</span>${fn?`<button type="button">${esc(tl('Undo'))}</button>`:''}`;u.classList.add('on');clearTimeout(u._t);u._t=setTimeout(()=>u.classList.remove('on'),fn?6000:2600);
+  const b=u.querySelector('button');if(b)b.onclick=()=>{u.classList.remove('on');try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}fn()}}
+function trRestore(x){if(!x)return;if(x.k==='task'){if(!(S.tasks||[]).some(t=>t.id===x.o.id))S.tasks.splice(Math.min(x.i??S.tasks.length,S.tasks.length),0,x.o)}else if(x.k==='goal'){S.goals=S.goals||[];if(!S.goals.some(g=>g.id===x.o.id))S.goals.push(x.o)}
+  S.trash=(S.trash||[]).filter(y=>y!==x);TRS.mute=true;save();TRS.mute=false;TRS.snap=trSnap();render()}
+{const _svT=save;save=function(){try{if(!TRS.mute&&TRS.snap&&Date.now()-TRS.tap<5000){const cur=new Set((S.tasks||[]).map(t=>t.id).concat((S.goals||[]).filter(g=>g&&g.id).map(g=>'g:'+g.id)));const gone=[];
+  TRS.snap.forEach((v,k)=>{if(!cur.has(k))gone.push(v.t?{k:'task',o:v.t,i:v.i,at:Date.now()}:{k:'goal',o:v.g,i:v.i,at:Date.now()})});
+  if(gone.length&&gone.length<=20){S.trash=Array.isArray(S.trash)?S.trash:[];gone.forEach(x=>{if(!S.trash.some(y=>y.o&&y.o.id===x.o.id))S.trash.unshift(x)});trashTidy();
+   const one=gone[0];setTimeout(()=>undoBar(tl('Deleted')+(gone.length===1?': '+(one.o.title||''):' ('+gone.length+')'),()=>{gone.forEach(x=>trRestore(S.trash.find(y=>y.o&&y.o.id===x.o.id)))}),30)}}
+ }catch(e){}const r=_svT.apply(this,arguments);try{TRS.snap=trSnap()}catch(e){}return r}}
+setTimeout(()=>{try{TRS.snap=trSnap()}catch(e){}},0);
+{const _rdT=render;render=function(){const r=_rdT.apply(this,arguments);try{if(Date.now()-TRS.tap>5000)TRS.snap=trSnap()}catch(e){}return r}}
+function trOpen(){trashTidy();const L=S.trash||[];try{const m=$('apMenu');if(m)m.hidden=true}catch(e){}
+  modalCard(`<div class="tr"><p class="label">🗑️ ${tl('Recently deleted')}</p><p class="small muted" style="text-align:center;margin:0 0 10px">${tl('Kept for 30 days, then deleted for good.')}</p>
+   ${L.length?`<div class="tr-l">${L.map((x,i)=>{const d=Math.max(1,30-Math.floor((Date.now()-x.at)/864e5));return `<div class="tr-r"><span class="tr-i">${x.k==='goal'?'🎯':'✅'}</span><span class="tr-t"><b class="notranslate" data-raw dir="auto">${esc(x.o.title||'')}</b><small>${d} ${tl('days left')}</small></span><button type="button" class="btn-calm" data-tr="${i}">${tl('Restore')}</button></div>`}).join('')}</div>
+   <button type="button" class="tr-all" id="trAll">${tl('Delete all now')}</button>`:`<p class="muted" style="text-align:center;padding:20px 0">${tl('Nothing here.')}</p>`}</div>`);
+  $('scrollBody').querySelectorAll('[data-tr]').forEach(b=>b.onclick=()=>{const x=(S.trash||[])[+b.dataset.tr];trRestore(x);undoBar(tl('Restored')+' ✓');trOpen()});
+  const a=$('trAll');if(a){let armed=false;a.onclick=()=>{if(!armed){armed=true;a.textContent=tl('Delete all now')+' ?';a.classList.add('arm');return}S.trash=[];TRS.mute=true;save();TRS.mute=false;trOpen()}}}
+GO.trash=GO.deleted=GO.recentlydeleted=()=>trOpen();
+{const _amT=apMenu;apMenu=function(){const r=_amT.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="pv"]');if(s&&!m.querySelector('[data-am="trash"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='trash';b.textContent='🗑️ '+tl('Recently deleted');b.onclick=()=>{m.hidden=true;trOpen()};s.before(b)}}catch(e){}return r}}
+SRCH_PG.push(['🗑️','Recently deleted','trash']);
+
+/* quick add: plain words become date, time, range and repeat */
+const QA_DAYS={en:['sunday','monday','tuesday','wednesday','thursday','friday','saturday'],en3:['sun','mon','tue','wed','thu','fri','sat'],ar:['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],so:['axad','isniin','talaado','arbaco','khamiis','jimco','sabti'],om:['dilbata','wiixata','kibxata','roobii','kamiisa','jimaata','sanbata']};
+const QA_MON=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];
+function qaParse(raw){let s=' '+raw+' ',due=null,time='',end='',rep=null;const today=new Date();today.setHours(0,0,0,0);const add=n=>{const d=new Date(today);d.setDate(d.getDate()+n);return d};
+  const cut=re=>{const m=s.match(re);if(m){s=s.replace(m[0],' ');return m}return null};
+  const dayIdx=w=>{w=w.toLowerCase();for(const k in QA_DAYS){const i=QA_DAYS[k].indexOf(w);if(i>=0)return i}return -1};
+  const dayRe='(sunday|monday|tuesday|wednesday|thursday|friday|saturday|sun|mon|tue|tues|wed|thu|thur|thurs|fri|sat|axad|isniin|talaado|arbaco|khamiis|jimco|sabti|dilbata|wiixata|kibxata|roobii|kamiisa|jimaata|sanbata|الأحد|الاثنين|الثلاثاء|الأربعاء|الخميس|الجمعة|السبت)';
+  const norm=w=>({tues:'tue',thur:'thu',thurs:'thu'}[w.toLowerCase()]||w);
+  let m;
+  if(m=cut(/\s(every\s?day|daily|kull?\s?yawm|يوميا|يوميًا|maalin\s?kasta|guyyaa\s?guyyaan)\s/i))rep={k:'daily'};
+  else if(m=cut(/\s(every\s?weekday|weekdays)\s/i))rep={k:'weekdays'};
+  else if(m=cut(new RegExp('\\s(?:every|each|كل)\\s'+dayRe+'(?:\\s?(?:and|,|&|و)\\s?'+dayRe+')?\\s','i'))){const d=[dayIdx(norm(m[1]))];if(m[2])d.push(dayIdx(norm(m[2])));rep={k:'days',d:d.filter(x=>x>=0).sort()};const n=new Date(today);while(!rep.d.includes(n.getDay()))n.setDate(n.getDate()+1);due=n}
+  else if(m=cut(/\s(every\s?week|weekly|أسبوعيا|أسبوعيًا)\s/i))rep={k:'weekly'};
+  else if(m=cut(/\s(every\s?month|monthly|شهريا|شهريًا)\s/i))rep={k:'monthly'};
+  if(!due){if(cut(/\s(today|tonight|اليوم|الليلة|maanta|har'?a)\s/i))due=add(0);
+   else if(cut(/\s(tomorrow|tmrw|tmr|غدا|غدًا|بكرة|بكره|berri|boru)\s/i))due=add(1);
+   else if(m=cut(/\sin\s(\d{1,2})\s(days?)\s/i))due=add(+m[1]);
+   else if(m=cut(/\sin\s(?:a|1)\sweek\s/i))due=add(7);
+   else if(m=cut(new RegExp('\\s(?:on\\s|next\\s|this\\s|يوم\\s)?'+dayRe+'\\s','i'))){const i=dayIdx(norm(m[1]));if(i>=0){const n=new Date(today);n.setDate(n.getDate()+1);while(n.getDay()!==i)n.setDate(n.getDate()+1);due=n}}
+   else if(m=cut(new RegExp('\\s(?:on\\s)?(?:('+QA_MON.join('|')+')[a-z]*\\.?\\s(\\d{1,2})(?:st|nd|rd|th)?|(\\d{1,2})(?:st|nd|rd|th)?\\s(?:of\\s)?('+QA_MON.join('|')+')[a-z]*)\\s','i'))){const mo=QA_MON.indexOf((m[1]||m[4]).toLowerCase().slice(0,3)),dd=+(m[2]||m[3]);const n=new Date(today.getFullYear(),mo,dd);if(n<today)n.setFullYear(n.getFullYear()+1);due=n}}
+  const hm=(h,mi,ap)=>{h=+h;mi=+(mi||0);ap=(ap||'').toLowerCase();if(ap.startsWith('p')&&h<12)h+=12;if(ap.startsWith('a')&&h===12)h=0;if(h>23||mi>59)return '';return String(h).padStart(2,'0')+':'+String(mi).padStart(2,'0')};
+  if(m=cut(/\s(?:at\s|from\s)?(\d{1,2})(?::(\d{2}))?\s?(am|pm|a\.m\.|p\.m\.)?\s?(?:-|–|to|until|till)\s?(\d{1,2})(?::(\d{2}))?\s?(am|pm|a\.m\.|p\.m\.)\s/i)){const ap2=m[6];time=hm(m[1],m[2],m[3]||ap2);end=hm(m[4],m[5],ap2);if(time&&end&&end<time&&!m[3])time=hm(m[1],m[2],'am')}
+  else if(m=cut(/\s(?:at\s|@)?(\d{1,2})(?::(\d{2}))?\s?(am|pm|a\.m\.|p\.m\.)\s/i))time=hm(m[1],m[2],m[3]);
+  else if(m=cut(/\s(?:at\s|@)(\d{1,2})(?::(\d{2}))?\s/i)){let h=+m[1];if(h>=1&&h<=6&&!/fajr|morning|subax|ganama|فجر|صباح|wake/i.test(raw))h+=12;time=hm(h,m[2],'')}
+  else if(m=cut(/\s(\d{1,2}):(\d{2})\s/))time=hm(m[1],m[2],'');
+  if(!due&&(time||rep))due=add(0);
+  if(due&&!rep&&time){const now=new Date();if(dkey(due)===dkey(now)&&time<String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')&&!/today|اليوم|maanta|har/i.test(raw)){/* keep today; user can see it */}}
+  const title=s.replace(/\s(at|on|by|from|في|على)\s*$/i,' ').replace(/\s+/g,' ').trim();
+  if(!due&&!time&&!rep)return null;return {title:title||raw,due:due?dkey(due):'',time,end,rep}}
+{const _svQ=save;save=function(){try{if(TRS.snap&&!TRS.mute){(S.tasks||[]).forEach(t=>{if(TRS.snap.has(t.id)||t.qa||t.due||t.time||t.src)return;t.qa=1;const p=qaParse(t.title);if(!p||!p.title)return;t.title=p.title;if(p.due)t.due=p.due;if(p.time)t.time=p.time;if(p.end)t.end=p.end;if(p.rep)t.rep=p.rep;
+   setTimeout(()=>{try{const d=new Date(t.due+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'});undoBar('📅 '+tl('Added for')+' '+d+(t.time?' · '+t12(t.time)+(t.end?'–'+t12(t.end):''):'')+(t.rep?' '+tkRepLbl(t):''))}catch(e){}},400)})}}catch(e){}return _svQ.apply(this,arguments)}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
