@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>Fastaqim</title>
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-180.png"><link rel="icon" href="icon-192.png"><meta name="theme-color" content="#0f766e"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Fastaqim"><meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -2043,6 +2043,8 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .fq-dic b{font-size:.58em!important;font-weight:700!important;color:#1b2430!important;margin-top:.08em!important}
 .cal-week .hjd{font-size:.68rem;white-space:nowrap;line-height:1.25;display:block}
 .cal-week .its.emp{min-height:0}
+/* iPhone zooms the whole page when a box with small text is tapped, then fixed bars drift. 16px stops that. */
+@supports (-webkit-touch-callout:none){input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:max(16px,1em)!important}}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7684,7 +7686,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v132',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v133',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8382,7 +8384,7 @@ GO.recap=GO.week=()=>wkOpen();GO.level=GO.history=()=>stAll();
 const WN_V=125,WN=[['🔍','Search everything from the top bar'],['🌙','Before sleep: wins, tomorrow, sleep dua'],['🧩','Chunks: one chunk of your day at a time'],['📅','Calendar on Home: add and edit right there'],['🔁','Repeat to-dos, from–until times, Help me with this'],['🗑️','Undo and Recently deleted'],['✍️','Type "Dentist tomorrow 3pm" and it\'s scheduled'],['🧭','Qibla, Verse of the day, Report a problem'],['📊','Levels and a weekly recap']];
 function wnOpen(){S.wnSeen=WN_V;save();modalCard(`<div class="wn"><p class="label">✨ ${tl("What's new")}</p>${WN.map(([i,t])=>`<div class="wn-r"><span>${i}</span><b>${tl(t)}</b></div>`).join('')}</div>`)}
 {const _hsW=hmTrk;hmTrk=function(){let h=_hsW.apply(this,arguments);try{
-  if((S.wnSeen||0)<131&&S.name)h=`<div class="hm-wn"><button type="button" class="hm-wnb" data-hm="wn"><span class="i">✨</span><span class="m"><b>${esc(tl("What's new"))}</b><small>✅ 🔴 🔍 🌙 🗂️ 📅 ›</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-hm="wnx" aria-label="✕">✕</button></div>`+h;
+  if((S.wnSeen||0)<131&&S.name)h=`<div class="hm-wn"><button type="button" class="hm-wnb" data-hm="wn"><span class="i">✨</span><span class="m"><b>${esc(tl("What's new"))}</b><small>✅ ${esc(tl('Done today list'))} · 🔴 ${esc(tl('Priority + size'))}</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-hm="wnx" aria-label="✕">✕</button></div>`+h;
   const dw=new Date().getDay(),[st]=wkRange(0),wk=dkey(st);if((dw===0||dw===1||dw===5)&&S.wkSeen!==wk){const M=dayStats();let s=0,t=0;const [ps]=wkRange(dw===5?0:1);for(let i=0;i<7;i++){const d=new Date(ps);d.setDate(ps.getDate()+i);const m=M[dkey(d)]||{};s+=m.s||0;t+=m.t||0}
    if(s||t)h+=`<div class="hm-wn"><button type="button" class="hm-wnb wk2" data-hm="wk"><span class="i">📊</span><span class="m"><b>${esc(tl('Your week'))}</b><small>⭐ ${s} · ✅ ${t}</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-hm="wkx" aria-label="✕">✕</button></div>`}
  }catch(e){}return h}}
@@ -8514,9 +8516,9 @@ function fqVV(){try{const sa=fqStandalone(),de=document.documentElement,vv=windo
   FQV.kb=fqEd(document.activeElement)&&!!vv&&vv.height<innerHeight*0.85||fqEd(document.activeElement)&&sa&&(screen.height-(vv?vv.height:innerHeight))>150;
   de.classList.toggle('fq-kb',sa&&FQV.kb);
   let H=vv?vv.height:innerHeight;
-  let stale=false;if(sa&&!FQV.kb){const por=matchMedia('(orientation: portrait)').matches,sh=por?Math.max(screen.height,screen.width):Math.min(screen.height,screen.width);if(sh-innerHeight>60&&sh-innerHeight<500){H=sh;stale=true}}
+  const stale=false;if(vv&&vv.scale>1.02&&!FQV.kb&&!fqEd(document.activeElement)){const m=document.querySelector('meta[name=viewport]');if(m){const c=m.content;m.content=c.replace(/,?\s*maximum-scale=[\d.]+/,'')+', maximum-scale=1';}}
   de.style.setProperty('--fqvh',H+'px');
-  if(bn){if(stale){const z=parseFloat(document.body.style.zoom)||1,h=bn.offsetHeight||64;bn.style.top=(H/z-h)+'px';bn.style.bottom='auto'}else{bn.style.top='';bn.style.bottom=''}}
+  if(bn){if(stale){const h=bn.offsetHeight||64;bn.style.top=(H-h)+'px';bn.style.bottom='auto'}else{bn.style.top='';bn.style.bottom=''}}
   de.classList.toggle('fq-sa',sa);de.classList.toggle('fq-scr',scrollY>6)}catch(e){}}
 ['resize','orientationchange','scroll','pageshow'].forEach(ev=>addEventListener(ev,()=>requestAnimationFrame(fqVV),{passive:true}));
 if(window.visualViewport){visualViewport.addEventListener('resize',()=>requestAnimationFrame(fqVV));visualViewport.addEventListener('scroll',()=>requestAnimationFrame(fqVV))}
@@ -8722,6 +8724,15 @@ function fqCalPolish(){try{const w=document.createTreeWalker(document.body,NodeF
 {const FQCP={t:0};new MutationObserver(()=>{clearTimeout(FQCP.t);FQCP.t=setTimeout(fqCalPolish,30)}).observe(document.body,{childList:true,subtree:true,characterData:false})}
 setTimeout(fqCalPolish,300);
 [["Tap","اضغط","Tuqi","Taabo"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v133: Text size no longer zooms <body>. On iPhone, zoom on body makes "fixed" things (tab bar, status strip) scroll with the page.
+   The zoom now goes on the page content only; the tab bar, menus and pop-ups stay fixed and normal size. */
+const FQZ={z:1,busy:false};
+function fqZoomKids(){if(FQZ.busy)return;FQZ.busy=true;try{const z=FQZ.z;[...document.body.children].forEach(c=>{if(/^(SCRIPT|STYLE|LINK|TEMPLATE)$/.test(c.tagName))return;const fx=getComputedStyle(c).position==='fixed';const want=(!fx&&z!==1)?String(z):'';if(c.style.zoom!==want)c.style.zoom=want})}catch(e){}FQZ.busy=false}
+function fqZoomTake(){const v=document.body.style.zoom;if(v){FQZ.z=parseFloat(v)||1;FQZ.busy=true;document.body.style.zoom='';FQZ.busy=false;fqZoomKids()}}
+new MutationObserver(()=>{if(FQZ.busy)return;fqZoomTake()}).observe(document.body,{attributes:true,attributeFilter:['style']});
+new MutationObserver(()=>{if(FQZ.busy||FQZ.z===1)return;clearTimeout(FQZ.t);FQZ.t=setTimeout(fqZoomKids,0)}).observe(document.body,{childList:true});
+try{const L=(S&&S.look)||{};if(L.zoom&&L.zoom!==1&&!document.body.style.zoom)FQZ.z=L.zoom}catch(e){}fqZoomTake();fqZoomKids();
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
