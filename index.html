@@ -1214,6 +1214,58 @@ button.sr-c{cursor:pointer}
 body.has-bnav header>.hud{flex:1 1 100%;width:100%;justify-content:flex-start}
 #dashCard .dz-chips{flex-wrap:wrap}
 #dashCard .dz-ch.en svg{width:22px;height:13px;vertical-align:-2px}
+/* v93: one ☰ (bottom bar), tighter header, salah strip on top, salah marks */
+body.has-bnav #apMb,#apBar.ap3 #apMb{display:none!important}
+body.has-bnav #avatarBtn{display:none!important}
+#apBar.ap3{gap:6px!important;padding:4px 0 0!important}
+#apBar.ap3 .ap-r{padding:2px!important}
+#apBar.ap3 .ap-r .pin-c,#apBar.ap3 .ap-r .ap-c{height:34px!important;min-height:34px!important}
+#apBar.ap3 .ap-bw{order:3!important;gap:0!important;margin:0!important}
+#apBar.ap3 .ap-brand{font-size:2rem!important;line-height:1.05!important}
+#apBar.ap3 .ap-nm{font-size:1.02rem!important;line-height:1.3!important}
+#apBar.ap3 .ap-nm.arq{font-size:1.7rem!important;line-height:1.3!important}
+body.has-saltop #pinSal{display:none!important}
+body.has-saltop #apBar.ap3 .ap-r :is(#pinZk)::before{display:none}
+.st-top{order:2;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:8px 6px 6px;box-shadow:0 4px 14px -10px rgba(15,23,42,.3)}
+.st-top .sr{margin:0!important}
+body.has-saltop #dashCard .dz-sal{display:none!important}
+body.has-bnav .wrap>header{margin-top:8px!important}
+body.has-bnav #hello{gap:2px!important}
+body.has-bnav #hello .hl1{font-size:1.32rem!important}
+#hello .hl2{font:800 1.02rem/1.35 var(--display)!important;background:linear-gradient(90deg,#D67433,#C9972A);-webkit-background-clip:text;background-clip:text;color:transparent!important;-webkit-text-fill-color:transparent;width:max-content;max-width:100%}
+body.has-bnav header .hud:has(#syncBadge[hidden]){display:none!important}
+body[data-tab=now] #progStrip,body[data-tab=now] header .level{display:none!important}
+body.has-bnav .wrap>nav{margin-top:10px!important;gap:8px!important}
+body.has-bnav .wrap>nav button{padding:6px 2px!important;min-height:0!important;gap:2px!important}
+body.has-bnav .wrap>nav button .ni{font-size:1.3rem!important;line-height:1.1!important}
+/* salah marks */
+[data-dz="sal"].sq-late{border-color:#D99A1E!important}
+[data-dz="sal"].sq-late .sr-ok,[data-dz="sal"].sq-late>i{background:#D99A1E!important;color:#fff!important;border-color:#D99A1E!important}
+[data-dz="sal"].sq-miss{border-color:#D9534F!important}
+[data-dz="sal"].sq-miss .sr-ok,[data-dz="sal"].sq-miss>i{background:#fff!important;color:#D9534F!important;border:2px solid #D9534F!important}
+.sq-g{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 6px}
+.sq-b{display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 4px;border-radius:14px;border:1.5px solid var(--line);background:var(--surface);font-weight:800;font-size:.9rem;color:var(--ink);min-height:84px;overflow-wrap:anywhere;text-align:center}
+.sq-b i{font-style:normal;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;font-size:1rem}
+.sq-b.on i{background:#0F9D6E;color:#fff}.sq-b.late i{background:#D99A1E;color:#fff}.sq-b.miss i{background:#fff;color:#D9534F;border:2px solid #D9534F}
+.sq-b.sel.on{border-color:#0F9D6E;background:color-mix(in srgb,#0F9D6E 10%,var(--surface))}.sq-b.sel.late{border-color:#D99A1E;background:color-mix(in srgb,#D99A1E 10%,var(--surface))}.sq-b.sel.miss{border-color:#D9534F;background:color-mix(in srgb,#D9534F 8%,var(--surface))}
+.sq-clr{display:block;margin:0 auto 4px}
+.sq-h{margin:12px 0 6px;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.sq-st{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.sq-st span{display:flex;flex-direction:column;align-items:center;padding:8px 4px;border-radius:12px;background:var(--bg);font-size:.78rem;font-weight:700;color:var(--muted);text-align:center}
+.sq-st b{font:800 1.3rem/1.2 var(--display);color:var(--ink)}
+.sq-st .on b{color:#0F9D6E}.sq-st .late b{color:#B7791F}.sq-st .miss b{color:#C9302C}
+/* chips: number + what it is */
+#dashCard .dz-ch{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;min-height:52px;white-space:normal;line-height:1.15;padding:4px 2px}
+#dashCard .dz-ch small{font-size:.66rem;font-weight:700;color:var(--muted);overflow-wrap:anywhere;text-align:center}
+body.has-bnav>.wrap{gap:14px!important;padding-top:8px!important}
+body.has-bnav>.wrap>header{margin-top:0!important}
+body.has-bnav .wrap>nav{margin-top:0!important;margin-bottom:0!important}
+body.has-bnav{padding-top:calc(4px + env(safe-area-inset-top,0px))!important;margin-top:0!important}
+body.has-bnav>.wrap{padding-top:4px!important}
+.sq-card .sq-pc{margin:2px 0 10px;font-weight:700;color:var(--muted)}.sq-card .sq-pc b{font:800 1.6rem/1 var(--display);color:#0F9D6E;margin-inline-end:4px}
+.st-top .sr-tk{font-variant-numeric:tabular-nums;font-style:normal;min-width:0;white-space:nowrap}
+.hs-n{display:flex;align-items:center;gap:10px;margin:8px 12px 0;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,#0F9D6E 10%,var(--surface));border:1px solid color-mix(in srgb,#0F9D6E 35%,var(--line));font-weight:700;font-size:.9rem;color:var(--ink)}
+.hs-n span{flex:1;min-width:0}.hs-n button{flex:none;min-height:38px;padding:0 14px;border-radius:99px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5709,7 +5761,7 @@ thmMini=function(k,a,b){const t=THK[k]||{},k1=t.k1||'#FF8A3D',k2=t.k2||'#22B39A'
 /* ---------- user page header: one tidy corner cluster (salah · dhikr · stars · language) + centered logo like the first page ---------- */
 function apTop3(){const b=$('apBar');if(!b)return;b.classList.add('ap3');const r=b.querySelector('.ap-r'),pb=$('pinBar');
  if(r&&pb&&pb.parentNode!==r)r.insertBefore(pb,r.firstChild);
- const lg=$('apLang'),mb=$('apMb');if(r&&lg&&lg.nextElementSibling!==mb)r.appendChild(lg);if(r&&mb&&r.lastElementChild!==mb)r.appendChild(mb);
+ const lg=$('apLang'),mb=$('apMb');if(r&&lg&&lg.nextElementSibling!==mb)r.appendChild(lg);
  document.querySelectorAll('#apBar .dec').forEach(d=>b.after(d))}
 {const _at=apTop;apTop=function(){const x=_at.apply(this,arguments);try{apTop3()}catch(e){}return x}}
 {const _pr3=pinRender;pinRender=function(){const x=_pr3.apply(this,arguments);try{apTop3()}catch(e){}return x}}
@@ -5726,6 +5778,90 @@ setTimeout(()=>{try{apTop3()}catch(e){}},400);
 setTimeout(()=>{try{const l=$('landing');if(l)new MutationObserver(()=>{try{bnav();apTop3()}catch(e){}}).observe(l,{attributes:true,attributeFilter:['hidden']});bnav();apTop3()}catch(e){}},200);
 /* account state loaded from the cloud can carry started:false, which hid the bottom bar and the name on iPhone: a signed-in account is always started */
 {const _ci=cloudInit;cloudInit=async function(){S.started=true;const r=await _ci.apply(this,arguments);try{if(!S.started){S.started=true;save()}render();bnav();apTop3()}catch(e){}return r}}
+
+/* ===================== v93 (17 Nov): professional signed-in page ===================== */
+[["Good afternoon","نهارك سعيد","Akkam ooltee","Galab wanaagsan"],["Small step? Still a win!","خطوة صغيرة؟ تظل إنجازًا!","Tarkaanfii xiqqaa? Ammallee milkaa'ina!","Tallaabo yar? Weli waa guul!"],
+ ["On time","في وقتها","Yeroo isaatti","Waqtigeeda"],["Late","متأخرة","Turtee","Daahday"],["Missed","فاتتني","Na darbe","Iga dhaaftay"],["Clear","مسح","Haqi","Tirtir"],
+ ["Not time yet","لم يحن وقتها بعد","Yeroon isaa hin geenye","Waqtigeedii weli ma iman"],["Last 7 days","آخر 7 أيام","Guyyoota 7 darban","7-dii maalmood ee u dambeeyay"],
+ ["Glasses of water","أكواب الماء","Kubbaayyaa bishaanii","Koobab biyo ah"],["Quran pages","صفحات القرآن","Fuula Qur'aanaa","Bogag Qur'aan"],["Account","الحساب","Herrega","Akoonka"],
+ ["Tap a prayer to mark it.","اضغط على الصلاة لتسجيلها.","Salaata galmeessuuf tuqi.","Taabo salaadda si aad u calaamadiso."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* 1) your real name in the greeting (account name, or the first word of the email), never a "T" circle or "Hi." */
+function acctFirstName(){try{const u=typeof AU!=='undefined'&&AU.user;if(!u||(typeof ACT!=='undefined'&&ACT.id))return '';const m=u.user_metadata||{};let n=String(m.given_name||m.full_name||m.name||'').trim().split(/\s+/)[0]||'';
+  if(!n){const e=(u.email||'').split('@')[0].match(/[A-Za-zÀ-ɏ]{2,}/);n=e?e[0]:''}return n?n.charAt(0).toUpperCase()+n.slice(1).toLowerCase():''}catch(e){return ''}}
+function nameFill(){if(!S.name){const n=acctFirstName();if(n){S.name=n;try{save()}catch(e){}}}}
+{const _rh3=renderHeader;renderHeader=function(){try{nameFill()}catch(e){}const r=_rh3.apply(this,arguments);try{const h=$('hello');if(h){const a=h.querySelector('.hl1'),b=h.querySelector('.hl2'),hr=new Date().getHours();
+  if(a&&!strict()){const g=hr<12?'Good morning':hr<17?'Good afternoon':'Good evening',nm=S.name?(LANG==='ar'?'، ':', ')+S.name:'';a.textContent=tl(g)+nm+(LANG==='ar'?'':'.')}
+  if(b)b.textContent=tl('Small step? Still a win!')}}catch(e){}return r}}
+{const _ci2=cloudInit;cloudInit=async function(){const r=await _ci2.apply(this,arguments);try{nameFill();renderHeader()}catch(e){}return r}}
+/* account lives in ☰ now (the "T" circle is gone from the page) */
+{const _am2=apMenu;apMenu=function(){const r=_am2.apply(this,arguments);try{const m=$('apMenu'),o=m&&m.querySelector('[data-am="out"]');if(o&&typeof AU!=='undefined'&&AU.user&&!m.querySelector('[data-am="acct"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='acct';b.textContent='👤 '+tl('Account');b.onclick=()=>{m.hidden=true;try{accMenu()}catch(e){}};o.before(b)}}catch(e){}return r}}
+/* sync line only when something needs attention (saved-to-account is the normal state) */
+{const _sb=syncBadge;syncBadge=function(){const r=_sb.apply(this,arguments);try{const b=$('syncBadge');if(b)b.hidden=SYNC.state==='on'}catch(e){}return r}}
+
+/* 2) salah: tap a prayer → On time / Late / Missed; stored per day in S.salQ, and counted in Me */
+const SQ5=['Fajr','Dhuhr','Asr','Maghrib','Isha'],SQK=['fajr','dhuhr','asr','maghrib','isha'];
+function salQ(d){S.salQ=S.salQ||{};return S.salQ[dkey(d)]||{}}
+function salQStats(days){let on=0,late=0,miss=0;for(let i=0;i<days;i++){const d=new Date();d.setDate(d.getDate()-i);const q=salQ(d);Object.values(q).forEach(v=>{if(v==='on')on++;else if(v==='late')late++;else if(v==='miss')miss++})}return {on,late,miss}}
+function salQLine(){const s=salQStats(7);return `<div class="sq-st"><span class="on"><b>${s.on}</b>${esc(tl('On time'))}</span><span class="late"><b>${s.late}</b>${esc(tl('Late'))}</span><span class="miss"><b>${s.miss}</b>${esc(tl('Missed'))}</span></div>`}
+function salMark(i){let P=null;try{P=salahFor(new Date())}catch(e){}
+  if(P&&P[SQK[i]]&&P[SQK[i]]>new Date()){toast('🕌 '+tl(SQ5[i])+' · '+tl('Not time yet'));return}
+  const cur=salQ()[i];
+  modalCard(`<div class="sq"><p class="label">🕌 ${esc(tl(SQ5[i]))}${P&&P[SQK[i]]?` · <span dir="ltr">${hmShort(P[SQK[i]])}</span>`:''}</p>
+   <div class="sq-g"><button type="button" class="sq-b on${cur==='on'?' sel':''}" data-sq="on"><i>✓</i>${esc(tl('On time'))}</button><button type="button" class="sq-b late${cur==='late'?' sel':''}" data-sq="late"><i>⏰</i>${esc(tl('Late'))}</button><button type="button" class="sq-b miss${cur==='miss'?' sel':''}" data-sq="miss"><i>✕</i>${esc(tl('Missed'))}</button></div>
+   ${cur?`<button type="button" class="btn-ghost small sq-clr" data-sq="clr">${esc(tl('Clear'))}</button>`:''}
+   <p class="sq-h">${esc(tl('Last 7 days'))}</p>${salQLine()}</div>`);
+  $('scrollBody').querySelectorAll('[data-sq]').forEach(b=>b.onclick=()=>{const v=b.dataset.sq;S.salQ=S.salQ||{};const k=dkey(),q=Object.assign({},S.salQ[k]||{});if(v==='clr')delete q[i];else q[i]=v;S.salQ[k]=q;
+    const T=dzTrkMake('salah'),a=(Array.isArray(trkDay()[T.id])?trkDay()[T.id]:[0,0,0,0,0]).slice();a[i]=(v==='on'||v==='late')?1:0;
+    if(v==='on'||v==='late'){try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}}trkSet(T,a);save();modalClose();try{dashRender()}catch(e){}try{salTop()}catch(e){}
+    if(v==='on')toast('🕌 '+tl(SQ5[i])+' · '+tl('On time')+' ✓')})}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-dz="sal"]');if(!b||!inApp())return;e.preventDefault();e.stopImmediatePropagation();salMark(+b.dataset.i)},true);
+function salDecorate(root){if(!root)return;const q=salQ();root.querySelectorAll('[data-dz="sal"]').forEach(b=>{const v=q[+b.dataset.i];b.classList.remove('sq-on','sq-late','sq-miss');if(v)b.classList.add('sq-'+v);
+  const ok=b.querySelector('.sr-ok');if(v==='miss'){if(ok)ok.textContent='✕';else if(b.querySelector('.sr-c,svg')){const x=document.createElement('i');x.className='sr-ok';x.textContent='✕';b.querySelector('b')?.after(x)}const ii=b.querySelector(':scope>i');if(ii&&!b.classList.contains('sr-c'))ii.textContent='✕'}
+  else if(v==='late'&&ok)ok.textContent='✓'});root.querySelectorAll('.sr-since').forEach(x=>x.remove())}
+
+/* 3) salah times strip pinned at the very top once times are set (countdown to the next prayer only) */
+function salTop(){const bar=$('apBar');let el=$('salTop');let P=null;try{P=inApp()?salahFor(new Date()):null}catch(e){}
+  if(!bar||!P){if(el)el.remove();document.body.classList.remove('has-saltop');return}
+  if(!el){el=document.createElement('div');el.id='salTop';el.className='st-top dz-sal2'}
+  if(el.parentNode!==bar)bar.appendChild(el);
+  const sT=dzTrk('salah'),day=trkDay(),sv=sT&&Array.isArray(day[sT.id])?day[sT.id]:[0,0,0,0,0];
+  el.innerHTML=salRowHTML(P,new Date(),{check:true,sv});salDecorate(el);document.body.classList.add('has-saltop')}
+{const _rh4=renderHeader;renderHeader=function(){const r=_rh4.apply(this,arguments);try{salTop()}catch(e){}return r}}
+{const _dr2=dashRender;dashRender=function(){const r=_dr2.apply(this,arguments);try{const c=$('dashCard');salDecorate(c);dzChipLabels(c)}catch(e){}return r}}
+setInterval(()=>{try{if(!document.hidden)salTop()}catch(e){}},30000);
+{const _sp2=salPop;salPop=function(){const r=_sp2.apply(this,arguments);try{salDecorate($('scrollBody'))}catch(e){}return r}}
+
+/* 4) chips say what they are: 💧 0/8 + "Glasses of water" (tap adds one) */
+function dzChipLabels(c){if(!c)return;[['w','Glasses of water'],['q','Quran pages'],['m','Spent today'],['en','Energy']].forEach(([k,l])=>{const b=c.querySelector('.dz-ch.'+k);if(b&&!b.querySelector('small')){const s=document.createElement('small');s.textContent=tl(l);b.appendChild(s);b.setAttribute('aria-label',tl(l))}})}
+/* salah consistency in Me: last 7 days, on time / late / missed */
+{const _rw=renderWins;renderWins=function(){const r=_rw.apply(this,arguments);try{const t=$('tab-wins');if(!t)return r;let c=$('sqCard');if(!c){c=document.createElement('div');c.id='sqCard';c.className='card sq-card';t.insertBefore(c,t.firstChild)}
+  const s=salQStats(7),n=s.on+s.late+s.miss,pc=n?Math.round(s.on/n*100):0;
+  c.innerHTML=`<p class="label">🕌 ${esc(tl('Salah'))} · ${esc(tl('Last 7 days'))}</p>${n?`<p class="sq-pc"><b>${pc}%</b> ${esc(tl('On time'))}</p>`:`<p class="small muted">${esc(tl('Tap a prayer to mark it.'))}</p>`}${salQLine()}`}catch(e){}return r}}
+/* live clocks on the top strip: time since the current prayer + countdown to the next, with seconds */
+function hms(ms){const t=Math.max(0,Math.floor(ms/1000)),h=Math.floor(t/3600),m=Math.floor(t%3600/60),s=t%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(s).padStart(2,'0')}
+function salTick(){const el=$('salTop');if(!el)return;const now=new Date();let P=null;try{P=salahFor(now)}catch(e){}if(!P)return;
+  const five=['fajr','dhuhr','asr','maghrib','isha'];let cur=null;five.forEach(k=>{if(P[k]<=now)cur=k});
+  let nx=five.find(k=>P[k]>now),nt=nx?P[nx]:null;if(!nx){nx='fajr';try{const d=new Date(now);d.setDate(d.getDate()+1);nt=salahFor(d).fajr}catch(e){}}
+  if(!cur){try{const d=new Date(now);d.setDate(d.getDate()-1);const Y=salahFor(d);if(Y&&Y.isha<=now){cur='isha'}}catch(e){}}
+  const curT=cur?(P[cur]<=now?P[cur]:(()=>{const d=new Date(now);d.setDate(d.getDate()-1);return salahFor(d)[cur]})()):null;
+  el.querySelectorAll('.sr-c').forEach(c=>{c.classList.remove('cur','nx');c.querySelectorAll('.sr-in,.sr-since,.sr-tk').forEach(x=>x.remove())});
+  const cells=[...el.querySelectorAll('.sr-c')],ks=['fajr','sunrise','dhuhr','asr','maghrib','isha'],cellOf=k=>cells[ks.indexOf(k)];
+  if(cur&&curT&&cellOf(cur)){const c=cellOf(cur);c.classList.add('cur');const e=document.createElement('em');e.className='sr-tk sr-since';e.dir='ltr';e.textContent=hms(now-curT);c.appendChild(e)}
+  if(nt&&cellOf(nx)){const c=cellOf(nx);c.classList.add('nx');const e=document.createElement('em');e.className='sr-tk sr-in';e.dir='ltr';e.textContent=hms(nt-now);c.appendChild(e)}}
+{const _st=salTop;salTop=function(){const r=_st.apply(this,arguments);try{salTick()}catch(e){}return r}}
+setInterval(()=>{try{if(!document.hidden&&$('salTop'))salTick()}catch(e){}},1000);
+/* Home Screen icon keeps its own sign-in on iPhone: say so, one tap to sign in */
+[["Sign in once here to see your plan.","سجّل الدخول مرة واحدة هنا لترى خطتك.","Karoora kee arguuf asitti al tokko seeni.","Hal mar halkan ka gal si aad u aragto qorshahaaga."],["Sign in","تسجيل الدخول","Seeni","Gal"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function hsNudge(){try{const sa=navigator.standalone||matchMedia('(display-mode: standalone)').matches,l=$('landing');let n=$('hsNudge');
+  const show=sa&&l&&!l.hidden&&!(typeof AU!=='undefined'&&AU.user)&&!window.GUEST;
+  if(!show){if(n)n.remove();return}
+  if(!n){n=document.createElement('div');n.id='hsNudge';n.className='hs-n';l.insertBefore(n,l.firstChild)}
+  n.innerHTML=`<span>📲 ${esc(tl('Sign in once here to see your plan.'))}</span><button type="button" class="btn-main small">${esc(tl('Sign in'))}</button>`;n.querySelector('button').onclick=()=>{try{ldAuthOpen('in')}catch(e){}}}catch(e){}}
+{const _ls2=landingShow;landingShow=function(){const r=_ls2.apply(this,arguments);setTimeout(hsNudge,50);return r}}
+{const _lr2=langRelabel;langRelabel=function(){const r=_lr2.apply(this,arguments);try{hsNudge()}catch(e){}return r}}
+setTimeout(hsNudge,1500);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
