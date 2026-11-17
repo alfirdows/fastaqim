@@ -1297,6 +1297,14 @@ body.has-bnav #apBar.ap3{padding-top:6px!important}
 #hello .hl2{background:none!important;-webkit-text-fill-color:currentColor!important;color:#C8601A!important;font-weight:800!important}
 #dateLabel span:first-child{color:#475569!important}
 #dateLabel{margin-bottom:2px!important}
+.sk{display:flex;flex-direction:column;gap:8px;text-align:center;padding:4px 2px}
+.sk-ar{font-family:"Fastaqim Quran","IBM Plex Sans Arabic",serif;font-size:1.55rem;line-height:1.7;color:#0f5e48;margin:0}
+.sk-tr{margin:0;font-weight:700;font-size:1rem;color:var(--ink)}
+.sk-ref{font-size:.78rem;font-weight:700;color:var(--muted);text-decoration:none;align-self:center}
+.sk-l{margin:6px 0 2px;font-size:.92rem;color:#7a4b00;background:#FFF5E6;border-radius:12px;padding:10px 12px}
+.sk-b{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.sk-nn{display:block;margin:8px auto 0;background:none;border:0;min-height:36px;color:var(--muted);font-weight:700;font-size:.88rem;text-decoration:underline;text-underline-offset:3px}
+.hype p{font-weight:800!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5989,6 +5997,35 @@ function hmStr(t){const d=new Date();d.setHours(Math.floor(t/60),t%60,0,0);try{r
 document.addEventListener('click',e=>{try{const t=e.target;if(!t||!t.closest)return;if(t.closest('label[aria-hidden="true"]'))return;
   if(t.closest('.bnav button,.wrap>nav button,#dashCard button,.sr-c,.sq-b,.mr-d button,.apm-i,.apm-g button,.tm-c,.dz-ch'))navigator.vibrate&&navigator.vibrate(8)}catch(_){}},true);
 document.addEventListener('change',e=>{try{const t=e.target;if(t&&t.type==='checkbox'&&!t.hasAttribute('switch'))navigator.vibrate&&navigator.vibrate(t.checked?[14]:[6])}catch(_){}},true);
+
+/* v96: gentle card when skipping a religious step (no guilt): أحب الأعمال إلى الله أدومها وإن قل + one tiny option */
+[["Not now","ليس الآن","Amma miti","Hadda maya"],["Just 1 dhikr","ذكر واحد فقط","Zikrii tokko qofa","Hal dhikri oo keliya"],["Just 2 minutes","دقيقتان فقط","Daqiiqaa 2 qofa","2 daqiiqo oo keliya"],["Later","لاحقًا","Booda","Mar dambe"],
+ ["A small step can be great with Allah. He sees your effort and knows your situation.","خطوتك الصغيرة قد تكون عظيمة عند الله. هو يرى جهدك ويعلم حالك.","Tarkaanfiin kee xiqqaan Rabbi biratti guddaa ta'uu danda'a. Inni carraaqqii kee ni arga, haala kees ni beeka.","Tallaabadaada yar waxay Alle agtiisa ku noqon kartaa mid weyn. Wuu arkaa dadaalkaaga, xaaladdaadana wuu og yahay."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const RELRX2=/qur'?a+n|quran|dhikr|zikr|thikr|adhkar|azkar|athkar|salah|salat|sunnah|du'?a\b|dua\b|tasbih|tahajjud|witr|qiyam|fajr|dhuhr|asr|maghrib|isha|قرآن|القرآن|ذكر|أذكار|اذكار|صلاة|الصلاة|سنة|دعاء|تسبيح|قيام|وتر|zikrii|salaat|quraan|dhikri|salaad|duco/i;
+const SKIPQ=[
+ {ref:'Bukhari 6464 · Muslim 783',u:'https://sunnah.com/bukhari:6464',ar:'أحبُّ الأعمالِ إلى اللهِ أدومُها وإن قلَّ',en:'The most beloved deeds to Allah are the most consistent, even if small.',om:'Hojiiwwan Rabbiitti jaallatamoo ta\'an kanneen itti fufiinsaan hojjetamanidha, yoo xixiqqaatanillee.',so:'Camalada Alle u jecel yihiin waa kuwa joogtada ah, xitaa haddii ay yar yihiin.'},
+ {ref:'Muslim 2626',u:'https://sunnah.com/muslim:2626',ar:'لا تحقرنَّ من المعروفِ شيئًا',en:'Do not belittle any good deed.',om:'Waan gaarii tokkollee hin tuffatin.',so:'Ha yasyeelin wax wanaag ah.'},
+ {ref:'Bukhari 1 · Muslim 1907',u:'https://sunnah.com/bukhari:1',ar:'إنما الأعمالُ بالنياتِ',en:'Actions are only by intentions.',om:'Hojiiwwan niyyaadhaan qofa.',so:'Camalladu waxay ku xiran yihiin niyadda oo keliya.'},
+ {ref:'Muslim 2664',u:'https://sunnah.com/muslim:2664',ar:'احرصْ على ما ينفعُك، واستعنْ باللهِ ولا تعجزْ',en:'Strive for what benefits you, seek Allah\'s help, and do not give up.',om:'Waan si fayyadu irratti cimi, Rabbiin gargaarsa gaafadhu, hin dadhabin.',so:'Ku dadaal waxa ku anfacaya, Alle kaalmo weydiiso, hana is dhiibin.'}];
+function isRel(t){return RELRX2.test(String(t||''))}
+function skipCard(kind){S.skipI=(S.skipI||0)+1;const q=SKIPQ[(S.skipI-1)%SKIPQ.length],tr=LANG==='ar'?'':(q[LANG]||q.en);
+  modalCard(`<div class="sk"><p class="sk-ar notranslate" dir="rtl">«${esc(q.ar)}»</p>${tr?`<p class="sk-tr" dir="auto">${esc(tr)}</p>`:''}
+   <a class="sk-ref" href="${q.u}" target="_blank" rel="noopener">${esc(q.ref)} ↗</a>
+   <p class="sk-l" dir="auto">${esc(tl('A small step can be great with Allah. He sees your effort and knows your situation.'))}</p>
+   <div class="sk-b"><button type="button" class="btn-main" id="skA">${kind==='zk'?'📿 '+esc(tl('Just 1 dhikr')):'⏱ '+esc(tl('Just 2 minutes'))}</button><button type="button" class="btn-ghost" id="skL">${esc(tl('Later'))}</button></div></div>`);
+  $('skA').onclick=()=>{modalClose();try{if(kind==='zk')zkOpen();else kickCurrent(2)}catch(e){}};$('skL').onclick=()=>modalClose()}
+/* "Not now" under a religious next step */
+{const _dr3=dashRender;dashRender=function(){const r=_dr3.apply(this,arguments);try{const c=$('dashCard'),nx=c&&c.querySelector('.dz-next'),tx=nx&&nx.querySelector('.dz-ck span');if(nx&&tx&&isRel(tx.textContent)&&!nx.querySelector('.sk-nn')){
+  const b=document.createElement('button');b.type='button';b.className='sk-nn';b.textContent=tl('Not now');b.onclick=()=>skipCard(/dhikr|zikr|thikr|adhkar|azkar|ذكر|أذكار|zikrii|dhikri/i.test(tx.textContent)?'zk':'go');nx.appendChild(b)}}catch(e){}return r}}
+/* a missed salah gets the same kind word, never guilt */
+{const _sm2=salMark;salMark=function(i){const r=_sm2.apply(this,arguments);try{const b=$('scrollBody').querySelector('[data-sq="miss"]');if(b){const f=b.onclick;b.onclick=()=>{f&&f();setTimeout(()=>skipCard('zk'),350)}}}catch(e){}return r}}
+
+/* v96: pop-ups are short cheers (2.5 s); long hadith lines live in calm places, not toasts */
+const CHEER=[["Look how far you've come! 👏🎉","انظر كم تقدّمت! 👏🎉","Hagam akka deemte ilaali! 👏🎉","Eeg inta aad gaartay! 👏🎉"],["You showed up! 🌟","حضرت! 🌟","Dhufteetta! 🌟","Waad timid! 🌟"],
+ ["Small steps add up! 💪","الخطوات الصغيرة تتراكم! 💪","Tarkaanfiin xixiqqaan ni walitti dabalamu! 💪","Tallaabooyinka yaryar way isku darsamaan! 💪"],["Keep going! 🚀","استمر! 🚀","Itti fufi! 🚀","Sii wad! 🚀"],["Proud of you! 🎉","فخورون بك! 🎉","Sitti boonna! 🎉","Waan kugu faanaynaa! 🎉"]];
+{const _hy=hype;hype=function(){const was=HY.last,r=_hy.apply(this,arguments);try{const h=$("hypeBox");if(h&&HY.last!==was&&h.classList.contains("show")){S.cheerI=((S.cheerI??-1)+1)%CHEER.length;const row=CHEER[S.cheerI],li={en:0,ar:1,om:2,so:3}[LANG];
+  h.querySelector('p').textContent=row[li==null?0:li];if(li==null)h.classList.remove('notranslate');clearTimeout(HY.t);HY.t=setTimeout(()=>h.classList.remove('show'),2500)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
