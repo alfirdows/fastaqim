@@ -1608,6 +1608,28 @@ html,body{overflow-x:clip}
 .qt-bar{max-width:calc(100vw - 24px)!important;border-radius:16px!important;text-align:center}
 .toast{white-space:pre-line}
 .hub-n{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;overflow-wrap:break-word!important;font-size:11.5px!important;letter-spacing:-.01em}
+.cn{display:flex;flex-direction:column;gap:10px;text-align:center}.cn .label{margin:0}
+.cn-big{margin:0;font:800 44px/1 Inter,system-ui}.cn-big span{font-size:20px;color:var(--muted);margin-inline-start:6px}
+.cn-tr{height:10px;border-radius:6px;background:color-mix(in srgb,var(--ink) 8%,transparent);overflow:hidden}.cn-tr i{display:block;height:100%;width:0;background:#0EA5E9;border-radius:6px;transition:width .25s}
+.cn-d{margin:0;font-size:.9rem;color:var(--muted)}.cn-ok{margin:0;font-weight:800;color:#0F9D6E}
+.cn-b{display:flex;justify-content:center;gap:18px}.cn-x{width:64px;height:64px;border-radius:50%;border:2px solid var(--line);background:var(--surface);color:var(--ink);font:800 30px/1 Inter,system-ui}.cn-p{background:#0EA5E9;border-color:#0EA5E9;color:#fff}.cn-x:disabled{opacity:.35}
+.mr-ed{cursor:pointer}.mr-ed.on{outline:2px solid #F0A030;outline-offset:2px;border-radius:12px}
+.mr-cn{width:100%;margin-top:6px}.mr-hist{margin-top:10px}.mr-hist summary{font-weight:700;font-size:.9rem;cursor:pointer;color:var(--muted)}.mr-hist summary b{margin-inline-start:4px}
+.mr-old{opacity:.75}.mr-rs{min-height:34px;padding:0 10px;font-size:.82rem}
+.mr-sf{background:color-mix(in srgb,#0EA5E9 10%,var(--surface));border-radius:14px;padding:10px 12px;font-size:.9rem}.mr-sf p{margin:0 0 6px}
+.mr-how{background:none;border:0;padding:0;min-height:0;color:#0B7FB0;font-weight:700;text-decoration:underline;font-size:.88rem}.mr-al{margin:6px 0 0;text-align:center}
+.hm-go[data-hm="go"],.dz-go{display:none!important}
+#landing .ld-scr.ld-scr2{padding:0;height:430px;overflow:hidden;display:block;background:var(--bg,#F3F6F5);border-radius:26px;position:relative}
+.ld-live{width:375px!important;min-width:375px!important;max-width:none!important;transform:scale(.533);transform-origin:top left;pointer-events:none;background:var(--bg,#F3F6F5);text-align:start}
+html[dir=rtl] .ld-live{transform-origin:top right}
+#landing .ld-phone{width:220px}
+#landing .ld-phone:has(.ld-scr2) .ld-pop{display:none}
+/* v110: the bottom tabs stay on screen on every page, also over pop-ups and the menu */
+body.has-bnav .bnav{z-index:97!important;transform:translateZ(0)}
+body.has-bnav .modal,body.has-bnav #scrollModal,body.has-bnav .apm{bottom:var(--bnh,72px)!important}
+body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
+/* energy: the choice is explained once, in the card, never in a bubble over the buttons */
+.en-ok{white-space:normal!important;overflow:visible!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7152,7 +7174,7 @@ async function gisMount(){try{const old=$('auG');if(!GIS.cid||!old||old.dataset.
   google.accounts.id.initialize({client_id:GIS.cid,nonce:n.hashed,ux_mode:'popup',itp_support:true,context:'signin',
     callback:async r=>{try{const {error}=await AU.sb.auth.signInWithIdToken({provider:'google',token:r.credential,nonce:n.raw});if(error){const m=$('auMsg');if(m)m.textContent=error.message}}catch(e){}}});
   google.accounts.id.renderButton(wrap,{type:'standard',theme:'outline',size:'large',text:'continue_with',shape:'pill',logo_alignment:'center',width:Math.min(380,Math.max(220,old.offsetWidth||300)),locale:LANG});
-  old.hidden=true;const alt=document.createElement('button');alt.type='button';alt.className='gis-alt';alt.textContent=tl('Other way to sign in with Google');alt.onclick=()=>old.click();wrap.after(alt)}catch(e){const o=$('auG');if(o)o.hidden=false}}
+  old.hidden=true}catch(e){const o=$('auG');if(o)o.hidden=false}}
 {const _af=authForm;authForm=function(){const r=_af.apply(this,arguments);setTimeout(gisMount,0);return r}}
 TX["You earned 20 minutes of free play 🎮"]={ar:'ربحت 20 دقيقة من اللعب الحر 🎮',om:'Daqiiqaa 20 tapha bilisaa argatte 🎮',so:'Waxaad heshay 20 daqiiqo oo ciyaar xor ah 🎮'};
 /* ===== No racist, sexist or hateful words anywhere people type (same guard as curse words: blocked everywhere, even in journals).
@@ -7250,7 +7272,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v109',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v110',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7307,6 +7329,83 @@ new MutationObserver(()=>{document.querySelectorAll('.mc-h:not([data-ic])').forE
 /* "Welcome back!" on its own line, the rest in full on the next line */
 {const _t9=toast;toast=function(msg){if(typeof msg==="string"&&/^Welcome back/.test(msg))msg=tl(msg);if(typeof msg==="string"){const m=/^(Welcome back[.!]?|أهلًا بعودتك[.!]?|Baga nagaan deebite[.!]?|Ku soo dhowow mar kale[.!]?)\s+(\S[\s\S]*)$/.exec(msg);if(m)msg=m[1].replace(/[.]$/,'!')+'\n'+m[2]}return _t9.call(this,msg)}}
 [["Notes: three boxes, that's it","الملاحظات: ثلاثة صناديق فقط","Yaadannoo: saanduqa sadii qofa","Qoraallo: saddex sanduuq oo keliya"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* water and Quran pages: tap opens a small counter with − and +, and says what the numbers mean (no more wrapping back to 0) */
+function cntSheet(k){const W=k==='w',T=dzTrkMake(W?'water':'quran'),g=T.goal||(W?8:2);
+  const draw=()=>{const n=+trkDay()[T.id]||0;$('cnN').textContent=n;$('cnBar').style.width=Math.min(100,n/g*100)+'%';$('cnM').disabled=n<=0;$('cnOk').hidden=n<g};
+  modalCard(`<div class="cn"><p class="label">${W?'💧 '+esc(tl('Water')):'📖 '+esc(tl('Quran pages'))}</p>
+   <p class="cn-big"><b id="cnN">0</b><span>/ ${g}</span></p><div class="cn-tr"><i id="cnBar"></i></div>
+   <p class="cn-d">${esc(tl(W?'Tap + each time you drink a glass. Goal: 8 glasses a day.':'Tap + for each page you read. Goal: 2 pages a day.'))}</p>
+   <p class="cn-ok" id="cnOk" hidden>✓ ${esc(tl('Goal reached today!'))}</p>
+   <div class="cn-b"><button type="button" class="cn-x" id="cnM" aria-label="−">−</button><button type="button" class="cn-x cn-p" id="cnP" aria-label="+">+</button></div>
+   <button type="button" class="btn-main" id="cnD" style="width:100%">${esc(tl('Done'))}</button></div>`);
+  draw();
+  $('cnP').onclick=()=>{const n=+trkDay()[T.id]||0;trkSet(T,n+1);try{if(!S.calm&&navigator.vibrate)navigator.vibrate(10)}catch(e){}if(n+1===g)try{star(1,(W?'💧 ':'📖 ')+tl(W?'Water':'Quran'),'hm-'+k+dkey())}catch(e){}save();draw()};
+  $('cnM').onclick=()=>{lastTap=null;const n=+trkDay()[T.id]||0;if(n>0){trkSet(T,n-1);save();draw()}};
+  $('cnD').onclick=()=>{modalClose()};
+  const done=()=>{try{hmRender()}catch(e){}try{dashRender()}catch(e){}};const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();done()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hm="w"],[data-hm="q"],.dz-ch.w,.dz-ch.q');if(!b)return;e.preventDefault();e.stopImmediatePropagation();
+  const k=(b.dataset.hm==='q'||b.classList.contains('q'))?'q':'w';cntSheet(k)},true);
+[["Tap + each time you drink a glass. Goal: 8 glasses a day.","اضغط + كلما شربت كوبًا. الهدف: 8 أكواب في اليوم.","Yeroo bishaan burcuqqii tokko dhugdu + tuqi. Galma: guyyaatti burcuqqii 8.","Taabo + mar kasta oo aad cabto koob. Yoolka: 8 koob maalintii."],
+ ["Tap + for each page you read. Goal: 2 pages a day.","اضغط + لكل صفحة تقرؤها. الهدف: صفحتان في اليوم.","Fuula dubbistu hundaaf + tuqi. Galma: guyyaatti fuula 2.","Taabo + bog kasta oo aad akhrido. Yoolka: 2 bog maalintii."],
+ ["Goal reached today!","وصلت إلى هدف اليوم!","Har'a galma kee gahteetta!","Maanta yoolkii waad gaartay!"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* reminders: tap one to edit it; ✕ moves it to "Deleted" (kept, can be restored); clear "turn on" steps */
+function remHist(){S.remHist=Array.isArray(S.remHist)?S.remHist:[];return S.remHist}
+{const _rr3=renderRemind;renderRemind=function(){const r=_rr3.apply(this,arguments);try{const c=$('remCard'),box=c&&c.querySelector('.mr');if(!box)return r;
+  box.querySelectorAll('[data-mrx]').forEach(b=>b.onclick=e=>{e.stopPropagation();const x=myRem().find(y=>y.id===b.dataset.mrx);if(x){remHist().unshift(Object.assign({},x,{gone:Date.now()}));S.remHist=remHist().slice(0,50)}S.myRem=myRem().filter(y=>y.id!==b.dataset.mrx);if(RMF.edit===b.dataset.mrx)RMF.edit=null;save();renderRemind();toast('✓ '+tl('Deleted. You can restore it below.'))});
+  box.querySelectorAll('.mr-i').forEach(row=>{const id=(row.querySelector('[data-mrx]')||{}).dataset;if(!id)return;const x=myRem().find(y=>y.id===id.mrx);if(!x)return;row.classList.add('mr-ed');row.setAttribute('role','button');row.tabIndex=0;
+    if(RMF.edit===x.id)row.classList.add('on');
+    row.onclick=()=>{RMF.edit=x.id;RMF.ev=x.ev||0;RMF.days=(x.days||[0,1,2,3,4,5,6]).slice();RMF.nag=x.nag||0;renderRemind();const f=$('mrF');if(!f)return;$('mrT').value=x.t;$('mrA').value=x.at||'16:00';$('mrE').value=String(RMF.ev);$('mrU').hidden=!RMF.ev;if(x.until)$('mrUt').value=x.until;f.scrollIntoView({block:'center',behavior:'smooth'})}});
+  const f=$('mrF');if(f&&RMF.edit){const sb=f.querySelector('[type=submit]');if(sb)sb.textContent=tl('Save changes');if(!f.querySelector('.mr-cn')){const cn=document.createElement('button');cn.type='button';cn.className='btn-ghost mr-cn';cn.textContent=tl('Cancel');cn.onclick=()=>{RMF.edit=null;renderRemind()};f.appendChild(cn)}}
+  const H=remHist();if(H.length&&!box.querySelector('.mr-hist')){const d=document.createElement('details');d.className='mr-hist';d.innerHTML=`<summary>🗂️ ${esc(tl('Deleted reminders'))} <b>${H.length}</b></summary>${H.map((x,i)=>`<div class="mr-i mr-old"><div><b dir="auto">${esc(x.t)}</b><small>${remTimes(x).map(hmStr).join(' · ')} · ${esc(tl('Deleted'))} ${new Date(x.gone).toLocaleDateString(LOC(),{month:'short',day:'numeric'})}</small></div><button type="button" class="btn-calm mr-rs" data-mrr="${i}">↺ ${esc(tl('Restore'))}</button></div>`).join('')}`;
+    d.querySelectorAll('[data-mrr]').forEach(b=>b.onclick=()=>{const x=remHist().splice(+b.dataset.mrr,1)[0];if(x){delete x.gone;myRem().push(x)}save();renderRemind();toast('↺ '+tl('Restored'))});const fo=$('mrF');(fo||box).after(d)}
+  const on=$('mrOn');if(on){const ios=/iphone|ipad/i.test(navigator.userAgent),stand=typeof isStand==='function'?isStand():fqStandalone(),perm=('Notification' in window)?Notification.permission:'none';
+    if(ios&&!stand){const p=document.createElement('div');p.className='mr-sf';p.innerHTML=`<p>🔔 ${esc(tl('Reminders work from the Fastaqim icon on your Home Screen. Open Fastaqim from there to turn them on.'))}</p><button type="button" class="mr-how">${esc(tl('No icon yet? See how to add it'))}</button>`;p.querySelector('.mr-how').onclick=()=>{try{instGuide()}catch(e){}};on.replaceWith(p)}
+    else if(perm==='denied'){const p=document.createElement('p');p.className='mr-sf';p.textContent='🔕 '+tl('Notifications are off for Fastaqim. Turn them on in your phone Settings → Notifications → Fastaqim, then come back.');on.replaceWith(p)}
+    else{const n=document.createElement('p');n.className='small muted mr-al';n.textContent=tl('Your phone will ask. Tap Allow.');on.after(n)}}
+}catch(e){console.error(e)}return r}}
+document.addEventListener('submit',e=>{if(!e.target||e.target.id!=='mrF'||!RMF.edit)return;const old=RMF.edit,before=myRem().length;setTimeout(()=>{const L=myRem();if(L.length>before){const nu=L[L.length-1],i=L.findIndex(y=>y.id===old);if(i>=0){nu.id=old;L.splice(i,1,nu);L.pop()}}RMF.edit=null;save();renderRemind()},0)},true);
+/* tapping a notification: the app also checks a note the service worker leaves, so the Done / Snooze card shows even when iPhone opens the app in the background */
+const REMSEEN={k:''};
+{const _rs=remSheet;remSheet=function(info){const k=info&&(info.ref||info.tag||'')+(info.title||'');if(k&&REMSEEN.k===k&&Date.now()-(REMSEEN.at||0)<60000)return;REMSEEN.k=k;REMSEEN.at=Date.now();return _rs.apply(this,arguments)}}
+async function remPending(){try{if(!('caches' in window))return;const c=await caches.open('fq-rem');const r=await c.match('rem');if(!r)return;const j=await r.json();await c.delete('rem');if(j&&j.at&&Date.now()-j.at<15*60000)setTimeout(()=>remSheet(j),400)}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)remPending()});setTimeout(remPending,1200);
+[["Deleted. You can restore it below.","حُذف. يمكنك استرجاعه بالأسفل.","Haqameera. Gadi irratti deebisuu dandeessa.","Waa la tirtiray. Hoos waad ka soo celin kartaa."],["Save changes","احفظ التغييرات","Jijjiirama olkaa'i","Kaydi isbeddellada"],["Cancel","إلغاء","Dhiisi","Jooji"],
+ ["Deleted reminders","التذكيرات المحذوفة","Yaadachiisota haqaman","Xasuusinnada la tirtiray"],["Deleted","حُذف","Haqame","La tirtiray"],["Restore","استرجاع","Deebisi","Soo celi"],["Restored","تم الاسترجاع","Deebi'ameera","Waa la soo celiyay"],
+ ["Reminders work from the Fastaqim icon on your Home Screen. Open Fastaqim from there to turn them on.","التذكيرات تعمل من أيقونة Fastaqim على الشاشة الرئيسية. افتح Fastaqim من هناك لتفعيلها.","Yaadachiisonni mallattoo Fastaqim Home Screen irra jiru irraa hojjetu. Banuuf achii Fastaqim bani.","Xasuusinnadu waxay ka shaqeeyaan astaanta Fastaqim ee shaashadda hore. Halkaas ka fur Fastaqim si aad u shiddo."],
+ ["No icon yet? See how to add it","لا توجد أيقونة بعد؟ انظر كيف تضيفها","Ammaaf mallattoo hin qabduu? Akkaataa itti dabaltu ilaali","Astaan weli ma lihid? Arag sida loo daro"],
+ ["Notifications are off for Fastaqim. Turn them on in your phone Settings → Notifications → Fastaqim, then come back.","الإشعارات مطفأة لـ Fastaqim. فعّلها من إعدادات الهاتف ← الإشعارات ← Fastaqim، ثم ارجع.","Beeksisni Fastaqimiif cufaa dha. Settings bilbilaa → Notifications → Fastaqim keessatti bani, achii deebi'i.","Ogeysiisyada Fastaqim waa dansan yihiin. Ka shid Settings-ka taleefanka → Notifications → Fastaqim, kadib soo noqo."],
+ ["Your phone will ask. Tap Allow.","سيسألك هاتفك. اضغط سماح.","Bilbilli kee si gaafata. Allow tuqi.","Taleefankaagu wuu ku weydiin doonaa. Taabo Allow."]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* "Start for 2 minutes" removed: never push starting now. The next step keeps its ✓. */
+/* landing "See it move": the phone shows the REAL Home screen (drawn by the same code), with sample data. Nothing is saved. */
+function ldDemo(){const box=document.querySelector('#landing .ld-scr');const sec=$('tab-now');if(!box||!sec||typeof hmRender!=='function')return;
+  const keep=S,sv=save,ps=typeof pushSync==='function'?pushSync:null;let html='';const real=$('fqHome');
+  try{save=function(){};if(ps)pushSync=function(){};S=JSON.parse(JSON.stringify(keep));S.name='';const k=dkey();
+    S.tasks=[{id:'ldemo1',title:tl('Read 1 page'),steps:[],done:false,top:true,due:k,created:Date.now()}];S.trk={};S.salQ={};S.avatar=null;
+    S.trackers=(S.trackers||[]).filter(t=>!['water','quran','salah'].includes(t.type));if(!S.loc)S.loc={lat:21.4225,lng:39.8262,name:'Makkah'};
+    const W=dzTrkMake('water'),Q=dzTrkMake('quran');trkDay()[W.id]=5;trkDay()[Q.id]=2;
+    try{const P=salahFor(new Date()),q={};SQK.forEach((kk,i)=>{if(P[kk]&&P[kk]<=new Date())q[i]='on'});S.salQ[k]=q}catch(e){}
+    if(real)real.id='fqHomeX';const tmp=document.createElement('div');tmp.id='fqHome';sec.prepend(tmp);hmRender();html=tmp.innerHTML;tmp.remove()}
+  catch(e){console.warn('ldDemo',e)}finally{if(real)real.id='fqHome';S=keep;save=sv;if(ps)pushSync=ps}
+  if(!html)return;box.classList.add('ld-scr2');box.innerHTML=`<div class="ld-live" inert>${html}</div>`;
+  box.querySelectorAll('[id]').forEach(e=>e.removeAttribute('id'));box.querySelectorAll('.hm-go[data-hm="go"]').forEach(e=>e.remove());requestAnimationFrame(()=>{const lv=box.querySelector('.ld-live');if(lv)box.style.height=Math.ceil(lv.scrollHeight*.533+8)+'px'})}
+{const _ls=landingShow;landingShow=function(on){const r=_ls.apply(this,arguments);if(on)setTimeout(ldDemo,30);return r}}
+{const _sl=setLang;setLang=function(){const r=_sl.apply(this,arguments);try{const l=$('landing');if(l&&!l.hidden)setTimeout(ldDemo,60)}catch(e){}return r}}
+setTimeout(()=>{try{const l=$('landing');if(l&&!l.hidden)ldDemo()}catch(e){}},300);
+[["Read 1 page","اقرأ صفحة واحدة","Fuula 1 dubbisi","Akhri 1 bog"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* bottom tabs: measure their height for pop-ups; tapping a tab closes any pop-up or menu first */
+function bnH(){const b=$('bNav');if(b&&!b.hidden)document.documentElement.style.setProperty('--bnh',b.offsetHeight+'px')}
+{const _bn6=bnav;bnav=function(){const r=_bn6.apply(this,arguments);try{bnH()}catch(e){}return r}}
+addEventListener('resize',()=>{try{bnH()}catch(e){}});
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#bNav button');if(!b)return;try{const m=$('scrollModal');if(m&&!m.hidden)modalClose();const a=$('apMenu');if(a&&!a.hidden&&!b.matches('[data-bn="menu"],[data-tab="menu"]'))a.hidden=true}catch(err){}},true);
+/* energy choice: no pop-up bubble (the card already says it) */
+{const _es2=enSet;enSet=function(){const t=toast;toast=function(){};try{return _es2.apply(this,arguments)}finally{toast=t}}}
+/* water and Quran on Home are tracker tiles: open the − / + counter for them too */
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#fqHome [data-hm="tk"]');if(!b)return;const W=dzTrk('water'),Q=dzTrk('quran'),id=b.dataset.id,k=W&&W.id===id?'w':Q&&Q.id===id?'q':'';if(!k)return;e.preventDefault();e.stopImmediatePropagation();cntSheet(k)},true);
+/* sign in: the small "Other way to sign in with Google" link is removed (the Google button is the only Google option) */
+
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
