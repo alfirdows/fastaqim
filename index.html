@@ -1630,6 +1630,8 @@ body.has-bnav .modal,body.has-bnav #scrollModal,body.has-bnav .apm{bottom:var(--
 body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 /* energy: the choice is explained once, in the card, never in a bubble over the buttons */
 .en-ok{white-space:normal!important;overflow:visible!important}
+.wz-oth{justify-content:center;margin-top:8px}.wz-oth input{max-width:260px;width:100%}.wz-ex{text-align:center;margin:0 0 4px}
+#wzWs,#wzWe{max-width:138px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -6750,7 +6752,7 @@ const C2={
  a_heavy:["Heaviness when you go to do good is something many people describe.","الثقل عند الإقبال على الخير أمر يذكره كثير من الناس.","Ulfaatinni yeroo waan gaarii hojjechuuf deemtu kan namoonni baay'een himan dha.","Culayska marka aad wax wanaagsan u socoto dad badan ayaa sheega."],
  a_later:["Later works best with a set time, not a maybe.","\"لاحقًا\" تنجح أكثر بوقت محدد، لا بـ\"ربما\".","\"Booda\" yeroo murtaa'een hojjeta, \"tarii\"n miti.","\"Goor dambe\" waxay si fiican u shaqaysaa waqti go'an, ma aha \"laga yaabee\"."],
  a_care:["That's a lot to carry. Taking care of them comes first, and that counts as good work too.","هذا حمل ثقيل. رعايتهم تأتي أولًا، وهذا عمل صالح أيضًا.","Kun ba'aa ulfaataa dha. Isaan kunuunsuun dursa, kunis hojii gaarii dha.","Taasi waa culays badan. Daryeelkooda ayaa horreeya, taasina waa camal wanaagsan."],
- a_any:["Got it. Here's one thing to try.","فهمت. إليك شيئًا واحدًا تجرّبه.","Hubadheera. Waan tokko yaali.","Waan fahmay. Hal shay isku day."],
+ a_any:["I'm not sure I understood that. Pick the one that's closest, or write it another way.","لست متأكدًا أني فهمت. اختر الأقرب، أو اكتبها بطريقة أخرى.","Akka hubadhe hin beeku. Kan itti dhiyaatu filadhu, ykn karaa biraan barreessi.","Hubaal maaha inaan fahmay. Dooro midka ugu dhow, ama si kale u qor."],
  // techniques
  t_cue:["Tie it to something you already do: right after the next salah, start {s}.","اربطها بشيء تفعله أصلًا: بعد الصلاة القادمة مباشرة، ابدأ {s}.","Waan ati duraanuu hojjettu wajjin walqabsiisi: salaata itti aantu booda battaluma {s} jalqabi.","Ku xir wax aad horeba u samayso: salaadda xigta kadib isla markiiba bilow {s}."],
  t_body:["Body doubling: sit near someone, or call a friend on mute, and do {s} while they're there.","المرافقة: اجلس قرب أحد، أو اتصل بصديق مع كتم الصوت، وافعل {s} وهو معك.","Hiriyaa wajjin hojjechuu: nama biratti taa'i, yookaan hiriyyaa sagalee dhaamsitee bilbili, {s} hojjedhu.","La-shaqeyn: u dhow qof, ama wac saaxiib adigoo codka xiray, oo samee {s} intuu joogo."],
@@ -6793,7 +6795,7 @@ coachFree=function(text){CO.log.push({c:0,t:text});CO.used=CO.used||[];CO.lastT=
   const pool=[...(C2T[k]||[]),...C2T.any];let tk=pool.find(x=>!CO.used.includes(x)&&x!==CO.lastT);if(!tk){CO.used=[];tk=pool.find(x=>x!==CO.lastT)}
   CO.used.push(tk);CO.lastT=tk;
   if(k==='study'&&hits.includes('scroll')&&!CO.used.includes('t_phone')){CO.used.pop();CO.used.push('t_phone');tk='t_phone';CO.lastT=tk}
-  coachSay(c2('a_'+k));coachSay(c2(tk,c2Step()));
+  coachSay(c2('a_'+k));if(k!=='any')coachSay(c2(tk,c2Step()));else{CO.used.pop()}
   if(k==='any'){CO.ask=[c2('q_any'),[['Tired',()=>coachFree('tired')],['Overwhelmed',()=>coachFree('overwhelmed')],['No motivation',()=>coachFree('no motivation')],['Scrolling',()=>coachFree('scrolling')],['Bored',()=>coachFree('boring')]].map(([l,f])=>[tl(l),()=>{CO.log.pop();f()}])]}
   else if(ASK[k==='motiv'?'feel':k])CO.ask=ASK[k==='motiv'?'feel':k];
   renderCoach()};
@@ -7272,7 +7274,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v110',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v111',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7406,6 +7408,35 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#fqHome [data-hm="tk"]');if(!b)return;const W=dzTrk('water'),Q=dzTrk('quran'),id=b.dataset.id,k=W&&W.id===id?'w':Q&&Q.id===id?'q':'';if(!k)return;e.preventDefault();e.stopImmediatePropagation();cntSheet(k)},true);
 /* sign in: the small "Other way to sign in with Google" link is removed (the Google button is the only Google option) */
 
+
+/* Build my schedule: the choices are only examples; "Something else" can be typed, and "Prefer not to say" is always there */
+{const _wr=wizRender;wizRender=function(){const r=_wr.apply(this,arguments);try{const sb=$('scrollBody'),a=WZ.a;
+  const pns=(key,multi)=>{const row=sb.querySelector(`[data-wk="${key}"]`);if(!row)return null;const box=row.parentElement;if(box.querySelector('.wz-pns'))return box;
+    const b=document.createElement('button');b.className='chip wz-pns';b.type='button';b.textContent=tl('Prefer not to say');const on=multi?(a[key]||[]).includes('none'):a[key]==='none';if(on)b.style.cssText='background:var(--ink);color:var(--bg)';
+    b.onclick=()=>{if(multi)a[key]=on?[]:['none'];else a[key]=on?'':'none';if(key==='fill')a.fillOther='';wizRender()};box.appendChild(b);return box};
+  const box=pns('fill',true);
+  if(box){if(!sb.querySelector('.wz-ex')){const ex=document.createElement('p');ex.className='small muted wz-ex';ex.textContent=tl('These are only examples. Pick any, or type your own.');box.before(ex)}
+    if(!sb.querySelector('#wzOther')){const w=document.createElement('div');w.className='row wz-oth';w.innerHTML=`<input id="wzOther" maxlength="40" dir="auto" placeholder="${esc(tl('Something else? Type it here'))}" value="${esc(a.fillOther||'')}">`;box.after(w);
+      const i=w.querySelector('input');i.oninput=()=>{const v=i.value.trim();if(v&&(blocked(v)||selfHit(v))){i.setCustomValidity('x');return}i.setCustomValidity('');a.fillOther=v;if(v&&(a.fill||[]).includes('none'))a.fill=a.fill.filter(x=>x!=='none')}}
+    sb.querySelectorAll('[data-wk="fill"]:not(.wz-pns)').forEach(c=>{const f=c.onclick;c.onclick=()=>{a.fill=(a.fill||[]).filter(x=>x!=='none');f&&f()}})}
+  pns('best',false);pns('extras',true);
+}catch(e){console.warn(e)}return r}}
+{const _bs=buildSchedule;buildSchedule=function(a,fri){const a2=Object.assign({},a,{fill:(a.fill||[]).filter(x=>x!=='none'),extras:(a.extras||[]).filter(x=>x!=='none'),best:a.best==='none'?'Not sure':a.best});const B=_bs.call(this,a2,fri);
+  try{const t=(a.fillOther||'').trim();if(t){const m=x=>toMin(x),W=m(a.wake)+180,Z=(m(a.bed)<m(a.wake)?1439:m(a.bed))-90;
+    let ok=false;for(const [lo,hi] of [[W,Z],[m(a.wake),(m(a.bed)<m(a.wake)?1439:m(a.bed))]]){for(const d of [45,30,20]){for(let s=lo;s+d<=hi;s+=5){if(B.every(b=>s+d<=m(b.s)||s>=m(b.e))){B.push({id:uid(),s:hm(s),e:hm(s+d),t,ty:'focus',core:false,tip:'',low:''});ok=true;break}}if(ok)break}if(ok)break}
+    B.sort((x,y)=>m(x.s)-m(y.s))}}catch(e){}return B}}
+[["Prefer not to say","أفضّل عدم القول","Dubbachuu hin barbaadu","Doorbidi inaanan sheegin"],["These are only examples. Pick any, or type your own.","هذه أمثلة فقط. اختر ما يناسبك، أو اكتب ما عندك.","Kunniin fakkeenya qofa. Kamiyyuu filadhu, ykn kan kee barreessi.","Kuwani waa tusaalayaal keliya. Dooro mid kasta, ama qor adigu."],["Something else? Type it here","شيء آخر؟ اكتبه هنا","Waan biraa? Asitti barreessi","Wax kale? Halkan ku qor"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* change email: same account, all history kept; Supabase sends a link to confirm */
+{const _ar=acctRender;acctRender=function(){const r=_ar.apply(this,arguments);try{const pw=$('acPw');if(pw&&!$('acEm')&&AU.user){const b=document.createElement('button');b.className='small';b.id='acEm';b.textContent=tl('Change email');b.onclick=emModal;pw.after(b)}}catch(e){}return r}}
+function emModal(){modalCard(`<p class="label">✉️ ${esc(tl('Change email'))}</p><p class="small muted">${esc(tl('Your account, stars and history stay the same. Only the email changes.'))}</p>
+  <form id="emF" class="wrap" style="gap:8px;width:100%"><input type="email" id="emN" required autocomplete="email" placeholder="${esc(tl('New email'))}" style="width:100%"><button class="btn-main" type="submit" style="width:100%">${esc(tl('Send confirmation link'))}</button></form><p class="small" id="emE" role="status"></p>`);
+  $('emF').onsubmit=async e=>{e.preventDefault();const v=$('emN').value.trim();if(!v)return;const btn=e.target.querySelector('[type=submit]');btn.disabled=true;
+    try{const {error}=await AU.sb.auth.updateUser({email:v},{emailRedirectTo:location.origin+location.pathname});if(error)throw error;$('emE').textContent='✓ '+tl('Check both inboxes (old and new) and tap the link to confirm.')}
+    catch(err){$('emE').textContent=tl('That did not work. Check the email and try again.');btn.disabled=false}}}
+[["Change email","تغيير البريد","Imeelii jijjiiri","Beddel iimaylka"],["Your account, stars and history stay the same. Only the email changes.","حسابك ونجومك وسجلك تبقى كما هي. يتغير البريد فقط.","Herregni kee, urjiiwwan fi seenaan akkuma jiranitti hafu. Imeeliin qofa jijjiirama.","Akoonkaaga, xiddigahaaga iyo taariikhdaadu sidooda ayay ahaanayaan. Iimaylka keliya ayaa isbeddelaya."],
+ ["New email","البريد الجديد","Imeelii haaraa","Iimaylka cusub"],["Send confirmation link","أرسل رابط التأكيد","Linkii mirkaneessaa ergi","Dir xiriirka xaqiijinta"],
+ ["Check both inboxes (old and new) and tap the link to confirm.","افتح البريدين (القديم والجديد) واضغط الرابط للتأكيد.","Saanduqa imeelii lamaan (moofaa fi haaraa) ilaaliitii linkii tuqi.","Eeg labada sanduuq (kii hore iyo kan cusub) oo taabo xiriirka si aad u xaqiijiso."],
+ ["That did not work. Check the email and try again.","لم ينجح ذلك. تحقق من البريد وحاول مرة أخرى.","Hin hojjenne. Imeelii mirkaneessiitii irra deebi'ii yaali.","Ma shaqayn. Hubi iimaylka oo isku day mar kale."]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
