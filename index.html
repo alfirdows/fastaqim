@@ -7093,7 +7093,7 @@ addEventListener('pointerdown',e=>{if(e.target.closest&&e.target.closest('#czBox
 {const _sa=setApply;setApply=function(){const r=_sa.apply(this,arguments);requestAnimationFrame(bnPill);return r}}
 /* ===== Earned free play (game): 3 days in a row at ≥50% of the day = 1 hour; each further day in a row = +1 hour.
    At most 7 hours earned per 7-day window, credit never expires, at most 1 hour played per day. Shared with the game via localStorage. ===== */
-const PLK='fastaqim.play',PL_H=3600,PL_WK=7*3600;
+const PLK='fastaqim.play',PL_H=20*60,PL_WK=140*60; /* 20 min per earned day, at most 2 h 20 min earned per 7 days (free play is 10 min/day free, 30 min/day max) */
 function plDk(d){d=d||new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function plGet(){try{return Object.assign({days:{},bank:0,wk:null,used:null,earn:{}},JSON.parse(localStorage.getItem(PLK)||'{}'))}catch(e){return {days:{},bank:0,wk:null,used:null,earn:{}}}}
 function plSet(o){try{const ks=Object.keys(o.days).sort();while(ks.length>60)delete o.days[ks.shift()];localStorage.setItem(PLK,JSON.stringify(o))}catch(e){}}
@@ -7117,7 +7117,7 @@ function plReal(){const m=tSeenUpd(),k=dkey(),tops=(S.tasks||[]).filter(t=>t.top
 [["+5 min free play: a strong day 🎮","+5 دقائق لعب حر: يوم قوي 🎮","+daqiiqaa 5 tapha bilisaa: guyyaa cimaa 🎮","+5 daqiiqo ciyaar xor ah: maalin xoog leh 🎮"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 function plAdd(o,sec){const now=Date.now();if(!o.wk||now-o.wk.t>=7*864e5)o.wk={t:now,got:0};const add=Math.max(0,Math.min(sec,PL_WK-o.wk.got));o.bank+=add;o.wk.got+=add;return add}
 plCheck=function(){try{if(!S.started)return;const r=plReal();if(!(r.pct>=50&&r.real>=2))return;const o=plGet(),k=plDk();o.bon=o.bon||{};let msg='';
-  if(!o.days[k]){o.days[k]=1;if(plRun(o)>=3&&!o.earn[k]){const a=plAdd(o,PL_H);if(a>0){o.earn[k]=a;msg=tl('You earned 1 hour of free play 🎮')}}}
+  if(!o.days[k]){o.days[k]=1;if(plRun(o)>=3&&!o.earn[k]){const a=plAdd(o,PL_H);if(a>0){o.earn[k]=a;msg=tl('You earned 20 minutes of free play 🎮')}}}
   const b=o.bon[k]=o.bon[k]||{};const q=salQ();
   const goals={all:r.tot>=3&&r.real===r.tot,salah:[0,1,2,3,4].every(i=>q[i]==='on'),adhkar:!!(S.azDays&&S.azDays[dkey()])};
   Object.entries(goals).forEach(([g,ok])=>{if(ok&&!b[g]){b[g]=1;if(plAdd(o,300)>0&&!msg)msg=tl('+5 min free play: a strong day 🎮')}});
@@ -7137,6 +7137,7 @@ async function gisMount(){try{const old=$('auG');if(!GIS.cid||!old||old.dataset.
   google.accounts.id.renderButton(wrap,{type:'standard',theme:'outline',size:'large',text:'continue_with',shape:'pill',logo_alignment:'center',width:Math.min(380,Math.max(220,old.offsetWidth||300)),locale:LANG});
   old.hidden=true;const alt=document.createElement('button');alt.type='button';alt.className='gis-alt';alt.textContent=tl('Other way to sign in with Google');alt.onclick=()=>old.click();wrap.after(alt)}catch(e){const o=$('auG');if(o)o.hidden=false}}
 {const _af=authForm;authForm=function(){const r=_af.apply(this,arguments);setTimeout(gisMount,0);return r}}
+TX["You earned 20 minutes of free play 🎮"]={ar:'ربحت 20 دقيقة من اللعب الحر 🎮',om:'Daqiiqaa 20 tapha bilisaa argatte 🎮',so:'Waxaad heshay 20 daqiiqo oo ciyaar xor ah 🎮'};
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);

@@ -5,8 +5,8 @@
 @font-face{font-family:"FQ";src:url(fonts/UthmanicHafs.otf) format("opentype");font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 [hidden]{display:none!important}
-html,body{margin:0;height:100%;overflow:hidden;background:#0f172a;font-family:Inter,"IBM Plex Sans Arabic",system-ui,-apple-system,sans-serif;color:#0f172a;overscroll-behavior:none;touch-action:none;-webkit-user-select:none;user-select:none}
-#cv{position:fixed;inset:0;width:100%;height:100%;display:block}
+html,body{margin:0;height:100%;overflow:hidden;background:#0f172a;font-family:Inter,"IBM Plex Sans Arabic",system-ui,-apple-system,sans-serif;color:#0f172a;overscroll-behavior:none;-webkit-user-select:none;user-select:none}
+#cv{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
 .bar{position:fixed;top:0;left:0;right:0;padding:calc(env(safe-area-inset-top) + 8px) 10px 0;display:flex;align-items:center;gap:6px;z-index:12;pointer-events:none;direction:ltr}
 .bar>*{pointer-events:auto}
 .pill{background:rgba(15,23,42,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:99px;min-height:40px;padding:0 12px;display:inline-flex;align-items:center;gap:6px;font:800 15px Inter,system-ui;text-decoration:none;white-space:nowrap}
@@ -59,7 +59,7 @@ button.pill{cursor:pointer}
 .stepbox b{display:block;font:900 1.25rem/1.35 Inter,system-ui;color:#0f172a;overflow-wrap:anywhere}
 .tmr{font:900 2.2rem Inter,system-ui;text-align:center;color:#0e8a62}
 .empty{background:#f8fafc;border-radius:14px;padding:12px;text-align:center;font:600 .9rem Inter,system-ui;color:#475569}
-.toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%);z-index:6;pointer-events:none;font:900 30px Inter,system-ui;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 18px rgba(0,0,0,.25);white-space:nowrap;animation:tp 1s ease-out forwards}
+.toast{position:fixed;left:50%;top:42%;transform:translate(-50%,-50%);z-index:30;pointer-events:none;font:900 30px Inter,system-ui;color:#fff;text-shadow:0 3px 0 rgba(0,0,0,.35),0 0 18px rgba(0,0,0,.25);white-space:nowrap;animation:tp 1s ease-out forwards}
 @keyframes tp{0%{opacity:0;transform:translate(-50%,-30%) scale(.6)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}30%{transform:translate(-50%,-50%) scale(1)}100%{opacity:0;transform:translate(-50%,-120%)}}
 .hint{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom) + 18px);z-index:4;text-align:center;font:800 15px Inter,system-ui;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.6);pointer-events:none}
 .pw{position:fixed;left:10px;bottom:calc(env(safe-area-inset-bottom) + 50px);z-index:4;display:flex;flex-direction:column;gap:6px;pointer-events:none;direction:ltr}
@@ -373,7 +373,7 @@ function worldThumb(c,k){const w=WORLDS[k],cx=c.getContext('2d'),Wc=c.width=180,
  cx.fillStyle=w.edge;cx.beginPath();cx.moveTo(Wc*.44,Hc*.5);cx.lineTo(Wc*.56,Hc*.5);cx.lineTo(Wc*.95,Hc);cx.lineTo(Wc*.05,Hc);cx.fill();cx.fillStyle=w.road;cx.beginPath();cx.moveTo(Wc*.45,Hc*.5);cx.lineTo(Wc*.55,Hc*.5);cx.lineTo(Wc*.9,Hc);cx.lineTo(Wc*.1,Hc);cx.fill();
  cx.fillStyle=w.carC[0];cx.beginPath();if(cx.roundRect)cx.roundRect(Wc*.42,Hc*.74,Wc*.16,Hc*.16,w.car==='sleek'?3:7);else cx.rect(Wc*.42,Hc*.74,Wc*.16,Hc*.16);cx.fill();cx.fillStyle='#f5b301';cx.beginPath();cx.arc(Wc*.5,Hc*.62,4,0,7);cx.fill();
  const sc2={gold:'#3f8a3a',toy:'#ff5a5f',blos:'#ff9fc8'}[k];cx.fillStyle=sc2;cx.beginPath();cx.arc(Wc*.12,Hc*.62,7,0,7);cx.arc(Wc*.88,Hc*.62,7,0,7);cx.fill()}
-function showMenu(){state='menu';G=null;$('goal').hidden=true;$('hc').hidden=true;$('hearts').hidden=true;$('pz').hidden=true;$('pw').innerHTML='';
+function showMenu(){if(!showMenu.once){showMenu.once=1;ST.mode='dhikr'}state='menu';G=null;$('goal').hidden=true;$('hc').hidden=true;$('hearts').hidden=true;$('pz').hidden=true;$('pw').innerHTML='';
  const tasks=tasksWithSteps();
  menuShow(`<h1>🏁 ${tl('title')}</h1><h2>${tl('pick')}</h2>
   <div class="modes">${[['dhikr','📿'],['task','✅'],['free','🎮']].map(([k,i])=>`<button class="mode ${ST.mode===k?'on':''}" data-m="${k}"><i>${i}</i>${tl('m_'+k)}<small>${tl('d_'+k)}</small></button>`).join('')}</div>
@@ -383,10 +383,10 @@ function showMenu(){state='menu';G=null;$('goal').hidden=true;$('hc').hidden=tru
   <h2>${tl('how')}</h2><div class="how"><div><b>⇆</b>${tl('h1')}</div><div><b>⤒</b>${tl('h2')}</div><div><b>⤓</b>${tl('h3')}</div></div>
   <button class="go" id="goB">${tl('start')}</button>${ST.best?`<p style="font-size:.85rem;margin-top:8px">🏆 ${tl('best')}: <b>${ST.best}</b></p>`:''}`);
  document.querySelectorAll('[data-th]').forEach(c=>worldThumb(c,c.dataset.th));
- const opt=()=>{const o=$('opt');if(ST.mode==='dhikr')o.innerHTML=`<h2>${tl('pickZ')}</h2><div class="dk z">${DZ.map((d,i)=>`<button data-z="${i}" class="${ST.dz===i?'on':''}"><span class="ar">${d.ar}</span>${LG==='ar'?'':`<small>${esc(d.tr)}</small>`}</button>`).join('')}</div>
+ const opt=()=>{const o=$('opt');try{if(ST.mode==='dhikr')o.innerHTML=`<h2>${tl('pickZ')}</h2><div class="dk z">${DZ.map((d,i)=>`<button data-z="${i}" class="${ST.dz===i?'on':''}"><span class="ar">${d.ar}</span>${LG==='ar'?'':`<small>${esc(d.tr)}</small>`}</button>`).join('')}</div>
    <h2>${tl('target')}</h2><div class="chips">${[33,100].map(n=>`<button class="chip ${ST.tgt===n?'on':''}" data-n="${n}">${n}</button>`).join('')}</div>`;
   else if(ST.mode==='task')o.innerHTML=`<h2>${tl('pickT')}</h2>${tasks.length?`<div class="dk">${tasks.slice(0,8).map((t,i)=>`<button data-t="${i}" class="${(ST.ti||0)===i?'on':''}"><span dir="auto" style="font:700 .95rem Inter,system-ui;color:#0f172a">${esc(t.title)}</span><small>${t.steps.filter(s=>!s.done).length} ✓</small></button>`).join('')}</div>`:`<div class="empty">${tl('noT')}</div>`}`;
-  else o.innerHTML=freeInfo();
+  else o.innerHTML=freeInfo();}catch(e){o.innerHTML=''}
   o.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();opt()});o.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>{ST.tgt=+b.dataset.n;stSave();opt()});o.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST.ti=+b.dataset.t;stSave();opt()})};opt();
  document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{ST.mode=b.dataset.m;stSave();document.querySelectorAll('[data-m]').forEach(q=>q.classList.toggle('on',q===b));opt()});
  document.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{ST.world=b.dataset.w;WD=WORLDS[ST.world];stSave();document.querySelectorAll('[data-w]').forEach(q=>q.classList.toggle('on',q===b))});
@@ -407,38 +407,44 @@ showMenu();
 </script>
 <script src="game/r3d.js?v=2"></script>
 <script>
-/* Free play is EARNED on Fastaqim (shared localStorage fastaqim.play): 3 days in a row at 50% of the day = 1 hour, each further day in a row = +1 hour,
-   max 7 hours earned a week, credit never expires, max 1 hour played a day. Dhikr and Task runs are never limited. */
-Object.assign(T,{fq_rule:["Free play is earned: 3 days in a row at 50% of your day = 1 hour. Each extra day in a row = +1 hour.","اللعب الحر بالمكافأة: 3 أيام متتالية بإنجاز 50% من يومك = ساعة. كل يوم متتالٍ بعدها = ساعة أخرى.","Tapha bilisaa ni argatama: guyyaa 3 walitti aansee %50 guyyaa keetii = sa'aatii 1. Guyyaan dabalataa hundi = sa'aatii 1 dabalataa.","Ciyaarta xorta ah waa la kasbadaa: 3 maalmood oo xiriir ah oo 50% maalintaada ah = 1 saac. Maalin kasta oo dheeraad ah = +1 saac."],
- fq_lim:["Strong days add +5 min. Up to 7 hours a week, 1 hour a day. Saved time never expires.","الأيام القوية تضيف 5 دقائق. حتى 7 ساعات في الأسبوع، وساعة في اليوم. الوقت المحفوظ لا ينتهي.","Guyyaan cimaan daqiiqaa 5 dabalu. Torbanitti hanga sa'aatii 7, guyyaatti sa'aatii 1. Yeroon kuufame hin dhumatu.","Maalmaha xoogga leh waxay ku daraan 5 daqiiqo. Ilaa 7 saac toddobaadkii, 1 saac maalintii. Waqtiga la kaydiyay ma dhaco."],
- fq_bank:["Saved: {h}","المحفوظ: {h}","Kuufame: {h}","La kaydiyay: {h}"],
- fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
+/* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
+   Credit never expires. Dhikr and To-do runs are never limited. */
+Object.assign(T,{
+ fq_today:["Today: {n} min left","اليوم: باقي {n} دقيقة","Har'a: daqiiqaan {n} hafte","Maanta: {n} daqiiqo ayaa hadhay"],
+ fq_rows:["Free every day|10 min","مجانًا كل يوم|10 دقائق","Guyyaa guyyaan bilisaan|daqiiqaa 10","Bilaash maalin kasta|10 daqiiqo"],
+ fq_bankr:["Your saved credit|{h}","رصيدك المحفوظ|{h}","Kuusaa kee|{h}","Kaydkaaga|{h}"],
+ fq_maxr:["Most per day|30 min","الحد الأقصى في اليوم|30 دقيقة","Guyyaatti hanga|daqiiqaa 30","Ugu badnaan maalintii|30 daqiiqo"],
+ fq_how:["Earn credit: finish 50% of your day 3 days in a row = +20 min, every extra day in a row = +20 min, strong days = +5 min. Saved credit never expires.","اكسب رصيدًا: أنجز 50% من يومك 3 أيام متتالية = 20 دقيقة، وكل يوم متتالٍ بعدها = 20 دقيقة، والأيام القوية = 5 دقائق. الرصيد لا ينتهي.","Kuusaa argadhu: guyyaa 3 walitti aansee %50 guyyaa kee xumuri = daqiiqaa 20, guyyaan dabalataa hundi = daqiiqaa 20, guyyaan cimaan = daqiiqaa 5. Kuusaan hin dhumatu.","Kasbo kayd: dhammee 50% maalintaada 3 maalmood oo xiriir ah = 20 daqiiqo, maalin kasta oo dheeraad ah = 20 daqiiqo, maalmaha xoogga leh = 5 daqiiqo. Kaydku ma dhaco."],
  fq_run:["Your run: {n} of 3 days","سلسلتك: {n} من 3 أيام","Walitti aansuu kee: guyyaa {n} keessaa 3","Taxanahaaga: {n} ka mid ah 3 maalmood"],
- fq_none:["No free play saved yet.","لا يوجد لعب حر محفوظ بعد.","Ammaaf tapha bilisaa kuufame hin jiru.","Weli ciyaar xor ah lama kaydin."],
- fq_done:["Great playing! That's today's hour.","لعب رائع! انتهت ساعة اليوم.","Tapha gaarii! Sa'aatiin har'aa xumurameera.","Ciyaar fiican! Saacaddii maanta way dhammaatay."],
- fq_more:["Dhikr and Task runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
+ fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
+ fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
+ fq_more:["Dhikr and To-do runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
  fq_back:["Free play is back tomorrow.","يعود اللعب الحر غدًا.","Tapha bilisaa boru deebi'a.","Ciyaarta xorta ah berri ayay soo laabanaysaa."]});
-const PLK='fastaqim.play',FQDAY=3600;
+const PLK='fastaqim.play',FQFREE=600,FQDAY=1800;
 function fqDay(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function plGet(){try{return Object.assign({days:{},bank:0,used:null},JSON.parse(localStorage.getItem(PLK)||'{}'))}catch(e){return {days:{},bank:0,used:null}}}
-function plRun(o){let n=0,d=new Date();for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!o.days[k]){if(n===0&&d.toDateString()===new Date().toDateString()){d.setDate(d.getDate()-1);continue}break}n++;d.setDate(d.getDate()-1)}return n}
+function plRun(o){let n=0,d=new Date(),first=true;for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!o.days[k]){if(first){first=false;d.setDate(d.getDate()-1);continue}break}first=false;n++;d.setDate(d.getDate()-1)}return n}
 function usedToday(o){return o.used&&o.used.d===fqDay()?o.used.s:0}
-function fqLeft(){const o=plGet();return Math.max(0,Math.min(FQDAY-usedToday(o),o.bank||0))}
+function fqLeftO(o){const u=usedToday(o);return Math.max(0,Math.min(FQDAY-u,Math.max(0,FQFREE-u)+(o.bank||0)))}
+function fqLeft(){return fqLeftO(plGet())}
 let FQ=null;
-function fqAdd(dt){const o=plGet();const u=usedToday(o)+dt;o.used={d:fqDay(),s:u};o.bank=Math.max(0,(o.bank||0)-dt);FQ=o;
-  if(!fqAdd.w||performance.now()-fqAdd.w>1000){fqAdd.w=performance.now();try{localStorage.setItem(PLK,JSON.stringify(o))}catch(e){}}}
+function fqAdd(dt){if(!FQ||FQ._d!==fqDay()){FQ=plGet();FQ._d=fqDay();FQ._sp=0}const o=FQ,u=usedToday(o);if(u+dt>FQFREE){const c=Math.min(o.bank||0,dt,u+dt-FQFREE);o.bank=(o.bank||0)-c;o._sp=(o._sp||0)+c}o.used={d:fqDay(),s:u+dt};
+  if(!fqAdd.w||performance.now()-fqAdd.w>1000){fqAdd.w=performance.now();fqSave()}}
+function fqSave(){if(!FQ)return;try{const cur=plGet();cur.used=FQ.used;cur.bank=Math.max(0,(cur.bank||0)-(FQ._sp||0));FQ._sp=0;FQ.bank=cur.bank;localStorage.setItem(PLK,JSON.stringify(cur))}catch(e){}}
 function fqMin(){return Math.ceil(fqLeft()/60)}
-function fqH(sec){const h=Math.floor(sec/3600),m=Math.round(sec%3600/60);return (h?h+' h':'')+(h&&m?' ':'')+(m||!h?m+' min':'')}
-function freeInfo(){const o=plGet(),l=fqLeft(),run=Math.min(3,plRun(o));
-  if(l>0)return `<div class="fq"><b>🎮 ${tl('fq_bank').replace('{h}',fqH(o.bank||0))} · ${tl('fq_left').replace('{n}',fqMin())}</b><span>${tl('fq_lim')}</span></div>`;
-  if((o.bank||0)>0)return `<div class="fq done"><b>🌟 ${tl('fq_done')} ${tl('fq_back')}</b><span>${tl('fq_bank').replace('{h}',fqH(o.bank))} · ${tl('fq_more')}</span></div>`;
-  return `<div class="fq done"><b>🔒 ${tl('fq_none')}</b><span>${tl('fq_rule')}</span><span class="fq-r">${'●'.repeat(run)}${'○'.repeat(3-run)} ${tl('fq_run').replace('{n}',run)}</span><span>${tl('fq_more')}</span></div>`}
-{const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast((plGet().bank>0?'🌟 '+tl('fq_back'):'🔒 '+tl('fq_none'))+' '+tl('fq_more'));return}return _b.apply(this,arguments)}}
-{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=fqLeft(),el=$('fqT');
+function fqH(sec){const h=Math.floor(sec/3600),m=Math.round(sec%3600/60);return (h?h+' '+tl('u_h'):'')+(h&&m?' ':'')+(m||!h?m+' '+tl('u_min'):'')}
+Object.assign(T,{u_h:['h','س',"sa'a.",'saac'],u_min:['min','د','daq.','daq.']});
+function freeInfo(){const o=plGet(),l=fqLeftO(o),run=Math.min(3,plRun(o));const row=(k,v)=>{const [a,b]=tl(k).split('|');return `<div class="fq-row"><span>${a}</span><b>${v||b}</b></div>`};
+  return `<div class="fq${l>0?'':' done'}"><b class="fq-big">${l>0?'🎮 '+tl('fq_today').replace('{n}',Math.ceil(l/60)):'🌟 '+tl('fq_done')}</b>
+   ${row('fq_rows')}${row('fq_bankr',fqH(o.bank||0))}${row('fq_maxr')}
+   <span class="fq-how">${tl('fq_how')}</span>${(o.bank||0)<60?`<span class="fq-r">${'●'.repeat(run)}${'○'.repeat(3-run)} ${tl('fq_run').replace('{n}',run)}</span>`:''}${l>0?'':`<span>${tl('fq_back')} ${tl('fq_more')}</span>`}</div>`}
+{const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast('🌟 '+tl('fq_back'));return}FQ=plGet();FQ._d=fqDay();FQ._sp=0;return _b.apply(this,arguments)}}
+addEventListener('pagehide',fqSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqSave()});
+{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=fqLeftO(FQ),el=$('fqT');
   if(el){const m=Math.floor(left/60),s=Math.floor(left%60);el.textContent='⏱ '+m+':'+String(s).padStart(2,'0');el.hidden=false;const bk=$('back');if(bk&&!bk.dataset.t){bk.dataset.t=bk.textContent;bk.textContent='‹';bk.setAttribute('aria-label',bk.dataset.t)}}
-  if(left<=0){state='end';try{localStorage.setItem(PLK,JSON.stringify(FQ))}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
+  if(left<=0){state='end';fqSave();try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const el=$('fqT');if(el)el.hidden=true;const bk=$('back');if(bk&&bk.dataset.t){bk.textContent=bk.dataset.t;delete bk.dataset.t}}catch(e){}return r}}
 (function(){const hc=$('hc');if(hc&&!$('fqT')){const s=document.createElement('span');s.id='fqT';s.hidden=true;s.className=hc.className;s.style.cssText='font-variant-numeric:tabular-nums';hc.after(s)}
- const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}';document.head.appendChild(st)})();
+ const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}.fq{gap:6px}.fq-big{font-size:1.05rem}.fq-row{display:flex;justify-content:space-between;gap:10px;padding:6px 10px;background:rgba(255,255,255,.7);border-radius:10px;font-weight:600;text-align:start}.fq-row b{white-space:nowrap}.fq-how{font-size:.8rem;font-weight:500;opacity:.9}';document.head.appendChild(st)})();
 </script>
 </body></html>
