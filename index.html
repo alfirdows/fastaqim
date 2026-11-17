@@ -1377,6 +1377,9 @@ body.has-bnav #apBar.ap3{padding-top:6px!important}
 .st-hist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .st-hist li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);font-size:.92rem}.st-hist li:last-child{border:0}
 .st-n{font-weight:800;color:#B7791F;white-space:nowrap}.st-t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.st-hist time{font-size:.8rem;color:var(--muted);white-space:nowrap}
+/* v99 one overlay at a time, no background movement */
+#scrollModal,#scrollBody,#apMenu,.apm-p{overscroll-behavior:contain}
+body.fq-lock #toast,body.fq-lock #hypeBox,body.fq-lock .star-toast{display:none!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -6285,6 +6288,20 @@ function stCard(){try{const sec=$('tab-wins');if(!sec)return;let c=$('stBox');if
 {const _sh5=show;show=function(t){const r=_sh5.apply(this,arguments);if(t==='wins')stCard();return r}}
 {const _sl5=setLang;setLang=function(){const r=_sl5.apply(this,arguments);setTimeout(stCard,0);return r}}
 setTimeout(stCard,600);
+
+/* v99: one pop-up at a time, and the page behind it never moves.
+   While a pop-up or ☰ is open: the page is frozen in place (iPhone-safe), and short messages wait; only the latest one shows after it closes. */
+const LK={y:null,q:null};
+function ovOpen(){const m=$('scrollModal'),a=$('apMenu');return !!((m&&!m.hidden)||(a&&!a.hidden))}
+function lockSync(){const o=ovOpen(),B=document.body;
+  if(o&&LK.y===null){LK.y=scrollY;B.style.position='fixed';B.style.setProperty('top',(-LK.y)+'px','important');B.style.left='0';B.style.right='0';B.style.width='100%';B.classList.add('fq-lock');
+    try{const h=$('hypeBox');if(h)h.classList.remove('show');const t=$('toast');if(t)t.classList.remove('show')}catch(e){}}
+  else if(!o&&LK.y!==null){const y=LK.y;LK.y=null;B.style.position='';B.style.removeProperty('top');B.style.left='';B.style.right='';B.style.width='';B.classList.remove('fq-lock');scrollTo(0,y);
+    if(LK.q){const q=LK.q;LK.q=null;setTimeout(()=>{try{q.f.apply(null,q.a)}catch(e){}},250)}}}
+new MutationObserver(lockSync).observe(document.body,{attributes:true,subtree:true,attributeFilter:['hidden']});
+{const _t=toast;toast=function(){if(ovOpen()){LK.q={f:toast,a:[...arguments]};return}return _t.apply(this,arguments)}}
+if(typeof starToast==='function'){const _s=starToast;starToast=function(){if(ovOpen()){LK.q={f:starToast,a:[...arguments]};return}return _s.apply(this,arguments)}}
+{const _h=hype;hype=function(){if(ovOpen())return;return _h.apply(this,arguments)}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);

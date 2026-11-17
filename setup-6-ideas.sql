@@ -17,5 +17,6 @@ end $$;
 drop trigger if exists fastaqim_feedback_notify on public.fastaqim_feedback;
 create trigger fastaqim_feedback_notify after insert on public.fastaqim_feedback
   for each row execute function public.fastaqim_feedback_notify();
+revoke execute on function public.fastaqim_feedback_notify() from public, anon, authenticated;
 
 select 'Ideas inbox is set up ✓' as result;
