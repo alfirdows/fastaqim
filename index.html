@@ -1585,6 +1585,7 @@ body.hb-open{overflow:hidden}
 .az-qw{display:flex;justify-content:center;margin:4px 0 8px}
 .cz{z-index:95}.cz-mid .az-qa,.cz-mid .cz-ar{pointer-events:auto}.cz-mid .az-qw{margin:2px 0}
 body.in-set #tab-wins .hub-bar [data-tp="set"]{display:none}
+.gis-w{display:flex;justify-content:center;min-height:44px}.gis-alt{background:none;border:0;color:var(--muted);font:600 12.5px Inter,system-ui;text-decoration:underline;padding:6px;min-height:32px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7103,6 +7104,39 @@ function plCheck(){try{if(typeof todayPct!=='function'||!S.started)return;const 
     if(add>0){o.bank+=add;o.wk.got+=add;o.earn[k]=add;plSet(o);setTimeout(()=>{try{toast(tl('You earned 1 hour of free play 🎮'));navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}},900);return}}
   plSet(o)}catch(e){}}
 {const _sv9=save;save=function(){const r=_sv9.apply(this,arguments);try{plCheck()}catch(e){}return r}}
+/* ===== Earned play v2: only real work counts.
+   A to-do counts only if it was done 10+ minutes after it was added (adding and ticking at once earns nothing); ticking, unticking and ticking again earns nothing extra
+   (each reward is given once per day). Opening or browsing the site earns nothing. Bonus +5 min each, once a day, on a day that already reached 50%:
+   all of today's to-dos done (3 or more), all 5 salah on time, an adhkar set finished. Bonuses count toward the 7 hours a week. ===== */
+const TSK='fastaqim.tseen',PL_MIN_GAP=10*60*1000;
+function tSeen(){try{return JSON.parse(localStorage.getItem(TSK)||'{}')}catch(e){return {}}}
+function tSeenUpd(){try{const m=tSeen(),ids=new Set();let ch=false;(S.tasks||[]).forEach(t=>{ids.add(t.id);if(!m[t.id]){m[t.id]=t.done?(t.doneAt||Date.now()):Date.now();ch=true}});
+  Object.keys(m).forEach(k=>{if(!ids.has(k)&&Date.now()-m[k]>30*864e5){delete m[k];ch=true}});if(ch)localStorage.setItem(TSK,JSON.stringify(m));return m}catch(e){return {}}}
+function plReal(){const m=tSeenUpd(),k=dkey(),tops=(S.tasks||[]).filter(t=>t.top&&(!t.done||(t.doneAt&&dkey(new Date(t.doneAt))===k)));
+  const real=tops.filter(t=>t.done&&t.doneAt&&m[t.id]&&t.doneAt-m[t.id]>=PL_MIN_GAP).length;return {tot:tops.length,real,pct:tops.length?real/tops.length*100:0}}
+[["+5 min free play: a strong day 🎮","+5 دقائق لعب حر: يوم قوي 🎮","+daqiiqaa 5 tapha bilisaa: guyyaa cimaa 🎮","+5 daqiiqo ciyaar xor ah: maalin xoog leh 🎮"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function plAdd(o,sec){const now=Date.now();if(!o.wk||now-o.wk.t>=7*864e5)o.wk={t:now,got:0};const add=Math.max(0,Math.min(sec,PL_WK-o.wk.got));o.bank+=add;o.wk.got+=add;return add}
+plCheck=function(){try{if(!S.started)return;const r=plReal();if(!(r.pct>=50&&r.real>=2))return;const o=plGet(),k=plDk();o.bon=o.bon||{};let msg='';
+  if(!o.days[k]){o.days[k]=1;if(plRun(o)>=3&&!o.earn[k]){const a=plAdd(o,PL_H);if(a>0){o.earn[k]=a;msg=tl('You earned 1 hour of free play 🎮')}}}
+  const b=o.bon[k]=o.bon[k]||{};const q=salQ();
+  const goals={all:r.tot>=3&&r.real===r.tot,salah:[0,1,2,3,4].every(i=>q[i]==='on'),adhkar:!!(S.azDays&&S.azDays[dkey()])};
+  Object.entries(goals).forEach(([g,ok])=>{if(ok&&!b[g]){b[g]=1;if(plAdd(o,300)>0&&!msg)msg=tl('+5 min free play: a strong day 🎮')}});
+  Object.keys(o.bon).sort().slice(0,-14).forEach(x=>delete o.bon[x]);plSet(o);
+  if(msg)setTimeout(()=>{try{toast(msg);navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}},900)}catch(e){}};
+/* ===== Google sign-in that shows alfirdows.github.io (Google Identity Services → Supabase signInWithIdToken).
+   Turns on only when GIS.cid (the public OAuth client ID) is set. The old Google sign-in stays as a small backup link. ===== */
+const GIS={cid:''};
+[["Other way to sign in with Google","طريقة أخرى للدخول بـ Google","Karaa biraa Google'n seenuu","Hab kale oo Google lagu galo"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+async function gisNonce(){const a=new Uint8Array(16);crypto.getRandomValues(a);const raw=[...a].map(b=>b.toString(16).padStart(2,'0')).join('');
+  const h=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(raw));return {raw,hashed:[...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('')}}
+async function gisMount(){try{const old=$('auG');if(!GIS.cid||!old||old.dataset.gis)return;if(!(AU&&AU.sb)){gisMount.n=(gisMount.n||0)+1;if(gisMount.n<20)setTimeout(gisMount,500);return}old.dataset.gis=1;
+  if(!(window.google&&google.accounts&&google.accounts.id))await loadScript('https://accounts.google.com/gsi/client');
+  const n=await gisNonce();const wrap=document.createElement('div');wrap.className='gis-w';old.before(wrap);
+  google.accounts.id.initialize({client_id:GIS.cid,nonce:n.hashed,ux_mode:'popup',itp_support:true,context:'signin',
+    callback:async r=>{try{const {error}=await AU.sb.auth.signInWithIdToken({provider:'google',token:r.credential,nonce:n.raw});if(error){const m=$('auMsg');if(m)m.textContent=error.message}}catch(e){}}});
+  google.accounts.id.renderButton(wrap,{type:'standard',theme:'outline',size:'large',text:'continue_with',shape:'pill',logo_alignment:'center',width:Math.min(380,Math.max(220,old.offsetWidth||300)),locale:LANG});
+  old.hidden=true;const alt=document.createElement('button');alt.type='button';alt.className='gis-alt';alt.textContent=tl('Other way to sign in with Google');alt.onclick=()=>old.click();wrap.after(alt)}catch(e){const o=$('auG');if(o)o.hidden=false}}
+{const _af=authForm;authForm=function(){const r=_af.apply(this,arguments);setTimeout(gisMount,0);return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
