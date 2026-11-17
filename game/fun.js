@@ -116,7 +116,7 @@ const CI=()=>COINS[(coinQ||ST.coinS||1)-1]||COINS[0];
 {const _m=menuShow;menuShow=function(h){return _m.call(this,typeof h==='string'?h.split('🪙').join(CI()):h)}}
 st.textContent+=`.ci{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.2em;flex:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}#hc{display:inline-flex;align-items:center;gap:5px}#hc[hidden]{display:none}`;
 /* ---------- game Settings + picture guide ---------- */
-Object.assign(T,{ok:['OK','حسنًا','Tole','Hagaag'],set_t:['Game settings','إعدادات اللعبة','Qindaa\'ina taphaa','Dejinta ciyaarta'],snd_l:['Sound effects','المؤثرات الصوتية','Sagalee','Codadka'],vib_l:['Vibration','الاهتزاز','Raafama','Gariir'],
+Object.assign(T,{ok:['OK','حسنًا','Tole','Hagaag'],view:['View','زاوية الكاميرا','Mul\'ata','Muuqaal'],v_high:['High','عالية','Ol','Sare'],v_top:['Top','من فوق','Gubbaa','Kor'],v_classic:['Low','منخفضة','Gadi','Hoose'],set_t:['Game settings','إعدادات اللعبة','Qindaa\'ina taphaa','Dejinta ciyaarta'],snd_l:['Sound effects','المؤثرات الصوتية','Sagalee','Codadka'],vib_l:['Vibration','الاهتزاز','Raafama','Gariir'],
  on:['On','تشغيل','Banaa','Shidan'],off:['Off','إيقاف','Cufaa','Damsan'],g_t:['How it works','كيف تعمل','Akkamitti hojjeta','Sida ay u shaqeyso'],
  g_coin:['1 coin = 1 dhikr (in a Dhikr run)','عملة = ذكر واحد (في سباق الذكر)','Saantima 1 = zikrii 1','1 qadaadiic = 1 dhikri'],
  g_gift:['Gift: a surprise reward','هدية: مكافأة مفاجئة','Kennaa: badhaasa dinqisiisaa','Hadiyad: abaalmarin layaab ah'],
@@ -148,13 +148,14 @@ function guideHTML(){const row=(i,t)=>`<div class="gr">${i}<span>${t}</span></di
 if(ST.vib===undefined)ST.vib=true;
 try{if(navigator.vibrate){const _v=navigator.vibrate.bind(navigator);navigator.vibrate=p=>ST.vib===false?false:_v(p)}}catch(e){}
 function setHTML(){const tg=(id,on)=>`<div class="tg"><button data-t="${id}" data-v="1" class="${on?'on':''}">${tl('on')}</button><button data-t="${id}" data-v="0" class="${on?'':'on'}">${tl('off')}</button></div>`;
- return `<h1>${tl('set_t')}</h1><div class="sr"><span>${tl('snd_l')}</span>${tg('snd',ST.snd)}</div><div class="sr"><span>${tl('vib_l')}</span>${tg('vib',ST.vib!==false)}</div>
+ return `<h1>${tl('set_t')}</h1><div class="sr"><span>${tl('snd_l')}</span>${tg('snd',ST.snd)}</div><div class="sr"><span>${tl('vib_l')}</span>${tg('vib',ST.vib!==false)}</div><div class="sr"><span>${tl('view')}</span><div class="tg">${['high','top','classic'].map(v=>`<button data-vw="${v}" class="${(ST.view||'high')===v?'on':''}">${tl('v_'+v)}</button>`).join('')}</div></div>
  <button class="sec" id="sGd">${tl('g_t')}</button><button class="go" id="sOk">${tl('ok')}</button>`}
 function sheet(html){if(state==='play')pause();const ctx=state==='pause'&&G?'pause':state;menuShow(html);
  return ()=>{if(ctx==='pause'){state='play';pause()}else if(ctx==='menu')showMenu();else menuHide()}}
 function openGuide(){const close=sheet(guideHTML());$('gOk').onclick=close}
 function openSet(){const close=sheet(setHTML());const m=$('menuS');
  m.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{ST[b.dataset.t]=b.dataset.v==='1';stSave();m.querySelectorAll(`[data-t="${b.dataset.t}"]`).forEach(x=>x.classList.toggle('on',x===b));try{const sl=$('snd');if(sl)sl.textContent=ST.snd?'🔈':'🔇'}catch(e){}});
+ m.querySelectorAll('[data-vw]').forEach(b=>b.onclick=()=>{ST.view=b.dataset.vw;stSave();m.querySelectorAll('[data-vw]').forEach(x=>x.classList.toggle('on',x===b))});
  $('sGd').onclick=openGuide;$('sOk').onclick=close}
 {const bar=document.querySelector('.bar');if(bar){const b=document.createElement('button');b.className='pill ib';b.id='gset';b.setAttribute('aria-label','Settings');b.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>';b.onclick=()=>{if(state==='menu'||state==='play'||state==='pause')openSet()};$('snd').before(b)}}
 function addHelp(){try{const how=document.querySelector('#menuS .how');if(how&&!$('hlp')){const b=document.createElement('button');b.id='hlp';b.className='sec';b.textContent='? '+tl('g_t');b.onclick=openGuide;how.after(b)}}catch(e){}}
