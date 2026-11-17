@@ -1266,6 +1266,20 @@ body.has-bnav>.wrap{padding-top:4px!important}
 .st-top .sr-tk{font-variant-numeric:tabular-nums;font-style:normal;min-width:0;white-space:nowrap}
 .hs-n{display:flex;align-items:center;gap:10px;margin:8px 12px 0;padding:10px 12px;border-radius:16px;background:color-mix(in srgb,#0F9D6E 10%,var(--surface));border:1px solid color-mix(in srgb,#0F9D6E 35%,var(--line));font-weight:700;font-size:.9rem;color:var(--ink)}
 .hs-n span{flex:1;min-width:0}.hs-n button{flex:none;min-height:38px;padding:0 14px;border-radius:99px}
+/* my reminders */
+.mr{margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+.mr-h{margin:0;font-weight:800}
+.mr-i{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:12px;background:var(--bg)}
+.mr-i>div{flex:1;min-width:0;display:flex;flex-direction:column}.mr-i small{color:var(--muted);font-size:.78rem;overflow-wrap:anywhere}
+.mr-f{display:flex;flex-direction:column;gap:8px}
+.mr-f input,.mr-f select{min-height:44px;font-size:16px;border-radius:12px;border:1px solid var(--line);padding:0 10px;background:var(--surface);color:var(--ink);min-width:0}
+.mr-r{display:flex;gap:8px;align-items:center}.mr-r>*{flex:1}.mr-r>span{flex:none;color:var(--muted);font-weight:700}
+.mr-d{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.mr-d button{min-height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:800;color:var(--muted);padding:0}
+.mr-d button.on{background:#0F9D6E;border-color:#0F9D6E;color:#fff}
+.mr-ok{margin:0;font-weight:700;color:#0F9D6E}
+#remCard.rem2 .mr{margin:4px 0 10px;padding:0 0 14px;border-top:0;border-bottom:1px solid var(--line)}
+.mr-x{flex:none;width:36px;height:36px;min-height:36px;padding:0;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);font-weight:800}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5862,6 +5876,73 @@ function hsNudge(){try{const sa=navigator.standalone||matchMedia('(display-mode:
 {const _ls2=landingShow;landingShow=function(){const r=_ls2.apply(this,arguments);setTimeout(hsNudge,50);return r}}
 {const _lr2=langRelabel;langRelabel=function(){const r=_lr2.apply(this,arguments);try{hsNudge()}catch(e){}return r}}
 setTimeout(hsNudge,1500);
+
+/* ===================== reminders that arrive when Fastaqim is closed (Web Push via the free "push" function) ===================== */
+[["My reminders","تذكيراتي","Yaadachiisota koo","Xasuusinadayda"],["What? e.g. School work","ماذا؟ مثلًا: واجب المدرسة","Maal? Fkn. Hojii mana barumsaa","Maxay? Tusaale: Shaqada dugsiga"],
+ ["Once","مرة واحدة","Al tokko","Hal mar"],["Every hour","كل ساعة","Sa'aatii hundumaa","Saacad kasta"],["Every 2 hours","كل ساعتين","Sa'aatii 2 hundumaa","2 saacadood kasta"],["Every 3 hours","كل 3 ساعات","Sa'aatii 3 hundumaa","3 saacadood kasta"],
+ ["until","حتى","hanga","ilaa"],["Add reminder","أضف تذكيرًا","Yaadachiisa dabali","Ku dar xasuusin"],
+ ["Reminders arrive even when Fastaqim is closed.","تصلك التذكيرات حتى لو كان Fastaqim مغلقًا.","Yaadachiisonni yeroo Fastaqim cufamees ni dhufu.","Xasuusinadu way imanayaan xitaa marka Fastaqim xiran yahay."],
+ ["Turn on reminders on this phone","فعّل التذكيرات على هذا الهاتف","Bilbila kana irratti yaadachiisa banii","Ka shid xasuusinta taleefankan"],
+ ["Sign in to get reminders when Fastaqim is closed.","سجّل الدخول لتصلك التذكيرات وFastaqim مغلق.","Yeroo Fastaqim cufamu yaadachiisa argachuuf seeni.","Gal si aad u hesho xasuusin marka Fastaqim xiran yahay."],
+ ["Reminders","التذكيرات","Yaadachiisota","Xasuusinta"],["Time to start","حان وقت البدء","Yeroo jalqabuu","Waa waqtigii la bilaabi lahaa"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const PUSHFN=()=>(SUPA&&SUPA.url?SUPA.url+'/functions/v1/push':'');
+const u8=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
+const b64=buf=>btoa(String.fromCharCode(...new Uint8Array(buf))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+function pushOK(){return typeof AU!=='undefined'&&AU.user&&AU.sb&&!(typeof ACT!=='undefined'&&ACT.id)&&('Notification' in window)&&Notification.permission==='granted'&&'serviceWorker' in navigator&&'PushManager' in window}
+async function pushSubscribe(){try{if(!(typeof AU!=='undefined'&&AU.user&&AU.sb)||!PUSHFN())return false;const reg=await navigator.serviceWorker.ready;let sub=await reg.pushManager.getSubscription();
+  if(!sub){const r=await fetch(PUSHFN()+'?key=1');const {key}=await r.json();sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8(key)})}
+  const j=sub.toJSON();const {error}=await AU.sb.from('push_subs').upsert({endpoint:j.endpoint,user_id:AU.user.id,p256dh:j.keys.p256dh,auth:j.keys.auth});if(error)throw error;
+  S.pushOn=1;save();pushSync(true);return true}catch(e){console.warn('push',e);return false}}
+function myRem(){S.myRem=Array.isArray(S.myRem)?S.myRem:[];return S.myRem}
+function remTimes(r){const [h,m]=(r.at||'09:00').split(':').map(Number),out=[h*60+m];if(r.ev){const [uh,um]=(r.until||'21:00').split(':').map(Number),end=uh*60+um;for(let t=h*60+m+r.ev*60;t<=end;t+=r.ev*60)out.push(t)}return out}
+function pushItems(){const R=S.remind||{},before=(R.before||0)*60000,now=Date.now(),out=[],H=14;
+  for(let i=0;i<H;i++){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+i);const dk=dkey(d);
+    if(R.salah){let P=null;try{P=salahFor(d)}catch(e){}if(P)SQK.forEach((k,j)=>{const at=P[k].getTime()-before;out.push({at,title:'🕌 '+tl("It's time for")+' '+tl(SQ5[j]),body:hmShort(P[k]),tag:'sal-'+k})})}
+    if(R.tasks)(S.tasks||[]).filter(t=>!t.done&&t.due===dk&&t.time).forEach(t=>{const [h,m]=t.time.split(':').map(Number);out.push({at:new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m).getTime()-before,title:'⏰ '+t.title,body:tl('Time to start'),tag:'t-'+t.id})});
+    myRem().forEach(r=>{if(r.days&&r.days.length&&!r.days.includes(d.getDay()))return;remTimes(r).forEach(t=>out.push({at:new Date(d.getFullYear(),d.getMonth(),d.getDate(),Math.floor(t/60),t%60).getTime(),title:'⏰ '+r.t,body:tl('Time to start'),tag:'r-'+r.id+'-'+t}))})}
+  return out.filter(x=>x.at>now+30000).sort((a,b)=>a.at-b.at).slice(0,600)}
+let _psT=0;function pushSync(force){clearTimeout(_psT);_psT=setTimeout(()=>pushSyncNow(force),force?50:4000)}
+async function pushSyncNow(force){try{if(!pushOK()||!S.pushOn)return;const items=pushItems(),h=JSON.stringify([LANG,items.map(x=>[x.at,x.title,x.body])]),hk='fastaqim.pushH',last=JSON.parse(localStorage.getItem(hk)||'{}');
+  if(!force&&last.h===h&&Date.now()-(last.t||0)<864e5)return;
+  const uidv=AU.user.id;let {error}=await AU.sb.from('push_queue').delete().eq('user_id',uidv).eq('sent',false);if(error)throw error;
+  for(let i=0;i<items.length;i+=200){({error}=await AU.sb.from('push_queue').insert(items.slice(i,i+200).map(x=>({user_id:uidv,at:new Date(x.at).toISOString(),title:x.title.slice(0,120),body:(x.body||'').slice(0,200),tag:x.tag,url:'./'}))));if(error)throw error}
+  localStorage.setItem(hk,JSON.stringify({h,t:Date.now()}))}catch(e){console.warn('pushSync',e)}}
+{const _sv=save;save=function(){const r=_sv.apply(this,arguments);try{if(S.pushOn)pushSync()}catch(e){}return r}}
+{const _ci3=cloudInit;cloudInit=async function(){const r=await _ci3.apply(this,arguments);try{if(S.pushOn&&pushOK())pushSubscribe()}catch(e){}return r}}
+
+/* "My reminders" + one clear button, inside the Reminders card */
+const RMF={ev:0,days:[0,1,2,3,4,5,6]};
+function hmStr(t){const d=new Date();d.setHours(Math.floor(t/60),t%60,0,0);try{return new Intl.DateTimeFormat(LOC(),{hour:'numeric',minute:'2-digit'}).format(d)}catch(e){return hmShort(d)}}
+{const _rr=renderRemind;renderRemind=function(){const r=_rr.apply(this,arguments);try{const c=$('remCard');if(!c)return r;
+  const signed=typeof AU!=='undefined'&&AU.user,perm=('Notification' in window)?Notification.permission:'none',on=signed&&perm==='granted'&&S.pushOn;
+  const wd=[...Array(7)].map((_,i)=>{const d=new Date(2026,10,15+i);return new Intl.DateTimeFormat(LOC(),{weekday:'narrow'}).format(d)});
+  const box=document.createElement('div');box.className='mr';
+  box.innerHTML=`<p class="mr-h">⏰ ${esc(tl('My reminders'))}</p>
+   ${myRem().map(x=>`<div class="mr-i"><div><b dir="auto">${esc(x.t)}</b><small dir="auto">${remTimes(x).map(hmStr).join(' · ')}${x.days&&x.days.length<7?' · '+x.days.map(i=>wd[i]).join(' '):''}</small></div><button type="button" class="mr-x" data-mrx="${x.id}" aria-label="Delete">✕</button></div>`).join('')}
+   <form class="mr-f" id="mrF"><input id="mrT" maxlength="60" placeholder="${esc(tl('What? e.g. School work'))}" required>
+    <div class="mr-r"><input type="time" id="mrA" value="16:00" required><select id="mrE"><option value="0">${esc(tl('Once'))}</option><option value="1">${esc(tl('Every hour'))}</option><option value="2">${esc(tl('Every 2 hours'))}</option><option value="3">${esc(tl('Every 3 hours'))}</option></select></div>
+    <div class="mr-r" id="mrU" ${RMF.ev?'':'hidden'}><span>${esc(tl('until'))}</span><input type="time" id="mrUt" value="21:00"></div>
+    <div class="mr-d">${wd.map((w,i)=>`<button type="button" data-mrd="${i}" class="${RMF.days.includes(i)?'on':''}">${esc(w)}</button>`).join('')}</div>
+    <button class="btn-main" type="submit">${esc(tl('Add reminder'))}</button></form>
+   ${on?`<p class="mr-ok">✓ ${esc(tl('Reminders arrive even when Fastaqim is closed.'))}</p>`:!signed?`<p class="small muted">${esc(tl('Sign in to get reminders when Fastaqim is closed.'))}</p>`:`<button type="button" class="btn-calm" id="mrOn">🔔 ${esc(tl('Turn on reminders on this phone'))}</button>`}`;
+  const lb=c.querySelector('.label');if(lb)lb.after(box);else c.appendChild(box);c.classList.add('rem2');
+  const ics=$('rmIcs');if(ics){ics.hidden=true;const n=ics.nextElementSibling;if(n&&n.tagName==='P')n.hidden=true}
+  c.querySelectorAll(':scope>p.small').forEach(x=>{if(x.textContent.includes('📍'))x.hidden=true});
+  if(signed){const rn=$('rmN');if(rn){rn.hidden=true;const n=rn.nextElementSibling;if(n&&n.tagName==='P')n.hidden=true}c.querySelectorAll(':scope>p.small').forEach(x=>{if(x.textContent.startsWith('✓'))x.hidden=true})}
+  $('mrE').value=String(RMF.ev);$('mrE').onchange=e=>{RMF.ev=+e.target.value;$('mrU').hidden=!RMF.ev};
+  box.querySelectorAll('[data-mrd]').forEach(b=>b.onclick=()=>{const i=+b.dataset.mrd;RMF.days=RMF.days.includes(i)?RMF.days.filter(x=>x!==i):[...RMF.days,i].sort();b.classList.toggle('on')});
+  box.querySelectorAll('[data-mrx]').forEach(b=>b.onclick=()=>{S.myRem=myRem().filter(x=>x.id!==b.dataset.mrx);save();renderRemind()});
+  $('mrF').onsubmit=e=>{e.preventDefault();const t=$('mrT').value.trim();if(!t)return;if(typeof blocked==='function'&&blocked(t)){toast(tl('That message cannot be saved here.'));return}
+    myRem().push({id:uid(),t,at:$('mrA').value||'16:00',ev:RMF.ev,until:RMF.ev?($('mrUt').value||'21:00'):'',days:RMF.days.slice()});save();toast('⏰ '+t);renderRemind();
+    if(signed&&!S.pushOn&&!on)setTimeout(()=>{const b=$('mrOn');if(b)b.scrollIntoView({block:'center'})},100)};
+  if($('mrOn'))$('mrOn').onclick=async()=>{if(!isStand()&&/iphone|ipad/i.test(navigator.userAgent)){instGuide();return}if(!('Notification' in window)){instGuide();return}
+    const p=await Notification.requestPermission();if(p==='granted'){S.pushOn=1;save();await pushSubscribe()}renderRemind()};
+  if(on)pushSync()}catch(e){console.error(e)}return r}}
+
+
+/* ☰ → 🔔 Reminders */
+{const _am3=apMenu;apMenu=function(){const r=_am3.apply(this,arguments);try{const m=$('apMenu'),q=m&&m.querySelector('[data-am="qt"]');if(q&&!m.querySelector('[data-am="rem"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='rem';b.textContent='🔔 '+tl('Reminders');b.onclick=()=>{m.hidden=true;show('wins');setTimeout(()=>{const c=$('remCard');if(c)c.scrollIntoView({block:'start',behavior:'smooth'})},120)};q.before(b)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
