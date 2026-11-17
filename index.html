@@ -1636,6 +1636,22 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .fq-bar span{flex:1;text-align:center;color:var(--muted)}.fq-bar button{all:unset;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--ink);cursor:pointer}
 
 .apm-ver{text-align:center;font-size:12px;color:var(--muted,#8a95a1);padding:10px 0 4px}
+.qb{--qr:118px}.qb-loc{color:var(--muted,#5b6673);font-size:14px;margin:2px 0 12px;line-height:1.35}
+.qb-dial{width:290px;height:290px;max-width:78vw;max-height:78vw;margin:4px auto 14px;border-radius:50%;background:var(--surface,#fff);border:2px solid #dfe5ea;position:relative;box-shadow:0 6px 20px #0001;transition:border-color .3s,box-shadow .3s}
+.qb-dial.ok{border:4px solid #15835f;box-shadow:0 0 0 8px #15835f22}
+.qb-rot{position:absolute;inset:0;transition:transform .15s linear}
+.qb-t,.qb-kb{position:absolute;left:50%;top:50%;width:30px;height:30px;margin:-15px 0 0 -15px;display:grid;place-items:center;font-weight:800;font-size:15px;color:#8a95a1}
+.qb-t.n{color:#e5484d}.qb-kb{font-size:28px;width:36px;height:36px;margin:-18px 0 0 -18px}
+.qb-arr{position:absolute;left:50%;top:50%;width:0;height:0}.qb-arr i{position:absolute;left:-5px;bottom:0;width:10px;height:92px;border-radius:6px;background:#15835f}
+.qb-arr i:before{content:"";position:absolute;left:-13px;top:-20px;border:18px solid transparent;border-bottom:24px solid #15835f;border-top:0}
+.qb-hub{position:absolute;left:50%;top:50%;width:22px;height:22px;margin:-11px;border-radius:50%;background:#1b2430}
+.qb-idx{position:absolute;left:50%;top:-12px;margin-left:-8px;border:8px solid transparent;border-top:12px solid #1b2430}
+.qb-st{text-align:center;font-size:21px;font-weight:800;margin:0 0 10px}.qb-st.g{color:#15835f}
+.qb-meter{display:flex;gap:4px}.qb-meter i{flex:1;height:10px;border-radius:5px;background:#dfe5ea}.qb-meter i.on{background:#e0a100}.qb-meter i.on.g{background:#15835f}
+.qb-ml{display:flex;justify-content:space-between;font-size:13px;color:var(--muted,#5b6673);margin:6px 0 10px}
+.qb-warn{background:#fff3d6;color:#7a5200;border-radius:14px;padding:11px 14px;font-size:14.5px;line-height:1.4;margin-bottom:10px}.qb-warn b{display:block;color:#5c3d00}
+.qb-fine{color:var(--muted,#6b7682);font-size:12.5px;line-height:1.45;text-align:center;margin-top:10px}
+[data-theme=dark] .qb-dial{border-color:#2a3440}[data-theme=dark] .qb-hub{background:#e8edf2}[data-theme=dark] .qb-idx{border-top-color:#e8edf2}[data-theme=dark] .qb-warn{background:#3a2e10;color:#f5d58a}[data-theme=dark] .qb-warn b{color:#ffe3a3}[data-theme=dark] .qb-meter i{background:#2a3440}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7278,7 +7294,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v114',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v115',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7464,6 +7480,87 @@ function fqBar(){if(!FQBAR.on||!fqStandalone()||!inApp()||$('fqBar'))return;cons
 /* v114: version label at the bottom of the menu, so it's easy to see the latest version is there */
 {const _amV=apMenu;apMenu=function(){const r=_amV.apply(this,arguments);try{const p=$('apMenu').querySelector('.apm-p');if(p&&!p.querySelector('.apm-ver')){const d=document.createElement('div');d.className='apm-ver';d.textContent=tl('Version')+' '+FQ_BUILD.replace(/\D+/g,'');p.appendChild(d)}}catch(e){}return r}}
 [["Version","الإصدار","Gosa","Nooca"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* v115: Qibla compass (style 3: compass + accuracy bar). Direction from exact location (great circle), magnetic correction from WMM-2025 */
+const WMM={g:[0,-29351.8,-1410.8,-2556.6,2951.1,1649.3,1361,-2404.1,1243.8,453.6,895,799.5,55.7,-281.1,12.1,-233.2,368.9,187.2,-138.7,-142,20.9,64.4,63.8,76.9,-115.7,-40.9,14.9,-60.7,79.5,-77,-8.8,59.3,15.8,2.5,-11.1,14.2,23.2,10.8,-17.5,2,-21.7,16.9,15,-16.8,0.9,4.6,7.8,3,-0.2,-2.5,-13.1,2.4,8.6,-8.7,-12.9,-1.3,-6.4,0.2,2,-1,-0.6,-0.9,1.5,0.9,-2.7,-3.9,2.9,-1.5,-2.5,2.4,-0.6,-0.1,-0.6,-0.1,1.1,-1,-0.2,2.6,-2,-0.2,0.3,1.2,-1.3,0.6,0.6,0.5,-0.1,-0.4,-0.2,-1.3,-0.7],h:[0,0,4545.4,0,-3133.6,-815.1,0,-56.6,237.5,-549.5,0,278.6,-133.9,212,-375.6,0,45.4,220.2,-122.9,43,106.1,0,-18.4,16.8,48.8,-59.8,10.9,72.7,0,-48.9,-14.4,-1,23.4,-7.4,-25.1,-2.3,0,7.1,-12.6,11.4,-9.7,12.7,0.7,-5.2,3.9,0,-24.8,12.2,8.3,-3.3,-5.2,7.2,-0.6,0.8,10,0,3.3,0,2.4,5.3,-9.1,0.4,-4.2,-3.8,0.9,-9.1,0,0,2.9,-0.6,0.2,0.5,-0.3,-1.2,-1.7,-2.9,-1.8,-2.3,0,-1.3,0.7,1,-1.4,0,0.6,-0.1,0.8,0.1,-1,0.1,0.2],gd:[0,12,9.7,-11.6,-5.2,-8,-1.3,-4.2,0.4,-15.6,-1.6,-2.4,-6,5.6,-7,0.6,1.4,0,0.6,2.2,0.9,-0.2,-0.4,0.9,1.2,-0.9,0.3,0.9,0,-0.1,-0.1,0.5,-0.1,-0.8,-0.8,0.8,-0.1,0.2,0,0.5,-0.1,0.3,0.2,0,0.2,0,-0.1,0.1,0.3,-0.3,0,0.3,-0.1,0.1,-0.1,0.1,0,0.1,0.1,0,-0.3,0,-0.1,-0.1,0,0,0,0,0,0,0,-0.1,0,0,-0.1,-0.1,-0.1,-0.1,0,0,0,0,0,0,0.1,0,0,0,-0.1,0,-0.1],hd:[0,0,-21.5,0,-27.7,-12.1,0,4,-0.3,-4.1,0,-1.1,4.1,1.6,-4.4,0,-0.5,2.2,0.4,1.7,1.9,0,0.3,-1.6,-0.4,0.9,0.7,0.9,0,0.6,0.5,-0.8,0,-1,0.6,-0.2,0,-0.2,0.5,-0.4,0.4,-0.5,-0.6,0.3,0.2,0,-0.3,0.3,-0.3,0.3,0.2,-0.1,-0.2,0.4,0.1,0,0,0,-0.2,0.1,-0.1,0.1,0,-0.1,0.2,0,0,0,0.1,0,0.1,0,0,0.1,0,0,0,0,0,0,0,-0.1,0.1,0,0,0,0,0,0,0,-0.1]};
+/* magnetic declination in degrees (east +), World Magnetic Model 2025 (NOAA/BGS, public domain). yrs = years since 2025.0 */
+function magDecl(lat,lng,yrs,alt){alt=alt||0;const N=12,dt=yrs!=null?yrs:(Date.now()-Date.UTC(2025,0,1))/31557600000;
+  const a=6378.137,f=1/298.257223563,e2=f*(2-f),Re=6371.2,ph=lat*Math.PI/180,lm=lng*Math.PI/180;
+  const sp=Math.sin(ph),cp=Math.cos(ph),Rc=a/Math.sqrt(1-e2*sp*sp),p=(Rc+alt)*cp,z=(Rc*(1-e2)+alt)*sp,r=Math.hypot(p,z),phs=Math.asin(z/r);
+  const x=Math.sin(phs),cx=Math.cos(phs),id=(n,m)=>n*(n+1)/2+m,P=[1],D=[0],S=[1];
+  for(let n=1;n<=N;n++)for(let m=0;m<=n;m++){const k=id(n,m);
+    if(n===m){const j=id(n-1,m-1);P[k]=cx*P[j];D[k]=cx*D[j]+x*P[j]}
+    else{const j=id(n-1,m);const K=n>1&&m<=n-2?((n-1)*(n-1)-m*m)/((2*n-1)*(2*n-3)):0,q=K?id(n-2,m):0;
+      P[k]=x*P[j]-(K?K*P[q]:0);D[k]=x*D[j]-cx*P[j]-(K?K*D[q]:0)}}
+  for(let n=1;n<=N;n++){S[id(n,0)]=S[id(n-1,0)]*(2*n-1)/n;for(let m=1;m<=n;m++)S[id(n,m)]=S[id(n,m-1)]*Math.sqrt((n-m+1)*(m===1?2:1)/(n+m))}
+  let Bt=0,Bp=0,Br=0,pw=(Re/r)*(Re/r);
+  for(let n=1;n<=N;n++){pw*=Re/r;for(let m=0;m<=n;m++){const k=id(n,m),g=(WMM.g[k]+dt*WMM.gd[k])*S[k],h=(WMM.h[k]+dt*WMM.hd[k])*S[k],cm=Math.cos(m*lm),sm=Math.sin(m*lm);
+    Bt-=pw*(g*cm+h*sm)*D[k];Bp+=pw*m*(g*sm-h*cm)*P[k];Br+=pw*(n+1)*(g*cm+h*sm)*P[k]}}
+  Bp/=cx;const ps=phs-ph,X=Bt*Math.cos(ps)-Br*Math.sin(ps);return Math.atan2(Bp,-X)*180/Math.PI}
+const KAABA=[21.4225,39.8262];
+function qbBear(la,lo){const r=Math.PI/180,p1=la*r,p2=KAABA[0]*r,dl=(KAABA[1]-lo)*r;return (Math.atan2(Math.sin(dl)*Math.cos(p2),Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl))/r+360)%360}
+function qbDist(la,lo){const r=Math.PI/180,a=Math.sin((KAABA[0]-la)*r/2)**2+Math.cos(la*r)*Math.cos(KAABA[0]*r)*Math.sin((KAABA[1]-lo)*r/2)**2;return 2*6371*Math.asin(Math.sqrt(a))}
+[["Qibla","القبلة","Qiblaa","Qiblada"],
+ ["from North","من الشمال","Kaabaa irraa","laga bilaabo Waqooyiga"],
+ ["km to Makkah","كم إلى مكة","km gara Makkaa","km ilaa Makkah"],
+ ["You're facing the Qibla","أنت متّجه إلى القبلة","Gara Qiblaatti garagalteetta","Waxaad u jeeddaa Qiblada"],
+ ["Turn right","استدر يمينًا","Gara mirgaatti garagali","U leexo midig"],
+ ["Turn left","استدر يسارًا","Gara bitaatti garagali","U leexo bidix"],
+ ["Compass accuracy","دقة البوصلة","Sirrummaa kompaasii","Saxnaanta jiheeyaha"],
+ ["good","جيدة","gaarii","wanaagsan"],["medium","متوسطة","giddugaleessa","dhexdhexaad"],["low","ضعيفة","gadi aanaa","hooseeya"],["unknown","غير معروفة","hin beekamu","lama yaqaan"],
+ ["May be off","قد لا يكون دقيقًا","Sirrii ta'uu dhiisuu danda'a","Waxaa laga yaabaa inuu khaldan yahay"],
+ ["Move your phone in a figure 8, away from metal and magnets.","حرّك هاتفك على شكل الرقم 8، بعيدًا عن المعادن والمغناطيس.","Bilbila kee akka lakkoofsa 8tti sochoosi, sibiilaa fi maagneetii irraa fagaadhu.","Telefoonkaaga u dhaqaaji sida lambarka 8, kana fogee birta iyo birlabta."],
+ ["This phone doesn't report how accurate its compass is. Move it in a figure 8 first, away from metal and magnets.","هذا الهاتف لا يُظهر دقة بوصلته. حرّكه أولًا على شكل الرقم 8، بعيدًا عن المعادن والمغناطيس.","Bilbilli kun sirrummaa kompaasii isaa hin agarsiisu. Dursa akka lakkoofsa 8tti sochoosi, sibiilaa fi maagneetii irraa fagaadhu.","Telefoonkani ma muujiyo saxnaanta jiheeyihiisa. Marka hore u dhaqaaji sida lambarka 8, kana fogee birta iyo birlabta."],
+ ["Hold your phone flat.","أمسك هاتفك بشكل مستوٍ.","Bilbila kee diriirsii qabadhu.","Telefoonka si siman u qabo."],
+ ["Set your city first, so the direction is exact for where you are.","حدّد مدينتك أولًا ليكون الاتجاه دقيقًا لمكانك.","Dursa magaalaa kee filadhu, akka kallattiin bakka jirtuuf sirrii ta'u.","Marka hore dooro magaaladaada, si jihadu ugu saxnaato meesha aad joogto."],
+ ["Set my city","حدّد مدينتي","Magaalaa koo filadhu","Dooro magaaladayda"],
+ ["Start compass","تشغيل البوصلة","Kompaasii jalqabi","Bilow jiheeyaha"],
+ ["Motion access is off. Turn it on in Settings, Apps, Safari, Motion & Orientation Access, then open Qibla again.","الوصول إلى الحركة متوقف. فعّله من الإعدادات ثم التطبيقات ثم Safari ثم الوصول إلى الحركة والاتجاه، ثم افتح القبلة مرة أخرى.","Seensi sochii cufameera. Settings, Apps, Safari, Motion & Orientation Access keessatti banii, ergasii Qiblaa irra deebi'ii bani.","Gelitaanka dhaqdhaqaaqa waa xiran yahay. Ka shid Settings, Apps, Safari, Motion & Orientation Access, kadib mar kale fur Qiblada."],
+ ["Motion access is off. Allow motion sensors for this site in your browser settings, then open Qibla again.","الوصول إلى الحركة متوقف. اسمح بحساسات الحركة لهذا الموقع من إعدادات المتصفح، ثم افتح القبلة مرة أخرى.","Seensi sochii cufameera. Qindaa'ina biraawzarii keessatti sensarii sochii marsariitii kanaaf eeyyami, ergasii Qiblaa irra deebi'ii bani.","Gelitaanka dhaqdhaqaaqa waa xiran yahay. U oggolow dareemayaasha dhaqdhaqaaqa boggan habaynta biraawsarka, kadib mar kale fur Qiblada."],
+ ["No compass found on this device. Use the direction above with a real compass.","لم يتم العثور على بوصلة في هذا الجهاز. استخدم الاتجاه أعلاه مع بوصلة حقيقية.","Meeshaa kana irratti kompaasiin hin argamne. Kallattii olii kompaasii dhugaa wajjin fayyadami.","Qalabkan jiheeye laguma helin. Jihada kore la isticmaal jiheeye dhab ah."],
+ ["For full certainty, check with your local masjid.","للتأكد التام، اسأل مسجدك المحلي.","Guutummaatti mirkaneessuuf, masjiida naannoo keetii gaafadhu.","Si aad u hubiso, weydii masjidka xaafaddaada."],
+ ["Magnetic correction for your city","تصحيح مغناطيسي لمدينتك","Sirreeffama maagneetii magaalaa keetiif","Sixitaanka birlabta ee magaaladaada"],
+ ["Location","الموقع","Bakka","Goobta"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+let QB=null;
+function qbStop(){if(QB){removeEventListener('deviceorientation',QB.h,true);removeEventListener('deviceorientationabsolute',QB.h,true);clearTimeout(QB.t);QB=null}}
+function qbOpen(){qbStop();const L=S.loc||{};const has=L.lat!=null&&L.lng!=null;
+  const N=n=>Math.round(n).toLocaleString(LANG==='ar'?'ar-EG':'en-US');
+  if(!has){modalCard(`<div class="qb"><p class="label">🧭 ${esc(tl('Qibla'))}</p><div class="qb-warn"><b>⚠ ${esc(tl('May be off'))}</b>${esc(tl('Set your city first, so the direction is exact for where you are.'))}</div><button type="button" class="btn-main" id="qbCity" style="width:100%">📍 ${esc(tl('Set my city'))}</button></div>`);
+    $('qbCity').onclick=()=>locAsk(()=>setTimeout(qbOpen,150));return}
+  const B=qbBear(L.lat,L.lng),dec=magDecl(L.lat,L.lng),km=qbDist(L.lat,L.lng),ticks=(LANG==='ar'?[['ش',0],['ق',90],['ج',180],['غ',270]]:[['N',0],['E',90],['S',180],['W',270]]).map(([t,a],i)=>[t,a,i]);
+  modalCard(`<div class="qb"><p class="label">🧭 ${esc(tl('Qibla'))}</p>
+   <p class="qb-loc">📍 ${esc(L.name||tl('Location'))} · ${N(B)}° ${esc(tl('from North'))} · ${N(km)} ${esc(tl('km to Makkah'))}</p>
+   <div class="qb-dial" id="qbDial"><i class="qb-idx"></i><div class="qb-rot" id="qbRot">${ticks.map(([t,a,i])=>`<span class="qb-t${i===0?' n':''}" style="transform:rotate(${a}deg) translateY(calc(var(--qr) * -1)) rotate(${-a}deg) rotate(calc(var(--h,0) * 1deg))">${t}</span>`).join('')}
+     <div class="qb-arr" style="transform:rotate(${B}deg)"><i></i></div><span class="qb-kb" style="transform:rotate(${B}deg) translateY(calc(var(--qr) * -1)) rotate(${-B}deg) rotate(calc(var(--h,0) * 1deg))">🕋</span></div><i class="qb-hub"></i></div>
+   <p class="qb-st" id="qbSt"></p>
+   <div id="qbAcc" hidden><div class="qb-meter"><i></i><i></i><i></i><i></i></div><p class="qb-ml"><span id="qbAl"></span><span id="qbAv"></span></p></div>
+   <div class="qb-warn" id="qbW" hidden></div>
+   <button type="button" class="btn-main" id="qbGo" style="width:100%">🧭 ${esc(tl('Start compass'))}</button>
+   <p class="qb-fine">${esc(tl('Magnetic correction for your city'))}: <bdi dir="ltr">${dec>=0?'+':''}${dec.toFixed(1)}°</bdi><br>${esc(tl('For full certainty, check with your local masjid.'))}</p></div>`);
+  const rot=$('qbRot'),st=$('qbSt'),W=$('qbW'),dial=$('qbDial');let got=false,lastOk=false,hs=[];
+  const warn=(t,b)=>{if(!t){W.hidden=true;return}W.hidden=false;W.innerHTML='<b>⚠ '+esc(tl(b||'May be off'))+'</b>'+esc(tl(t))};
+  const acc=a=>{$('qbAcc').hidden=false;const lv=a==null||a<0?0:a<=5?4:a<=15?3:a<=25?2:1,lab=lv===4?'good':lv===3?'medium':lv===0?'unknown':'low';
+    $('qbAcc').querySelectorAll('.qb-meter i').forEach((x,i)=>x.className=i<lv?(lv>=3?'on g':'on'):'');$('qbAl').textContent=tl('Compass accuracy')+': '+tl(lab);$('qbAv').textContent=a!=null&&a>=0?'±'+Math.round(a)+'°':'';return lv};
+  const h=e=>{let hd=null,a=null;
+    if(typeof e.webkitCompassHeading==='number'&&!isNaN(e.webkitCompassHeading)){hd=e.webkitCompassHeading;a=e.webkitCompassAccuracy}
+    else if(e.absolute&&e.alpha!=null){hd=(360-e.alpha)%360}
+    if(hd==null)return;got=true;$('qbGo').hidden=true;
+    const so=(screen.orientation&&screen.orientation.angle)||window.orientation||0;const T=(hd+dec+so+360)%360;
+    hs.push(T);if(hs.length>12)hs.shift();const spread=hs.length>6?Math.max(...hs.map(v=>Math.abs(((v-hs[0]+540)%360)-180))):0;
+    rot.style.transform='rotate('+(-T)+'deg)';rot.style.setProperty('--h',T);
+    let d=((B-T+540)%360)-180;const ok=Math.abs(d)<=5;dial.classList.toggle('ok',ok);
+    st.className='qb-st'+(ok?' g':'');st.innerHTML=ok?'✓ '+esc(tl("You're facing the Qibla")):esc(d>0?tl('Turn right')+' ↻ ':tl('Turn left')+' ↺ ')+'<bdi dir="ltr">'+Math.round(Math.abs(d))+'°</bdi>';
+    if(ok&&!lastOk){try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(_){}}lastOk=ok;
+    const lv=acc(a),flat=e.beta!=null&&Math.abs(e.beta)>50;
+    if(flat)warn('Hold your phone flat.');else if(lv===0)warn("This phone doesn't report how accurate its compass is. Move it in a figure 8 first, away from metal and magnets.");else if(lv<=2||spread>20)warn('Move your phone in a figure 8, away from metal and magnets.');else warn(null)};
+  const start=async()=>{try{if(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'){const p=await DeviceOrientationEvent.requestPermission();if(p!=='granted'){warn(/iP(hone|ad|od)/.test(navigator.userAgent)||navigator.standalone!=null?'Motion access is off. Turn it on in Settings, Apps, Safari, Motion & Orientation Access, then open Qibla again.':'Motion access is off. Allow motion sensors for this site in your browser settings, then open Qibla again.');return}}}catch(e){}
+    QB={h,t:0};addEventListener('deviceorientationabsolute',h,true);addEventListener('deviceorientation',h,true);st.textContent='…';
+    QB.t=setTimeout(()=>{if(!got){st.textContent=N(B)+'° '+tl('from North');warn('No compass found on this device. Use the direction above with a real compass.')}},3000)};
+  $('qbGo').onclick=start;
+  if(!(typeof DeviceOrientationEvent!=='undefined'&&typeof DeviceOrientationEvent.requestPermission==='function'))start();
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();qbStop()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
+GO.qibla=()=>qbOpen();
+{const _amQ=apMenu;apMenu=function(){const r=_amQ.apply(this,arguments);try{const m=$('apMenu'),s=m&&m.querySelector('[data-am="sal"]');if(s&&!m.querySelector('[data-am="qb"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='qb';b.textContent='🧭 '+tl('Qibla');b.onclick=()=>{m.hidden=true;qbOpen()};s.after(b)}}catch(e){}return r}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
