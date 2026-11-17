@@ -1422,8 +1422,8 @@ body.fq-homev #dayCard{margin-inline:-8px}
 .hm-stead{font:700 14.5px Inter,"IBM Plex Sans Arabic",system-ui;color:#F7D488;margin-top:5px}.hm-stead.ar{font-family:FQ,"KFGQPC Uthmanic Script HAFS",serif;font-size:22px;font-weight:400;line-height:1.3;margin-top:2px}
 .hm-hi{margin-top:10px;position:relative}.hm-hi h1{font:800 22px/1.2 Inter,"IBM Plex Sans Arabic",system-ui;letter-spacing:-.01em;color:#fff;margin:0}.hm-hi p{font:600 14px Inter,"IBM Plex Sans Arabic",system-ui;color:rgba(255,255,255,.88);margin-top:3px}
 .hm-loc{margin-top:14px;background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.35);border-radius:14px;padding:10px 14px;font:700 14px Inter,"IBM Plex Sans Arabic",system-ui;min-height:44px}
-.hm-tl{position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:14px}
-.hm-ln{position:absolute;inset-inline:8.3%;top:10px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}.hm-ln i{position:absolute;inset-inline-start:0;top:0;bottom:0;border-radius:2px;background:#F7D488}
+.hm-tl{position:relative;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:14px}
+.hm-ln{position:absolute;inset-inline:10%;top:10px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}.hm-ln i{position:absolute;inset-inline-start:0;top:0;bottom:0;border-radius:2px;background:#F7D488}
 .hm-p{display:flex;flex-direction:column;align-items:center;position:relative;background:none;border:0;padding:0;color:#fff;min-height:0;font:inherit}
 .hm-p i{width:22px;height:22px;border-radius:50%;background:#2A8A6E;box-shadow:inset 0 0 0 2.5px rgba(255,255,255,.45)}
 .hm-p.ok i{background:#F7D488 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B5040' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center/12px no-repeat;box-shadow:none}
@@ -1592,6 +1592,11 @@ body.in-set #tab-wins .hub-bar [data-tp="set"]{display:none}
 .st-c{padding:6px 2px 2px}.st-c .ayq{font-size:38px;line-height:1.9;color:var(--calm);margin:6px 0 2px;font-weight:400}
 .st-c .ayq .orn{color:#C9A227;font-size:.9em}.st-t{font-size:17px;line-height:1.55;color:var(--ink);max-width:30ch}
 .st-c .qa-b{min-height:40px;padding:0 16px;font-size:14px}
+.ms-is{font-size:1.05rem}.ms-is b{margin-inline-start:6px;color:var(--muted)}
+#fqPtr{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 6px);z-index:200;width:38px;height:38px;border-radius:50%;background:var(--card,#fff);color:var(--muted,#667);box-shadow:0 4px 14px rgba(0,0,0,.16);display:grid;place-items:center;opacity:0;transform:translate(-50%,0);pointer-events:none;transition:opacity .15s}
+#fqPtr.go{color:#0f8a6a}#fqPtr.spin{opacity:1!important;animation:fqspin .7s linear infinite}
+@keyframes fqspin{from{transform:translate(-50%,54px) rotate(0)}to{transform:translate(-50%,54px) rotate(360deg)}}
+.sr-c.sun{display:none!important}.sr{grid-template-columns:repeat(5,1fr)!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -2059,7 +2064,7 @@ function seedRoutine(){
 let S;
 try{S=JSON.parse(localStorage.getItem(KEY));}catch(e){}
 let fresh=false;if(!S||!Array.isArray(S.tasks)){S=seed();fresh=true}
-if(S.name==null)S.name=fresh?'':'Tasnim';
+if(S.name==null)S.name='';
 if(!S.routine){S.routine=[];S.routineDone={}}
 if(S.earned==null)S.earned=S.sparks;
 if(!S.reasons&&fresh){S.reasons=[];S.reasonsV2=true;S.reasonsV3=true}
@@ -2067,11 +2072,7 @@ if(!S.reasons)S.reasons=[{id:uid(),text:'قُلْ أَذَٰلِكَ خَيْر�
 if(S.reasonIx==null)S.reasonIx=0;
 if(!S.coachStyle)S.coachStyle='bal';if(!S.coachV3){S.coachStyle='bal';S.coachV3=true}
 if(!S.reasonsV2){S.reasonsV2=true;[
-  {text:'وَعَصَيْتُم مِّن بَعْدِ مَا أَرَاكُم مَّا تُحِبُّونَ',note:'Āl ʿImrān 3:152 · "...and disobeyed after He had shown you that which you love." (Saheeh International)'},
-  {text:'I remember the good dreams. I don\'t want to lose Jannah.',note:''},
-  {text:'You don\'t reach your goal without struggle.',note:''},
-  {text:'Al-Firdaws is not free.',note:''},
-  {text:'Hard work today is my ticket to Al-Firdaws.',note:''}
+  {text:'وَعَصَيْتُم مِّن بَعْدِ مَا أَرَاكُم مَّا تُحِبُّونَ',note:'Āl ʿImrān 3:152 · "...and disobeyed after He had shown you that which you love." (Saheeh International)'}
 ].forEach(r=>{if(!S.reasons.some(x=>x.text===r.text))S.reasons.push({id:uid(),text:r.text,note:r.note})})}
 const strict=()=>S.coachStyle==='strict';
 const SM=()=>S.starter||2;
@@ -6066,10 +6067,10 @@ function svOpen(){svList();modalCard(`<div class="ah sv2"><p class="ah-t">🔖 $
   const x={id:uid(),u,t:'',note,at:Date.now(),done:0};L.unshift(x);save();$('svU').value='';$('svN').value='';SVV.tab='w';svRender();toast('🔖 '+tl('Saved'));svMeta(x)};
  svList().filter(x=>!x.t&&!x.done).slice(0,8).forEach(x=>svMeta(x))}
 
-/* ---------- no floating 📿: the 📿 chip in the top pill (beside 🕌) opens quick dhikr (Tasnim, 17 Nov) ---------- */
+/* ---------- no floating 📿: the 📿 chip in the top pill (beside 🕌) opens quick dhikr ---------- */
 function fabZk(){const b=$('fabZk');if(b)b.remove();document.body.classList.remove('has-fab')}
 
-/* ---------- greeting line under the name: "You can do it!" (Tasnim's pick, 16 Nov) ---------- */
+/* ---------- greeting line under the name: "You can do it!" ---------- */
 TX['You can do it!']=Object.assign(TX['You can do it!']||{},{ar:'أنت تقدر!',om:'Ni dandeessa!',so:'Waad kari kartaa!'});
 {const _rh2=renderHeader;renderHeader=function(){const r=_rh2.apply(this,arguments);try{const h=document.querySelector('#hello .hl2');if(h)h.textContent=tl('You can do it!')}catch(e){}return r}}
 
@@ -6591,13 +6592,13 @@ function hmClock(ms){ms=Math.max(0,ms);const s=Math.floor(ms/1000),h=Math.floor(
 function hmTabName(k){const n={now:'Now',plan:'Plan',today:'To-do',money:'Money',goals:'Goals',focus:'Focus',enjoy:'Enjoy',wins:'Me'}[k]||k;try{const b=document.querySelector(`nav [data-tab="${k}"]`);if(b){const i=b.querySelector('.ni');const t=(i?b.textContent.replace(i.textContent,''):b.textContent).trim();if(t)return t}}catch(e){}return tl(n)}
 function hmSal(){let P=null;try{P=salahFor(new Date())}catch(e){}
   if(!P)return `<button type="button" class="hm-loc" data-hm="loc">🕌 ${esc(tl('Set my city for salah times'))}</button>`;
-  const now=new Date(),q=Object.assign({},(()=>{try{const T=dzTrk('salah'),v=T&&trkDay()[T.id];return Array.isArray(v)?Object.fromEntries(v.map((x,i)=>[i,x?'on':null]).filter(e=>e[1])):{}}catch(e){return{}}})(),(typeof salQ==='function'?salQ():{})||{}),K=['fajr','sunrise','dhuhr','asr','maghrib','isha'],N=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'];
+  const now=new Date(),q=Object.assign({},(()=>{try{const T=dzTrk('salah'),v=T&&trkDay()[T.id];return Array.isArray(v)?Object.fromEntries(v.map((x,i)=>[i,x?'on':null]).filter(e=>e[1])):{}}catch(e){return{}}})(),(typeof salQ==='function'?salQ():{})||{}),K=['fajr','dhuhr','asr','maghrib','isha'],N=['Fajr','Dhuhr','Asr','Maghrib','Isha'];
   let cur=-1,nx=-1;K.forEach((k,i)=>{if(k==='sunrise')return;if(P[k]&&P[k]<=now)cur=i});K.forEach((k,i)=>{if(nx<0&&k!=='sunrise'&&P[k]&&P[k]>now)nx=i});
   if(P.sunrise&&now>=P.sunrise&&(!P.dhuhr||now<P.dhuhr))cur=-1;
-  const pi=i=>i>1?i-1:i; /* index in the 5 prayers */
+  const pi=i=>i; /* index in the 5 prayers */
   const cells=K.map((k,i)=>{const sr=k==='sunrise',m=sr?null:q[pi(i)],cls=[sr?'sr':'',m==='on'||m==='late'?'ok':'',m==='late'?'lt':'',m==='miss'?'ms':'',i===cur?'cur':'',i===nx?'nx':''].join(' ');
     return `<${sr?'div':'button type="button" data-dz="sal" data-i="'+pi(i)+'"'} class="hm-p ${cls}"><i></i><small>${esc(tl(N[i]))}</small><b dir="ltr">${P[k]?hmShort(P[k]):''}</b></${sr?'div':'button'}>`}).join('');
-  const lastDone=Math.max(cur,0),fill=cur<0&&nx>0?(nx-1)/5:Math.max(0,lastDone)/5;
+  const lastDone=Math.max(cur,0),fill=cur<0&&nx>0?(nx-.5)/4:Math.max(0,lastDone)/4;
   const p1=cur>=0?`<span class="hm-p1" data-hmt="up" data-t="${P[K[cur]].getTime()}">${esc(tl(N[cur]))} · <b dir="ltr">${hmClock(now-P[K[cur]])}</b></span>`:'';
   let nxT=nx>=0?P[K[nx]]:null,nxN=nx>=0?N[nx]:'Fajr';if(!nxT){try{const d=new Date();d.setDate(d.getDate()+1);const P2=salahFor(d);nxT=P2&&P2.fajr}catch(e){}}
   const p2=nxT?`<span class="hm-p2" data-hmt="down" data-t="${nxT.getTime()}" data-n="${esc(tl(nxN))}">${(HM_IN[LANG]||HM_IN.en)(esc(tl(nxN)),`<b dir="ltr">${hmClock(nxT-now)}</b>`)}</span>`:'';
@@ -6911,7 +6912,6 @@ const WP={
  garden:{n:'Garden',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140"><rect width="140" height="140" fill="#EEF8F0"/><g fill="#BFE3C8"><path d="M20 30c14-14 32-10 34 6-16 8-28 6-34-6z"/><path d="M90 20c10 12 6 28-10 30-4-14 0-24 10-30z"/><path d="M100 90c16-6 30 4 26 18-16 2-24-4-26-18z"/><path d="M30 100c4 16-6 28-20 26-2-14 6-22 20-26z"/></g><g fill="#9ED3AE"><path d="M60 70c10-10 22-6 22 6-10 6-18 4-22-6z"/></g></svg>`)+' 0 0/140px 140px',dk:'#152A1E'},
  sky:{n:'Sky',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9ED0F5"/><stop offset="1" stop-color="#EAF6FF"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><g fill="#fff" opacity=".9"><ellipse cx="80" cy="140" rx="70" ry="22"/><ellipse cx="120" cy="125" rx="40" ry="24"/><ellipse cx="300" cy="300" rx="80" ry="22"/><ellipse cx="270" cy="285" rx="40" ry="24"/><ellipse cx="120" cy="520" rx="90" ry="24"/><ellipse cx="160" cy="503" rx="44" ry="26"/></g></svg>`)+' center/cover',dk:'#0F2238'},
  mountains:{n:'Mountains',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3F1FA"/><stop offset="1" stop-color="#FDF4EC"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><circle cx="300" cy="430" r="40" fill="#FBD38D" opacity=".7"/><path d="M0 560 90 450 160 520 250 420 400 560V800H0z" fill="#C9C3E6"/><path d="M0 640 110 540 200 610 300 530 400 620V800H0z" fill="#A9B8DF"/><path d="M0 720 120 640 230 700 330 650 400 690V800H0z" fill="#8FA9D3"/></svg>`)+' center bottom/cover',dk:'#171A2E'},
- pattern:{n:'Pattern',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80"><rect width="80" height="80" fill="#F4F8F6"/><g fill="none" stroke="#CFE3DA" stroke-width="1.6"><path d="M40 8 49 31 72 40 49 49 40 72 31 49 8 40 31 31z"/><rect x="24" y="24" width="32" height="32" transform="rotate(45 40 40)"/><rect x="24" y="24" width="32" height="32"/><path d="M0 0 8 8M80 0 72 8M0 80 8 72M80 80 72 72"/></g></svg>`)+' 0 0/80px 80px',dk:'#122520'},
  dawn:{n:'Dawn',bg:'linear-gradient(170deg,#FDE7D3 0%,#F9D3DE 45%,#E3DDF7 100%)',dk:'linear-gradient(170deg,#2B1E2A,#1E1B33)'},
  sea:{n:'Sea',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="800" viewBox="0 0 400 800" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E6F4FA"/><stop offset=".55" stop-color="#D2ECF4"/><stop offset="1" stop-color="#A9DCE9"/></linearGradient></defs><rect width="400" height="800" fill="url(#g)"/><g fill="none" stroke="#fff" stroke-width="3" opacity=".7"><path d="M0 560q50-14 100 0t100 0 100 0 100 0"/><path d="M0 620q50-14 100 0t100 0 100 0 100 0"/><path d="M0 680q50-14 100 0t100 0 100 0 100 0"/></g></svg>`)+' center bottom/cover',dk:'#0E2230'},
  night:{n:'Stars at night',bg:svgU(`<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><rect width="160" height="160" fill="#1B2A4A"/><g fill="#FDE68A"><circle cx="20" cy="30" r="1.4"/><circle cx="90" cy="18" r="1"/><circle cx="140" cy="60" r="1.6"/><circle cx="60" cy="90" r="1.1"/><circle cx="120" cy="130" r="1.3"/><circle cx="30" cy="140" r="1"/><circle cx="100" cy="80" r=".9"/></g><path d="M52 40a14 14 0 1 0 12 18 11 11 0 1 1-12-18z" fill="#FDE68A" opacity=".85"/></svg>`)+' 0 0/160px 160px',dk:'#0B1428',dark:1}};
@@ -7157,7 +7157,7 @@ BLOCK_BAD_AR.push('زنجي','زنجيه','زنجية','زنوج','عبد اسو
   modalCard(`<p class="label">🌿 ${esc(tl("Let's keep it respectful"))}</p><p>${esc(tl('Curse words, racist, sexist and other hurtful words are not allowed on Fastaqim. Please write it another way.'))}</p><div class="row"><button class="btn-calm" id="blkOk">${esc(tl('Okay'))}</button></div>`);$('blkOk').onclick=modalClose}}
 [["Let's keep it respectful","لنحافظ على الاحترام","Kabaja haa eegnu","Aan ixtiraamno"],["Curse words, racist, sexist and other hurtful words are not allowed on Fastaqim. Please write it another way.","الشتائم والكلمات العنصرية والمسيئة للرجال أو النساء وأي كلمات جارحة غير مسموحة في Fastaqim. اكتبها بطريقة أخرى من فضلك.","Arrabsoo, jechoota sanyummaa, saala irratti xiqqeessan fi jechoota miidhan Fastaqim irratti hin hayyamamu. Maaloo karaa biraan barreessi.","Aflagaado, erayo midab-takoor, kuwa jinsiga lagu yareeyo iyo erayo kale oo dhib leh lagama oggola Fastaqim. Fadlan si kale u qor."],["Okay","حسنًا","Tole","Hagaag"],["Offensive words","كلمات مسيئة","Jechoota miidhan","Erayo xun"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 /* ideas: let the form through (the owner needs to see it), but flag and blur it in the inbox */
-window.addEventListener('submit',e=>{const f=e.target;if(f&&f.id==='fbForm'&&typeof f.onsubmit==='function'){e.preventDefault();e.stopPropagation();f.onsubmit(e)}},true);
+window.addEventListener('submit',e=>{const f=e.target;if(f&&f.id==='fbForm'&&typeof f.onsubmit==='function'){const v=blkVals(f);e.preventDefault();e.stopPropagation();if(blockedBad(v)||(typeof selfHit==='function'&&selfHit(v))){blkWarn(v);return}f.onsubmit(e)}},true);
 {const _ir9=ibRender;ibRender=function(){const r=_ir9.apply(this,arguments);try{$('scrollBody').querySelectorAll('.ibm').forEach(m=>{const b=m.querySelector('[data-id]');const row=b&&(FB.rows||[]).find(x=>x.id===+b.dataset.id);if(!row||m.dataset.bf)return;m.dataset.bf=1;
   if(blockedBad(row.body||'')){const p=[...m.querySelectorAll('p')].find(x=>x.textContent.trim()===String(row.body||'').trim())||m.querySelector('p.notranslate,p[dir=auto]');const t=document.createElement('span');t.className='fbt fbt-bad';t.textContent='⚠ '+tl('Offensive words');(m.querySelector('.fbts')||m.firstElementChild).prepend(t);if(p){p.classList.add('ib-blur');p.onclick=()=>p.classList.remove('ib-blur')}}})}catch(e){}return r}}
 /* ===== "Small step? Still a win!" stands out: a solid gold pill ===== */
@@ -7182,6 +7182,86 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)audStop()})
 /* ===== Proper Qur'an font (KFGQPC Uthmanic Hafs, already bundled as "Fastaqim Quran") for every ayah ===== */
 /* ===== Google sign-in shows alfirdows.github.io ===== */
 GIS.cid='877677669475-c5q3mmae9mekj60oj6igittia1gohjeu.apps.googleusercontent.com';
+
+/* ===== v108 safety: words that put yourself down, and self-harm words ===== */
+const SELF_INS=["i'm dumb","im dumb","i am dumb","i'm so dumb","im so dumb","i'm stupid","im stupid","i am stupid","i'm so stupid","im so stupid","i'm an idiot","im an idiot","i am an idiot","i'm useless","im useless","i am useless","i'm worthless","im worthless","i am worthless","i'm a failure","im a failure","i am a failure","i'm lazy","im lazy","i am lazy","i'm so lazy","i'm pathetic","i am pathetic","i'm a loser","im a loser","i am a loser","i'm hopeless","i am hopeless","i'm trash","i am trash","i'm disgusting","i am disgusting","i'm ugly","im ugly","i am ugly","i'm a mess","i am a mess","i'm a waste","i am a waste","i hate myself","i hate me","i hate my life","stupid me","dumb me","i suck","i'm nothing","i am nothing","i'm a burden","i am a burden",
+ "ana ghabi","ana fashil",
+ "ani gowwaa","ani gowwaa dha","of nan jibba","ofii koo nan jibba","ani hin fayyadu","ani homaa miti",
+ "doqon baan ahay","nacas baan ahay","waxaan ahay doqon","waxaan ahay nacas","naftayda waan nacayaa","waan is nacayaa","waxba ma ahi","faa'iido ma lihi"];
+const SELF_INS_AR=["انا غبي","انا غبية","انا غبيه","انا فاشل","انا فاشلة","انا فاشله","انا كسول","انا كسولة","انا تافه","انا تافهة","انا حمار","انا حمارة","انا ما استاهل","انا لا استحق","اكره نفسي","انا اكره نفسي","انا عديم الفائدة","انا عديمة الفائدة","انا ولا شي","انا لا شيء"];
+const SELF_HARM=["kill myself","killing myself","kms","suicide","suicidal","end my life","ending my life","want to die","wanna die","i want to die","cut myself","cutting myself","hurt myself","hurting myself","self harm","self-harm","selfharm","better off dead","no reason to live","end it all","don't want to live","dont want to live",
+ "of ajjeesuu","of ajjeessuu","of ajjeesa","du'uun barbaada","du'uun fedha",
+ "is dil","isdil","isdilid","is dilid","naftayda dil","waan dhiman rabaa","dhimasho ayaan rabaa"];
+const SELF_HARM_AR=["انتحار","انتحر","سانتحر","اقتل نفسي","ابي اموت","ابغى اموت","اريد ان اموت","اريد الموت","بدي موت","اذي نفسي","اؤذي نفسي","ايذاء النفس","انهي حياتي"];
+const selfHit=text=>{if(!text)return null;const t=blkNorm(String(text).replace(/[’‘`]/g,"'"));return blkWords(t,SELF_HARM,SELF_HARM_AR)?'harm':blkWords(t,SELF_INS,SELF_INS_AR)?'ins':null};
+BLOCK_BAD.push(...SELF_INS,...SELF_HARM);BLOCK_BAD_AR.push(...SELF_INS_AR,...SELF_HARM_AR);
+{const _bw2=blkWarn;blkWarn=function(text){const k=selfHit(text);if(!k)return _bw2.apply(this,arguments);
+  if(k==='harm')modalCard(`<p class="label">🤍 ${esc(tl('You matter'))}</p><p>${esc(tl('If you are thinking about hurting yourself, please talk to someone you trust or your doctor today. If you are in danger right now, call your local emergency number.'))}</p>
+   <p class="sk-ar notranslate" dir="rtl" style="font-size:1.3rem;text-align:center">﴿لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ﴾</p><p class="small muted" style="text-align:center;margin:0 0 8px">${esc(tl('Do not despair of the mercy of Allah.'))} · ${esc(tl("Qur'an, Surah"))} 39:53</p>
+   <div class="row"><button class="btn-calm" id="blkOk">${esc(tl('Okay'))}</button></div>`);
+  else modalCard(`<p class="label">🌿 ${esc(tl('Be kind to yourself'))}</p><p>${esc(tl('Words that put you down are not saved on Fastaqim. Write the step itself instead, for example "Read 1 page".'))}</p><div class="row"><button class="btn-calm" id="blkOk">${esc(tl('Okay'))}</button></div>`);
+  $('blkOk').onclick=modalClose}}
+[["You matter","أنت مهم","Ati barbaachisaa dha","Adiga waad muhiim tahay"],
+ ["If you are thinking about hurting yourself, please talk to someone you trust or your doctor today. If you are in danger right now, call your local emergency number.","إذا كنت تفكر في إيذاء نفسك، فتحدث اليوم مع شخص تثق به أو مع طبيبك. وإذا كنت في خطر الآن، فاتصل برقم الطوارئ في بلدك.","Yoo of miidhuu yaadaa jirte, maaloo har'a nama amantu ykn doktara kee waliin haasa'i. Yoo amma balaa keessa jirta ta'e, lakkoofsa balaa tasaa naannoo keetii bilbili.","Haddii aad ka fikirayso inaad naftaada wax yeesho, fadlan maanta la hadal qof aad aaminsan tahay ama dhakhtarkaaga. Haddii aad hadda khatar ku jirto, wac lambarka gurmadka degdegga ah ee dalkaaga."],
+ ["Do not despair of the mercy of Allah.","لا تيأس من رحمة الله.","Rahmata Rabbii irraa abdii hin muratinaa.","Ha ka quusanina naxariista Eebe."],
+ ["Be kind to yourself","ترفّق بنفسك","Ofiif gara laafi","Naftaada u naxariiso"],
+ ['Words that put you down are not saved on Fastaqim. Write the step itself instead, for example "Read 1 page".','الكلمات التي تقلل من نفسك لا تُحفظ في Fastaqim. اكتب الخطوة نفسها بدلًا منها، مثل "أقرأ صفحة واحدة".','Jechoonni of xiqqeessan Fastaqim irratti hin olkaa\'aman. Kanaa mannaa tarkaanfii sana barreessi, fakkeenyaaf "Fuula 1 dubbisi".','Erayada naftaada hoos u dhiga laguma kaydiyo Fastaqim. Halkii, qor tallaabada lafteeda, tusaale ahaan "Akhri 1 bog".']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ideas form: hurtful words are stopped before sending (no exemption any more); other words (like "music" in an idea) still go through */
+window.addEventListener('submit',e=>{const f=e.target;if(!f||f.id!=='fbForm')return;const v=blkVals(f);if(blockedBad(v)||selfHit(v)){e.preventDefault();e.stopImmediatePropagation();blkWarn(v)}},true);
+
+/* no stars for blocked titles; the same to-do title earns stars once a day */
+const NS_RX=/^(Finished|Did|Started|Plan|Goal step|Tried|Reviewed): ([\s\S]*)$/;
+function nsKey(w){const m=NS_RX.exec(w||'');return m&&/^(Finished|Did)$/.test(m[1])?dkey()+'|'+m[1]+'|'+blkNorm(m[2]).replace(/\s+/g,' ').trim():null}
+function noStar(w){const m=NS_RX.exec(w||'');if(m&&(blocked(m[2])||selfHit(m[2])))return true;const k=nsKey(w);return !!(k&&S.awk&&S.awk[k])}
+{const _aw=award;award=function(n,win){if(noStar(win))return 0;const k=nsKey(win);if(k){S.awk=S.awk||{};const d=dkey();Object.keys(S.awk).forEach(x=>{if(!x.startsWith(d))delete S.awk[x]});S.awk[k]=1}return _aw.apply(this,arguments)}}
+{const _ft=finishTask;finishTask=function(t){if(t&&noStar('Finished: '+t.title)){try{tgHit()}catch(e){}t.done=true;t.doneAt=Date.now();toast('✓ '+tl('Done'));return}return _ft.apply(this,arguments)}}
+{const _cs=completeStep;completeStep=function(t,s){if(t&&s&&noStar('Did: '+s.text)){s.done=true;if(t.steps.every(x=>x.done))finishTask(t);else toast('✓ '+tl('Done'));save();render();return}return _cs.apply(this,arguments)}}
+
+/* notifications: never send a blocked title; a short encouraging line instead of "Time to start" */
+const PUSHB=[["Your star is waiting ⭐","نجمتك بانتظارك ⭐","Urjiin kee si eegaa jira ⭐","Xiddigtaadu way ku sugaysaa ⭐"],["Begin with Bismillah","ابدأ ببسم الله","Bismillaahiin jalqabi","Ku bilow Bismillaah"],["You've got this, one step at a time","تقدر عليها، خطوة بخطوة","Ni dandeessa, tarkaanfii tokko tokkoon","Waad kartaa, tallaabo tallaabo"],["Small step? Still a win!"]];
+{const _pi=pushItems;pushItems=function(){const li={en:0,ar:1,om:2,so:3}[LANG],st=tl('Time to start');let j=0;
+  return _pi.apply(this,arguments).filter(x=>!(x.tag&&!/^sal-/.test(x.tag)&&(blocked(x.title)||selfHit(x.title)))).map(x=>{if(x.body===st){const r=PUSHB[j++%PUSHB.length];x.body=r[3]?r[li==null?0:li]:tl(r[0])}return x})}}
+
+/* missed salah: pray it when you remember, istighfar, and hope. No guilt. */
+{const _sm3=salMark;salMark=function(i){const r=_sm3.apply(this,arguments);try{const b=$('scrollBody').querySelector('[data-sq="miss"]');if(b){const f=b.onclick;b.onclick=()=>{f&&f();setTimeout(()=>{try{modalClose()}catch(e){}missCard(i)},360)}}}catch(e){}return r}}
+const MISSQ={ar:'مَن نسيَ صلاةً أو نامَ عنها فكفّارتُها أن يُصلّيَها إذا ذكرَها',en:'Whoever forgets a prayer or sleeps through it, its expiation is to pray it when they remember it.',om:'Namni salaata irraanfate ykn irraa rafe, kaffaaraan isaa yeroo yaadatetti salaatuudha.',so:'Qofkii salaad illoobay ama ka seexday, kafaaraddeedu waa inuu tukado markuu xusuusto.'};
+function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
+  modalCard(`<div class="sk"><p class="sk-ar notranslate" dir="rtl">«${esc(MISSQ.ar)}»</p>${tr?`<p class="sk-tr" dir="auto">${esc(tr)}</p>`:''}
+   <a class="sk-ref" href="https://sunnah.com/muslim:684" target="_blank" rel="noopener">Muslim 684 · Bukhari 597 ↗</a>
+   <div class="sk-b"><button type="button" class="btn-main" id="msPray">🕌 ${esc(tl('I prayed it now'))}</button>
+   <button type="button" class="btn-ghost ms-is" id="msIs"><span class="notranslate" dir="rtl">أستغفر الله</span> <b id="msN"></b></button></div>
+   <p class="sk-l" dir="auto">﴿لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ﴾ ${LANG==='ar'?'':esc(tl('Do not despair of the mercy of Allah.'))} <a href="https://quran.com/39/53" target="_blank" rel="noopener" style="color:inherit;font-weight:700">39:53 ↗</a></p></div>`);
+  $('msPray').onclick=()=>{S.salQ=S.salQ||{};const k=dkey(),q=Object.assign({},S.salQ[k]||{});q[i]='late';S.salQ[k]=q;try{const T=dzTrkMake('salah'),a=(Array.isArray(trkDay()[T.id])?trkDay()[T.id]:[0,0,0,0,0]).slice();a[i]=1;trkSet(T,a)}catch(e){}
+    save();modalClose();try{dashRender()}catch(e){}try{salTop()}catch(e){}toast('🕌 '+tl(SQ5[i])+' ✓ '+tl('Alhamdulillah'))};
+  $('msIs').onclick=()=>{n++;$('msN').textContent='×'+n;try{if(!S.calm&&navigator.vibrate)navigator.vibrate(10)}catch(e){}}}
+[["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
+const FQ_BUILD='fastaqim-v108',FQ_DAY0=dkey();
+function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
+function fqReload(){fqStateSave();location.reload()}
+addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
+setTimeout(()=>{try{if(location.hash&&location.hash.length>1||/[?&]go=/.test(location.search))return;const st=JSON.parse(sessionStorage.getItem('fq.state')||'null');if(!st||Date.now()-st.at>6*3600e3||!$('tab-'+st.tab))return;
+  Object.keys(HUBV).forEach(k=>{if(st.hub&&k in st.hub)HUBV[k]=st.hub[k]});if(st.nowv)document.body.dataset.nowv=st.nowv;if(st.setv&&SETP[st.setv])SETV=st.setv;show(st.tab);setTimeout(()=>{try{scrollTo(0,st.y||0)}catch(e){}},60)}catch(e){}},0);
+async function fqCheckNew(){try{if(location.protocol!=='https:'||inArtifact())return;
+  if(dkey()!==FQ_DAY0&&!document.querySelector('#scrollModal:not([hidden])')){fqReload();return}
+  const r=await fetch('sw.js',{cache:'no-store'});if(!r.ok)return;const m=/CACHE="([^"]+)"/.exec(await r.text());if(!m||m[1]===FQ_BUILD)return;
+  if(sessionStorage.getItem('fq.rl')===m[1])return;sessionStorage.setItem('fq.rl',m[1]);
+  try{const g=await navigator.serviceWorker.getRegistration();if(g)await g.update()}catch(e){}fqReload()}catch(e){}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)fqCheckNew()});setTimeout(fqCheckNew,1500);
+function fqStandalone(){return navigator.standalone===true||matchMedia('(display-mode: standalone)').matches}
+const PTR={y0:0,on:false,d:0,el:null};
+function ptrEl(){if(!PTR.el){PTR.el=document.createElement('div');PTR.el.id='fqPtr';PTR.el.setAttribute('aria-hidden','true');PTR.el.innerHTML='<svg viewBox="0 0 24 24" width="22" height="22"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';document.body.appendChild(PTR.el)}return PTR.el}
+document.addEventListener('touchstart',e=>{PTR.on=false;if(!fqStandalone()||e.touches.length!==1||scrollY>0||swAnyOpen())return;for(let x=e.target;x&&x!==document.body;x=x.parentElement){if(x.scrollTop>0)return;if(x.matches&&x.matches('input,textarea,select,canvas,.no-swipe'))return}PTR.y0=e.touches[0].clientY;PTR.d=0;PTR.on=true},{passive:true});
+document.addEventListener('touchmove',e=>{if(!PTR.on)return;PTR.d=Math.max(0,e.touches[0].clientY-PTR.y0);if(scrollY>0){PTR.on=false;PTR.d=0}const el=ptrEl(),p=Math.min(1,PTR.d/90);el.style.opacity=PTR.d>12?p:0;el.style.transform=`translate(-50%,${Math.min(80,PTR.d*.6)}px) rotate(${p*300}deg)`;el.classList.toggle('go',PTR.d>=90)},{passive:true});
+document.addEventListener('touchend',()=>{if(!PTR.on)return;PTR.on=false;const el=ptrEl();if(PTR.d>=90){el.classList.add('spin');try{if(!S.calm&&navigator.vibrate)navigator.vibrate(10)}catch(e){}setTimeout(fqReload,350)}else{el.style.opacity=0;el.style.transform='translate(-50%,0)'}PTR.d=0},{passive:true});
+/* swiping sideways no longer changes the section (swipe stays within the section) */
+swOrder=function(){return []};
+/* Sunrise is not a salah: removed from the strip and lists */
+{const i=SAL.findIndex(x=>x[0]==='sunrise');if(i>=0)SAL.splice(i,1)}
+{const _sr=salRowHTML;salRowHTML=function(){SAL.splice(1,0,['sunrise','Sunrise']);try{return _sr.apply(this,arguments)}finally{SAL.splice(1,1)}}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
