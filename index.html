@@ -1903,6 +1903,16 @@ body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z
 .apm-tip{font-size:12.5px;color:var(--muted);margin:8px 2px 0}
 .apm-i{position:relative}
 .apm-pinb{position:absolute;inset-inline-end:8px;top:50%;transform:translateY(-50%);font-size:20px;color:#c99a1c;width:34px;height:34px;display:grid;place-items:center;cursor:pointer}
+
+/* v127 real theme colors */
+.hm-hero{background:linear-gradient(165deg,var(--hero1,#0B5040) 0%,var(--hero2,#11725A) 60%,var(--hero3,#178466) 100%)!important}
+.tmm{position:relative;display:flex;flex-direction:column;gap:4px;width:100%;aspect-ratio:9/15;border-radius:14px;overflow:hidden;padding:0 0 4px;box-sizing:border-box;box-shadow:inset 0 0 0 1px #0000000f}
+.tmm-h{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:7px 7px 14px;border-radius:0 0 10px 10px;color:#fff}.tmm-h b{font-size:10px;font-weight:900;letter-spacing:-.01em}.tmm-h i{width:44%;height:5px;border-radius:3px}
+.tmm-c{margin:-10px 6px 0;border-radius:8px;padding:5px;display:flex;flex-direction:column;gap:3px;box-shadow:0 1px 4px #0000001a}.tmm-c i{height:7px;border-radius:4px}.tmm-c em{height:4px;width:70%;border-radius:2px}
+.tmm-t{display:grid;grid-template-columns:repeat(4,1fr);gap:3px;padding:2px 6px}.tmm-t i{aspect-ratio:1;border-radius:4px}
+.tmm-n{margin-top:auto;height:10px;margin-inline:0;display:flex;justify-content:center;align-items:center}.tmm-n i{width:22%;height:4px;border-radius:2px}
+.tmm-dec{position:absolute;top:1px;inset-inline:0;text-align:center;font-size:7px;font-style:normal;color:#f5c542;z-index:1;letter-spacing:2px}
+.tmm{aspect-ratio:3/4}.tmm-t{grid-template-columns:repeat(4,1fr)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7545,7 +7555,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v126',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v127',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8280,6 +8290,16 @@ function amEdit(p,keep){const on=AME.on;p.querySelectorAll('.apm-pinb').forEach(
   let tip=p.querySelector('.apm-tip');if(on&&!tip){tip=document.createElement('p');tip.className='apm-tip';tip.textContent=tl('Tap ☆ to pin a tool to the top of the menu.');p.querySelector('.apm-g').after(tip)}else if(!on&&tip)tip.remove();
   if(!on)return;const P=S.mPins||[];p.querySelectorAll('.apm-i[data-am]').forEach(b=>{if(['out','gx','set2'].includes(b.dataset.am))return;const k=b.dataset.am,s=document.createElement('span');s.className='apm-pinb'+(P.includes(k)?' on':'');s.textContent=P.includes(k)?'★':'☆';s.setAttribute('role','button');s.setAttribute('aria-label',tl('Pin to Tabs'));
     s.onclick=e=>{e.stopPropagation();e.preventDefault();S.mPins=(S.mPins||[]).filter(x=>x!==k);if(!P.includes(k))S.mPins.push(k);S.mPins=S.mPins.slice(0,6);save();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}apMenu()};b.appendChild(s)})}
+
+/* v127: themes really change the page (Home header, buttons, bars), Night turns the page dark, and the picker shows each theme as a mini Home screen */
+const THH={calm:['#0B5040','#11725A','#178466'],ocean:['#1B4E86','#2F6FB5','#3F88CC'],plum:['#45296E','#6B4C9A','#8566B4'],emerald:['#06463A','#0E7C5A','#1C9871'],sky:['#1A45B8','#2563EB','#4B8BF5'],forest:['#1E4426','#2F6B3A','#3F8A4B'],sand:['#7E3A1C','#B4532A','#CC6C40'],ramadan:['#0E1A46','#1B2D6B','#27418A'],eid:['#0A4F57','#0F7C7C','#18A096'],teal:['#0A5555','#0F7C7C','#18A096'],mono:['#1F2937','#374151','#4B5563'],night:['#0B1222','#16203A','#202E52']};
+function thmHero(){try{const k=(typeof thmEff==='function'?thmEff():(S.look||{}).preset)||'calm',h=THH[k]||THH.calm,r=document.documentElement;r.style.setProperty('--hero1',h[0]);r.style.setProperty('--hero2',h[1]);r.style.setProperty('--hero3',h[2]);r.dataset.thk=k;
+  const L=S.look||{};if(L.preset==='night'&&L.mode!=='dark'){L.mode='dark';L.nightSet=1;r.dataset.theme='dark'}else if(L.preset!=='night'&&L.nightSet){L.mode='auto';delete L.nightSet;r.dataset.theme='auto'}}catch(e){}}
+{const _lkH=lookApply;lookApply=function(){const r=_lkH.apply(this,arguments);thmHero();return r}}
+{const _tsH=thmSet;thmSet=function(k){const r=_tsH.apply(this,arguments);thmHero();if((S.look||{}).nightSet!==undefined||k==='night'){try{lookApply()}catch(e){}}save();return r}}
+setTimeout(thmHero,0);
+thmMini=function(k){const h=THH[k]||THH.calm,t=THK[k]||{},acc=t.k1||'#FF8A3D',dark=k==='night',bg=dark?'#121a2c':'#eef1f3',card=dark?'#1f2a44':'#fff',ink=dark?'#e8ecf5':'#18212b',deco=k==='ramadan'?'<i class="tmm-dec">🌙 ⭐ 🏮</i>':k==='eid'?'<i class="tmm-dec">⭐ ⭐ ⭐</i>':'';
+  return `<span class="tmm" style="background:${bg}">${deco}<span class="tmm-h" style="background:linear-gradient(165deg,${h[0]},${h[1]} 60%,${h[2]})"><b>Fastaqim</b><i style="background:${t.k4||'#F5C46B'}"></i></span><span class="tmm-c" style="background:${card}"><i style="background:${acc}"></i><em style="background:${ink};opacity:.25"></em></span><span class="tmm-t">${[t.k2||h[1],acc,t.k4||'#F5B82E',h[2]].map(c=>`<i style="background:${c}"></i>`).join('')}</span><span class="tmm-n" style="background:${card}"><i style="background:${h[1]}"></i></span></span>`};
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
