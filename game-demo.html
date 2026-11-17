@@ -407,26 +407,38 @@ showMenu();
 </script>
 <script src="game/r3d.js?v=2"></script>
 <script>
-/* Free play: 30 minutes a day (Dhikr and Task runs are never limited) */
-Object.assign(T,{fq_rule:["Free play: 30 minutes a day.","اللعب الحر: 30 دقيقة في اليوم.","Tapha bilisaa: guyyaatti daqiiqaa 30.","Ciyaar xor ah: 30 daqiiqo maalintii."],
+/* Free play is EARNED on Fastaqim (shared localStorage fastaqim.play): 3 days in a row at 50% of the day = 1 hour, each further day in a row = +1 hour,
+   max 7 hours earned a week, credit never expires, max 1 hour played a day. Dhikr and Task runs are never limited. */
+Object.assign(T,{fq_rule:["Free play is earned: 3 days in a row at 50% of your day = 1 hour. Each extra day in a row = +1 hour.","اللعب الحر بالمكافأة: 3 أيام متتالية بإنجاز 50% من يومك = ساعة. كل يوم متتالٍ بعدها = ساعة أخرى.","Tapha bilisaa ni argatama: guyyaa 3 walitti aansee %50 guyyaa keetii = sa'aatii 1. Guyyaan dabalataa hundi = sa'aatii 1 dabalataa.","Ciyaarta xorta ah waa la kasbadaa: 3 maalmood oo xiriir ah oo 50% maalintaada ah = 1 saac. Maalin kasta oo dheeraad ah = +1 saac."],
+ fq_lim:["Up to 7 hours a week, 1 hour a day. Saved hours never expire.","حتى 7 ساعات في الأسبوع، وساعة في اليوم. الساعات المحفوظة لا تنتهي.","Torbanitti hanga sa'aatii 7, guyyaatti sa'aatii 1. Sa'aatiin kuufaman hin dhumatan.","Ilaa 7 saac toddobaadkii, 1 saac maalintii. Saacadaha la kaydiyay ma dhacaan."],
+ fq_bank:["Saved: {h}","المحفوظ: {h}","Kuufame: {h}","La kaydiyay: {h}"],
  fq_left:["{n} min left today","باقي {n} دقيقة اليوم","Har'a daqiiqaan {n} hafte","Maanta {n} daqiiqo ayaa hadhay"],
- fq_done:["Great playing! Free play is done for today.","لعب رائع! انتهى اللعب الحر لليوم.","Tapha gaarii! Tapha bilisaa har'aa xumurameera.","Ciyaar fiican! Ciyaarta xorta ah maanta way dhammaatay."],
+ fq_run:["Your run: {n} of 3 days","سلسلتك: {n} من 3 أيام","Walitti aansuu kee: guyyaa {n} keessaa 3","Taxanahaaga: {n} ka mid ah 3 maalmood"],
+ fq_none:["No free play saved yet.","لا يوجد لعب حر محفوظ بعد.","Ammaaf tapha bilisaa kuufame hin jiru.","Weli ciyaar xor ah lama kaydin."],
+ fq_done:["Great playing! That's today's hour.","لعب رائع! انتهت ساعة اليوم.","Tapha gaarii! Sa'aatiin har'aa xumurameera.","Ciyaar fiican! Saacaddii maanta way dhammaatay."],
  fq_more:["Dhikr and Task runs are always open.","جولات الذكر والمهام متاحة دائمًا.","Fiigichi zikrii fi hojii yeroo hunda banaa dha.","Orodka dhikriga iyo hawlaha had iyo jeer waa furan yihiin."],
  fq_back:["Free play is back tomorrow.","يعود اللعب الحر غدًا.","Tapha bilisaa boru deebi'a.","Ciyaarta xorta ah berri ayay soo laabanaysaa."]});
-const FQK='fastaqim.freeT',FQMAX=1800;
-function fqDay(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
-function fqGet(){try{const o=JSON.parse(localStorage.getItem(FQK)||'{}');return o.d===fqDay()?o:{d:fqDay(),s:0}}catch(e){return {d:fqDay(),s:0}}}
-function fqLeft(){return Math.max(0,FQMAX-(fqGet().s||0))}
-let FQ=null;function fqAdd(dt){if(!FQ)FQ=fqGet();if(FQ.d!==fqDay())FQ={d:fqDay(),s:0};FQ.s+=dt;if(!FQ.w||performance.now()-FQ.w>1000){FQ.w=performance.now();try{localStorage.setItem(FQK,JSON.stringify({d:FQ.d,s:Math.round(FQ.s)}))}catch(e){}}}
+const PLK='fastaqim.play',FQDAY=3600;
+function fqDay(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function plGet(){try{return Object.assign({days:{},bank:0,used:null},JSON.parse(localStorage.getItem(PLK)||'{}'))}catch(e){return {days:{},bank:0,used:null}}}
+function plRun(o){let n=0,d=new Date();for(;;){const k=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');if(!o.days[k]){if(n===0&&d.toDateString()===new Date().toDateString()){d.setDate(d.getDate()-1);continue}break}n++;d.setDate(d.getDate()-1)}return n}
+function usedToday(o){return o.used&&o.used.d===fqDay()?o.used.s:0}
+function fqLeft(){const o=plGet();return Math.max(0,Math.min(FQDAY-usedToday(o),o.bank||0))}
+let FQ=null;
+function fqAdd(dt){const o=plGet();const u=usedToday(o)+dt;o.used={d:fqDay(),s:u};o.bank=Math.max(0,(o.bank||0)-dt);FQ=o;
+  if(!fqAdd.w||performance.now()-fqAdd.w>1000){fqAdd.w=performance.now();try{localStorage.setItem(PLK,JSON.stringify(o))}catch(e){}}}
 function fqMin(){return Math.ceil(fqLeft()/60)}
-function freeInfo(){const l=fqLeft();return l>0?`<div class="fq"><b>⏱ ${tl('fq_rule')}</b><span>${tl('fq_left').replace('{n}',fqMin())}</span></div>`
-  :`<div class="fq done"><b>🌟 ${tl('fq_done')}</b><span>${tl('fq_more')}</span></div>`}
-{const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast('🌟 '+tl('fq_back')+' '+tl('fq_more'));return}FQ=fqGet();return _b.apply(this,arguments)}}
-{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=Math.max(0,FQMAX-FQ.s),el=$('fqT');
+function fqH(sec){const h=Math.floor(sec/3600),m=Math.round(sec%3600/60);return (h?h+' h':'')+(h&&m?' ':'')+(m||!h?m+' min':'')}
+function freeInfo(){const o=plGet(),l=fqLeft(),run=Math.min(3,plRun(o));
+  if(l>0)return `<div class="fq"><b>🎮 ${tl('fq_bank').replace('{h}',fqH(o.bank||0))} · ${tl('fq_left').replace('{n}',fqMin())}</b><span>${tl('fq_lim')}</span></div>`;
+  if((o.bank||0)>0)return `<div class="fq done"><b>🌟 ${tl('fq_done')} ${tl('fq_back')}</b><span>${tl('fq_bank').replace('{h}',fqH(o.bank))} · ${tl('fq_more')}</span></div>`;
+  return `<div class="fq done"><b>🔒 ${tl('fq_none')}</b><span>${tl('fq_rule')}</span><span class="fq-r">${'●'.repeat(run)}${'○'.repeat(3-run)} ${tl('fq_run').replace('{n}',run)}</span><span>${tl('fq_more')}</span></div>`}
+{const _b=begin;begin=function(){if(ST.mode==='free'&&fqLeft()<=0){toast((plGet().bank>0?'🌟 '+tl('fq_back'):'🔒 '+tl('fq_none'))+' '+tl('fq_more'));return}return _b.apply(this,arguments)}}
+{const _s=step;step=function(dt){const r=_s.apply(this,arguments);try{const g=G;if(g&&g.mode==='free'&&state==='play'){fqAdd(dt);const left=fqLeft(),el=$('fqT');
   if(el){const m=Math.floor(left/60),s=Math.floor(left%60);el.textContent='⏱ '+m+':'+String(s).padStart(2,'0');el.hidden=false;const bk=$('back');if(bk&&!bk.dataset.t){bk.dataset.t=bk.textContent;bk.textContent='‹';bk.setAttribute('aria-label',bk.dataset.t)}}
-  if(left<=0){state='end';try{localStorage.setItem(FQK,JSON.stringify({d:FQ.d,s:FQMAX}))}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
+  if(left<=0){state='end';try{localStorage.setItem(PLK,JSON.stringify(FQ))}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,50,20])}catch(e){}endCard(`<p class="big" style="font-size:1.35rem">🌟 ${tl('fq_done')}</p><p style="margin-top:6px">${tl('fq_more')}</p>`,true)}}}catch(e){}return r}}
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const el=$('fqT');if(el)el.hidden=true;const bk=$('back');if(bk&&bk.dataset.t){bk.textContent=bk.dataset.t;delete bk.dataset.t}}catch(e){}return r}}
 (function(){const hc=$('hc');if(hc&&!$('fqT')){const s=document.createElement('span');s.id='fqT';s.hidden=true;s.className=hc.className;s.style.cssText='font-variant-numeric:tabular-nums';hc.after(s)}
- const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}';document.head.appendChild(st)})();
+ const st=document.createElement('style');st.textContent='.fq{display:flex;flex-direction:column;gap:2px;margin:8px 0 2px;padding:10px 12px;border-radius:14px;background:rgba(15,157,110,.1);color:#0f5132;font:600 .9rem/1.35 Inter,system-ui,sans-serif;text-align:center}.fq b{font-weight:800}.fq.done{background:rgba(232,163,23,.14);color:#7a4b00}.fq-r{font-weight:800;letter-spacing:1px}';document.head.appendChild(st)})();
 </script>
 </body></html>
