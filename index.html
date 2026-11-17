@@ -1632,6 +1632,8 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .en-ok{white-space:normal!important;overflow:visible!important}
 .wz-oth{justify-content:center;margin-top:8px}.wz-oth input{max-width:260px;width:100%}.wz-ex{text-align:center;margin:0 0 4px}
 #wzWs,#wzWe{max-width:138px}
+.fq-bar{position:sticky;top:0;z-index:80;display:flex;align-items:center;gap:8px;margin:0 8px;padding:calc(env(safe-area-inset-top,0px) + 4px) 8px 4px;background:var(--surface);border-radius:0 0 16px 16px;box-shadow:0 2px 10px -6px rgba(0,0,0,.3);font:600 14px Inter,system-ui;color:var(--ink)}
+.fq-bar span{flex:1;text-align:center;color:var(--muted)}.fq-bar button{all:unset;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;color:var(--ink);cursor:pointer}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7176,7 +7178,7 @@ async function gisMount(){try{const old=$('auG');if(!GIS.cid||!old||old.dataset.
   google.accounts.id.initialize({client_id:GIS.cid,nonce:n.hashed,ux_mode:'popup',itp_support:true,context:'signin',
     callback:async r=>{try{const {error}=await AU.sb.auth.signInWithIdToken({provider:'google',token:r.credential,nonce:n.raw});if(error){const m=$('auMsg');if(m)m.textContent=error.message}}catch(e){}}});
   google.accounts.id.renderButton(wrap,{type:'standard',theme:'outline',size:'large',text:'continue_with',shape:'pill',logo_alignment:'center',width:Math.min(380,Math.max(220,old.offsetWidth||300)),locale:LANG});
-  old.hidden=true}catch(e){const o=$('auG');if(o)o.hidden=false}}
+  old.hidden=true}catch(e){const o=$('auG');if(o){o.hidden=false;delete o.dataset.gis;o.onclick=()=>{const m=$('auMsg');if(m)m.textContent=tl('Google sign-in could not load. Check your internet and tap again.');gisMount()}}}}
 {const _af=authForm;authForm=function(){const r=_af.apply(this,arguments);setTimeout(gisMount,0);return r}}
 TX["You earned 20 minutes of free play 🎮"]={ar:'ربحت 20 دقيقة من اللعب الحر 🎮',om:'Daqiiqaa 20 tapha bilisaa argatte 🎮',so:'Waxaad heshay 20 daqiiqo oo ciyaar xor ah 🎮'};
 /* ===== No racist, sexist or hateful words anywhere people type (same guard as curse words: blocked everywhere, even in journals).
@@ -7274,7 +7276,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v111',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v112',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7437,6 +7439,18 @@ function emModal(){modalCard(`<p class="label">✉️ ${esc(tl('Change email'))}
  ["New email","البريد الجديد","Imeelii haaraa","Iimaylka cusub"],["Send confirmation link","أرسل رابط التأكيد","Linkii mirkaneessaa ergi","Dir xiriirka xaqiijinta"],
  ["Check both inboxes (old and new) and tap the link to confirm.","افتح البريدين (القديم والجديد) واضغط الرابط للتأكيد.","Saanduqa imeelii lamaan (moofaa fi haaraa) ilaaliitii linkii tuqi.","Eeg labada sanduuq (kii hore iyo kan cusub) oo taabo xiriirka si aad u xaqiijiso."],
  ["That did not work. Check the email and try again.","لم ينجح ذلك. تحقق من البريد وحاول مرة أخرى.","Hin hojjenne. Imeelii mirkaneessiitii irra deebi'ii yaali.","Ma shaqayn. Hubi iimaylka oo isku day mar kale."]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* Home Screen app: Safari-style bar (Open in Safari + refresh). Off until a style is picked. */
+const FQBAR={on:false};
+function fqBar(){if(!FQBAR.on||!fqStandalone()||!inApp()||$('fqBar'))return;const d=document.createElement('div');d.id='fqBar';d.className='fq-bar';
+  d.innerHTML=`<button type="button" id="fqbS" aria-label="${esc(tl('Open in Safari'))}"><svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.8 8.2 13.3 13.3 8.2 15.8 10.7 10.7z" fill="currentColor"/></svg></button><span>alfirdows.github.io</span><button type="button" id="fqbR" aria-label="${esc(tl('Refresh'))}"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M20 12a8 8 0 1 1-2.34-5.66" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round"/><path d="M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`;
+  document.body.prepend(d);d.querySelector('#fqbR').onclick=()=>fqReload();d.querySelector('#fqbS').onclick=()=>{fqStateSave();location.href='x-safari-'+location.href.split('#')[0]}}
+[["Open in Safari","افتح في Safari","Safari keessatti bani","Ku fur Safari"],["Refresh","تحديث","Haaromsi","Cusbooneysii"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v112: keep swipe-back inside the Home Screen app (old pages in history, e.g. a Google error page, can't come back) */
+[["Google sign-in could not load. Check your internet and tap again.","تعذّر تحميل الدخول بـ Google. تحقّق من الإنترنت واضغط مرة أخرى.","Seensi Google fe'uu hin dandeenye. Interneetii kee ilaali, irra deebi'ii tuqi.","Gelitaanka Google lama soo rarin karin. Hubi internetkaaga oo mar kale taabo."]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+(function(){try{if(!fqStandalone())return;const st=history.state||{};if(!st.fqG){history.replaceState(Object.assign({},st,{fqB:1}),'');history.pushState({fqG:1},'')}
+  addEventListener('popstate',e=>{if(e.state&&e.state.fqG)return;
+    history.pushState({fqG:1},'')})}catch(e){}})();
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
