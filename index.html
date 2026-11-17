@@ -1787,6 +1787,46 @@ body.has-bnav #scrollModal.tm-sheet #scrollBody{padding-bottom:14px!important}
 .ch-pr.on{background:color-mix(in srgb,#15835f 12%,transparent)}.ch-pr.on i{background:#15835f;border-color:#15835f}.ch-pr.on i::after{content:'✓';color:#fff;font-size:12px;font-weight:900;font-style:normal}
 .ch-t small{-webkit-line-clamp:1}.ch-t .ch-nx{color:var(--ink);opacity:.75}
 body.ch-on #tab-today > .card:not(#chCard):not(:has(#topList)):not(:has(#laterList)):not(:has(#dumpForm)){display:none}
+
+/* v122 home calendar */
+.hc{padding-bottom:12px}
+.hc-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}
+.hc-m{font-size:19px;font-weight:800;color:var(--ink)}
+.hc-ctl{display:flex;align-items:center;gap:4px}
+.hc-ar{border:0;background:transparent;color:#15835f;font-size:26px;font-weight:600;width:36px;height:36px;min-height:0;padding:0;border-radius:50%;line-height:1}
+[dir=rtl] .hc-ar{transform:scaleX(-1)}
+.hc-today{border:0;background:color-mix(in srgb,#15835f 12%,transparent);color:#15835f;font-weight:800;font-size:13px;border-radius:14px;padding:5px 11px;min-height:0}
+.hc-g{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));row-gap:2px;text-align:center}
+.hc-w{font-size:11.5px;font-weight:700;color:var(--muted);padding:2px 0 4px}
+.hc-d{border:0;background:transparent;padding:2px 0;min-height:0;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink);font:inherit}
+.hc-d span{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:16.5px;font-weight:600}
+.hc-d.td span{color:#15835f;font-weight:800}
+.hc-d.sel span{background:var(--ink);color:var(--surface,#fff)}.hc-d.sel.td span{background:#15835f;color:#fff}
+.hc-d.out span{opacity:.35}
+.hc-d i{width:5px;height:5px;border-radius:50%;background:transparent}.hc-d i.on{background:color-mix(in srgb,var(--ink) 40%,transparent)}
+.hc-tg{display:block;margin:2px auto 0;border:0;background:transparent;padding:4px 20px;min-height:0}.hc-tg i{display:block;width:36px;height:5px;border-radius:3px;background:color-mix(in srgb,var(--ink) 18%,transparent)}
+.hc-day{border-top:1px solid var(--line);margin-top:6px;padding-top:10px}
+.hc-dl{font-size:13.5px;color:var(--muted);margin:0 0 6px}.hc-dl b{color:var(--ink)}
+.hc-l{display:flex;flex-direction:column}
+.hc-it{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:9px 2px;border-bottom:1px solid var(--line)}
+.hc-it:last-child{border-bottom:0}
+.hc-tm{min-width:64px;font-size:13.5px;font-weight:700;color:#15835f;padding-inline-start:8px;border-inline-start:3px solid #15835f}
+.hc-tt{flex:1;min-width:0;font-size:15.5px;color:var(--ink);overflow-wrap:break-word}
+.hc-it i{font-style:normal;color:var(--muted);font-size:14px}
+.hc-it.dn .hc-tt{text-decoration:line-through;opacity:.55}
+.hc-free{font-size:14px;color:var(--muted);margin:2px 0 6px}
+.hc-add{display:flex;gap:6px;margin-top:8px;align-items:center}
+.hc-add input{height:44px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);padding:0 10px;font:inherit;font-size:16px;min-width:0}
+.hc-add #hcI{flex:1;width:0}.hc-add #hcT{flex:0 0 108px;font-size:14px;padding:0 6px}
+.hc-add .btn-main{flex:none;width:44px;height:44px;min-height:0;padding:0;font-size:22px;border-radius:12px}
+.hc-full{all:unset;cursor:pointer;display:block;margin:10px auto 0;color:#15835f;font-weight:800;font-size:14px}
+.hc-ed{display:flex;flex-direction:column;gap:12px;text-align:start}
+.hc-ed input{height:46px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface,#fff);color:var(--ink);padding:0 12px;font:inherit;font-size:16px;width:100%;box-sizing:border-box}
+.hc-er{display:grid;grid-template-columns:1fr 1fr;gap:8px}.hc-er label{display:flex;flex-direction:column;gap:4px;font-size:13px;font-weight:700;color:var(--muted)}.hc-er small{font-weight:500}
+.hc-del{all:unset;cursor:pointer;text-align:center;color:#c2410c;font-weight:700;padding:6px}
+body.fq-homev #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5){display:block!important;margin-inline:-8px}
+body.fq-app[data-nowv=tools] #tab-now > #hmCal:not(#z1):not(#z2):not(#z3):not(#z4):not(#z5):not(#z6){display:none!important}
+[dir=rtl] .hc-ar{transform:none}.hc-tm.na{color:var(--muted);font-weight:600;font-size:12.5px;border-inline-start-color:var(--line)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7429,7 +7469,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v121',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v122',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -7918,6 +7958,49 @@ document.addEventListener('submit',e=>{if(!(e.target&&e.target.id==='dumpForm')|
 {const _shC=show;show=function(tab){const r=_shC.apply(this,arguments);try{if(tab==='today')chCard()}catch(e){}return r}}
 GO.chunks=()=>{show('today');setTimeout(()=>{const c=$('chCard');if(c)c.scrollIntoView({block:'start'})},200)};
 SRCH_PG.splice(3,0,['🧩','Chunks','chunks']);
+
+/* v122: Calendar on Home instead of Energy (Energy stays in the menu). iPhone-style: week strip or full month, dots on busy days, tap a day to see, add and edit */
+[['Today','اليوم','Har\'a','Maanta'],['Week','أسبوع','Torban','Toddobaad'],['Month','شهر','Ji\'a','Bil'],['Add','أضف','Dabali','Ku dar'],['Edit','تعديل','Gulaali','Wax ka beddel'],['Date','التاريخ','Guyyaa','Taariikh'],['Time','الوقت','Yeroo','Waqti'],
+ ['Delete','حذف','Haqi','Tirtir'],['Save','حفظ','Olkaa\'i','Keydi'],['Free day. Add something?','يوم فارغ. تضيف شيئًا؟','Guyyaa duwwaa. Waa tokko dabaltaa?','Maalin bannaan. Wax ma ku daraysaa?'],
+ ['Add to this day','أضف لهذا اليوم','Guyyaa kanatti dabali','Ku dar maalintan'],['Full planner','المخطط الكامل','Karoora guutuu','Qorshaha oo dhan'],['Optional','اختياري','Dirqama miti','Ikhtiyaari']
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const HC={sel:null,mode:'week',anc:null};
+function hcD(k){return new Date(k+'T00:00')}
+function hcItems(k){return (S.tasks||[]).filter(t=>t.due===k).sort((a,b)=>(a.time||'99').localeCompare(b.time||'99'))}
+function hcCard(){const day=$('dayCard');if(!day)return;let c=$('hmCal');if(!c){c=document.createElement('div');c.className='card hc';c.id='hmCal';day.after(c)}
+  const td=dkey();if(!HC.sel)HC.sel=td;if(!HC.anc)HC.anc=HC.sel;const sel=HC.sel,a=hcD(HC.anc);
+  const busy=new Set((S.tasks||[]).filter(t=>t.due&&!t.done).map(t=>t.due));
+  let days=[];if(HC.mode==='week'){const s=new Date(a);s.setDate(s.getDate()-s.getDay());for(let i=0;i<7;i++){const d=new Date(s);d.setDate(s.getDate()+i);days.push(d)}}
+  else{const f=new Date(a.getFullYear(),a.getMonth(),1),s=new Date(f);s.setDate(1-f.getDay());const n=Math.ceil((f.getDay()+new Date(a.getFullYear(),a.getMonth()+1,0).getDate())/7)*7;for(let i=0;i<n;i++){const d=new Date(s);d.setDate(s.getDate()+i);days.push(d)}}
+  const WKL={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']},wk=days.slice(0,7).map(d=>WKL[LANG]?WKL[LANG][d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'}));
+  const mon=a.toLocaleDateString(LOC(),{month:'long',year:'numeric'});
+  const sd=hcD(sel),L=hcItems(sel),sdl=sd.toLocaleDateString(LOC(),{weekday:'long',month:'long',day:'numeric'});
+  c.innerHTML=`<div class="hc-top"><b class="hc-m notranslate">${esc(mon)}</b><span class="hc-ctl">${sel!==td||HC.anc!==td?`<button type="button" class="hc-today" data-hc="today">${tl('Today')}</button>`:''}<button type="button" class="hc-ar" data-hc="prev" aria-label="‹"><span dir="ltr">${RTL.includes(LANG)?'›':'‹'}</span></button><button type="button" class="hc-ar" data-hc="next" aria-label="›"><span dir="ltr">${RTL.includes(LANG)?'‹':'›'}</span></button></span></div>
+   <div class="hc-g notranslate">${wk.map(w=>`<span class="hc-w">${esc(w)}</span>`).join('')}${days.map(d=>{const k=dkey(d),out=HC.mode==='month'&&d.getMonth()!==a.getMonth();return `<button type="button" class="hc-d${k===sel?' sel':''}${k===td?' td':''}${out?' out':''}" data-hd="${k}"><span>${d.getDate()}</span><i class="${busy.has(k)?'on':''}"></i></button>`}).join('')}</div>
+   <button type="button" class="hc-tg" data-hc="mode" aria-label="${tl(HC.mode==='week'?'Month':'Week')}"><i></i></button>
+   <div class="hc-day"><p class="hc-dl notranslate">${sel===td?`<b>${tl('Today')}</b> · `:''}${esc(sdl)}</p>
+    ${L.length?`<div class="hc-l">${L.map(t=>`<button type="button" class="hc-it${t.done?' dn':''}" data-he="${t.id}"><span class="hc-tm${t.time?'':' na'}">${t.time?esc(t12(t.time)):esc(tl('Anytime'))}</span><span class="hc-tt notranslate" data-raw dir="auto">${esc(t.title)}</span><i aria-hidden="true">✎</i></button>`).join('')}</div>`:`<p class="hc-free">${tl('Free day. Add something?')}</p>`}
+    <form class="hc-add" id="hcF"><input id="hcI" maxlength="90" dir="auto" placeholder="${esc(tl('Add to this day'))}" enterkeyhint="done"><input id="hcT" type="time" aria-label="${esc(tl('Time'))}"><button class="btn-main" aria-label="${esc(tl('Add'))}">＋</button></form>
+    <button type="button" class="hc-full" data-hc="full">${tl('Full planner')} ›</button></div>`;
+  const f=$('hcF');f.onsubmit=e=>{e.preventDefault();const v=$('hcI').value.trim();if(!v)return;if(typeof blocked==='function'&&blocked(v)){toast(tl('That message cannot be saved here.'));return}
+    try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}S.tasks.push({id:uid(),title:v,top:false,done:false,steps:[],due:HC.sel,time:$('hcT').value||''});save();hcCard();setTimeout(()=>{const i=$('hcI');if(i)i.focus()},30)}}
+function hcEdit(id){const t=(S.tasks||[]).find(x=>x.id===id);if(!t)return;
+  modalCard(`<div class="hc-ed"><p class="label">✎ ${tl('Edit')}</p><input id="heN" maxlength="90" dir="auto" value="${esc(t.title)}"><div class="hc-er"><label>${tl('Date')}<input id="heD" type="date" value="${esc(t.due||'')}"></label><label>${tl('Time')}<input id="heT" type="time" value="${esc(t.time||'')}"></label></div>
+   <button type="button" class="btn-main" id="heS" style="width:100%">${tl('Save')}</button><button type="button" class="hc-del" id="heX">${tl('Delete')}</button></div>`);
+  $('heS').onclick=()=>{const v=$('heN').value.trim();if(!v)return;if(typeof blocked==='function'&&blocked(v)){toast(tl('That message cannot be saved here.'));return}t.title=v;t.due=$('heD').value||t.due;t.time=$('heT').value||'';if(t.due)HC.sel=t.due;HC.anc=HC.sel;save();modalClose()};
+  $('heX').onclick=()=>{const i=S.tasks.indexOf(t);if(i>=0){S.tasks.splice(i,1);if(typeof trashPut==='function')trashPut('task',t);save()}modalClose()}}
+document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('#hmCal');if(!c)return;const d=e.target.closest('[data-hd]'),h=e.target.closest('[data-hc]'),ed=e.target.closest('[data-he]');if(!d&&!h&&!ed)return;e.preventDefault();try{navigator.vibrate&&navigator.vibrate(6)}catch(x){}
+  if(ed)return hcEdit(ed.dataset.he);
+  if(d){HC.sel=d.dataset.hd;if(HC.mode==='month'&&hcD(HC.sel).getMonth()!==hcD(HC.anc).getMonth())HC.anc=HC.sel;else if(HC.mode==='week')HC.anc=HC.sel;return hcCard()}
+  const k=h.dataset.hc,a=hcD(HC.anc);
+  if(k==='mode'){HC.mode=HC.mode==='week'?'month':'week';HC.anc=HC.sel}
+  else if(k==='today'){HC.sel=HC.anc=dkey()}
+  else if(k==='prev'||k==='next'){const s=k==='prev'?-1:1;if(HC.mode==='week')a.setDate(a.getDate()+7*s);else{a.setDate(1);a.setMonth(a.getMonth()+s)}HC.anc=dkey(a);if(HC.mode==='week')HC.sel=HC.anc}
+  else if(k==='full'){GO.calendar();return}
+  hcCard()});
+{const _rdH=renderDayCard;renderDayCard=function(){const r=_rdH.apply(this,arguments);try{const c=$('dayCard');if(c&&!c.hidden&&c.querySelector('[data-en]'))c.hidden=true;hcCard()}catch(e){}return r}}
+GO.cal=GO.month=()=>{goHome&&goHome();setTimeout(()=>{const c=$('hmCal');if(c)c.scrollIntoView({block:'center',behavior:'smooth'})},250)};
+{const _hrv=hubReveal;hubReveal=function(el){try{if(el&&el.closest&&el.closest('#hmCal'))return}catch(e){}return _hrv.apply(this,arguments)}}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
