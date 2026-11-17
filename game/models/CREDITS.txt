@@ -1,0 +1,5 @@
+3D models in this folder: CC0 1.0 (public domain), free for any use.
+Cars: Kenney "Car Kit" (https://kenney.nl/assets/car-kit)
+Buildings: Kenney "City Kit (Commercial)" (https://kenney.nl/assets/city-kit-commercial)
+Nature (trees, rocks, cactus, crystals, props): Kenney "Nature Kit" and Quaternius (https://quaternius.com), CC0
+Optimized copies from the npm package @netforge/asset-library-files (CC0 art, credits in its NOTICE file).
