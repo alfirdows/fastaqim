@@ -196,12 +196,14 @@ function step(dt){const g=G;g.t+=dt;
  build();const near=Math.round(g.x+1);
  for(const ob of g.objs){const d=ob.z-g.dist;
   if(ob.k==='coin'&&!ob.got&&(g.mag>0||g.boost>0)&&d<7&&d>-.5){ob.ln=near;ob.h=Math.max(0,g.y*.8)}
-  if(ob.got||ob.hit||d>.45||d<-.6)continue;
+  if(ob.got||ob.hit||d>.45)continue;
+  const isPk=ob.k==='coin'||ob.k==='gem'||ob.k==='star5';
+  if(d<-.6&&!(isPk&&d>-1.5&&ob.ln===near))continue; /* coins passed in one big frame still count */
   if(ob.k==='gate'){if(d<.2){ob.hit=true;gateHit(ob)}continue}
   if(ob.k==='finish'){if(d<.2){ob.hit=true;finish()}continue}
   if(ob.ln!==near)continue;
-  if(ob.k==='coin'){if(Math.abs(g.y-(ob.h||0))>1.3)continue;ob.got=true;coin(ob)}
-  else if(ob.k==='gem'||ob.k==='star5'){if(Math.abs(g.y-(ob.h||0))>1.4)continue;ob.got=true;bonus(ob)}
+  if(ob.k==='coin'){ob.got=true;coin(ob)} /* any height: coins you jump over or duck under count */
+  else if(ob.k==='gem'||ob.k==='star5'){ob.got=true;bonus(ob)}
   else if(['mag','shield','x2','boost'].includes(ob.k)){ob.got=true;power(ob.k)}
   else if(g.inv>0||g.boost>0)continue;
   else if(ob.k==='low'&&g.y<.8){ob.hit=true;hurt()}
