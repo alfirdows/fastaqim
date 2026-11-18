@@ -2,13 +2,14 @@
  "v": 1,
  "items": [
   {
-   "id": "v5-home",
-   "t": "New Home screen",
-   "ar": "الشاشة الرئيسية الجديدة",
-   "s": "Salah countdown, tap a salah to mark it, Ayah of the day, shortcuts, next tasks",
+   "id": "v5-home-2",
+   "t": "New Home: salah card and Ayah of the day",
+   "ar": "الرئيسية الجديدة: بطاقة الصلاة وآية اليوم",
+   "s": "Salah countdown and the 5 salah in one card with a light geometric pattern. Clear date: Wed, Nov 18 · 8 Jumada al-Akhirah 1448 AH. Ayah card: ▶ plays Saad al-Ghamdi, ↻ shows another ayah, no reflect question.",
    "pics": [
-    "decisions/img/home1.jpg",
-    "decisions/img/home2.jpg"
+    "decisions/img/home3.jpg",
+    "decisions/img/home4.jpg",
+    "decisions/img/home5.jpg"
    ],
    "link": "next/v5/#home"
   },
