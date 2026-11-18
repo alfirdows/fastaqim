@@ -7837,7 +7837,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v138',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v139',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9726,6 +9726,15 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
   setTimeout(()=>{try{const el=document.querySelector(`[data-id="${CSS.escape(String(t.id))}"]`)||[...document.querySelectorAll('#tab-today .task')].find(x=>x.textContent.includes(t.title));if(el)el.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}},250)},true);
 /* the last two ayahs of al-Baqarah (al-Bukhārī 5009: "whoever recites them at night, they will suffice him") sit in the evening set too, so it matches the check-in */
 try{const r3=(ADHKAR.ruqyah.items||[]).find(x=>x.id==='r3');if(r3&&!ADHKAR.evening.items.some(x=>x.id==='e24'))ADHKAR.evening.items.splice(4,0,Object.assign({},r3,{id:'e24',n:1,au:['002285','002286'],src:"Qur'an 2:285–286 · al-Bukhārī 5009"}))}catch(e){}
+/* audit fixes (AUDIT.md): honest grading labels; the 10× ṣalawāt (aṭ-Ṭabarānī, grading disputed) leaves the morning/evening sets and stays in Ṣalawāt */
+try{const fix=(L)=>{L.forEach(x=>{const n=azNorm(x.ar);
+   if(/^رضيتبالله/.test(n))x.src='Abū Dāwūd 5072, at-Tirmidhī 3389 · ḥasan (at-Tirmidhī, Ibn Bāz); al-Albānī: weak';
+   if(/^اعوذباللهمنالشيطانالرجيماللهلااله|^أعوذباللهمنالشيطانالرجيماللهلاإله/.test(n)&&/2:255/.test(x.src||''))x.src="Qur'an 2:255 · al-Ḥākim 1/562, ṣaḥīḥ (al-Albānī)";
+   if(/^لاالهالااللهوحدهلاشريكله|^لاإلهإلااللهوحدهلاشريكله/.test(n)&&x.n===10)x.src="an-Nasā'ī, ʿAmal al-Yawm wal-Laylah · ṣaḥīḥ (al-Albānī)";
+   if(/^ياحيياقيوم/.test(n))x.src="al-Ḥākim 1/545, an-Nasā'ī (al-Kubrā) · ḥasan (al-Albānī)";
+   if(/^اعوذبكلماتاللهالتامات|^أعوذبكلماتاللهالتامات/.test(n))x.src='at-Tirmidhī 3604, Muslim 2709';});
+  return L.filter(x=>!(/^اللهمصلوسلمعلىنبينا/.test(azNorm(x.ar))))};
+  ADHKAR.morning.items=fix(ADHKAR.morning.items);ADHKAR.evening.items=fix(ADHKAR.evening.items)}catch(e){}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
