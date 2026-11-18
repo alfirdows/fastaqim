@@ -2061,6 +2061,93 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .hs-r{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent)}.hs-r b{font-variant-numeric:tabular-nums}
 .hs-nx{margin:4px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,#1f9d6b 10%,transparent);font-size:.9rem}
 .hs-note{margin:0;color:var(--muted);font-size:.78rem;line-height:1.5}.hs-note a{color:var(--calm);font-weight:700;text-decoration:none}
+/* v135: My tracking */
+.tx{display:flex;flex-direction:column;gap:10px}
+.tx-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:14px;background:color-mix(in srgb,var(--ink) 7%,transparent);position:sticky;top:0;z-index:2;backdrop-filter:blur(8px)}
+.tx-seg button{border:0;border-radius:11px;padding:8px 4px;font:inherit;font-weight:700;font-size:.85rem;color:var(--muted);background:transparent;display:flex;flex-direction:column;align-items:center;gap:2px;min-height:48px}
+.tx-seg button span{font-size:18px}.tx-seg button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.tx-h{font-size:1.15rem;font-weight:800;margin:2px 0 0}.tx-sub{color:var(--muted);font-size:.86rem;margin:0;line-height:1.45}
+.tx-day{display:inline-flex;align-self:center;gap:4px;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.tx-day button{border:0;border-radius:999px;padding:6px 16px;font:inherit;font-size:.85rem;font-weight:700;color:var(--muted);background:transparent;min-height:36px}.tx-day button.on{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.tx-go{width:100%;min-height:52px;font-size:1.02rem}.tx-go small{opacity:.8;font-weight:600;margin-inline-start:6px}
+.tx-foot{display:flex;gap:8px}.tx-foot button{flex:1}
+.tx-note{padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font-size:.9rem;line-height:1.5}.tx-note p{margin:0 0 8px}.tx-note p:last-child{margin:0}
+.tx-star{font-weight:800;color:#c98a00;font-size:1.1rem;margin:0}
+.tx-sticky{position:sticky;bottom:0;padding-top:8px;background:linear-gradient(transparent,var(--surface) 30%)}
+.sx-list{display:flex;flex-direction:column;gap:6px}
+.sx-row{display:flex;align-items:center;gap:10px;padding:10px 12px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;color:var(--ink);text-align:start;min-height:56px}
+.sx-ri{font-size:22px;flex:none;width:28px;text-align:center}.sx-rt{display:flex;flex-direction:column;flex:1;min-width:0}.sx-rt b{font-size:.95rem}.sx-rt small{color:var(--muted);font-size:.78rem;line-height:1.35}.sx-rt em{font-style:normal;opacity:.75}
+.sx-ds{display:flex;gap:3px;flex:none}.sx-d{display:inline-grid;place-items:center;width:11px;height:11px;border-radius:4px;font-style:normal;font-size:8px;font-weight:800;color:var(--muted);vertical-align:middle}
+.sx-d.nd{border:1.5px dashed color-mix(in srgb,var(--ink) 25%,transparent)}.sx-d.q{background:color-mix(in srgb,var(--ink) 10%,transparent)}
+.sx-d.f0{background:#bfe8d4}.sx-d.f1{background:#f7e3a8}.sx-d.f2{background:#f5c77a}.sx-d.f3{background:#ee9f5c}.sx-d.f4{background:#e07a4f}.sx-d.f5{background:#c95b45}
+.sx-key{font-size:.75rem;color:var(--muted);display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin:0}.sx-key .sx-d{margin-inline-start:6px}
+.sx-lib{display:flex;flex-direction:column;gap:6px}.sx-li{display:flex;gap:6px;align-items:stretch}
+.sx-lt{flex:1;display:flex;align-items:center;gap:10px;padding:10px 12px;border:2px solid transparent;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;color:var(--ink);text-align:start}
+.sx-li.on .sx-lt{border-color:var(--calm,#1f9d6b);background:color-mix(in srgb,var(--calm,#1f9d6b) 9%,transparent)}
+.sx-ck{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid color-mix(in srgb,var(--ink) 25%,transparent);display:grid;place-items:center;font-weight:800;font-size:.8rem}
+.sx-li.on .sx-ck{background:var(--calm,#1f9d6b);border-color:var(--calm,#1f9d6b);color:#fff}
+.sx-up{flex:none;width:44px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 6%,transparent);font-size:1.1rem;color:var(--ink)}
+.sx-top{display:flex;align-items:center;gap:10px}.sx-bk{width:40px;height:40px;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 7%,transparent);font-size:1.5rem;line-height:1;color:var(--ink);flex:none}
+[dir=rtl] .sx-bk{transform:scaleX(-1)}
+.sx-pg{flex:1;height:6px;border-radius:9px;background:color-mix(in srgb,var(--ink) 10%,transparent);overflow:hidden}.sx-pg i{display:block;height:100%;background:var(--calm,#1f9d6b);border-radius:9px;transition:width .3s}
+.sx-n{font-size:.8rem;color:var(--muted);font-weight:700;font-variant-numeric:tabular-nums}
+.sx-q{display:flex;flex-direction:column;gap:10px;text-align:center}.sx-q h3{margin:0;font-size:1.2rem}.sx-big{font-size:40px;margin:4px 0 0;line-height:1.1}
+.sx-w{margin:0;font-size:.98rem;line-height:1.45}
+.sx-ex{padding:10px 12px;border-radius:14px;background:color-mix(in srgb,#f5a524 12%,transparent);text-align:start;font-size:.9rem;line-height:1.45;display:flex;flex-direction:column;gap:2px}.sx-ex b{font-size:.75rem;text-transform:uppercase;letter-spacing:.05em;color:#a86a00}
+.sx-ex.pop{animation:sxPop .35s ease}@keyframes sxPop{from{opacity:.3;transform:translateY(4px)}to{opacity:1;transform:none}}
+.sx-ask{font-weight:800;margin:4px 0 0;font-size:1rem}
+.sx-fs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sx-fs button,.sx-sv button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:62px;padding:8px;border:2px solid transparent;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;color:var(--ink)}
+.sx-fs button b,.sx-sv button b{font-size:.95rem}.sx-fs button small,.sx-sv button small{color:var(--muted);font-size:.78rem;line-height:1.3}
+.sx-fs button.on,.sx-sv button.on,.sx-alt button.on{border-color:var(--calm,#1f9d6b);background:color-mix(in srgb,var(--calm,#1f9d6b) 10%,transparent)}
+.sx-sv{display:flex;flex-direction:column;gap:8px}.sx-sv button{flex-direction:column;align-items:flex-start;text-align:start;padding:10px 14px}
+.sx-sv .s1{background:color-mix(in srgb,#f5c77a 22%,transparent)}.sx-sv .s2{background:color-mix(in srgb,#ee9f5c 22%,transparent)}.sx-sv .s3{background:color-mix(in srgb,#c95b45 18%,transparent)}
+.sx-alt{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}.sx-alt button{border:2px solid transparent;border-radius:999px;padding:7px 12px;font:inherit;font-size:.82rem;font-weight:600;background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink);min-height:38px}
+.sx-skip{align-self:center;min-width:120px}
+.sx-lv{display:flex;flex-direction:column;gap:6px;text-align:start}.sx-lv div{padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent);display:flex;flex-direction:column;font-size:.88rem}.sx-lv b{font-size:.78rem;color:var(--muted)}
+.sx-sum{display:flex;flex-direction:column;gap:4px;text-align:start}.sx-sum div{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent);font-size:.86rem}.sx-sum b{text-align:end}
+.mx-meds{display:flex;flex-direction:column;gap:8px}.mx-m{padding:12px;border-radius:16px;background:color-mix(in srgb,#5b6cd6 8%,transparent);display:flex;flex-direction:column;gap:8px}
+.mx-mt{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.mx-mt small{color:var(--muted)}
+.mx-tb{display:flex;gap:6px}.mx-tb .btn-main{flex:2}.mx-tb .btn-ghost{flex:1}
+.mx-tk{min-height:46px;border-radius:12px;font:inherit;font-weight:700}.mx-tk.on{border:0;background:color-mix(in srgb,#1f9d6b 15%,transparent);color:var(--ink)}.mx-tk.sk{border:0;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--muted)}
+.mx-chk{display:flex;align-items:center;gap:10px;padding:12px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;color:var(--ink);text-align:start;min-height:58px}.mx-chk>span:first-child{font-size:22px}
+.mx-safe{border-radius:14px;background:color-mix(in srgb,#e5484d 8%,transparent);padding:10px 12px}.mx-safe summary{font-weight:700;cursor:pointer;min-height:28px}.mx-sf{background:transparent;padding:8px 0 0}.mx-sf ul{margin:4px 0 8px;padding-inline-start:20px}
+.mx-lb{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.mx-lb small{color:var(--muted);font-weight:500}
+.mx-in{width:100%;box-sizing:border-box;min-height:48px;border-radius:12px;border:1.5px solid var(--line);padding:10px 12px;font:inherit;background:var(--surface);color:var(--ink)}
+.mx-o{grid-template-columns:1fr}.mx-o button{min-height:50px}
+.mx-fx{display:flex;flex-direction:column;gap:10px;text-align:start}.mx-fr{display:flex;flex-direction:column;gap:6px}.mx-fr>span{font-weight:700;font-size:.92rem}
+.mx-fr>div{display:flex;flex-wrap:wrap;gap:5px}.mx-fr>div button{flex:1 1 auto;border:2px solid transparent;border-radius:10px;padding:8px 8px;min-height:40px;font:inherit;font-size:.82rem;font-weight:600;background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink)}
+.mx-fr>div button.on{border-color:var(--calm,#1f9d6b);background:color-mix(in srgb,var(--calm,#1f9d6b) 12%,transparent)}
+.mx-fr button.b.on{border-color:#1f9d6b}.mx-fr button.w.on{border-color:#e07a4f;background:color-mix(in srgb,#e07a4f 12%,transparent)}
+.mx-se{display:grid;grid-template-columns:1fr 1fr;gap:6px}.mx-se button{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 10px;min-height:46px;border:2px solid transparent;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;font-size:.84rem;color:var(--ink);text-align:start}
+.mx-se button span{font-size:18px}.mx-se em{font-style:normal;font-size:.72rem;font-weight:800;width:100%}
+.mx-se .sv1{border-color:#f5c77a;background:color-mix(in srgb,#f5c77a 18%,transparent)}.mx-se .sv2{border-color:#ee9f5c;background:color-mix(in srgb,#ee9f5c 18%,transparent)}.mx-se .sv3{border-color:#c95b45;background:color-mix(in srgb,#c95b45 16%,transparent)}
+.mx-nums{display:flex;flex-direction:column;gap:10px;text-align:start}.mx-nums label{display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:.9rem}.mx-nums span{display:flex;align-items:center;gap:6px}
+.mx-nums input,.mx-nums select{min-height:46px;border-radius:12px;border:1.5px solid var(--line);padding:8px 10px;font:inherit;background:var(--surface);color:var(--ink);width:100%;min-width:0}.mx-nums select{width:auto}
+.mx-warn{padding:12px;border-radius:14px;background:color-mix(in srgb,#e5484d 12%,transparent);text-align:start;font-size:.9rem}.mx-warn p{margin:6px 0 0}
+.mx-ch{display:flex;flex-direction:column;gap:4px}.mx-ch div{display:flex;gap:8px;flex-wrap:wrap;font-size:.84rem;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.mx-ch span,.mx-ch small{color:var(--muted)}
+.mx-cg{padding:12px;border-radius:16px;background:color-mix(in srgb,var(--ink) 4%,transparent);display:flex;flex-direction:column;gap:6px}.mx-cgh{margin:0;font-weight:800}.mx-cgh small{color:var(--muted);font-weight:600}
+.mx-cr{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:.86rem}.mx-cr b{text-align:end}
+.mx-bar{display:flex;width:44%;height:10px;border-radius:9px;overflow:hidden;background:color-mix(in srgb,var(--ink) 8%,transparent);flex:none}.mx-bar i,.mx-k{display:block;height:100%}.mx-bar .b,.mx-k.b{background:#1f9d6b}.mx-bar .s,.mx-k.s{background:#b9c0cc}.mx-bar .w,.mx-k.w{background:#e07a4f}
+.mx-k{display:inline-block;width:10px;height:10px;border-radius:3px;margin-inline-start:6px}
+.lx-tp,.lx-gl,.lx-ch{display:flex;flex-wrap:wrap;gap:6px}
+.lx-tp button,.lx-gl button,.lx-ch button{border:2px solid transparent;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-size:.86rem;font-weight:600;background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink)}
+.lx-tp button.on,.lx-gl button.on,.lx-ch button.on{border-color:var(--calm,#1f9d6b);background:color-mix(in srgb,var(--calm,#1f9d6b) 12%,transparent)}
+.lx-cg{display:grid;grid-template-columns:1fr auto;grid-template-areas:"t p" "b b";gap:6px 10px;align-items:center;padding:10px 12px;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent)}.lx-cg .sx-rt{grid-area:t}.lx-cg .ci-bar{grid-area:b}
+.lx-cg button{grid-area:p;border:0;border-radius:999px;padding:8px 14px;min-height:40px;font:inherit;font-weight:800;background:var(--calm,#1f9d6b);color:#fff}
+.lx-st{display:grid;grid-template-columns:1fr 1fr;gap:6px}.lx-st div{padding:10px;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);display:flex;flex-direction:column}.lx-st b{font-size:1.1rem}.lx-st small{color:var(--muted);font-size:.75rem;line-height:1.3}
+.lx-hist{display:flex;flex-direction:column;gap:4px}.lx-hist div{display:flex;justify-content:space-between;gap:10px;font-size:.84rem;padding:6px 10px;border-radius:10px;background:color-mix(in srgb,var(--ink) 4%,transparent)}.lx-hist span{color:var(--muted);min-width:0;overflow-wrap:anywhere}
+.lx-run{display:flex;flex-direction:column;gap:10px;text-align:center}.lx-tpc{margin:0;font-weight:800;font-size:1.05rem}
+.lx-ring{position:relative;width:200px;height:200px;margin:0 auto}.lx-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.lx-ring circle{fill:none;stroke-width:9}.lx-ring .bg{stroke:color-mix(in srgb,var(--ink) 9%,transparent)}.lx-ring .fg{stroke:var(--calm,#1f9d6b);stroke-linecap:round;stroke-dasharray:0 100;transition:stroke-dasharray .4s}
+.lx-ring.done .fg{stroke:#e3a21a}.lx-ring.paused{opacity:.6}
+.lx-ring>div{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.lx-ring b{font-size:2.6rem;font-variant-numeric:tabular-nums;letter-spacing:-.02em}.lx-ring small{color:var(--muted);font-size:.82rem;font-weight:700}
+.lx-ctl{display:flex;gap:8px}.lx-ctl button{flex:1;min-height:52px}
+.lx-shut{display:flex;flex-direction:column;align-items:center;gap:2px;padding:12px;border:0;border-radius:16px;background:color-mix(in srgb,#5b6cd6 13%,transparent);font:inherit;font-weight:800;color:var(--ink);min-height:60px}.lx-shut small{font-weight:500;color:var(--muted);font-size:.78rem}
+.lx-cnt{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.lx-cnt button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;min-height:62px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;font-size:.8rem;font-weight:600;color:var(--ink)}.lx-cnt b{font-size:1.05rem}
+.lx-sym{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.lx-sym button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;min-height:60px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;font-size:.76rem;font-weight:600;color:var(--ink)}.lx-sym span{font-size:20px}.lx-sym b{font-size:.75rem;color:var(--calm,#1f9d6b)}
+.lx-end{display:flex;flex-direction:column;gap:8px;text-align:center}.lx-end h3{margin:0;font-size:1.6rem}.lx-end .label{text-align:start;margin:6px 0 0}
+.lx-home{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;margin:0 0 10px;border:0;border-radius:16px;background:color-mix(in srgb,#5b6cd6 12%,var(--surface));font:inherit;color:var(--ink);text-align:start;min-height:58px}.lx-home>span:first-child{font-size:22px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7702,7 +7789,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v134',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v135',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8816,6 +8903,474 @@ function hsOpen(){const h=hsWeek(),o=ciPeek(),left=5-Object.values(o.k||{}).filt
    <p class="hs-note">${esc(tl("Each letter of the Qur'an"))} = 10 · <a href="https://sunnah.com/tirmidhi:2910" target="_blank" rel="noopener">at-Tirmidhī 2910 ↗</a><br>100× lā ilāha illallāh… = 100 · <a href="https://sunnah.com/bukhari:3293" target="_blank" rel="noopener">al-Bukhārī 3293 ↗</a></p>
    <p class="hs-note">${esc(tl('Only numbers stated in authentic hadith are counted. Allah multiplies for whom He wills.'))} <a href="https://quran.com/2/261" target="_blank" rel="noopener">2:261 ↗</a></p></div>`)}
 GO.hasanat=()=>hsOpen();GO.evening=()=>ciAzOpenL('e');
+
+/* ===================== v135 data: personal symptom library =====================
+   Original plain-language items for personal tracking. Not a diagnostic questionnaire.
+   Each item: name, what it is (the inner difficulty), two everyday examples, and what mild / moderate / severe looks like for THIS item.
+   Order of each text: [en, ar, om, so]. */
+const SXL=[
+ {id:'focus',ic:'🎯',n:['Concentration','التركيز','Xiyyeeffannaa','Diirada'],
+  w:['My mind slips away from what I am doing, even when I want to stay with it.','ينصرف ذهني عمّا أفعله، حتى وأنا أريد البقاء معه.','Sammuun koo waan hojjechaa jiru irraa ni bada, osoo itti turuu barbaadee illee.','Maskaxdaydu waxay ka fogaataa waxaan qabanayo, xitaa marka aan rabo inaan la joogo.'],
+  e:['You read a page, then notice none of it went in.','تقرأ صفحة ثم تكتشف أنك لم تستوعب شيئًا منها.','Fuula tokko dubbiste, booda homaa akka hin galle hubatta.','Waxaad akhrisaa bog, kadibna waxaad ogaataa inaanay waxba kugu dhicin.'],
+  e2:['Someone is talking to you and your mind drifts to something else.','يكلّمك أحدهم فيسرح ذهنك إلى شيء آخر.','Namni si haasofsiisaa jira, sammuun kee waan biraatti deema.','Qof ayaa kula hadlaya, maskaxdaaduna waxay u ambabaxdaa wax kale.'],
+  lv:[['I drift off, then come back by myself quickly.','أسرح ثم أعود بسرعة من نفسي.','Nan bada, booda dafee ofiin deebi\'a.','Waan lumaa, kadib si dhakhso ah ayaan isu soo celiyaa.'],
+      ['I drift off a lot and have to restart or reread.','أسرح كثيرًا وأحتاج للبدء من جديد أو إعادة القراءة.','Baay\'een bada, irra deebi\'ee jalqabuu ykn dubbisuu qaba.','Aad ayaan u lumaa, waana inaan dib u bilaabo ama dib u akhriyo.'],
+      ['I cannot stay on it long enough to get it done.','لا أستطيع البقاء عليه مدة تكفي لإنجازه.','Hanga xumuruutti itti turuu hin danda\'u.','Kuma sii joogi karo ilaa aan dhammeeyo.']]},
+ {id:'process',ic:'🐢',n:['Understanding and speed','الفهم والسرعة','Hubannaa fi saffisa','Fahamka iyo xawaaraha'],
+  w:['New information takes me longer to take in and make sense of.','المعلومة الجديدة تأخذ مني وقتًا أطول لأستوعبها وأفهمها.','Odeeffannoon haaraan fudhachuu fi hubachuuf yeroo dheeraa natti fudhata.','Macluumaadka cusub waqti dheer ayay igu qaadataa inaan qaato oo fahmo.'],
+  e:['You need to hear instructions twice before they make sense.','تحتاج أن تسمع التعليمات مرتين حتى تفهمها.','Qajeelfama hubachuuf si\'a lama dhaga\'uu qabda.','Waxaad u baahan tahay inaad tilmaamaha laba jeer maqasho si ay kuugu caddaadaan.'],
+  e2:['Others finish reading a message while you are still on the first part.','ينهي الآخرون قراءة الرسالة وأنت ما زلت في أولها.','Warri kaan ergaa dubbisanii xumuru, ati ammas jalqaba irra jirta.','Dadka kale fariinta way dhammeeyaan adigoo weli qaybta hore jooga.'],
+  lv:[['A bit slower, but I get there.','أبطأ قليلًا لكني أصل.','Xiqqoo suuta, garuu nan ga\'a.','Xoogaa gaabis ah, laakiin waan gaaraa.'],
+      ['I often need it repeated or said another way.','كثيرًا ما أحتاج التكرار أو شرحًا بطريقة أخرى.','Yeroo baay\'ee irra deebi\'amuu ykn karaa biraan ibsamuu barbaada.','Inta badan waxaan u baahdaa in lagu celiyo ama si kale loo sheego.'],
+      ['Even after repeating, it does not make sense to me.','حتى بعد التكرار لا أفهمه.','Erga irra deebi\'amee illee natti hin galu.','Xitaa marka lagu celiyo, iima caddaado.']]},
+ {id:'memory',ic:'🧩',n:['Memory and forgetting','الذاكرة والنسيان','Yaadannoo fi irraanfachuu','Xusuusta iyo illowshaha'],
+  w:['Things fall out of my head, even things I care about.','تسقط الأشياء من ذهني، حتى ما يهمني منها.','Wanti mataa koo keessaa ni bada, kan naaf barbaachisu illee.','Waxyaabaha ayaa madaxayga ka baxa, xitaa kuwa aan daryeelo.'],
+  e:['You walk into a room and forget why you came.','تدخل غرفة وتنسى لماذا جئت.','Kutaa tokko seenta, maaliif akka dhufte irraanfatta.','Waxaad gashaa qol, waxaadna illowdaa waxa aad u timid.'],
+  e2:['You forget something you agreed to do until it is too late.','تنسى أمرًا وعدت به حتى يفوت الأوان.','Waan raawwachuuf waliigalte hanga yeroon darbutti irraanfatta.','Waxaad illowdaa wax aad ogolaatay inaad qabato ilaa waqtigu dhaafo.'],
+  lv:[['Small things slip, but I catch them.','تفلت أشياء صغيرة لكني أتداركها.','Wanti xixiqqaan ni bada, garuu nan qaba.','Waxyaabo yaryar ayaa iga dhaca, laakiin waan qabtaa.'],
+      ['I forget things that cause trouble or need fixing.','أنسى أشياء تسبب مشكلة أو تحتاج إصلاحًا.','Waan rakkoo fidu ykn sirreeffamuu barbaadu nan irraanfadha.','Waxaan illowdaa waxyaabo dhibaato keena ama u baahan in la saxo.'],
+      ['I forget important things, even with reminders.','أنسى أمورًا مهمة حتى مع التذكيرات.','Yaadachiiftuu qabaadhee illee waan barbaachisaa nan irraanfadha.','Waxaan illowdaa waxyaabo muhiim ah, xitaa xasuusiyeyaal jiraan.']]},
+ {id:'words',ic:'💬',n:['Finding words','إيجاد الكلمات','Jecha argachuu','Helitaanka erayada'],
+  w:['I know what I mean, but the word will not come out.','أعرف ما أقصد لكن الكلمة لا تخرج.','Waan jechuu barbaadu nan beeka, garuu jechi hin bahu.','Waan garanayaa waxaan ula jeedo, laakiin erayga ma soo baxo.'],
+  e:['The word is on the tip of your tongue, so you describe it instead.','الكلمة على طرف لسانك فتصفها بدلًا منها.','Jechi arraba kee fiixa irra jira, kanaaf ibsuu jalqabda.','Ereygu waa carrabkaaga cidhifkiisa, markaa waad sharraxdaa.'],
+  e2:['You say "the thing" because the name will not come.','تقول "الشيء ذاك" لأن الاسم لا يحضرك.','Maqaan sitti hin dhufu waan ta\'eef "wanta sana" jetta.','Waxaad tiraahdaa "shaygaas" maxaa yeelay magacii kuuma imanayo.'],
+  lv:[['A short pause, then it comes.','توقف قصير ثم تأتي.','Dhaabbii gabaabaa, booda ni dhufa.','Hakad gaaban, kadib wuu yimaadaa.'],
+      ['I often stop or use the wrong word.','كثيرًا ما أتوقف أو أستخدم كلمة خطأ.','Yeroo baay\'ee nan dhaabadha ykn jecha dogoggoraa fayyadama.','Inta badan waan joogsadaa ama eray khaldan isticmaalaa.'],
+      ['I give up on saying what I meant.','أتراجع عن قول ما أردت.','Waan jechuu barbaade dhiisa.','Waan ka quustaa inaan sheego waxaan ula jeeday.']]},
+ {id:'explain',ic:'🗣️',n:['Explaining my thoughts','شرح أفكاري','Yaada koo ibsuu','Sharraxaadda fikradahayga'],
+  w:['The idea is clear in my head, but it comes out mixed up.','الفكرة واضحة في رأسي لكنها تخرج مشوّشة.','Yaadni mataa koo keessatti ifa, garuu walitti makamee bahu.','Fikraddu madaxayga way ku caddahay, laakiin si isku dhex jiran ayay u soo baxdaa.'],
+  e:['You tell a story and people look confused about what happened.','تحكي قصة فيبدو الناس مرتبكين مما حدث.','Seenaa himta, namoonni waan ta\'e hin hubanne.','Waxaad sheegtaa sheeko, dadkuna way ku wareersan yihiin waxa dhacay.'],
+  e2:['You know the answer but cannot put it in order.','تعرف الجواب لكن لا تستطيع ترتيبه.','Deebii ni beekta, garuu tartiibaan kaa\'uu hin dandeessu.','Jawaabta waad taqaannaa laakiin ma habayn kartid.'],
+  lv:[['Sometimes I need a second try.','أحيانًا أحتاج محاولة ثانية.','Yeroo tokko tokko yaalii lammaffaa barbaada.','Mararka qaar waxaan u baahdaa isku day labaad.'],
+      ['People often ask me what I mean.','كثيرًا ما يسألني الناس ماذا أقصد.','Namoonni yeroo baay\'ee maal jechuu akka barbaadu na gaafatu.','Dadku inta badan waxay i weydiiyaan waxaan ula jeedo.'],
+      ['I cannot get my point across, even after trying again.','لا أستطيع إيصال فكرتي حتى بعد المحاولة.','Erga irra deebi\'ee yaaleen illee yaada koo dabarsuu hin danda\'u.','Ma gaarsiin karo fikraddayda, xitaa kadib marka aan isku dayo mar kale.']]},
+ {id:'overexp',ic:'🔁',n:['Overexplaining','الإطالة في الشرح','Baay\'isanii ibsuu','Sharraxaad xad-dhaaf ah'],
+  w:['I keep adding details because I worry I was not understood.','أواصل إضافة التفاصيل لأني أخشى ألّا يفهمني أحد.','Akka hin hubatamne waanan yaadda\'uuf bal\'ina itti dabala.','Waxaan sii daraa faahfaahin maxaa yeelay waxaan ka walwalaa in aan la i fahmin.'],
+  e:['A short question gets a long answer with side stories.','سؤال قصير يقابله جواب طويل مع قصص جانبية.','Gaaffii gabaabaaf deebii dheeraa seenaa cinaa qabu kenna.','Su\'aal gaaban waxay heshaa jawaab dheer oo sheekooyin dhinac ah leh.'],
+  e2:['You repeat the same point in new words several times.','تكرر الفكرة نفسها بكلمات جديدة عدة مرات.','Yaada tokko jechoota haaraan si\'a hedduu irra deebi\'ta.','Isla qodobka ayaad ku celisaa erayo cusub dhowr jeer.'],
+  lv:[['A bit longer than needed.','أطول قليلًا من اللازم.','Xiqqoo dheeraa caalaa.','Xoogaa ka dheer intii loo baahnaa.'],
+      ['People lose track or cut me off.','يتوه الناس أو يقاطعونني.','Namoonni ni dhabu ykn na addaan kutu.','Dadku way lumaan ama way i jaraan.'],
+      ['It gets in the way of most talks or work.','يعيق أغلب أحاديثي أو عملي.','Haasaa ykn hojii koo baay\'ee ni gufachiisa.','Wuxuu carqaladeeyaa inta badan wadahadallada ama shaqada.']]},
+ {id:'interrupt',ic:'✋',n:['Interrupting','المقاطعة','Addaan kutuu','Kala-goynta hadalka'],
+  w:['Words come out before I can stop them, or I worry I will lose my thought.','تخرج الكلمات قبل أن أوقفها، أو أخشى أن تضيع فكرتي.','Jechi osoon hin dhaabin bahu, ykn yaadni koo akka badu nan yaadda\'a.','Erayadu way soo baxaan ka hor intaanan joojin, ama waxaan ka cabsadaa inay fikraddu iga lumto.'],
+  e:['You answer before the other person finishes the question.','تجيب قبل أن ينهي الآخر سؤاله.','Namni kaan gaaffii osoo hin xumurin deebifta.','Waad ka jawaabtaa ka hor inta qofka kale su\'aasha dhammayn.'],
+  e2:['You jump into a conversation that was not yours.','تدخل في حديث لا يخصّك.','Haasaa kan kee hin taane keessa seenta.','Waxaad ku boodaa wadahadal aan adiga kuu socon.'],
+  lv:[['Once in a while, and I notice.','أحيانًا، وأنتبه لذلك.','Yeroo tokko tokko, nan hubadha.','Mar mar, waanan dareemaa.'],
+      ['Often, and others notice.','كثيرًا، ويلاحظ الآخرون.','Yeroo baay\'ee, warri kaan ni hubatu.','Inta badan, dadka kale way arkaan.'],
+      ['It causes arguments or trouble.','يسبب خلافات أو مشاكل.','Wal falmii ykn rakkoo fida.','Waxay keentaa dood ama dhibaato.']]},
+ {id:'review',ic:'📋',n:['Checking my work','مراجعة عملي','Hojii koo ilaaluu','Hubinta shaqadayda'],
+  w:['I move on before checking my work or rereading the details.','أنتقل قبل أن أراجع عملي أو أعيد قراءة التفاصيل.','Hojii koo osoon hin ilaalin ykn bal\'ina osoon irra deebi\'ee hin dubbisin darba.','Waan sii socdaa ka hor intaanan hubin shaqadayda ama dib u akhriyin faahfaahinta.'],
+  e:['You send a message and then see the mistakes.','ترسل رسالة ثم ترى الأخطاء.','Ergaa ergita, booda dogoggora argita.','Waxaad dirtaa fariin, kadibna waxaad aragtaa khaladaadka.'],
+  e2:['You skip the last step of the instructions.','تتخطى الخطوة الأخيرة من التعليمات.','Tarkaanfii qajeelfamaa isa dhumaa irra utaalta.','Waxaad ka boodaa tallaabada ugu dambeysa ee tilmaamaha.'],
+  lv:[['Small slips I fix later.','هفوات صغيرة أصلحها لاحقًا.','Dogoggora xixiqqaa booda sirreessu.','Khaladaad yaryar oo aan hadhow saxo.'],
+      ['Mistakes that need redoing.','أخطاء تحتاج إعادة.','Dogoggora irra deebi\'amee hojjetamuu barbaadu.','Khaladaad u baahan in dib loo sameeyo.'],
+      ['Mistakes that cause real problems.','أخطاء تسبب مشاكل حقيقية.','Dogoggora rakkoo dhugaa fidu.','Khaladaad dhibaato dhab ah keena.']]},
+ {id:'fog',ic:'🌫️',n:['Brain fog','ضبابية الذهن','Burjaajii sammuu','Ceeryaamo maskaxeed'],
+  w:['My thoughts are slow, cloudy or tangled.','أفكاري بطيئة أو ضبابية أو متشابكة.','Yaadni koo suuta, duumessa ykn walitti makamaa dha.','Fikradahaygu waa gaabis, ceeryaamo ama isku murugsan.'],
+  e:['You look at a simple task and cannot think how to begin.','تنظر إلى مهمة بسيطة ولا تعرف كيف تبدأ.','Hojii salphaa ilaalta, akkamitti akka jalqabdu yaaduu hin dandeessu.','Waxaad eegtaa hawl fudud mana garan kartid sida loo bilaabo.'],
+  e2:['Thoughts jump around and none of them finish.','تقفز الأفكار ولا يكتمل أي منها.','Yaadni utaalee deema, tokkollee hin xumuramu.','Fikraduhu way boodaan midkoodna ma dhammaado.'],
+  lv:[['A little cloudy, I can still work.','ضبابية خفيفة وما زلت أستطيع العمل.','Xiqqoo duumessa, ammas hojjechuu nan danda\'a.','Xoogaa ceeryaamo ah, weli waan shaqayn karaa.'],
+      ['Thinking is slow and hard work.','التفكير بطيء ومجهد.','Yaaduun suuta fi hojii cimaa dha.','Fekerku waa gaabis iyo shaqo adag.'],
+      ['I cannot think clearly enough to do things.','لا أستطيع التفكير بوضوح يكفي لإنجاز شيء.','Wantoota hojjechuuf ifatti yaaduu hin danda\'u.','Si cad uma fikiri karo si aan wax u qabto.']]},
+ {id:'overload',ic:'🔋',n:['Overload and exhaustion','الإرهاق والحمل الزائد','Ba\'aa baay\'ee fi dadhabbii','Culays iyo daal'],
+  w:['Too much at once, and my mind runs out of energy.','الكثير دفعة واحدة، فتنفد طاقة ذهني.','Waan baay\'ee yeroo tokkotti, humni sammuu koo ni dhuma.','Wax badan hal mar, maskaxdayduna tamar way ka dhammaataa.'],
+  e:['Noise, messages and tasks pile up and you shut down.','تتراكم الضوضاء والرسائل والمهام فتنطفئ.','Sagaleen, ergaawwanii fi hojiiwwan walitti kuufamu, ati ni dhaabatta.','Buuqa, fariimaha iyo hawlaha ayaa is dul fuula, adna waad xirmaysaa.'],
+  e2:['After a busy day your mind is empty and tired.','بعد يوم مزدحم يكون ذهنك فارغًا ومتعبًا.','Guyyaa hojii baay\'ee booda sammuun kee duwwaa fi dadhabaa dha.','Maalin mashquul ah kadib maskaxdaadu waa madhan oo daalan.'],
+  lv:[['Tired, but still going.','متعب لكني مستمر.','Dadhabeera, garuu ammas itti jira.','Waan daalanahay, laakiin weli waan socdaa.'],
+      ['I have to stop and rest to keep going.','أحتاج للتوقف والراحة لأكمل.','Itti fufuuf dhaabbadhee boqochuu qaba.','Waa inaan joojiyo oo nasto si aan u sii wado.'],
+      ['I shut down and cannot do any more.','أنطفئ ولا أستطيع فعل المزيد.','Nan dhaabadha, kana caalaa hojjechuu hin danda\'u.','Waan xirmaa mana sameyn karo wax dheeraad ah.']]},
+ {id:'emotion',ic:'🌊',n:['Big emotions','الانفعالات القوية','Miira cimaa','Shucuur xooggan'],
+  w:['Emotions come fast and strong, and are hard to calm.','تأتي الانفعالات بسرعة وقوة ويصعب تهدئتها.','Miirri dafee fi cimee dhufa, tasgabbeessuun ulfaata.','Shucuurtu si degdeg ah oo xooggan ayay u timaadaa, way adag tahay in la dejiyo.'],
+  e:['A small problem makes you very upset very fast.','مشكلة صغيرة تجعلك منزعجًا جدًا بسرعة.','Rakkoon xiqqaan dafee baay\'ee si aarsa.','Dhibaato yar ayaa si degdeg ah kuu cadhaysiisa.'],
+  e2:['It takes a long time to calm down after something goes wrong.','تحتاج وقتًا طويلًا لتهدأ بعدما يسوء أمر.','Erga wanti tokko dogoggore booda tasgabbaa\'uuf yeroo dheeraa sitti fudhata.','Waqti dheer ayay kugu qaadataa inaad degto kadib marka wax qaldamaan.'],
+  lv:[['Strong, but I calm down soon.','قوية لكني أهدأ قريبًا.','Cimaa dha, garuu dafee nan tasgabbaa\'a.','Waa xooggan, laakiin dhakhso ayaan u degaa.'],
+      ['Hard to calm, it changes my day.','يصعب تهدئتها وتغيّر يومي.','Tasgabbeessuun ulfaata, guyyaa koo jijjiira.','Way adag tahay in la dejiyo, maalintayda ayay beddeshaa.'],
+      ['It takes over, and I say or do things I regret.','تسيطر عليّ فأقول أو أفعل ما أندم عليه.','Na to\'ata, waanan gaabbu jedha ykn hojjedha.','Way i qabsataa, waxaan dhahaa ama sameeyaa waxaan ka shallaayo.']]},
+ {id:'restless',ic:'⚡',n:['Restlessness and acting fast','التململ والتسرّع','Tasgabbii dhabuu fi ariifachuu','Degganaansho la\'aan iyo degdeg'],
+  w:['My body or mind will not stay still, and I act before thinking.','لا يهدأ جسدي أو ذهني، وأتصرف قبل أن أفكر.','Qaamni koo ykn sammuun koo hin tasgabbaa\'u, osoon hin yaadin hojjedha.','Jirkayga ama maskaxdaydu ma degganaan, waxaanna sameeyaa ka hor intaanan ka fikirin.'],
+  e:['You cannot sit through a meeting without moving.','لا تستطيع الجلوس طوال اجتماع دون حركة.','Walga\'ii tokko osoo hin sochoo\'in taa\'uu hin dandeessu.','Ma fadhiyi kartid kulan dhan adigoon dhaqaaqin.'],
+  e2:['You buy or say something on the spot, then wish you had not.','تشتري أو تقول شيئًا فورًا ثم تتمنى لو لم تفعل.','Achumatti waa bitta ykn jetta, booda maal godhe jetta.','Waxaad iibsataa ama dhahdaa wax isla markiiba, kadib waxaad jeclaan lahayd inaadan samayn.'],
+  lv:[['Fidgety, but in control.','كثير الحركة لكني متحكم.','Socho\'a, garuu of to\'adha.','Waan dhaqaaqaa, laakiin waan is xakameeyaa.'],
+      ['I often have to get up or act on it.','كثيرًا ما أضطر للقيام أو التصرف.','Yeroo baay\'ee ka ka\'uu ykn hojjechuu qaba.','Inta badan waa inaan kaco ama falceliyo.'],
+      ['I cannot stay put or stop myself.','لا أستطيع البقاء مكاني أو إيقاف نفسي.','Iddoo tokkotti turuu ykn of dhaabuu hin danda\'u.','Ma joogi karo meel ama ma joojin karo naftayda.']]},
+ {id:'start',ic:'🚦',n:['Starting and finishing','البدء والإنهاء','Jalqabuu fi xumuruu','Bilaabidda iyo dhammaystirka'],
+  w:['I want to do a task but cannot make myself begin, or I stop before the end.','أريد إنجاز مهمة لكن لا أستطيع البدء، أو أتوقف قبل نهايتها.','Hojii tokko hojjechuu barbaada garuu jalqabuu hin danda\'u, ykn osoon hin xumurin dhaabadha.','Waxaan rabaa inaan hawl qabto laakiin ma bilaabi karo, ama waan joojiyaa ka hor dhammaadka.'],
+  e:['You sit with the task open and end up doing something else for an hour.','تجلس والمهمة أمامك وتنشغل بغيرها ساعة.','Hojiin si dura banaa jira, ati sa\'aa tokko waan biraa hojjetta.','Waxaad la fadhidaa hawsha oo furan, waxaadna saacad qabataa wax kale.'],
+  e2:['You have many half-done things.','لديك أشياء كثيرة منجزة نصفها.','Wantoota hanga walakkaatti hojjetaman baay\'ee qabda.','Waxaad haysataa waxyaabo badan oo badh la qabtay.'],
+  lv:[['Slow to start, but I finish.','أتأخر في البدء لكني أنهي.','Jalqabuuf nan turra, garuu nan xumura.','Waan ka raagaa bilowga, laakiin waan dhammeeyaa.'],
+      ['I often put off or leave tasks unfinished.','كثيرًا ما أؤجل أو أترك المهام ناقصة.','Yeroo baay\'ee hojii nan dabarsa ykn walakkaatti dhiisa.','Inta badan waan dib u dhigaa ama ka tagaa hawlo aan dhammaan.'],
+      ['Important tasks do not get started at all.','المهام المهمة لا تبدأ أصلًا.','Hojiiwwan barbaachisoo gonkumaa hin jalqabaman.','Hawlaha muhiimka ah gabi ahaanba lama bilaabo.']]},
+ {id:'switch',ic:'🔄',n:['Stopping or switching','التوقف أو التنقّل','Dhaabuu ykn jijjiiruu','Joojinta ama beddelidda'],
+  w:['Once I am into something, it is very hard to stop or move to the next thing.','حين أنغمس في شيء يصعب جدًا أن أتوقف أو أنتقل للتالي.','Erga waan tokko keessa seeneen booda, dhaabuun ykn kan itti aanutti ce\'uun baay\'ee ulfaata.','Markaan wax ku dhex galo, aad bay u adag tahay inaan joojiyo ama u gudbo kan xiga.'],
+  e:['You plan to stop for salah or a meal and keep going for another hour.','تنوي التوقف للصلاة أو الطعام فتستمر ساعة أخرى.','Salaataaf ykn nyaataaf dhaabbachuu karoorfatta, sa\'aa biraa itti fufta.','Waxaad qorsheysaa inaad u joogsato salaad ama cunto, waxaadna sii wadaa saacad kale.'],
+  e2:['Being pulled away makes you very upset.','يزعجك كثيرًا أن يقطعك أحد.','Achi harkifamuun baay\'ee si aarsa.','In lagaa jiido ayaa aad kuu cadhaysiisa.'],
+  lv:[['I stop, just a bit late.','أتوقف لكن متأخرًا قليلًا.','Nan dhaabadha, xiqqoo booda.','Waan joojiyaa, xoogaa daahitaan ah.'],
+      ['I often miss the next thing.','كثيرًا ما يفوتني الأمر التالي.','Yeroo baay\'ee wanti itti aanu na jalaa darba.','Inta badan waxa xiga ayaa iga dhaafa.'],
+      ['I miss important things like meals, sleep or prayer.','تفوتني أمور مهمة كالطعام أو النوم أو الصلاة.','Wantoota barbaachisoo akka nyaataa, hirribaa ykn salaataa na jalaa darbu.','Waxaa iga dhaafa waxyaabo muhiim ah sida cuntada, hurdada ama salaadda.']]},
+ {id:'detail',ic:'🔍',n:['Stuck on small details','الانشغال بالتفاصيل الصغيرة','Bal\'ina xixiqqaa irratti hidhamuu','Ku dhegganaanta faahfaahinta yaryar'],
+  w:['I spend so long on small parts that the main task does not move.','أقضي وقتًا طويلًا في أجزاء صغيرة فلا تتقدم المهمة الأساسية.','Kutaalee xixiqqaa irratti yeroo dheeraa dabarsa, hojiin guddaan hin sochoo\'u.','Waqti dheer ayaan ku bixiyaa qaybo yaryar, hawsha weynina ma dhaqaaqdo.'],
+  e:['You rewrite one sentence again and again.','تعيد كتابة جملة واحدة مرارًا.','Hima tokko irra deebi\'ee irra deebi\'ee barreessita.','Waxaad mar iyo mar dib u qortaa hal jumlad.'],
+  e2:['You fix how a list looks instead of doing the list.','تحسّن شكل القائمة بدل تنفيذها.','Tarreeffama hojjechuu mannaa bifa isaa sirreessita.','Waxaad hagaajisaa muuqaalka liiska halkii aad qaban lahayd liiska.'],
+  lv:[['Some extra time on details.','بعض الوقت الإضافي على التفاصيل.','Bal\'ina irratti yeroo dabalataa muraasa.','Waqti dheeraad ah oo yar faahfaahinta.'],
+      ['Details often slow me down a lot.','كثيرًا ما تبطئني التفاصيل جدًا.','Yeroo baay\'ee bal\'inni baay\'ee na suuteessa.','Inta badan faahfaahintu aad bay ii gaabisaa.'],
+      ['The task does not get done because of details.','لا تنجز المهمة بسبب التفاصيل.','Sababa bal\'inaatiin hojiin hin xumuramu.','Hawshu ma dhammaato sababtoo ah faahfaahinta.']]},
+ {id:'perfect',ic:'💎',n:['Perfectionism','الكمالية','Guutummaa barbaaduu','Kaamilnimo-doon'],
+  w:['If it cannot be perfect, starting or finishing is hard.','إن لم يكن كاملًا يصعب البدء أو الإنهاء.','Yoo guutuu ta\'uu baate, jalqabuun ykn xumuruun ulfaata.','Haddii aanay noqon karin mid dhammaystiran, bilaabidda ama dhammaystirka way adag yihiin.'],
+  e:['You do not send your work because it is not good enough yet.','لا ترسل عملك لأنه ليس جيدًا بما يكفي بعد.','Hojii kee hin ergitu sababni isaas ammallee gahaa miti jettee.','Ma dirtid shaqadaada maxaa yeelay weli kuma filna.'],
+  e2:['One small mistake makes the whole thing look ruined to you.','خطأ صغير يجعل العمل كله يبدو لك فاسدًا.','Dogoggorri xiqqaan tokko waan hunda akka balleesse sitti fakkeessa.','Hal khalad oo yar ayaa kaa dhigaya in wax walba burbureen.'],
+  lv:[['High standards, but I still finish.','معايير عالية لكني أنهي.','Sadarkaa ol\'aanaa, garuu ammas nan xumura.','Heer sare, laakiin weli waan dhammeeyaa.'],
+      ['I delay or redo things often.','كثيرًا ما أؤجل أو أعيد الأشياء.','Yeroo baay\'ee nan turfadha ykn irra deebi\'ee hojjedha.','Inta badan waan dib u dhigaa ama dib u sameeyaa.'],
+      ['I cannot finish or hand things in.','لا أستطيع الإنهاء أو التسليم.','Xumuruu ykn galchuu hin danda\'u.','Ma dhammayn karo mana dhiibi karo.']]},
+ {id:'time',ic:'⏰',n:['Time awareness','الإحساس بالوقت','Yeroo hubachuu','Dareenka waqtiga'],
+  w:['Time slips by without me noticing, or I guess it wrong.','يمرّ الوقت دون أن ألاحظ، أو أقدّره خطأ.','Yeroon osoon hin hubatin darba, ykn dogoggoraan tilmaama.','Waqtigu wuu dhaafaa anigoon dareemin, ama si khaldan ayaan u qiyaasaa.'],
+  e:['"Five minutes" turns into an hour.','"خمس دقائق" تصبح ساعة.','"Daqiiqaa shan" sa\'aa tokko ta\'a.','"Shan daqiiqo" waxay noqotaa saacad.'],
+  e2:['You are often late, even when you try hard.','تتأخر كثيرًا حتى مع اجتهادك.','Osoo cimtee yaaltee illee yeroo baay\'ee ni turta.','Inta badan waad daahdaa, xitaa markaad aad isugu dayto.'],
+  lv:[['A little off, but mostly on time.','فرق بسيط لكني غالبًا في الموعد.','Xiqqoo dogoggora, garuu baay\'inaan yeroon jira.','Xoogaa ka leexasho ah, laakiin badanaa waqtiga ayaan joogaa.'],
+      ['Often late or rushed.','كثيرًا متأخر أو مستعجل.','Yeroo baay\'ee nan tura ykn nan ariifadha.','Inta badan waan daahaa ama degdegaa.'],
+      ['I miss things because time got away.','تفوتني أمور لأن الوقت هرب.','Yeroon waan na jalaa baqateef wantoonni na darbu.','Waxyaabo ayaa iga dhaafa maxaa yeelay waqtigu wuu baxsaday.']]},
+ {id:'organize',ic:'🗂️',n:['Organizing and planning','التنظيم والتخطيط','Qindeessuu fi karoorsuu','Habaynta iyo qorshaynta'],
+  w:['Putting steps in order and keeping things in place is hard.','ترتيب الخطوات وإبقاء الأشياء في مكانها صعب.','Tarkaanfii tartiibaan kaa\'uu fi wantoota iddoo isaanii eeguun ulfaata.','Way adag tahay in tallaabooyinka la habeeyo oo waxyaabaha meeshooda lagu hayo.'],
+  e:['You do not know which part of a project to do first.','لا تعرف أي جزء من المشروع تبدأ به.','Pirojektii keessaa kutaa kam dursitee hojjechuu akka qabdu hin beektu.','Ma garanaysid qaybta mashruuca aad horta qabanayso.'],
+  e2:['You lose things you just put down.','تضيّع أشياء وضعتها للتو.','Waan amma kaa\'te ni dhabda.','Waxaad lumisaa waxyaabo aad hadda dhigtay.'],
+  lv:[['A bit messy, but I manage.','بعض الفوضى لكني أتدبّر.','Xiqqoo walxaxa, garuu nan danda\'a.','Xoogaa qasan, laakiin waan maareeyaa.'],
+      ['Plans or things often fall apart.','كثيرًا ما تنهار الخطط أو تضيع الأشياء.','Karoorri ykn wantoonni yeroo baay\'ee ni diigamu.','Qorshayaasha ama waxyaabuhu inta badan way burburaan.'],
+      ['I cannot plan or find what I need.','لا أستطيع التخطيط أو إيجاد ما أحتاجه.','Karoorsuu ykn waan barbaadu argachuu hin danda\'u.','Ma qorsheyn karo mana heli karo waxaan u baahanahay.']]},
+ {id:'body',ic:'🩹',n:['Body discomfort','انزعاج جسدي','Rakkoo qaamaa','Raaxo-darro jireed'],
+  w:['My body hurts or is uncomfortable, and that makes it hard to focus.','جسدي يؤلمني أو غير مرتاح، فيصعب التركيز.','Qaamni koo na dhukkuba ykn hin mijaa\'u, kanaaf xiyyeeffachuun ulfaata.','Jirkaygu wuu i xanuunaa ama ma raaxeeyo, taasina diiradda way adkeysaa.'],
+  e:['A headache makes reading hard.','الصداع يجعل القراءة صعبة.','Mataa dhukkubbiin dubbisuu ulfeessa.','Madax-xanuun ayaa akhriska adkeeya.'],
+  e2:['Tight shoulders or a stomach ache after a long task.','شدّ في الكتفين أو ألم في المعدة بعد مهمة طويلة.','Hojii dheeraa booda gateettiin cimuu ykn garaan dhukkubuu.','Garbaha oo adkaada ama calool-xanuun kadib hawl dheer.'],
+  lv:[['Noticeable, but I keep going.','ملحوظ لكني أستمر.','Ni beekama, garuu itti fufa.','Waa la dareemi karaa, laakiin waan sii socdaa.'],
+      ['It makes me slow down or stop.','يجعلني أبطئ أو أتوقف.','Akkan suuta jedhu ykn dhaabbadhu na godha.','Waxay iga dhigtaa inaan gaabiyo ama joojiyo.'],
+      ['I cannot do things because of it.','لا أستطيع فعل الأشياء بسببه.','Sababa isaatiin wantoota hojjechuu hin danda\'u.','Ma qaban karo waxyaabaha sababteeda.']]}
+];
+/* How often, TODAY. Concrete meanings, so nobody has to work out a number from memory. */
+const SXF=[
+ [['Never','أبدًا','Gonkumaa','Marnaba'],['Not once today','ولا مرة اليوم','Har\'a si\'a tokkollee','Maanta xitaa hal mar']],
+ [['Rarely','نادرًا','Darbee darbee','Dhif'],['Once or twice','مرة أو مرتين','Si\'a tokko ykn lama','Hal ama laba jeer']],
+ [['Sometimes','أحيانًا','Yeroo tokko tokko','Mararka qaar'],['A few times','بضع مرات','Si\'a muraasa','Dhowr jeer']],
+ [['Often','كثيرًا','Yeroo baay\'ee','Inta badan'],['Many times','مرات كثيرة','Si\'a baay\'ee','Marar badan']],
+ [['Very often','كثيرًا جدًا','Baay\'ee yeroo baay\'ee','Aad u badan'],['Most of the day','معظم اليوم','Guyyaa irra caalaa','Inta badan maalinta']],
+ [['Always','دائمًا','Yeroo hunda','Had iyo jeer'],['The whole day','طوال اليوم','Guyyaa guutuu','Maalinta oo dhan']]];
+
+/* v135 translations */
+[["Skip","تخطَّ","Dabarsi","Ka bood"],["Compare","قارن","Wal bira qabi","Isbarbardhig"],["Symptoms","الأعراض","Mallattoolee","Calaamadaha"],["Medicine","الدواء","Qoricha","Daawada"],["Learning","التعلّم","Barachuu","Barashada"],["Learning timer","مؤقّت التعلّم","Sa'aatii barachuu","Saacadda barashada"],["Health & learning","الصحة والتعلّم","Fayyaa fi barachuu","Caafimaadka iyo barashada"],
+["Today","اليوم","Har'a","Maanta"],["Yesterday","أمس","Kaleessa","Shalay"],["Check today","سجّل اليوم","Har'a galmeessi","Maanta diiwaangeli"],["Check yesterday","سجّل أمس","Kaleessa galmeessi","Shalay diiwaangeli"],["Change answers","غيّر الإجابات","Deebii jijjiiri","Beddel jawaabaha"],
+["No record yet","لا تسجيل بعد","Ammaaf galmee hin jiru","Weli diiwaan ma jiro"],["No record","لا تسجيل","Galmee hin jiru","Diiwaan ma jiro"],["Last 7 days","آخر ٧ أيام","Guyyoota 7 darban","7-dii maalmood ee la soo dhaafay"],["My list","قائمتي","Tarree koo","Liiskayga"],["About","حول","Waa'ee","Ku saabsan"],
+["This is for you to notice patterns. It is not a test and it does not diagnose anything.","هذا لتلاحظ الأنماط. ليس اختبارًا ولا يشخّص أي شيء.","Kun akka ati haala irra deddeebi'u hubattuuf. Qormaata miti, waan tokkollee hin adda baasu.","Tani waa inaad aragto qaababka soo noqnoqda. Ma aha imtixaan, waxna ma ogaanayso (ma baaro)."],
+["These difficulties can come from many things: sleep, stress, health, hormones, ADHD and more.","قد تأتي هذه الصعوبات من أشياء كثيرة: النوم، الضغط، الصحة، الهرمونات، ADHD وغيرها.","Rakkooleen kun waan baay'ee irraa dhufuu danda'u: hirriba, dhiphina, fayyaa, hormoonii, ADHD fi kkf.","Dhibaatooyinkan waxay ka iman karaan waxyaabo badan: hurdo, walbahaar, caafimaad, hormoonno, ADHD iyo kuwo kale."],
+["Answer about one day at a time. A day with no answer shows as \"No record\", never as \"none\".","أجب عن يوم واحد في كل مرة. اليوم بلا إجابة يظهر \"لا تسجيل\" وليس \"لا شيء\".","Yeroo tokkotti guyyaa tokkoof deebisi. Guyyaan deebii hin qabne \"Galmee hin jiru\" jedhee mul'ata, \"homaa\" miti.","Ka jawaab hal maalin markiiba. Maalin aan jawaab lahayn waxay muuqataa \"Diiwaan ma jiro\", ma aha \"waxba\"."],
+["Your answers stay private. You choose if you share a report with your doctor.","إجاباتك تبقى خاصة. أنت تختار إن كنت ستشارك تقريرًا مع طبيبك.","Deebiin kee dhuunfaa dha. Gabaasa doktara keetiif qooduu kee ati murteessita.","Jawaabahaagu waa sir. Adiga ayaa go'aansada inaad warbixin la wadaagto dhakhtarkaaga."],
+["What do you want to keep an eye on?","ما الذي تريد متابعته؟","Maal hordofuu barbaadda?","Maxaad rabtaa inaad la socoto?"],["Pick as many as you like. You can change this any time.","اختر ما تشاء. يمكنك التغيير في أي وقت.","Hammam akka barbaadde filadhu. Yeroo kamiyyuu jijjiiruu dandeessa.","Dooro inta aad rabto. Waad beddeli kartaa wakhti kasta."],["Move up","إلى الأعلى","Ol kaa'i","Kor u qaad"],
+["For example","مثال","Fakkeenyaaf","Tusaale ahaan"],["Today, how often did this get in the way?","اليوم، كم مرة أعاقك هذا؟","Har'a, kun si'a meeqa si gufachiise?","Maanta, imisa jeer ayay tani ku hor istaagtay?"],["Yesterday, how often did this get in the way?","أمس، كم مرة أعاقك هذا؟","Kaleessa, kun si'a meeqa si gufachiise?","Shalay, imisa jeer ayay tani ku hor istaagtay?"],
+["Not once that day","ولا مرة في ذلك اليوم","Guyyaa sana si'a tokkollee","Maalintaas xitaa hal mar"],["The whole day","طوال اليوم","Guyyaa guutuu","Maalinta oo dhan"],
+["I'm not sure","لست متأكدًا","Hin mirkaneessu","Ma hubo"],["I need another example","أحتاج مثالًا آخر","Fakkeenya biraa barbaada","Waxaan u baahanahay tusaale kale"],["I still don't understand","ما زلت لا أفهم","Ammas hin hubanne","Weli ma fahmin"],["It doesn't apply to me","لا ينطبق عليّ","Anaaf hin ilaallatu","Igu ma khuseyso"],
+["Here it is another way. These are three ways it can look:","إليك بطريقة أخرى. هذه ثلاث صور قد يظهر بها:","Karaa biraan kunooti. Haala sadii itti mul'achuu danda'u:","Waa kan si kale loo sheegay. Waa saddex siyaabood oo ay u muuqan karto:"],
+["Still unclear? That's okay. Skip it for now. Nothing is counted.","ما زال غير واضح؟ لا بأس. تخطّه الآن. لا يُحسب شيء.","Ammas ifa miti? Rakkoo hin qabu. Amma dabarsi. Homtuu hin lakkaa'amu.","Weli ma caddahay? Waa caadi. Hadda ka bood. Waxba lama tiriyo."],["I understand now","فهمت الآن","Amma hubadheera","Hadda waan fahmay"],["Skip for now","تخطَّ الآن","Amma dabarsi","Hadda ka bood"],
+["When it happened, how much did it get in the way?","عندما حدث، كم أعاقك؟","Yeroo inni ta'etti, hammam si gufachiise?","Markay dhacday, intee in le'eg ayay ku hor istaagtay?"],["Mild","خفيف","Salphaa","Fudud"],["Moderate","متوسط","Giddu-galeessa","Dhexdhexaad"],["Severe","شديد","Cimaa","Daran"],
+["Noticing is a real skill. Thank you for being honest.","الملاحظة مهارة حقيقية. شكرًا على صدقك.","Hubachuun dandeettii dhugaa ti. Dhugaa dubbachuu keetiif galatoomi.","U fiirsashadu waa xirfad dhab ah. Mahadsanid daacadnimadaada."],
+["Not taken","لم يؤخذ","Hin fudhatamne","Lama qaadan"],["Taken","تمّ أخذه","Fudhatameera","La qaatay"],["I took it now","أخذته الآن","Amma fudhadhe","Hadda ayaan qaatay"],["I took it","أخذته","Fudhadheera","Waan qaatay"],["Other time","وقت آخر","Yeroo biraa","Wakhti kale"],
+["Today's check","فحص اليوم","Sakatta'a har'aa","Hubinta maanta"],["Yesterday's check","فحص أمس","Sakatta'a kaleessaa","Hubinta shalay"],["answered","تمت الإجابة","deebi'ame","laga jawaabay"],["Best in the evening. About 1 minute.","الأفضل في المساء. نحو دقيقة واحدة.","Galgala wayya. Gara daqiiqaa 1.","Fiidkii ayaa ugu fiican. Qiyaastii 1 daqiiqo."],
+["Doses, days with and without, weeks","الجرعات، أيام مع وبدون، الأسابيع","Dooziiwwan, guyyoota qabuu fi malee, torbanoota","Qiyaasaha, maalmaha la qaatay iyo aan la qaadan, toddobaadyada"],["When to get help now","متى تطلب المساعدة فورًا","Yoom gargaarsa amma barbaaduu","Goorta caawimaad degdeg ah la raadsado"],["My medicines","أدويتي","Qorichoota koo","Daawooyinkayga"],
+["Call your local emergency number now if you have:","اتصل برقم الطوارئ المحلي فورًا إن كان لديك:","Yoo kanneen qabaatte, amma lakkoofsa balaa tasaa naannoo keetti bilbili:","Hadda wac lambarka gurmadka degdegga ah haddii aad qabto:"],
+["Chest pain or pressure","ألم أو ضغط في الصدر","Dhukkubbii ykn dhiphina qoma","Xanuun ama cadaadis xabadka ah"],["Fainting, or nearly fainting","إغماء أو شبه إغماء","Of wallaaluu ykn dhiyeessuu","Suuxdin ama ku dhawaad suuxdin"],["A very fast or uneven heartbeat while resting","نبض سريع جدًا أو غير منتظم أثناء الراحة","Yeroo boqottu onneen baay'ee saffisaan ykn sirna malee rukutuu","Garaaca wadnaha oo aad u dhakhso badan ama aan joogto ahayn adigoo nasanaya"],
+["Trouble breathing","صعوبة في التنفس","Hafuura baafachuu dadhabuu","Neefsasho dhib ah"],["Swelling of the face, lips or tongue","تورّم الوجه أو الشفتين أو اللسان","Dhiitoo fuulaa, hidhii ykn arrabaa","Barar wejiga, bushimaha ama carrabka"],["Seeing or hearing things that are not there","رؤية أو سماع أشياء غير موجودة","Waan hin jirre arguu ykn dhaga'uu","Arkid ama maqlid waxyaabo aan jirin"],["Thoughts of hurting yourself","أفكار بإيذاء نفسك","Yaada of miidhuu","Fikrado ah inaad naftaada waxyeelleyso"],
+["Call your doctor soon for side effects that are strong, do not go away, or worry you.","اتصل بطبيبك قريبًا إن كانت الأعراض الجانبية قوية أو لا تزول أو تقلقك.","Miidhaa cinaa cimaa, hin badne ykn si yaaddessuuf dafii doktara kee bilbili.","Dhakhtarkaaga dhakhso u wac haddii saameynta dhinaca ahi ay xooggan tahay, aanay tagin, ama ay ku walwalinayso."],
+["Fastaqim does not diagnose or give dose advice. Talk to your doctor before changing or stopping a medicine.","فاستقم لا يشخّص ولا يقدّم نصائح عن الجرعات. كلّم طبيبك قبل تغيير الدواء أو إيقافه.","Fastaqim hin adda baasu, gorsa doozii hin kennu. Qoricha jijjiiruu ykn dhaabuu dura doktara kee haasofsiisi.","Fastaqim ma baaro mana bixiyo talo qiyaaseed. La hadal dhakhtarkaaga ka hor intaadan beddelin ama joojin daawo."],
+["When did you take it?","متى أخذته؟","Yoom fudhatte?","Goorma ayaad qaadatay?"],["I did not take it","لم آخذه","Hin fudhanne","Ma qaadan"],["Medicine tracker","متابعة الدواء","Hordoffii qorichaa","La socodka daawada"],
+["Start from today. No history needed. Add older details later only if you want.","ابدأ من اليوم. لا حاجة لتاريخ سابق. أضف التفاصيل القديمة لاحقًا إن أردت فقط.","Har'a irraa jalqabi. Seenaan hin barbaachisu. Yoo barbaadde qofa booda dabali.","Ka bilow maanta. Taariikh looma baahna. Faahfaahinta hore hadhow ku dar haddii aad rabto oo keliya."],
+["Edit medicine","تعديل الدواء","Qoricha gulaali","Wax ka beddel daawada"],["Add a medicine","أضف دواء","Qoricha dabali","Ku dar daawo"],["Name","الاسم","Maqaa","Magac"],["optional","اختياري","dirqama miti","ikhtiyaari"],["My medicine","دوائي","Qoricha koo","Daawadayda"],["Dose","الجرعة","Doozii","Qiyaas"],["As on the label","كما على العلبة","Akka maallattoo irratti","Sida ku qoran calaamadda"],
+["Changing the dose saves the date, so you can compare before and after.","تغيير الجرعة يحفظ التاريخ لتقارن قبل وبعد.","Doozii jijjiiruun guyyaa ni olkaa'a, kanaaf dura fi booda wal bira qabuu dandeessa.","Beddelidda qiyaasta waxay kaydisaa taariikhda, si aad u barbardhigto kahor iyo kadib."],["I take it again","أتناوله مجددًا","Irra deebi'ee fudhadha","Mar kale ayaan qaataa"],["I stopped taking it","توقفت عن تناوله","Fudhachuu dhaabeera","Waan joojiyay qaadashadeeda"],
+["Stopped","متوقف","Dhaabbate","La joojiyay"],["Started again","بدأ مجددًا","Irra deebi'ee jalqabe","Mar kale la bilaabay"],["Started","بدأ","Jalqabe","La bilaabay"],["Changes","التغييرات","Jijjiiramoota","Isbeddellada"],
+["After taking it, when did you notice it start working?","بعد أخذه، متى لاحظت أنه بدأ يعمل؟","Erga fudhattee booda, yoom hojjechuu akka jalqabe hubatte?","Kadib markaad qaadatay, goorma ayaad ogaatay inay shaqeyso bilowday?"],["About 30 minutes","نحو ٣٠ دقيقة","Gara daqiiqaa 30","Qiyaastii 30 daqiiqo"],["About 1 hour","نحو ساعة","Gara sa'aatii 1","Qiyaastii 1 saac"],["About 2 hours","نحو ساعتين","Gara sa'aatii 2","Qiyaastii 2 saacadood"],["3 hours or more","٣ ساعات أو أكثر","Sa'aatii 3 ykn isaa ol","3 saacadood ama ka badan"],["I did not notice it working","لم ألاحظ أنه يعمل","Akka hojjetu hin hubanne","Ma dareemin inay shaqeyneyso"],
+["How long did it keep working?","كم استمر مفعوله؟","Hammam turee hojjete?","Intee in le'eg ayay shaqeysay?"],["About 4 hours","نحو ٤ ساعات","Gara sa'aatii 4","Qiyaastii 4 saacadood"],["About 6 hours","نحو ٦ ساعات","Gara sa'aatii 6","Qiyaastii 6 saacadood"],["About 8 hours","نحو ٨ ساعات","Gara sa'aatii 8","Qiyaastii 8 saacadood"],["10 hours or more","١٠ ساعات أو أكثر","Sa'aatii 10 ykn isaa ol","10 saacadood ama ka badan"],["It is still working","ما زال يعمل","Ammas hojjechaa jira","Weli way shaqeyneysaa"],
+["While it was working, these were:","أثناء مفعوله، كانت هذه:","Yeroo inni hojjechaa turetti, kunneen:","Intii ay shaqeyneysay, kuwani waxay ahaayeen:"],["Easier","أسهل","Salphaa","Ka fudud"],["No change","لا تغيير","Jijjiirama hin qabu","Isbeddel ma jiro"],["Harder","أصعب","Ulfaataa","Ka adag"],["Not sure","غير متأكد","Hin mirkanoofne","Ma hubo"],
+["Any side effects today?","هل من أعراض جانبية اليوم؟","Har'a miidhaa cinaa qabdaa?","Saameyn dhinac ah maanta ma jirtaa?"],["Tap once for mild, again for moderate, again for severe.","اضغط مرة للخفيف، ومرة للمتوسط، ومرة للشديد.","Salphaaf si'a tokko, giddu-galeessaaf ammas, cimaaf ammas tuqi.","Hal mar taabo fudud, mar kale dhexdhexaad, mar kale daran."],["None today","لا شيء اليوم","Har'a homaa","Maanta waxba"],
+["Headache","صداع","Mataa dhukkubbii","Madax-xanuun"],["Nausea","غثيان","Garaa garagalchaa","Lallabbo"],["Stomach ache","ألم في المعدة","Garaa dhukkubbii","Calool-xanuun"],["Dry mouth","جفاف الفم","Afaan gogaa","Af engegan"],["Fast heartbeat","نبض سريع","Onnee saffisaan rukutu","Garaac wadne oo dhakhso ah"],["Dizziness","دوخة","Mataa naannessuu","Dawakh"],["Trouble sleeping","صعوبة في النوم","Hirriba dhabuu","Hurdo la'aan"],["Low appetite","قلة الشهية","Fedhii nyaataa xiqqaa","Rabitaan cunto oo yar"],["Irritable","سريع الانفعال","Dafee aaru","Si dhakhso ah u xanaaqa"],["Jittery","متوتر ومرتعش","Kirkiruu","Gariir"],["Tired when it wears off","تعب عند زوال المفعول","Yeroo dhumutti dadhabuu","Daal marka ay dhammaato"],["Tics or twitches","لزمات أو ارتعاشات","Sochii of malee","Dhaqdhaqaaq aan ikhtiyaar ahayn"],["Something else","شيء آخر","Waan biraa","Wax kale"],
+["Compared with a usual day for you:","مقارنة بيوم معتاد لك:","Guyyaa kee idilee wajjin yoo madaalamu:","Marka la barbardhigo maalin caadi ah oo adiga kuu ah:"],["Appetite","الشهية","Fedhii nyaataa","Rabitaanka cuntada"],["Sleep last night","نوم الليلة الماضية","Hirriba edaa","Hurdada xalay"],["Energy","الطاقة","Humna","Tamar"],["Emotions","الانفعالات","Miira","Shucuur"],["Less","أقل","Xiqqaa","Ka yar"],["Usual","كالمعتاد","Idilee","Caadi"],["More","أكثر","Baay'ee","Ka badan"],["Lower","أقل","Gadi aanaa","Ka hooseeya"],["Higher","أعلى","Ol aanaa","Ka sarreeya"],["Calmer","أهدأ","Tasgabbii caalaa","Ka deggan"],["Upset more easily","أنزعج بسهولة أكبر","Salphaatti aara","Si fudud u xanaaqa"],
+["Numbers, if you have them","أرقام، إن كانت لديك","Lakkoofsota, yoo qabaatte","Tirooyin, haddii aad haysato"],["All optional. From any source: a scale, a watch, a pharmacy or a home cuff.","كلها اختيارية. من أي مصدر: ميزان أو ساعة أو صيدلية أو جهاز منزلي.","Hundi dirqama miti. Madda kamiyyuu: madaallii, sa'aatii, faarmaasii ykn meeshaa manaa.","Dhammaan waa ikhtiyaari. Il kasta: miisaan, saacad, farmashiye ama qalab guri."],["Weight","الوزن","Ulfaatina","Miisaan"],["Blood pressure","ضغط الدم","Dhiibbaa dhiigaa","Dhiig-karka"],["Heart rate","نبض القلب","Rukuttaa onnee","Garaaca wadnaha"],
+["Please contact your doctor about this soon.","يُرجى التواصل مع طبيبك بشأن هذا قريبًا.","Maaloo waa'ee kanaa dafii doktara kee quunnami.","Fadlan dhakhso ula xiriir dhakhtarkaaga arrintan."],["If it is sudden or very strong, call your local emergency number now.","إن كان مفاجئًا أو قويًا جدًا، اتصل برقم الطوارئ فورًا.","Yoo tasa ykn baay'ee cimaa ta'e, amma lakkoofsa balaa tasaa bilbili.","Haddii ay tahay mid kedis ah ama aad u xooggan, hadda wac lambarka gurmadka."],["Every record makes the comparison clearer.","كل تسجيل يجعل المقارنة أوضح.","Galmeen hundi madaallii ifa godha.","Diiwaan kastaa wuxuu caddeeyaa barbardhigga."],
+["Only from what you recorded. Under 3 days says \"Not enough information yet\".","فقط مما سجّلته. أقل من ٣ أيام يظهر \"لا توجد معلومات كافية بعد\".","Waan galmeessite qofa irraa. Guyyaa 3 gadi \"Ammaaf odeeffannoon gahaan hin jiru\" jedha.","Kaliya waxaad diiwaangelisay. Wax ka yar 3 maalmood waxay dhahaan \"Weli macluumaad ku filan ma jiro\"."],["Not enough information yet","لا توجد معلومات كافية بعد","Ammaaf odeeffannoon gahaan hin jiru","Weli macluumaad ku filan ma jiro"],
+["days","أيام","guyyoota","maalmood"],["hours","ساعات","sa'aatii","saacadood"],["Starts working","يبدأ مفعوله","Hojjechuu jalqaba","Bilaabaa shaqada"],["Keeps working","مدة المفعول","Hojjechuu itti fufa","Sii shaqeeya"],["Side effects","الأعراض الجانبية","Miidhaa cinaa","Saameynaha dhinaca"],["Days with and without medicine","أيام مع الدواء وبدونه","Guyyoota qoricha qabuu fi malee","Maalmaha daawada leh iyo kuwa aan lahayn"],["With","مع","Wajjin","La"],["Without","بدون","Malee","La'aan"],
+["For study, school, work training or anything you are learning.","للدراسة أو المدرسة أو تدريب العمل أو أي شيء تتعلّمه.","Qo'annaaf, mana barumsaaf, leenjii hojiif ykn waan barachaa jirtu hunda.","Waxbarasho, iskuul, tababar shaqo ama wax kasta oo aad baranayso."],["What are you learning?","ماذا تتعلّم؟","Maal barachaa jirta?","Maxaad baranaysaa?"],["First goal","الهدف الأول","Galma jalqabaa","Hadafka koowaad"],
+["The timer keeps going after the goal. You decide when to stop.","يستمر المؤقت بعد الهدف. أنت تقرر متى تتوقف.","Sa'aatiin galma booda itti fufa. Yoom akka dhaabattu ati murteessita.","Saacaddu way sii socotaa hadafka kadib. Adiga ayaa go'aansada goorta aad joojinayso."],["Course goals","أهداف الدورة","Galmoota koorsii","Hadafyada koorsada"],["lessons","دروس","barnoota","casharro"],["Add a course goal","أضف هدف دورة","Galma koorsii dabali","Ku dar hadaf koorso"],
+["Your sessions","جلساتك","Yeroowwan kee","Fadhiyadaada"],["Course or training name","اسم الدورة أو التدريب","Maqaa koorsii ykn leenjii","Magaca koorsada ama tababarka"],["How many lessons or parts?","كم درسًا أو جزءًا؟","Barnoota ykn kutaalee meeqa?","Imisa cashar ama qaybood?"],["Minutes","دقائق","Daqiiqaa","Daqiiqado"],
+["sessions","جلسات","yeroowwan","fadhiyo"],["average focus time","متوسط وقت التركيز","giddugaleessa yeroo xiyyeeffannaa","celceliska waqtiga diiradda"],["until mental shutdown","حتى الانطفاء الذهني","hanga sammuun dhaabbatutti","ilaa maskaxdu xirmayso"],["learning time vs total","وقت التعلّم من المجموع","yeroo barachuu kan waliigalaa irraa","waqtiga barashada iyo wadarta"],["to understand a concept","لفهم فكرة","yaada tokko hubachuuf","si loo fahmo fikrad"],
+["Goal reached","تحقق الهدف","Galmi ga'ame","Hadafka waa la gaaray"],["Goal","الهدف","Galma","Hadaf"],["Keep going if you want","استمر إن أردت","Yoo barbaadde itti fufi","Sii wad haddii aad rabto"],["Mental shutdown","انطفاء ذهني","Sammuun dhaabbate","Maskaxdu way xirantay"],["My brain is done. Save how long I lasted.","ذهني انتهى. احفظ كم صمدت.","Sammuun koo xumurame. Hammam akkan ture olkaa'i.","Maskaxdaydu way dhammaatay. Kaydi intaan sii socday."],
+["Reread","أعدت القراءة","Irra deebi'ee dubbise","Dib u akhri"],["Replay","أعدت التشغيل","Irra deebi'ee taphachiise","Dib u daar"],["I understood it","فهمته","Hubadheera","Waan fahmay"],["One tap if it happens","اضغط مرة إن حدث","Yoo ta'e si'a tokko tuqi","Hal taabasho haddii ay dhacdo"],["Lost focus","فقدت التركيز","Xiyyeeffannaan bade","Diiradda ayaa iga luntay"],["Brain fog","ضبابية الذهن","Burjaajii sammuu","Ceeryaamo maskaxeed"],["Tired","تعب","Dadhabe","Daal"],["Overwhelmed","حمل زائد","Baay'ee natti caale","Culays badan"],["Distracted","تشتّت","Of irraanfate","Mashquul"],
+["Safe to close. The timer keeps your place.","يمكنك الإغلاق بأمان. المؤقت يحفظ مكانك.","Cufuun nagaa dha. Sa'aatiin iddoo kee ni eega.","Waad xiri kartaa. Saacaddu meeshaada way haysaa."],["Saved how long you lasted. That is useful to know.","حُفظت مدة صمودك. هذا مفيد أن تعرفه.","Hammam akka turte olkaa'ameera. Beekuun isaa gargaara.","Waa la kaydiyay intaad sii socotay. Taas waa wax faa'iido leh."],["Nice work. A few quick taps, or skip.","عمل جميل. بضع ضغطات سريعة، أو تخطَّ.","Hojii gaarii. Tuqii muraasa, ykn dabarsi.","Shaqo fiican. Dhowr taabasho oo degdeg ah, ama ka bood."],
+["Why did you stop?","لماذا توقفت؟","Maaliif dhaabatte?","Maxaad u joojisay?"],["Finished","انتهيت","Xumure","Dhammeeyay"],["Out of time","انتهى الوقت","Yeroon dhume","Waqtigii wuu dhammaaday"],["Something else to do","عندي شيء آخر","Waan biraa hojjechuu qaba","Wax kale ayaan qabanayaa"],
+["How much did you understand?","كم فهمت؟","Hammam hubatte?","Intee ayaad fahantay?"],["How much do you remember right now?","كم تتذكر الآن؟","Amma hammam yaadatta?","Intee ayaad hadda xasuusataa?"],["How much of the material did you finish?","كم أنهيت من المادة؟","Meeshaa barumsaa keessaa hammam xumurte?","Intee ka mid ah casharka ayaad dhammeysay?"],["None","لا شيء","Homaa","Waxba"],["A little","قليلًا","Xiqqoo","Wax yar"],["About half","نحو النصف","Gara walakkaa","Qiyaastii badh"],["Most","معظمه","Irra caalaa","Inta badan"],["All","كله","Hunda","Dhammaan"],
+["Paused","متوقف مؤقتًا","Yeroof dhaabbate","Hakad"],["Timer running","المؤقت يعمل","Sa'aatiin deemaa jira","Saacaddu way socotaa"],["Symptom tracker","متابعة الأعراض","Hordoffii mallattoolee","La socodka calaamadaha"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ===================== v135: My tracking (Phase 1 of the upgrade spec) =====================
+   🧠 Symptoms  ·  💊 Medicine  ·  📚 Learning timer
+   Rules: one thing at a time, plain words, concrete meanings, honest "not sure" options, nothing made up.
+   Missing days are "no record", never "no symptoms". No diagnosing, no dose advice. Saved on the phone (and to the account when signed in). */
+const L4=a=>Array.isArray(a)?(a[{en:0,ar:1,om:2,so:3}[LANG]||0]||a[0]):a;
+function txAw(key,n,txt){const L=S.txAw=S.txAw||{},had=L[key]||0;if(n===had)return 0;if(n>had)award(n-had,txt);else fqUnAward(had-n,txt);L[key]=n;save();return n-had}
+const TXV={tab:'sx'};
+function txOpen(tab){TXV.tab=tab||S.txTab||'sx';S.txTab=TXV.tab;try{const a=$('apMenu');if(a)a.hidden=true}catch(e){}
+  ({sx:sxMain,mx:mxMain,lx:lxMain}[TXV.tab]||sxMain)()}
+function txSeg(){return `<div class="tx-seg" role="tablist">${[['sx','🧠','Symptoms'],['mx','💊','Medicine'],['lx','📚','Learning']].map(([k,i,l])=>`<button type="button" role="tab" data-txt="${k}" aria-selected="${TXV.tab===k}" class="${TXV.tab===k?'on':''}"><span>${i}</span>${esc(tl(l))}</button>`).join('')}</div>`}
+function txShow(html){modalCard(`<div class="tx">${txSeg()}${html}</div>`);const B=$('scrollBody');B.scrollTop=0;B.querySelectorAll('[data-txt]').forEach(b=>b.onclick=()=>{try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}txOpen(b.dataset.txt)})}
+function txBare(html){modalCard(`<div class="tx">${html}</div>`);$('scrollBody').scrollTop=0}
+function txAsk(label,def,num,cb,back){txBare(`<p class="label">${esc(label)}</p><input id="txA" class="mx-in" ${num?'inputmode="numeric"':''} maxlength="40" value="${esc(def||'')}"><button type="button" class="btn-main" style="width:100%;margin-top:10px" id="txAOk">✓ ${esc(tl('Save'))}</button><button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="txABk">${esc(tl('Back'))}</button>`);
+  const i=$('txA');setTimeout(()=>{try{i.focus()}catch(e){}},250);const ok=()=>{const v=i.value.trim();if(!v)return;cb(v)};$('txAOk').onclick=ok;i.onkeydown=e=>{if(e.key==='Enter')ok()};$('txABk').onclick=back}
+const tap=()=>{try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}};
+function dShift(n){const d=new Date();d.setDate(d.getDate()+n);return d}
+function dLbl(k){try{return new Date(k+'T12:00').toLocaleDateString(LOC(),{weekday:'short',day:'numeric',month:'short'})}catch(e){return k}}
+
+/* ---------------- 🧠 Symptoms ---------------- */
+function sxS(){const o=S.sx=S.sx||{};o.on=(o.on||[]).filter(id=>SXL.some(x=>x.id===id));o.log=o.log||{};return o}
+const sxBy=id=>SXL.find(x=>x.id===id);
+const SXQ={day:0};
+function sxAnsLbl(a){if(!a)return '';if(a.f==='ns')return tl("I'm not sure");if(a.f==='nu')return tl("I still don't understand");if(a.f==='na')return tl("It doesn't apply to me");const f=SXF[a.f];if(!f)return '';
+  return L4(f[0])+(a.s&&a.s!=='ns'?' · '+tl(['','Mild','Moderate','Severe'][a.s]):'')}
+function sxDots(id){let h='';for(let i=6;i>=0;i--){const k=dkey(dShift(-i)),a=((sxS().log[k]||{})[id]);let c='nd',t='';
+  if(a){if(typeof a.f==='number'){c='f'+a.f;t=''}else{c='q';t=a.f==='na'?'–':'?'}}h+=`<i class="sx-d ${c}" title="${esc(dLbl(k))}">${t}</i>`}return `<span class="sx-ds" aria-hidden="true">${h}</span>`}
+function sxMain(){const o=sxS();if(!o.on.length)return sxPick(true);
+  const k=dkey(dShift(SXQ.day)),L=o.log[k]||{},n=o.on.filter(id=>L[id]).length,all=n===o.on.length;
+  txShow(`<div class="tx-day">${[0,-1].map(d=>`<button type="button" data-sxday="${d}" class="${SXQ.day===d?'on':''}">${esc(tl(d?'Yesterday':'Today'))}</button>`).join('')}</div>
+   <button type="button" class="btn-main tx-go" id="sxGo">${all?'✓ '+esc(tl('Done'))+' · '+esc(tl('Change answers')):'▶ '+esc(tl(SXQ.day?'Check yesterday':'Check today'))+` <small>${n}/${o.on.length}</small>`}</button>
+   <div class="sx-list">${o.on.map(id=>{const x=sxBy(id),a=L[id];return `<button type="button" class="sx-row" data-sxone="${id}"><span class="sx-ri">${x.ic}</span><span class="sx-rt"><b>${esc(L4(x.n))}</b><small>${a?esc(sxAnsLbl(a)):'<em>'+esc(tl('No record yet'))+'</em>'}</small></span>${sxDots(id)}</button>`}).join('')}</div>
+   <p class="sx-key"><span>${esc(tl('Last 7 days'))}:</span> <i class="sx-d f0"></i>${esc(L4(SXF[0][0]))} <i class="sx-d f5"></i>${esc(L4(SXF[5][0]))} <i class="sx-d nd"></i>${esc(tl('No record'))}</p>
+   <div class="tx-foot"><button type="button" class="btn-ghost" id="sxEdit">✎ ${esc(tl('My list'))}</button><button type="button" class="btn-ghost" id="sxAbout">ⓘ ${esc(tl('About'))}</button></div>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-sxday]').forEach(b=>b.onclick=()=>{tap();SXQ.day=+b.dataset.sxday;sxMain()});
+  $('sxGo').onclick=()=>{tap();const first=o.on.findIndex(id=>!L[id]);sxAsk(all?0:Math.max(0,first),o.on.slice())};
+  B.querySelectorAll('[data-sxone]').forEach(b=>b.onclick=()=>{tap();sxAsk(0,[b.dataset.sxone],true)});
+  $('sxEdit').onclick=()=>sxPick(false);$('sxAbout').onclick=sxAbout}
+function sxAbout(){txBare(`<p class="label">🧠 ${esc(tl('Symptoms'))}</p><div class="tx-note">
+  <p>${esc(tl('This is for you to notice patterns. It is not a test and it does not diagnose anything.'))}</p>
+  <p>${esc(tl('These difficulties can come from many things: sleep, stress, health, hormones, ADHD and more.'))}</p>
+  <p>${esc(tl('Answer about one day at a time. A day with no answer shows as "No record", never as "none".'))}</p>
+  <p>${esc(tl('Your answers stay private. You choose if you share a report with your doctor.'))}</p></div>
+  <button type="button" class="btn-main" style="width:100%" id="sxBk">${esc(tl('Back'))}</button>`);$('sxBk').onclick=sxMain}
+function sxPick(first){const o=sxS();let sel=o.on.slice();
+  const paint=()=>{txShow(`<p class="tx-h">${esc(tl(first?'What do you want to keep an eye on?':'My list'))}</p><p class="tx-sub">${esc(tl('Pick as many as you like. You can change this any time.'))}</p>
+   <div class="sx-lib">${SXL.map(x=>{const i=sel.indexOf(x.id);return `<div class="sx-li${i>=0?' on':''}"><button type="button" class="sx-lt" data-sxp="${x.id}" aria-pressed="${i>=0}"><span class="sx-ri">${x.ic}</span><span class="sx-rt"><b>${esc(L4(x.n))}</b><small>${esc(L4(x.w))}</small></span><span class="sx-ck">${i>=0?i+1:''}</span></button>${i>0?`<button type="button" class="sx-up" data-sxu="${x.id}" aria-label="${esc(tl('Move up'))}">↑</button>`:''}</div>`}).join('')}</div>
+   <p class="tx-sub">${esc(tl('These difficulties can come from many things: sleep, stress, health, hormones, ADHD and more.'))}</p>
+   <div class="tx-sticky"><button type="button" class="btn-main" id="sxSave" ${sel.length?'':'disabled'} style="width:100%">✓ ${esc(tl('Save'))} (${sel.length})</button></div>`);
+   const B=$('scrollBody');B.querySelectorAll('[data-sxp]').forEach(b=>b.onclick=()=>{tap();const id=b.dataset.sxp,i=sel.indexOf(id);if(i>=0)sel.splice(i,1);else sel.push(id);const st=B.scrollTop;paint();$('scrollBody').scrollTop=st});
+   B.querySelectorAll('[data-sxu]').forEach(b=>b.onclick=()=>{tap();const i=sel.indexOf(b.dataset.sxu);if(i>0){[sel[i-1],sel[i]]=[sel[i],sel[i-1]]}const st=B.scrollTop;paint();$('scrollBody').scrollTop=st});
+   $('sxSave').onclick=()=>{o.on=sel.slice();save();toast('✓ '+tl('Saved'));sxMain()}};
+  paint()}
+/* one question at a time */
+function sxAsk(i,list,single){const o=sxS(),id=list[i];if(!id)return sxDone(list);const x=sxBy(id),k=dkey(dShift(SXQ.day)),cur=((o.log[k]||{})[id])||null;let ex=0;
+  const head=`<div class="sx-top"><button type="button" class="sx-bk" id="sxBack" aria-label="${esc(tl('Back'))}">‹</button><span class="sx-pg"><i style="width:${Math.round(i/list.length*100)}%"></i></span><span class="sx-n" dir="ltr">${i+1}/${list.length}</span></div>`;
+  const paint=()=>{txBare(`${head}<div class="sx-q"><p class="sx-big">${x.ic}</p><h3>${esc(L4(x.n))}</h3><p class="sx-w">${esc(L4(x.w))}</p>
+   <div class="sx-ex"><b>${esc(tl('For example'))}</b><span id="sxEx">${esc(L4(ex?x.e2:x.e))}</span></div>
+   <p class="sx-ask">${esc(tl(SXQ.day?'Yesterday, how often did this get in the way?':'Today, how often did this get in the way?'))}</p>
+   <div class="sx-fs">${SXF.map((f,j)=>`<button type="button" data-f="${j}" class="${cur&&cur.f===j?'on':''}"><b>${esc(L4(f[0]))}</b><small>${esc(SXQ.day&&j===0?tl('Not once that day'):SXQ.day&&j===5?tl('The whole day'):L4(f[1]))}</small></button>`).join('')}</div>
+   <div class="sx-alt"><button type="button" data-f="ns" class="${cur&&cur.f==='ns'?'on':''}">🤔 ${esc(tl("I'm not sure"))}</button><button type="button" id="sxEx2">💡 ${esc(tl('I need another example'))}</button><button type="button" data-f="nu" class="${cur&&cur.f==='nu'?'on':''}">❓ ${esc(tl("I still don't understand"))}</button><button type="button" data-f="na" class="${cur&&cur.f==='na'?'on':''}">🚫 ${esc(tl("It doesn't apply to me"))}</button></div>
+   <button type="button" class="btn-ghost sx-skip" id="sxSkip">${esc(tl('Skip'))}</button></div>`);
+   const B=$('scrollBody');$('sxBack').onclick=()=>{tap();i>0?sxAsk(i-1,list,single):sxMain()};$('sxSkip').onclick=()=>{tap();sxAsk(i+1,list,single)};
+   $('sxEx2').onclick=()=>{tap();ex=1-ex;const e=$('sxEx');e.textContent=L4(ex?x.e2:x.e);e.parentNode.classList.remove('pop');void e.offsetWidth;e.parentNode.classList.add('pop')};
+   B.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{tap();const v=b.dataset.f,f=/^\d$/.test(v)?+v:v;
+     if(f==='nu')return sxExplain(x,()=>paint(),()=>{sxPut(k,id,{f:'nu'});sxAsk(i+1,list,single)});
+     if(typeof f==='number'&&f>0)return sxSev(x,k,f,()=>paint(),()=>sxAsk(i+1,list,single),head);
+     sxPut(k,id,{f});sxAsk(i+1,list,single)})};
+  paint()}
+function sxPut(k,id,a){const o=sxS();o.log[k]=o.log[k]||{};o.log[k][id]=Object.assign({at:Date.now()},a);save()}
+function sxExplain(x,back,skip){txBare(`<div class="sx-q"><p class="sx-big">${x.ic}</p><h3>${esc(L4(x.n))}</h3><p class="tx-sub">${esc(tl('Here it is another way. These are three ways it can look:'))}</p>
+  <div class="sx-lv">${x.lv.map((l,j)=>`<div><b>${esc(tl(['Mild','Moderate','Severe'][j]))}</b><span>${esc(L4(l))}</span></div>`).join('')}</div>
+  <div class="sx-ex"><b>${esc(tl('For example'))}</b><span>${esc(L4(x.e2))}</span></div>
+  <p class="tx-sub">${esc(tl("Still unclear? That's okay. Skip it for now. Nothing is counted."))}</p>
+  <button type="button" class="btn-main" style="width:100%" id="sxGot">${esc(tl('I understand now'))}</button><button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="sxNu">${esc(tl('Skip for now'))}</button></div>`);
+  $('sxGot').onclick=()=>{tap();back()};$('sxNu').onclick=()=>{tap();skip()}}
+function sxSev(x,k,f,back,next,head){const cur=((sxS().log[k]||{})[x.id])||{};
+  txBare(`${head}<div class="sx-q"><p class="sx-big">${x.ic}</p><h3>${esc(L4(x.n))}</h3><p class="sx-ask">${esc(tl('When it happened, how much did it get in the way?'))}</p>
+   <div class="sx-sv">${x.lv.map((l,j)=>`<button type="button" data-s="${j+1}" class="s${j+1}${cur.s===j+1?' on':''}"><b>${esc(tl(['Mild','Moderate','Severe'][j]))}</b><small>${esc(L4(l))}</small></button>`).join('')}</div>
+   <div class="sx-alt"><button type="button" data-s="ns">🤔 ${esc(tl("I'm not sure"))}</button></div></div>`);
+  const B=$('scrollBody');$('sxBack').onclick=()=>{tap();back()};B.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>{tap();const s=b.dataset.s==='ns'?'ns':+b.dataset.s;sxPut(k,x.id,{f,s});next()})}
+function sxDone(list){const o=sxS(),k=dkey(dShift(SXQ.day)),L=o.log[k]||{},real=o.on.filter(id=>L[id]&&typeof L[id].f==='number').length;
+  let g=0;if(real)g=txAw('sx'+k,3,'🧠 '+tl('Symptoms'));
+  txBare(`<div class="sx-q sx-end"><p class="sx-big">✅</p><h3>${esc(tl('Saved'))}</h3><p class="tx-sub">${esc(tl('Noticing is a real skill. Thank you for being honest.'))}</p>${g>0?`<p class="tx-star">+${g} ⭐</p>`:''}
+   <div class="sx-sum">${list.map(id=>{const x=sxBy(id),a=L[id];return `<div><span>${x.ic} ${esc(L4(x.n))}</span><b>${a?esc(sxAnsLbl(a)):'—'}</b></div>`}).join('')}</div>
+   <button type="button" class="btn-main" style="width:100%" id="sxOk">${esc(tl('Done'))}</button></div>`);$('sxOk').onclick=()=>{tap();sxMain()}}
+
+/* ---------------- 💊 Medicine ---------------- */
+function mxS(){const o=S.mx=S.mx||{};o.meds=o.meds||[];o.log=o.log||{};o.chg=o.chg||[];return o}
+const mxDay=k=>{const o=mxS();return o.log[k]=o.log[k]||{tk:{}}};
+const MXQ={day:0};
+function mxDoseOn(m,k){let d=m.dose||'';(m.hist||[]).forEach(h=>{if(h.d<=k)d=h.dose});return d}
+function mxNowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}
+function hm12(s){if(!s||!/^\d\d:\d\d$/.test(s))return s||'';const [h,m]=s.split(':').map(Number),d=new Date();d.setHours(h,m,0,0);try{return d.toLocaleTimeString(LOC(),{hour:'numeric',minute:'2-digit'})}catch(e){return s}}
+const MX_SIDE=[['head','🤕','Headache'],['naus','🤢','Nausea'],['stom','🌀','Stomach ache'],['mouth','💧','Dry mouth'],['heart','💓','Fast heartbeat'],['dizzy','💫','Dizziness'],['sleep','🌙','Trouble sleeping'],['appet','🍽️','Low appetite'],['irrit','⚡','Irritable'],['jitter','〰️','Jittery'],['crash','🔋','Tired when it wears off'],['tics','🔁','Tics or twitches'],['other','➕','Something else']];
+function mxMain(){const o=mxS();if(!o.meds.length)return mxAdd(true);
+  const k=dkey(dShift(MXQ.day)),D=o.log[k]||{tk:{}},chk=mxCheckN(D);
+  txShow(`<div class="tx-day">${[0,-1].map(d=>`<button type="button" data-mxday="${d}" class="${MXQ.day===d?'on':''}">${esc(tl(d?'Yesterday':'Today'))}</button>`).join('')}</div>
+   <div class="mx-meds">${o.meds.filter(m=>!m.stop).map(m=>{const t=(D.tk||{})[m.id];return `<div class="mx-m"><div class="mx-mt"><b>💊 ${esc(m.name||tl('My medicine'))}</b><small>${esc(mxDoseOn(m,k)||'')}</small></div>
+     ${t&&t!=='skip'?`<button type="button" class="mx-tk on" data-mxe="${m.id}">✓ ${esc(tl('Taken'))} · ${esc(hm12(t))} ✎</button>`:t==='skip'?`<button type="button" class="mx-tk sk" data-mxe="${m.id}">${esc(tl('Not taken'))} ✎</button>`:`<div class="mx-tb"><button type="button" class="btn-main mx-tk" data-mxt="${m.id}">${esc(tl(MXQ.day?'I took it':'I took it now'))}</button><button type="button" class="btn-ghost" data-mxe="${m.id}">${esc(tl('Other time'))}</button></div>`}</div>`}).join('')}</div>
+   <button type="button" class="mx-chk" id="mxChk"><span>📝</span><span class="sx-rt"><b>${esc(tl(MXQ.day?"Yesterday's check":"Today's check"))}</b><small>${chk.n?chk.n+'/'+chk.of+' '+esc(tl('answered')):esc(tl('Best in the evening. About 1 minute.'))}</small></span><span class="ci-go">›</span></button>
+   <button type="button" class="mx-chk" id="mxCmp"><span>📊</span><span class="sx-rt"><b>${esc(tl('Compare'))}</b><small>${esc(tl('Doses, days with and without, weeks'))}</small></span><span class="ci-go">›</span></button>
+   <details class="mx-safe"><summary>⚠️ ${esc(tl('When to get help now'))}</summary>${mxSafeHTML()}</details>
+   <div class="tx-foot"><button type="button" class="btn-ghost" id="mxMng">✎ ${esc(tl('My medicines'))}</button></div>`);
+  const B=$('scrollBody');B.querySelectorAll('[data-mxday]').forEach(b=>b.onclick=()=>{tap();MXQ.day=+b.dataset.mxday;mxMain()});
+  B.querySelectorAll('[data-mxt]').forEach(b=>b.onclick=()=>{tap();const d=mxDay(k);d.tk[b.dataset.mxt]=MXQ.day?'08:00':mxNowHM();save();if(MXQ.day)return mxTime(b.dataset.mxt,k);toast('💊 ✓ '+hm12(d.tk[b.dataset.mxt]));mxMain()});
+  B.querySelectorAll('[data-mxe]').forEach(b=>b.onclick=()=>{tap();mxTime(b.dataset.mxe,k)});
+  $('mxChk').onclick=()=>{tap();mxCheck(0,k)};$('mxCmp').onclick=()=>{tap();mxCompare()};$('mxMng').onclick=()=>{tap();mxManage()}}
+function mxSafeHTML(){return `<div class="tx-note mx-sf"><p><b>${esc(tl('Call your local emergency number now if you have:'))}</b></p><ul>${['Chest pain or pressure','Fainting, or nearly fainting','A very fast or uneven heartbeat while resting','Trouble breathing','Swelling of the face, lips or tongue','Seeing or hearing things that are not there','Thoughts of hurting yourself'].map(s=>`<li>${esc(tl(s))}</li>`).join('')}</ul>
+  <p>${esc(tl('Call your doctor soon for side effects that are strong, do not go away, or worry you.'))}</p><p class="small muted">${esc(tl('Fastaqim does not diagnose or give dose advice. Talk to your doctor before changing or stopping a medicine.'))}</p></div>`}
+function mxTime(mid,k){const d=mxDay(k),t=d.tk[mid];
+  txBare(`<p class="label">💊 ${esc(tl('When did you take it?'))}</p><input type="time" id="mxT" value="${t&&t!=='skip'?t:mxNowHM()}" class="mx-in">
+   <button type="button" class="btn-main" style="width:100%;margin-top:10px" id="mxTS">✓ ${esc(tl('Save'))}</button>
+   <button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxTN">${esc(tl('I did not take it'))}</button>
+   ${t?`<button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxTC">↶ ${esc(tl('Clear'))}</button>`:''}
+   <button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxTB">${esc(tl('Back'))}</button>`);
+  $('mxTS').onclick=()=>{const v=$('mxT').value;if(v){d.tk[mid]=v;save()}mxMain()};$('mxTN').onclick=()=>{d.tk[mid]='skip';save();mxMain()};$('mxTB').onclick=mxMain;if($('mxTC'))$('mxTC').onclick=()=>{delete d.tk[mid];save();mxMain()}}
+function mxAdd(first,m){const ed=!!m;m=m||{};
+  txShow(`${first?`<p class="tx-h">💊 ${esc(tl('Medicine tracker'))}</p><p class="tx-sub">${esc(tl('Start from today. No history needed. Add older details later only if you want.'))}</p>`:`<p class="tx-h">${esc(tl(ed?'Edit medicine':'Add a medicine'))}</p>`}
+   <label class="mx-lb">${esc(tl('Name'))} <small>${esc(tl('optional'))}</small><input id="mxN" class="mx-in" maxlength="40" value="${esc(m.name||'')}" placeholder="${esc(tl('My medicine'))}"></label>
+   <label class="mx-lb">${esc(tl('Dose'))} <small>${esc(tl('optional'))}</small><input id="mxD" class="mx-in" maxlength="30" value="${esc(m.dose||'')}" placeholder="${esc(tl('As on the label'))}"></label>
+   ${ed?`<p class="tx-sub">${esc(tl('Changing the dose saves the date, so you can compare before and after.'))}</p>`:''}
+   <button type="button" class="btn-main" style="width:100%;margin-top:8px" id="mxSv">✓ ${esc(tl('Save'))}</button>
+   ${ed?`<button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxSt">${esc(tl(m.stop?'I take it again':'I stopped taking it'))}</button>`:''}
+   ${first?'':`<button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxBk">${esc(tl('Back'))}</button>`}
+   ${first?`<details class="mx-safe"><summary>⚠️ ${esc(tl('When to get help now'))}</summary>${mxSafeHTML()}</details>`:''}`);
+  $('mxSv').onclick=()=>{const o=mxS(),name=$('mxN').value.trim(),dose=$('mxD').value.trim(),k=dkey();
+    if(ed){const x=o.meds.find(y=>y.id===m.id);if(x){if((x.dose||'')!==dose){x.hist=x.hist||[];x.hist.push({d:k,dose});o.chg.push({d:k,mid:x.id,from:x.dose||'',to:dose})}x.name=name;x.dose=dose}}
+    else{const id='m'+Date.now().toString(36);o.meds.push({id,name,dose,since:k,hist:[{d:k,dose}]});o.chg.push({d:k,mid:id,from:'',to:dose||'+'})}
+    save();toast('✓ '+tl('Saved'));mxMain()};
+  if($('mxBk'))$('mxBk').onclick=()=>mxManage();
+  if($('mxSt'))$('mxSt').onclick=()=>{const o=mxS(),x=o.meds.find(y=>y.id===m.id);if(x){x.stop=x.stop?0:dkey();o.chg.push({d:dkey(),mid:x.id,from:x.dose||'',to:x.stop?'stop':'restart'});save()}mxManage()}}
+function mxManage(){const o=mxS();txShow(`<p class="tx-h">${esc(tl('My medicines'))}</p><div class="sx-list">${o.meds.map(m=>`<button type="button" class="sx-row" data-mxm="${m.id}"><span class="sx-ri">💊</span><span class="sx-rt"><b>${esc(m.name||tl('My medicine'))}</b><small>${esc(m.dose||'')}${m.stop?' · '+esc(tl('Stopped')):''}</small></span><span class="ci-go">✎</span></button>`).join('')}</div>
+  <button type="button" class="btn-main" style="width:100%" id="mxNew">+ ${esc(tl('Add a medicine'))}</button>
+  ${o.chg.length?`<p class="label" style="margin-top:14px">${esc(tl('Changes'))}</p><div class="mx-ch">${o.chg.slice(-8).reverse().map(c=>{const m=o.meds.find(y=>y.id===c.mid)||{};return `<div><span>${esc(dLbl(c.d))}</span><b>${esc(m.name||tl('My medicine'))}</b><small>${c.to==='stop'?esc(tl('Stopped')):c.to==='restart'?esc(tl('Started again')):(c.from?esc(c.from)+' → ':'')+esc(c.to==='+'?tl('Started'):c.to)}</small></div>`}).join('')}</div>`:''}
+  <button type="button" class="btn-ghost" style="width:100%;margin-top:8px" id="mxBk2">${esc(tl('Back'))}</button>`);
+  $('scrollBody').querySelectorAll('[data-mxm]').forEach(b=>b.onclick=()=>mxAdd(false,o.meds.find(m=>m.id===b.dataset.mxm)));$('mxNew').onclick=()=>mxAdd(false);$('mxBk2').onclick=mxMain}
+/* the daily check: one question per screen */
+const MXQS=['on','dur','fx','side','body','num'];
+function mxCheckN(D){D=D||{};let n=0;if(D.on)n++;if(D.dur)n++;if(D.fx&&Object.keys(D.fx).length)n++;if(D.side&&(Object.keys(D.side).length||D.side._none||D.side._ns))n++;if(D.ap||D.sl||D.en||D.emo)n++;if(D.wt||D.bps||D.hr||D.numSkip)n++;return {n,of:MXQS.length}}
+function mxSyms(){const on=sxS().on;return (on.length?on:['focus','start','time','emotion']).slice(0,8)}
+function mxCheck(i,k){const D=mxDay(k),q=MXQS[i];if(!q)return mxCheckDone(k);
+  const head=`<div class="sx-top"><button type="button" class="sx-bk" id="mxQB" aria-label="${esc(tl('Back'))}">‹</button><span class="sx-pg"><i style="width:${Math.round(i/MXQS.length*100)}%"></i></span><span class="sx-n" dir="ltr">${i+1}/${MXQS.length}</span></div>`;
+  const nxt=()=>{save();mxCheck(i+1,k)},opts=(key,list)=>`<div class="sx-fs mx-o">${list.map(([v,l,s])=>`<button type="button" data-v="${v}" class="${D[key]===v?'on':''}"><b>${esc(tl(l))}</b>${s?`<small>${esc(tl(s))}</small>`:''}</button>`).join('')}</div>`;
+  let h='';
+  if(q==='on')h=`<p class="sx-big">⏱️</p><p class="sx-ask">${esc(tl('After taking it, when did you notice it start working?'))}</p>${opts('on',[['30','About 30 minutes'],['60','About 1 hour'],['120','About 2 hours'],['180','3 hours or more'],['no','I did not notice it working'],['ns',"I'm not sure"]])}`;
+  if(q==='dur')h=`<p class="sx-big">⌛</p><p class="sx-ask">${esc(tl('How long did it keep working?'))}</p>${opts('dur',[['2','About 2 hours'],['4','About 4 hours'],['6','About 6 hours'],['8','About 8 hours'],['10','10 hours or more'],['still','It is still working'],['ns',"I'm not sure"]])}`;
+  if(q==='fx'){D.fx=D.fx||{};h=`<p class="sx-big">🧠</p><p class="sx-ask">${esc(tl('While it was working, these were:'))}</p><div class="mx-fx">${mxSyms().map(id=>{const x=sxBy(id),v=D.fx[id];return `<div class="mx-fr"><span>${x.ic} ${esc(L4(x.n))}</span><div>${[['b','Easier'],['s','No change'],['w','Harder'],['ns','Not sure']].map(([c,l])=>`<button type="button" data-fx="${id}:${c}" class="${c}${v===c?' on':''}">${esc(tl(l))}</button>`).join('')}</div></div>`}).join('')}</div><button type="button" class="btn-main" style="width:100%" id="mxNx">${esc(tl('Next'))} ›</button>`}
+  if(q==='side'){D.side=D.side||{};h=`<p class="sx-big">🩺</p><p class="sx-ask">${esc(tl('Any side effects today?'))}</p><p class="tx-sub">${esc(tl('Tap once for mild, again for moderate, again for severe.'))}</p><div class="mx-se">${MX_SIDE.map(([c,i,l])=>{const v=D.side[c]||0;return `<button type="button" data-se="${c}" class="sv${v}"><span>${i}</span>${esc(tl(l))}${v?`<em>${esc(tl(['','Mild','Moderate','Severe'][v]))}</em>`:''}</button>`}).join('')}</div>
+    <div class="sx-alt"><button type="button" data-sen="_none" class="${D.side._none?'on':''}">✓ ${esc(tl('None today'))}</button><button type="button" data-sen="_ns" class="${D.side._ns?'on':''}">🤔 ${esc(tl("I'm not sure"))}</button></div><button type="button" class="btn-main" style="width:100%" id="mxNx">${esc(tl('Next'))} ›</button>`}
+  if(q==='body')h=`<p class="sx-big">🍽️</p><p class="sx-ask">${esc(tl('Compared with a usual day for you:'))}</p><div class="mx-fx">${[['ap','🍽️','Appetite',['Less','Usual','More']],['sl','🌙','Sleep last night',['Less','Usual','More']],['en','🔋','Energy',['Lower','Usual','Higher']],['emo','🌊','Emotions',['Calmer','Usual','Upset more easily']]].map(([key,ic,l,o])=>`<div class="mx-fr"><span>${ic} ${esc(tl(l))}</span><div>${o.map((t,j)=>`<button type="button" data-bd="${key}:${j}" class="${D[key]===String(j)?'on':''}">${esc(tl(t))}</button>`).join('')}<button type="button" data-bd="${key}:ns" class="${D[key]==='ns'?'on':''}">${esc(tl('Not sure'))}</button></div></div>`).join('')}</div><button type="button" class="btn-main" style="width:100%" id="mxNx">${esc(tl('Next'))} ›</button>`;
+  if(q==='num')h=`<p class="sx-big">❤️</p><p class="sx-ask">${esc(tl('Numbers, if you have them'))}</p><p class="tx-sub">${esc(tl('All optional. From any source: a scale, a watch, a pharmacy or a home cuff.'))}</p>
+    <div class="mx-nums"><label>${esc(tl('Weight'))}<span><input id="mxW" inputmode="decimal" value="${esc(D.wt||'')}"><select id="mxWU">${['kg','lb'].map(u=>`<option ${((D.wu||S.mxWU||'kg')===u)?'selected':''}>${u}</option>`).join('')}</select></span></label>
+     <label>${esc(tl('Blood pressure'))}<span><input id="mxBs" inputmode="numeric" value="${esc(D.bps||'')}" placeholder="120"> / <input id="mxBd" inputmode="numeric" value="${esc(D.bpd||'')}" placeholder="80"></span></label>
+     <label>${esc(tl('Heart rate'))}<span><input id="mxH" inputmode="numeric" value="${esc(D.hr||'')}" placeholder="70"> <small>/min</small></span></label></div>
+    <button type="button" class="btn-main" style="width:100%;margin-top:8px" id="mxNx">✓ ${esc(tl('Save'))}</button><button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="mxSk">${esc(tl('Skip'))}</button>`;
+  txBare(head+`<div class="sx-q">${h}</div>`+(q==='on'||q==='dur'?`<button type="button" class="btn-ghost sx-skip" id="mxSk">${esc(tl('Skip'))}</button>`:''));
+  const B=$('scrollBody');$('mxQB').onclick=()=>{tap();i?mxCheck(i-1,k):mxMain()};if($('mxSk'))$('mxSk').onclick=()=>{tap();if(q==='num')D.numSkip=1;nxt()};
+  B.querySelectorAll('.mx-o [data-v]').forEach(b=>b.onclick=()=>{tap();D[q]=b.dataset.v;nxt()});
+  B.querySelectorAll('[data-fx]').forEach(b=>b.onclick=()=>{tap();const [id,c]=b.dataset.fx.split(':');D.fx[id]=c;save();b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+  B.querySelectorAll('[data-bd]').forEach(b=>b.onclick=()=>{tap();const [key,v]=b.dataset.bd.split(':');D[key]=v;save();b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+  B.querySelectorAll('[data-se]').forEach(b=>b.onclick=()=>{tap();const c=b.dataset.se;D.side[c]=((D.side[c]||0)+1)%4;if(!D.side[c])delete D.side[c];delete D.side._none;save();const st=B.scrollTop;mxCheck(i,k);$('scrollBody').scrollTop=st});
+  B.querySelectorAll('[data-sen]').forEach(b=>b.onclick=()=>{tap();const c=b.dataset.sen;if(c==='_none'){D.side={_none:1}}else{D.side._ns=D.side._ns?0:1;if(!D.side._ns)delete D.side._ns}save();const st=B.scrollTop;mxCheck(i,k);$('scrollBody').scrollTop=st});
+  if($('mxNx'))$('mxNx').onclick=()=>{tap();if(q==='num'){const n=v=>{v=String(v||'').replace(',','.').trim();return v&&!isNaN(+v)?v:''};D.wt=n($('mxW').value);D.wu=S.mxWU=$('mxWU').value;D.bps=n($('mxBs').value);D.bpd=n($('mxBd').value);D.hr=n($('mxH').value)}nxt()}}
+function mxWarn(D){const w=[];const sev=Object.entries(D.side||{}).filter(([c,v])=>c[0]!=='_'&&v===3).map(([c])=>tl((MX_SIDE.find(x=>x[0]===c)||[])[2]||c));
+  if(sev.length)w.push(tl('Severe')+': '+sev.join(', '));if(+D.hr>=120)w.push(tl('Heart rate')+' '+D.hr+'/min');if(+D.hr&&+D.hr<45)w.push(tl('Heart rate')+' '+D.hr+'/min');
+  if(+D.bps>=180||+D.bpd>=120)w.push(tl('Blood pressure')+' '+D.bps+'/'+D.bpd);return w}
+function mxCheckDone(k){const D=mxDay(k),w=mxWarn(D),g=mxCheckN(D).n>=3?txAw('mx'+k,2,'💊 '+tl("Today's check")):0;
+  txBare(`<div class="sx-q sx-end"><p class="sx-big">${w.length?'⚠️':'✅'}</p><h3>${esc(tl('Saved'))}</h3>${g>0?`<p class="tx-star">+${g} ⭐</p>`:''}
+   ${w.length?`<div class="mx-warn"><b>${esc(tl('Please contact your doctor about this soon.'))}</b><p>${w.map(esc).join('<br>')}</p><p>${esc(tl('If it is sudden or very strong, call your local emergency number now.'))}</p></div>`:`<p class="tx-sub">${esc(tl('Every record makes the comparison clearer.'))}</p>`}
+   <button type="button" class="btn-main" style="width:100%" id="mxOk">${esc(tl('Done'))}</button></div>`);$('mxOk').onclick=()=>{tap();mxMain()}}
+/* comparisons: only from what was recorded; small samples say so */
+function mxCompare(){const o=mxS(),days=Object.keys(o.log).sort(),sx=sxS(),N=3;
+  const grp={};days.forEach(k=>{const D=o.log[k];Object.entries(D.tk||{}).forEach(([mid,t])=>{if(t==='skip')return;const m=o.meds.find(x=>x.id===mid);if(!m)return;const key=mid+'|'+mxDoseOn(m,k);(grp[key]=grp[key]||{m,dose:mxDoseOn(m,k),days:[]}).days.push(k)})});
+  const avgF=(ks,id)=>{const v=ks.map(k=>((sx.log[k]||{})[id]||{}).f).filter(f=>typeof f==='number');return v.length?{a:v.reduce((x,y)=>x+y,0)/v.length,n:v.length}:null};
+  const fLbl=a=>L4(SXF[Math.round(a)][0]);
+  const taken=new Set(days.filter(k=>Object.values(o.log[k].tk||{}).some(t=>t&&t!=='skip')));
+  const sxDays=Object.keys(sx.log),noMed=sxDays.filter(k=>!taken.has(k)&&o.log[k]&&Object.values(o.log[k].tk||{}).includes('skip'));
+  const G=Object.values(grp);
+  let h=`<p class="tx-h">📊 ${esc(tl('Compare'))}</p><p class="tx-sub">${esc(tl('Only from what you recorded. Under 3 days says "Not enough information yet".'))}</p>`;
+  if(!G.length)h+=`<div class="tx-note"><p>${esc(tl('Not enough information yet'))}</p></div>`;
+  G.forEach(g=>{const ks=g.days,chk=ks.filter(k=>o.log[k].on),onC={},durs=[],fx={},side={};ks.forEach(k=>{const D=o.log[k];if(D.on)onC[D.on]=(onC[D.on]||0)+1;if(D.dur&&!isNaN(+D.dur))durs.push(+D.dur);Object.entries(D.fx||{}).forEach(([id,c])=>{fx[id]=fx[id]||{b:0,s:0,w:0,ns:0};fx[id][c]++});Object.entries(D.side||{}).forEach(([c,v])=>{if(c[0]!=='_')side[c]=(side[c]||0)+1})});
+    const onTop=Object.entries(onC).sort((a,b)=>b[1]-a[1])[0],onL={'30':'About 30 minutes','60':'About 1 hour','120':'About 2 hours','180':'3 hours or more','no':'I did not notice it working','ns':"I'm not sure"};
+    h+=`<div class="mx-cg"><p class="mx-cgh">💊 ${esc(g.m.name||tl('My medicine'))} <small>${esc(g.dose||'')}</small> · ${ks.length} ${esc(tl('days'))}</p>`;
+    if(ks.length<N)h+=`<p class="tx-sub">${esc(tl('Not enough information yet'))}</p>`;else{
+     h+=`<div class="mx-cr"><span>⏱️ ${esc(tl('Starts working'))}</span><b>${onTop?esc(tl(onL[onTop[0]]||onTop[0])):'—'}</b></div><div class="mx-cr"><span>⌛ ${esc(tl('Keeps working'))}</span><b>${durs.length?'~'+Math.round(durs.reduce((a,b)=>a+b,0)/durs.length)+' '+esc(tl('hours')):'—'}</b></div>`;
+     Object.entries(fx).forEach(([id,c])=>{const x=sxBy(id);if(!x)return;const t=c.b+c.s+c.w;if(!t)return;h+=`<div class="mx-cr"><span>${x.ic} ${esc(L4(x.n))}</span><b class="mx-bar"><i class="b" style="width:${c.b/t*100}%"></i><i class="s" style="width:${c.s/t*100}%"></i><i class="w" style="width:${c.w/t*100}%"></i></b></div>`});
+     const se=Object.entries(side).sort((a,b)=>b[1]-a[1]);h+=`<div class="mx-cr"><span>🩺 ${esc(tl('Side effects'))}</span><b>${se.length?se.slice(0,4).map(([c,n])=>esc(tl((MX_SIDE.find(x=>x[0]===c)||[])[2]||c))+' '+n+'/'+ks.length).join(', '):'—'}</b></div>`}
+    h+=`</div>`});
+  if(G.length)h+=`<p class="sx-key"><i class="mx-k b"></i>${esc(tl('Easier'))} <i class="mx-k s"></i>${esc(tl('No change'))} <i class="mx-k w"></i>${esc(tl('Harder'))}</p>`;
+  if(sx.on.length){h+=`<p class="label" style="margin-top:14px">🧠 ${esc(tl('Days with and without medicine'))}</p>`;
+    const tk=[...taken];sx.on.forEach(id=>{const x=sxBy(id),a=avgF(tk,id),b=avgF(noMed,id);h+=`<div class="mx-cr"><span>${x.ic} ${esc(L4(x.n))}</span><b>${a&&a.n>=N?esc(tl('With'))+': '+esc(fLbl(a.a)):esc(tl('With'))+': —'} · ${b&&b.n>=N?esc(tl('Without'))+': '+esc(fLbl(b.a)):esc(tl('Without'))+': —'}</b></div>`});
+    h+=`<p class="tx-sub">— = ${esc(tl('Not enough information yet'))}</p>`}
+  h+=`<p class="tx-sub">${esc(tl('Fastaqim does not diagnose or give dose advice. Talk to your doctor before changing or stopping a medicine.'))}</p><button type="button" class="btn-ghost" style="width:100%" id="mxBk3">${esc(tl('Back'))}</button>`;
+  txShow(h);$('mxBk3').onclick=mxMain}
+
+/* ---------------- 📚 Learning timer ---------------- */
+function lxS(){const o=S.lx=S.lx||{};o.goal=o.goal||5;o.ses=o.ses||[];o.topics=o.topics||[];o.cg=o.cg||[];return o}
+function lxAct(c,now){now=now||Date.now();let p=0;(c.pa||[]).forEach(([a,b])=>p+=b-a);if(c.pAt)p+=now-c.pAt;return Math.max(0,now-c.t0-p)}
+function lxMMSS(ms){const s=Math.floor(ms/1000),h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':'+String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')}
+const LXT={iv:0,topic:''};
+const LX_SYM=[['focus','🎯','Lost focus'],['fog','🌫️','Brain fog'],['head','🩹','Headache'],['tired','🔋','Tired'],['over','🌊','Overwhelmed'],['phone','📱','Distracted']];
+function lxMain(){const o=lxS();if(o.cur)return lxRun();
+  const sel=LXT.topic||o.topics[0]||'';
+  const st=lxStats();
+  txShow(`<p class="tx-h">📚 ${esc(tl('Learning timer'))}</p><p class="tx-sub">${esc(tl('For study, school, work training or anything you are learning.'))}</p>
+   <p class="label">${esc(tl('What are you learning?'))}</p><div class="lx-tp">${o.topics.slice(0,6).map(t=>`<button type="button" data-lxtp="${esc(t)}" class="${t===sel?'on':''}">${esc(t)}</button>`).join('')}<button type="button" id="lxNewT">+ ${esc(tl('New'))}</button></div>
+   <p class="label">${esc(tl('First goal'))}</p><div class="lx-gl">${[5,10,15,25,45].map(m=>`<button type="button" data-lxg="${m}" class="${o.goal===m?'on':''}">${m} ${esc(tl('min'))}</button>`).join('')}<button type="button" data-lxg="c" class="${[5,10,15,25,45].includes(o.goal)?'':'on'}">${[5,10,15,25,45].includes(o.goal)?esc(tl('Custom')):o.goal+' '+esc(tl('min'))}</button></div>
+   <p class="tx-sub">${esc(tl('The timer keeps going after the goal. You decide when to stop.'))}</p>
+   <button type="button" class="btn-main tx-go" id="lxStart">▶ ${esc(tl('Start'))}</button>
+   ${o.cg.length?`<p class="label" style="margin-top:14px">🏁 ${esc(tl('Course goals'))}</p>${o.cg.map(g=>`<div class="lx-cg"><span class="sx-rt"><b>${esc(g.name)}</b><small>${g.done}/${g.target} ${esc(tl('lessons'))}</small></span><span class="ci-bar"><i style="width:${Math.min(100,g.done/g.target*100)}%"></i></span><button type="button" data-lxc="${g.id}" aria-label="+1">+1</button></div>`).join('')}`:''}
+   <button type="button" class="btn-ghost" style="width:100%;margin-top:8px" id="lxNewG">🏁 ${esc(tl('Add a course goal'))}</button>
+   ${st?`<p class="label" style="margin-top:14px">📈 ${esc(tl('Your sessions'))}</p>${st}`:''}`);
+  const B=$('scrollBody');B.querySelectorAll('[data-lxtp]').forEach(b=>b.onclick=()=>{tap();LXT.topic=b.dataset.lxtp;lxMain()});
+  $('lxNewT').onclick=()=>txAsk(tl('What are you learning?'),'',0,v=>{const t=v.slice(0,40);o.topics=[t].concat(o.topics.filter(x=>x!==t)).slice(0,12);LXT.topic=t;save();lxMain()},lxMain);
+  B.querySelectorAll('[data-lxg]').forEach(b=>b.onclick=()=>{tap();let v=b.dataset.lxg;if(v==='c')return txAsk(tl('Minutes'),String(o.goal),1,x=>{x=parseInt(x,10);if(!(x>0&&x<=600))return;o.goal=x;save();lxMain()},lxMain);o.goal=+v;save();lxMain()});
+  B.querySelectorAll('[data-lxc]').forEach(b=>b.onclick=()=>{tap();const g=o.cg.find(x=>x.id===b.dataset.lxc);if(g){g.done=Math.min(g.target,g.done+1);save();if(g.done===g.target)toast('🏁 '+g.name+' ✓');fqUndoToast(()=>{g.done=Math.max(0,g.done-1);save();lxMain()},'+1 · '+g.name);lxMain()}});
+  $('lxNewG').onclick=()=>txAsk(tl('Course or training name'),'',0,n=>txAsk(tl('How many lessons or parts?'),'10',1,t=>{t=parseInt(t,10);if(!(t>0&&t<1000))return;o.cg.push({id:'g'+Date.now().toString(36),name:n.slice(0,40),target:t,done:0});save();lxMain()},lxMain),lxMain);
+  $('lxStart').onclick=()=>{tap();const t=sel;if(t)o.topics=[t].concat(o.topics.filter(x=>x!==t)).slice(0,12);o.cur={t0:Date.now(),pa:[],pAt:0,topic:t,goal:o.goal,rr:0,rp:0,sym:[],got:[],lastGot:0};save();lxRun()}}
+function lxStats(){const o=lxS(),L=o.ses.slice(-30);if(!L.length)return '';const avg=a=>a.length?a.reduce((x,y)=>x+y,0)/a.length:0;
+  const act=L.map(s=>s.act),sh=L.filter(s=>s.why==='shut').map(s=>s.act),eff=L.reduce((a,s)=>a+s.act,0)/Math.max(1,L.reduce((a,s)=>a+s.tot,0)),con=[].concat(...L.map(s=>s.got||[]));
+  return `<div class="lx-st"><div><b>${L.length}</b><small>${esc(tl('sessions'))}</small></div><div><b>${esc(fqDur(avg(act)))}</b><small>${esc(tl('average focus time'))}</small></div><div><b>${sh.length?esc(fqDur(avg(sh))):'—'}</b><small>${esc(tl('until mental shutdown'))}</small></div><div><b>${Math.round(eff*100)}%</b><small>${esc(tl('learning time vs total'))}</small></div>${con.length?`<div><b>${esc(fqDur(avg(con)))}</b><small>${esc(tl('to understand a concept'))}</small></div>`:''}</div>
+   <div class="lx-hist">${L.slice(-6).reverse().map(s=>`<div><span>${esc(dLbl(dkey(new Date(s.t0))))} · ${esc(s.topic||tl('Learning'))}</span><b>${esc(fqDur(s.act))}${s.why==='shut'?' · 🧠':''}</b></div>`).join('')}</div>`}
+function lxRun(){const o=lxS(),c=o.cur;if(!c)return lxMain();
+  txShow(`<div class="lx-run"><p class="lx-tpc">${esc(c.topic||tl('Learning'))}</p>
+   <div class="lx-ring" id="lxRing"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" class="bg"/><circle cx="60" cy="60" r="52" class="fg" id="lxArc" pathLength="100"/></svg><div><b id="lxTm" dir="ltr">0:00</b><small id="lxGl"></small></div></div>
+   <div class="lx-ctl"><button type="button" class="btn-main" id="lxPa">${c.pAt?'▶ '+esc(tl('Resume')):'⏸ '+esc(tl('Pause'))}</button><button type="button" class="btn-ghost" id="lxSt">⏹ ${esc(tl('Stop'))}</button></div>
+   <button type="button" class="lx-shut" id="lxSh">🧠 ${esc(tl('Mental shutdown'))}<small>${esc(tl('My brain is done. Save how long I lasted.'))}</small></button>
+   <div class="lx-cnt"><button type="button" id="lxRr">📖 ${esc(tl('Reread'))} <b id="lxRrN">${c.rr}</b></button><button type="button" id="lxRp">⏪ ${esc(tl('Replay'))} <b id="lxRpN">${c.rp}</b></button><button type="button" id="lxGot">💡 ${esc(tl('I understood it'))} <b id="lxGotN">${c.got.length}</b></button></div>
+   <p class="label">${esc(tl('One tap if it happens'))}</p><div class="lx-sym">${LX_SYM.map(([k,i,l])=>`<button type="button" data-lxs="${k}"><span>${i}</span>${esc(tl(l))} <b>${c.sym.filter(s=>s.k===k).length||''}</b></button>`).join('')}</div>
+   <p class="tx-sub">${esc(tl('Safe to close. The timer keeps your place.'))}</p></div>`);
+  const tick=()=>{const cc=lxS().cur;if(!cc||!$('lxTm')){clearInterval(LXT.iv);return}const a=lxAct(cc),g=cc.goal*60000,p=Math.min(1,a/g);$('lxTm').textContent=lxMMSS(a);const arc=$('lxArc');if(arc)arc.style.strokeDasharray=(p*100)+' 100';
+    const gl=$('lxGl');if(gl)gl.textContent=a>=g?'✓ '+tl('Goal reached'):tl('Goal')+' '+cc.goal+' '+tl('min');$('lxRing').classList.toggle('done',a>=g);$('lxRing').classList.toggle('paused',!!cc.pAt);
+    if(a>=g&&!cc.gotGoal){cc.gotGoal=1;save();const n=txAw('lx'+cc.t0,2,'📚 '+tl('Learning'));toast('✓ '+tl('Goal reached')+(n>0?' +'+n+' ⭐':'')+' · '+tl('Keep going if you want'));try{navigator.vibrate&&navigator.vibrate([30,60,30])}catch(e){}}};
+  clearInterval(LXT.iv);LXT.iv=setInterval(tick,500);tick();
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden||!$('lxTm')){mo.disconnect();clearInterval(LXT.iv)}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']});
+  $('lxPa').onclick=()=>{tap();const cc=lxS().cur;if(cc.pAt){cc.pa.push([cc.pAt,Date.now()]);cc.pAt=0}else cc.pAt=Date.now();save();lxRun()};
+  $('lxSt').onclick=()=>{tap();lxEnd('')};$('lxSh').onclick=()=>{tap();lxEnd('shut')};
+  const bump=(key,el)=>{const cc=lxS().cur;cc[key]++;save();$(el).textContent=cc[key];fqUndoToast(()=>{const c2=lxS().cur;if(c2){c2[key]=Math.max(0,c2[key]-1);save();const e=$(el);if(e)e.textContent=c2[key]}},'+1')};
+  $('lxRr').onclick=()=>{tap();bump('rr','lxRrN')};$('lxRp').onclick=()=>{tap();bump('rp','lxRpN')};
+  $('lxGot').onclick=()=>{tap();const cc=lxS().cur,a=lxAct(cc),d=a-(cc.lastGot||0);cc.got.push(d);cc.lastGot=a;save();$('lxGotN').textContent=cc.got.length;toast('💡 '+fqDur(d));};
+  $('scrollBody').querySelectorAll('[data-lxs]').forEach(b=>b.onclick=()=>{tap();const cc=lxS().cur;cc.sym.push({k:b.dataset.lxs,at:lxAct(cc)});save();const n=cc.sym.filter(s=>s.k===b.dataset.lxs).length;b.querySelector('b').textContent=n;
+    fqUndoToast(()=>{const c2=lxS().cur;if(!c2)return;const i=c2.sym.map(s=>s.k).lastIndexOf(b.dataset.lxs);if(i>=0)c2.sym.splice(i,1);save();const bb=$('scrollBody').querySelector(`[data-lxs="${b.dataset.lxs}"] b`);if(bb)bb.textContent=c2.sym.filter(s=>s.k===b.dataset.lxs).length||''},'✓ '+tl(LX_SYM.find(x=>x[0]===b.dataset.lxs)[2]))})}
+function lxEnd(why){try{const u=$('fqUndo2');if(u)u.remove()}catch(e){}const o=lxS(),c=o.cur;if(!c)return lxMain();const now=Date.now();if(c.pAt){c.pa.push([c.pAt,now]);c.pAt=0}const act=lxAct(c,now),tot=now-c.t0;clearInterval(LXT.iv);
+  const R={why:why||'',und:'',rem:'',fin:''};
+  const row=(key,label,opts)=>`<p class="label">${esc(tl(label))}</p><div class="lx-ch" data-row="${key}">${opts.map(([v,l])=>`<button type="button" data-v="${v}" class="${R[key]===v?'on':''}">${esc(tl(l))}</button>`).join('')}</div>`;
+  const paint=()=>{txBare(`<div class="lx-end"><p class="sx-big">${why==='shut'?'🧠':'⏹'}</p><h3 dir="ltr">${esc(fqDur(act))}</h3><p class="tx-sub">${esc(why==='shut'?tl('Saved how long you lasted. That is useful to know.'):tl('Nice work. A few quick taps, or skip.'))}</p>
+    ${row('why','Why did you stop?',[['done','Finished'],['shut','Mental shutdown'],['tired','Tired'],['head','Headache'],['dist','Distracted'],['time','Out of time'],['duty','Something else to do']])}
+    ${row('und','How much did you understand?',[['0','None'],['1','A little'],['2','About half'],['3','Most'],['4','All'],['ns','Not sure']])}
+    ${row('rem','How much do you remember right now?',[['0','None'],['1','A little'],['2','About half'],['3','Most'],['4','All'],['ns','Not sure']])}
+    ${row('fin','How much of the material did you finish?',[['0','0%'],['25','25%'],['50','50%'],['75','75%'],['100','100%']])}
+    <button type="button" class="btn-main" style="width:100%;margin-top:10px" id="lxSv">✓ ${esc(tl('Save'))}</button><button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="lxSk">${esc(tl('Skip'))}</button>
+    <button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="lxRes">▶ ${esc(tl('Keep going'))}</button></div>`);
+   $('scrollBody').querySelectorAll('[data-row] [data-v]').forEach(b=>b.onclick=()=>{tap();R[b.parentNode.dataset.row]=b.dataset.v;b.parentNode.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b))});
+   const fin=keep=>{const cc=lxS().cur;if(!cc)return;o.ses.push(Object.assign({t0:cc.t0,end:now,act,tot,topic:cc.topic,goal:cc.goal,rr:cc.rr,rp:cc.rp,sym:cc.sym,got:cc.got},keep?R:{why:R.why}));o.ses=o.ses.slice(-400);delete o.cur;save();lxMain();toast('✓ '+tl('Saved'))};
+   $('lxSv').onclick=()=>fin(true);$('lxSk').onclick=()=>fin(false);$('lxRes').onclick=()=>{const cc=lxS().cur;if(cc&&cc.pa.length){const l=cc.pa[cc.pa.length-1];if(l[1]===now){cc.pa.pop();cc.pAt=0;cc.pa.push([l[0],Date.now()])}}save();lxRun()}};
+  if(why!=='shut'&&!c.pAt){c.pAt=now;save()}else save();
+  paint()}
+/* a running timer shows on Home, so nothing is lost after a refresh */
+{const _hL=hmTrk;hmTrk=function(){let h=_hL.apply(this,arguments);try{const c=(S.lx||{}).cur;if(c)h=`<button type="button" class="lx-home" data-lxh="1"><span>📚</span><span class="sx-rt"><b>${esc(c.topic||tl('Learning'))}</b><small>${c.pAt?esc(tl('Paused')):esc(tl('Timer running'))} · ${esc(fqDur(lxAct(c)))}</small></span><span class="ci-go">›</span></button>`+h}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-lxh]');if(!b)return;e.preventDefault();tap();txOpen('lx')},true);
+
+/* ☰ menu: new group */
+{const _amT=apMenu;apMenu=function(){const r=_amT.apply(this,arguments);try{const m=$('apMenu'),p=m&&m.querySelector('.apm-p');if(!p||p.querySelector('[data-am="sx"]'))return r;
+  const hs=[...p.querySelectorAll('.apm-gh')],before=hs.find(x=>x.textContent===tl('Plan my day'))||hs[1];if(!before)return r;
+  const hd=document.createElement('p');hd.className='apm-s apm-gh';hd.textContent=tl('Health & learning');before.before(hd);let a=hd;
+  [['sx','🧠','Symptoms'],['mx','💊','Medicine'],['lx','📚','Learning timer']].forEach(([k,i,l])=>{const b=document.createElement('button');b.type='button';b.className='apm-i';b.dataset.am=k;b.textContent=i+' '+tl(l);b.onclick=()=>{m.hidden=true;txOpen(k)};a.after(b);a=b})}catch(e){}return r}}
+GO.symptoms=GO.track=()=>txOpen('sx');GO.medicine=GO.meds=()=>txOpen('mx');GO.learn=GO.study=()=>txOpen('lx');
+try{WN2.unshift(['📚','Learning timer','learn'],['💊','Medicine tracker','medicine'],['🧠','Symptom tracker','symptoms'])}catch(e){}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
