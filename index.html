@@ -2284,6 +2284,21 @@ html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
 html.fq-sa body.has-bnav .bnav{top:0!important;bottom:auto!important;transform:translate3d(0,calc(100vh - 100%),0)!important;transform:translate3d(0,calc(100lvh - 100%),0)!important}
 .wnc-big{font-size:2.6rem;text-align:center;margin:4px 0 0}.wnc-h{font:800 1.25rem var(--display,var(--body));text-align:center;margin:4px 0}
 #fqHome>.hm-wn{margin:12px 16px 0!important}
+/* v149: Safari (not Home Screen): the bar blends into Safari's own bottom area instead of a separate floating strip */
+html:not(.fq-sa) body.has-bnav .bnav{background:var(--bg)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;border-top:1px solid var(--line)!important;padding:2px 4px 0!important;box-shadow:none!important}
+html:not(.fq-sa) body.has-bnav .bnav button{min-height:40px;padding:2px 0}
+html:not(.fq-sa) body.has-bnav .bnav button.on{background:transparent!important}
+html:not(.fq-sa) body.has-bnav .bnav button i{font-size:1.15rem}
+html:not(.fq-sa){background:var(--bg)}
+
+/* v149: every popup opens as a normal full page above the tab bar (no floating cards over Home) */
+#scrollModal:not(.adf-on):not([hidden]){inset:0 0 var(--bnh,64px) 0!important;background:var(--bg)!important;padding:0!important;display:block!important;z-index:89!important}
+#scrollModal:not(.adf-on):not([hidden]) #scrollBody{max-width:none!important;width:100%!important;height:100%!important;max-height:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;overflow-y:auto!important;padding:calc(6px + env(safe-area-inset-top,0px)) 16px 24px!important;margin:0!important}
+body.is-guest #scrollModal:not(.adf-on):not([hidden]) #scrollBody{padding-top:calc(58px + env(safe-area-inset-top,0px))!important}
+#scrollModal:not(.adf-on):not([hidden]) .mc-bar{margin:0 -16px 0!important;top:0!important;padding:8px 12px 0!important;height:50px!important}#scrollModal:not(.adf-on):not([hidden]) #scrollBody{padding-top:env(safe-area-inset-top,0px)!important}body.is-guest #scrollModal:not(.adf-on):not([hidden]) #scrollBody{padding-top:calc(52px + env(safe-area-inset-top,0px))!important}
+body:not(.has-bnav) #scrollModal:not(.adf-on):not([hidden]){bottom:0!important}
+#scrollModal:not(.adf-on):not([hidden]) #scrollBody{animation:fqPgIn .22s ease-out both}@keyframes fqPgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){#scrollModal:not(.adf-on):not([hidden]) #scrollBody{animation:none}}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -4006,9 +4021,9 @@ async function cloudInit(user){
   SYNC.state='wait';syncBadge();
   try{const {data,error}=await AU.sb.from('fastaqim_state').select('state').eq('user_id',user.id).maybeSingle();if(error)throw error;
     const remote=data&&data.state;
-    if(remote&&(remote.savedAt||0)>(S.savedAt||0)){S=Object.assign({},S,clone(remote));S.uid=user.id;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}toast('Welcome back. Your plan is loaded.')}
+    if(remote){S=fqMerge(S,clone(remote),fqBase());S.uid=user.id;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(fqSame(S,remote))fqSetBase(clone(remote))}
     SYNC.ref={set:async o=>{const {error}=await AU.sb.from('fastaqim_state').upsert({user_id:user.id,state:o.state,updated_at:new Date().toISOString()});if(error)throw error}};
-    SYNC.state='on';syncBadge();if(!remote||(S.savedAt||0)>(remote.savedAt||0)){SYNC.dirty=true;dbPush()}
+    SYNC.state='on';syncBadge();try{fqRedraw()}catch(e){}if(!remote||!fqSame(S,remote)){SYNC.dirty=true;dbPush()}
   }catch(e){SYNC.state='local';syncBadge();toast('Couldn\'t reach your account. Saving on this device for now.')}
   lifeFix();render();delCheck();try{pfAfterInit()}catch(e){}
 }
@@ -7925,7 +7940,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v148',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v149',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9568,7 +9583,7 @@ function myAzOpen(){const L=myAz(),o=ciD();o.my=o.my||{};
   B.onclick=e=>{const ed=e.target.closest('[data-mye]');if(ed){e.stopPropagation();return myAzEdit(ed.dataset.mye)}
     const u=e.target.closest('[data-myu]');if(u){e.stopPropagation();const id=u.dataset.myu,x=L.find(y=>y.id===id),o2=ciD();o2.my=o2.my||{};const was=(o2.my[id]||0)>=x.n;o2.my[id]=Math.max(0,(o2.my[id]||0)-1);if(was)ciAw('my_'+id,0,'🤲 '+tl('My adhkar'));save();myAzPaint(id,x);return}
     const c=e.target.closest('[data-my]');if(!c)return;const id=c.dataset.my,x=L.find(y=>y.id===id);if(!x)return;const o2=ciD();o2.my=o2.my||{};const n=o2.my[id]||0;if(n>=x.n)return;
-    const now=Date.now(),l=MYZ.last[id]||MYZ.open;const gap=Math.max(700,Math.min(12000,String(x.t).replace(/\s/g,'').length*45));if(l&&now-l<gap){c.classList.remove('slow');void c.offsetWidth;c.classList.add('slow');return}
+    const now=Date.now(),l=MYZ.last[id]||MYZ.open;const gap=90;if(l&&now-l<gap){c.classList.remove('slow');void c.offsetWidth;c.classList.add('slow');return}
     MYZ.last[id]=now;o2.my[id]=n+1;try{navigator.vibrate&&navigator.vibrate(10)}catch(z){}if(n+1>=x.n){const g=ciAw('my_'+id,1,'🤲 '+tl('My adhkar'));if(g)toast('✓ +'+g+' ⭐')}save();myAzPaint(id,x)};
   const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();ciRefresh()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
 function myAzPaint(id,x){const c=$('scrollBody').querySelector(`[data-my="${id}"]`);if(!c)return;const n=(ciD().my||{})[id]||0;c.querySelector('.ci-zc').textContent=n+'/'+x.n;c.querySelector('.ci-zb i').style.width=Math.min(100,n/x.n*100)+'%';c.classList.toggle('dn',n>=x.n);const u=c.querySelector('[data-myu]');if(u)u.hidden=!n}
@@ -9656,7 +9671,7 @@ function adRead(cat,i){const C=ADHKAR[cat];if(!C)return;const L=C.items;i=Math.m
   card.addEventListener('touchmove',e=>{const t=e.touches[0];if(Math.abs(t.clientX-ADF.sx)>12||Math.abs(t.clientY-ADF.sy)>12)ADF.moved=true},{passive:true});
   card.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-ADF.sx,dy=t.clientY-ADF.sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4){const fwd=(document.documentElement.dir==='rtl')?dx>0:dx<0;if(fwd)$('adfNext').click();else if(i)adRead(cat,i-1)}});
   card.onclick=()=>{if(ADF.moved&&!ADF.force){ADF.moved=false;return}const d=azDone();if(d[it.id])return;const now=Date.now(),gap=ciMinGap(it);
-    if(!ADF.force&&ADF.last&&now-ADF.last<gap&&adfCnt(it.id)>0){card.classList.remove('slow');void card.offsetWidth;card.classList.add('slow');const h=$('adfHint');if(h)h.textContent=tl('A little slower, so it counts');try{navigator.vibrate&&navigator.vibrate([15,40,15])}catch(e){}return}
+    if(!ADF.force&&ADF.last&&now-ADF.last<gap&&adfCnt(it.id)>0){card.classList.remove('slow');void card.offsetWidth;card.classList.add('slow');const h=$('adfHint');if(h)0;try{navigator.vibrate&&navigator.vibrate([15,40,15])}catch(e){}return}
     ADF.last=now;const c=adfCnt(it.id)+1;ADF.cnt[it.id]=c;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
     $('adfN').textContent=Math.min(c,N);card.querySelector('.adf-ring').style.setProperty('--p',Math.min(1,c/N));const h=$('adfHint');if(h)h.textContent='👆 '+tl('Tap anywhere to count');card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');
     if(c>=N){d[it.id]=true;S.azDays=S.azDays||{};S.azDays[dkey()]=1;try{award(1,(it.tr||'').slice(0,40))}catch(e){}save();try{actMark()}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}
@@ -9678,7 +9693,7 @@ new MutationObserver(()=>{const m=$('scrollModal');document.body.classList.toggl
   const b=document.createElement('button');b.type='button';b.id='ciElse';b.className='adf-else';b.style.width='100%';b.innerHTML=`✓ ${esc(tl('I read it elsewhere'))}<small>${esc(tl('Reading here earns more stars.'))}</small>`;
   b.onclick=()=>{const o=ciD(),L=kind==='e'?ciMinE():ciMin();L.forEach(x=>{if((o.az[x.id]||0)<x.n)o.az[x.id]=x.n});ciAw('else_'+kind,1,(kind==='e'?'🌇 ':'🌅 ')+tl('I read it elsewhere'));save();modalClose();ciRefresh();toast('✓ +1 ⭐')};
   const tip=m.querySelector('.ci-tip');(tip||m.firstChild).after(b);
-  const mo=new MutationObserver(ms=>{ms.forEach(x=>{if(x.target.classList&&x.target.classList.contains('slow')){const t=m.querySelector('.ci-tip');if(t)t.textContent=tl('A little slower, so it counts')}})});mo.observe(m,{attributes:true,subtree:true,attributeFilter:['class']})}}catch(e){}return r}}
+  const mo=new MutationObserver(ms=>{ms.forEach(x=>{if(x.target.classList&&x.target.classList.contains('slow')){const t=m.querySelector('.ci-tip');if(t)0}})});mo.observe(m,{attributes:true,subtree:true,attributeFilter:['class']})}}catch(e){}return r}}
 /* phrase breaks in duas: the Qur'an font draws the Arabic comma "،" like an ayah-end circle, so duas could look like Qur'an.
    Duas now show a small soft diamond instead; real ayah markers (۝) stay only in Qur'an text. */
 function fqDm(root){try{(root||document).querySelectorAll('.adf-ar,.ci-zar,.ldz-ar,.ar-ar,.ayq,.ah-v p[lang=ar]').forEach(el=>{if(el.dataset.dm||!el.textContent.includes('،'))return;if(el.children.length)return;el.dataset.dm=1;el.innerHTML=esc(el.textContent).replace(/\s*،\s*/g,'<span class="fq-dm" aria-label="،"> ◆ </span>')})}catch(e){}}
@@ -9960,7 +9975,7 @@ function tkQuickTop(){try{const sec=$('tab-today'),i=$('dumpInput');if(!sec||!i)
 [["More","المزيد","Dabalata","Wax kale"],["Add… “tomorrow 5pm”","أضف مهمة… «غدًا 5 م»","Hojii dabali… “boru 5pm”","Ku dar hawl… “berri 5pm”"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* v148: What's new = one "You're all caught up" summary of everything since your last visit. ✕ or opening it keeps it closed (saved on this phone too, so a sync can't bring it back). */
-const WNL=[[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
+const WNL=[[149,'🔄','Safari and the Home Screen app now share the same day'],[149,'📄','Popups open as full pages'],[149,'🤲','Count istighfar at your own speed'],[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
 function fqBuildN(){return +String(FQ_BUILD).replace(/\D+/g,'')||0}
 function wnLast(){let l=0;try{l=+localStorage.getItem('fq.wnLast')||0}catch(e){}return Math.max(l,S.wnLast||0,(S.wnSeen||0)>=131?Math.max(131,S.wnSeen):0)}
 function wnMark(){const v=fqBuildN();S.wnLast=v;S.wnSeen=Math.max(S.wnSeen||0,v);S.wnRead=Math.max(S.wnRead||0,WN2_V);try{localStorage.setItem('fq.wnLast',v)}catch(e){}save();try{fqMenuDot()}catch(e){}}
@@ -9981,6 +9996,60 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 ["Salah alerts with a short hadith","تنبيهات الصلاة مع حديث قصير","Beeksisa salaataa hadiisa gabaabaa waliin","Ogeysiisyada salaadda oo wata xadiis gaaban"],["Animated salah streak","سلسلة الصلاة المتحركة","Tarree salaataa socho'u","Isku xigga salaadda oo dhaqdhaqaaqa"],["Dhikr is its own page","الذكر صار صفحة مستقلة","Zikriin fuula mataa isaa qaba","Dhikrigu waa bog gaar ah"],["Stars only for real work","النجوم فقط للعمل الحقيقي","Urjiin hojii dhugaa qofaaf","Xiddiguhu waa shaqo dhab ah oo keliya"],
 ["Full-screen adhkar player with audio","مشغّل أذكار بملء الشاشة مع الصوت","Taphataa zikrii guutuu iskiriinii sagalee waliin","Ciyaariye adkaar shaashad buuxda oo cod leh"],['"Too much?" help for adhkar','مساعدة «كثير عليّ؟» للأذكار','Gargaarsa "Baay\'ee natti ta\'e?" zikriif','Caawimo "Aad u badan?" adkaarta'],["Istighfar 100×","الاستغفار 100 مرة","Istighfaara 100×","Istigfaar 100×"],
 ["Split adhkar into small parts","قسّم الأذكار إلى أجزاء صغيرة","Zikrii kutaa xixiqqootti qoodi","U kala qaybi adkaarta qaybo yaryar"],["Add your own adhkar","أضف أذكارك","Zikrii kee dabali","Ku dar adkaartaada"],["Symptoms, medicine and learning trackers","متابعة الأعراض والدواء والتعلّم","Hordoffii mallattoo, qorichaa fi barumsaa","Raadraaca calaamadaha, daawada iyo waxbarashada"],["Weekly hasanat count","عدّ الحسنات الأسبوعي","Lakkoofsa hasanaatii torbanii","Tirinta xasanaadka toddobaadka"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v149: safe sync. Each device keeps the last cloud copy it saw ("base") and merges change-by-change,
+   so an old copy on another device (e.g. Safari vs the Home Screen app) can never wipe newer marks. Nothing is auto-marked. */
+const FQ_DAYRX=/^\d{4}-\d{2}-\d{2}/,FQ_SUM=['spa'+'rks','earned'],FQ_MAX=['sqBest','savedAt','wnSeen','wnLast'];
+function fqIsObj(v){return v!==null&&typeof v==='object'&&!Array.isArray(v)}
+function fqSame(a,b){if(a===b)return true;try{return JSON.stringify(a)===JSON.stringify(b)}catch(e){return false}}
+const fqHasIds=a=>Array.isArray(a)&&a.length>0&&a.every(x=>x&&typeof x==='object'&&x.id!=null);
+function fq3(b,l,r,k){/* three-way merge: b = last shared copy, l = this device, r = cloud */
+  if(fqSame(l,r))return l;if(fqSame(l,b))return r;if(fqSame(r,b))return l;
+  if(typeof l==='number'&&typeof r==='number'){if(FQ_SUM.includes(k)&&typeof b==='number')return Math.max(0,l+r-b);if(FQ_MAX.includes(k))return Math.max(l,r)}
+  if(fqIsObj(l)&&fqIsObj(r)){const bb=fqIsObj(b)?b:{},o={};
+    new Set([...Object.keys(l),...Object.keys(r)]).forEach(x=>{const v=fq3(bb[x],l[x],r[x],x);if(v!==undefined)o[x]=v});return o}
+  if(Array.isArray(l)&&Array.isArray(r)&&(fqHasIds(l)||!l.length)&&(fqHasIds(r)||!r.length)){
+    const bm=new Map((Array.isArray(b)?b:[]).filter(x=>x&&x.id!=null).map(x=>[x.id,x])),lm=new Map(l.map(x=>[x.id,x])),rm=new Map(r.map(x=>[x.id,x])),out=[];
+    r.forEach(x=>{if(lm.has(x.id))out.push(fq3(bm.get(x.id),lm.get(x.id),x,'item'));else if(!bm.has(x.id))out.push(x)});
+    l.forEach(x=>{if(!rm.has(x.id)&&!bm.has(x.id))out.push(x)});return out}
+  if(l===undefined)return b===undefined?r:undefined;if(r===undefined)return b===undefined?l:undefined;
+  return l}/* both changed the same thing: this device wins */
+function fq2(a,b){/* no shared copy yet (first sync after update): union, the newer copy wins on clashes */
+  if(fqIsObj(a)&&fqIsObj(b)){const o=Object.assign({},a);Object.keys(b).forEach(k=>{o[k]=k in a?fq2(a[k],b[k]):b[k]});return o}
+  if(fqHasIds(a)&&fqHasIds(b)){const s=new Set(b.map(x=>x.id));return b.concat(a.filter(x=>!s.has(x.id)))}
+  return b===undefined?a:b}
+function fqMerge(local,remote,base){
+  if(!remote)return local;if(!local)return clone(remote);let m;
+  if(base)m=fq3(base,local,remote,'');
+  else{const lt=local.savedAt||0,rt=remote.savedAt||0,nw=rt>lt?remote:local,od=nw===remote?local:remote;m=fq2(od,nw);
+    ['spa'+'rks','earned','sqBest'].forEach(k=>{if(typeof local[k]==='number'&&typeof remote[k]==='number')m[k]=Math.max(local[k],remote[k])})}
+  m.savedAt=Math.max(local.savedAt||0,remote.savedAt||0);return m}
+const fqBaseK=()=>'fq.base.'+(S&&S.uid||'');
+function fqBase(){try{const t=localStorage.getItem(fqBaseK());return t?JSON.parse(t):null}catch(e){return null}}
+function fqSetBase(o){try{localStorage.setItem(fqBaseK(),JSON.stringify(o))}catch(e){}}
+function fqRedraw(){try{render()}catch(e){}try{if(typeof hmRender==='function')hmRender()}catch(e){}try{if(typeof ciRefresh==='function')ciRefresh()}catch(e){}}
+async function fqPull(){/* fetch the cloud copy and merge it in; true if this device changed */
+  if(!SYNC.ref||!AU||!AU.sb||!S.uid)return false;
+  try{const {data,error}=await AU.sb.from('fastaqim_state').select('state').eq('user_id',S.uid).maybeSingle();if(error)throw error;
+    const r=data&&data.state;if(!r)return false;return fqTake(r)}catch(e){return false}}
+function fqTake(r){const uid=S.uid,m=fqMerge(S,clone(r),fqBase());m.uid=uid;const changed=!fqSame(m,S);
+  if(changed){S=m;try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+  if(fqSame(m,r))fqSetBase(clone(r));else{SYNC.dirty=true}return changed}
+(function(){
+  const push0=dbPush;
+  dbPush=async function(){if(!SYNC.ref||SYNC.busy||!SYNC.dirty)return;
+    SYNC.busy=true;let ch=false;try{ch=await fqPull()}catch(e){}SYNC.busy=false;SYNC.dirty=true;if(ch)fqRedraw();
+    const ref=SYNC.ref;let sent=null;if(ref){const set0=ref.set;ref.set=async o=>{await set0(o);sent=o.state}
+      try{await push0()}finally{ref.set=set0}}else await push0();if(sent)fqSetBase(sent)};
+  let last=0;const wake=async()=>{if(document.hidden||Date.now()-last<4000)return;last=Date.now();
+    if(await fqPull())fqRedraw();if(SYNC.dirty)dbPush()};
+  document.addEventListener('visibilitychange',wake);addEventListener('pageshow',wake);addEventListener('focus',wake);
+})();
+ciMinGap=function(){return 90};
+[["Safari and the Home Screen app now share the same day","سفاري وتطبيق الشاشة الرئيسية يعرضان نفس اليوم الآن","Safaarii fi appiin Home Screen guyyaa tokko agarsiisu","Safari iyo app-ka Home Screen hadda waa isku maalin"],
+ ["Popups open as full pages","النوافذ تُفتح الآن كصفحات كاملة","Foddaawwan akka fuula guutuutti banamu","Daaqadaha waxay u furmaan bog buuxa"],
+ ["Count istighfar at your own speed","عُدّ الاستغفار بسرعتك أنت","Istighfaara saffisa keetiin lakkaa'i","Istiqfaarka ku tiri xawaarahaaga"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
