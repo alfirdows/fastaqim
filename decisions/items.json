@@ -5,13 +5,34 @@
    "id": "v5-home-2",
    "t": "New Home: salah card and Ayah of the day",
    "ar": "الرئيسية الجديدة: بطاقة الصلاة وآية اليوم",
-   "s": "Salah countdown and the 5 salah in one card with a light geometric pattern. Clear date: Wed, Nov 18 · 8 Jumada al-Akhirah 1448 AH. Ayah card: ▶ plays Saad al-Ghamdi, ↻ shows another ayah, no reflect question.",
+   "s": "Salah countdown and the 5 salah in one card with a light geometric pattern. Clear date: Wed, Nov 18 · 8 Jumada al-Akhirah 1448 AH. Ayah card: ▶ plays Saad al-Ghamdi, ↻ shows another ayah, no reflect question. A short encouraging line sits under the date.",
    "pics": [
     "decisions/img/home3.jpg",
     "decisions/img/home4.jpg",
     "decisions/img/home5.jpg"
    ],
    "link": "next/v5/#home"
+  },
+  {
+   "id": "v5-after-salah",
+   "t": "After salah: one drop-down",
+   "ar": "بعد الصلاة: قائمة منسدلة واحدة",
+   "s": "Tap a salah: On time / Made up / Excused, then one drop-down with Ayat al-Kursi, Tasbih 33·33·34 and Adhkar, each with its source.",
+   "pics": [
+    "decisions/img/aft.jpg",
+    "decisions/img/aft_ar.jpg"
+   ],
+   "link": "next/v5/?t=13:10#home"
+  },
+  {
+   "id": "v5-energy",
+   "t": "Energy check in To-do",
+   "ar": "فحص الطاقة في المهام",
+   "s": "Low = quick tasks first, High = big tasks first. Each task shows its size.",
+   "pics": [
+    "decisions/img/energy.jpg"
+   ],
+   "link": "next/v5/#todo"
   },
   {
    "id": "v5-quran",
