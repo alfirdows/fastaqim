@@ -2299,6 +2299,10 @@ body.is-guest #scrollModal:not(.adf-on):not([hidden]) #scrollBody{padding-top:ca
 body:not(.has-bnav) #scrollModal:not(.adf-on):not([hidden]){bottom:0!important}
 #scrollModal:not(.adf-on):not([hidden]) #scrollBody{animation:fqPgIn .22s ease-out both}@keyframes fqPgIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){#scrollModal:not(.adf-on):not([hidden]) #scrollBody{animation:none}}
+.ci-zd{border:0;min-height:0;height:34px;padding:0 12px;border-radius:17px;background:color-mix(in srgb,var(--calm) 12%,transparent);color:var(--calm);font:700 .82rem var(--body)}
+.ci-zh{justify-content:flex-start!important}.ci-zh .ci-zc{margin-right:auto}
+html[dir=rtl] .ci-zh .ci-zc{margin-right:0!important;margin-left:auto!important}
+#adfCard{position:relative}#adfCard .adf-one{position:absolute;top:18px;left:18px;z-index:2}html[dir=rtl] #adfCard .adf-one{left:auto;right:18px}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7940,7 +7944,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v149',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v150',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9741,7 +9745,7 @@ Object.defineProperty(ADF,'cnt',{get(){adfCnt('');return new Proxy(S.azCnt.c,{se
 /* Istighfar 100× (Muslim 2702): in the evening set too, and its own row in the daily check-in, counted for the whole day */
 try{const ist=(ADHKAR.morning.items||[]).find(x=>/6307/.test(x.src||''));if(ist){ist.src='Muslim 2702, al-Bukhārī 6307';if(ADHKAR.evening&&!ADHKAR.evening.items.some(x=>x.id===ist.id))ADHKAR.evening.items.push(Object.assign({},ist,{id:ist.id+'_e'}))}}catch(e){}
 {const _cp2=ciPower;ciPower=function(){const L=_cp2.apply(this,arguments);try{const ist=(ADHKAR.morning.items||[]).find(x=>/6307/.test(x.src||''));if(ist&&!L.some(x=>x.id==='p3'))L.push(Object.assign({},ist,{id:'p3',n:100}))}catch(e){}return L}}
-function ciIstRow(){const o=ciPeek(),n=Math.min(100,(o.az||{}).p3||0);return `<div class="ci-azw"><button type="button" class="ci-az ci-ist${n>=100?' done':''}" data-ci="ist"><span class="ci-azi">🤲</span><span class="ci-azt"><b>${esc(tl('Istighfar 100×'))}</b><small dir="ltr">${n}/100 · +20 ⭐</small></span><span class="ci-bar"><i style="width:${n}%"></i></span><span class="ci-go">›</span></button></div>`}
+function ciIstRow(){const o=ciPeek(),n=Math.min(100,(o.az||{}).p3||0);return `<div class="ci-azw"><button type="button" class="ci-az ci-ist${n>=100?' done':''}" data-ci="ist"><span class="ci-azi">🤲</span><span class="ci-azt"><b>${esc(tl('Istighfar 100×'))}</b><small><bdi dir="ltr">${n}/100</bdi> · +20 ⭐</small></span><span class="ci-bar"><i style="width:${n}%"></i></span><span class="ci-go">›</span></button></div>`}
 {const _chI=ciHTML;ciHTML=function(){let h=_chI.apply(this,arguments);try{const k=h.indexOf('<div class="ci-azw"><button type="button" class="ci-az ci-sprow');const m=h.indexOf('<div class="ci-azw"><button type="button" class="ci-az ci-my');const a=h.indexOf('<button type="button" class="ci-add"');const at=[k,m,a].filter(x=>x>0).sort((x,y)=>x-y)[0];
   if(at>0)h=h.slice(0,at)+ciIstRow()+h.slice(at);else{const j=h.lastIndexOf('</div>');h=h.slice(0,j)+ciIstRow()+h.slice(j)}}catch(e){}return h}}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="ist"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
@@ -9975,7 +9979,7 @@ function tkQuickTop(){try{const sec=$('tab-today'),i=$('dumpInput');if(!sec||!i)
 [["More","المزيد","Dabalata","Wax kale"],["Add… “tomorrow 5pm”","أضف مهمة… «غدًا 5 م»","Hojii dabali… “boru 5pm”","Ku dar hawl… “berri 5pm”"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* v148: What's new = one "You're all caught up" summary of everything since your last visit. ✕ or opening it keeps it closed (saved on this phone too, so a sync can't bring it back). */
-const WNL=[[149,'🔄','Safari and the Home Screen app now share the same day'],[149,'📄','Popups open as full pages'],[149,'🤲','Count istighfar at your own speed'],[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
+const WNL=[[150,'🌙','Before-sleep adhkar, with a reminder 15 min after Isha'],[150,'✅','Mark single adhkar as read'],[149,'🔄','Safari and the Home Screen app now share the same day'],[149,'📄','Popups open as full pages'],[149,'🤲','Count istighfar at your own speed'],[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
 function fqBuildN(){return +String(FQ_BUILD).replace(/\D+/g,'')||0}
 function wnLast(){let l=0;try{l=+localStorage.getItem('fq.wnLast')||0}catch(e){}return Math.max(l,S.wnLast||0,(S.wnSeen||0)>=131?Math.max(131,S.wnSeen):0)}
 function wnMark(){const v=fqBuildN();S.wnLast=v;S.wnSeen=Math.max(S.wnSeen||0,v);S.wnRead=Math.max(S.wnRead||0,WN2_V);try{localStorage.setItem('fq.wnLast',v)}catch(e){}save();try{fqMenuDot()}catch(e){}}
@@ -10051,6 +10055,40 @@ ciMinGap=function(){return 90};
  ["Popups open as full pages","النوافذ تُفتح الآن كصفحات كاملة","Foddaawwan akka fuula guutuutti banamu","Daaqadaha waxay u furmaan bog buuxa"],
  ["Count istighfar at your own speed","عُدّ الاستغفار بسرعتك أنت","Istighfaara saffisa keetiin lakkaa'i","Istiqfaarka ku tiri xawaarahaaga"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* v149: mark single adhkar done ("✓ Read"), e.g. only the 3 Quls. Reading in the site earns about 1.5× more than this. */
+[["Read","قرأتُه","Dubbiseera","Waan akhriyay"],["Already read this one","قرأتُ هذا","Kana dubbiseera","Kan waan akhriyay"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function ciElseN(x){const full=x.n>=100?20:String(x.id).startsWith('e_')?1:2;return Math.max(1,Math.round(full/1.5))}
+function ciZdPaint(){const B=$('scrollBody');if(!B||!B.querySelector('.ci-az-m'))return;const o=ciD();
+  B.querySelectorAll('.ci-z[data-cz]').forEach(c=>{const h=c.querySelector('.ci-zh');if(!h)return;let d=h.querySelector('.ci-zd');const id=c.dataset.cz,dn=c.classList.contains('dn');
+    if(!d){d=document.createElement('button');d.type='button';d.className='ci-zd';d.dataset.czd=id;d.textContent='✓ '+tl('Read');h.insertBefore(d,h.querySelector('.ci-zu'))}d.hidden=dn})}
+{const _cao2=ciAzOpen;ciAzOpen=function(){const r=_cao2.apply(this,arguments);try{const B=$('scrollBody'),ALL=ciMin().concat(ciExtra(),ciPower(),typeof ciMinE==='function'?ciMinE():[]);ciZdPaint();
+  B.addEventListener('click',e=>{const d=e.target.closest&&e.target.closest('[data-czd]');if(!d)return;e.stopPropagation();e.preventDefault();const id=d.dataset.czd,x=ALL.find(y=>y.id===id);if(!x)return;
+    const o=ciD();if((o.az[id]||0)>=x.n)return;o.az[id]=x.n;const g=ciAw('az_'+id,ciElseN(x),'🌅 '+tl('Morning adhkar'));try{navigator.vibrate&&navigator.vibrate(12)}catch(z){}save();ciAzPaint(id,x);ciZdPaint();if(g)toast('✓ +'+g+' ⭐')},true);
+  new MutationObserver(()=>ciZdPaint()).observe(B,{subtree:true,attributes:true,attributeFilter:['class']})}catch(e){}return r}}
+/* the same in the Dhikr tab reader: one item at a time */
+{const _adr=adRead;adRead=function(cat,i){const r=_adr.apply(this,arguments);try{const B=$('scrollBody'),L=ADHKAR[cat].items,it=L[i],d=azDone();const card=$('adfCard');
+  if(card&&it&&!d[it.id]&&!$('adfOne')){const b=document.createElement('button');b.type='button';b.id='adfOne';b.className='ci-zd adf-one';b.textContent='✓ '+tl('Read');card.prepend(b);
+    b.addEventListener('touchend',e=>e.stopPropagation());b.onclick=e=>{e.stopPropagation();const d2=azDone();if(!d2[it.id]){d2[it.id]=true;S.azDays=S.azDays||{};S.azDays[dkey()]=1;try{award(1,(it.tr||'').slice(0,40))}catch(e){}save();try{actMark()}catch(e){}}
+      if(i<L.length-1)adRead(cat,i+1);else adfEnd(cat)}}}catch(e){}return r}}
+/* v149: before-sleep adhkar. A row in the check-in after Isha, and a reminder 15 minutes after the Isha adhan
+   (in the app while it is open, and as a push when the site is closed, if salah reminders are on). */
+[["Before-sleep adhkar","أذكار النوم","Zikrii hirriba dura","Adkaarta hurdada ka hor"],["Read them before you sleep","اقرأها قبل أن تنام","Utuu hin rafin dubbisi","Akhri intaadan seexan"],["Optional","اختياري","Filannoo","Ikhtiyaari"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function slpAt(d){try{const P=salahFor(d||new Date());return P&&P.isha?P.isha.getTime()+15*60000:0}catch(e){return 0}}
+function slpCount(){const L=(ADHKAR.sleep&&ADHKAR.sleep.items)||[],d=(S.azkar||{})[dkey()]||{};return [L.filter(x=>d[x.id]).length,L.length]}
+function slpRow(){const [n,t]=slpCount();if(!t)return '';const p=Math.round(n/t*100);
+  return `<div class="ci-azw"><button type="button" class="ci-az ci-slp${n>=t?' done':''}" data-ci="slp"><span class="ci-azi">🌙</span><span class="ci-azt"><b>${esc(tl('Before-sleep adhkar'))}</b><small><bdi dir="ltr">${n}/${t}</bdi> · ${esc(tl("Optional"))}</small></span><span class="ci-bar"><i style="width:${p}%"></i></span><span class="ci-go">›</span></button></div>`}
+{const _chZ=ciHTML;ciHTML=function(){let h=_chZ.apply(this,arguments);try{const a=slpAt();if(a&&Date.now()>=a-15*60000){const i=h.indexOf('<div class="ci-azw"><button type="button" class="ci-az ci-ist');
+  if(i>0){const j=h.indexOf('</div>',h.indexOf('</button>',i))+6;h=h.slice(0,j)+slpRow()+h.slice(j)}}}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="slp"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();
+  const L=ADHKAR.sleep.items,d=azDone();let i=L.findIndex(x=>!d[x.id]);adRead('sleep',i<0?0:i)},true);
+{const _pi=pushItems;pushItems=function(){const out=_pi.apply(this,arguments),R=S.remind||{};try{if(R.salah&&R.sleep!==false){const now=Date.now();
+  for(let i=0;i<14;i++){const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+i);const at=slpAt(d);if(at>now+30000)out.push({at,title:'🌙 '+tl('Before-sleep adhkar'),body:tl('Read them before you sleep'),tag:'slp-'+dkey(d)})}
+  out.sort((a,b)=>a.at-b.at)}}catch(e){}return out}}
+const SLP={done:''};
+setInterval(()=>{try{const R=S.remind||{};if(!S.name||!R.salah||R.sleep===false)return;const a=slpAt(),k=dkey(),now=Date.now();
+  if(a&&now>=a&&now-a<120000&&SLP.done!==k&&localStorage.getItem('fq.slp')!==k){SLP.done=k;localStorage.setItem('fq.slp',k);const [n,t]=slpCount();if(n>=t)return;
+    try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}notify('🌙 '+tl('Before-sleep adhkar'),tl('Read them before you sleep'));toast('🌙 '+tl('Before-sleep adhkar'))}}catch(e){}},30000);
+[["Before-sleep adhkar, with a reminder 15 min after Isha","أذكار النوم، مع تذكير بعد أذان العشاء بـ15 دقيقة","Zikrii hirriba dura, yaadachiisa azaana Ishaa'a booda daqiiqaa 15","Adkaarta hurdada, xusuusin 15 daqiiqo kadib addaanka Cishaha"],["Mark single adhkar as read","علّم ذكرًا واحدًا كمقروء","Zikrii tokko tokko akka dubbifametti mallatteessi","Calaamadee dhikri kasta oo aad akhriday"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
