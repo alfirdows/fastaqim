@@ -2312,7 +2312,12 @@ html[dir=rtl] .ci-zh .ci-zc{margin-right:0!important;margin-left:auto!important}
 body.zt-noar .adf-ar,body.zt-noar .ci-zar,body.zt-noar .ci-m .ci-ar{display:none!important}
 body.zt-notr .adf-tr,body.zt-notr .ci-ztr{display:none!important}
 body.zt-nomn .adf-m,body.zt-nomn .ci-zen{display:none!important}
-.fq-isti{display:block;font-size:.7em;opacity:.72;margin-bottom:.4em;line-height:1.6}.vd-done{width:100%;margin-top:14px}.vd-done.on{opacity:.75}.vd-q2{display:block;text-align:center;margin-top:12px;font-weight:700;color:#15835f;text-decoration:none}</style>
+.fq-isti{display:block;font-size:.7em;opacity:.72;margin-bottom:.4em;line-height:1.6}.vd-done{width:100%;margin-top:14px}.vd-done.on{opacity:.75}.vd-q2{display:block;text-align:center;margin-top:12px;font-weight:700;color:#15835f;text-decoration:none}
+/* v155: stale iPhone screen height in the Home Screen app: tab bar and full-screen panels placed by the real height */
+html.fq-stale.fq-sa body.has-bnav .bnav{position:absolute!important;top:var(--fqbt)!important;bottom:auto!important;transform:none!important}
+html.fq-stale .apm,html.fq-stale #scrollModal,html.fq-stale .modal,html.fq-stale .hisn,html.fq-stale .cz,html.fq-stale .jt,html.fq-stale #hbR,html.fq-stale .ldm,html.fq-stale .pfb,html.fq-stale .ipop{position:absolute!important;top:var(--fqdy,0px)!important;bottom:auto!important;height:var(--fqrh)!important;min-height:0!important}
+html.fq-stale #scrollModal #scrollBody{max-height:calc(var(--fqrh) - var(--bnh,72px) - 36px)!important}
+</style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
@@ -7953,7 +7958,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v154',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v155',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9880,7 +9885,7 @@ try{new MutationObserver(()=>{const m=$('scrollModal');if(m&&m.hidden&&m.classLi
 /* v142: animated salah streak. A day counts when all 5 are prayed (on time, late or made up; "Excused" holds it). */
 function sqFull(d){const q=salQ(d);for(let i=0;i<5;i++){const v=q[i];if(!(v==='on'||v==='late'||v==='exc'))return false}return true}
 function sqCnt(d){const q=salQ(d);let n=0;for(let i=0;i<5;i++){const v=q[i];if(v==='on'||v==='late'||v==='exc')n++}return n}
-function sqStreak(){let n=0;const d=new Date();if(!sqFull(d))d.setDate(d.getDate()-1);while(sqFull(d)&&n<3650){n++;d.setDate(d.getDate()-1)}return n}
+function sqStreak(){let n=0;const d=new Date();let t=0;if(!sqFull(d)){const q=salQ(d);for(let i=0;i<5;i++){const v=q[i];if(v==='on'||v==='late'||v==='exc'){t=1;break}}d.setDate(d.getDate()-1)}while(sqFull(d)&&n<3650){n++;d.setDate(d.getDate()-1)}return n+t}
 
 /* v153: isti'adha is not an ayah: show it on its own small line, never with an ayah-end sign */
 (function(){const IS='أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ',KEY=IS+' ۝';
@@ -9894,6 +9899,38 @@ function sqRepair(){try{if(!S||!S.salQ)return;const now=new Date(),k=dkey(),q=S.
  Object.keys(q).forEach(i=>{const t=P[SQK[i]],v=q[i];if(t&&now<t&&(v==='on'||v==='late')){const yq=Object.assign({},S.salQ[yk]||{});if(yq[i]==null||yq[i]==='miss')yq[i]=v;S.salQ[yk]=yq;delete q[i];mv++}});
  if(mv){S.salQ[k]=Object.assign({},q);save();try{salTop()}catch(e){}}}catch(e){}}
 setTimeout(sqRepair,1500);setInterval(sqRepair,60000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(sqRepair,800)});
+
+
+/* ===================== v155 =====================
+   1) Home Screen app: iPhone sometimes keeps a shorter screen height after the keyboard, a pop-up, or coming back to the app.
+      That pushed the tab bar and the menu up to the middle. Now the app (a) asks iPhone to re-measure the screen, and
+      (b) if iPhone still reports the short height, places the tab bar and full-screen panels by the real screen height. */
+const FQH={rh:0,stale:false,heal:0,log:[]};
+function fqTyping(){const a=document.activeElement;return !!(a&&a.matches&&a.matches('input:not([type=checkbox]):not([type=radio]):not([type=button]):not([type=range]),textarea,select,[contenteditable="true"]'))}
+function fqOri(){return innerWidth>innerHeight?'l':'p'}
+function fqRH(){try{const k='fq.rh.'+fqOri()+'.'+innerWidth,vv=window.visualViewport,cur=Math.round(Math.max(innerHeight,vv?vv.height:0));let s=+localStorage.getItem(k)||0;
+  if(!fqTyping()&&cur>s&&cur<=screen.height+2){s=cur;localStorage.setItem(k,s)}return Math.max(s,cur)}catch(e){return innerHeight}}
+function fqNudge(){try{FQH.heal++;const de=document.documentElement,m=document.querySelector('meta[name=viewport]');
+  if(m){const c=m.content;m.content=c+', height=device-height';requestAnimationFrame(()=>{m.content=c})}
+  const y=scrollY;if(!document.body.classList.contains('fq-lock')){scrollTo(scrollX,y+1);requestAnimationFrame(()=>scrollTo(scrollX,y))}
+  de.style.height='100.1%';requestAnimationFrame(()=>{de.style.height=''})}catch(e){}}
+function fqStale(){try{const de=document.documentElement;if(!fqStandalone()){if(FQH.stale){FQH.stale=false;de.classList.remove('fq-stale')}return}
+  const vv=window.visualViewport,seen=Math.round(Math.min(innerHeight,vv?vv.height:innerHeight)),rh=fqRH(),typing=fqTyping();
+  const st=!typing&&rh-seen>70;
+  if(st&&!FQH.stale&&FQH.heal<3){fqNudge();setTimeout(fqStale,260);return}
+  FQH.stale=st;if(!st)FQH.heal=0;
+  de.classList.toggle('fq-stale',st);
+  if(st){const y=(typeof LK!=='undefined'&&LK.y!==null)?LK.y:scrollY;de.style.setProperty('--fqrh',rh+'px');de.style.setProperty('--fqdy',y+'px');
+    const bn=document.querySelector('.bnav');if(bn)de.style.setProperty('--fqbt',(y+rh-(bn.offsetHeight||64))+'px')}
+  else{de.style.removeProperty('--fqdy');de.style.removeProperty('--fqbt')}}catch(e){}}
+['resize','orientationchange','pageshow','focusout'].forEach(ev=>addEventListener(ev,()=>setTimeout(fqStale,ev==='focusout'?380:60),{passive:true}));
+addEventListener('scroll',()=>{if(FQH.stale)requestAnimationFrame(fqStale)},{passive:true});
+if(window.visualViewport)visualViewport.addEventListener('resize',()=>setTimeout(fqStale,80));
+document.addEventListener('visibilitychange',()=>{if(!document.hidden){FQH.heal=0;[120,600].forEach(t=>setTimeout(fqStale,t))}});
+new MutationObserver(()=>setTimeout(fqStale,30)).observe(document.body,{attributes:true,subtree:true,attributeFilter:['hidden']});
+setInterval(()=>{if(!document.hidden)fqStale()},1200);setTimeout(fqStale,400);
+/* 2) Istighfar 100x lives inside the morning and evening adhkar (same shared count), not as its own row */
+ciIstRow=function(){return ''};
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
