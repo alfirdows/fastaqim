@@ -158,7 +158,7 @@ const SFX={c:null,ctx(){if(!this.c)try{this.c=new (window.AudioContext||window.w
 const vib=p=>{try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}};
 /* ---------- worlds ---------- */
 const WORLDS={
- gold:{sky:['#5b8fd6','#a9cdeb','#fde6c4'],sun:'#fff3c4',hill:['#7aa06b','#94b57f'],ground:['#7fa565','#93b878'],road:'#3a3f47',road2:'#444a53',edge:'#e8e2d4',line:'#f6f1e3',side:'palm',far:'city',car:'sleek',carC:['#0f8a64','#0a5c45'],obs:'cone'},
+ gold:{sky:['#5b8fd6','#a9cdeb','#fde6c4'],sun:'#fff3c4',hill:['#7aa06b','#94b57f'],ground:['#7fa565','#93b878'],road:'#3a3f47',road2:'#444a53',edge:'#e8e2d4',line:'#f6f1e3',side:'palm',far:'city',car:'sleek',carC:['#e11d48','#9f1239'],obs:'cone'},
  toy:{sky:['#4fb3ff','#9bd8ff','#e6f6ff'],sun:'#fff7b0',hill:['#58c472','#7fd68e'],ground:['#6fd17f','#8fe09b'],road:'#5b6b8c',road2:'#66779a',edge:'#ffd23f',line:'#ffffff',side:'blocks',far:'toys',car:'toy',carC:['#2f7bf6','#1e4fb3'],obs:'block'},
  blos:{sky:['#c9a7f2','#f3c9e8','#fff1f7'],sun:'#fff6e6',hill:['#b9e3c6','#d1efd9'],ground:['#bfe8c9','#d4f2dc'],road:'#b49ac6',road2:'#bea6cf',edge:'#ffffff',line:'#fff5fb',side:'blossom',far:'castle',car:'cute',carC:['#ff6fae','#d63d86'],obs:'heart'}};
 
@@ -556,5 +556,6 @@ function ruleLine(){try{const go=$('goB');if(go&&!$('ruleL')){const left=Math.ma
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);ruleLine();return r}}ruleLine();
 addEventListener('pagehide',()=>brSet(BR));
 </script>
-<script src="game/minis.js?v=2"></script>
+<script src="game/minis.js?v=3"></script>
+<script src="game/coin.js?v=1"></script>
 </body></html>
