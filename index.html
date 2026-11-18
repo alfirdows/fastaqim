@@ -2317,7 +2317,43 @@ body.zt-nomn .adf-m,body.zt-nomn .ci-zen{display:none!important}
 html.fq-stale.fq-sa body.has-bnav .bnav{position:absolute!important;top:var(--fqbt)!important;bottom:auto!important;transform:none!important}
 html.fq-stale .apm,html.fq-stale #scrollModal,html.fq-stale .modal,html.fq-stale .hisn,html.fq-stale .cz,html.fq-stale .jt,html.fq-stale #hbR,html.fq-stale .ldm,html.fq-stale .pfb,html.fq-stale .ipop{position:absolute!important;top:var(--fqdy,0px)!important;bottom:auto!important;height:var(--fqrh)!important;min-height:0!important}
 html.fq-stale #scrollModal #scrollBody{max-height:calc(var(--fqrh) - var(--bnh,72px) - 36px)!important}
-</style>
+
+.apv{padding-bottom:24px;width:100%;max-width:100%;min-width:0;overflow-x:hidden;box-sizing:border-box}.apv>*{max-width:100%;min-width:0}.apv-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:2px 0 6px}
+.apv-n{font-weight:700;font-size:.9rem;color:var(--muted,#667)}.apv-bk[disabled]{opacity:.35}
+.apv-dots{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:none}.apv-dots::-webkit-scrollbar{display:none}
+.apv-dot{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid color-mix(in srgb,currentColor 22%,transparent);background:transparent;font-weight:700;font-size:.85rem;display:inline-flex;align-items:center;justify-content:center;color:inherit;padding:0}
+.apv-dot.ok{background:#1f9d6b;border-color:#1f9d6b;color:#fff}.apv-dot.ch{background:#e7962b;border-color:#e7962b;color:#fff}
+.apv-dot.cur{box-shadow:0 0 0 3px var(--bg,#fff),0 0 0 5px var(--calm,#3b6fd8)}
+.apv-pics{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:4px -4px 0;padding:0 4px;scrollbar-width:none}.apv-pics::-webkit-scrollbar{display:none}
+.apv-pic{flex:0 0 82%;scroll-snap-align:center;border:0;padding:0;background:none;border-radius:18px;overflow:hidden;box-shadow:0 4px 18px rgba(0,0,0,.12)}
+.apv-pics .apv-pic:only-child{flex-basis:100%}
+.apv-pic img{display:block;width:100%;height:34vh;object-fit:cover;object-position:top}
+.apv-hint{display:flex;justify-content:center;gap:6px;margin:8px 0 0}.apv-pd{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.22}.apv-pd.on{opacity:.8}
+.apv-t{font-size:1.25rem;line-height:1.3;margin:12px 0 2px}.apv-s{margin:0 0 6px;opacity:.8;line-height:1.5}
+.apv-live{display:inline-block;margin:2px 0 4px;color:var(--calm,#3b6fd8);font-weight:600}
+.apv-note{background:color-mix(in srgb,#e7962b 14%,transparent);border-radius:12px;padding:8px 12px}
+.apv-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 8px}
+.apv-btns button{min-height:54px;border-radius:16px;font-size:1.05rem;font-weight:700;border:0}
+.apv-ok{background:#1f9d6b;color:#fff}.apv-ch{background:color-mix(in srgb,#e7962b 18%,transparent);color:#9a5b0c}
+html.dark .apv-ch,.dark .apv-ch{color:#f0b35e}
+.apv-btns .sel{box-shadow:0 0 0 3px var(--bg,#fff),0 0 0 5px currentColor}.apv-ok.sel{box-shadow:0 0 0 3px var(--bg,#fff),0 0 0 5px #1f9d6b}
+.apv-form{display:grid;gap:8px;margin:0 0 8px}.apv-form textarea{width:100%;box-sizing:border-box;border-radius:14px;padding:10px 12px;font:inherit;font-size:16px}
+.apv-later{display:block;margin:2px auto 0}
+.apv-go{opacity:0;transform:translateX(-14px);transition:opacity .18s,transform .18s}[dir=rtl] .apv-go{transform:translateX(14px)}
+.apv-toast{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:14px;align-items:center;background:#1d2433;color:#fff;border-radius:14px;padding:10px 14px;font-weight:600;z-index:5;box-shadow:0 6px 20px rgba(0,0,0,.25);animation:decUp .25s ease-out;white-space:nowrap}
+.apv-toast button{background:none;border:0;color:#8fb6ff;font-weight:700;font-size:1rem;padding:4px 2px}
+@keyframes decUp{from{opacity:0;transform:translate(-50%,10px)}to{opacity:1;transform:translate(-50%,0)}}
+.apv-zoom{position:absolute;inset:0;background:#000;z-index:6;display:flex;flex-direction:column}
+.apv-zx{position:absolute;top:calc(10px + env(safe-area-inset-top));right:12px;z-index:2;background:rgba(255,255,255,.18)!important;color:#fff!important}
+.apv-zs{flex:1;display:flex;overflow-x:auto;scroll-snap-type:x mandatory}.apv-zs img{flex:0 0 100%;width:100%;height:100%;object-fit:contain;scroll-snap-align:center}
+.apv-cel{text-align:center;padding:10px 0 4px}.apv-cel h2{margin:6px 0 4px}
+.apv-star{width:88px;height:88px;fill:#f5b72b;stroke:#e09a12;stroke-width:.8;animation:decPop .9s cubic-bezier(.2,1.6,.4,1) both,decGlow 2.4s ease-in-out .9s infinite}
+@keyframes decPop{0%{transform:scale(0) rotate(-40deg);opacity:0}100%{transform:scale(1) rotate(0);opacity:1}}
+@keyframes decGlow{0%,100%{filter:drop-shadow(0 0 0 rgba(245,183,43,.0))}50%{filter:drop-shadow(0 0 14px rgba(245,183,43,.8))}}
+.apv-list{display:grid;gap:8px;margin-top:8px}.apv-row{display:flex;gap:12px;align-items:center;text-align:start;border:0;border-radius:14px;padding:10px 12px;background:color-mix(in srgb,currentColor 6%,transparent);color:inherit;font:inherit}
+.apv-row small{display:block;margin-top:2px}
+@media (prefers-reduced-motion:reduce){.apv-star,.apv-toast{animation:none}.apv-go{transition:none}}
+.ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}</style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
@@ -6060,7 +6096,7 @@ function apMenu(){let m=$('apMenu');if(!m){m=document.createElement('div');m.id=
    <p class="apm-s">${tl('Tools')}</p>
    <button class="apm-i" data-am="hisn">📖 ${tl('Hisnul Muslim')}</button><button class="apm-i" data-am="sal">🕌 ${tl('Salah times')}</button><button class="apm-i" data-am="zk">📿 ${tl('Dhikr')}</button>
    <button class="apm-i" data-am="game">🏎️ ${tl('Game')}</button><button class="apm-i" data-am="qt">⏱ ${tl('Timer')}</button><button class="apm-i" data-am="cal">📅 ${tl('Calendar')}</button><button class="apm-i" data-am="en">⚡ ${tl('Energy')}</button><hr>
-   <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="kid">🎈 ${tl('Kid mode')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
+   <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
    <button class="apm-i" data-am="pv">🔒 ${tl('Privacy')}</button><button class="apm-i" data-am="fb">💡 ${tl('Feedback')}</button>
    ${window.GUEST?`<button class="apm-i apm-o" data-am="gx">↩ ${tl('Exit guest mode')}</button>`:signed||fam?`<button class="apm-i apm-o" data-am="out">↩ ${tl('Sign out')}</button>`:''}</div>`;
   m.hidden=false;
@@ -6541,7 +6577,7 @@ Object.assign(THK.ramadan,{k1:'#C9971C',k2:'#1D5C7A',k4:'#E9C46A'});Object.assig
 {const r=PRESETS.find(p=>p[0]==='ramadan');if(r){Object.assign(r[2],{color:'navy',c1:'#1D5C7A',c2:'#C9971C'});r[3]='#1D5C7A';r[4]='#C9971C'}
  const e=PRESETS.find(p=>p[0]==='eid');if(e){Object.assign(e[2],{color:'green',c1:'#0F7A6B',c2:'#D4A021'});e[3]='#0F7A6B';e[4]='#D4A021'}}
 try{if(S&&S.look&&(S.look.preset==='ramadan'||S.look.preset==='eid')){const p=PRESETS.find(q=>q[0]===S.look.preset);Object.assign(S.look,p[2],{preset:p[0]});lookApply()}}catch(e){}
-const DEC={ramadan:(w)=>`<svg viewBox="0 0 320 54" class="dec-svg" aria-hidden="true" preserveAspectRatio="xMidYMin meet">${[[40,26],[92,16],[228,16],[280,26]].map(([x,l])=>`<g transform="translate(${x} 0)"><line x1="0" y1="0" x2="0" y2="${l}" stroke="#B88A1C" stroke-width="1"/><g transform="translate(0 ${l})"><path d="M-5 0h10l-2 4h-6z" fill="#C9971C"/><path d="M-7 4 Q-9 13 -6 20 H6 Q9 13 7 4z" fill="#E9C46A" stroke="#B88A1C" stroke-width="1"/><path d="M-3 7 Q-4 13 -2 18 M3 7 Q4 13 2 18" stroke="#B88A1C" stroke-width=".8" fill="none"/><circle cy="13" r="2.4" fill="#FFF3C4"/><path d="M-4 20h8l-2 3h-4z" fill="#C9971C"/></g></g>`).join('')}<g transform="translate(160 18)"><path d="M6 -12 A13 13 0 1 0 6 12 A10 10 0 1 1 6 -12z" fill="#E9C46A"/></g>${[[132,10],[190,8],[200,26],[120,28]].map(([x,y])=>`<path transform="translate(${x} ${y})" d="M0-3.5 1-1 3.5 0 1 1 0 3.5-1 1-3.5 0-1-1z" fill="#E9C46A"/>`).join('')}</svg>`,
+const DEC={ramadan:(w)=>`<svg viewBox="0 0 320 54" class="dec-svg" aria-hidden="true" preserveAspectRatio="xMidYMin meet">${[[40,26],[92,16],[228,16],[280,26]].map(([x,l])=>`<g transform="translate(${x} 0)"><line x1="0" y1="0" x2="0" y2="${l}" stroke="#B88A1C" stroke-width="1"/><g transform="translate(0 ${l})"><path d="M-5 0h10l-2 4h-6z" fill="#C9971C"/><path d="M-7 4 Q-9 13 -6 20 H6 Q9 13 7 4z" fill="#E9C46A" stroke="#B88A1C" stroke-width="1"/><path d="M-3 7 Q-4 13 -2 18 M3 7 Q4 13 2 18" stroke="#B88A1C" stroke-width=".8" fill="none"/><circle cy="13" r="2.4" fill="#FFF3C4"/><path d="M-4 20h8l-2 3h-4z" fill="#C9971C"/></g></g>`).join('')}<g transform="translate(160 18)"><path d="M6 -12 A13 13 0 1 0 6 12 A10 10 0 1 1 6 -12z" fill="#E9C46A"/></g>${[[132,10],[190,8],[200,26],[120,28]].map(([x,y])=>`<path transform="translate(${x} ${y})" d="M-1.6 0a1.6 1.6 0 1 0 3.2 0a1.6 1.6 0 1 0-3.2 0z" fill="#E9C46A"/>`).join('')}</svg>`,
  eid:()=>`<svg viewBox="0 0 320 44" class="dec-svg" aria-hidden="true" preserveAspectRatio="xMidYMin meet"><path d="M0 4 Q80 22 160 6 T320 4" stroke="#B88A1C" stroke-width="1" fill="none"/>${[...Array(15)].map((_,j)=>{const x=10+j*21.4,y=4+Math.sin(j/14*Math.PI*2)*(-6)+(j%7===3?8:j%7<3?(j%7)*3+4:(6-j%7)*3+4);const c=['#0F7A6B','#D4A021','#E07A5F','#5B8DEF'][j%4];return `<path transform="translate(${x.toFixed(1)} ${(8+Math.sin(j/14*Math.PI)*8).toFixed(1)})" d="M-6 0 H6 L0 11z" fill="${c}"/>`}).join('')}<g transform="translate(160 30)"><path d="M5 -9 A10 10 0 1 0 5 9 A7.5 7.5 0 1 1 5 -9z" fill="#D4A021"/></g></svg>`};
 function decApply(){const L=(S&&S.look)||{},eff=(typeof thmEff==='function'?thmEff():L.preset)||'calm';document.querySelectorAll('.dec').forEach(d=>d.remove());const f=DEC[eff];if(!f)return;
   const lt=document.querySelector('#landing .ld-top');if(lt){const d=document.createElement('div');d.className='dec dec-'+eff;d.innerHTML=f();lt.after(d)}
@@ -7568,7 +7604,7 @@ function tpWire(){if(!fqApp())return;const hero=document.querySelector('#fqHome 
 function setListWire(){const w=$('tab-wins');if(!w)return;let c=$('setList');const hc=$('histCard');
   const lgName=(()=>{try{const b=document.querySelector('#apLang b');return ({en:'English',ar:'العربية',om:'Afaan Oromoo',so:'Soomaali'})[LANG]||(b&&b.textContent)||LANG}catch(e){return LANG}})();
   const apL={auto:'Auto',light:'Light',dark:'Dark'}[(S.look&&S.look.mode)||'auto'],wpL=(WP[(S.look&&S.look.wp)||'plain']||WP.plain).n;
-  const rows=[['lang','🌐','Language',lgName],['ap','🌗','Appearance',tl(apL)],['wp','🖼️','Wallpaper',tl(wpL)],['th','🎨','Theme'],['pin','📌','Pinned at the top'],['arr','↕️','Arrange tabs'],['kid','🎈','Kid mode'],['rem','🔔','Reminders'],['fam','🏠','Family'],['pv','🔒','Privacy'],['idea','💡','My ideas']];
+  const rows=[['lang','🌐','Language',lgName],['ap','🌗','Appearance',tl(apL)],['wp','🖼️','Wallpaper',tl(wpL)],['th','🎨','Theme'],['pin','📌','Pinned at the top'],['arr','↕️','Arrange tabs'],['rem','🔔','Reminders'],['fam','🏠','Family'],['pv','🔒','Privacy'],['idea','💡','My ideas']];
   const html=`${rows.map(([k,i,l,v])=>`<button type="button" class="sl-r" data-sl="${k}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span>${v?`<span class="sl-v notranslate">${esc(v)}</span>`:''}<span class="sl-c" aria-hidden="true">›</span></button>`).join('')}`;
   if(!c){c=document.createElement('div');c.id='setList';c.className='card';}const hk=LANG+lgName+apL+wpL;if(c.dataset.h!==hk){c.innerHTML=html;c.dataset.h=hk;
     c.querySelectorAll('[data-sl]').forEach(b=>b.onclick=()=>{const k=b.dataset.sl;({lang:langOpen,ap:apOpen,wp:wpOpen,th:thmOpen,pin:pinEdit,arr:tabsArrange,kid:kidOpen,rem:()=>goCard('wins','remCard'),fam:()=>GO.family(),pv:privacyOpen,idea:myIdeas}[k]||(()=>{}))()})}
@@ -7958,7 +7994,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v156',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v157',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9953,6 +9989,115 @@ function fqUnstick(){FQD.stick=false;FQH.heal=0;FQH.stale=false;document.documen
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)fqUnstick()});addEventListener('orientationchange',fqUnstick);addEventListener('pageshow',fqUnstick);
 setInterval(()=>{if(!document.hidden)fqStale()},600);
 
+
+/* ===================== v157: Approvals (owner only) =====================
+   One item at a time: picture, Approve or Change (with a short note), then the next one.
+   Answers save to the owner-only table fastaqim_decisions (RLS: is_admin()). Until saved they wait on this phone. */
+[["Approvals","الموافقات","Mirkaneessa","Ansixinta"],["Approve","موافقة","Raggaasi","Ansixi"],["Change","تغيير","Jijjiiri","Beddel"],
+ ["Later","لاحقًا","Booda","Hadhow"],["What should change? (optional)","ما الذي يجب تغييره؟ (اختياري)","Maaltu jijjiiramuu qaba? (filannoo)","Maxaa la beddelaa? (ikhtiyaari)"],
+ ["Send","إرسال","Ergi","Dir"],["Saved","تم الحفظ","Olkaa'ame","La keydiyey"],["Undo","تراجع","Deebisi","Ka noqo"],["Back","رجوع","Duuba","Dib"],
+ ["Open it live","افتحه مباشرة","Kallattiin bani","Si toos ah u fur"],["All done","تم الكل","Hundi xumurame","Dhammaan waa la dhammeeyey"],
+ ["approved","موافق عليه","raggaafame","la ansixiyey"],["to change","للتغيير","jijjiiramuuf","in la beddelo"],["not yet","ليس بعد","ammaas miti","weli maya"],
+ ["Nothing waiting right now.","لا شيء بانتظارك الآن.","Amma wanti si eegu hin jiru.","Hadda wax ku sugaya ma jiraan."],
+ ["Waiting to save. It will save when you are online.","بانتظار الحفظ. سيُحفظ عند الاتصال.","Olkaa'amuuf eegaa jira. Yeroo interneetii qabdu ni olkaa'ama.","Waxay sugaysaa keydin. Way keydsami doontaa marka aad khadka joogto."],
+ ["Tap a picture to see it big","اضغط الصورة لتكبيرها","Suuraa guddisuuf tuqi","Taabo sawirka si aad u weyneyso"],["Tap any item to look again","اضغط أي عنصر لمراجعته","Ilaaluuf kamiyyuu tuqi","Taabo shay kasta si aad dib u eegto"],
+ ["of","من","keessaa","ka mid ah"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const APV={items:null,ans:{},own:null,i:0,toast:0,base:'decisions/'};
+function decLoadLocal(){try{APV.ans=JSON.parse(localStorage.getItem('fq.dec')||'{}')}catch(e){APV.ans={}}}
+function decSaveLocal(){try{localStorage.setItem('fq.dec',JSON.stringify(APV.ans))}catch(e){}}
+function decQ(){try{return JSON.parse(localStorage.getItem('fq.dec.q')||'[]')}catch(e){return[]}}
+function decSetQ(q){try{localStorage.setItem('fq.dec.q',JSON.stringify(q))}catch(e){}}
+async function decIsOwner(){if(!AU.sb||!AU.user)return false;if(APV.own!==null&&APV.ownU===AU.user.id)return APV.own;
+  try{const {data,error}=await AU.sb.rpc('is_admin');APV.own=!error&&data===true}catch(e){APV.own=false}APV.ownU=AU.user.id;return APV.own}
+async function decItems(){if(APV.items)return APV.items;try{const r=await fetch(APV.base+'items.json?b='+encodeURIComponent(FQ_BUILD),{cache:'no-store'});const j=await r.json();APV.items=j.items||[]}catch(e){APV.items=[]}return APV.items}
+async function decFlush(){const q=decQ();if(!q.length||!AU.sb||!AU.user)return;const keep=[];
+  for(const x of q){try{let r;if(x.answer==='undo')r=await AU.sb.from('fastaqim_decisions').delete().eq('id',x.id);
+    else r=await AU.sb.from('fastaqim_decisions').upsert({id:x.id,answer:x.answer,note:x.note||null,at:x.at});if(r.error)throw r.error}catch(e){keep.push(x)}}
+  decSetQ(keep);return keep.length}
+async function decPull(){if(!AU.sb||!AU.user)return;try{const {data,error}=await AU.sb.from('fastaqim_decisions').select('id,answer,note,at');if(error)throw error;
+  const pend=new Set(decQ().map(x=>x.id));(data||[]).forEach(r=>{if(!pend.has(r.id))APV.ans[r.id]={a:r.answer,n:r.note||'',at:r.at}});decSaveLocal()}catch(e){}}
+function decPut(id,a,n){const at=new Date().toISOString();if(a)APV.ans[id]={a,n:n||'',at};else delete APV.ans[id];decSaveLocal();
+  const q=decQ().filter(x=>x.id!==id);q.push({id,answer:a||'undo',note:n||'',at});decSetQ(q);decFlush().then(()=>{if(!$('decWrap'))return;const w=$('decWait');if(w)w.hidden=!decQ().length})}
+function decLeft(){return(APV.items||[]).filter(x=>!APV.ans[x.id]||APV.ans[x.id].a==='later').length}
+function decT(x){return LANG==='ar'&&x.ar?x.ar:x.t}
+function decDots(){return`<div class="apv-dots" role="tablist">${APV.items.map((x,k)=>{const a=APV.ans[x.id]&&APV.ans[x.id].a;const c=a==='approve'?'ok':a==='change'?'ch':'no';
+  return`<button type="button" class="apv-dot ${c}${k===APV.i?' cur':''}" data-k="${k}" aria-label="${k+1}: ${esc(decT(x))}, ${esc(tl(a==='approve'?'approved':a==='change'?'to change':'not yet'))}">${a==='approve'?'✓':a==='change'?'✎':k+1}</button>`}).join('')}</div>`}
+async function decOpen(k){decLoadLocal();modalCard(`<div id="decWrap" class="apv"><p class="label">✅ ${esc(tl('Approvals'))}</p><p class="small muted">…</p></div>`);
+  for(let t=0;t<40&&(!AU.sb||!AU.user);t++)await new Promise(r=>setTimeout(r,150));
+  if(!(await decIsOwner())){$('decWrap').innerHTML=`<p class="label">✅ ${esc(tl('Approvals'))}</p><p class="small muted">${esc(tl('Only the owner can open this.'))}</p>`;return}
+  await decItems();await decFlush();await decPull();
+  if(typeof k==='number')APV.i=k;else{const f=APV.items.findIndex(x=>!APV.ans[x.id]);APV.i=f<0?APV.items.length:f}
+  decRender()}
+function decRender(){const w=$('decWrap');if(!w)return;const L=APV.items,n=L.length;
+  if(!n){w.innerHTML=`<p class="label">✅ ${esc(tl('Approvals'))}</p><p class="muted">${esc(tl('Nothing waiting right now.'))}</p>`;return}
+  if(APV.i>=n)return decDone();
+  const x=L[APV.i],a=APV.ans[x.id]||{},rtl=LANG==='ar';
+  w.innerHTML=`<div class="apv-top"><button type="button" class="btn-ghost small apv-bk" ${APV.i?'':'disabled'}>${rtl?'›':'‹'} ${esc(tl('Back'))}</button>
+    <span class="apv-n" dir="ltr">${APV.i+1} / ${n}</span></div>${decDots()}
+   <div class="apv-pics">${(x.pics||[]).map((p,j)=>`<button type="button" class="apv-pic" data-j="${j}" aria-label="${esc(tl('Tap a picture to see it big'))}"><img src="${esc(p)}" alt="" loading="${j?'lazy':'eager'}"></button>`).join('')}</div>
+   ${(x.pics||[]).length>1?`<p class="apv-hint small muted">${(x.pics||[]).map((_,j)=>`<span class="apv-pd${j?'':' on'}"></span>`).join('')}</p>`:''}
+   <h2 class="apv-t" dir="auto">${esc(decT(x))}</h2><p class="apv-s small" dir="auto">${esc(x.s||'')}</p>
+   ${x.link?`<a class="apv-live small" href="${esc(x.link)}" target="_blank" rel="noopener">${esc(tl('Open it live'))} ↗</a>`:''}
+   ${a.a==='change'&&a.n?`<p class="apv-note small" dir="auto">✎ ${esc(a.n)}</p>`:''}
+   <div class="apv-btns"><button type="button" class="apv-ok${a.a==='approve'?' sel':''}">✓ ${esc(tl('Approve'))}</button><button type="button" class="apv-ch${a.a==='change'?' sel':''}">✎ ${esc(tl('Change'))}</button></div>
+   <div class="apv-form" hidden><textarea id="decNote" rows="3" dir="auto" maxlength="600" placeholder="${esc(tl('What should change? (optional)'))}">${esc(a.a==='change'?a.n||'':'')}</textarea><button type="button" class="btn-calm apv-send">${esc(tl('Send'))}</button></div>
+   <button type="button" class="btn-ghost small apv-later">${esc(tl('Later'))} ${rtl?'‹':'›'}</button>
+   <p id="decWait" class="small muted" ${decQ().length?'':'hidden'}>⏳ ${esc(tl('Waiting to save. It will save when you are online.'))}</p>`;
+  w.querySelector('.apv-bk').onclick=()=>{if(APV.i>0){APV.i--;decRender()}};
+  w.querySelectorAll('.apv-dot').forEach(b=>b.onclick=()=>{APV.i=+b.dataset.k;decRender()});
+  w.querySelectorAll('.apv-pic').forEach(b=>b.onclick=()=>decZoom(x,+b.dataset.j));
+  const pics=w.querySelector('.apv-pics');if(pics)pics.onscroll=()=>{const j=Math.round(Math.abs(pics.scrollLeft)/Math.max(1,pics.clientWidth*.82));w.querySelectorAll('.apv-pd').forEach((d,i)=>d.classList.toggle('on',i===j))};
+  w.querySelector('.apv-ok').onclick=()=>decAnswer(x,'approve','');
+  w.querySelector('.apv-ch').onclick=()=>{const f=w.querySelector('.apv-form');f.hidden=false;const t=$('decNote');t.focus();setTimeout(()=>f.scrollIntoView({block:'center',behavior:'smooth'}),120)};
+  w.querySelector('.apv-send').onclick=()=>decAnswer(x,'change',$('decNote').value.trim());
+  w.querySelector('.apv-later').onclick=()=>{APV.i++;decRender()};
+  const cur=w.querySelector('.apv-dot.cur');if(cur)cur.scrollIntoView({inline:'center',block:'nearest'});$('scrollBody').scrollTop=0}
+function decAnswer(x,a,n){const prev=APV.ans[x.id]?Object.assign({},APV.ans[x.id]):null;decPut(x.id,a,n);try{navigator.vibrate&&navigator.vibrate(12)}catch(e){}
+  const k=APV.i;const nx=APV.items.findIndex((y,j)=>j>k&&!APV.ans[y.id]);APV.i=nx<0?(APV.items.findIndex(y=>!APV.ans[y.id])<0?APV.items.length:APV.items.findIndex(y=>!APV.ans[y.id])):nx;
+  const w=$('decWrap');if(w){w.classList.add('apv-go');setTimeout(()=>{w.classList.remove('apv-go');decRender()},180)}
+  decToast(()=>{decPut(x.id,prev&&prev.a,prev&&prev.n);APV.i=k;decRender()})}
+function decToast(undo){let t=$('decToast');if(t)t.remove();t=document.createElement('div');t.id='decToast';t.className='apv-toast';t.setAttribute('role','status');
+  t.innerHTML=`<span>✓ ${esc(tl('Saved'))}</span><button type="button">${esc(tl('Undo'))}</button>`;$('scrollModal').appendChild(t);
+  t.querySelector('button').onclick=()=>{t.remove();undo()};clearTimeout(APV.toast);APV.toast=setTimeout(()=>{t.remove()},5000)}
+function decZoom(x,j){const z=document.createElement('div');z.className='apv-zoom';z.innerHTML=`<button type="button" class="mc-x apv-zx" aria-label="Close">✕</button><div class="apv-zs">${(x.pics||[]).map(p=>`<img src="${esc(p)}" alt="">`).join('')}</div>`;
+  $('scrollModal').appendChild(z);const s=z.querySelector('.apv-zs');requestAnimationFrame(()=>{s.scrollLeft=(LANG==='ar'?-1:1)*j*s.clientWidth});z.querySelector('.apv-zx').onclick=()=>z.remove()}
+function decDone(){const w=$('decWrap'),L=APV.items;const c=k=>L.filter(x=>APV.ans[x.id]&&APV.ans[x.id].a===k).length;
+  w.innerHTML=`<div class="apv-top"><button type="button" class="btn-ghost small apv-bk">${LANG==='ar'?'›':'‹'} ${esc(tl('Back'))}</button><span class="apv-n"></span></div>${decDots()}
+   <div class="apv-cel"><svg class="apv-star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.7 5.8 6.3.7c.6.1.9.9.4 1.3l-4.7 4.3 1.3 6.2c.1.6-.5 1.1-1.1.8L12 18.6l-5.5 3.1c-.6.3-1.2-.2-1.1-.8l1.3-6.2-4.7-4.3c-.5-.4-.2-1.2.4-1.3l6.3-.7z" stroke-linejoin="round"/></svg>
+   <h2>${esc(tl('All done'))}</h2><p class="muted">✓ ${c('approve')} ${esc(tl('approved'))} · ✎ ${c('change')} ${esc(tl('to change'))}${decLeft()?` · ${decLeft()} ${esc(tl('not yet'))}`:''}</p></div>
+   <p class="small muted">${esc(tl('Tap any item to look again'))}</p>
+   <div class="apv-list">${L.map((x,k)=>{const a=APV.ans[x.id]||{};return`<button type="button" class="apv-row" data-k="${k}"><span class="apv-dot ${a.a==='approve'?'ok':a.a==='change'?'ch':'no'}">${a.a==='approve'?'✓':a.a==='change'?'✎':k+1}</span><span dir="auto">${esc(decT(x))}${a.a==='change'&&a.n?`<small class="muted" dir="auto">${esc(a.n)}</small>`:''}</span></button>`}).join('')}</div>
+   <p id="decWait" class="small muted" ${decQ().length?'':'hidden'}>⏳ ${esc(tl('Waiting to save. It will save when you are online.'))}</p>`;
+  w.querySelector('.apv-bk').onclick=()=>{APV.i=L.length-1;decRender()};
+  w.querySelectorAll('[data-k]').forEach(b=>b.onclick=()=>{APV.i=+b.dataset.k;decRender()});$('scrollBody').scrollTop=0;setTimeout(()=>{$('scrollBody').scrollTop=0},60)}
+GO.approve=()=>decOpen();GO.approvals=GO.approve;GO.decide=GO.approve;
+/* owner menu + owner dashboard entry (only shows for the owner) */
+async function decBadge(){if(!(await decIsOwner()))return;decLoadLocal();await decItems();await decPull();decFlush();const n=decLeft();
+  const box=$('admBox');if(box){let d=$('decEntry');if(!d){d=document.createElement('div');d.id='decEntry';d.className='sp-sec';box.prepend(d)}
+    d.innerHTML=`<button type="button" class="btn-calm apv-open">✅ ${esc(tl('Approvals'))}${n?` <span class="due">${n}</span>`:''}</button>`;d.querySelector('button').onclick=()=>decOpen()}
+  APV.n=n}
+{const _am5=apMenu;apMenu=function(){const r=_am5.apply(this,arguments);try{const m=$('apMenu'),f=m&&m.querySelector('[data-am="fb"]');
+  if(f&&APV.own&&!m.querySelector('[data-am="dec"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='dec';
+    b.innerHTML='✅ '+esc(tl('Approvals'))+(APV.n?` <span class="due">${APV.n}</span>`:'');b.onclick=()=>{m.hidden=true;decOpen()};f.before(b)}}catch(e){}return r}}
+{const _al=admLoad;admLoad=async function(){const r=await _al.apply(this,arguments);try{await decBadge()}catch(e){}return r}}
+addEventListener('online',()=>{decFlush()});
+
+
+/* v157: tap "Ayat al-Kursi?" → why read it after each salah (an-Nasa'i al-Kubra 9848, sahih per al-Albani, Sahih al-Jami' 6464) */
+[["Ayat al-Kursi?","آية الكرسي؟","Aayatal Kursii?","Aayadda Kursiga?"],
+ ["Ayat al-Kursi after each salah","آية الكرسي بعد كل صلاة","Aayatal Kursii salaata hunda booda","Aayadda Kursiga salaad kasta kadib"],
+ ["Whoever recites Ayat al-Kursi after every obligatory salah, nothing stands between him and entering Paradise except death.","«مَنْ قَرَأَ آيَةَ الْكُرْسِيِّ دُبُرَ كُلِّ صَلَاةٍ مَكْتُوبَةٍ، لَمْ يَمْنَعْهُ مِنْ دُخُولِ الْجَنَّةِ إِلَّا أَنْ يَمُوتَ»","Namni salaata dirqamaa hunda booda Aayatal Kursii dubbise, jannata seenuu irraa wanti isa dhorku du'a malee hin jiru.","Qofkii akhriya Aayadda Kursiga salaad kasta oo waajib ah kadib, waxba kama celinayaan galitaanka Jannada geerida mooyee."],
+ ["Recite it once, right after the salah.","اقرأها مرة واحدة بعد الصلاة مباشرة.","Salaata booda yeroo tokko dubbisi.","Hal mar akhri, salaadda kadib isla markiiba."],
+ ["Read it now","اقرأها الآن","Amma dubbisi","Hadda akhri"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function kvOpen(){modalCard(`<div class="kv"><p class="label">📖 ${esc(tl('Ayat al-Kursi after each salah'))}</p>
+  <p class="kv-h" dir="auto">${esc(tl('Whoever recites Ayat al-Kursi after every obligatory salah, nothing stands between him and entering Paradise except death.'))}</p>
+  ${LANG!=='ar'?`<p class="kv-ar notranslate" dir="rtl" lang="ar">«مَنْ قَرَأَ آيَةَ الْكُرْسِيِّ دُبُرَ كُلِّ صَلَاةٍ مَكْتُوبَةٍ، لَمْ يَمْنَعْهُ مِنْ دُخُولِ الْجَنَّةِ إِلَّا أَنْ يَمُوتَ»</p>`:''}
+  <p class="small muted">an-Nasāʼī, as-Sunan al-Kubrā 9848 · ṣaḥīḥ (al-Albānī, Ṣaḥīḥ al-Jāmiʻ 6464)</p>
+  <p class="small">${esc(tl('Recite it once, right after the salah.'))}</p>
+  <a class="btn-calm kv-go" href="https://quran.com/2/255" target="_blank" rel="noopener">${esc(tl('Read it now'))} ↗</a></div>`)}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ci="kv"]');if(!b)return;e.preventDefault();e.stopPropagation();kvOpen()},true);
+
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
 const SQSTAR='<svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="sqg" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#FFF6C7"/><stop offset=".55" stop-color="#FFD24A"/><stop offset="1" stop-color="#E8A317"/></radialGradient></defs><path d="M50 6c2.4 0 3.9 1.5 5 3.8l10.2 21 23 3.3c2.6.4 4.2 1.6 4.9 3.7.7 2.2-.1 4-1.9 5.8L74.5 59.9l3.9 22.9c.4 2.6-.2 4.5-2 5.8-1.9 1.3-3.9 1.2-6.2 0L50 77.8 29.8 88.6c-2.3 1.2-4.3 1.3-6.2 0-1.8-1.3-2.4-3.2-2-5.8l3.9-22.9L8.8 43.6c-1.8-1.8-2.6-3.6-1.9-5.8.7-2.1 2.3-3.3 4.9-3.7l23-3.3L45 9.8C46.1 7.5 47.6 6 50 6z" fill="url(#sqg)" stroke="#C98A0E" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="38" cy="34" rx="7" ry="4.5" fill="#fff" opacity=".55" transform="rotate(-30 38 34)"/></svg>';
@@ -10021,7 +10166,17 @@ const SALL=[ // [en, ar, om, so] · source
 {const _pi=pushItems;pushItems=function(){const o=_pi.apply(this,arguments);try{const L=SALT[LANG]?LANG:'en',li={en:0,ar:1,om:2,so:3}[L];
   o.forEach(x=>{const m=/^sal-(\w+)/.exec(x.tag||'');if(!m)return;const j=SQK.indexOf(m[1]);if(j<0)return;
     const day=Math.floor((x.at-new Date(x.at).getTimezoneOffset()*60000)/864e5),set=SALL[j];
-    x.title=SALT[L](tl(SQ5[j]));x.body=set[(day+j)%set.length][li]})}catch(e){}return o}}
+    x.title=SALT[L](tl(SQ5[j]));x.body=set[(day+j)%set.length][li];
+    x.at+=((S.remind||{}).before||0)*60000})}catch(e){}return o}} // salah alert exactly at the salah time; "minutes before" is for to-dos only
+/* 15 minutes before a salah's time ends, a gentle nudge, only if that salah isn't marked yet. Nothing before the adhan. */
+const SALE={en:[p=>'There\'s still time for '+p,'About 15 minutes left in its time.'],ar:[p=>'ما زال هناك وقت لصلاة '+p,'بقي نحو ١٥ دقيقة على خروج وقتها.'],
+ om:[p=>'Ammallee yeroon salaata '+p+' ni jira','Yeroo isheetiif daqiiqaa 15 qofatu hafe.'],so:[p=>'Wali waqti ayaa u haray salaadda '+p,'Qiyaastii 15 daqiiqo ayaa ka harsan waqtigeeda.']};
+{const _pe=pushItems;pushItems=function(){const o=_pe.apply(this,arguments);try{const R=S.remind||{};if(!R.salah)return o;const now=Date.now(),L=SALE[LANG]?LANG:'en';
+  for(let i=0;i<14;i++){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+i);const P=salahFor(d);if(!P)continue;const n=new Date(d);n.setDate(n.getDate()+1);const N=salahFor(n),q=salQ(d);
+    const end=[P.sunrise,P.asr,P.maghrib,P.isha,N?new Date(P.maghrib.getTime()+(N.fajr-P.maghrib)/2):null]; // Isha ends at the middle of the night (Muslim 612)
+    SQK.forEach((k,j)=>{if(q[j]||!end[j])return;const at=end[j].getTime()-15*60000;if(at<=now+30000||at-P[k].getTime()<20*60000)return;
+      o.push({at,title:'⏳ '+SALE[L][0](tl(SQ5[j])),body:SALE[L][1],tag:'sle-'+k+'-'+dkey(d)})})}
+  o.sort((a,b)=>a.at-b.at)}catch(e){}return o}}
 
 
 /* hostile or insulting words toward anyone: never saved, never sent in a notification */
@@ -10033,7 +10188,7 @@ BLOCK_BAD.push(...HOSTILE);BLOCK_BAD_AR.push(...HOSTILE_AR);
 {const _pb=pushItems;pushItems=function(){const o=_pb.apply(this,arguments);try{return o.filter(x=>!(blocked(x.title||'')||blocked(x.body||'')))}catch(e){return o}}}
 /* passed salah: one compact "Kursi?" row with ✓ / ✕ circles, the same size as the done cell */
 ciKPast=function(i,o){const no=!!(o.kn&&o.kn[i]);
-  return `<span class="ci-k3${no?' no':''}"><small>${esc(tl('Kursi?'))}</small><button type="button" class="y" data-ci="kr" data-i="${i}" aria-label="${esc(tl('Read'))}">✓</button><button type="button" class="n${no?' sel':''}" data-ci="kn" data-i="${i}" aria-pressed="${no}" aria-label="${esc(tl('No'))}">✕</button></span>`};
+  return `<span class="ci-k3${no?' no':''}"><button type="button" class="ci-kv" data-ci="kv">${esc(tl('Ayat al-Kursi?'))} <span aria-hidden="true">ⓘ</span></button><button type="button" class="y" data-ci="kr" data-i="${i}" aria-label="${esc(tl('Read'))}">✓</button><button type="button" class="n${no?' sel':''}" data-ci="kn" data-i="${i}" aria-pressed="${no}" aria-label="${esc(tl('No'))}">✕</button></span>`};
 [["Kursi?","الكرسي؟","Kursii?","Kursi?"],["Kursi","الكرسي","Kursii","Kursi"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* v146: lighter to-do editor. Open task = title, steps, "add a step", Do it. Everything else sits in one folded "More" row. */

@@ -1,0 +1,113 @@
+{
+ "v": 1,
+ "items": [
+  {
+   "id": "v5-home",
+   "t": "New Home screen",
+   "ar": "الشاشة الرئيسية الجديدة",
+   "s": "Salah countdown, tap a salah to mark it, Ayah of the day, shortcuts, next tasks",
+   "pics": [
+    "decisions/img/home1.jpg",
+    "decisions/img/home2.jpg"
+   ],
+   "link": "next/v5/#home"
+  },
+  {
+   "id": "v5-quran",
+   "t": "Qur'an tab",
+   "ar": "تبويب القرآن",
+   "s": "Continue reading, all surahs with search, listen, my khatmah",
+   "pics": [
+    "decisions/img/quran.jpg",
+    "decisions/img/index.jpg",
+    "decisions/img/khatmah.jpg"
+   ],
+   "link": "next/v5/#quran"
+  },
+  {
+   "id": "v5-dhikr",
+   "t": "Dhikr: one at a time",
+   "ar": "الأذكار: ذكر واحد في كل مرة",
+   "s": "Big counter button, list of unfinished, animated star when done",
+   "pics": [
+    "decisions/img/dhikr.jpg",
+    "decisions/img/dhikr1.jpg",
+    "decisions/img/done.jpg"
+   ],
+   "link": "next/v5/#dhikr"
+  },
+  {
+   "id": "reader",
+   "t": "Qur'an reader",
+   "ar": "قارئ القرآن",
+   "s": "The ayah being read is shaded; touch and hold an ayah for play, meaning, tafsir, share",
+   "pics": [
+    "decisions/img/reader1.jpg",
+    "decisions/img/reader2.jpg",
+    "decisions/img/reader3.jpg"
+   ],
+   "link": "next/design/read.html"
+  },
+  {
+   "id": "wbw-helper",
+   "t": "Box that follows Saad al-Ghamdi word by word",
+   "ar": "مربع يتبع الشيخ سعد الغامدي كلمة بكلمة",
+   "s": "Approve = add a small free helper on GitHub (MIT licence) that times each of his words. Nothing to pay.",
+   "pics": [
+    "decisions/img/wbw.jpg"
+   ],
+   "link": "next/design/read.html"
+  },
+  {
+   "id": "v5-notif",
+   "t": "Notifications page",
+   "ar": "صفحة الإشعارات",
+   "s": "One switch for all, grouped by Salah, Adhkar, Qur'an, Tasks, Sunnah fasts",
+   "pics": [
+    "decisions/img/notif.jpg"
+   ],
+   "link": "next/v5/#notif"
+  },
+  {
+   "id": "v5-cal",
+   "t": "Hijri calendar",
+   "ar": "التقويم الهجري",
+   "s": "Hijri month with dates, Sunnah fasts and Islamic days marked",
+   "pics": [
+    "decisions/img/cal.jpg"
+   ],
+   "link": "next/v5/#cal"
+  },
+  {
+   "id": "v5-todo-more",
+   "t": "To-do and More",
+   "ar": "المهام والمزيد",
+   "s": "Quick add in one line; More has stars, game, settings",
+   "pics": [
+    "decisions/img/todo.jpg",
+    "decisions/img/more.jpg"
+   ],
+   "link": "next/v5/#todo"
+  },
+  {
+   "id": "v5-dark",
+   "t": "Dark mode",
+   "ar": "الوضع الداكن",
+   "s": "Same design at night, with the mini player",
+   "pics": [
+    "decisions/img/dark.jpg"
+   ],
+   "link": "next/v5/?dark=1"
+  },
+  {
+   "id": "v5-arabic",
+   "t": "Arabic layout",
+   "ar": "الواجهة العربية",
+   "s": "Everything right to left",
+   "pics": [
+    "decisions/img/arabic.jpg"
+   ],
+   "link": "next/v5/?lang=ar"
+  }
+ ]
+}

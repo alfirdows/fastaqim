@@ -280,7 +280,7 @@ body:not(.live) .bk{display:none}
 .tsb{display:block}
 .tab a i .tsb{width:25px;height:25px}.ic i .tsb{width:21px;height:21px}
 </style></head><body style="cursor:default"><div id="s"></div>
-<script>
+<script>if(new URLSearchParams(location.search).get("s")==="rv"){location.replace("../../#approve")}
 const q=new URLSearchParams(location.search),L=q.get('lang')||'en',S=q.get('s')||'home';
 if(!q.get('shot'))document.documentElement.classList.add('live');
 if(q.get('dark')==='1')document.documentElement.classList.add('dark');
