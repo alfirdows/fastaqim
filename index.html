@@ -7958,7 +7958,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v155',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v156',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8284,7 +8284,7 @@ function rpSheet(){const signed=!!(AU.sb&&AU.user);
   const rm=$('rpRm');if(rm)rm.onclick=()=>{keep();RP.shot=null;rpSheet()};
   [$('rpTh'),$('rpCi')].forEach(b=>{if(b)b.onclick=()=>{keep();rpDraw()}});
   $('rpForm').onsubmit=async e=>{e.preventDefault();const body=$('rpText').value.trim();if(!body)return;if(blockedBad(body)||selfHit(body)){blkWarn(body);return}const btn=e.target.querySelector('[type=submit]');btn.disabled=true;
-    const base={kind:'problem',area:'other',body:body+'\n\n['+(document.title||'')+' · '+(location.hash||'#home')+' · v'+FQ_BUILD.replace(/\D+/g,'')+' · '+innerWidth+'×'+innerHeight+']',lang:LANG};if(RP.shot)base.shot=RP.shot;
+    const base={kind:'problem',area:'other',body:body+'\n\n['+(document.title||'')+' · '+(location.hash||'#home')+' · v'+FQ_BUILD.replace(/\D+/g,'')+' · '+innerWidth+'×'+innerHeight+']'+(function(){try{const d=localStorage.getItem('fq.diag');return d&&d!=='[]'?'\n[layout '+d.slice(-900)+']':''}catch(e){return ''}})(),lang:LANG};if(RP.shot)base.shot=RP.shot;
     const ok=signed?await fbInsert({...base,user_id:AU.user.id,email:AU.user.email,name:S.name||''}):await fbInsert({...base,name:'visitor'});
     if(ok){RP.shot=null;RP.txt='';modalClose();toast('📨 '+tl("Thank you! We'll look at it."))}
     else{btn.disabled=false;toast(tl("That didn't send. Please try again in a bit."))}}}
@@ -9931,6 +9931,27 @@ new MutationObserver(()=>setTimeout(fqStale,30)).observe(document.body,{attribut
 setInterval(()=>{if(!document.hidden)fqStale()},1200);setTimeout(fqStale,400);
 /* 2) Istighfar 100x lives inside the morning and evening adhkar (same shared count), not as its own row */
 ciIstRow=function(){return ''};
+
+
+/* ===================== v156 =====================
+   The bar is checked where it really is: if its bottom edge is not at the real bottom of the screen, it is placed there,
+   and it stays placed until the app is reopened or turned (no flicker). A short log is kept on this phone (fq.diag) and added
+   to "Report a problem" so a wrong height can be seen exactly. */
+const FQD={stick:false,ok:0};
+function fqSig(){const vv=window.visualViewport,rh=fqRH(),bn=document.querySelector('.bnav'),de=document.documentElement,typing=fqTyping();
+  const r=bn&&!bn.hidden?bn.getBoundingClientRect():null;
+  const s={ih:innerHeight,vh:vv?Math.round(vv.height):0,vo:vv?Math.round(vv.offsetTop):0,ch:de.clientHeight,sh:screen.height,rh,bb:r?Math.round(r.bottom):0,sy:Math.round(scrollY),t:typing};
+  s.bad=!typing&&(rh-s.ih>70||(s.vh&&rh-s.vh>70)||s.vo>20||rh-s.ch>70||(r&&!de.classList.contains('fq-stale')&&r.bottom<rh-30&&r.height>0));return s}
+function fqDiag(s){try{const L=JSON.parse(localStorage.getItem('fq.diag')||'[]');L.push(Object.assign({at:new Date().toISOString().slice(5,19),v:FQ_BUILD.replace(/\D+/g,'')},s));localStorage.setItem('fq.diag',JSON.stringify(L.slice(-12)))}catch(e){}}
+{const _fs=fqStale;fqStale=function(){try{if(!fqStandalone())return _fs();const de=document.documentElement,s=fqSig();
+  if(s.bad){if(!FQD.stick){fqDiag(s);if(FQH.heal<3){fqNudge();setTimeout(fqStale,260);return}}FQD.stick=true;FQD.ok=0}
+  else if(FQD.stick&&!de.classList.contains('fq-stale')){FQD.ok++}
+  if(FQD.stick){FQH.stale=true;de.classList.add('fq-stale');const y=(typeof LK!=='undefined'&&LK.y!==null)?LK.y:scrollY,bn=document.querySelector('.bnav');
+    de.style.setProperty('--fqrh',s.rh+'px');de.style.setProperty('--fqdy',y+'px');if(bn)de.style.setProperty('--fqbt',(y+s.rh-(bn.offsetHeight||64))+'px')}
+  else _fs()}catch(e){}}}
+function fqUnstick(){FQD.stick=false;FQH.heal=0;FQH.stale=false;document.documentElement.classList.remove('fq-stale');setTimeout(fqStale,150);setTimeout(fqStale,700)}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)fqUnstick()});addEventListener('orientationchange',fqUnstick);addEventListener('pageshow',fqUnstick);
+setInterval(()=>{if(!document.hidden)fqStale()},600);
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
