@@ -2154,6 +2154,8 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .ci-az.ci-my{background:color-mix(in srgb,#8a63d2 10%,transparent)}.ci-az.ci-my .ci-bar i{background:#8a63d2}.ci-az.ci-my.done{background:color-mix(in srgb,#1f9d6b 13%,transparent)}.ci-az.ci-my.done .ci-bar i{background:#1f9d6b}
 .ci-add{align-self:flex-start;border:1.5px dashed color-mix(in srgb,var(--ink) 25%,transparent);border-radius:999px;background:transparent;padding:8px 14px;min-height:40px;font:inherit;font-size:.86rem;font-weight:700;color:var(--muted)}
 textarea.mx-in{min-height:84px;resize:vertical}
+.ci-k2{display:flex;gap:4px;min-width:132px}.ci-k2 button{flex:1;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font:inherit;font-size:.8rem;font-weight:700;color:var(--ink);min-height:44px;padding:4px 6px}
+.ci-k2 button[data-ci="kr"]{border-color:color-mix(in srgb,#1f9d6b 45%,var(--line));color:#1a7f57}.ci-k2 button.on{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--muted)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -5303,7 +5305,7 @@ function tgHit(){const G=tgState();if(!G.on)return;const now=Date.now();G.combo=
 const QA={a:null,list:[],i:0,key:''},SURA_N={1:7,112:4,113:5,114:6};
 function qaParse(src){const m=String(src||'').match(/Qur'an (\d+)(?::(\d+)(?:[–-](\d+))?)?/);if(!m)return null;const s=+m[1];let a=m[2]?+m[2]:1,b=m[3]?+m[3]:(m[2]?a:(SURA_N[s]||1));return{s,a,b,key:s+':'+a+(b!==a?'-'+b:'')}}
 function qaBtn(src){const q=qaParse(src);return q?`<button type="button" class="qa-b" data-qa="${q.key}">▶ ${tl('Listen · Saad Al-Ghamdi')}</button>`:''}
-const qaUrl=(s,a)=>'https://everyayah.com/data/Ghamadi_40kbps/'+String(s).padStart(3,'0')+String(a).padStart(3,'0')+'.mp3';
+const qaUrl=(s,a)=>fqAudU(String(s).padStart(3,'0')+String(a).padStart(3,'0'));
 function qaStop(){if(QA.a){QA.a.pause()}QA.key='';document.querySelectorAll('[data-qa]').forEach(b=>{b.classList.remove('on');b.textContent=b.classList.contains('qa-mini')?'▶':'▶ '+tl('Listen · Saad Al-Ghamdi')})}
 function qaPlay(key,btn){if(QA.key===key&&QA.a&&!QA.a.paused){qaStop();return}qaStop();const [s,r]=key.split(':'),[a,b]=r.split('-').map(Number);QA.list=[];for(let i=a;i<=(b||a);i++)QA.list.push(qaUrl(+s,i));QA.i=0;QA.key=key;
   if(!QA.a){QA.a=new Audio();QA.a.preload='auto';QA.a.onended=()=>{QA.i++;if(QA.i<QA.list.length){QA.a.src=QA.list[QA.i];QA.a.play().catch(()=>{})}else qaStop()}}
@@ -7795,7 +7797,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v136',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v137',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8772,14 +8774,14 @@ let CI_BUSY=false;function ciSync(){if(CI_BUSY)return;CI_BUSY=true;try{if(!inApp
   save()}catch(e){console.warn('ci',e)}finally{CI_BUSY=false}}
 function ciHTML(){const P=(()=>{try{return salahFor(new Date())}catch(e){return null}})(),q=salQ(),o=ciPeek(),now=new Date(),M=ciMin(),azN=M.filter(x=>((o.az||{})[x.id]||0)>=x.n).length,pc=ciPct(),st=Object.values(o.aw||{}).reduce((a,b)=>a+Math.max(0,b),0);
   const rows=SQK.map((k,i)=>{const v=q[i],t=P&&P[k],fut=t&&t>now,kd=o.k&&o.k[i];const sl=v==='on'?['on','✓ '+tl('On time')]:v==='late'?['late','⏰ '+tl('Late')]:v==='miss'?['miss','✕ '+tl('Missed')]:v==='exc'?['exc','🌸 '+tl('Excused')]:['',fut?(t?hmShort(t):''):tl('Tap')];
-    return `<div class="ci-r${fut&&!v?' fut':''}"><button type="button" class="ci-s ${sl[0]}" data-ci="sal" data-i="${i}"><b>${esc(tl(SQ5[i]))}</b><span>${esc(sl[1])}</span></button>${v==='exc'?'<span class="ci-k na"></span>':`<button type="button" class="ci-k${kd?' on':''}" data-ci="k" data-i="${i}" ${(v==='on'||v==='late'||kd)?'':'disabled'} aria-label="${esc(tl('Ayat al-Kursi'))}">${kd?'✓':'📖'} <small>${esc(tl('Ayat al-Kursi'))}</small></button>`}</div>`}).join('');
+    return `<div class="ci-r${fut&&!v?' fut':''}"><button type="button" class="ci-s ${sl[0]}" data-ci="sal" data-i="${i}"><b>${esc(tl(SQ5[i]))}</b><span>${esc(sl[1])}</span></button>${v==='exc'?'<span class="ci-k na"></span>':(!kd&&(v==='on'||v==='late')&&i<4&&P&&P[SQK[i+1]]&&P[SQK[i+1]]<=now)?ciKPast(i,o):`<button type="button" class="ci-k${kd?' on':''}" data-ci="k" data-i="${i}" ${(v==='on'||v==='late'||kd)?'':'disabled'} aria-label="${esc(tl('Ayat al-Kursi'))}">${kd?'✓':'📖'} <small>${esc(tl('Ayat al-Kursi'))}</small></button>`}</div>`}).join('');
   return `<div class="hm-card ci-card" id="ciCard"><div class="ci-h"><div class="ci-ring" style="--p:${pc}"><b>${pc}%</b></div><div class="ci-ht"><p class="ci-t">✅ ${esc(tl('Daily check-in'))}</p><p class="ci-st">${st?'⭐ +'+st:''}</p></div></div>
    <div class="ci-rows">${rows}</div>
    <button type="button" class="ci-az${azN===M.length?' done':''}" data-ci="az"><span class="ci-azi">🌅</span><span class="ci-azt"><b>${esc(tl('Morning adhkar'))}</b><small>${azN}/${M.length} · ${esc(tl('minimum'))}</small></span><span class="ci-bar"><i style="width:${Math.round(azN/M.length*100)}%"></i></span><span class="ci-go">›</span></button></div>`}
 {const _hmC=hmTrk;hmTrk=function(){const h=_hmC.apply(this,arguments);try{if(!inApp()||!S.name)return h;return ciHTML()+h}catch(e){return h}}}
 function ciRefresh(){const c=$('ciCard');if(c){const t=document.createElement('div');t.innerHTML=ciHTML();c.replaceWith(t.firstChild)}}
 {const _stC=salTop;salTop=function(){const r=_stC.apply(this,arguments);try{if(!CI_BUSY){ciSync();ciRefresh()}}catch(e){}return r}}
-document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="sal"],#ciCard [data-ci="k"],#ciCard [data-ci="az"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
   const k=b.dataset.ci,i=+b.dataset.i;if(k==='sal')salMark(i);else if(k==='k')ciKursi(i);else if(k==='az')ciAzOpen()},true);
 /* sisters: "Excused" in the salah choices (private setting) */
 {const _sm=salMark;salMark=function(i){const r=_sm.apply(this,arguments);try{if(S.sister){const g=$('scrollBody').querySelector('.sq-g');if(g&&!g.querySelector('[data-sq="exc"]')){const cur=salQ()[i];const b=document.createElement('button');b.type='button';b.className='sq-b exc'+(cur==='exc'?' sel':'');b.dataset.sq='exc';b.innerHTML='<i>🌸</i>'+esc(tl('Excused'));g.appendChild(b);
@@ -8791,7 +8793,7 @@ try{const _pf=SETP.prof.f;SETP.prof.f=()=>{const a=_pf();return a.concat([sisEl(
 /* audio: Saad al-Ghamdi (EveryAyah), one or more ayat in a row */
 const CIA={a:null};
 function ciPlay(list,btn){try{if(CIA.a){CIA.a.pause();CIA.a=null;if(btn&&btn.classList.contains('on')){btn.classList.remove('on');return}}let i=0;const a=new Audio();CIA.a=a;if(btn)btn.classList.add('on');
-  const nx=()=>{if(i>=list.length||CIA.a!==a){if(btn)btn.classList.remove('on');CIA.a=null;return}a.src='https://everyayah.com/data/Ghamadi_40kbps/'+list[i++]+'.mp3';a.play().catch(()=>{})};a.onended=nx;nx()}catch(e){}}
+  const nx=()=>{if(i>=list.length||CIA.a!==a){if(btn)btn.classList.remove('on');CIA.a=null;return}a.src=fqAudU(list[i++]);a.play().catch(()=>{})};a.onended=nx;nx()}catch(e){}}
 function ciStopAudio(){try{if(CIA.a){CIA.a.pause();CIA.a=null}}catch(e){}}
 /* Ayat al-Kursi after salah: ✓ unlocks after the time it takes to read it */
 function ciKursi(i){const o=ciD();if(o.k[i]){o.k[i]=0;delete o.k[i];ciAw('k'+i,0,'📖 '+tl('Ayat al-Kursi'));save();ciRefresh();return}
@@ -9456,6 +9458,18 @@ function myAzEdit(id){const L=myAz(),x=L.find(y=>y.id===id)||{t:'',n:3,w:'a',src
    if($('myDel'))$('myDel').onclick=()=>{const i=L.findIndex(y=>y.id===id);if(i<0)return;const del=L.splice(i,1)[0];save();myAzOpen();fqUndoToast(()=>{L.splice(i,0,del);save();myAzOpen()},tl('Deleted'))};
    $('myBk').onclick=()=>L.length?myAzOpen():(modalClose(),ciRefresh())};paint()}
 GO.myadhkar=()=>myAzOpen();GO.split=()=>ciAzOne(ciWin().e&&!ciWin().m?'e':'m');
+/* ---------- offline adhkar audio ----------
+   The ayahs used in the adhkar (Ayat al-Kursi, the 3 Quls, end of al-Baqarah) are stored with the site and saved on the phone, so they play without internet. */
+const FQ_AUDL=new Set('002255 002285 002286 112001 112002 112003 112004 113001 113002 113003 113004 113005 114001 114002 114003 114004 114005 114006'.split(' '));
+function fqAudU(code){code=String(code);return (FQ_AUDL.has(code)&&location.protocol==='https:')?'audio/g/'+code+'.mp3':'https://everyayah.com/data/Ghamadi_40kbps/'+code+'.mp3'}
+function fqAudPre(){try{if(!navigator.onLine||!navigator.serviceWorker||!navigator.serviceWorker.controller)return;if(S.audPre===FQ_BUILD)return;
+  navigator.serviceWorker.controller.postMessage({fqPre:[...FQ_AUDL].map(c=>new URL('audio/g/'+c+'.mp3',location.href).href)});S.audPre=FQ_BUILD;save()}catch(e){}}
+setTimeout(fqAudPre,6000);addEventListener('online',()=>setTimeout(fqAudPre,3000));
+/* Ayat al-Kursi for a salah whose time has passed: just "Read" or "No" */
+[["Read","قرأتها","Dubbiseera","Waan akhriyay"],["No","لا","Lakki","Maya"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function ciKPast(i,o){const no=o.kn&&o.kn[i];return `<span class="ci-k2"><button type="button" data-ci="kr" data-i="${i}">📖 ${esc(tl('Read'))}</button><button type="button" data-ci="kn" data-i="${i}" class="${no?'on':''}">${no?'✕ ':''}${esc(tl('No'))}</button></span>`}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="kr"],#ciCard [data-ci="kn"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  const i=+b.dataset.i,o=ciD();o.kn=o.kn||{};if(b.dataset.ci==='kr'){o.k[i]=1;delete o.kn[i];const g=ciAw('k'+i,2,'📖 '+tl('Ayat al-Kursi'));save();ciRefresh();toast('📖 ✓'+(g>0?' +'+g+' ⭐':''))}else{if(o.kn[i])delete o.kn[i];else o.kn[i]=1;save();ciRefresh()}},true);
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
