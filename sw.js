@@ -9,6 +9,7 @@ async function rangeFrom(cached,req){const buf=await cached.arrayBuffer();const 
  return new Response(buf.slice(a,b+1),{status:206,headers:{"Content-Type":cached.headers.get("Content-Type")||"audio/mp4","Content-Range":`bytes ${a}-${b}/${buf.byteLength}`,"Content-Length":String(b-a+1),"Accept-Ranges":"bytes"}})}
 self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET")return;const url=new URL(req.url);
  if(url.pathname.endsWith(".ics"))return;
+ if(url.pathname.includes("/next/"))return; /* the new-design preview is never cached as the main page */
  const same=url.origin===self.location.origin;
  if(!same&&!LIBS.includes(url.hostname))return; /* account data, translation, Quran.com: always live */
  if(req.mode==="navigate"||(same&&(url.pathname.endsWith("/index.html")||url.pathname.endsWith("/")))){
