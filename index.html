@@ -7900,7 +7900,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v142',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v143',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9872,6 +9872,31 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 ["day salah streak","يوم صلاة متتالية","guyyaa salaata walitti aanaa","maalmood salaad isku xigta"],
 ["Best","الأفضل","Isa caalu","Ugu fiican"],["Alhamdulillah","الحمد لله","Alhamdulillah","Alxamdulillaah"],["day in a row","يوم متتالٍ","guyyaa walitti aanaa","maalin isku xigta"],["days in a row","أيام متتالية","guyyaa walitti aanaa","maalmood isku xigta"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* salah notifications: title = just the prayer, body = one short authentic line (sahih/hasan only), rotating daily. No app name, no pressure. */
+const SALT={en:p=>p+' has arrived',ar:p=>'حان وقت صلاة '+p,om:p=>'Yeroon salaata '+p+' ga\'eera',so:p=>'Waa waqtigii salaadda '+p};
+const SALL=[ // [en, ar, om, so] · source
+ [["Whoever prays Fajr is under the protection of Allah.","مَن صلّى الصبحَ فهو في ذمّة الله.","Namni salaata Fajrii salaate eegumsa Rabbii keessa jira.","Qofkii tukada salaadda Subax wuxuu ku jiraa magangalka Alle."], // Muslim 657
+  ["The two rak'ahs of Fajr are better than this world and all it holds.","ركعتا الفجر خيرٌ من الدنيا وما فيها.","Rakaanni lamaan Fajrii addunyaa fi waan ishee keessa jiru caalu.","Labada rakcadood ee Subax waxay ka khayr badan yihiin adduunka iyo waxa ku jira."], // Muslim 725
+  ["Whoever prays the two cool prayers, Fajr and Asr, will enter Jannah.","مَن صلّى البَردَين دخل الجنة.","Namni salaata qabbanoo lamaan, Fajrii fi Asrii, salaate Jannata seena.","Qofkii tukada labada salaadood ee qabow, Subax iyo Casar, wuxuu gelayaa Jannada."]], // Bukhari 574
+ [["The most beloved deed to Allah is prayer on its time.","أحبّ الأعمال إلى الله الصلاةُ على وقتها.","Hojiin Rabbiitti jaallatamaan salaata yeroo isheetti salaatamuudha.","Camalka Alle ugu jecel yahay waa salaadda waqtigeeda lagu tukado."], // Bukhari 527
+  ["Five prayers wash away sins, like bathing in a river five times a day.","الصلوات الخمس يمحو الله بهنّ الخطايا، كنهرٍ يغتسل منه المرء كل يوم خمسًا.","Salaanni shanan cubbuu dhiqu, akka laga keessa guyyaatti si'a shan dhiqachuu.","Shanta salaadood waxay dembiyada u maydhaan sida webi maalintii shan jeer lagu maydho."], // Bukhari 528, Muslim 667
+  ["An hour when the gates of heaven open: the Prophet ﷺ loved a good deed of his to rise in it.","ساعةٌ تُفتح فيها أبواب السماء، وأحبّ النبي ﷺ أن يصعد له فيها عملٌ صالح.","Sa'aatii balbalni samii itti banamu: Nabiin ﷺ hojiin gaariin isaa yeroo kana ol ba'uu jaallata ture.","Saacad albaabada samada la furo: Nebigu ﷺ wuxuu jeclaa in camal wanaagsan oo isaga ah uu kor u baxo."]], // Tirmidhi 478 (hasan)
+ [["Guard the prayers, and the middle prayer.","﴿حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ﴾","Salaatota eegaa, salaata giddu galeessaas.","Ilaaliya salaadaha iyo salaadda dhexe."], // Qur'an 2:238, Muslim 627
+  ["Angels of the night and the day gather at Fajr and Asr.","يتعاقبون فيكم ملائكةٌ بالليل وملائكةٌ بالنهار، ويجتمعون في صلاة الفجر وصلاة العصر.","Malaa'ikni halkanii fi guyyaa salaata Fajrii fi Asrii irratti walitti dhufu.","Malaa'igta habeenka iyo maalinta waxay ku kulmaan salaadda Subax iyo Casar."], // Bukhari 555
+  ["Whoever prays the two cool prayers, Fajr and Asr, will enter Jannah.","مَن صلّى البَردَين دخل الجنة.","Namni salaata qabbanoo lamaan, Fajrii fi Asrii, salaate Jannata seena.","Qofkii tukada labada salaadood ee qabow, Subax iyo Casar, wuxuu gelayaa Jannada."]], // Bukhari 574
+ [["Twelve rak'ahs of sunnah a day, and a house is built for you in Jannah.","مَن صلّى اثنتي عشرة ركعةً في يوم وليلة بُني له بيتٌ في الجنة.","Guyyaatti rakaa kudha lama sunnaa, manni Jannata keessatti siif ijaarama.","Laba iyo toban rakcadood oo sunno ah maalintii, guri ayaa laguugu dhisaa Jannada."], // Muslim 728
+  ["The most beloved deed to Allah is prayer on its time.","أحبّ الأعمال إلى الله الصلاةُ على وقتها.","Hojiin Rabbiitti jaallatamaan salaata yeroo isheetti salaatamuudha.","Camalka Alle ugu jecel yahay waa salaadda waqtigeeda lagu tukado."], // Bukhari 527
+  ["Seek help through patience and prayer.","﴿وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ﴾","Obsaa fi salaataan gargaarsa barbaadaa.","Ku kaalmaysta samirka iyo salaadda."]], // Qur'an 2:45
+ [["Whoever prays Isha in congregation, it is as if they prayed half the night.","مَن صلّى العشاء في جماعة فكأنما قام نصف الليل.","Namni Ishaa jamaa'aan salaate, akka walakkaa halkanii salaateetti.","Qofkii Cishe jamaaco ku tukada, waa sidii isagoo tukaday nus habeen."], // Muslim 656
+  ["Glad tidings of full light on the Day of Judgment for those who walk to the masjid in the dark.","بشِّر المشّائين في الظُّلَم إلى المساجد بالنور التامّ يوم القيامة.","Warri gammachuu ifa guutuu Guyyaa Qiyaamaa namoota dukkana keessa gara masjiidaa deemaniif.","Bishaaro iftiin buuxda Maalinta Qiyaamaha kuwa mugdiga u socda masaajidda."], // Abu Dawud 561, Tirmidhi 223 (sahih)
+  ["Five prayers wash away sins, like bathing in a river five times a day.","الصلوات الخمس يمحو الله بهنّ الخطايا، كنهرٍ يغتسل منه المرء كل يوم خمسًا.","Salaanni shanan cubbuu dhiqu, akka laga keessa guyyaatti si'a shan dhiqachuu.","Shanta salaadood waxay dembiyada u maydhaan sida webi maalintii shan jeer lagu maydho."]] // Bukhari 528, Muslim 667
+];
+{const _pi=pushItems;pushItems=function(){const o=_pi.apply(this,arguments);try{const L=SALT[LANG]?LANG:'en',li={en:0,ar:1,om:2,so:3}[L];
+  o.forEach(x=>{const m=/^sal-(\w+)/.exec(x.tag||'');if(!m)return;const j=SQK.indexOf(m[1]);if(j<0)return;
+    const day=Math.floor((x.at-new Date(x.at).getTimezoneOffset()*60000)/864e5),set=SALL[j];
+    x.title=SALT[L](tl(SQ5[j]));x.body=set[(day+j)%set.length][li]})}catch(e){}return o}}
+
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
