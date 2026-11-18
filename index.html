@@ -7856,6 +7856,11 @@ const SELF_HARM=["kill myself","killing myself","kms","suicide","suicidal","end 
 const SELF_HARM_AR=["انتحار","انتحر","سانتحر","اقتل نفسي","ابي اموت","ابغى اموت","اريد ان اموت","اريد الموت","بدي موت","اذي نفسي","اؤذي نفسي","ايذاء النفس","انهي حياتي"];
 const selfHit=text=>{if(!text)return null;const t=blkNorm(String(text).replace(/[’‘`]/g,"'"));return blkWords(t,SELF_HARM,SELF_HARM_AR)?'harm':blkWords(t,SELF_INS,SELF_INS_AR)?'ins':null};
 BLOCK_BAD.push(...SELF_INS,...SELF_HARM);BLOCK_BAD_AR.push(...SELF_INS_AR,...SELF_HARM_AR);
+/* hostile or insulting words toward anyone: never saved, never sent in a notification (Tasnim: no negative energy) */
+const HOSTILE=["i hate you","hate you","hate u","i hate","i hate it","stupid","idiot","idiots","moron","dumb","dumbass","loser","losers","shut up","stfu","go to hell","screw you","get lost","you suck","u suck","drop dead","go die","nobody likes you","ugly","useless","worthless","pathetic","retard","retarded","jerk","freak",
+ "nan si jibba","si jibba","isin jibba","gowwaa","waan ku nacayaa","waan idin nacayaa","ku nacay","doqon","nacas","dameer"];
+const HOSTILE_AR=["اكرهك","أكرهك","اكرهكم","أكرهكم","غبي","غبية","غبيه","يا غبي","احمق","أحمق","يا حمار","يا حيوان","تافه","تافهة","انقلع","اسكت","وقح","حقير","حقيرة"];
+BLOCK_BAD.push(...HOSTILE);BLOCK_BAD_AR.push(...HOSTILE_AR);
 {const _bw2=blkWarn;blkWarn=function(text){const k=selfHit(text);if(!k)return _bw2.apply(this,arguments);
   if(k==='harm')modalCard(`<p class="label">🤍 ${esc(tl('You matter'))}</p><p>${esc(tl('If you are thinking about hurting yourself, please talk to someone you trust or your doctor today. If you are in danger right now, call your local emergency number.'))}</p>
    <p class="sk-ar notranslate" dir="rtl" style="font-size:1.3rem;text-align:center">﴿لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ﴾</p><p class="small muted" style="text-align:center;margin:0 0 8px">${esc(tl('Do not despair of the mercy of Allah.'))} · ${esc(tl("Qur'an, Surah"))} 39:53</p>
