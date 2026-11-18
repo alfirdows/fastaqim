@@ -2353,7 +2353,7 @@ html.dark .apv-ch,.dark .apv-ch{color:#f0b35e}
 .apv-list{display:grid;gap:8px;margin-top:8px}.apv-row{display:flex;gap:12px;align-items:center;text-align:start;border:0;border-radius:14px;padding:10px 12px;background:color-mix(in srgb,currentColor 6%,transparent);color:inherit;font:inherit}
 .apv-row small{display:block;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.apv-star,.apv-toast{animation:none}.apv-go{transition:none}}
-.ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}</style>
+.ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}#fqHome .tp-av{display:none!important}#avCard{display:none!important}</style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
@@ -4252,7 +4252,7 @@ ADHKAR.worry={t:'Worry & laziness',ic:'💚',v:'When stuck, anxious or low on en
 
 /* ---------- profile picture ---------- */
 const AVE=['🌌','⭐','🌿','🌸','📚','🕌','🌴','⛰️','☕','🌊','🌻','🍃'];
-const avHTML=(av,name)=>av&&/^data:image\//.test(av)?`<img src="${av}" alt="" class="avimg">`:av?`<span class="avemo">${esc(av)}</span>`:esc(((name||'?').trim()[0]||'?').toUpperCase());
+const avHTML=(av,name)=>(av='')&&/^data:image\//.test(av)?`<img src="${av}" alt="" class="avimg">`:av?`<span class="avemo">${esc(av)}</span>`:esc(((name||'?').trim()[0]||'?').toUpperCase());
 function avDot(av,name){return `<span class="avdot">${avHTML(av,name)}</span>`}
 function renderAvatar(){const p=$('avPrev');if(!p)return;p.innerHTML=avHTML(S.avatar,S.name||(AU.user&&AU.user.email));
   $('avEmo').innerHTML=AVE.map(e=>`<button type="button" class="avpick${S.avatar===e?' on':''}" data-ave="${e}">${e}</button>`).join('');$('avDel').hidden=!S.avatar}
@@ -6874,7 +6874,7 @@ function nameFill(){if(!S.name){const n=acctFirstName();if(n){S.name=n;try{save(
   if(b)b.textContent=tl('Small step? Still a win!')}}catch(e){}return r}}
 {const _ci2=cloudInit;cloudInit=async function(){const r=await _ci2.apply(this,arguments);try{nameFill();renderHeader()}catch(e){}return r}}
 /* account lives in ☰ now (the "T" circle is gone from the page) */
-{const _am2=apMenu;apMenu=function(){const r=_am2.apply(this,arguments);try{const m=$('apMenu'),o=m&&m.querySelector('[data-am="out"]');if(o&&typeof AU!=='undefined'&&AU.user&&!m.querySelector('[data-am="acct"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='acct';b.textContent='🪪 '+tl('Account');b.onclick=()=>{m.hidden=true;try{accMenu()}catch(e){}};o.before(b)}}catch(e){}return r}}
+{const _am2=apMenu;apMenu=function(){const r=_am2.apply(this,arguments);try{const m=$('apMenu'),o=m&&m.querySelector('[data-am="out"]');if(o&&typeof AU!=='undefined'&&AU.user&&!m.querySelector('[data-am="acct"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='acct';b.textContent='🏷️ '+tl('Account');b.onclick=()=>{m.hidden=true;try{accMenu()}catch(e){}};o.before(b)}}catch(e){}return r}}
 /* sync line only when something needs attention (saved-to-account is the normal state) */
 {const _sb=syncBadge;syncBadge=function(){const r=_sb.apply(this,arguments);try{const b=$('syncBadge');if(b)b.hidden=SYNC.state==='on'}catch(e){}return r}}
 
@@ -7768,7 +7768,7 @@ setListWire=function(){const w=$('tab-wins');if(!w)return;let c=$('setList');con
   const G=[['Appearance',[['ap','🌗','Appearance',tl(apL)],['wp','🖼️','Wallpaper',tl(wpL)],['th','🎨','Color theme'],['lk','🔤','Font & custom colors']]],
     ['General',[['lang','🌐','Language',lgName],['vib','🎉','Confetti and vibration',null,'sw'],['gd','🧭','Guide & Start button'],['pin','📌','Pinned at the top'],['arr','↕️','Arrange tabs'],['kid','🎈','Kid mode']]],
     ['Notifications',[['rem','🔔','Prayer & task reminders'],['fam','🏠','Family']]],
-    ['Account',[['prof','🪪','Name & picture'],...(signed?[['acc','🪪','My account']]:[]),['pv','🔒','Privacy'],['bk','💾','Backup & reset'],...(signed&&$('acDel')?[['del','🗑️','Delete my account',null,'red']]:[])]],
+    ['Account',[['prof','🏷️','Your name'],...(signed?[['acc','🏷️','My account']]:[]),['pv','🔒','Privacy'],['bk','💾','Backup & reset'],...(signed&&$('acDel')?[['del','🗑️','Delete my account',null,'red']]:[])]],
     ['Help & feedback',[['fb','💡','Feedback'],...(signed?[['idea','📬','My ideas']]:[]),['share','📤','Share Fastaqim']]]];
   const row=([k,i,l,v,x])=>x==='sw'?`<button type="button" class="sl-r" data-sl="${k}" role="switch" aria-checked="${!S.calm}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span><span class="sl-sw${S.calm?'':' on'}" aria-hidden="true"><i></i></span></button>`
     :`<button type="button" class="sl-r${x==='red'?' sl-red':''}" data-sl="${k}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span>${v?`<span class="sl-v notranslate">${esc(v)}</span>`:''}<span class="sl-c" aria-hidden="true">›</span></button>`;
@@ -7789,7 +7789,7 @@ TX["Name & picture"]={ar:'الاسم والصورة',om:'Maqaa fi suuraa',so:'Ma
 TX["Backup & reset"]={ar:'النسخ الاحتياطي وإعادة الضبط',om:'Kuusaa fi haaromsuu',so:'Kayd iyo dib u dejin'};
 /* each row that isn't a pop-up opens its own small page inside Settings; ‹ goes back to the list */
 const SETP={lk:{t:'Font & custom colors',ic:'🔤',f:()=>[$('lookCard')]},gd:{t:'Guide & Start button',ic:'🧭',f:()=>{const a=$('lookCard'),n=$('nameEdit');const o=[];let x=a&&a.nextElementSibling;while(x&&x!==n){if(x.classList.contains('card'))o.push(x);x=x.nextElementSibling}return o}},
-  prof:{t:'Name & picture',ic:'🪪',f:()=>[$('nameEdit'),$('avCard')]},acc:{t:'My account',ic:'🪪',f:()=>[$('acctBox')]},bk:{t:'Backup & reset',ic:'💾',f:()=>{const b=$('backupBtn'),r=$('resetBtn'),rc=$('resetConfirm');return [b,r,rc].filter(Boolean).map(e=>e.closest('.card')||e)}}};
+  prof:{t:'Your name',ic:'🏷️',f:()=>[$('nameEdit'),$('avCard')]},acc:{t:'My account',ic:'🏷️',f:()=>[$('acctBox')]},bk:{t:'Backup & reset',ic:'💾',f:()=>{const b=$('backupBtn'),r=$('resetBtn'),rc=$('resetConfirm');return [b,r,rc].filter(Boolean).map(e=>e.closest('.card')||e)}}};
 let SETV=null;
 function setPage(k){SETV=k;if(document.body.dataset.tab!=='wins')SETG=true;HUBV.wins='set';show('wins');scrollTo(0,0)}
 function setApply(){const sec=$('tab-wins');if(!sec)return;const on=fqApp()&&HUBV.wins==='set';sec.querySelectorAll('.sl-off').forEach(e=>e.classList.remove('sl-off'));if(!on){SETV=null;return}
@@ -7814,7 +7814,7 @@ function bnPill(){try{const b=$('bNav');if(!b||b.hidden)return;let p=b.querySele
 addEventListener('resize',()=>requestAnimationFrame(bnPill));
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#bNav button');if(!b)return;const n=$('bNav');n.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));bnPill()},true);
 /* ===== profile picture at the top of Home ===== */
-{const _hr9=hmRender;hmRender=function(){const r=_hr9.apply(this,arguments);try{const w=document.querySelector('#fqHome .hm-tpw .tp-i');if(w&&!w.querySelector('.tp-av')){const b=document.createElement('button');b.type='button';b.className='tp-av';b.setAttribute('aria-label',tl('Name & picture'));
+{const _hr9=hmRender;hmRender=function(){const r=_hr9.apply(this,arguments);try{const w=document.querySelector('#fqHome .hm-tpw .tp-i');if(w&&!w.querySelector('.tp-av')){const b=document.createElement('button');b.type='button';b.className='tp-av';b.setAttribute('aria-label',tl('Your name'));
   b.innerHTML=avHTML(S.avatar,S.name||(AU.user&&AU.user.email));b.onclick=()=>{try{navigator.vibrate(8)}catch(x){}setPage('prof')};w.appendChild(b)}}catch(e){}return r}}
 {const _av=avSet;avSet=function(){const r=_av.apply(this,arguments);try{hmRender()}catch(e){}return r}}
 /* ===== "Be steadfast" on Home: ▶ recitation + its translation, like the first page ===== */
@@ -7994,7 +7994,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v158',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v159',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8352,7 +8352,7 @@ GO.report=()=>rpOpen();GO.problem=GO.report;
  ['To-dos','المهام','To-do','Hawlaha'],['Goals','الأهداف','Kaayyoo','Yoolal'],['Journal','اليوميات','Galmee guyyaa','Xusuus-qor'],['Reminders','التذكيرات','Yaadachiistota','Xasuusiyeyaal'],['Saved','المحفوظات','Kan olkaa\'e','La keydiyey'],['Pages','الصفحات','Fuulota','Bogag'],
  ['No results','لا توجد نتائج','Bu\'aan hin jiru','Natiijo ma jirto'],['Try another word.','جرّب كلمة أخرى.','Jecha biraa yaali.','Isku day eray kale.'],['Done','تمّت','Xumurameera','Dhammaaday'],['Jump to','انتقل إلى','Gara deemi','U gudub']
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
-const SRCH_PG=[['🕋','Qibla','qibla'],['📖','Ayah of the day','verse'],['📕','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['🏠','Family','family'],['🪪','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Feedback','idea']];
+const SRCH_PG=[['🕋','Qibla','qibla'],['📖','Ayah of the day','verse'],['📕','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['🏠','Family','family'],['🏷️','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Feedback','idea']];
 function srAm(k){try{const F={lang:()=>langOpen(),pv:()=>privacyOpen(),zk:()=>zkOpen(),qt:()=>qtOpen(),sv:()=>svOpen(),ns:()=>nsOpen(),rec:()=>recOpen()};if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36);return}if(F[k]){F[k]();return}}catch(e){}try{apMenu();const m=$('apMenu'),b=m&&m.querySelector('[data-am="'+k+'"]');if(m)m.hidden=true;if(b)b.click()}catch(e){}}
 function srNorm(s){return String(s||'').toLowerCase().normalize('NFKD').replace(/[ً-ْٰـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[̀-ͯ]/g,'')}
 function srD(d){try{return new Date(d+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'})}catch(e){return d}}
@@ -8984,7 +8984,7 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
 {const _sm=salMark;salMark=function(i){const r=_sm.apply(this,arguments);try{if(S.sister){const g=$('scrollBody').querySelector('.sq-g');if(g&&!g.querySelector('[data-sq="exc"]')){const cur=salQ()[i];const b=document.createElement('button');b.type='button';b.className='sq-b exc'+(cur==='exc'?' sel':'');b.dataset.sq='exc';b.innerHTML='<i>🌸</i>'+esc(tl('Excused'));g.appendChild(b);
    b.onclick=()=>{S.salQ=S.salQ||{};const k=sqKey(),q=Object.assign({},S.salQ[k]||{});q[i]='exc';S.salQ[k]=q;save();modalClose();try{salTop()}catch(x){}}}}}catch(e){}return r}}
 function sisEl(){let c=$('sisCard');if(!c){c=document.createElement('div');c.id='sisCard';c.className='card sis-card'}
-  c.innerHTML=`<p class="label">${esc(tl('I am'))}</p><div class="seg sis-seg"><button type="button" data-sis="0" aria-pressed="${!S.sister}">${esc(tl('Brother'))}</button><button type="button" data-sis="1" aria-pressed="${!!S.sister}">${esc(tl('Sister'))}</button></div><p class="small muted">🔒 ${esc(tl('Private. Only changes the salah options you see.'))}</p>`;
+  c.innerHTML=`<p class="label">${esc(tl('I am'))}</p><div class="seg sis-seg"><button type="button" data-sis="0" aria-pressed="${!S.sister}">${esc(tl('Brother'))}</button><button type="button" data-sis="1" aria-pressed="${!!S.sister}">${esc(tl('Sister'))}</button></div>`;
   c.querySelectorAll('[data-sis]').forEach(b=>b.onclick=()=>{S.sister=b.dataset.sis==='1';save();sisEl()});const a=$('avCard');if(a&&c.previousElementSibling!==a)a.after(c);return c}
 try{const _pf=SETP.prof.f;SETP.prof.f=()=>{const a=_pf();return a.concat([sisEl()])}}catch(e){}
 /* audio: Saad al-Ghamdi (EveryAyah), one or more ayat in a row */
@@ -10097,6 +10097,21 @@ function kvOpen(){modalCard(`<div class="kv"><p class="label">📖 ${esc(tl('Aya
   <p class="small">${esc(tl('Recite it once, right after the salah.'))}</p>
   <a class="btn-calm kv-go" href="https://quran.com/2/255" target="_blank" rel="noopener">${esc(tl('Read it now'))} ↗</a></div>`)}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-ci="kv"]');if(!b)return;e.preventDefault();e.stopPropagation();kvOpen()},true);
+
+
+/* v159: no profile pictures anywhere; the header shows the name instead of a round picture */
+function fqNameChip(){try{const b=document.querySelector('#fqHome .tp-av');if(!b)return;const n=((ACT&&ACT.id?ACT.name:S.name)||'').trim().split(/\s+/)[0]||'';
+  if(n){if(b.textContent!==n)b.textContent=n;b.classList.add('tp-name')}else b.classList.remove('tp-name')}catch(e){}}
+{const _hr159=hmRender;hmRender=function(){const r=_hr159.apply(this,arguments);fqNameChip();return r}}
+function fqHidePic(){try{const p=$('avPrev');if(!p)return;const row=p.closest('.row');if(row){row.hidden=true;const l=row.previousElementSibling;if(l&&/Profile picture|صورة/.test(l.textContent))l.hidden=true}}catch(e){}}
+[["Your name","اسمك","Maqaa kee","Magacaaga"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+{const _am159=apMenu;apMenu=function(){const r=_am159.apply(this,arguments);try{const m=$('apMenu'),f=m&&(m.querySelector('[data-am="set2"]')||m.querySelector('[data-am="th"]')||m.querySelector('[data-am="fb"]'));
+  if(f&&!m.querySelector('[data-am="nm"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='nm';b.innerHTML='🏷️ '+esc(tl('Your name'));
+    b.onclick=()=>{m.hidden=true;const a=document.querySelector('#fqHome .tp-av');if(a)a.click()};f.before(b)}}catch(e){}return r}}
+new MutationObserver(()=>fqHidePic()).observe(document.body,{childList:true,subtree:true});
+
+
+try{for(const k of ['Your name']){TX[k]=Object.assign(TX[k]||{},{ar:'اسمك',om:'Maqaa kee',so:'Magacaaga'})}}catch(e){}
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
