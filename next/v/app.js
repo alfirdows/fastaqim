@@ -56,7 +56,7 @@ var LANG = 'en';
       <div class="list inset list-strong"><ul>${rows}</ul></div>
       <div class="list inset list-strong media-list-off"><ul>
         <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-sun-horizon"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Morning adhkar'))}</div></div></a></li>
-        <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-moon-stars"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Evening adhkar'))}</div></div></a></li>
+        <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-lamp"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Evening adhkar'))}</div></div></a></li>
         <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-circles-three"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Istighfar 100×'))}</div><div class="item-after"><bdi>${ist}/100</bdi></div></div></a></li>
       </ul></div>`;
   }
