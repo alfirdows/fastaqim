@@ -2268,6 +2268,16 @@ html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
 .ci-k3.no button{width:100%;height:44px;border-radius:14px;background:transparent;color:var(--muted);font:700 .8rem var(--body)}
 #ciCard .ci-r{grid-template-columns:minmax(0,1fr) 136px!important}#ciCard .ci-r>:last-child{min-width:0!important;width:100%}
 .ci-k3{padding:0 4px 0 8px;gap:4px}.ci-k3 small{overflow:hidden;text-overflow:clip}
+/* v146: lighter to-do editor */
+.tk-more{margin-top:8px;border-top:1px solid var(--line);padding-top:6px}
+.tk-more>summary{list-style:none;display:flex;align-items:center;gap:8px;min-height:44px;cursor:pointer;font:700 .88rem var(--body);color:var(--ink)}
+.tk-more>summary::-webkit-details-marker{display:none}
+.tk-more>summary::after{content:'›';margin-inline-start:auto;font-size:1.2rem;color:var(--muted);transition:transform .2s}
+.tk-more[open]>summary::after{transform:rotate(90deg)}
+.tk-ms{display:flex;gap:4px;flex-wrap:wrap;min-width:0}.tk-ms i{font-style:normal;font:600 .72rem var(--body);padding:3px 8px;border-radius:99px;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--muted);white-space:nowrap}
+.tk-mb{display:flex;flex-direction:column;gap:10px;padding:4px 0 6px}
+.tk-mb .tk-mdel{align-self:flex-start;color:#c0392b!important}
+#tab-today .tk-qa{padding:10px!important}#tab-today .tk-qa>:not(form):not(:has(#dumpInput)){display:none!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7909,7 +7919,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v145',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v146',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9919,6 +9929,30 @@ ciKPast=function(i,o){const no=o.kn&&o.kn[i];
   if(no)return `<span class="ci-k3 no"><button type="button" data-ci="kn" data-i="${i}" aria-label="${esc(tl('Undo'))}">✕ ${esc(tl('Kursi'))}</button></span>`;
   return `<span class="ci-k3"><small>${esc(tl('Kursi?'))}</small><button type="button" class="y" data-ci="kr" data-i="${i}" aria-label="${esc(tl('Read'))}">✓</button><button type="button" class="n" data-ci="kn" data-i="${i}" aria-label="${esc(tl('No'))}">✕</button></span>`};
 [["Kursi?","الكرسي؟","Kursii?","Kursi?"],["Kursi","الكرسي","Kursii","Kursi"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v146: lighter to-do editor. Open task = title, steps, "add a step", Do it. Everything else sits in one folded "More" row. */
+const TKM={};
+function tkLight(t){if(!t||t.dataset.tkl)return;const id=t.dataset.id;if(!t.querySelector(':scope>ul.steps,:scope>.tk-pri,:scope>.tk-df'))return;t.dataset.tkl=1;
+  const mv=[...t.children].filter(c=>c.matches('.tk-pri,.tk-one,.tk-df,.tk-x,.tk-rp,div.inline-form'));const del=t.querySelector(':scope>.row [data-act="del"]');
+  if(!mv.length)return;
+  const pick=(sel)=>{const b=t.querySelector(sel+' [aria-pressed="true"]');return b?b.textContent.trim():''};
+  const segs=[...t.querySelectorAll('.tk-df .seg')];const est=segs[1]?(segs[1].querySelector('[aria-pressed="true"]')||{}).textContent:'';
+  const parts=[pick('.tk-pri'),segs[0]?(segs[0].querySelector('[aria-pressed="true"]')||{}).textContent:'',est?est.trim()+' '+tl('min'):''].filter(Boolean).map(s=>s.trim());
+  const d=document.createElement('details');d.className='tk-more';if(TKM[id])d.open=true;
+  d.innerHTML=`<summary><span class="tk-mo">⚙️ ${esc(tl('More'))}</span><span class="tk-ms">${parts.map(x=>`<i>${esc(x)}</i>`).join('')}</span></summary><div class="tk-mb"></div>`;
+  const box=d.querySelector('.tk-mb');mv.forEach(c=>box.appendChild(c));if(del){del.classList.add('tk-mdel');box.appendChild(del)}
+  const add=t.querySelector(':scope>form[data-act="addstep"]'),steps=t.querySelector(':scope>ul.steps');
+  if(add&&steps)steps.after(add);const anchor=t.querySelector(':scope>.row')||t.querySelector(':scope>.tk-close');
+  if(anchor)anchor.after(d);else t.appendChild(d);
+  d.addEventListener('toggle',()=>{TKM[id]=d.open})}
+function tkLightAll(){document.querySelectorAll('.task[data-id]').forEach(tkLight)}
+try{new MutationObserver(()=>{tkLightAll()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
+/* quick add sits at the top of To-do, like a reminders app */
+function tkQuickTop(){try{const sec=$('tab-today'),i=$('dumpInput');if(!sec||!i)return;const card=i.closest('.card');if(!card||card.dataset.qt)return;card.dataset.qt=1;card.classList.add('tk-qa');
+  const seg=$('tdSeg');if(seg&&seg.parentElement===sec)seg.after(card);
+  i.placeholder=tl('Add… “tomorrow 5pm”')}catch(e){}}
+{const _rt=renderToday;renderToday=function(){const r=_rt.apply(this,arguments);try{tkQuickTop();tkLightAll()}catch(e){}return r}}
+[["More","المزيد","Dabalata","Wax kale"],["Add… “tomorrow 5pm”","أضف مهمة… «غدًا 5 م»","Hojii dabali… “boru 5pm”","Ku dar hawl… “berri 5pm”"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
