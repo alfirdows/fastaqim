@@ -1,0 +1,22 @@
+name: Fetch adhkar audio (for offline use)
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download Saad al-Ghamdi ayahs used in the adhkar
+        run: |
+          mkdir -p audio/g
+          for c in 002255 002285 002286 112001 112002 112003 112004 113001 113002 113003 113004 113005 114001 114002 114003 114004 114005 114006; do
+            [ -s audio/g/$c.mp3 ] || curl -fsSL --retry 4 -o audio/g/$c.mp3 "https://everyayah.com/data/Ghamadi_40kbps/$c.mp3"
+          done
+          ls -la audio/g
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add audio
+          git diff --cached --quiet || (git commit -m "Add adhkar audio for offline use" && git push)
