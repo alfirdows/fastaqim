@@ -3,6 +3,7 @@
 //  POST (x-cron header)  -> every minute: send reminders that are due, then mark them sent
 // Keys are made on first use and kept in public.push_cfg (no one can read that table from the site).
 import { newVapid, send, vapidPublic } from "./wp.js";
+import { clean } from "./safe.js";
 
 const SB = Deno.env.get("SUPABASE_URL")!;
 function secretKey(): string {
@@ -55,10 +56,13 @@ Deno.serve(async (req) => {
     if (due.length) {
       const users = [...new Set(due.map((d) => d.user_id))];
       const subs = await db(`push_subs?user_id=in.(${users.join(",")})&select=endpoint,user_id,p256dh,auth`);
+      let extra: string[] = [];
+      try { extra = ((await db("fastaqim_blocklist?select=word")) || []).map((r: { word: string }) => r.word); } catch (_) { /* list is optional */ }
       for (const d of due) {
         for (const s of subs.filter((x: { user_id: string }) => x.user_id === d.user_id)) {
           try {
-            const st = await send(s, { title: d.title, body: d.body || "", tag: d.tag || "fq", url: d.url || "./", ref: d.ref || "" }, jwk, CONTACT);
+            const c = clean(d.title, d.body || "", extra);
+            const st = await send(s, { title: c.title, body: c.body, tag: d.tag || "fq", url: d.url || "./", ref: d.ref || "" }, jwk, CONTACT);
             if (st === 404 || st === 410) { gone++; await db(`push_subs?endpoint=eq.${encodeURIComponent(s.endpoint)}`, { method: "DELETE" }); }
             else if (st < 300) sent++;
           } catch (_) { /* one bad subscription never stops the rest */ }
