@@ -2282,6 +2282,8 @@ html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
 
 /* v147: Home Screen app: the tab bar is placed from the TOP of the screen (100lvh), so a stale iPhone layout height can never lift it mid-screen */
 html.fq-sa body.has-bnav .bnav{top:0!important;bottom:auto!important;transform:translate3d(0,calc(100vh - 100%),0)!important;transform:translate3d(0,calc(100lvh - 100%),0)!important}
+.wnc-big{font-size:2.6rem;text-align:center;margin:4px 0 0}.wnc-h{font:800 1.25rem var(--display,var(--body));text-align:center;margin:4px 0}
+#fqHome>.hm-wn{margin:12px 16px 0!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -2318,7 +2320,7 @@ html.fq-sa body.has-bnav .bnav{top:0!important;bottom:auto!important;transform:t
     <p class="ld-swap ld-sw-in"><span>No account?</span> <button class="lnk" data-at2="up">Register</button></p><p class="ld-swap ld-sw-up"><span>Already have one?</span> <button class="lnk" data-at2="in">Sign in</button></p>
     <p class="ld-free">Free · No ads.</p></div></div>
     <div class="ld-row2"><button type="button" class="ld-home" id="ldHome">📲 Add to Home Screen</button><button type="button" class="ld-home" id="ldRe" hidden>↻ Refresh</button><a class="ld-home" id="ldSaf" href="x-safari-https://alfirdows.github.io/fastaqim/" hidden>🧭 Open in browser</a><button type="button" class="ld-home" id="ldDl">🖨️ Print & Save</button></div>
-    <p class="ld-foot" id="ldNote"><button type="button" class="ld-fl privLink">Privacy</button><span aria-hidden="true">·</span><button type="button" class="ld-fl" id="ldFb">Suggest an idea</button></p><p class="ld-copy notranslate" dir="ltr" id="ldCopy">© 2026 Fastaqim</p>
+    <p class="ld-foot" id="ldNote"><button type="button" class="ld-fl privLink">Privacy</button><span aria-hidden="true">·</span><button type="button" class="ld-fl" id="ldFb">Feedback</button></p><p class="ld-copy notranslate" dir="ltr" id="ldCopy">© 2026 Fastaqim</p>
   </div>
 </div>
 <div class="wrap">
@@ -4323,7 +4325,7 @@ document.querySelectorAll('[data-lz]').forEach(b=>b.onclick=()=>lookSet('zoom',+
 try{const L=JSON.parse(localStorage.getItem('fastaqim.look')||'null');if(L)S.look=S.look||L;lookApply()}catch(e){lookApply()}
 
 /* ---------- feedback ---------- */
-function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 ${tl('Suggest an idea')}</p>
+function fbOpen(){let kind='idea';modalCard(`<p class="label">💡 ${tl('Feedback')}</p>
   <form id="fbForm" class="fb2"><textarea id="fbText" rows="3" maxlength="2000" placeholder="${tl('Write here')}" required></textarea><button class="btn-main" type="submit">${tl('Send')}</button></form>`);
   $('fbForm').onsubmit=async e=>{e.preventDefault();const body=$('fbText').value.trim();if(!body)return;let ok=false;
     if(AU.sb&&AU.user){const {error}=await AU.sb.from('fastaqim_feedback').insert({user_id:AU.user.id,email:AU.user.email,name:S.name||'',kind,body,lang:LANG});ok=!error}
@@ -4720,7 +4722,7 @@ const X4=[
 ['Read 1 page','اقرأ صفحة واحدة','Fuula 1 dubbisi','Akhri 1 bog'],
 ['Dhuhr salah','صلاة الظهر','Salaata Zuhrii','Salaadda Duhur'],
 ['Make your bed','رتّب سريرك','Siree kee sirreessi','Hagaaji sariirtaada'],
-['💡 Suggest an idea','💡 اقترح فكرة','💡 Yaada kenni','💡 Soo jeedi fikrad'],
+['💡 Feedback','💡 الملاحظات','💡 Yaada','💡 Jawaab celin'],
 ['What is ADHD?','ما هو فرط الحركة وتشتت الانتباه؟','ADHD maali?','Waa maxay ADHD?'],
 ['ADHD_DEF','اضطراب فرط الحركة وتشتت الانتباه (ADHD) حالة نمائية عصبية تؤثّر في الانتباه وضبط الاندفاع ومستوى النشاط، وخاصةً في «الوظائف التنفيذية»: التخطيط، وبدء المهام، والإحساس بالوقت، والدافعية. ليس كسلًا ولا ضعفًا في الذكاء. يظهر عند الأطفال والكبار، ويمكن التعامل معه بالأدوات والدعم المناسبين.',
  'ADHD (Attention-Deficit/Hyperactivity Disorder) haala guddina sirna narvii ti. Xiyyeeffannaa, of to\'achuu fi sadarkaa sochii irratti dhiibbaa qaba; keessumaa dandeettii "hojii raawwachiisuu" jedhaman: karoorsuu, hojii jalqabuu, yeroo hubachuu fi kaka\'umsa. Dadhabbii ykn hanqina beekumsaa miti. Ijoollee fi gurguddoo irratti mul\'ata, meeshaalee fi deeggarsa sirrii ta\'een to\'achuun ni danda\'ama.',
@@ -5020,7 +5022,7 @@ function hisnRender(){const d=$('hisnD');if(!d||d.hidden)return;const a=hisnAudi
 
 /* ================= v40: quick timer, calendar day view, salah times, .ics + paste import, install/offline ================= */
 const X40=[
-['Suggest an idea','اقترح فكرة','Yaada dhiyeessi','Soo jeedi fikrad'],
+['Feedback','الملاحظات','Yaada','Jawaab celin'],
 ['Remember me','تذكّرني','Na yaadadhu','I xasuuso'],
 ['Already have an account?','لديك حساب بالفعل؟','Herrega qabdaa?','Akoon ma haysataa?'],
 ["Why: a no is useful information. A smaller step lowers the effort needed to begin.","السبب: الرفض معلومة مفيدة. الخطوة الأصغر تقلّل الجهد اللازم للبدء.","Sababa: lakki odeeffannoo gaarii dha. Tarkaanfiin xiqqaan humna jalqabuuf barbaachisu ni hir'isa.","Sababta: diiddu waa xog faa'iido leh. Tallaabo yar waxay yareysaa dadaalka loo baahan yahay si loo bilaabo."],
@@ -5042,7 +5044,7 @@ const X40=[
 ['Salah times','أوقات الصلاة','Yeroo salaataa','Waqtiyada salaadda'],
 ['Done. Now make every day like this. 👇','تمّ. اجعل كل يومٍ هكذا. 👇','Xumurameera. Guyyaa hunda akkana godhi. 👇','Waa dhammaatay. Maalin kasta sidan ka dhig. 👇'],['Well done.','أحسنت.','Baay\'ee gaarii.','Si fiican ayaad u qabatay.'],['Low energy','طاقة منخفضة','Humni koo xiqqaa dha','Tamar yar'],['Too big','كبيرة جدًا','Baay\'ee guddaa dha','Aad bay u weyn tahay'],['No motivation','لا دافع عندي','Fedhii hin qabu','Dhiirrigelin ma hayo'],
 ['Free count','عدّ حرّ','Lakkoofsa bilisaa','Tirin xor ah'],
-['Reset','إعادة','Haaromsi','Dib u bilow'],['Undo','تراجع','Deebisi','Ka noqo'],['Menu','القائمة','Baafata','Liiska'],['Sign in','تسجيل الدخول','Seeni','Gal'],['Create account','إنشاء حساب','Herrega uumi','Samee akoon'],['Suggest an idea','اقترح فكرة','Yaada dhiyeessi','Soo jeedi fikrad'],['Privacy','الخصوصية','Dhuunfaa','Qarsoodi'],['Add to Home Screen','أضف إلى الشاشة الرئيسية','Gara Home Screen dabali','Ku dar shaashadda hore'],
+['Reset','إعادة','Haaromsi','Dib u bilow'],['Undo','تراجع','Deebisi','Ka noqo'],['Menu','القائمة','Baafata','Liiska'],['Sign in','تسجيل الدخول','Seeni','Gal'],['Create account','إنشاء حساب','Herrega uumi','Samee akoon'],['Feedback','الملاحظات','Yaada','Jawaab celin'],['Privacy','الخصوصية','Dhuunfaa','Qarsoodi'],['Add to Home Screen','أضف إلى الشاشة الرئيسية','Gara Home Screen dabali','Ku dar shaashadda hore'],
 ['Tap anywhere to count','اضغط في أي مكان للعدّ','Lakkaa\'uuf bakka kamiyyuu tuqi','Meel kasta taabo si aad u tiriso'],['Milestone!','إنجاز!','Galma!','Guul!'],
 ['Fajr salah','صلاة الفجر','Salaata Fajrii','Salaadda Subax'],['Morning & evening adhkar','أذكار الصباح والمساء','Zikrii ganamaa fi galgalaa','Adkaarta subaxa iyo galabta'],['Reply to that message','ردّ على تلك الرسالة','Ergaa sanaaf deebii kenni','Ka jawaab fariintaas'],
 ['Using an iPhone?','تستخدم iPhone؟','iPhone fayyadamtaa?','Ma isticmaashaa iPhone?'],['Using Android?','تستخدم Android؟','Android fayyadamtaa?','Ma isticmaashaa Android?'],['Dhikr','الذِّكر','Zikrii','Dhikri'],['Tap to count','اضغط للعدّ','Lakkaa\'uuf tuqi','Taabo si aad u tiriso'],['Today','اليوم','Har\'a','Maanta'],['Back','السابق','Duubatti','Dib'],['Next','التالي','Itti aanu','Xiga'],
@@ -5359,7 +5361,7 @@ function ldMenu(){const top=document.querySelector('#landing .ld-top'),rt=docume
   const pn=document.createElement('div');pn.id='ldMenu';pn.className='ldm';pn.hidden=true;
   pn.innerHTML=`<div class="ldm-p" role="dialog" aria-modal="true"><div class="ldm-h"><b>Fastaqim</b><button type="button" class="mc-x" data-mx aria-label="Close">✕</button></div><div class="ldm-top"></div><hr>
    <button class="ldm-i" data-mi="home">📲 ${tl('Add to Home Screen')}</button><button class="ldm-i" data-mi="th">🎨 ${tl('Theme')}</button><button class="ldm-i" data-mi="dl">🖨️ ${tl('Print & Save')}</button><hr>
-   <button class="ldm-i" data-mi="pv">🔒 ${tl('Privacy')}</button><button class="ldm-i" data-mi="fb">💡 ${tl('Suggest an idea')}</button></div>`;
+   <button class="ldm-i" data-mi="pv">🔒 ${tl('Privacy')}</button><button class="ldm-i" data-mi="fb">💡 ${tl('Feedback')}</button></div>`;
   document.body.appendChild(pn);const tp=pn.querySelector('.ldm-top');tp.appendChild($('ldToday'));tp.appendChild($('ldZb'));top.prepend(lang);rt.appendChild(login);rt.appendChild(mb);
   const close=()=>{pn.classList.remove('on');setTimeout(()=>pn.hidden=true,250)};
   mb.onclick=()=>{pn.hidden=false;requestAnimationFrame(()=>pn.classList.add('on'))};
@@ -5397,10 +5399,10 @@ function zLookFill(){const z=$('lkZoom');if(z)z.outerHTML=`<div id="lkZoom">${zC
 
 /* Privacy: short, one line each, in the four pinned languages */
 const PRIV2={
- en:['Privacy',[['What we collect','Your account email and what you add: tasks, trackers and settings.'],['How we use it','Only to run Fastaqim and keep your data synced. Your location stays on your device.'],['Sharing','We never sell or share your data. No ads, trackers or analytics cookies.'],['Your choices','Edit or delete your account anytime. You can restore it within 30 days.'],['Children & family profiles','Managed by the family admin.']],'Close','Last updated','Questions? Use Suggest an idea.'],
- ar:['الخصوصية',[['ما نجمعه','بريد حسابك وما تضيفه: المهام والمتابعات والإعدادات.'],['كيف نستخدمه','لتشغيل فاستقم ومزامنة بياناتك فقط. موقعك يبقى على جهازك.'],['المشاركة','لا نبيع بياناتك ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع ولا ملفات تحليلات.'],['خياراتك','عدّل حسابك أو احذفه متى شئت، ويمكنك استرجاعه خلال 30 يومًا.'],['الأطفال والملفات العائلية','يديرها مسؤول العائلة.']],'إغلاق','آخر تحديث','لديك سؤال؟ استخدم «اقترح فكرة».'],
- om:['Dhuunfaa',[['Waan walitti qabnu','Imeelii herrega keetii fi waan ati dabaltu: hojiiwwan, hordoffii fi qindaa\'ina.'],['Akkamitti itti fayyadamna','Fastaqim hojjechiisuu fi odeeffannoo kee walsimsiisuuf qofa. Bakki kee meeshaa kee irra tura.'],['Qooduu','Odeeffannoo kee gonkumaa hin gurgurru, hin qoodnus. Beeksisa, hordoftoota ykn kuukii xiinxalaa hin qabnu.'],['Filannoo kee','Yeroo barbaadde herrega kee gulaali ykn haqi. Guyyaa 30 keessatti deebisuu dandeessa.'],['Ijoollee fi piroofaayilii maatii','Bulchaa maatiitiin bulfama.']],'Cufi','Yeroo dhumaaf haaromfame','Gaaffii qabdaa? "Yaada dhiyeessi" fayyadami.'],
- so:['Qarsoodi',[['Waxa aan ururino','Iimaylka akoonkaaga iyo waxa aad ku darto: hawlaha, raadraacyada iyo dejimaha.'],['Sida aan u isticmaalno','Kaliya si aan u socodsiino Fastaqim oo aan xogtaada isugu xirno. Goobtaadu qalabkaaga ayay ku jirtaa.'],['Wadaagis','Weligeen xogtaada ma iibinno mana wadaagno. Ma jiraan xayeysiis, raadrayaal ama kukiyo falanqeyn.'],['Doorashooyinkaaga','Wax ka beddel ama tirtir akoonkaaga waqti kasta. Waxaad dib u soo celin kartaa 30 maalmood gudahood.'],['Carruurta iyo astaamaha qoyska','Waxaa maamula maamulaha qoyska.']],'Xir','La cusbooneysiiyay','Su\'aal ma qabtaa? Isticmaal "Soo jeedi fikrad".']};
+ en:['Privacy',[['What we collect','Your account email and what you add: tasks, trackers and settings.'],['How we use it','Only to run Fastaqim and keep your data synced. Your location stays on your device.'],['Sharing','We never sell or share your data. No ads, trackers or analytics cookies.'],['Your choices','Edit or delete your account anytime. You can restore it within 30 days.'],['Children & family profiles','Managed by the family admin.']],'Close','Last updated','Questions? Use Feedback.'],
+ ar:['الخصوصية',[['ما نجمعه','بريد حسابك وما تضيفه: المهام والمتابعات والإعدادات.'],['كيف نستخدمه','لتشغيل فاستقم ومزامنة بياناتك فقط. موقعك يبقى على جهازك.'],['المشاركة','لا نبيع بياناتك ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع ولا ملفات تحليلات.'],['خياراتك','عدّل حسابك أو احذفه متى شئت، ويمكنك استرجاعه خلال 30 يومًا.'],['الأطفال والملفات العائلية','يديرها مسؤول العائلة.']],'إغلاق','آخر تحديث','لديك سؤال؟ استخدم «الملاحظات».'],
+ om:['Dhuunfaa',[['Waan walitti qabnu','Imeelii herrega keetii fi waan ati dabaltu: hojiiwwan, hordoffii fi qindaa\'ina.'],['Akkamitti itti fayyadamna','Fastaqim hojjechiisuu fi odeeffannoo kee walsimsiisuuf qofa. Bakki kee meeshaa kee irra tura.'],['Qooduu','Odeeffannoo kee gonkumaa hin gurgurru, hin qoodnus. Beeksisa, hordoftoota ykn kuukii xiinxalaa hin qabnu.'],['Filannoo kee','Yeroo barbaadde herrega kee gulaali ykn haqi. Guyyaa 30 keessatti deebisuu dandeessa.'],['Ijoollee fi piroofaayilii maatii','Bulchaa maatiitiin bulfama.']],'Cufi','Yeroo dhumaaf haaromfame','Gaaffii qabdaa? "Yaada" fayyadami.'],
+ so:['Qarsoodi',[['Waxa aan ururino','Iimaylka akoonkaaga iyo waxa aad ku darto: hawlaha, raadraacyada iyo dejimaha.'],['Sida aan u isticmaalno','Kaliya si aan u socodsiino Fastaqim oo aan xogtaada isugu xirno. Goobtaadu qalabkaaga ayay ku jirtaa.'],['Wadaagis','Weligeen xogtaada ma iibinno mana wadaagno. Ma jiraan xayeysiis, raadrayaal ama kukiyo falanqeyn.'],['Doorashooyinkaaga','Wax ka beddel ama tirtir akoonkaaga waqti kasta. Waxaad dib u soo celin kartaa 30 maalmood gudahood.'],['Carruurta iyo astaamaha qoyska','Waxaa maamula maamulaha qoyska.']],'Xir','La cusbooneysiiyay','Su\'aal ma qabtaa? Isticmaal "Jawaab celin".']};
 const PRIV3={en:["Privacy","Your tasks and progress stay private to you. We never sell or share them. No ads or trackers. Delete your account anytime."],
  ar:["الخصوصية","مهامّك وتقدّمك خاصّة بك. لا نبيعها ولا نشاركها أبدًا. لا إعلانات ولا أدوات تتبّع. احذف حسابك متى شئت."],
  om:["Dhuunfaa","Hojiileen fi guddinni kee kan kee qofa. Gonkumaa hin gurgurru, hin qoodnu. Beeksisni fi hordoftoonni hin jiran. Yeroo barbaadde herrega kee haqi."],
@@ -6026,7 +6028,7 @@ function apMenu(){let m=$('apMenu');if(!m){m=document.createElement('div');m.id=
    <button class="apm-i" data-am="hisn">📖 ${tl('Hisnul Muslim')}</button><button class="apm-i" data-am="sal">🕌 ${tl('Salah times')}</button><button class="apm-i" data-am="zk">📿 ${tl('Dhikr')}</button>
    <button class="apm-i" data-am="game">🏎️ ${tl('Game')}</button><button class="apm-i" data-am="qt">⏱ ${tl('Timer')}</button><button class="apm-i" data-am="cal">📅 ${tl('Calendar')}</button><button class="apm-i" data-am="en">⚡ ${tl('Energy')}</button><hr>
    <button class="apm-i" data-am="pin">📌 ${tl('Pinned at the top')}</button><button class="apm-i" data-am="arr">↕️ ${tl('Arrange tabs')}</button><button class="apm-i" data-am="th">🎨 ${tl('Theme')}</button><button class="apm-i" data-am="kid">🧒 ${tl('Kid mode')}</button><button class="apm-i" data-am="lang">🌐 ${tl('Language')}</button><hr>
-   <button class="apm-i" data-am="pv">🔒 ${tl('Privacy')}</button><button class="apm-i" data-am="fb">💡 ${tl('Suggest an idea')}</button>
+   <button class="apm-i" data-am="pv">🔒 ${tl('Privacy')}</button><button class="apm-i" data-am="fb">💡 ${tl('Feedback')}</button>
    ${window.GUEST?`<button class="apm-i apm-o" data-am="gx">↩ ${tl('Exit guest mode')}</button>`:signed||fam?`<button class="apm-i apm-o" data-am="out">↩ ${tl('Sign out')}</button>`:''}</div>`;
   m.hidden=false;
   m.querySelector('[data-fax]').onclick=()=>{m.hidden=true};
@@ -6251,7 +6253,7 @@ function bnav(){let b=$('bNav');if(!inApp()){if(b)b.hidden=true;document.body.cl
 {const _mc=modalCard;modalCard=function(){const r=_mc.apply(this,arguments);try{if(inApp()){const bar=$('scrollBody').querySelector('.mc-bar');if(bar&&!bar.querySelector('.mc-h')){const h=document.createElement('button');h.type='button';h.className='mc-x mc-h';h.setAttribute('aria-label',tl('Home'));h.textContent='🏠';h.onclick=goHome;bar.insertBefore(h,bar.firstChild)}}}catch(e){}return r}}
 setTimeout(()=>{try{bnav()}catch(e){}},300);
 /* language switch re-labels everything built earlier with tl(): first-page menu, dhikr chip, open menus, bottom bar (no refresh needed) */
-const LDM_K={home:['📲','Add to Home Screen'],th:['🎨','Theme'],dl:['🖨️','Print & Save'],game:['🏎️','Game'],pv:['🔒','Privacy'],fb:['💡','Suggest an idea']};
+const LDM_K={home:['📲','Add to Home Screen'],th:['🎨','Theme'],dl:['🖨️','Print & Save'],game:['🏎️','Game'],pv:['🔒','Privacy'],fb:['💡','Feedback']};
 function ldmGame(){const pn=$('ldMenu');if(!pn||pn.querySelector('[data-mi="game"]'))return;const dl=pn.querySelector('[data-mi="dl"]');if(!dl)return;
   const g=document.createElement('button');g.className='ldm-i';g.dataset.mi='game';g.onclick=e=>{e.stopPropagation();location.href='./game-demo.html?v='+Date.now().toString(36)};dl.after(g)}
 function langRelabel(){try{render()}catch(e){}try{renderHeader()}catch(e){}try{renderTG()}catch(e){}try{renderNotif&&renderNotif()}catch(e){}try{ldGuestLbl()}catch(e){}try{ldmGame();document.querySelectorAll('#ldMenu [data-mi]').forEach(b=>{const k=LDM_K[b.dataset.mi];if(k)b.textContent=k[0]+' '+tl(k[1])});const mb=$('ldMb');if(mb)mb.setAttribute('aria-label',tl('Menu'))}catch(e){}
@@ -7456,7 +7458,7 @@ coachFree=function(text){CO.log.push({c:0,t:text});CO.used=CO.used||[];CO.lastT=
  ["Received. It will be reviewed.","تم الاستلام. ستتم مراجعتها.","Ga'eera. Ni ilaalama.","Waa la helay. Waa la eegi doonaa."],["You can follow it in My ideas.","يمكنك متابعتها في «أفكاري».","\"Yaadota koo\" keessatti hordofuu dandeessa.","Waxaad kala socon kartaa \"Fikradahayga\"."],
  ["My ideas","أفكاري","Yaadota koo","Fikradahayga"],["Received","وصلت","Ga'eera","Waa la helay"],["Planned","مخطط لها","Karoorfameera","Waa la qorsheeyay"],["Done","تمّ","Xumurameera","Waa la sameeyay"],
  ["You haven't sent any ideas yet.","لم ترسل أي فكرة بعد.","Ammaaf yaada tokkollee hin ergine.","Weli wax fikrad ah ma aadan dirin."],["Sign in to follow your ideas.","سجّل الدخول لمتابعة أفكارك.","Yaadota kee hordofuuf seeni.","Gal si aad ula socoto fikradahaaga."],
- ["Suggest an idea","اقترح فكرة","Yaada dhiyeessi","Soo jeedi fikrad"],["Send","إرسال","Ergi","Dir"],["Close","إغلاق","Cufi","Xir"],["Screenshot","لقطة شاشة","Suuraa","Sawir"]
+ ["Feedback","الملاحظات","Yaada","Jawaab celin"],["Send","إرسال","Ergi","Dir"],["Close","إغلاق","Cufi","Xir"],["Screenshot","لقطة شاشة","Suuraa","Sawir"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 const FB2={shot:null,txt:'',lib:null};
 function h2cLoad(){if(window.html2canvas)return Promise.resolve();if(FB2.lib)return FB2.lib;FB2.lib=new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/html2canvas-pro@2.5.0/dist/html2canvas-pro.min.js';s.onload=ok;s.onerror=()=>{FB2.lib=null;no()};document.head.appendChild(s)});return FB2.lib}
@@ -7468,7 +7470,7 @@ async function fbShot(){const t=$('fbText');FB2.txt=t?t.value:FB2.txt;modalClose
   fbOpen(true)}
 async function fbInsert(row){if(!AU.sb)return false;let r={...row};for(let i=0;i<2;i++){const {error}=await AU.sb.from('fastaqim_feedback').insert(r);if(!error)return true;if(r.shot&&/shot|column/i.test(error.message||'')){delete r.shot;continue}return false}return false}
 fbOpen=function(keep){if(keep!==true){FB2.shot=null;FB2.txt=''}const signed=!!(AU.sb&&AU.user);
-  modalCard(`<div class="fb3"><p class="label">💡 ${esc(tl('Suggest an idea'))}</p>
+  modalCard(`<div class="fb3"><p class="label">💡 ${esc(tl('Feedback'))}</p>
    <form id="fbForm" class="fb2"><textarea id="fbText" rows="4" maxlength="2000" placeholder="${esc(tl('Write here'))}" required dir="auto">${esc(FB2.txt||'')}</textarea>
    ${FB2.shot?`<div class="fb-sh"><img src="${FB2.shot}" alt="${esc(tl('Screenshot'))}"><button type="button" class="btn-ghost small" id="fbRm">✕ ${esc(tl('Remove'))}</button></div>`:`<button type="button" class="btn-calm fb-cap" id="fbCap">📸 ${esc(tl('Add a screenshot of this page'))}</button>`}
    <button class="btn-main" type="submit">${esc(tl('Send'))}</button></form>
@@ -7488,7 +7490,7 @@ async function myIdeas(){if(!(AU.sb&&AU.user)){modalCard(`<p>${esc(tl('Sign in t
     if(q.error)q=await AU.sb.from('fastaqim_feedback').select('id,body,created_at,kind').eq('user_id',AU.user.id).order('created_at',{ascending:false}).limit(100);rows=q.data||[]}catch(e){}
   rows=rows.filter(r=>!r.hidden_by_sender);const st=r=>r.status||(r.seen?'done':'new'),lab={new:'Received',planned:'Planned',done:'Done',denied:'Not planned'};
   modalCard(`<div class="fb3"><p class="label">📬 ${esc(tl('My ideas'))}</p>${rows.length?rows.map(r=>`<div class="mi"><div class="mi-h"><span class="mi-tg">${typeof fbTags==="function"?fbTags(r):""}</span><span class="small muted">${new Date(r.created_at).toLocaleDateString(LOC(),{day:'numeric',month:'short',year:'numeric'})}${r.has_shot||r.shot?' · 📸':''}<button type="button" class="mi-x" data-mix="${r.id}" aria-label="${esc(tl('Delete'))}">✕</button></span></div><p class="notranslate" dir="auto">${esc(r.body)}</p></div>`).join(''):`<p class="small muted">${esc(tl("You haven't sent any ideas yet."))}</p>`}
-   <button class="btn-main" id="miNew">💡 ${esc(tl('Suggest an idea'))}</button></div>`);$('miNew').onclick=()=>fbOpen();
+   <button class="btn-main" id="miNew">💡 ${esc(tl('Feedback'))}</button></div>`);$('miNew').onclick=()=>fbOpen();
   $('scrollBody').querySelectorAll('[data-mix]').forEach(b=>b.onclick=()=>{const id=+b.dataset.mix;modalCard(`<div class="fb3"><p><b>${esc(tl('Delete this idea from your list?'))}</b></p><button class="btn-main dl-y" id="mxY">${esc(tl('Delete'))}</button><button class="btn-ghost" id="mxN">${esc(tl('Keep'))}</button></div>`);$('mxN').onclick=myIdeas;$('mxY').onclick=async()=>{let ok=false;try{const {error}=await AU.sb.rpc('fastaqim_feedback_hide',{fid:id});ok=!error}catch(e){}if(!ok)toast(tl("That didn't save. Please try again."));myIdeas()}})}
 try{GO.myideas=()=>myIdeas();GO.idea=()=>fbOpen()}catch(e){}
 /* owner inbox: load without the big screenshots; open a screenshot only when tapped */
@@ -7653,7 +7655,7 @@ const FBK=[['problem','🛠️','Problem'],['idea','💡','Idea'],['confusing','
 Object.assign(FB2,{area:'',kind:'',rate:0});
 fbOpen=function(keep){if(keep!==true){FB2.shot=null;FB2.txt='';FB2.area='';FB2.kind='';FB2.rate=0}const signed=!!(AU.sb&&AU.user);
   const chips=(L,cur,attr)=>L.map(([k,i,l])=>`<button type="button" class="fbc${cur===k?' on':''}" data-${attr}="${k}" aria-pressed="${cur===k}">${i} ${esc(tl(l))}</button>`).join('');
-  modalCard(`<div class="fb3"><p class="label">💡 ${esc(tl('Suggest an idea'))}</p>
+  modalCard(`<div class="fb3"><p class="label">💡 ${esc(tl('Feedback'))}</p>
    <p class="fb-q">1 · ${esc(tl('Which part?'))}</p><div class="fbcs">${chips(FBA,FB2.area,'fa')}</div>
    <p class="fb-q">2 · ${esc(tl('What is it?'))}</p><div class="fbcs">${chips(FBK,FB2.kind,'fk')}</div>
    <p class="fb-q">3 · ${esc(tl('How is it?'))}</p><div class="fb-r" dir="ltr">${[1,2,3,4,5].map(n=>`<button type="button" data-fr="${n}" class="${FB2.rate>=n?'on':''}" aria-label="${n}">★</button>`).join('')}</div>
@@ -7698,7 +7700,7 @@ setListWire=function(){const w=$('tab-wins');if(!w)return;let c=$('setList');con
     ['General',[['lang','🌐','Language',lgName],['vib','🎉','Confetti and vibration',null,'sw'],['gd','🧭','Guide & Start button'],['pin','📌','Pinned at the top'],['arr','↕️','Arrange tabs'],['kid','🧒','Kid mode']]],
     ['Notifications',[['rem','🔔','Prayer & task reminders'],['fam','👨‍👩‍👧','Family']]],
     ['Account',[['prof','🙂','Name & picture'],...(signed?[['acc','👤','My account']]:[]),['pv','🔒','Privacy'],['bk','💾','Backup & reset'],...(signed&&$('acDel')?[['del','🗑️','Delete my account',null,'red']]:[])]],
-    ['Help & feedback',[['fb','💡','Suggest an idea'],...(signed?[['idea','📬','My ideas']]:[]),['share','📤','Share Fastaqim']]]];
+    ['Help & feedback',[['fb','💡','Feedback'],...(signed?[['idea','📬','My ideas']]:[]),['share','📤','Share Fastaqim']]]];
   const row=([k,i,l,v,x])=>x==='sw'?`<button type="button" class="sl-r" data-sl="${k}" role="switch" aria-checked="${!S.calm}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span><span class="sl-sw${S.calm?'':' on'}" aria-hidden="true"><i></i></span></button>`
     :`<button type="button" class="sl-r${x==='red'?' sl-red':''}" data-sl="${k}"><span class="sl-i">${i}</span><span class="sl-t">${esc(tl(l))}</span>${v?`<span class="sl-v notranslate">${esc(v)}</span>`:''}<span class="sl-c" aria-hidden="true">›</span></button>`;
   const html=G.map(([h,R])=>`<p class="sl-h">${esc(tl(h))}</p><div class="sl-g">${R.map(row).join('')}</div>`).join('');
@@ -7923,7 +7925,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v147',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v148',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8281,7 +8283,7 @@ GO.report=()=>rpOpen();GO.problem=GO.report;
  ['To-dos','المهام','To-do','Hawlaha'],['Goals','الأهداف','Kaayyoo','Yoolal'],['Journal','اليوميات','Galmee guyyaa','Xusuus-qor'],['Reminders','التذكيرات','Yaadachiistota','Xasuusiyeyaal'],['Saved','المحفوظات','Kan olkaa\'e','La keydiyey'],['Pages','الصفحات','Fuulota','Bogag'],
  ['No results','لا توجد نتائج','Bu\'aan hin jiru','Natiijo ma jirto'],['Try another word.','جرّب كلمة أخرى.','Jecha biraa yaali.','Isku day eray kale.'],['Done','تمّت','Xumurameera','Dhammaaday'],['Jump to','انتقل إلى','Gara deemi','U gudub']
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
-const SRCH_PG=[['🕋','Qibla','qibla'],['📖','Verse of the day','verse'],['📕','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['👪','Family','family'],['👤','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Suggest an idea','idea']];
+const SRCH_PG=[['🕋','Qibla','qibla'],['📖','Verse of the day','verse'],['📕','Hisnul Muslim','book'],['📿','Dhikr','am:zk'],['🏎️','Game','am:game'],['🔔','Reminders','reminders'],['📅','Calendar','calendar'],['⏱','Timer','am:qt'],['🕌','Salah times','salah'],['⭐','Stars','stars'],['🔖','Saved & watch later','am:sv'],['🔊','Nasheeds','am:ns'],['🍲','Recipes','am:rec'],['🎨','Theme','theme'],['🖼️','Wallpaper','wallpaper'],['👪','Family','family'],['👤','Account','account'],['⚙️','Settings','settings'],['🌐','Language','am:lang'],['🔒','Privacy','am:pv'],['🛠️','Report a problem','report'],['💡','Feedback','idea']];
 function srAm(k){try{const F={lang:()=>langOpen(),pv:()=>privacyOpen(),zk:()=>zkOpen(),qt:()=>qtOpen(),sv:()=>svOpen(),ns:()=>nsOpen(),rec:()=>recOpen()};if(k==='game'){location.href='./game-demo.html?v='+Date.now().toString(36);return}if(F[k]){F[k]();return}}catch(e){}try{apMenu();const m=$('apMenu'),b=m&&m.querySelector('[data-am="'+k+'"]');if(m)m.hidden=true;if(b)b.click()}catch(e){}}
 function srNorm(s){return String(s||'').toLowerCase().normalize('NFKD').replace(/[ً-ْٰـ]/g,'').replace(/[أإآ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/[̀-ͯ]/g,'')}
 function srD(d){try{return new Date(d+'T00:00').toLocaleDateString(LOC(),{weekday:'short',month:'short',day:'numeric'})}catch(e){return d}}
@@ -9956,6 +9958,30 @@ function tkQuickTop(){try{const sec=$('tab-today'),i=$('dumpInput');if(!sec||!i)
   i.placeholder=tl('Add… “tomorrow 5pm”')}catch(e){}}
 {const _rt=renderToday;renderToday=function(){const r=_rt.apply(this,arguments);try{tkQuickTop();tkLightAll()}catch(e){}return r}}
 [["More","المزيد","Dabalata","Wax kale"],["Add… “tomorrow 5pm”","أضف مهمة… «غدًا 5 م»","Hojii dabali… “boru 5pm”","Ku dar hawl… “berri 5pm”"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v148: What's new = one "You're all caught up" summary of everything since your last visit. ✕ or opening it keeps it closed (saved on this phone too, so a sync can't bring it back). */
+const WNL=[[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
+function fqBuildN(){return +String(FQ_BUILD).replace(/\D+/g,'')||0}
+function wnLast(){let l=0;try{l=+localStorage.getItem('fq.wnLast')||0}catch(e){}return Math.max(l,S.wnLast||0,(S.wnSeen||0)>=131?Math.max(131,S.wnSeen):0)}
+function wnMark(){const v=fqBuildN();S.wnLast=v;S.wnSeen=Math.max(S.wnSeen||0,v);S.wnRead=Math.max(S.wnRead||0,WN2_V);try{localStorage.setItem('fq.wnLast',v)}catch(e){}save();try{fqMenuDot()}catch(e){}}
+function wnMissed(){const l=wnLast();return WNL.filter(x=>x[0]>l)}
+function wnCaught(all){const L=all?WNL:wnMissed();const list=L.length?L:WNL.slice(0,6);wnMark();
+  modalCard(`<div class="wn wnc"><p class="wnc-big">🎉</p><p class="wnc-h">${esc(tl("You're all caught up"))}</p><p class="small muted" style="text-align:center;margin:0 0 10px">${esc(tl('Everything new since your last visit'))}</p>${list.map(([v,i,t])=>`<div class="wn-r"><span>${i}</span><b>${esc(tl(t))}</b></div>`).join('')}</div>`)}
+wnOpen=function(){wnCaught(true)};GO.new=GO.whatsnew=()=>wnCaught(true);
+/* Home card: only when something was missed, one card for all of it */
+{const _hr=hmRender;hmRender=function(){const r=_hr.apply(this,arguments);try{const h=$('fqHome');if(h){h.querySelectorAll('.hm-wn').forEach(c=>{if(c.querySelector('[data-hm="wn"]'))c.remove()});const M=wnMissed();
+  if(M.length&&S.name&&wnLast()>0){const d=document.createElement('div');d.className='hm-wn';d.innerHTML=`<button type="button" class="hm-wnb" data-wn2="o"><span class="i">✨</span><span class="m"><b>${esc(tl("What's new"))} · ${M.length}</b><small>${M.slice(0,4).map(x=>x[1]).join(' ')} · ${esc(tl('Tap to catch up'))}</small></span><i aria-hidden="true">›</i></button><button type="button" class="hm-wnx" data-wn2="x" aria-label="${esc(tl('Close'))}">✕</button>`;
+   const nx=h.querySelector('.hm-next')||h.querySelector('.hm-hero');if(nx)nx.after(d);else h.prepend(d)}}}catch(e){}return r}}
+/* first visit ever: nothing to catch up on */
+try{if(!localStorage.getItem('fq.wnLast')&&!(S.wnSeen||S.wnLast)&&!S.name)localStorage.setItem('fq.wnLast',fqBuildN())}catch(e){}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-wn2]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();if(b.dataset.wn2==='o')wnCaught(false);else{wnMark();const c=b.closest('.hm-wn');if(c)c.remove()}},true);
+[["Tap to catch up","اضغط لتطّلع","Tuqii beeki","Taabo si aad ula socoto"],["You're all caught up","أنت على اطلاع بكل جديد","Hunda beekteetta","Wax walba waad la socotaa"],["Everything new since your last visit","كل جديد منذ زيارتك الأخيرة","Waan haaraa yeroo dhumaa asii dhufte booda","Wax kasta oo cusub tan iyo booqashadaadii u dambaysay"],
+["The tab bar stays at the bottom","شريط التبويب يبقى في الأسفل","Sarreen gadi jalatti hafa","Barta hoose waxay joogtaa xagga hoose"],['Faster to-dos: type "tomorrow 5pm", details under More','مهام أسرع: اكتب «غدًا 5 م»، والتفاصيل تحت «المزيد»','Hojii saffisaa: "boru 5pm" barreessi, bal\'inni "Dabalata" jala','Hawlo degdeg ah: qor "berri 5pm", faahfaahintu waxay ku jirtaa "Wax kale"'],
+["Quick Kursi ✓ / ✕ after a salah passes","الكرسي ✓ / ✕ بسرعة بعد خروج وقت الصلاة","Kursii ✓ / ✕ saffisaan erga salaanni darbee","Kursi ✓ / ✕ degdeg ah markay salaaddu dhaafto"],["No hurtful words in reminders","لا كلمات جارحة في التذكيرات","Yaadachiisa keessatti jechi miidhu hin jiru","Erayo dhaawac leh kuma jiraan xusuusinta"],
+["Salah alerts with a short hadith","تنبيهات الصلاة مع حديث قصير","Beeksisa salaataa hadiisa gabaabaa waliin","Ogeysiisyada salaadda oo wata xadiis gaaban"],["Animated salah streak","سلسلة الصلاة المتحركة","Tarree salaataa socho'u","Isku xigga salaadda oo dhaqdhaqaaqa"],["Dhikr is its own page","الذكر صار صفحة مستقلة","Zikriin fuula mataa isaa qaba","Dhikrigu waa bog gaar ah"],["Stars only for real work","النجوم فقط للعمل الحقيقي","Urjiin hojii dhugaa qofaaf","Xiddiguhu waa shaqo dhab ah oo keliya"],
+["Full-screen adhkar player with audio","مشغّل أذكار بملء الشاشة مع الصوت","Taphataa zikrii guutuu iskiriinii sagalee waliin","Ciyaariye adkaar shaashad buuxda oo cod leh"],['"Too much?" help for adhkar','مساعدة «كثير عليّ؟» للأذكار','Gargaarsa "Baay\'ee natti ta\'e?" zikriif','Caawimo "Aad u badan?" adkaarta'],["Istighfar 100×","الاستغفار 100 مرة","Istighfaara 100×","Istigfaar 100×"],
+["Split adhkar into small parts","قسّم الأذكار إلى أجزاء صغيرة","Zikrii kutaa xixiqqootti qoodi","U kala qaybi adkaarta qaybo yaryar"],["Add your own adhkar","أضف أذكارك","Zikrii kee dabali","Ku dar adkaartaada"],["Symptoms, medicine and learning trackers","متابعة الأعراض والدواء والتعلّم","Hordoffii mallattoo, qorichaa fi barumsaa","Raadraaca calaamadaha, daawada iyo waxbarashada"],["Weekly hasanat count","عدّ الحسنات الأسبوعي","Lakkoofsa hasanaatii torbanii","Tirinta xasanaadka toddobaadka"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
