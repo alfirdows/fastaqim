@@ -57,7 +57,7 @@ var LANG = 'en';
       <div class="list inset list-strong media-list-off"><ul>
         <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-sun-horizon"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Morning adhkar'))}</div></div></a></li>
         <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-moon-stars"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Evening adhkar'))}</div></div></a></li>
-        <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-hands-praying"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Istighfar 100×'))}</div><div class="item-after"><bdi>${ist}/100</bdi></div></div></a></li>
+        <li><a class="item-link item-content" data-soon="1"><div class="item-media"><i class="ph ph-circles-three"></i></div><div class="item-inner"><div class="item-title">${esc(tl('Istighfar 100×'))}</div><div class="item-after"><bdi>${ist}/100</bdi></div></div></a></li>
       </ul></div>`;
   }
   function topHTML() {
@@ -79,12 +79,12 @@ var LANG = 'en';
         </div></div>
       <div class="page-content">
         <h1 class="fq-hi">${esc(greet())}</h1><div class="fq-sub">${esc(dateLine())}</div>
-        <div class="fq-preview"><i class="ph ph-eye"></i>${esc(tl('Preview: taps here are not saved'))}</div>
+        <div class="fq-preview"><i class="ph ph-info"></i>${esc(tl('Preview: taps here are not saved'))}</div>
         ${heroHTML()}${checkHTML()}${topHTML()}${verseHTML()}<div style="height:24px"></div>
       </div></div>`;
   }
   function soonPage(t, ic) { return `<div class="page"><div class="navbar navbar-large"><div class="navbar-bg"></div><div class="navbar-inner"><div class="title">${esc(tl(t))}</div><div class="title-large"><div class="title-large-text">${esc(tl(t))}</div></div></div></div><div class="page-content"><div class="fq-soon"><i class="ph ${ic}"></i>${esc(tl('Coming in the next step'))}</div></div></div>`; }
-  const TABS = [['home', 'Home', 'ph-house'], ['stars', 'Stars', 'ph-star'], ['todo', 'To-do', 'ph-check-square'], ['dhikr', 'Dhikr', 'ph-hands-praying'], ['game', 'Game', 'ph-game-controller'], ['menu', 'Menu', 'ph-list']];
+  const TABS = [['home', 'Home', 'ph-house'], ['stars', 'Stars', 'ph-star'], ['todo', 'To-do', 'ph-check-square'], ['dhikr', 'Dhikr', 'ph-circles-three'], ['game', 'Game', 'ph-game-controller'], ['menu', 'Menu', 'ph-list']];
 
   function shell() {
     document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr';
