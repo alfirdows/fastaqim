@@ -2264,8 +2264,9 @@ html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
 .ci-k3 small{font:700 .78rem var(--body);color:var(--muted);white-space:nowrap;margin-inline-end:auto}
 .ci-k3 button{width:36px;height:36px;min-height:0;padding:0;border-radius:50%;border:0;display:grid;place-items:center;font:900 .95rem/1 var(--body);flex:none}
 .ci-k3 .y{background:#1f9d6b;color:#fff}.ci-k3 .n{background:color-mix(in srgb,var(--ink) 9%,transparent);color:var(--muted)}
-.ci-k3.no{border-style:solid;border-color:var(--line);padding:0;background:transparent}
-.ci-k3.no button{width:100%;height:44px;border-radius:14px;background:transparent;color:var(--muted);font:700 .8rem var(--body)}
+.ci-k3.no{border-style:solid;border-color:var(--line)}
+.ci-k3.no .y{background:transparent;color:#1f9d6b;box-shadow:inset 0 0 0 2px color-mix(in srgb,#1f9d6b 55%,transparent)}
+.ci-k3 .n.sel{background:#8a94a3;color:#fff}
 #ciCard .ci-r{grid-template-columns:minmax(0,1fr) 136px!important}#ciCard .ci-r>:last-child{min-width:0!important;width:100%}
 .ci-k3{padding:0 4px 0 8px;gap:4px}.ci-k3 small{overflow:hidden;text-overflow:clip}
 /* v146: lighter to-do editor */
@@ -2278,6 +2279,9 @@ html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
 .tk-mb{display:flex;flex-direction:column;gap:10px;padding:4px 0 6px}
 .tk-mb .tk-mdel{align-self:flex-start;color:#c0392b!important}
 #tab-today .tk-qa{padding:10px!important}#tab-today .tk-qa>:not(form):not(:has(#dumpInput)){display:none!important}
+
+/* v147: Home Screen app: the tab bar is placed from the TOP of the screen (100lvh), so a stale iPhone layout height can never lift it mid-screen */
+html.fq-sa body.has-bnav .bnav{top:0!important;bottom:auto!important;transform:translate3d(0,calc(100vh - 100%),0)!important;transform:translate3d(0,calc(100lvh - 100%),0)!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7919,7 +7923,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v146',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v147',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9681,7 +9685,7 @@ function fqDm(root){try{(root||document).querySelectorAll('.adf-ar,.ci-zar,.ldz-
    stops halfway up. Check often; first nudge the scroll (iOS then re-measures); if it is still wrong, pin the bar to the real bottom.
    Does nothing while the keyboard is open or when everything is already right. */
 const FQBG={on:false,nudged:0,log:[]};
-function fqBarGuard(){try{const bn=document.querySelector('.bnav');if(!bn||!fqStandalone())return;
+function fqBarGuard(){try{const bn=document.querySelector('.bnav');if(!bn)return;if(FQBG.on||bn.style.top){bn.style.top='';bn.style.bottom='';FQBG.on=false}return;/* v147: retired; the bar is pinned by CSS from the top of the screen instead */
   const clear=()=>{FQBG.nudged=0;if(FQBG.on){bn.style.top='';bn.style.bottom='';FQBG.on=false}};
   if(document.documentElement.classList.contains('fq-kb')||fqEd(document.activeElement))return clear();
   const vv=window.visualViewport,land=innerWidth>innerHeight&&screen.width!==screen.height?matchMedia('(orientation: landscape)').matches:false,
@@ -9925,9 +9929,8 @@ BLOCK_BAD.push(...HOSTILE);BLOCK_BAD_AR.push(...HOSTILE_AR);
 /* last check on this phone: a notification with hostile or blocked words is never scheduled */
 {const _pb=pushItems;pushItems=function(){const o=_pb.apply(this,arguments);try{return o.filter(x=>!(blocked(x.title||'')||blocked(x.body||'')))}catch(e){return o}}}
 /* passed salah: one compact "Kursi?" row with ✓ / ✕ circles, the same size as the done cell */
-ciKPast=function(i,o){const no=o.kn&&o.kn[i];
-  if(no)return `<span class="ci-k3 no"><button type="button" data-ci="kn" data-i="${i}" aria-label="${esc(tl('Undo'))}">✕ ${esc(tl('Kursi'))}</button></span>`;
-  return `<span class="ci-k3"><small>${esc(tl('Kursi?'))}</small><button type="button" class="y" data-ci="kr" data-i="${i}" aria-label="${esc(tl('Read'))}">✓</button><button type="button" class="n" data-ci="kn" data-i="${i}" aria-label="${esc(tl('No'))}">✕</button></span>`};
+ciKPast=function(i,o){const no=!!(o.kn&&o.kn[i]);
+  return `<span class="ci-k3${no?' no':''}"><small>${esc(tl('Kursi?'))}</small><button type="button" class="y" data-ci="kr" data-i="${i}" aria-label="${esc(tl('Read'))}">✓</button><button type="button" class="n${no?' sel':''}" data-ci="kn" data-i="${i}" aria-pressed="${no}" aria-label="${esc(tl('No'))}">✕</button></span>`};
 [["Kursi?","الكرسي؟","Kursii?","Kursi?"],["Kursi","الكرسي","Kursii","Kursi"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* v146: lighter to-do editor. Open task = title, steps, "add a step", Do it. Everything else sits in one folded "More" row. */
