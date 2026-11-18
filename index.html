@@ -2303,6 +2303,15 @@ body:not(.has-bnav) #scrollModal:not(.adf-on):not([hidden]){bottom:0!important}
 .ci-zh{justify-content:flex-start!important}.ci-zh .ci-zc{margin-right:auto}
 html[dir=rtl] .ci-zh .ci-zc{margin-right:0!important;margin-left:auto!important}
 #adfCard{position:relative}#adfCard .adf-one{position:absolute;top:18px;left:18px;z-index:2}html[dir=rtl] #adfCard .adf-one{left:auto;right:18px}
+/* v151 text toggles */
+.zt-bar{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0 10px}
+.zt-c{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:5px;height:30px;padding:0 11px;border-radius:15px;font:600 .78rem var(--body);color:var(--muted);background:color-mix(in srgb,var(--ink) 6%,transparent);box-shadow:inset 0 0 0 1px var(--line)}
+.zt-c i{font-style:normal;font-weight:800;font-size:.8rem}
+.zt-c.on{color:var(--calm);background:color-mix(in srgb,var(--calm) 12%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--calm) 35%,transparent)}
+.ci-zen{margin:4px 0 0;font-size:.88rem;line-height:1.5;color:var(--ink);text-align:center}
+body.zt-noar .adf-ar,body.zt-noar .ci-zar,body.zt-noar .ci-m .ci-ar{display:none!important}
+body.zt-notr .adf-tr,body.zt-notr .ci-ztr{display:none!important}
+body.zt-nomn .adf-m,body.zt-nomn .ci-zen{display:none!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7944,7 +7953,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v150',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v151',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9979,7 +9988,7 @@ function tkQuickTop(){try{const sec=$('tab-today'),i=$('dumpInput');if(!sec||!i)
 [["More","المزيد","Dabalata","Wax kale"],["Add… “tomorrow 5pm”","أضف مهمة… «غدًا 5 م»","Hojii dabali… “boru 5pm”","Ku dar hawl… “berri 5pm”"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* v148: What's new = one "You're all caught up" summary of everything since your last visit. ✕ or opening it keeps it closed (saved on this phone too, so a sync can't bring it back). */
-const WNL=[[150,'🌙','Before-sleep adhkar, with a reminder 15 min after Isha'],[150,'✅','Mark single adhkar as read'],[149,'🔄','Safari and the Home Screen app now share the same day'],[149,'📄','Popups open as full pages'],[149,'🤲','Count istighfar at your own speed'],[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
+const WNL=[[151,'🔤','Arabic, meaning and transliteration, each with its own switch'],[150,'🌙','Before-sleep adhkar, with a reminder 15 min after Isha'],[150,'✅','Mark single adhkar as read'],[149,'🔄','Safari and the Home Screen app now share the same day'],[149,'📄','Popups open as full pages'],[149,'🤲','Count istighfar at your own speed'],[147,'📱',"The tab bar stays at the bottom"],[146,'✍️','Faster to-dos: type "tomorrow 5pm", details under More'],[145,'📖','Quick Kursi ✓ / ✕ after a salah passes'],[144,'🛡️','No hurtful words in reminders'],[143,'🔔','Salah alerts with a short hadith'],[142,'⭐','Animated salah streak'],[141,'📿','Dhikr is its own page'],[140,'⭐','Stars only for real work'],[138,'📿','Full-screen adhkar player with audio'],[138,'🤲','"Too much?" help for adhkar'],[138,'💯','Istighfar 100×'],[136,'✂️','Split adhkar into small parts'],[136,'➕','Add your own adhkar'],[135,'🧠','Symptoms, medicine and learning trackers'],[134,'✨','Weekly hasanat count']];
 function fqBuildN(){return +String(FQ_BUILD).replace(/\D+/g,'')||0}
 function wnLast(){let l=0;try{l=+localStorage.getItem('fq.wnLast')||0}catch(e){}return Math.max(l,S.wnLast||0,(S.wnSeen||0)>=131?Math.max(131,S.wnSeen):0)}
 function wnMark(){const v=fqBuildN();S.wnLast=v;S.wnSeen=Math.max(S.wnSeen||0,v);S.wnRead=Math.max(S.wnRead||0,WN2_V);try{localStorage.setItem('fq.wnLast',v)}catch(e){}save();try{fqMenuDot()}catch(e){}}
@@ -10089,6 +10098,55 @@ setInterval(()=>{try{const R=S.remind||{};if(!S.name||!R.salah||R.sleep===false)
   if(a&&now>=a&&now-a<120000&&SLP.done!==k&&localStorage.getItem('fq.slp')!==k){SLP.done=k;localStorage.setItem('fq.slp',k);const [n,t]=slpCount();if(n>=t)return;
     try{navigator.vibrate&&navigator.vibrate([200,100,200])}catch(e){}notify('🌙 '+tl('Before-sleep adhkar'),tl('Read them before you sleep'));toast('🌙 '+tl('Before-sleep adhkar'))}}catch(e){}},30000);
 [["Before-sleep adhkar, with a reminder 15 min after Isha","أذكار النوم، مع تذكير بعد أذان العشاء بـ15 دقيقة","Zikrii hirriba dura, yaadachiisa azaana Ishaa'a booda daqiiqaa 15","Adkaarta hurdada, xusuusin 15 daqiiqo kadib addaanka Cishaha"],["Mark single adhkar as read","علّم ذكرًا واحدًا كمقروء","Zikrii tokko tokko akka dubbifametti mallatteessi","Calaamadee dhikri kasta oo aad akhriday"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+/* v151: every dhikr and Qur'an text shows Arabic + meaning in your language + transliteration, each with a small on/off chip (remembered) */
+[["Arabic","العربية","Arabiffaa","Carabi"],["Meaning","المعنى","Hiika","Macnaha"],["Transliteration","النطق بالحروف اللاتينية","Akkaataa dubbisaa","Dhawaaqa"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function ztGet(){const z=S.zt||{};return {ar:z.ar!==false,mn:z.mn!==false,tr:z.tr===undefined?LANG!=='ar':z.tr!==false}}
+function ztApply(){const z=ztGet(),b=document.body;b.classList.toggle('zt-noar',!z.ar);b.classList.toggle('zt-nomn',!z.mn);b.classList.toggle('zt-notr',!z.tr)}
+function ztBar(){const z=ztGet(),c=(k,ic,l)=>`<button type="button" class="zt-c${z[k]?' on':''}" data-zt="${k}" aria-pressed="${z[k]}"><i>${ic}</i>${esc(tl(l))}</button>`;
+  return `<div class="zt-bar" role="group">${c('ar','ع','Arabic')}${LANG==='ar'?'':c('mn','Aa','Meaning')}${c('tr','abc','Transliteration')}</div>`}
+function ztItem(id){try{const L=[].concat(ciMin(),ciMinE(),ciExtra(),ciPower());return L.find(x=>x.id===id)}catch(e){return null}}
+function ztDecorate(){const B=$('scrollBody');if(!B||$('scrollModal').hidden)return;ztApply();
+  B.querySelectorAll('.ci-z[data-cz]').forEach(c=>{if(c.dataset.zt)return;c.dataset.zt=1;const x=ztItem(c.dataset.cz);if(!x)return;const ar=c.querySelector('.ci-zar');
+    if(!c.querySelector('.ci-ztr')&&x.tr){const p=document.createElement('p');p.className='ci-ztr';p.textContent=x.tr;ar&&ar.after(p)}
+    if(LANG!=='ar'&&x.en&&!c.querySelector('.ci-zen')){const p=document.createElement('p');p.className='ci-zen';p.textContent=LANG==='en'?x.en:tl(x.en);(c.querySelector('.ci-ztr')||ar).after(p)}});
+  const km=B.querySelector('.ci-m');if(km&&!km.dataset.zt&&km.querySelector('.ci-ar')){km.dataset.zt=1;const it=QZ.kursi,ar=km.querySelector('.ci-ar');
+    const mn=km.querySelector('p.small.muted');if(mn){mn.classList.add('ci-zen');if(LANG!=='ar'&&!mn.textContent.trim())mn.textContent=LANG==='en'?it.en:tl(it.en)}
+    if(it.tr&&!km.querySelector('.ci-ztr')){const p=document.createElement('p');p.className='ci-ztr';p.textContent=it.tr;ar.after(p)}}
+  if(LANG==='ar'){const ac=B.querySelector('.adf-card');if(ac&&!ac.querySelector('.adf-tr')){const it=ADHKAR[ADF.cat]&&ADHKAR[ADF.cat].items[ADF.i];const a=ac.querySelector('.adf-ar');if(it&&it.tr&&a){const p=document.createElement('p');p.className='adf-tr notranslate';p.textContent=it.tr;a.after(p)}}}
+  const host=B.querySelector('.ci-az-m > .ci-tip, .adf-seg, .ci-m > .label');
+  if(host&&!B.querySelector('.zt-bar')&&B.querySelector('.ci-zar,.adf-ar,.ci-ar')){host.insertAdjacentHTML('afterend',ztBar())}}
+{let t=0;new MutationObserver(()=>{clearTimeout(t);t=setTimeout(ztDecorate,0)}).observe($('scrollBody'),{childList:true,subtree:true})}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-zt]');if(!b||!b.closest('.zt-bar'))return;e.preventDefault();e.stopPropagation();
+  const z=ztGet(),k=b.dataset.zt,on=Object.keys(z).filter(x=>z[x]&&!(x==='mn'&&LANG==='ar'));if(z[k]&&on.length<=1){toast(tl('Keep at least one on'));return}
+  z[k]=!z[k];S.zt=z;save();ztApply();document.querySelectorAll('.zt-bar [data-zt="'+k+'"]').forEach(x=>{x.classList.toggle('on',z[k]);x.setAttribute('aria-pressed',z[k])});try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}},true);
+[["Keep at least one on","أبقِ واحدًا على الأقل","Tokko yoo xiqqaate banaa dhiisi","Ugu yaraan mid daar"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+setTimeout(ztApply,0);
+/* v151: full transliteration for Qur'an passages (their "tr" was only the surah name), and Somali meaning (Mahmud Muhammad Abduh, via Quran.com data) */
+const QTL={
+ fatiha:"Bismillāhir-raḥmānir-raḥīm. Al-ḥamdu lillāhi rabbil-ʿālamīn. Ar-raḥmānir-raḥīm. Māliki yawmid-dīn. Iyyāka naʿbudu wa iyyāka nastaʿīn. Ihdinaṣ-ṣirāṭal-mustaqīm. Ṣirāṭal-ladhīna anʿamta ʿalayhim, ghayril-maghḍūbi ʿalayhim wa laḍ-ḍāllīn.",
+ kursi:"Allāhu lā ilāha illā huwal-ḥayyul-qayyūm. Lā taʾkhudhuhū sinatuw-wa lā nawm. Lahū mā fis-samāwāti wa mā fil-arḍ. Man dhal-ladhī yashfaʿu ʿindahū illā bi-idhnih. Yaʿlamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bi-shayʾim-min ʿilmihī illā bimā shāʾ. Wasiʿa kursiyyuhus-samāwāti wal-arḍ, wa lā yaʾūduhū ḥifẓuhumā, wa huwal-ʿaliyyul-ʿaẓīm.",
+ ikhlas:"Qul huwallāhu aḥad. Allāhuṣ-ṣamad. Lam yalid wa lam yūlad. Wa lam yakul-lahū kufuwan aḥad.",
+ falaq:"Qul aʿūdhu bi-rabbil-falaq. Min sharri mā khalaq. Wa min sharri ghāsiqin idhā waqab. Wa min sharrin-naffāthāti fil-ʿuqad. Wa min sharri ḥāsidin idhā ḥasad.",
+ nas:"Qul aʿūdhu bi-rabbin-nās. Malikin-nās. Ilāhin-nās. Min sharril-waswāsil-khannās. Alladhī yuwaswisu fī ṣudūrin-nās. Minal-jinnati wan-nās.",
+ bq:"Āmanar-rasūlu bimā unzila ilayhi mir-rabbihī wal-muʾminūn. Kullun āmana billāhi wa malāʾikatihī wa kutubihī wa rusulih. Lā nufarriqu bayna aḥadim-mir-rusulih. Wa qālū samiʿnā wa aṭaʿnā, ghufrānaka rabbanā wa ilaykal-maṣīr. Lā yukallifullāhu nafsan illā wusʿahā. Lahā mā kasabat wa ʿalayhā mak-tasabat. Rabbanā lā tuʾākhidhnā in nasīnā aw akhṭaʾnā. Rabbanā wa lā taḥmil ʿalaynā iṣran kamā ḥamaltahū ʿalal-ladhīna min qablinā. Rabbanā wa lā tuḥammilnā mā lā ṭāqata lanā bih. Waʿfu ʿannā, waghfir lanā, warḥamnā. Anta mawlānā fanṣurnā ʿalal-qawmil-kāfirīn."};
+const QSO={
+ fatiha:"Magaca Eebe yaan kubillaabaynaa ee Naxariis guud Naxariista Tu gaarana naxariista. Mahad Eebaa iska leh ee barbaariyaha Caalamka ah (Koonka). Ee naxariis guud iyo mid gaaraba naxariista. Ee hanta maalinta abaalmarinta (Qiyaamada). Adiga unbaan ku caabudaynaa, adiga unbaana kaa kaalmo waydiisanaynaa (Eebow). Ee nagu hanuuni jidka toosan (Xaqa). Jidka kuwii aad unicmaysay eedan u cadhoonin dhuminna.",
+ kursi:"Eebe Ilaahaan isada ahayn ma jiro, waana Eebaha Nool, Khalqigana maamula. Ma qabato Lulmo iyo hurdo (midna) wuxuuna iska leeyahay waxa Samooyinka ka sugan iyo Dhulka, waa kuma kan ka shafeeci agtiisa (Eebe) idankiisa mooyee, wuxuu ogyahay (Eebe) waxa Dadka hortooda ah iyo waxa ka dambeeya mana koobaan wax Cilmigiisa ah, wuxuu Eebe doono mooyee, wuuna u waasacnoqday kursigiisu Samaawaadka iyo Dhulka, mana Cusleeyo ilaalinteedu, Eebana waa sareeye wayn.",
+ ikhlas:"Waxaad dhahdaa (Nabiyow) Eebe waa Kali (wehelna ma leh). Waana Sayid (deeqtoon). Eebe wax ma dhalin, isna lama dhalin. Wax la mid ahna ma jiro.",
+ falaq:"Waxaad dhahdaa (Nabiyow) waxaan ka magangalay Eebeha Subaxa (abuuray). Wixii shar leh sharkiisa. Iyo Habeenka sharkiisa markuu madoobaado. Iyo sharka Sixirrowga wax ku tufa guntimaha. Iyo sharka Xaasidka wax Xasda.",
+ nas:"Waxaad dhahdaa «Nabiyow» waxaan ka magangeley Eebaha dadka barbaariya. Ee dadka xukuma. Ee ah Ilaaha dadka. Sharka «iyo xumaanta» waswaasiyaha qarsoon. Ee waswaasiya laabta «Qalbiga» dadka. «Kuwaas wax waswaasinayna» oo ah jinni iyo insiba.",
+ bq:"Wuu rumeeyey Rasuulku wixii looga soo dajiyey Xaga Eebihiis, Mu'miniintuna (way rumeeyeen) dhamaana waxay rumeeyeen Eebe, Malaa'igtiisa kutubtiisa iyo Rasuuladiisa, mana kala geynayno mid ka mid ah Rasuuladiisa dhexdooda, waxayna dhaheen waan maqalay oon adeecnay, dhaafidaada. Eebahanow xaggaagaana loo ahaan. Kuma mashaqeeyo Eebe naf waxay awoodo mooyee, waxay mudan waxay kasbatay (oo wanaag ah) waxaana korkeeda ah waxay isu kasbatay (oo xumaano) Eebow ha noo qabanin haddaan halmaanno gafno, Eebow hanagu xambaarin Culays saad ugu xambaartay kuwii naga horeeyey, Eebow hanagu xambaarin (dhibin) waxaanaan awood u lahayn, na cafina oo noodhaaf noon naxariiso, adaa gargaarahanaga ahe, nooga gargaar qaarka gaalada ah."};
+function qKind(x){const t=String(x&&x.tr||'');if(/al-Ikhlāṣ, al-Falaq, an-Nās/.test(t))return 'three';if(/Kursī/.test(t))return 'kursi';if(/Sūrat al-Ikhlāṣ/.test(t))return 'ikhlas';if(/Sūrat al-Falaq/.test(t))return 'falaq';if(/Sūrat an-Nās/.test(t))return 'nas';if(/Last two āyāt/.test(t))return 'bq';if(/Sūrat al-Fātiḥah/.test(t))return 'fatiha';return ''}
+function qFull(x){const k=qKind(x);if(!k)return null;const ar=String(x.ar||''),pre=(/^\s*أَ?عُوذُ بِاللَّهِ/.test(ar)?'Aʿūdhu billāhi minash-shayṭānir-rajīm. ':'')+(k!=='fatiha'&&/بِسْمِ اللَّهِ الرَّحْمَٰ?نِ الرَّحِيمِ/.test(ar.replace(/[ٰ]/g,'ٰ'))?'Bismillāhir-raḥmānir-raḥīm. ':'');
+  if(k==='three')return {tr:['ikhlas','falaq','nas'].map(s=>'Bismillāhir-raḥmānir-raḥīm. '+QTL[s]).join(' ◆ '),so:['ikhlas','falaq','nas'].map(s=>QSO[s]).join(' ◆ ')};
+  return {tr:pre+QTL[k],so:QSO[k]}}
+function ztFill(el,x){if(!el||!x)return;const q=qFull(x);if(!q)return;const t=el.querySelector('.adf-tr,.ci-ztr');if(t)t.textContent=q.tr;
+  if(LANG==='so'){const m=el.querySelector('.adf-m,.ci-zen');if(m)m.textContent=q.so}}
+{const _zd=ztDecorate;ztDecorate=function(){_zd.apply(this,arguments);try{const B=$('scrollBody');
+  B.querySelectorAll('.ci-z[data-cz]').forEach(c=>{if(c.dataset.zq)return;c.dataset.zq=1;ztFill(c,ztItem(c.dataset.cz))});
+  const ac=B.querySelector('.adf-card');if(ac&&ac.dataset.zq!==ADF.cat+ADF.i){ac.dataset.zq=ADF.cat+ADF.i;ztFill(ac,ADHKAR[ADF.cat]&&ADHKAR[ADF.cat].items[ADF.i])}
+  const km=B.querySelector('.ci-m');if(km&&!km.dataset.zq&&km.querySelector('.ci-ar')){km.dataset.zq=1;ztFill(km,QZ.kursi)}}catch(e){}}}
+[["Arabic, meaning and transliteration, each with its own switch","العربية والمعنى والنطق، ولكلٍّ زرّ تشغيل","Arabiffaa, hiika fi akkaataa dubbisaa, tokkoon tokkoon isaanii furtuu mataa isaa qaba","Carabi, macne iyo dhawaaq, mid walba furaha u gaarka ah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
