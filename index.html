@@ -2045,6 +2045,22 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .cal-week .its.emp{min-height:0}
 /* iPhone zooms the whole page when a box with small text is tapped, then fixed bars drift. 16px stops that. */
 @supports (-webkit-touch-callout:none){input:not([type=checkbox]):not([type=radio]):not([type=range]),select,textarea{font-size:max(16px,1em)!important}}
+/* v134 */
+.ci-azw{display:flex;flex-direction:column;gap:4px}.ci-azw.dim .ci-az{opacity:.62}
+.ci-az.ev{background:color-mix(in srgb,#5b6cd6 11%,transparent)}.ci-az.ev .ci-bar i{background:#5b6cd6}.ci-az.ev.done{background:color-mix(in srgb,#1f9d6b 13%,transparent)}
+.ci-nn,.ci-nn2{align-self:flex-end;border:0;background:transparent;color:var(--muted);font:inherit;font-size:.8rem;font-weight:600;padding:2px 6px;min-height:28px}
+.ci-nn2{align-self:center;width:100%;margin-top:4px}
+.ci-why{display:flex;flex-direction:column;gap:10px;text-align:center}
+.ci-wg{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ci-wg button{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:82px;justify-content:center;border:0;border-radius:16px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;font-weight:700;color:var(--ink)}
+.ci-wg button span{font-size:24px}
+.ci-hd2{font-family:var(--qf,'Amiri Quran',serif);font-size:1.35rem;line-height:1.9;margin:4px 0 0;color:#0f6e52}
+.ci-even{margin:6px 0 0;font-weight:700}
+.ci-st{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.ci-hs{border:0;background:color-mix(in srgb,#c98a00 12%,transparent);color:#9a6a00;font:inherit;font-size:.75rem;font-weight:800;border-radius:99px;padding:3px 10px;min-height:0}
+.hs{display:flex;flex-direction:column;gap:8px;text-align:start}.hs-big{margin:0;text-align:center;font-size:2rem;font-weight:800;color:#9a6a00}
+.hs-r{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--ink) 5%,transparent)}.hs-r b{font-variant-numeric:tabular-nums}
+.hs-nx{margin:4px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,#1f9d6b 10%,transparent);font-size:.9rem}
+.hs-note{margin:0;color:var(--muted);font-size:.78rem;line-height:1.5}.hs-note a{color:var(--calm);font-weight:700;text-decoration:none}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7686,7 +7702,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v133',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v134',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8733,6 +8749,73 @@ function fqZoomTake(){const v=document.body.style.zoom;if(v){FQZ.z=parseFloat(v)
 new MutationObserver(()=>{if(FQZ.busy)return;fqZoomTake()}).observe(document.body,{attributes:true,attributeFilter:['style']});
 new MutationObserver(()=>{if(FQZ.busy||FQZ.z===1)return;clearTimeout(FQZ.t);FQZ.t=setTimeout(fqZoomKids,0)}).observe(document.body,{childList:true});
 try{const L=(S&&S.look)||{};if(L.zoom&&L.zoom!==1&&!document.body.style.zoom)FQZ.z=L.zoom}catch(e){}fqZoomTake();fqZoomKids();
+
+/* ===================== v134: check-in round 2 =====================
+   Morning adhkar: Fajr → Dhuhr. Evening adhkar: Asr → sleep. If the morning was missed, the evening counts for the day; if it was done, the evening is extra.
+   Honest answers instead of fake ticks: Later / Not today / Too much / I don't want to. Gentle replies, never pressure.
+   Weekly hasanat: only numbers stated in authentic hadith (10 per Qur'an letter, at-Tirmidhi 2910; 100 for the 100× tahlil, al-Bukhari 3293). */
+[["Evening adhkar","أذكار المساء","Zikrii galgalaa","Adkaarta fiidka"],["Not now","ليس الآن","Amma miti","Hadda maya"],["Later","لاحقًا","Booda","Mar dambe"],["Not today","ليس اليوم","Har'a miti","Maanta maya"],
+ ["Too much","كثير عليّ","Baay'ee natti caala","Aad ayey ii badan tahay"],["I don't want to","لا أريد","Hin barbaadu","Ma rabo"],["That's okay. It stays here for you.","لا بأس. يبقى هنا لك.","Rakkoo hin qabu. Asuma siif jira.","Waa caadi. Halkan ayuu kuu joogaa."],
+ ["Just the first 3","أول ٣ فقط","Jalqaba 3 qofa","Kaliya 3-da hore"],["Just one","واحد فقط","Tokko qofa","Mid keliya"],["Even one counts.","حتى الواحد يُحسب.","Tokko illee ni lakkaa'ama.","Xitaa mid waa la tiriyaa."],
+ ["Extra","إضافي","Dabalataa","Dheeraad"],["Counts for today","تُحسب لليوم","Har'aaf ni lakkaa'ama","Maanta ayuu u tirsanayaa"],["from","من","irraa","laga bilaabo"],
+ ["hasanat this week","حسنة هذا الأسبوع","hasanaat torban kana","xasanaad toddobaadkan"],["Hasanat this week","حسنات هذا الأسبوع","Hasanaat torban kana","Xasanaadka toddobaadkan"],
+ ["Only numbers stated in authentic hadith are counted. Allah multiplies for whom He wills.","نحسب فقط الأعداد الواردة في الأحاديث الصحيحة. والله يضاعف لمن يشاء.","Lakkoofsa hadiisa sirrii keessatti ibsame qofatu lakkaa'ama. Rabbiin nama fedheef dachaa.","Waxaa la tiriyaa kaliya tirooyinka ku xusan xadiisyada saxiixa ah. Allaah wuu u laablaabaa cidduu doono."],
+ ["Each letter of the Qur'an","كل حرف من القرآن","Qubee Qur'aanaa hunda","Xaraf kasta oo Quraanka ah"],["Ayat al-Kursi after salah","آية الكرسي بعد الصلاة","Aayatal Kursii salaata booda","Aayadda Kursiga salaadda kadib"],
+ ["Qur'an in your adhkar","القرآن في أذكارك","Qur'aana zikrii kee keessaa","Quraanka adkaartaada ku jira"],["100× lā ilāha illallāh","لا إله إلا الله ١٠٠ مرة","Laa ilaaha illallaah ×100","Laa ilaaha illallaah ×100"],
+ ["Today you can still add","ما زال بإمكانك اليوم إضافة","Har'a ammas dabaluu dandeessa","Maanta weli waad ku dari kartaa"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function ciMinE(){const M=ciMin(),r3=(ADHKAR.ruqyah.items||[]).find(x=>x.id==='r3')||{},e12=(ADHKAR.evening.items||[]).find(x=>x.id==='e12')||{};
+  return M.filter(x=>x.id!=='c9').map(x=>Object.assign({},x,{id:'v'+x.id})).concat([Object.assign({},e12,{id:'v12',n:3}),Object.assign({},r3,{id:'vb',n:1,au:['002285','002286']})])}
+function ciCnt(L,o){return L.filter(x=>((o.az||{})[x.id]||0)>=x.n).length}
+function ciPT(){try{return salahFor(new Date())}catch(e){return null}}
+function ciWin(){const P=ciPT(),n=new Date();if(!P)return {m:true,e:true};return {m:n>=P.fajr&&n<P.dhuhr,e:n>=P.asr||n<P.fajr,asr:P.asr,fajr:P.fajr}}
+/* the daily % counts the better of morning / evening adhkar */
+ciPct=function(d){const q=salQ(d),o=ciPeek(d),M=ciMin(),E=ciMinE();let got=0;const all=5+5+M.length;for(let i=0;i<5;i++){if(q[i]==='on'||q[i]==='late'||q[i]==='exc')got++;if(o.k&&o.k[i]||q[i]==='exc')got++}got+=Math.max(ciCnt(M,o),Math.min(M.length,ciCnt(E,o)));return Math.round(got/all*100)};
+{const _cs2=ciSync;ciSync=function(){const r=_cs2.apply(this,arguments);try{if(!inApp())return r;CI_BUSY=true;const o=ciD(),M=ciMin(),E=ciMinE(),mDone=ciCnt(M,o)===M.length,eDone=ciCnt(E,o)===E.length;ciAw('evmin',eDone?(mDone?2:5):0,'🌇 '+tl('Evening adhkar'));save()}catch(e){}finally{CI_BUSY=false}return r}}
+/* rows: morning + evening, with honest "Not now" */
+const CIW={m:{later:'⏰ ',not:'🌙 ',much:'🫶 ',no:'🤍 '}};
+function ciWhyLbl(w){return w==='later'?'⏰ '+tl('Later'):w==='not'?tl('Not today'):w==='much'?tl('Too much'):w==='no'?tl("I don't want to"):''}
+function ciAzRow(kind){const o=ciPeek(),L=kind==='m'?ciMin():ciMinE(),n=ciCnt(L,o),W=ciWin(),why=(o.why||{})['az_'+kind],mDone=ciCnt(ciMin(),o)===ciMin().length,done=n===L.length;
+  let sub=`${n}/${L.length} · ${tl('minimum')}`;if(kind==='e'&&!done){sub+=' · '+(mDone?tl('Extra'):tl('Counts for today'))}if(kind==='e'&&!W.e&&W.asr&&!n)sub=`${tl('from')} ${hmShort(W.asr)} · `+(mDone?tl('Extra'):tl('Counts for today'));if(why&&!done)sub=ciWhyLbl(why)+' · '+n+'/'+L.length;
+  const dim=(kind==='m'&&!W.m&&!n&&!done)||(kind==='e'&&!W.e&&!n);
+  return `<div class="ci-azw${dim?' dim':''}"><button type="button" class="ci-az${done?' done':''}${kind==='e'?' ev':''}" data-ci="${kind==='m'?'az':'aze'}"><span class="ci-azi">${kind==='m'?'🌅':'🌇'}</span><span class="ci-azt"><b>${esc(tl(kind==='m'?'Morning adhkar':'Evening adhkar'))}</b><small>${esc(sub)}</small></span><span class="ci-bar"><i style="width:${Math.round(n/L.length*100)}%"></i></span><span class="ci-go">›</span></button>${done?'':`<button type="button" class="ci-nn" data-ci="why" data-k="az_${kind}">${esc(tl('Not now'))}</button>`}</div>`}
+{const _ch=ciHTML;ciHTML=function(){let h=_ch.apply(this,arguments);try{const i=h.indexOf('<button type="button" class="ci-az');const j=h.lastIndexOf('</div>');if(i>0)h=h.slice(0,i)+ciAzRow('m')+ciAzRow('e')+h.slice(j);
+  const hs=hsWeek().total;h=h.replace('<p class="ci-st">',`<p class="ci-st"><button type="button" class="ci-hs" data-ci="hs">✨ ~${hs.toLocaleString(LOC())} ${esc(tl('hasanat this week'))} ›</button> `)}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="aze"],#ciCard [data-ci="why"],#ciCard [data-ci="hs"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  const k=b.dataset.ci;if(k==='aze')ciAzOpenL('e');else if(k==='hs')hsOpen();else ciWhy(b.dataset.k)},true);
+/* evening (and "first 3 only") use the same reader */
+function ciAzOpenL(kind,first){const _m=ciMin;if(kind==='e'||first){const base=kind==='e'?ciMinE():_m();ciMin=()=>first?base.slice(0,first):base}try{ciAzOpen()}finally{ciMin=_m}
+  try{const l=$('scrollBody').querySelector('.ci-az-m > .label');if(l&&kind==='e')l.textContent='🌇 '+tl('Evening adhkar');if(kind==='e'){const ex=$('scrollBody').querySelector('.ci-more');if(ex)ex.remove()}}catch(e){}
+  try{const B=$('scrollBody'),_oc=B.onclick,L=kind==='e'?ciMinE():ciMin();B.onclick=e=>{const c=e.target.closest('[data-cz],[data-czu],[data-cza]');const id=c&&(c.dataset.cz||c.dataset.czu||c.dataset.cza);if(id&&L.some(x=>x.id===id)){const x=L.find(y=>y.id===id);
+     if(c.dataset.cza){e.stopPropagation();ciPlay(x.au,c);return}if(c.dataset.czu){e.stopPropagation();const o2=ciD();const was=(o2.az[id]||0)>=x.n;o2.az[id]=Math.max(0,(o2.az[id]||0)-1);if(was)ciAzAw(x,false);save();ciAzPaint(id,x);return}
+     const o2=ciD(),n=o2.az[id]||0;if(n>=x.n)return;const now=Date.now(),l=CIZ.last[id]||CIZ.open||0;if(l&&now-l<ciMinGap(x)){c.classList.remove('slow');void c.offsetWidth;c.classList.add('slow');return}CIZ.last[id]=now;o2.az[id]=n+1;try{navigator.vibrate&&navigator.vibrate(10)}catch(x){}if(n+1>=x.n)ciAzAw(x,true);save();ciAzPaint(id,x);return}
+    return _oc&&_oc(e)}}catch(e){}}
+/* honest answers */
+function ciWhy(key){const kind=key.slice(3);
+  modalCard(`<div class="ci-why"><p class="label">${kind==='m'?'🌅 '+esc(tl('Morning adhkar')):kind==='e'?'🌇 '+esc(tl('Evening adhkar')):'📖 '+esc(tl('Ayat al-Kursi'))}</p>
+   <div class="ci-wg">${[['later','⏰','Later'],['not','🌙','Not today'],['much','🫶','Too much'],['no','🤍',"I don't want to"]].map(([k,i,l])=>`<button type="button" data-w="${k}"><span>${i}</span>${esc(tl(l))}</button>`).join('')}</div></div>`);
+  $('scrollBody').querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>{const w=b.dataset.w,o=ciD();o.why=o.why||{};o.why[key]=w;save();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+    if(w==='later'){modalClose();ciRefresh();toast('⏰ '+tl("That's okay. It stays here for you."));return}
+    const first=w==='much'?3:1;
+    modalCard(`<div class="ci-why"><p class="ci-hd2" dir="rtl" lang="ar">أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ</p><p class="small muted">${LANG==='ar'?'':esc("The most beloved deeds to Allah are the most constant, even if small.")}</p><p class="ci-src"><a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">al-Bukhārī 6464 ↗</a> · <a href="https://sunnah.com/muslim:783" target="_blank" rel="noopener">Muslim 783 ↗</a></p>
+     <p class="ci-even">${esc(tl('Even one counts.'))}</p><button type="button" class="btn-main" id="ciOne" style="width:100%">${esc(tl(w==='much'?'Just the first 3':'Just one'))}</button><button type="button" class="btn-ghost" id="ciNo" style="width:100%;margin-top:6px">${esc(tl("That's okay. It stays here for you."))}</button></div>`);
+    $('ciOne').onclick=()=>{modalClose();setTimeout(()=>{if(kind==='k')return;ciAzOpenL(kind==='e'?'e':'m',first)},150)};$('ciNo').onclick=()=>{modalClose();ciRefresh()}})}
+/* Ayat al-Kursi pop-up gets an honest "Not now" too */
+{const _ck=ciKursi;ciKursi=function(i){const r=_ck.apply(this,arguments);try{const B=$('scrollBody'),d=B.querySelector('#ciKD');if(d&&!B.querySelector('.ci-nn2')){const n=document.createElement('button');n.type='button';n.className='btn-ghost ci-nn2';n.textContent=tl('Not now');n.onclick=()=>{ciStopAudio();ciWhy('ci_k')};d.after(n)}}catch(e){}return r}}
+/* hasanat (verified only) */
+function arLetters(t){return (String(t||'').match(/[ء-غف-يٱ]/g)||[]).length}
+function qPart(t){t=String(t||'');const i=t.indexOf('۝');return t.startsWith('أَعُوذُ')&&i>0?t.slice(i+1):t}
+function hsWeek(){const kL=arLetters(qPart(QZ.kursi.ar)),qL=arLetters(QZ.ikhlas.ar)+arLetters(QZ.falaq.ar)+arLetters(QZ.nas.ar),r3=(ADHKAR.ruqyah.items||[]).find(x=>x.id==='r3')||{},bL=arLetters(r3.ar);
+  let k=0,az=0,th=0;for(let i=0;i<7;i++){const d=new Date();d.setDate(d.getDate()-i);const o=(S.ci||{})[dkey(d)];if(!o)continue;const A=o.az||{};
+    k+=Object.values(o.k||{}).filter(Boolean).length*kL*10;az+=(Math.min(1,A.c2||0)+Math.min(1,A.vc2||0))*kL*10+(Math.min(3,A.c3||0)+Math.min(3,A.vc3||0))*qL*10+Math.min(1,A.vb||0)*bL*10;th+=((A.p1||0)>=100?100:0)}
+  return {k,az,th,total:k+az+th,kL,qL}}
+function hsOpen(){const h=hsWeek(),o=ciPeek(),left=5-Object.values(o.k||{}).filter(Boolean).length,fmt=n=>n.toLocaleString(LOC());
+  modalCard(`<div class="hs"><p class="label">✨ ${esc(tl('Hasanat this week'))}</p><p class="hs-big">~${fmt(h.total)}</p>
+   <div class="hs-r"><span>📖 ${esc(tl('Ayat al-Kursi after salah'))}</span><b>${fmt(h.k)}</b></div><div class="hs-r"><span>🌅 ${esc(tl("Qur'an in your adhkar"))}</span><b>${fmt(h.az)}</b></div><div class="hs-r"><span>⚡ ${esc(tl('100× lā ilāha illallāh'))}</span><b>${fmt(h.th)}</b></div>
+   ${left>0?`<p class="hs-nx">${esc(tl('Today you can still add'))} <b>~${fmt(left*h.kL*10)}</b> · 📖 ${esc(tl('Ayat al-Kursi'))} ×${left}</p>`:''}
+   <p class="hs-note">${esc(tl("Each letter of the Qur'an"))} = 10 · <a href="https://sunnah.com/tirmidhi:2910" target="_blank" rel="noopener">at-Tirmidhī 2910 ↗</a><br>100× lā ilāha illallāh… = 100 · <a href="https://sunnah.com/bukhari:3293" target="_blank" rel="noopener">al-Bukhārī 3293 ↗</a></p>
+   <p class="hs-note">${esc(tl('Only numbers stated in authentic hadith are counted. Allah multiplies for whom He wills.'))} <a href="https://quran.com/2/261" target="_blank" rel="noopener">2:261 ↗</a></p></div>`)}
+GO.hasanat=()=>hsOpen();GO.evening=()=>ciAzOpenL('e');
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
