@@ -18,8 +18,8 @@ let comp=null,bloom=null,useBloom=true;
 function mkComp(){comp=new EffectComposer(R);comp.addPass(new RenderPass(scene,cam));bloom=new UnrealBloomPass(new T.Vector2(256,256),.28,.35,1.05);comp.addPass(bloom);comp.addPass(new OutputPass())}
 try{mkComp()}catch(e){comp=null;useBloom=false}
 /* camera views: [height, distance behind, look-at distance ahead, look-at height]; 'high' is the default */
-const VIEWS={classic:[3.3,4.6,-9,.4],high:[5.0,3.6,-5.5,0],top:[7.2,2.2,-4.4,0]};const VW=()=>VIEWS[ST.view]||VIEWS.high;
-function fitCam(){const a=innerWidth/innerHeight,v=VW(),D=Math.hypot(v[0],v[1]),half=ST.view==='classic'?2.15:2.45;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(40,Math.min(80,f));cam.userData.vk=ST.view}
+const VIEWS={close:[2.2,3.7,-10,.7],classic:[3.3,4.6,-9,.4],high:[5.0,3.6,-5.5,0],top:[7.2,2.2,-4.4,0]};const VW=()=>VIEWS[ST.view]||VIEWS.close;
+function fitCam(){const a=innerWidth/innerHeight,v=VW(),D=Math.hypot(v[0],v[1]),half=VIEWS[ST.view]&&ST.view!=='close'?(ST.view==='classic'?2.15:2.45):2.0;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(40,Math.min(80,f));cam.userData.vk=ST.view}
 function rs(){const w=innerWidth,h=innerHeight;R.setPixelRatio(PR);R.setSize(w,h,false);cam.aspect=w/h;fitCam();cam.fov=cam.userData.f0;cam.updateProjectionMatrix();if(comp){comp.setPixelRatio(PR);comp.setSize(w,h)}}
 addEventListener('resize',rs);
 
