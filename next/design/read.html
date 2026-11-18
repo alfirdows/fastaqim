@@ -130,7 +130,7 @@ const ref=k=>{const[s,a]=k.split(':');return T("Qur'an, Surah "+SUR[s][0]+' '+k,
 let SET=SETS[Q.get('set')]?Q.get('set'):'kursi',K=SETS[SET].k,TM=null;
 const HL=JSON.parse(localStorage.getItem('fq.rd.hl')||'{}');
 // word timings: made by quran-word-align (MIT) from this exact recording; missing => ayah highlight only
-fetch('../../data/wbw/ghamdi.json').then(r=>r.ok?r.json():null).then(j=>{TM=j}).catch(()=>{});
+[...new Set(K.map(k=>+k.split(':')[0]))].forEach(su=>fetch('../../data/wbw/ghamdi/'+String(su).padStart(3,'0')+'.json').then(r=>r.ok?r.json():null).then(j=>{if(!j)return;TM=TM||{};for(const a in j)TM[su+':'+a]={t:j[a]}}).catch(()=>{}));
 if(Q.get('demo'))TM=JSON.parse(decodeURIComponent(Q.get('demo')));
 
 function render(){
