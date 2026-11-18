@@ -2148,6 +2148,12 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 .lx-sym{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.lx-sym button{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;min-height:60px;border:0;border-radius:14px;background:color-mix(in srgb,var(--ink) 5%,transparent);font:inherit;font-size:.76rem;font-weight:600;color:var(--ink)}.lx-sym span{font-size:20px}.lx-sym b{font-size:.75rem;color:var(--calm,#1f9d6b)}
 .lx-end{display:flex;flex-direction:column;gap:8px;text-align:center}.lx-end h3{margin:0;font-size:1.6rem}.lx-end .label{text-align:start;margin:6px 0 0}
 .lx-home{display:flex;align-items:center;gap:10px;width:100%;padding:12px 14px;margin:0 0 10px;border:0;border-radius:16px;background:color-mix(in srgb,#5b6cd6 12%,var(--surface));font:inherit;color:var(--ink);text-align:start;min-height:58px}.lx-home>span:first-child{font-size:22px}
+/* v136 */
+.ci-spn{display:flex;flex-direction:column;gap:6px;margin-top:6px;text-align:start}
+.ci-az.ci-sprow{background:color-mix(in srgb,var(--calm,#1f9d6b) 9%,transparent)}.ci-az.ci-sprow.due{background:color-mix(in srgb,#f5a524 20%,transparent);box-shadow:0 0 0 2px color-mix(in srgb,#f5a524 45%,transparent) inset}
+.ci-az.ci-my{background:color-mix(in srgb,#8a63d2 10%,transparent)}.ci-az.ci-my .ci-bar i{background:#8a63d2}.ci-az.ci-my.done{background:color-mix(in srgb,#1f9d6b 13%,transparent)}.ci-az.ci-my.done .ci-bar i{background:#1f9d6b}
+.ci-add{align-self:flex-start;border:1.5px dashed color-mix(in srgb,var(--ink) 25%,transparent);border-radius:999px;background:transparent;padding:8px 14px;min-height:40px;font:inherit;font-size:.86rem;font-weight:700;color:var(--muted)}
+textarea.mx-in{min-height:84px;resize:vertical}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7789,7 +7795,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v135',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v136',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9371,6 +9377,85 @@ document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest
   [['sx','🧠','Symptoms'],['mx','💊','Medicine'],['lx','📚','Learning timer']].forEach(([k,i,l])=>{const b=document.createElement('button');b.type='button';b.className='apm-i';b.dataset.am=k;b.textContent=i+' '+tl(l);b.onclick=()=>{m.hidden=true;txOpen(k)};a.after(b);a=b})}catch(e){}return r}}
 GO.symptoms=GO.track=()=>txOpen('sx');GO.medicine=GO.meds=()=>txOpen('mx');GO.learn=GO.study=()=>txOpen('lx');
 try{WN2.unshift(['📚','Learning timer','learn'],['💊','Medicine tracker','medicine'],['🧠','Symptom tracker','symptoms'])}catch(e){}
+
+/* ===================== v136: adhkar split up + my own adhkar =====================
+   Split it up: do one dhikr now; the next one comes back after a few minutes or after your next to-do, always inside its time
+   (morning: Fajr → Dhuhr, evening: Asr → Fajr). Reminders show inside Fastaqim, gently. Never forced.
+   My adhkar: add any dhikr you want to keep yourself accountable to, with a count. Counted like the others (too-fast taps don't count). */
+[["Split it up","قسّمها","Qoodi","Kala qaybi"],["One now, the next one later","واحد الآن والتالي لاحقًا","Tokko amma, kan itti aanu booda","Mid hadda, kan xiga mar dambe"],["Next one","التالي","Kan itti aanu","Kan xiga"],
+ ["in 5 min","بعد ٥ دقائق","daqiiqaa 5 booda","5 daqiiqo kadib"],["in 15 min","بعد ١٥ دقيقة","daqiiqaa 15 booda","15 daqiiqo kadib"],["in 30 min","بعد ٣٠ دقيقة","daqiiqaa 30 booda","30 daqiiqo kadib"],["After my next to-do","بعد مهمتي التالية","Hojii koo itti aanu booda","Hawsha xigta kadib"],
+ ["Next dhikr is ready","الذكر التالي جاهز","Zikriin itti aanu qophaa'eera","Dhikriga xiga waa diyaar"],["Next dhikr","الذكر التالي","Zikrii itti aanu","Dhikriga xiga"],["Stop splitting","أوقف التقسيم","Qooduu dhaabi","Jooji kala qaybinta"],["before","قبل","dura","ka hor"],
+ ["All done for this time. Well done!","انتهيت منها كلها. أحسنت!","Hunduu xumurameera. Baay'ee gaarii!","Dhammaan waa la dhammeeyay. Mahadsanid!"],["It's ready when you are.","جاهز متى ما كنت جاهزًا.","Yeroo ati qophoofte qophaa'aa dha.","Waa diyaar markaad diyaar tahay."],
+ ["My adhkar","أذكاري","Zikrii koo","Adkaartayda"],["Add a dhikr","أضف ذكرًا","Zikrii dabali","Ku dar dhikri"],["Your own adhkar, to keep yourself on track.","أذكارك الخاصة لتلتزم بها.","Zikrii mataa keetii, of eeguuf.","Adkaartaada gaarka ah, si aad isula xisaabtanto."],
+ ["Text of the dhikr","نص الذكر","Barreeffama zikrii","Qoraalka dhikriga"],["How many times?","كم مرة؟","Si'a meeqa?","Imisa jeer?"],["When?","متى؟","Yoom?","Goorma?"],["Morning","الصباح","Ganama","Subax"],["Evening","المساء","Galgala","Fiid"],["Any time","أي وقت","Yeroo kamiyyuu","Wakhti kasta"],
+ ["Delete","حذف","Haqi","Tirtir"],["Please try other words","جرّب كلمات أخرى","Maaloo jechoota biroo yaali","Fadlan isku day erayo kale"],["Edit","تعديل","Gulaali","Wax ka beddel"],["Source (optional)","المصدر (اختياري)","Madda (dirqama miti)","Isha (ikhtiyaari)"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ---------- split it up ---------- */
+function ciWinEnd(kind){const P=ciPT();if(!P)return null;if(kind==='m')return P.dhuhr;const n=new Date();if(n<P.fajr)return P.fajr;const t=new Date(P.fajr.getTime()+864e5);return t}
+function ciWinOpen(kind){const W=ciWin();return kind==='m'?W.m:W.e}
+function ciListK(kind){return kind==='e'?ciMinE():ciMin()}
+function ciNextItem(kind){const o=ciPeek(),L=ciListK(kind);return L.find(x=>((o.az||{})[x.id]||0)<x.n)}
+function ciSp(){const s=S.ciSp;if(!s||s.day!==dkey())return null;return s}
+function ciSpDue(){const s=ciSp();if(!s||!ciWinOpen(s.kind)||!ciNextItem(s.kind))return false;return s.mode==='task'?!!s.go:Date.now()>=s.at}
+function ciAzOne(kind){const it=ciNextItem(kind);if(!it){S.ciSp=null;save();toast('✓ '+tl('All done for this time. Well done!'));ciRefresh();return}
+  S.ciSp={day:dkey(),kind,mode:'min',at:Date.now()+15*60000};save();
+  const _m=ciMin;ciMin=()=>[it];try{ciAzOpen()}finally{ciMin=_m}
+  const B=$('scrollBody');try{const ex=B.querySelector('.ci-more');if(ex)ex.remove();const l=B.querySelector('.ci-az-m > .label');if(l)l.textContent=(kind==='e'?'🌇 '+tl('Evening adhkar'):'🌅 '+tl('Morning adhkar'))+' · ✂️ '+tl('Split it up');
+    const L=ciListK(kind),o=ciPeek(),dn=L.filter(x=>((o.az||{})[x.id]||0)>=x.n).length,end=ciWinEnd(kind);
+    const box=document.createElement('div');box.className='ci-spn';box.innerHTML=`<p class="label">${esc(tl('Next one'))} · <span dir="ltr">${dn}/${L.length}</span></p><div class="lx-ch">${[['5','in 5 min'],['15','in 15 min'],['30','in 30 min'],['task','After my next to-do']].map(([v,l])=>`<button type="button" data-spm="${v}" class="${v==='15'?'on':''}">${esc(tl(l))}</button>`).join('')}</div>${end?`<p class="tx-sub">${esc(tl('before'))} ${esc(hmShort(end))}</p>`:''}`;
+    B.querySelector('.ci-az-m').appendChild(box);
+    box.querySelectorAll('[data-spm]').forEach(b=>b.onclick=e=>{e.stopPropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}const v=b.dataset.spm,s=S.ciSp;if(!s)return;
+      if(v==='task'){s.mode='task';s.go=0}else{s.mode='min';let at=Date.now()+(+v)*60000;const E=ciWinEnd(kind);if(E&&at>E.getTime()-5*60000)at=Math.max(Date.now(),E.getTime()-5*60000);s.at=at}save();box.querySelectorAll('[data-spm]').forEach(x=>x.classList.toggle('on',x===b))})}catch(e){}}
+function ciSpRow(){const s=ciSp();if(!s||!ciWinOpen(s.kind)||!ciNextItem(s.kind))return '';const due=ciSpDue(),L=ciListK(s.kind),o=ciPeek(),dn=L.filter(x=>((o.az||{})[x.id]||0)>=x.n).length;
+  const sub=due?tl("It's ready when you are."):s.mode==='task'?tl('After my next to-do'):hmShort(new Date(s.at));
+  return `<div class="ci-azw"><button type="button" class="ci-az ci-sprow${due?' due':''}${s.kind==='e'?' ev':''}" data-ci="spgo"><span class="ci-azi">✂️</span><span class="ci-azt"><b>${esc(tl(due?'Next dhikr is ready':'Next dhikr'))} · <span dir="ltr">${dn}/${L.length}</span></b><small>${esc(sub)}</small></span><span class="ci-go">›</span></button><button type="button" class="ci-nn" data-ci="spstop">${esc(tl('Stop splitting'))}</button></div>`}
+/* "Split it up" on the gentle card (Too much / Not today / I don't want to) and next to "Not now" */
+{const _cw=ciWhy;ciWhy=function(key){const r=_cw.apply(this,arguments);try{const kind=key.slice(3);if(kind!=='m'&&kind!=='e')return r;const B=$('scrollBody');
+  B.querySelectorAll('[data-w]').forEach(b=>{const oc=b.onclick;b.onclick=e=>{oc&&oc(e);if(b.dataset.w==='later')return;setTimeout(()=>{const one=$('ciOne');if(one&&!$('ciSplit')){const s=document.createElement('button');s.type='button';s.id='ciSplit';s.className='btn-main';s.style.width='100%';s.innerHTML=`✂️ ${esc(tl('Split it up'))}<small style="display:block;font-weight:500;opacity:.85">${esc(tl('One now, the next one later'))}</small>`;s.onclick=()=>{modalClose();setTimeout(()=>ciAzOne(kind),150)};one.before(s);one.className='btn-ghost'}},0)}})}catch(e){}return r}}
+/* after any to-do is finished, a waiting dhikr becomes ready */
+{const _fS=finishTask;finishTask=function(t){const r=_fS.apply(this,arguments);try{const s=ciSp();if(s&&s.mode==='task'&&!s.go){s.go=1;save();if(ciSpDue())setTimeout(()=>toast('✂️ '+tl('Next dhikr is ready')),1800)}}catch(e){}return r}}
+/* gentle in-app nudge when it becomes ready (once per item), never during another pop-up */
+const CISP={last:''};
+setInterval(()=>{try{if(!inApp()||document.hidden)return;const s=ciSp();if(!s||!ciSpDue())return;const it=ciNextItem(s.kind),k=s.day+it.id;if(CISP.last===k)return;if(!$('scrollModal').hidden)return;CISP.last=k;toast('✂️ '+tl('Next dhikr is ready'));try{navigator.vibrate&&navigator.vibrate([15,60,15])}catch(e){}ciRefresh()}catch(e){}},30000);
+
+/* ---------- my own adhkar ---------- */
+function myAz(){return S.ciMy=S.ciMy||[]}
+function myAzFor(){const W=ciWin();return myAz().filter(x=>x.w==='a'||(x.w==='m'&&W.m)||(x.w==='e'&&W.e))}
+function myAzRow(){const L=myAz();if(!L.length)return `<button type="button" class="ci-add" data-ci="myadd">+ ${esc(tl('My adhkar'))}</button>`;
+  const o=ciPeek(),A=(o.my||{}),n=L.filter(x=>(A[x.id]||0)>=x.n).length;
+  return `<div class="ci-azw"><button type="button" class="ci-az ci-my${n===L.length?' done':''}" data-ci="my"><span class="ci-azi">🤲</span><span class="ci-azt"><b>${esc(tl('My adhkar'))}</b><small dir="ltr">${n}/${L.length}</small></span><span class="ci-bar"><i style="width:${Math.round(n/L.length*100)}%"></i></span><span class="ci-go">›</span></button></div>`}
+{const _chM=ciHTML;ciHTML=function(){let h=_chM.apply(this,arguments);try{const j=h.lastIndexOf('</div>');if(j>0)h=h.slice(0,j)+ciSpRow()+myAzRow()+h.slice(j)}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="spgo"],#ciCard [data-ci="spstop"],#ciCard [data-ci="my"],#ciCard [data-ci="myadd"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  const k=b.dataset.ci;if(k==='spgo'){const s=ciSp();if(s)ciAzOne(s.kind)}else if(k==='spstop'){S.ciSp=null;save();ciRefresh()}else if(k==='my')myAzOpen();else myAzEdit()},true);
+const MYZ={last:{},open:0};
+function myAzOpen(){const L=myAz(),o=ciD();o.my=o.my||{};
+  const card=x=>{const c=o.my[x.id]||0,dn=c>=x.n;return `<div class="ci-z${dn?' dn':''}" data-my="${x.id}" role="button" tabindex="0"><div class="ci-zh"><span class="ci-zc" dir="ltr">${c}/${x.n}</span><button type="button" class="ci-zu" data-myu="${x.id}" aria-label="${esc(tl('Undo'))}" ${c?'':'hidden'}>↶</button><button type="button" class="ci-zu" data-mye="${x.id}" aria-label="${esc(tl('Edit'))}">✎</button></div>
+    <p class="ayq ci-zar" dir="auto">${esc(x.t)}</p>${x.src?`<p class="ci-zs">${esc(x.src)}</p>`:''}<p class="ci-zs">${esc(tl(x.w==='m'?'Morning':x.w==='e'?'Evening':'Any time'))}</p><span class="ci-zb"><i style="width:${Math.min(100,c/x.n*100)}%"></i></span></div>`};
+  modalCard(`<div class="ci-az-m"><p class="label">🤲 ${esc(tl('My adhkar'))}</p><p class="ci-tip">${esc(tl('Your own adhkar, to keep yourself on track.'))}</p>${L.map(card).join('')}<button type="button" class="btn-ghost" style="width:100%" id="myAdd">+ ${esc(tl('Add a dhikr'))}</button></div>`);
+  const B=$('scrollBody');$('myAdd').onclick=()=>myAzEdit();MYZ.open=Date.now()-60000;MYZ.last={};
+  B.onclick=e=>{const ed=e.target.closest('[data-mye]');if(ed){e.stopPropagation();return myAzEdit(ed.dataset.mye)}
+    const u=e.target.closest('[data-myu]');if(u){e.stopPropagation();const id=u.dataset.myu,x=L.find(y=>y.id===id),o2=ciD();o2.my=o2.my||{};const was=(o2.my[id]||0)>=x.n;o2.my[id]=Math.max(0,(o2.my[id]||0)-1);if(was)ciAw('my_'+id,0,'🤲 '+tl('My adhkar'));save();myAzPaint(id,x);return}
+    const c=e.target.closest('[data-my]');if(!c)return;const id=c.dataset.my,x=L.find(y=>y.id===id);if(!x)return;const o2=ciD();o2.my=o2.my||{};const n=o2.my[id]||0;if(n>=x.n)return;
+    const now=Date.now(),l=MYZ.last[id]||MYZ.open;const gap=Math.max(700,Math.min(12000,String(x.t).replace(/\s/g,'').length*45));if(l&&now-l<gap){c.classList.remove('slow');void c.offsetWidth;c.classList.add('slow');return}
+    MYZ.last[id]=now;o2.my[id]=n+1;try{navigator.vibrate&&navigator.vibrate(10)}catch(z){}if(n+1>=x.n){const g=ciAw('my_'+id,1,'🤲 '+tl('My adhkar'));if(g)toast('✓ +'+g+' ⭐')}save();myAzPaint(id,x)};
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden){mo.disconnect();ciRefresh()}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']})}
+function myAzPaint(id,x){const c=$('scrollBody').querySelector(`[data-my="${id}"]`);if(!c)return;const n=(ciD().my||{})[id]||0;c.querySelector('.ci-zc').textContent=n+'/'+x.n;c.querySelector('.ci-zb i').style.width=Math.min(100,n/x.n*100)+'%';c.classList.toggle('dn',n>=x.n);const u=c.querySelector('[data-myu]');if(u)u.hidden=!n}
+function myAzEdit(id){const L=myAz(),x=L.find(y=>y.id===id)||{t:'',n:3,w:'a',src:''};let n=x.n,w=x.w;
+  const paint=()=>{txBare(`<p class="label">🤲 ${esc(tl(id?'Edit':'Add a dhikr'))}</p>
+   <label class="mx-lb">${esc(tl('Text of the dhikr'))}<textarea id="myT" class="mx-in" rows="3" maxlength="400" dir="auto">${esc(x.t)}</textarea></label>
+   <p class="label">${esc(tl('How many times?'))}</p><div class="lx-ch" id="myN">${[1,3,7,10,33,100].map(v=>`<button type="button" data-v="${v}" class="${n===v?'on':''}">${v}</button>`).join('')}</div>
+   <p class="label">${esc(tl('When?'))}</p><div class="lx-ch" id="myW">${[['m','Morning'],['e','Evening'],['a','Any time']].map(([v,l])=>`<button type="button" data-v="${v}" class="${w===v?'on':''}">${esc(tl(l))}</button>`).join('')}</div>
+   <label class="mx-lb">${esc(tl('Source (optional)'))}<input id="myS" class="mx-in" maxlength="80" value="${esc(x.src||'')}"></label>
+   <button type="button" class="btn-main" style="width:100%;margin-top:10px" id="myOk">✓ ${esc(tl('Save'))}</button>
+   ${id?`<button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="myDel">${esc(tl('Delete'))}</button>`:''}
+   <button type="button" class="btn-ghost" style="width:100%;margin-top:6px" id="myBk">${esc(tl('Back'))}</button>`);
+   const B=$('scrollBody');B.querySelectorAll('#myN [data-v]').forEach(b=>b.onclick=()=>{x.t=$('myT').value;x.src=$('myS').value;n=+b.dataset.v;paint()});B.querySelectorAll('#myW [data-v]').forEach(b=>b.onclick=()=>{x.t=$('myT').value;x.src=$('myS').value;w=b.dataset.v;paint()});
+   $('myOk').onclick=()=>{const t=$('myT').value.trim();if(!t){$('myT').focus();return}try{if(typeof noStar==='function'&&noStar(t)){toast(tl('Please try other words'));return}}catch(e){}
+     const src=$('myS').value.trim();if(id){Object.assign(L.find(y=>y.id===id),{t,n,w,src})}else L.push({id:'u'+Date.now().toString(36),t,n,w,src});save();toast('✓ '+tl('Saved'));myAzOpen()};
+   if($('myDel'))$('myDel').onclick=()=>{const i=L.findIndex(y=>y.id===id);if(i<0)return;const del=L.splice(i,1)[0];save();myAzOpen();fqUndoToast(()=>{L.splice(i,0,del);save();myAzOpen()},tl('Deleted'))};
+   $('myBk').onclick=()=>L.length?myAzOpen():(modalClose(),ciRefresh())};paint()}
+GO.myadhkar=()=>myAzOpen();GO.split=()=>ciAzOne(ciWin().e&&!ciWin().m?'e':'m');
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
