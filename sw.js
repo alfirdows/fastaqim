@@ -1,7 +1,7 @@
 /* Fastaqim offline support: the page is fetched fresh when online (so updates reach everyone) and kept for offline use.
    Your to-dos and calendar live on your phone, so they open without WiFi and sync when you are back online. */
 const CACHE="fastaqim-v158";
-const CORE=["./","index.html","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png"];
+const CORE=["./","index.html","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","fonts/UthmanicHafs.otf","haptic.js"];
 const LIBS=["fonts.googleapis.com","fonts.gstatic.com","cdn.jsdelivr.net","unpkg.com"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
 self.addEventListener("activate",e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE&&k!=="fq-rem"&&k!=="fq-audio").map(k=>caches.delete(k)))).then(()=>self.clients.claim()))});
@@ -11,10 +11,11 @@ self.addEventListener("fetch",e=>{const req=e.request;if(req.method!=="GET")retu
  if(url.pathname.endsWith(".ics"))return;
  if(url.pathname.includes("/next/"))return; /* the new-design preview is never cached as the main page */
  const same=url.origin===self.location.origin;
- if(!same&&!LIBS.includes(url.hostname))return; /* account data, translation, Quran.com: always live */
+ const AUD=url.hostname==="everyayah.com"&&/\.mp3$/.test(url.pathname); /* Saad al-Ghamdi per-ayah audio: kept once played */
+ if(!same&&!LIBS.includes(url.hostname)&&!AUD)return; /* account data, translation, Quran.com: always live */
  if(req.mode==="navigate"||(same&&(url.pathname.endsWith("/index.html")||url.pathname.endsWith("/")))){
   e.respondWith(fetch(req,{cache:"no-cache"}).then(r=>{const cp=r.clone();caches.open(CACHE).then(c=>c.put("index.html",cp));return r}).catch(()=>caches.match("index.html")));return}
- if(/\.(m4a|mp3)$/.test(url.pathname)){e.respondWith((async()=>{const c=await caches.open(/\/audio\//.test(url.pathname)?"fq-audio":CACHE);const hit=await c.match(req.url,{ignoreSearch:true});
+ if(/\.(m4a|mp3)$/.test(url.pathname)){e.respondWith((async()=>{const c=await caches.open(AUD||/\/audio\//.test(url.pathname)?"fq-audio":CACHE);const hit=await c.match(req.url,{ignoreSearch:true});
   if(hit)return req.headers.get("range")?rangeFrom(hit,req):hit;
   try{const full=await fetch(req.url);if(full.ok){await c.put(req.url,full.clone());return req.headers.get("range")?rangeFrom(full,req):full}}catch(err){}return fetch(req)})());return}
  if(url.pathname.endsWith(".pdf")||url.pathname.endsWith("/sw.js"))return;
