@@ -12,7 +12,7 @@ Object.assign(T,{
 const tt=k=>tl(k),wal=n=>{try{if(window.FQWallet&&n>0)FQWallet.add(n)}catch(e){}};
 let M=null;
 const css=document.createElement('style');css.textContent=`
-#mini{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:linear-gradient(#123a5a,#0e6e6a);color:#fff;font-family:Inter,system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none}
+#mini{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;background:linear-gradient(#3b82f6,#8b5cf6);color:#fff;font-family:Inter,system-ui,sans-serif;touch-action:none;user-select:none;-webkit-user-select:none}
 #mini .mb{display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top) + 10px) 12px 8px}
 #mini .mb button,#mini .mb span{height:40px;border-radius:20px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.2);color:#fff;font:800 15px Inter,system-ui;padding:0 14px;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 #mini .mb .sp{flex:1;background:none;border:0;padding:0}
@@ -24,18 +24,18 @@ const css=document.createElement('style');css.textContent=`
 .mm{display:grid;gap:8px;width:min(100%,420px)}
 .mc{aspect-ratio:3/4;perspective:600px;cursor:pointer}.mc>div{position:relative;width:100%;height:100%;transition:transform .35s;transform-style:preserve-3d}
 .mc.f>div,.mc.ok>div{transform:rotateY(180deg)}.mc b,.mc u{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:grid;place-items:center}
-.mc b{background:linear-gradient(145deg,#10b981,#047857);box-shadow:inset 0 0 0 3px rgba(255,255,255,.25),0 6px 14px -6px rgba(0,0,0,.5)}
+.mc b{background:linear-gradient(145deg,#60a5fa,#6366f1);box-shadow:inset 0 0 0 3px rgba(255,255,255,.25),0 6px 14px -6px rgba(0,0,0,.5)}
 .mc b::after{content:'';width:42%;aspect-ratio:1;border-radius:50%;border:3px solid rgba(255,255,255,.35)}
 .mc u{text-decoration:none;background:#fff;transform:rotateY(180deg);font-size:clamp(26px,9vw,40px);box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
-.mc.ok u{background:#ecfdf5;box-shadow:0 0 0 3px #34d399}
-.g2{position:relative;width:min(100%,400px);aspect-ratio:1;background:#0b3b4f;border-radius:18px;padding:8px}
+.mc.ok u{background:#fefce8;box-shadow:0 0 0 3px #facc15}
+.g2{position:relative;width:min(100%,400px);aspect-ratio:1;background:rgba(15,23,42,.28);border-radius:18px;padding:8px}
 .g2 .c,.g2 .t{position:absolute;width:calc((100% - 40px)/4);height:calc((100% - 40px)/4);border-radius:12px}
 .g2 .c{background:rgba(255,255,255,.08)}
 .g2 .t{display:grid;place-items:center;font:900 clamp(18px,6.5vw,30px) Inter,system-ui;color:#fff;transition:left .12s,top .12s;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18)}
 .g2 .t.n{animation:mpop .18s}.g2 .t.m{animation:mpop2 .2s}
 @keyframes mpop{from{transform:scale(.3)}to{transform:scale(1)}}@keyframes mpop2{50%{transform:scale(1.15)}}`;
 document.head.appendChild(css);
-const GEM=['#94a3b8','#22c55e','#14b8a6','#0ea5e9','#3b82f6','#6366f1','#8b5cf6','#d946ef','#ec4899','#f43f5e','#f97316','#f59e0b','#eab308'];
+const GEM=['#94a3b8','#4ade80','#2dd4bf','#0ea5e9','#3b82f6','#6366f1','#8b5cf6','#d946ef','#ec4899','#f43f5e','#f97316','#f59e0b','#eab308'];
 /* ---------- shared: time rules ---------- */
 function canStart(mode){try{BR=brGet();if(brTaskSince(BR.at)){BR={s:0,at:Date.now()};brSet(BR)}if(BR.s>=BR_MAX){brCard();return false}}catch(e){}
  if(mode==='free'){try{if(fqLeft()<=0){toast('🌟 '+tl('fq_back'));return false}FQ=plGet();FQ._d=fqDay();FQ._sp=0}catch(e){}}return true}
