@@ -10021,7 +10021,17 @@ const SALL=[ // [en, ar, om, so] · source
 {const _pi=pushItems;pushItems=function(){const o=_pi.apply(this,arguments);try{const L=SALT[LANG]?LANG:'en',li={en:0,ar:1,om:2,so:3}[L];
   o.forEach(x=>{const m=/^sal-(\w+)/.exec(x.tag||'');if(!m)return;const j=SQK.indexOf(m[1]);if(j<0)return;
     const day=Math.floor((x.at-new Date(x.at).getTimezoneOffset()*60000)/864e5),set=SALL[j];
-    x.title=SALT[L](tl(SQ5[j]));x.body=set[(day+j)%set.length][li]})}catch(e){}return o}}
+    x.title=SALT[L](tl(SQ5[j]));x.body=set[(day+j)%set.length][li];
+    x.at+=((S.remind||{}).before||0)*60000})}catch(e){}return o}} // salah alert exactly at the salah time (Tasnim 18 Nov); "minutes before" is for to-dos only
+/* 15 minutes before a salah's time ends, a gentle nudge, only if that salah isn't marked yet (Tasnim 18 Nov). Nothing before the adhan. */
+const SALE={en:[p=>'There\'s still time for '+p,'About 15 minutes left in its time.'],ar:[p=>'ما زال هناك وقت لصلاة '+p,'بقي نحو ١٥ دقيقة على خروج وقتها.'],
+ om:[p=>'Ammallee yeroon salaata '+p+' ni jira','Yeroo isheetiif daqiiqaa 15 qofatu hafe.'],so:[p=>'Wali waqti ayaa u haray salaadda '+p,'Qiyaastii 15 daqiiqo ayaa ka harsan waqtigeeda.']};
+{const _pe=pushItems;pushItems=function(){const o=_pe.apply(this,arguments);try{const R=S.remind||{};if(!R.salah)return o;const now=Date.now(),L=SALE[LANG]?LANG:'en';
+  for(let i=0;i<14;i++){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+i);const P=salahFor(d);if(!P)continue;const n=new Date(d);n.setDate(n.getDate()+1);const N=salahFor(n),q=salQ(d);
+    const end=[P.sunrise,P.asr,P.maghrib,P.isha,N?new Date(P.maghrib.getTime()+(N.fajr-P.maghrib)/2):null]; // Isha ends at the middle of the night (Muslim 612)
+    SQK.forEach((k,j)=>{if(q[j]||!end[j])return;const at=end[j].getTime()-15*60000;if(at<=now+30000||at-P[k].getTime()<20*60000)return;
+      o.push({at,title:'🕌 '+SALE[L][0](tl(SQ5[j])),body:SALE[L][1],tag:'sle-'+k+'-'+dkey(d)})})}
+  o.sort((a,b)=>a.at-b.at)}catch(e){}return o}}
 
 
 /* hostile or insulting words toward anyone: never saved, never sent in a notification */
