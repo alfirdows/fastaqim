@@ -2210,6 +2210,55 @@ body.is-guest #scrollModal.zk-pg #scrollBody{padding-top:calc(58px + env(safe-ar
 .tx-sticky{background:var(--surface)!important;padding:10px 0 4px!important;margin-top:10px;border-top:1px solid var(--line);z-index:2;box-shadow:0 -8px 12px -10px rgba(0,0,0,.18)}
 .hm-vd .l small{text-transform:none!important;letter-spacing:0!important}
 #scrollModal.zk-pg .mc-bar{margin:0 -16px 0!important;top:0!important;padding:8px 12px 0!important;height:50px!important}#scrollModal.zk-pg #scrollBody{padding-top:env(safe-area-inset-top,0px)!important}body.is-guest #scrollModal.zk-pg #scrollBody{padding-top:calc(52px + env(safe-area-inset-top,0px))!important}
+/* v142: salah streak celebration */
+.sqc{position:fixed;inset:0;z-index:300;background:radial-gradient(120% 80% at 50% 18%,#1d7a5f 0%,#0e4a3a 45%,#072b22 100%);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;animation:sqcIn .3s ease both;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px))}
+.sqc.out{animation:sqcOut .25s ease both}
+@keyframes sqcIn{from{opacity:0}to{opacity:1}}@keyframes sqcOut{to{opacity:0;transform:scale(1.03)}}
+body.sqc-open{overflow:hidden}
+.sqc-sky{position:absolute;inset:0;pointer-events:none}.sqc-sky b{position:absolute;left:var(--x);top:var(--y);width:3px;height:3px;border-radius:50%;background:#fff;opacity:.5;animation:sqcTw 2.4s var(--t) ease-in-out infinite}
+@keyframes sqcTw{50%{opacity:.12;transform:scale(.6)}}
+.sqc-in{position:relative;width:100%;max-width:360px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.sqc-st{position:relative;width:132px;height:132px;animation:sqcPop 1.15s cubic-bezier(.2,1.4,.4,1) both;transform-origin:50% 60%}
+.sqc-st svg{position:relative;width:100%;height:100%;filter:drop-shadow(0 0 22px rgba(255,210,74,.65));animation:sqcBob 2.8s 1.2s ease-in-out infinite}
+.sqc-ray{position:absolute;inset:-60%;background:conic-gradient(from 0deg,transparent 0 6%,rgba(255,220,120,.22) 6% 10%,transparent 10% 18.5%,rgba(255,220,120,.22) 18.5% 22.5%,transparent 22.5% 31%,rgba(255,220,120,.22) 31% 35%,transparent 35% 43.5%,rgba(255,220,120,.22) 43.5% 47.5%,transparent 47.5% 56%,rgba(255,220,120,.22) 56% 60%,transparent 60% 68.5%,rgba(255,220,120,.22) 68.5% 72.5%,transparent 72.5% 81%,rgba(255,220,120,.22) 81% 85%,transparent 85% 93.5%,rgba(255,220,120,.22) 93.5% 97.5%,transparent 97.5%);border-radius:50%;-webkit-mask:radial-gradient(circle,#000 25%,transparent 68%);mask:radial-gradient(circle,#000 25%,transparent 68%);animation:sqcSpin 14s linear infinite,sqcIn .8s .2s both}
+.sqc-st em{position:absolute;left:50%;top:55%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:#FFE07A;opacity:0;transform:rotate(var(--a)) translateY(0);animation:sqcSpark .9s .35s ease-out both}
+.sqc-st em:nth-child(odd){background:#fff;width:6px;height:6px}
+@keyframes sqcSpark{0%{opacity:1;transform:rotate(var(--a)) translateY(0) scale(1)}100%{opacity:0;transform:rotate(var(--a)) translateY(-110px) scale(.3)}}
+@keyframes sqcPop{0%{transform:scale(0) rotate(-25deg)}45%{transform:scale(1.5) rotate(6deg)}70%{transform:scale(1.38)}100%{transform:scale(.82)}}
+@keyframes sqcBob{50%{transform:translateY(-5px) rotate(3deg)}}
+@keyframes sqcSpin{to{transform:rotate(360deg)}}
+.sqc-n{position:relative;height:86px;overflow:hidden;margin-top:6px;font:900 78px/86px var(--display,system-ui);color:#FFF4D6;letter-spacing:-.02em;text-shadow:0 4px 0 rgba(0,0,0,.18);animation:sqcUp .5s .85s both;min-width:2ch}
+.sqc-n span{display:block;transition:transform .55s cubic-bezier(.3,1.5,.5,1),opacity .4s}
+.sqc-n .v{position:absolute;inset:0;transform:translateY(100%);opacity:0}
+.sqc:not(.big) .sqc-n .o{display:none}.sqc:not(.big) .sqc-n .v{position:static;transform:none;opacity:1}
+.sqc.roll .sqc-n .o{transform:translateY(-100%);opacity:0}.sqc.roll .sqc-n .v{transform:none;opacity:1}
+.sqc.roll .sqc-n{animation:sqcThump .5s 0s both}
+@keyframes sqcThump{40%{transform:scale(1.25)}100%{transform:scale(1)}}
+.sqc-l{margin:0;font:800 .82rem var(--body);letter-spacing:.16em;text-transform:uppercase;color:#CFEBDD;animation:sqcUp .5s .95s both}
+html[lang=ar] .sqc-l,.sqc-l:lang(ar){letter-spacing:0}
+@keyframes sqcUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.sqc-bs{display:flex;gap:8px;margin:18px 0 6px;justify-content:center}
+.sqc-b{display:flex;flex-direction:column;align-items:center;gap:5px;animation:sqcUp .4s calc(1.05s + var(--d) * .09s) both}
+.sqc-b i{width:34px;height:34px;border-radius:50%;border:2.5px solid rgba(255,255,255,.28);display:grid;place-items:center;font-style:normal;font-weight:900;font-size:15px;color:#0e4a3a;transition:.3s}
+.sqc-b.ok i{background:#FFD24A;border-color:#FFD24A}.sqc-b.late i{background:#F4C46A;border-color:#F4C46A}
+.sqc-b.sqc-cur i{animation:sqcBead .7s 1.4s both;box-shadow:0 0 0 0 rgba(255,210,74,.6)}
+@keyframes sqcBead{0%{transform:scale(.4)}55%{transform:scale(1.3);box-shadow:0 0 0 10px rgba(255,210,74,0)}100%{transform:scale(1)}}
+.sqc-b small{font:700 .66rem var(--body);color:#CFEBDD}
+.sqc-wk{width:100%;margin-top:14px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:20px;padding:14px 12px 12px;animation:sqcUp .5s 1.5s both}
+.sqc-ws{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.sqc-d{display:flex;flex-direction:column;align-items:center;gap:6px}
+.sqc-d small{font:800 .66rem var(--body);color:#9FCBB6;text-transform:uppercase}.sqc-d.td small{color:#fff}
+.sqc-d i{position:relative;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;font-style:normal;font-weight:900;font-size:13px;color:#0e4a3a;overflow:hidden}
+.sqc-d.ok i{background:#FFD24A}.sqc-d.td i{outline:2px solid rgba(255,255,255,.55);outline-offset:2px}
+.sqc-d i em{position:absolute;inset:auto 0 0;height:var(--p);background:rgba(255,210,74,.45)}
+.sqc-wk p{margin:12px 0 0;font:600 .92rem/1.4 var(--body);color:#fff;text-wrap:balance}
+.sqc-wk .sqc-best{margin-top:4px;font-size:.78rem;color:#FFE59A}
+.sqc-ok{margin-top:22px;min-height:50px;padding:0 26px;border:0;border-radius:99px;background:#FFF4D6;color:#0B5040;font:800 1rem var(--body);box-shadow:0 8px 22px -10px rgba(0,0,0,.5);animation:sqcUp .5s 1.8s both}
+.sqc.view .sqc-st,.sqc.view .sqc-n,.sqc.view .sqc-l,.sqc.view .sqc-b,.sqc.view .sqc-wk,.sqc.view .sqc-ok{animation-delay:0s!important;animation-duration:.35s}
+.sqc.view .sqc-st{animation-name:sqcIn}.sqc.view .sqc-st{transform:scale(.82)}
+@media (prefers-reduced-motion:reduce){.sqc *,.sqc{animation:none!important;transition:none!important}.sqc-st{transform:scale(.82)}}
+.sq-chip{display:inline-flex;align-items:center;gap:4px;margin-top:3px;min-height:26px;padding:0 10px;border-radius:99px;border:1.5px solid color-mix(in srgb,#E8A317 55%,transparent);background:color-mix(in srgb,#FFD24A 16%,transparent);color:var(--ink);font:700 .76rem var(--body)}
+.sq-chip.on{background:#FFD24A;border-color:#FFD24A;color:#3b2a00}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7851,7 +7900,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v141',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v142',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -9773,6 +9822,56 @@ try{new MutationObserver(()=>{const m=$('scrollModal');if(m&&m.hidden&&m.classLi
 ["Qur'an 2:285–286 · al-Bukhārī 5009","القرآن ٢: ٢٨٥–٢٨٦ · البخاري ٥٠٠٩","Qur'aana 2:285–286 · al-Bukhaarii 5009","Qur'aanka 2:285–286 · al-Bukhaari 5009"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 [["I'll sit here with you.","سأجلس هنا معك.","Asitti si wajjin taa'a.","Halkan ayaan kula fadhiyi doonaa."]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* v142: animated salah streak. A day counts when all 5 are prayed (on time, late or made up; "Excused" holds it). */
+function sqFull(d){const q=salQ(d);for(let i=0;i<5;i++){const v=q[i];if(!(v==='on'||v==='late'||v==='exc'))return false}return true}
+function sqCnt(d){const q=salQ(d);let n=0;for(let i=0;i<5;i++){const v=q[i];if(v==='on'||v==='late'||v==='exc')n++}return n}
+function sqStreak(){let n=0;const d=new Date();if(!sqFull(d))d.setDate(d.getDate()-1);while(sqFull(d)&&n<3650){n++;d.setDate(d.getDate()-1)}return n}
+function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
+function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
+const SQSTAR='<svg viewBox="0 0 100 100" aria-hidden="true"><defs><radialGradient id="sqg" cx="50%" cy="42%" r="60%"><stop offset="0" stop-color="#FFF6C7"/><stop offset=".55" stop-color="#FFD24A"/><stop offset="1" stop-color="#E8A317"/></radialGradient></defs><path d="M50 6c2.4 0 3.9 1.5 5 3.8l10.2 21 23 3.3c2.6.4 4.2 1.6 4.9 3.7.7 2.2-.1 4-1.9 5.8L74.5 59.9l3.9 22.9c.4 2.6-.2 4.5-2 5.8-1.9 1.3-3.9 1.2-6.2 0L50 77.8 29.8 88.6c-2.3 1.2-4.3 1.3-6.2 0-1.8-1.3-2.4-3.2-2-5.8l3.9-22.9L8.8 43.6c-1.8-1.8-2.6-3.6-1.9-5.8.7-2.1 2.3-3.3 4.9-3.7l23-3.3L45 9.8C46.1 7.5 47.6 6 50 6z" fill="url(#sqg)" stroke="#C98A0E" stroke-width="2.5" stroke-linejoin="round"/><ellipse cx="38" cy="34" rx="7" ry="4.5" fill="#fff" opacity=".55" transform="rotate(-30 38 34)"/></svg>';
+function sqCelebrate(i,kind,view){try{const old=document.getElementById('sqCel');if(old)old.remove()}catch(e){}
+  const full=sqFull(),n=sqStreak(),best=sqBest(),q=salQ(),c=sqCnt(),justDone=!view&&full&&kind!=='exc',from=justDone?Math.max(0,n-1):n;
+  const nm=i!=null?tl(SQ5[i]):'';let msg;
+  if(view)msg=full?tl('All 5 today. Alhamdulillah!'):(n?tl('Pray all 5 today to make it {n}.').replace('{n}',(n+1).toLocaleString(LOC())):tl('Pray all 5 today to start your streak.'));
+  else if(justDone)msg=tl('All 5 today. Your streak grows!');
+  else if(kind==='qada')msg=tl('Made up. It counts, alhamdulillah.');
+  else if(kind==='late')msg=tl('{s} prayed. Late still counts.').replace('{s}',nm);
+  else msg=tl('{s} on time. {c} of 5 today.').replace('{s}',nm).replace('{c}',c.toLocaleString(LOC()));
+  const fresh=!view&&!n&&c===1;if(fresh)msg=tl('Fresh start. Day 1 begins today.');
+  const beads=SQ5.map((s,k)=>{const v=q[k],ok=v==='on'||v==='late'||v==='exc';return `<span class="sqc-b${ok?' ok':''}${k===i&&!view?' sqc-cur':''}${v==='late'?' late':''}" style="--d:${k}"><i>${ok?'✓':''}</i><small>${esc(tl(s))}</small></span>`}).join('');
+  const wk=sqWeek().map((x,k)=>`<span class="sqc-d${x.full?' ok':''}${x.today?' td':''}" style="--d:${k}"><small>${esc(x.w)}</small><i>${x.full?'✓':x.n?'<em style="--p:'+(x.n*20)+'%"></em>':''}</i></span>`).join('');
+  const el=document.createElement('div');el.id='sqCel';el.className='sqc'+(justDone?' big':'')+(view?' view':'');el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');
+  el.innerHTML=`<div class="sqc-sky" aria-hidden="true">${Array.from({length:22},(_,k)=>`<b style="--x:${(k*37)%100}%;--y:${(k*53)%62}%;--t:${(k%7)*.4}s"></b>`).join('')}</div>
+   <div class="sqc-in"><div class="sqc-st" aria-hidden="true"><span class="sqc-ray"></span>${SQSTAR}${Array.from({length:10},(_,k)=>`<em style="--a:${k*36}deg"></em>`).join('')}</div>
+   <div class="sqc-n" dir="ltr"><span class="o">${from.toLocaleString(LOC())}</span><span class="v">${(justDone?n:from).toLocaleString(LOC())}</span></div>
+   <p class="sqc-l">${esc(tl('day salah streak'))}</p>
+   <div class="sqc-bs">${beads}</div>
+   <div class="sqc-wk"><div class="sqc-ws">${wk}</div><p>${esc(msg)}</p>${best>1?`<p class="sqc-best">⭐ ${esc(tl('Best'))}: ${best.toLocaleString(LOC())}</p>`:''}</div>
+   <button type="button" class="sqc-ok">${view?esc(tl('Close')):`<span class="notranslate" lang="ar" dir="rtl">الحمد لله</span>${LANG==='ar'?'':' · '+esc(tl('Alhamdulillah'))}`}</button></div>`;
+  document.body.appendChild(el);document.body.classList.add('sqc-open');
+  const close=()=>{el.classList.add('out');document.body.classList.remove('sqc-open');setTimeout(()=>el.remove(),260);save()};
+  el.querySelector('.sqc-ok').onclick=close;
+  if(!view){try{if(!S.calm&&navigator.vibrate)navigator.vibrate(justDone?[18,70,18,70,18,120,45]:kind==='late'||kind==='qada'?[14,60,14]:[16,50,26])}catch(e){}}
+  if(justDone)setTimeout(()=>el.classList.add('roll'),1250);
+  return el}
+/* hook: after On time / Late in the salah sheet, and after "I prayed it now" */
+{const _sm=salMark;salMark=function(i){const r=_sm.apply(this,arguments);try{const sb=$('scrollBody');['on','late'].forEach(v=>{const b=sb.querySelector(`[data-sq="${v}"]`);if(b){const f=b.onclick;b.onclick=()=>{const was=salQ()[i];f&&f();if(was!==v)setTimeout(()=>sqCelebrate(i,v),120)}}})}catch(e){}return r}}
+{const _mc=missCard;missCard=function(i){const r=_mc.apply(this,arguments);try{const b=$('msPray');if(b){const f=b.onclick;b.onclick=()=>{f&&f();setTimeout(()=>sqCelebrate(i,'qada'),140)}}}catch(e){}return r}}
+/* streak chip on the check-in card: tap to see it */
+{const _ch=ciHTML;ciHTML=function(){let h=_ch.apply(this,arguments);try{const n=sqStreak(),full=sqFull();h=h.replace('<p class="ci-st">',`<button type="button" class="sq-chip${full?' on':''}" data-sqv="1">⭐ <b>${n.toLocaleString(LOC())}</b> ${esc(tl(n===1?'day in a row':'days in a row'))}</button><p class="ci-st">`)}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-sqv]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();sqCelebrate(null,null,true)},true);
+[["All 5 today. Alhamdulillah!","الصلوات الخمس اليوم. الحمد لله!","Har'a 5n hundi xumuraniiru. Alhamdulillah!","Maanta 5-ta oo dhan. Alxamdulillaah!"],
+["Pray all 5 today to make it {n}.","صلِّ الخمس اليوم لتصبح {n}.","Har'a 5n hundi salaati, {n} akka ta'uuf.","Maanta tuko 5-ta si ay u noqoto {n}."],
+["Pray all 5 today to start your streak.","صلِّ الخمس اليوم لتبدأ سلسلتك.","Tarree kee jalqabuuf har'a 5n hundi salaati.","Maanta tuko 5-ta si aad isku xigtadaada u bilowdo."],
+["All 5 today. Your streak grows!","الصلوات الخمس اليوم. سلسلتك تكبر!","Har'a 5n hundi! Tarreen kee ni guddata!","Maanta 5-ta oo dhan. Isku xigtadaadu way korayaa!"],
+["Made up. It counts, alhamdulillah.","قضيتها. تُحسب لك، الحمد لله.","Ni baafatte. Ni lakkaa'ama, alhamdulillah.","Waad qadaysay. Waa la tiriyaa, alxamdulillaah."],
+["{s} prayed. Late still counts.","صليت {s}. المتأخرة تُحسب أيضًا.","{s} salaatte. Yeroo darbe illee ni lakkaa'ama.","{s} waad tukatay. Daahitaankuna waa la tiriyaa."],
+["{s} on time. {c} of 5 today.","{s} في وقتها. {c} من 5 اليوم.","{s} yeroodhaan. Har'a 5 keessaa {c}.","{s} waqtigeeda. Maanta {c} ka mid ah 5."],
+["Fresh start. Day 1 begins today.","بداية جديدة. اليوم الأول يبدأ اليوم.","Jalqaba haaraa. Guyyaan 1ffaa har'a jalqaba.","Bilow cusub. Maalinta 1aad maanta ayay bilaabantaa."],
+["day salah streak","يوم صلاة متتالية","guyyaa salaata walitti aanaa","maalmood salaad isku xigta"],
+["Best","الأفضل","Isa caalu","Ugu fiican"],["Alhamdulillah","الحمد لله","Alhamdulillah","Alxamdulillaah"],["day in a row","يوم متتالٍ","guyyaa walitti aanaa","maalin isku xigta"],["days in a row","أيام متتالية","guyyaa walitti aanaa","maalmood isku xigta"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
