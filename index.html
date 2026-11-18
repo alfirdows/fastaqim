@@ -2156,6 +2156,46 @@ body.td-done #tab-today>:not(#tdSeg):not(#doneCard):not(.hub-bar):not(.scr-bar){
 textarea.mx-in{min-height:84px;resize:vertical}
 .ci-k2{display:flex;gap:4px;min-width:132px}.ci-k2 button{flex:1;border:1.5px solid var(--line);border-radius:12px;background:var(--surface);font:inherit;font-size:.8rem;font-weight:700;color:var(--ink);min-height:44px;padding:4px 6px}
 .ci-k2 button[data-ci="kr"]{border-color:color-mix(in srgb,#1f9d6b 45%,var(--line));color:#1a7f57}.ci-k2 button.on{background:color-mix(in srgb,var(--ink) 8%,transparent);color:var(--muted)}
+/* v137: full-screen adhkar reader */
+#scrollModal.adf-on{padding:0!important;background:var(--bg,#f4f6f8)!important;z-index:2147483000!important}
+body.adf-open .bnav,body.adf-open #bNav{display:none!important}
+#scrollModal.adf-on #scrollBody{position:fixed;inset:0;width:100%;max-width:none!important;max-height:none!important;height:var(--fqvh,100dvh);margin:0;border-radius:0!important;border:0!important;box-shadow:none!important;box-sizing:border-box;padding:calc(env(safe-area-inset-top,0px) + 8px) 16px calc(env(safe-area-inset-bottom,0px) + 12px)!important;overflow-y:auto;display:flex;flex-direction:column;background:var(--bg,#f4f6f8)}
+#scrollModal.adf-on .mc-bar{display:none!important}
+.adf{display:flex;flex-direction:column;gap:12px;flex:1;min-height:100%}
+.adf-h{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:8px;position:sticky;top:0;z-index:3;background:var(--bg,#f4f6f8);padding:4px 0}
+.adf-x{width:44px;height:44px;border-radius:50%;border:0;background:color-mix(in srgb,var(--ink) 8%,transparent);font-size:1.35rem;line-height:1;color:var(--ink);font-family:inherit}
+[dir=rtl] #adfBack{transform:scaleX(-1)}
+.adf-t{display:flex;flex-direction:column;align-items:center;min-width:0}.adf-t b{font-size:1.05rem}.adf-t small{color:var(--muted);font-size:.78rem;font-weight:700}
+.adf-seg{display:flex;gap:3px}.adf-seg button{flex:1;height:8px;min-width:0;padding:0;border:0;border-radius:9px;background:color-mix(in srgb,var(--ink) 12%,transparent);position:relative}
+.adf-seg button::after{content:"";position:absolute;inset:-12px 0}.adf-seg button.d{background:#1f9d6b}.adf-seg button.c{background:var(--accent,#e39b17);transform:scaleY(1.4)}.adf-seg button.c.d{background:#1f9d6b}
+.adf-card{flex:1 0 auto;position:relative;display:flex;flex-direction:column;justify-content:center;gap:12px;padding:70px 18px 18px;border-radius:24px;background:var(--surface,#fff);box-shadow:0 2px 14px rgba(0,0,0,.07);text-align:center;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:pan-y;min-height:300px}
+.adf-card.pulse{animation:adfP .22s ease}@keyframes adfP{50%{transform:scale(.985)}}
+.adf-card.slow{animation:adfS .35s ease}@keyframes adfS{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.adf-card.dn{box-shadow:0 0 0 2px #1f9d6b inset,0 2px 14px rgba(0,0,0,.07)}
+.adf-ring{position:absolute;top:12px;inset-inline-end:12px;width:52px;height:52px}.adf-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.adf-ring circle{fill:none;stroke-width:4}.adf-ring .bg{stroke:color-mix(in srgb,var(--ink) 10%,transparent)}.adf-ring .fg{stroke:#1f9d6b;stroke-linecap:round;stroke-dasharray:calc(var(--p)*100) 100;transition:stroke-dasharray .25s}
+.adf-ring span{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}.adf-ring b{font-size:1rem}.adf-ring small{font-size:.65rem;color:var(--muted)}
+.adf-ar{margin:0;line-height:2.05;font-family:var(--quran,'Amiri Quran','Amiri',serif);color:var(--ink)}
+.adf-tr{margin:0;color:var(--muted);font-size:.9rem;line-height:1.5;font-style:italic}.adf-m{margin:0;font-size:.92rem;line-height:1.5}
+.adf-hint{margin:4px 0 0;font-size:.8rem;font-weight:700;color:var(--muted)}
+.adf-tools{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.adf-tb{border:1.5px solid var(--line);border-radius:999px;background:var(--surface,#fff);padding:8px 14px;min-height:42px;font:inherit;font-size:.86rem;font-weight:700;color:var(--ink)}
+.adf-tb.on{background:#1f9d6b;border-color:#1f9d6b;color:#fff}.adf-i{width:42px;padding:0;font-size:1.1rem}
+.adf-info{padding:10px 14px;border-radius:14px;background:var(--surface,#fff);font-size:.86rem;display:flex;flex-direction:column;gap:6px}.adf-info p{margin:0;color:var(--muted)}.adf-info a{font-weight:700;color:var(--calm,#1f9d6b);text-decoration:none;padding:4px 0}
+.adf-nav{display:grid;grid-template-columns:56px 1fr 56px;gap:8px;align-items:stretch;position:sticky;bottom:0;z-index:3;background:var(--bg,#f4f6f8);padding:8px 0 calc(env(safe-area-inset-bottom,0px));margin-bottom:calc(-1 * env(safe-area-inset-bottom,0px))}
+.adf-nb{border:0;border-radius:16px;background:color-mix(in srgb,var(--ink) 8%,transparent);font-size:1.7rem;color:var(--ink);min-height:56px;font-family:inherit}.adf-nb:disabled{opacity:.3}
+[dir=rtl] .adf-nb{transform:scaleX(-1)}
+.adf-else{border:1.5px dashed color-mix(in srgb,var(--ink) 25%,transparent);border-radius:16px;background:transparent;font:inherit;font-weight:700;font-size:.9rem;color:var(--ink);padding:8px;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:56px}.adf-else small{font-weight:500;font-size:.72rem;color:var(--muted)}
+.adf-done .adf-card{cursor:default}.adf-done h3{margin:0}
+.fq-dm{font-family:-apple-system,system-ui,sans-serif!important;font-size:.42em;color:color-mix(in srgb,var(--calm,#1f9d6b) 55%,var(--muted));vertical-align:middle;letter-spacing:0;white-space:nowrap}
+.adf-dd{border:0;background:transparent;font:inherit;color:var(--ink);padding:4px;border-radius:12px}.adf-dd:active{background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.adf-list{flex:none;display:flex;flex-direction:column;gap:4px;max-height:46vh;overflow:auto;padding:8px;border-radius:16px;background:var(--surface,#fff);box-shadow:0 6px 24px rgba(0,0,0,.12)}
+.adf-list button{display:flex;align-items:center;gap:10px;border:0;border-radius:12px;background:transparent;padding:8px 10px;min-height:44px;font:inherit;color:var(--ink);text-align:start}
+.adf-list button.c{background:color-mix(in srgb,var(--accent,#e39b17) 14%,transparent)}.adf-lk{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.78rem;font-weight:800;background:color-mix(in srgb,var(--ink) 8%,transparent)}
+.adf-list button.d .adf-lk{background:#1f9d6b;color:#fff}.adf-ln{flex:1;min-width:0;font-size:.9rem}.adf-list small{color:var(--muted);font-weight:700}
+.ci-az.ci-ist{background:color-mix(in srgb,#0f766e 10%,transparent)}.ci-az.ci-ist .ci-bar i{background:#0f766e}.ci-lm{font-weight:700;color:var(--calm,#1f9d6b);text-decoration:none}
+.adf-help{align-self:center;border:0;background:transparent;font:inherit;font-weight:700;font-size:.88rem;color:var(--muted);padding:8px 14px;min-height:40px;border-radius:999px}.adf-help.sm{align-self:flex-end;margin:-4px 0 4px;font-size:.8rem}
+.hm-of{margin:4px 0 0;font-size:.78rem;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}.hm-ed{border:0;background:color-mix(in srgb,var(--ink) 7%,transparent);border-radius:999px;padding:4px 10px;min-height:30px;font:inherit;font-size:.76rem;font-weight:700;color:var(--ink)}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7797,7 +7837,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v137',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v138',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -8627,7 +8667,7 @@ function fqVV(){try{const sa=fqStandalone(),de=document.documentElement,vv=windo
   FQV.kb=fqEd(document.activeElement)&&!!vv&&vv.height<innerHeight*0.85||fqEd(document.activeElement)&&sa&&(screen.height-(vv?vv.height:innerHeight))>150;
   de.classList.toggle('fq-kb',sa&&FQV.kb);
   let H=vv?vv.height:innerHeight;
-  const stale=false;if(vv&&vv.scale>1.02&&!FQV.kb&&!fqEd(document.activeElement)){const m=document.querySelector('meta[name=viewport]');if(m){const c=m.content;m.content=c.replace(/,?\s*maximum-scale=[\d.]+/,'')+', maximum-scale=1';}}
+  const stale=false;if(vv&&vv.scale>1.02&&!FQV.kb&&!fqEd(document.activeElement)){const m=document.querySelector('meta[name=viewport]');if(m){const c=m.content,n=c.replace(/,?\s*maximum-scale=[\d.]+/,'')+', maximum-scale=1';if(n!==c)m.content=n;}}
   de.style.setProperty('--fqvh',H+'px');
   if(bn){if(stale){const h=bn.offsetHeight||64;bn.style.top=(H-h)+'px';bn.style.bottom='auto'}else{bn.style.top='';bn.style.bottom=''}}
   de.classList.toggle('fq-sa',sa);de.classList.toggle('fq-scr',scrollY>6)}catch(e){}}
@@ -8860,7 +8900,7 @@ try{const L=(S&&S.look)||{};if(L.zoom&&L.zoom!==1&&!document.body.style.zoom)FQZ
  ["Today you can still add","ما زال بإمكانك اليوم إضافة","Har'a ammas dabaluu dandeessa","Maanta weli waad ku dari kartaa"]
 ].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 function ciMinE(){const M=ciMin(),r3=(ADHKAR.ruqyah.items||[]).find(x=>x.id==='r3')||{},e12=(ADHKAR.evening.items||[]).find(x=>x.id==='e12')||{};
-  return M.filter(x=>x.id!=='c9').map(x=>Object.assign({},x,{id:'v'+x.id})).concat([Object.assign({},e12,{id:'v12',n:3}),Object.assign({},r3,{id:'vb',n:1,au:['002285','002286']})])}
+  return M.filter(x=>x.id!=='c9'&&x.id!=='m12').map(x=>Object.assign({},x,{id:'v'+x.id})).concat([Object.assign({},e12,{id:'v12',n:3}),Object.assign({},r3,{id:'vb',n:1,au:['002285','002286']})])}
 function ciCnt(L,o){return L.filter(x=>((o.az||{})[x.id]||0)>=x.n).length}
 function ciPT(){try{return salahFor(new Date())}catch(e){return null}}
 function ciWin(){const P=ciPT(),n=new Date();if(!P)return {m:true,e:true};return {m:n>=P.fajr&&n<P.dhuhr,e:n>=P.asr||n<P.fajr,asr:P.asr,fajr:P.fajr}}
@@ -9422,8 +9462,9 @@ const CISP={last:''};
 setInterval(()=>{try{if(!inApp()||document.hidden)return;const s=ciSp();if(!s||!ciSpDue())return;const it=ciNextItem(s.kind),k=s.day+it.id;if(CISP.last===k)return;if(!$('scrollModal').hidden)return;CISP.last=k;toast('✂️ '+tl('Next dhikr is ready'));try{navigator.vibrate&&navigator.vibrate([15,60,15])}catch(e){}ciRefresh()}catch(e){}},30000);
 
 /* ---------- my own adhkar ---------- */
-function myAz(){return S.ciMy=S.ciMy||[]}
-function myAzFor(){const W=ciWin();return myAz().filter(x=>x.w==='a'||(x.w==='m'&&W.m)||(x.w==='e'&&W.e))}
+/* uses the same list as Dhikr → My adhkar (S.myAz); items saved in v136 under S.ciMy are moved over */
+try{if(S.ciMy&&S.ciMy.length){S.myAz=(S.myAz||[]).concat(S.ciMy.filter(x=>!(S.myAz||[]).some(y=>y.id===x.id)));delete S.ciMy;save()}}catch(e){}
+function myAzFor(){const W=ciWin();return myAz().filter(x=>!x.w||x.w==='a'||(x.w==='m'&&W.m)||(x.w==='e'&&W.e))}
 function myAzRow(){const L=myAz();if(!L.length)return `<button type="button" class="ci-add" data-ci="myadd">+ ${esc(tl('My adhkar'))}</button>`;
   const o=ciPeek(),A=(o.my||{}),n=L.filter(x=>(A[x.id]||0)>=x.n).length;
   return `<div class="ci-azw"><button type="button" class="ci-az ci-my${n===L.length?' done':''}" data-ci="my"><span class="ci-azi">🤲</span><span class="ci-azt"><b>${esc(tl('My adhkar'))}</b><small dir="ltr">${n}/${L.length}</small></span><span class="ci-bar"><i style="width:${Math.round(n/L.length*100)}%"></i></span><span class="ci-go">›</span></button></div>`}
@@ -9469,7 +9510,222 @@ setTimeout(fqAudPre,6000);addEventListener('online',()=>setTimeout(fqAudPre,3000
 [["Read","قرأتها","Dubbiseera","Waan akhriyay"],["No","لا","Lakki","Maya"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 function ciKPast(i,o){const no=o.kn&&o.kn[i];return `<span class="ci-k2"><button type="button" data-ci="kr" data-i="${i}">📖 ${esc(tl('Read'))}</button><button type="button" data-ci="kn" data-i="${i}" class="${no?'on':''}">${no?'✕ ':''}${esc(tl('No'))}</button></span>`}
 document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="kr"],#ciCard [data-ci="kn"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
-  const i=+b.dataset.i,o=ciD();o.kn=o.kn||{};if(b.dataset.ci==='kr'){o.k[i]=1;delete o.kn[i];const g=ciAw('k'+i,2,'📖 '+tl('Ayat al-Kursi'));save();ciRefresh();toast('📖 ✓'+(g>0?' +'+g+' ⭐':''))}else{if(o.kn[i])delete o.kn[i];else o.kn[i]=1;save();ciRefresh()}},true);
+  const i=+b.dataset.i,o=ciD();o.kn=o.kn||{};if(b.dataset.ci==='kr'){o.k[i]=1;delete o.kn[i];const g=ciAw('k'+i,1,'📖 '+tl('Ayat al-Kursi'));save();ciRefresh();toast('📖 ✓'+(g>0?' +'+g+' ⭐':''))}else{if(o.kn[i])delete o.kn[i];else o.kn[i]=1;save();ciRefresh()}},true);
+
+/* ===================== v137: adhkar reader, full screen =====================
+   One dhikr per page. Tap anywhere on the card to count. Swipe or ‹ › to move. Progress as a bar, not number bubbles.
+   Audio: Saad al-Ghamdi for Qur'an ayahs (offline), and the Hisn al-Muslim recording for the whole section. Speed 1× / 0.75× / 0.5×, repeat 1× / 3× / 7× / ∞.
+   Sources sit behind a small ⓘ, away from the tap area. Reading here earns more stars than "I read it elsewhere". */
+[["Tap anywhere to count","اضغط في أي مكان للعدّ","Lakkaa'uuf bakka kamiyyuu tuqi","Meel kasta taabo si aad u tiriso"],["A little slower, so it counts","أبطأ قليلًا لكي يُحسب","Akka lakkaa'amuuf xiqqoo suuta","Xoogaa gaabi si loo tiriyo"],
+ ["I read it elsewhere","قرأتها في مكان آخر","Bakka biraatti dubbiseera","Meel kale ayaan ku akhriyay"],["Reading here earns more stars.","القراءة هنا تكسبك نجومًا أكثر.","Asitti dubbisuun urjii dabalataa argamsiisa.","Halkan akhriskiisu xiddigo badan ayuu kuu keenaa."],
+ ["All done. May Allah accept it.","تمّت كلها. تقبّل الله منك.","Hunduu xumurame. Rabbiin si irraa haa fudhatu.","Dhammaan waa la dhammeeyay. Allaah ha kaa aqbalo."],["Recording","تسجيل","Waraabbii","Duubis"],["Learn more","اعرف المزيد","Dabalata baradhu","Wax badan baro"],
+ ["Speed","السرعة","Saffisa","Xawaare"],["Repeat","تكرار","Irra deebi'i","Ku celi"],["Source","المصدر","Madda","Isha"],["Previous","السابق","Kan duraa","Kii hore"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+const ADF={cat:'',i:0,cnt:{},day:'',last:0,a:null,rate:1,rep:-1,force:false,left:0,info:false,sx:0,sy:0,moved:false};
+const ADF_HISN={morning:'morning-evening',evening:'morning-evening',salah:'after-salah',sleep:'sleep',waking:'waking'};
+function adSrcLinks(src){const out=[];src=String(src||'');let m;
+  const q=/Qur'an (\d+)(?::(\d+))?/g;while(m=q.exec(src))out.push([`Qur'an ${m[1]}${m[2]?':'+m[2]:''}`,`https://quran.com/${m[1]}${m[2]?'/'+m[2]:''}`]);
+  const H=[[/al-Bukh[āa]r[īi] (\d+)/g,'bukhari','al-Bukhārī'],[/Muslim (\d+)/g,'muslim','Muslim'],[/Ab[ūu] D[āa]w[ūu]d (\d+)/g,'abudawud','Abū Dāwūd'],[/at-Tirmidh[īi] (\d+)/g,'tirmidhi','at-Tirmidhī'],[/Ibn M[āa]jah (\d+)/g,'ibnmajah','Ibn Mājah']];
+  H.forEach(([re,c,n])=>{let x;while(x=re.exec(src))out.push([n+' '+x[1],`https://sunnah.com/${c}:${x[1]}`])});return out}
+function adfCnt(id){const k=dkey();if(ADF.day!==k){ADF.day=k;ADF.cnt={}}return ADF.cnt[id]||0}
+function adfStop(){try{if(ADF.a){ADF.a.pause();ADF.a.removeAttribute('src');ADF.a.load()}}catch(e){}ADF.a=null;const b=$('adfPlay');if(b)b.classList.remove('on')}
+function adRead(cat,i){const C=ADHKAR[cat];if(!C)return;const L=C.items;i=Math.max(0,Math.min(L.length-1,+i||0));if(ADF.cat!==cat||ADF.i!==i)adfStop();ADF.cat=cat;ADF.i=i;ADF.info=false;
+  const it=L[i],done=azDone(),N=it.n||1,n=done[it.id]?N:Math.min(N,adfCnt(it.id)),dn=L.filter(x=>done[x.id]).length,links=adSrcLinks(it.src),hz=ADF_HISN[cat];
+  const fs=it.ar.length>320?'1.2rem':it.ar.length>200?'1.35rem':it.ar.length>110?'1.55rem':'1.85rem';
+  modalCard(`<div class="adf">
+   <div class="adf-h"><button type="button" class="adf-x" id="adfBack" aria-label="${esc(tl('Back'))}">‹</button><div class="adf-t"><b>${C.ic} ${esc(tl(C.t))}</b><small dir="ltr">${i+1} / ${L.length}</small></div><button type="button" class="adf-x" id="adfClose" aria-label="${esc(tl('Close'))}">✕</button></div>
+   <div class="adf-seg" role="tablist">${L.map((x,j)=>`<button type="button" data-ri="${j}" aria-label="${j+1}" class="${done[x.id]?'d':''}${j===i?' c':''}"></button>`).join('')}</div>
+   <div class="adf-card${done[it.id]?' dn':''}" id="adfCard" role="button" tabindex="0" aria-label="${esc(tl('Tap anywhere to count'))}">
+    <div class="adf-ring" style="--p:${n/N}"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="bg"/><circle cx="22" cy="22" r="19" class="fg" pathLength="100"/></svg><span dir="ltr"><b id="adfN">${n}</b><small>/${N}</small></span></div>
+    <p class="adf-ar notranslate" dir="rtl" lang="ar" style="font-size:${fs}">${it.ar}</p>
+    ${LANG==='ar'?'':`<p class="adf-tr notranslate">${esc(it.tr||'')}</p><p class="adf-m">${esc(LANG==='en'?it.en:tl(it.en))}</p>`}
+    <p class="adf-hint" id="adfHint">${done[it.id]?'✓ '+esc(tl('Done today')):'👆 '+esc(tl('Tap anywhere to count'))}</p>
+   </div>
+   <div class="adf-tools">
+    ${(it.au&&it.au.length)||hz?`<button type="button" class="adf-tb" id="adfPlay">▶ ${it.au&&it.au.length?esc(tl('Saad al-Ghamdi')):esc(tl('Recording'))}</button>`:''}
+    <button type="button" class="adf-tb" id="adfRate" aria-label="${esc(tl('Speed'))}">🐢 ${ADF.rate}×</button>
+    <button type="button" class="adf-tb" id="adfRep" aria-label="${esc(tl('Repeat'))}">🔁 ${ADF.rep===0?'∞':(ADF.rep<0?N:ADF.rep)+'×'}</button>
+    ${it.src?`<button type="button" class="adf-tb adf-i" id="adfInfo" aria-label="${esc(tl('Source'))}">ⓘ</button>`:''}
+   </div>
+   <div class="adf-info" id="adfInfoBox" hidden><p>${esc(it.src||'')}</p>${links.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${esc(t)} · ${esc(tl('Learn more'))} ↗</a>`).join('')}</div>
+   <div class="adf-nav"><button type="button" class="adf-nb" id="adfPrev" ${i?'':'disabled'} aria-label="${esc(tl('Previous'))}">‹</button>
+    <button type="button" class="adf-else" id="adfElse">✓ ${esc(tl('I read it elsewhere'))}<small>${esc(tl('Reading here earns more stars.'))}</small></button>
+    <button type="button" class="adf-nb" id="adfNext" aria-label="${esc(tl('Next'))}">›</button></div></div>`);
+  $('scrollModal').classList.add('adf-on');
+  const card=$('adfCard'),B=$('scrollBody');
+  $('adfBack').onclick=()=>{adfStop();adCats()};$('adfClose').onclick=()=>{adfStop();modalClose()};
+  B.querySelectorAll('[data-ri]').forEach(b=>b.onclick=()=>adRead(cat,+b.dataset.ri));
+  $('adfPrev').onclick=()=>adRead(cat,i-1);$('adfNext').onclick=()=>i<L.length-1?adRead(cat,i+1):adfEnd(cat);
+  if($('adfInfo'))$('adfInfo').onclick=()=>{const x=$('adfInfoBox');x.hidden=!x.hidden};
+  $('adfRate').onclick=()=>{ADF.rate=ADF.rate===1?0.85:ADF.rate===0.85?0.75:ADF.rate===0.75?0.5:1;$('adfRate').textContent='🐢 '+ADF.rate+'×';if(ADF.a)ADF.a.playbackRate=ADF.rate};
+  $('adfRep').onclick=()=>{ADF.rep=ADF.rep<0?1:ADF.rep===1?0:-1;$('adfRep').textContent='🔁 '+(ADF.rep===0?'∞':(ADF.rep<0?N:ADF.rep)+'×')};
+  if($('adfPlay'))$('adfPlay').onclick=()=>{const pb=$('adfPlay');if(ADF.a&&!ADF.a.paused){adfStop();return}
+    const list=it.au&&it.au.length?it.au.map(fqAudU):[HB+hz+'.m4a'];let k=0;ADF.left=ADF.rep;const a=new Audio();ADF.a=a;a.playbackRate=ADF.rate;try{a.preservesPitch=true}catch(e){}pb.classList.add('on');
+    ADF.left=ADF.rep<0?Math.max(1,N-adfCnt(it.id)):ADF.rep;
+    const go=()=>{if(ADF.a!==a)return;if(k>=list.length){k=0;if(it.au&&it.au.length&&!azDone()[it.id]){ADF.force=true;card.onclick();ADF.force=false;if(ADF.a!==a)return}if(!(ADF.rep===0||--ADF.left>0)){adfStop();return}}a.src=list[k++];a.playbackRate=ADF.rate;a.play().catch(()=>{})};a.onended=go;go()};
+  /* tap anywhere on the card; a swipe moves instead */
+  card.addEventListener('touchstart',e=>{const t=e.touches[0];ADF.sx=t.clientX;ADF.sy=t.clientY;ADF.moved=false},{passive:true});
+  card.addEventListener('touchmove',e=>{const t=e.touches[0];if(Math.abs(t.clientX-ADF.sx)>12||Math.abs(t.clientY-ADF.sy)>12)ADF.moved=true},{passive:true});
+  card.addEventListener('touchend',e=>{const t=e.changedTouches[0],dx=t.clientX-ADF.sx,dy=t.clientY-ADF.sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.4){const fwd=(document.documentElement.dir==='rtl')?dx>0:dx<0;if(fwd)$('adfNext').click();else if(i)adRead(cat,i-1)}});
+  card.onclick=()=>{if(ADF.moved&&!ADF.force){ADF.moved=false;return}const d=azDone();if(d[it.id])return;const now=Date.now(),gap=ciMinGap(it);
+    if(!ADF.force&&ADF.last&&now-ADF.last<gap&&adfCnt(it.id)>0){card.classList.remove('slow');void card.offsetWidth;card.classList.add('slow');const h=$('adfHint');if(h)h.textContent=tl('A little slower, so it counts');try{navigator.vibrate&&navigator.vibrate([15,40,15])}catch(e){}return}
+    ADF.last=now;const c=adfCnt(it.id)+1;ADF.cnt[it.id]=c;try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}
+    $('adfN').textContent=Math.min(c,N);card.querySelector('.adf-ring').style.setProperty('--p',Math.min(1,c/N));const h=$('adfHint');if(h)h.textContent='👆 '+tl('Tap anywhere to count');card.classList.remove('pulse');void card.offsetWidth;card.classList.add('pulse');
+    if(c>=N){d[it.id]=true;S.azDays=S.azDays||{};S.azDays[dkey()]=1;try{award(1,(it.tr||'').slice(0,40))}catch(e){}save();try{actMark()}catch(e){}try{navigator.vibrate&&navigator.vibrate([20,40,20])}catch(e){}
+      card.classList.add('dn');setTimeout(()=>{if(ADF.cat!==cat||ADF.i!==i||$('scrollModal').hidden)return;if(i<L.length-1)adRead(cat,i+1);else adfEnd(cat)},650)}};
+  /* read elsewhere: the rest of this section counts, with fewer stars */
+  $('adfElse').onclick=()=>{const d=azDone(),left=L.filter(x=>!d[x.id]);if(!left.length)return adfEnd(cat);left.forEach(x=>d[x.id]=true);S.azDays=S.azDays||{};S.azDays[dkey()]=1;try{award(1,tl(C.t))}catch(e){}save();adfEnd(cat,true)};
+  const mo=new MutationObserver(()=>{if($('scrollModal').hidden||!$('adfCard')){mo.disconnect();adfStop();if(!$('adfCard')&&!$('adfEnd'))$('scrollModal').classList.remove('adf-on')}});mo.observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']});mo.observe(B,{childList:true})}
+function adfEnd(cat,elsewhere){adfStop();const C=ADHKAR[cat];
+  modalCard(`<div class="adf adf-done" id="adfEnd"><div class="adf-h"><span></span><div class="adf-t"><b>${C.ic} ${esc(tl(C.t))}</b></div><button type="button" class="adf-x" id="adfClose" aria-label="${esc(tl('Close'))}">✕</button></div>
+   <div class="adf-card dn"><p class="sx-big">✅</p><h3>${esc(tl('All done. May Allah accept it.'))}</h3>${elsewhere?`<p class="tx-sub">+1 ⭐ · ${esc(tl('Reading here earns more stars.'))}</p>`:''}</div>
+   <button type="button" class="btn-main" style="width:100%" id="adfBk">‹ ${esc(tl('Adhkar'))}</button></div>`);
+  $('scrollModal').classList.add('adf-on');$('adfClose').onclick=()=>modalClose();$('adfBk').onclick=()=>adCats()}
+{const _mcA=modalCard;modalCard=function(){try{$('scrollModal').classList.remove('adf-on');document.body.classList.remove('adf-open')}catch(e){}return _mcA.apply(this,arguments)}}
+new MutationObserver(()=>{const m=$('scrollModal');document.body.classList.toggle('adf-open',!!(m&&!m.hidden&&m.classList.contains('adf-on')))}).observe($('scrollModal'),{attributes:true,attributeFilter:['class','hidden']});
+{const _mclA=modalClose;modalClose=function(){try{$('scrollModal').classList.remove('adf-on');document.body.classList.remove('adf-open');adfStop()}catch(e){}return _mclA.apply(this,arguments)}}
+
+/* check-in adhkar: "I read it elsewhere" counts with fewer stars; too-fast taps get a gentle word, not a scolding */
+{const _cao=ciAzOpen;ciAzOpen=function(){const r=_cao.apply(this,arguments);try{const B=$('scrollBody'),m=B.querySelector('.ci-az-m');if(m&&!B.querySelector('#ciElse')){const lbl=(B.querySelector('.ci-az-m > .label')||{}).textContent||'',kind=/🌇/.test(lbl)?'e':'m';
+  const b=document.createElement('button');b.type='button';b.id='ciElse';b.className='adf-else';b.style.width='100%';b.innerHTML=`✓ ${esc(tl('I read it elsewhere'))}<small>${esc(tl('Reading here earns more stars.'))}</small>`;
+  b.onclick=()=>{const o=ciD(),L=kind==='e'?ciMinE():ciMin();L.forEach(x=>{if((o.az[x.id]||0)<x.n)o.az[x.id]=x.n});ciAw('else_'+kind,1,(kind==='e'?'🌇 ':'🌅 ')+tl('I read it elsewhere'));save();modalClose();ciRefresh();toast('✓ +1 ⭐')};
+  const tip=m.querySelector('.ci-tip');(tip||m.firstChild).after(b);
+  const mo=new MutationObserver(ms=>{ms.forEach(x=>{if(x.target.classList&&x.target.classList.contains('slow')){const t=m.querySelector('.ci-tip');if(t)t.textContent=tl('A little slower, so it counts')}})});mo.observe(m,{attributes:true,subtree:true,attributeFilter:['class']})}}catch(e){}return r}}
+/* phrase breaks in duas: the Qur'an font draws the Arabic comma "،" like an ayah-end circle, so duas could look like Qur'an.
+   Duas now show a small soft diamond instead; real ayah markers (۝) stay only in Qur'an text. */
+function fqDm(root){try{(root||document).querySelectorAll('.adf-ar,.ci-zar,.ldz-ar,.ar-ar,.ayq,.ah-v p[lang=ar]').forEach(el=>{if(el.dataset.dm||!el.textContent.includes('،'))return;if(el.children.length)return;el.dataset.dm=1;el.innerHTML=esc(el.textContent).replace(/\s*،\s*/g,'<span class="fq-dm" aria-label="،"> ◆ </span>')})}catch(e){}}
+{const FQDM={t:0};new MutationObserver(()=>{clearTimeout(FQDM.t);FQDM.t=setTimeout(()=>fqDm(),20)}).observe(document.body,{childList:true,subtree:true})}
+/* Tab bar guard (Home Screen app). On some iPhones the page's layout height goes stale (shorter than the screen), so a bar with bottom:0
+   stops halfway up. Check often; first nudge the scroll (iOS then re-measures); if it is still wrong, pin the bar to the real bottom.
+   Does nothing while the keyboard is open or when everything is already right. */
+const FQBG={on:false,nudged:0,log:[]};
+function fqBarGuard(){try{const bn=document.querySelector('.bnav');if(!bn||!fqStandalone())return;
+  const clear=()=>{FQBG.nudged=0;if(FQBG.on){bn.style.top='';bn.style.bottom='';FQBG.on=false}};
+  if(document.documentElement.classList.contains('fq-kb')||fqEd(document.activeElement))return clear();
+  const vv=window.visualViewport,land=innerWidth>innerHeight&&screen.width!==screen.height?matchMedia('(orientation: landscape)').matches:false,
+    SH=land?Math.min(screen.width,screen.height):Math.max(screen.width,screen.height),VB=vv?vv.offsetTop+vv.height:innerHeight;
+  /* real visible bottom, in page coordinates: the larger of what the visual viewport says and the layout height */
+  let real=Math.max(VB,innerHeight);const stale=(SH-innerHeight>90)||(VB-innerHeight>40);
+  if(!stale)return clear();
+  if(!FQBG.nudged){FQBG.nudged=1;const y=scrollY;try{scrollTo(scrollX,y+1);scrollTo(scrollX,y)}catch(e){}setTimeout(fqBarGuard,90);return}
+  if(SH-real>90)real=SH-(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--fq-sbh'))||0);
+  const h=bn.offsetHeight||64;bn.style.top=Math.round(real-h)+'px';bn.style.bottom='auto';FQBG.on=true;
+  FQBG.log.unshift({t:Date.now(),ih:innerHeight,vh:vv&&Math.round(vv.height),vo:vv&&Math.round(vv.offsetTop),sh:SH,sy:Math.round(scrollY)});FQBG.log=FQBG.log.slice(0,5)}catch(e){}}
+['resize','scroll','pageshow','orientationchange'].forEach(ev=>addEventListener(ev,()=>{clearTimeout(FQBG.t);FQBG.t=setTimeout(fqBarGuard,60)},{passive:true}));
+try{visualViewport.addEventListener('resize',()=>setTimeout(fqBarGuard,60));visualViewport.addEventListener('scroll',()=>setTimeout(fqBarGuard,60))}catch(e){}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(fqBarGuard,120)});
+new MutationObserver(()=>setTimeout(fqBarGuard,120)).observe($('scrollModal'),{attributes:true,attributeFilter:['hidden']});
+setInterval(fqBarGuard,1500);setTimeout(fqBarGuard,500);
+/* Ayat al-Kursi and adhkar audio: a little slower by default (0.85×) */
+{const _cp=ciPlay;ciPlay=function(){const r=_cp.apply(this,arguments);try{if(CIA.a){const a=CIA.a;a.playbackRate=S.ciRate||0.85;a.addEventListener('play',()=>{a.playbackRate=S.ciRate||0.85})}}catch(e){}return r}}
+ADF.rate=0.85;
+
+/* only sahih/hasan adhkar: "Ḥasbiyallāhu… 7 times" (Abū Dāwūd 5081) is mawqūf on Abū ad-Dardāʾ and graded weak as a saying of the Prophet ﷺ, so it is taken out of the morning/evening lists */
+try{['morning','evening'].forEach(k=>{if(ADHKAR[k])ADHKAR[k].items=ADHKAR[k].items.filter(x=>!/Ab[ūu] D[āa]w[ūu]d 5081/.test(x.src||''))})}catch(e){}
+/* ---------- the list of this set (dropdown at the top) ---------- */
+[["Istighfar 100×","الاستغفار ١٠٠ مرة","Istighfaara ×100","Istiqfaar ×100"],["Do some now, the rest later. It is saved.","اقرأ بعضها الآن والباقي لاحقًا. يُحفظ العدد.","Amma tokko tokko, kan hafe booda. Ni olkaa'ama.","Qaar hadda, inta kale mar dambe. Waa la kaydiyaa."],["All in this set","كل ما في هذه المجموعة","Hunduu garee kana keessaa","Dhammaan kooxdan"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function adShort(x){const t=String(LANG==='ar'?x.ar:(x.tr||x.ar)).replace(/[()×0-9]/g,'').trim().split(/\s+/).slice(0,LANG==='ar'?4:4).join(' ');return t.replace(/[,،.;:]+$/,'')}
+{const _adR=adRead;adRead=function(cat,i){const r=_adR.apply(this,arguments);try{const C=ADHKAR[cat],t=$('scrollBody').querySelector('.adf-t');if(!C||!t)return r;const done=azDone(),cur=ADF.i;
+  t.outerHTML=`<button type="button" class="adf-t adf-dd" id="adfDD" aria-expanded="false"><b>${C.ic} ${esc(tl(C.t))} ▾</b><small dir="ltr">${cur+1} / ${C.items.length}</small></button>`;
+  const list=document.createElement('div');list.className='adf-list';list.id='adfList';list.hidden=true;
+  list.innerHTML=`<p class="label">${esc(tl('All in this set'))}</p>`+C.items.map((x,j)=>`<button type="button" data-li="${j}" class="${j===cur?'c':''}${done[x.id]?' d':''}"><span class="adf-lk">${done[x.id]?'✓':j+1}</span><span class="adf-ln" ${LANG==='ar'?'dir="rtl" lang="ar"':''}>${esc(adShort(x))}</span><small dir="ltr">×${x.n||1}</small></button>`).join('');
+  $('scrollBody').querySelector('.adf-h').after(list);
+  $('adfDD').onclick=()=>{list.hidden=!list.hidden;$('adfDD').setAttribute('aria-expanded',String(!list.hidden));if(!list.hidden){const c=list.querySelector('.c');if(c)c.scrollIntoView({block:'nearest'})}};
+  list.querySelectorAll('[data-li]').forEach(b=>b.onclick=()=>adRead(cat,+b.dataset.li))}catch(e){}return r}}
+/* counts are kept for the day, so a 100× dhikr can be done in parts */
+function adfCnt(id){const k=dkey();S.azCnt=S.azCnt&&S.azCnt.d===k?S.azCnt:{d:k,c:{}};return S.azCnt.c[id]||0}
+Object.defineProperty(ADF,'cnt',{get(){adfCnt('');return new Proxy(S.azCnt.c,{set(o,k,v){o[k]=v;try{save()}catch(e){}return true}})},configurable:true});
+/* Istighfar 100× (Muslim 2702): in the evening set too, and its own row in the daily check-in, counted for the whole day */
+try{const ist=(ADHKAR.morning.items||[]).find(x=>/6307/.test(x.src||''));if(ist){ist.src='Muslim 2702, al-Bukhārī 6307';if(ADHKAR.evening&&!ADHKAR.evening.items.some(x=>x.id===ist.id))ADHKAR.evening.items.push(Object.assign({},ist,{id:ist.id+'_e'}))}}catch(e){}
+{const _cp2=ciPower;ciPower=function(){const L=_cp2.apply(this,arguments);try{const ist=(ADHKAR.morning.items||[]).find(x=>/6307/.test(x.src||''));if(ist&&!L.some(x=>x.id==='p3'))L.push(Object.assign({},ist,{id:'p3',n:100}))}catch(e){}return L}}
+function ciIstRow(){const o=ciPeek(),n=Math.min(100,(o.az||{}).p3||0);return `<div class="ci-azw"><button type="button" class="ci-az ci-ist${n>=100?' done':''}" data-ci="ist"><span class="ci-azi">🤲</span><span class="ci-azt"><b>${esc(tl('Istighfar 100×'))}</b><small dir="ltr">${n}/100 · +20 ⭐</small></span><span class="ci-bar"><i style="width:${n}%"></i></span><span class="ci-go">›</span></button></div>`}
+{const _chI=ciHTML;ciHTML=function(){let h=_chI.apply(this,arguments);try{const k=h.indexOf('<div class="ci-azw"><button type="button" class="ci-az ci-sprow');const m=h.indexOf('<div class="ci-azw"><button type="button" class="ci-az ci-my');const a=h.indexOf('<button type="button" class="ci-add"');const at=[k,m,a].filter(x=>x>0).sort((x,y)=>x-y)[0];
+  if(at>0)h=h.slice(0,at)+ciIstRow()+h.slice(at);else{const j=h.lastIndexOf('</div>');h=h.slice(0,j)+ciIstRow()+h.slice(j)}}catch(e){}return h}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#ciCard [data-ci="ist"]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();try{navigator.vibrate&&navigator.vibrate(8)}catch(x){}
+  const it=ciPower().find(x=>x.id==='p3');if(!it)return;const _m=ciMin,_e=ciExtra,_p=ciPower;ciMin=()=>[it];ciExtra=()=>[];ciPower=()=>[];try{ciAzOpen()}finally{ciMin=_m;ciExtra=_e;ciPower=_p}
+  try{const B=$('scrollBody');const ex=B.querySelector('.ci-more');if(ex)ex.remove();const l=B.querySelector('.ci-az-m > .label');if(l)l.textContent='🤲 '+tl('Istighfar 100×');const t=B.querySelector('.ci-tip');if(t)t.textContent=tl('Do some now, the rest later. It is saved.');const el=B.querySelector('#ciElse');if(el)el.remove();
+    const s=B.querySelector('.ci-zs');if(s)s.innerHTML=`<a href="https://sunnah.com/muslim:2702" target="_blank" rel="noopener" class="ci-lm">ⓘ Muslim 2702 ↗</a>`}catch(x){}},true);
+
+/* ===================== v138 =====================
+   1) One count everywhere: finishing a dhikr in the Dhikr tab counts in the daily check-in (and hasanat), and the other way round.
+   2) Evening check-in list: only evening adhkar. "From worry and grief" (al-Bukhārī 6369) and "Subḥānallāhi wa biḥamdihi ʿadada khalqihi" (Muslim 2726, after Fajr) are morning only.
+   3) Help when it is too much, inside the adhkar player too: Just one now / Just the first 3 / Later / Not today.
+   4) Next step on Home: says which to-do it belongs to, with an Edit steps button; message tasks get real steps. */
+[["Too much?","كثير عليك؟","Baay'ee sitti caale?","Ma kugu badan tahay?"],["Just this one now","هذا فقط الآن","Kana qofa amma","Kan keliya hadda"],["Done for now. Well done!","يكفي الآن. أحسنت!","Ammaaf gahaa. Baay'ee gaarii!","Hadda waa ku filan. Mahadsanid!"],
+ ["Edit steps","عدّل الخطوات","Tarkaanfii gulaali","Wax ka beddel tallaabooyinka"],["of","من","keessaa","ka mid ah"],["Step","خطوة","Tarkaanfii","Tallaabo"]
+].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+
+/* ---------- 2) evening check-in list ---------- */
+{const _me=ciMinE;ciMinE=function(){return _me.apply(this,arguments).filter(x=>!['vc7','vh1','vc9','vm12'].includes(x.id))}}
+
+/* ---------- 1) one shared count ---------- */
+function azNorm(t){return String(t||'').replace(/[ً-ٰٟۖ-ۭـ]/g,'').replace(/[^ء-ي]/g,'').slice(0,34)}
+function azMap(kind){const cat=kind==='e'?'evening':'morning',A=(ADHKAR[cat]&&ADHKAR[cat].items)||[],L=kind==='e'?ciMinE():ciMin();
+  return L.map(x=>{const parts=/c3$/.test(x.id)?[QZ.ikhlas.ar,QZ.falaq.ar,QZ.nas.ar]:[x.ar];const ids=parts.map(p=>{const k=azNorm(p);const m=A.find(a=>azNorm(a.ar)===k);return m&&m.id});return {x,ids:ids.every(Boolean)?ids:null}})}
+const AZS={busy:false};
+function azSync(){if(AZS.busy)return;AZS.busy=true;try{const d=azDone(),o=ciD();let ch=false;
+  ['m','e'].forEach(kind=>azMap(kind).forEach(({x,ids})=>{if(!ids)return;const ciDone=(o.az[x.id]||0)>=x.n,dDone=ids.every(i=>d[i]);
+    if(dDone&&!ciDone){o.az[x.id]=x.n;ch=true}else if(ciDone&&!dDone){ids.forEach(i=>d[i]=true);ch=true}}));
+  /* Istighfar 100× is one count for the whole day */
+  const ist=['m15','m15_e'];if(ist.some(i=>d[i])&&(o.az.p3||0)<100){o.az.p3=100;ch=true}else if((o.az.p3||0)>=100&&!ist.every(i=>d[i])){ist.forEach(i=>d[i]=true);ch=true}
+  if(ch)save()}catch(e){}finally{AZS.busy=false}}
+{const _chS=ciHTML;ciHTML=function(){try{azSync()}catch(e){}return _chS.apply(this,arguments)}}
+{const _hsS=hsWeek;hsWeek=function(){try{azSync()}catch(e){}return _hsS.apply(this,arguments)}}
+{const _adS=adCats;adCats=function(){try{azSync()}catch(e){}return _adS.apply(this,arguments)}}
+
+/* ---------- 3) help inside the player ---------- */
+const ADH={lim:0,cat:''};
+function adHelp(cat){const kind=cat==='evening'?'e':cat==='morning'?'m':'';
+  modalCard(`<div class="ci-why"><p class="label">🫶 ${esc(tl('Too much?'))}</p>
+   <p class="ci-hd2" dir="rtl" lang="ar">أَحَبُّ الأَعْمَالِ إِلَى اللَّهِ أَدْوَمُهَا وَإِنْ قَلَّ</p><p class="small muted">${LANG==='ar'?'':esc("The most beloved deeds to Allah are the most constant, even if small.")}</p>
+   <p class="ci-src"><button type="button" class="adf-tb adf-i" id="ahInfo" aria-label="${esc(tl('Source'))}">ⓘ</button></p><div class="adf-info" id="ahInfoBox" hidden><a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">al-Bukhārī 6464 · ${esc(tl('Learn more'))} ↗</a><a href="https://sunnah.com/muslim:783" target="_blank" rel="noopener">Muslim 783 · ${esc(tl('Learn more'))} ↗</a></div>
+   <div class="ci-wg">
+    <button type="button" data-h="one"><span>☝️</span>${esc(tl('Just this one now'))}</button>
+    <button type="button" data-h="three"><span>3️⃣</span>${esc(tl('Just the first 3'))}</button>
+    ${kind?`<button type="button" data-h="split"><span>✂️</span>${esc(tl('Split it up'))}</button>`:''}
+    <button type="button" data-h="later"><span>⏰</span>${esc(tl('Later'))}</button>
+    <button type="button" data-h="not"><span>🌙</span>${esc(tl('Not today'))}</button>
+    <button type="button" data-h="back"><span>📖</span>${esc(tl('Keep going'))}</button></div></div>`);
+  $('ahInfo').onclick=()=>{const b=$('ahInfoBox');b.hidden=!b.hidden};
+  $('scrollBody').querySelectorAll('[data-h]').forEach(b=>b.onclick=()=>{const h=b.dataset.h,C=ADHKAR[cat],done=azDone(),first=C.items.findIndex(x=>!done[x.id]);try{navigator.vibrate&&navigator.vibrate(8)}catch(e){}
+    if(h==='back')return adRead(cat,Math.max(0,first));
+    if(h==='one'){ADH.lim=1;ADH.cat=cat;ADH.start=Math.max(0,first);return adRead(cat,ADH.start)}
+    if(h==='three'){ADH.lim=3;ADH.cat=cat;ADH.start=0;return adRead(cat,0)}
+    if(h==='split'){modalClose();return setTimeout(()=>ciAzOne(kind),150)}
+    if(kind){const o=ciD();o.why=o.why||{};o.why['az_'+kind]=h;save()}
+    modalClose();toast((h==='later'?'⏰ ':'')+tl("That's okay. It stays here for you."))})}
+{const _adH=adRead;adRead=function(cat,i){
+  if(ADH.lim&&ADH.cat===cat&&(i-ADH.start)>=ADH.lim){ADH.lim=0;try{adfStop()}catch(e){}const C=ADHKAR[cat];
+    modalCard(`<div class="adf adf-done" id="adfEnd"><div class="adf-h"><span></span><div class="adf-t"><b>${C.ic} ${esc(tl(C.t))}</b></div><button type="button" class="adf-x" id="adfClose">✕</button></div><div class="adf-card dn"><p class="sx-big">✅</p><h3>${esc(tl('Done for now. Well done!'))}</h3><p class="tx-sub">${esc(tl('Even one counts.'))}</p></div><button type="button" class="btn-main" style="width:100%" id="adfMore">📖 ${esc(tl('Keep going'))}</button></div>`);
+    $('scrollModal').classList.add('adf-on');$('adfClose').onclick=()=>modalClose();$('adfMore').onclick=()=>adRead(cat,i);return}
+  if(ADH.cat!==cat)ADH.lim=0;
+  const r=_adH.apply(this,arguments);try{const B=$('scrollBody'),nav=B.querySelector('.adf-nav');if(nav&&!B.querySelector('#adfHelp')){const b=document.createElement('button');b.type='button';b.id='adfHelp';b.className='adf-help';b.textContent='🫶 '+tl('Too much?');b.onclick=()=>{try{adfStop()}catch(e){}adHelp(cat)};nav.before(b)}}catch(e){}return r}}
+/* the Dhikr tab's "Adhkar by time" list also offers help */
+{const _adC2=adCats;adCats=function(){const r=_adC2.apply(this,arguments);try{const B=$('scrollBody');B.querySelectorAll('[data-ac]').forEach(b=>{const k=b.dataset.ac,C=ADHKAR[k],done=azDone();if(!C||!['morning','evening','salah','sleep'].includes(k)||C.items.every(x=>done[x.id]))return;const h=document.createElement('button');h.type='button';h.className='adf-help sm';h.textContent='🫶 '+tl('Too much?');h.onclick=e=>{e.stopPropagation();adHelp(k)};b.after(h)})}catch(e){}return r}}
+
+/* ---------- morning / evening lists: add the missing authentic ones (Hisn al-Muslim) ---------- */
+try{const M=ADHKAR.morning.items,E=ADHKAR.evening.items,has=(L,re)=>L.some(x=>re.test(azNorm(x.ar)));
+  const alim={ar:'اللَّهُمَّ عَالِمَ الْغَيْبِ وَالشَّهَادَةِ، فَاطِرَ السَّمَاوَاتِ وَالْأَرْضِ، رَبَّ كُلِّ شَيْءٍ وَمَلِيكَهُ، أَشْهَدُ أَنْ لَا إِلَٰهَ إِلَّا أَنْتَ، أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ الشَّيْطَانِ وَشِرْكِهِ، وَأَنْ أَقْتَرِفَ عَلَى نَفْسِي سُوءًا، أَوْ أَجُرَّهُ إِلَى مُسْلِمٍ',
+    tr:"Allāhumma ʿālimal-ghaybi wash-shahādah, fāṭiras-samāwāti wal-arḍ, rabba kulli shay'in wa malīkah, ashhadu an lā ilāha illā ant, aʿūdhu bika min sharri nafsī, wa min sharrish-shayṭāni wa shirkih, wa an aqtarifa ʿalā nafsī sū'an aw ajurrahu ilā muslim",
+    en:'O Allah, Knower of the unseen and the seen, Creator of the heavens and the earth, Lord and Owner of everything: I bear witness that there is no god but You. I seek refuge in You from the evil of my own self, from the evil of Shayṭān and his call to shirk, and from doing wrong to myself or bringing it to a Muslim.',n:1,src:'at-Tirmidhī 3392, Abū Dāwūd 5067'};
+  const fit=(w)=>({ar:w+' عَلَى فِطْرَةِ الْإِسْلَامِ، وَعَلَى كَلِمَةِ الْإِخْلَاصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ ﷺ، وَعَلَى مِلَّةِ أَبِينَا إِبْرَاهِيمَ، حَنِيفًا مُسْلِمًا، وَمَا كَانَ مِنَ الْمُشْرِكِينَ',
+    tr:(w.startsWith('أَصْ')?'Aṣbaḥnā':'Amsaynā')+" ʿalā fiṭratil-islām, wa ʿalā kalimatil-ikhlāṣ, wa ʿalā dīni nabiyyinā Muḥammad ﷺ, wa ʿalā millati abīnā Ibrāhīm, ḥanīfan musliman wa mā kāna minal-mushrikīn",
+    en:(w.startsWith('أَصْ')?'We have reached the morning':'We have reached the evening')+' upon the natural way of Islam, the word of sincerity, the religion of our Prophet Muhammad ﷺ, and the way of our father Ibrāhīm, upright and Muslim, and he was not of those who associate others with Allah.',n:1,src:'Aḥmad 15360 (ṣaḥīḥ, al-Albānī)'});
+  const add=(L,id,o,at)=>{if(L.some(x=>x.id===id))return;const i=Math.min(L.length,at);L.splice(i,0,Object.assign({id},o))};
+  if(!has(M,/عالمالغيب/))add(M,'m20',alim,7);if(!has(E,/عالمالغيب/))add(E,'e20',alim,7);
+  if(!has(M,/فطرةالاسلام|فطرةالإسلام/))add(M,'m21',fit('أَصْبَحْنَا'),8);if(!has(E,/فطرةالاسلام|فطرةالإسلام/))add(E,'e21',fit('أَمْسَيْنَا'),8);
+  if(typeof CI_AFW==='object'&&!has(M,/اللهمانياسالكالعفو|اللهمإنيأسألكالعفو/)){add(M,'m22',Object.assign({},CI_AFW,{n:1}),9);add(E,'e22',Object.assign({},CI_AFW,{n:1}),9)}
+  if(typeof CI_AF==='object'&&!has(M,/اللهمعافني/)){add(M,'m23',Object.assign({},CI_AF,{n:3}),10);add(E,'e23',Object.assign({},CI_AF,{n:3}),10)}}catch(e){}
+
+/* ---------- 4) next step: real steps + Edit ---------- */
+try{const mb=BREAK.find(([re])=>re.test('message'));if(mb)mb[1]=['Open the chat or email','Read the last message again','Write a first draft (a helper like ChatGPT is fine)','Make it sound like you','Press send'];}catch(e){}
+[["Open the chat or email","افتح المحادثة أو البريد","Haasawwii ykn imeelii bani","Fur wadahadalka ama iimaylka"],["Read the last message again","اقرأ آخر رسالة مرة أخرى","Ergaa dhumaa irra deebi'ii dubbisi","Dib u akhri fariintii ugu dambeysay"],["Write a first draft (a helper like ChatGPT is fine)","اكتب مسودة أولى (لا بأس بمساعد مثل ChatGPT)","Barreeffama jalqabaa barreessi (gargaaraa akka ChatGPT fayyadamuun ni danda'ama)","Qor qabyo hore (caawiye sida ChatGPT waa caadi)"],["Make it sound like you","اجعلها بأسلوبك","Akka sagalee keetii godhi","Ka dhig sidaadii"],["Press send","اضغط إرسال","Ergi tuqi","Riix dir"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+{const _hR=hmRender;hmRender=function(){const r=_hR.apply(this,arguments);try{const t=current(),nt=document.querySelector('#fqHome .hm-nt');if(t&&nt&&!nt.querySelector('.hm-of')){const st=t.steps||[],i=st.findIndex(s=>!s.done);
+  const p=document.createElement('p');p.className='hm-of';const same=!st.length||i<0;p.innerHTML=`${same?'':`<span dir="auto" class="notranslate">${esc(t.title)}</span> · ${esc(tl('Step'))} ${i+1}/${st.length}`} <button type="button" class="hm-ed" data-hmed="${esc(t.id)}">✎ ${esc(tl('Edit steps'))}</button>`;nt.appendChild(p)}}catch(e){}return r}}
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('[data-hmed]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();const t=(S.tasks||[]).find(x=>String(x.id)===b.dataset.hmed);if(!t)return;t.open=true;save();show('today');render();
+  setTimeout(()=>{try{const el=document.querySelector(`[data-id="${CSS.escape(String(t.id))}"]`)||[...document.querySelectorAll('#tab-today .task')].find(x=>x.textContent.includes(t.title));if(el)el.scrollIntoView({block:'center',behavior:'smooth'})}catch(x){}},250)},true);
+/* the last two ayahs of al-Baqarah (al-Bukhārī 5009: "whoever recites them at night, they will suffice him") sit in the evening set too, so it matches the check-in */
+try{const r3=(ADHKAR.ruqyah.items||[]).find(x=>x.id==='r3');if(r3&&!ADHKAR.evening.items.some(x=>x.id==='e24'))ADHKAR.evening.items.splice(4,0,Object.assign({},r3,{id:'e24',n:1,au:['002285','002286'],src:"Qur'an 2:285–286 · al-Bukhārī 5009"}))}catch(e){}
 
 let i18nBusy=false;
 function txNode(n){const en=n.__en!=null?n.__en:n.nodeValue;const k=en.trim();if(!k)return;const t=TX[k];let tv=LANG!=='en'&&t&&t[LANG];if(LANG!=='en'&&!tv)tv=txRx(k);
