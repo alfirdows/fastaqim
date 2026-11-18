@@ -2209,6 +2209,7 @@ body.is-guest #scrollModal.zk-pg #scrollBody{padding-top:calc(58px + env(safe-ar
 .apm-h .mc-x{margin-block:0!important;translate:none!important;align-self:center!important;top:auto!important;inset:auto!important}
 .tx-sticky{background:var(--surface)!important;padding:10px 0 4px!important;margin-top:10px;border-top:1px solid var(--line);z-index:2;box-shadow:0 -8px 12px -10px rgba(0,0,0,.18)}
 .hm-vd .l small{text-transform:none!important;letter-spacing:0!important}
+#scrollModal.zk-pg .mc-bar{margin:0 -16px 0!important;top:0!important;padding:8px 12px 0!important;height:50px!important}#scrollModal.zk-pg #scrollBody{padding-top:env(safe-area-inset-top,0px)!important}body.is-guest #scrollModal.zk-pg #scrollBody{padding-top:calc(52px + env(safe-area-inset-top,0px))!important}
 </style>
 
 <canvas id="confetti"></canvas>
@@ -7850,7 +7851,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v140',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v141',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
