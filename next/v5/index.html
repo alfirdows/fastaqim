@@ -512,15 +512,30 @@ html.dark .cg .dy button.wd{background:linear-gradient(180deg,#3a2418,#4a2c1c)!i
 .dps span.fu{opacity:.5}.dps small{font-size:11.5px;font-weight:600;color:var(--sub)}
 .dpn{display:flex;gap:10px;align-items:center;margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:14.5px}.dpn i{font-size:19px;color:var(--gold)}
 .ps.dn .nd{background:#f08a4b!important;color:#fff!important}.ps.dn .nd .fqi .hz{stroke:#fff}
+.stp{display:flex;align-items:center;gap:5px;height:36px;padding:0 10px;border:0;border-radius:18px;background:var(--card);color:var(--ink);font-size:13.5px;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.stp svg{color:#ffb627;font-size:17px}.stp b{font-weight:800}.stp .sk{color:var(--sub);font-weight:600;font-size:12.5px;margin-inline-start:3px;padding-inline-start:7px;border-inline-start:1px solid var(--line)}
+.ci{background:var(--card);border-radius:22px 22px 22px 8px;padding:14px 14px 6px;margin-top:14px;box-shadow:0 4px 14px rgba(20,30,50,.05)}
+.cih{display:flex;align-items:center;gap:12px;margin-bottom:8px}.cir{position:relative;width:52px;height:52px;flex:none}.cir svg{width:52px;height:52px;transform:rotate(-90deg)}.cir circle{fill:none;stroke-width:6}.cir .rb{stroke:var(--card2)}.cir .rf{stroke:#f08a4b;stroke-linecap:round;transition:stroke-dashoffset .5s}
+.cir b{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;font-weight:800}.cit b{display:block;font-size:17px;font-weight:750}.cit small{color:var(--sub);font-size:13px}
+.cis,.cir2{display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;padding:10px 2px;border-top:1px solid var(--line);text-align:start;color:var(--ink);font:inherit;font-size:15.5px}
+.cis .fqi{font-size:26px;color:var(--acc)}.cis span{flex:1;font-weight:650}.cis em{font-style:normal;font-weight:700;color:var(--acc)}
+.cir2 span:nth-child(2){flex:1}.ck3{flex:none;width:26px;height:26px;border-radius:8px;box-shadow:0 0 0 1.8px var(--line) inset;display:grid;place-items:center;transition:transform .2s}
+.cir2.on .ck3{background:#f08a4b;box-shadow:none;animation:ckp .35s}.cir2.on span:nth-child(2){color:var(--sub)}
+.cir2 .st{font-style:normal;display:flex;align-items:center;gap:3px;font-size:13px;font-weight:700;color:#e0a019}.cir2 .st svg{color:#ffb627}
+@keyframes ckp{0%{transform:scale(.6)}60%{transform:scale(1.18)}100%{transform:scale(1)}}
+.cib{position:fixed;z-index:90;color:#ffb627;font-size:14px;pointer-events:none;animation:cib .7s ease-out forwards}@keyframes cib{to{transform:translate(var(--x),var(--y)) scale(.4);opacity:0}}
+.cel{background:radial-gradient(circle at 50% 40%,#fff6db,#fdf1e2 55%,#f7f8fb)!important;color:#1a1d24!important}.cel button{background:var(--acc)!important;color:#fff!important}
+.stp,.lgb{white-space:nowrap}.stp .sk{white-space:nowrap}.cir2 .st{white-space:nowrap;display:inline-block!important}.fh{gap:6px}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 <section class="scr" id="s-home">
- <div class="fh"><span class="wm">Fastaqim</span><button class="lgb" id="hLang" aria-label="Language"><i class="ph ph-globe-simple"></i><b></b><i class="ph ph-caret-down"></i></button><button class="ib" data-go="cal" aria-label="Calendar"><i class="ph ph-calendar-dots"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
+ <div class="fh"><span class="wm">Fastaqim</span><button class="stp" id="hStars" aria-label="Stars"></button><button class="lgb" id="hLang" aria-label="Language"><i class="ph ph-globe-simple"></i><b></b><i class="ph ph-caret-down"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
  <h1 class="gr" id="greet"></h1>
  <div class="nowc" id="hero"></div>
+ <div class="ci" id="ci"></div>
  <div class="sec"><h2 data-t="Today's path|طريق اليوم"></h2><span class="slh" id="slh"></span></div>
  <div class="path" id="path"></div>
  <div style="height:18px"></div>
@@ -716,6 +731,22 @@ function salahState(now){
  const pr=list.filter(x=>x.s[0]!=='sunrise');let next=pr.find(x=>x.t>now),prev=[...pr].reverse().find(x=>x.t<=now);return{next,prev}}
 function dayLine(now){const dk=dkey(now),day=S.salah[dk]||{},mm=t=>{const[h,m]=t.split(':').map(Number);return h*60+m},P=[5,27.5,50,72.5,95],M=SAL.map(z=>mm(z[3])),x=v=>{if(v<=M[0])return Math.max(1,5-(M[0]-v)/60*2);if(v>=M[4])return Math.min(99,95+(v-M[4])/60*2);let i=0;while(v>M[i+1])i++;return P[i]+(v-M[i])/(M[i+1]-M[i])*22.5},nm=now.getHours()*60+now.getMinutes();
  return `<div class="dl" aria-hidden="true"><span class="ln"></span><span class="fl" style="width:${x(nm)}%"></span>${SAL.map(z=>`<span class="mk ${day[z[0]]?'on':''}" style="left:${x(mm(z[3]))}%"><small>${T(z[1],z[2])}</small></span>`).join('')}<span class="nw2" style="left:${x(nm)}%"></span></div>`}
+
+/* Daily check-in (Fastaqim's own): one card, tap to tick, % ring, stars only for real ticks */
+const STAR_SVG=(c)=>`<svg viewBox="0 0 24 24" width="1em" height="1em" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .7-4.4 4.1 1.2 5.9L12 16.5l-5.4 2.9 1.2-5.9L3.4 9.4l6-.7z" fill="${c||'currentColor'}" stroke="${c||'currentColor'}" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+const CI=[['kursi',T('Ayat al-Kursi after salah','آية الكرسي بعد الصلاة'),'quran'],['morning',T('Morning adhkar','أذكار الصباح'),'fajr'],['evening',T('Evening adhkar','أذكار المساء'),'asr'],['duha',T('Duha','الضحى'),'dhuhr'],['witr',T('Witr','الوتر'),'isha'],['sleep',T('Before-sleep adhkar','أذكار النوم'),'maghrib']];
+function ciStreak(){let n=0;const d=NOW();for(let i=0;i<400;i++){const x=new Date(d);x.setDate(x.getDate()-i);const k=dkey(x),sal=Object.keys(S.salah[k]||{}).length,c=Object.values((S.ci||{})[k]||{}).filter(Boolean).length;if(sal+c>0)n++;else if(i>0)break}return n}
+function renderCI(){S.ci=S.ci||{};const dk=dkey(NOW()),o=S.ci[dk]||{},sal=Object.keys(S.salah[dk]||{}).length,done=CI.filter(c=>o[c[0]]).length+sal,tot=CI.length+5,p=Math.round(done/tot*100),C=2*Math.PI*22;
+ $('ci').innerHTML=`<div class="cih"><div class="cir"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" class="rb"/><circle cx="26" cy="26" r="22" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-done/tot)}"/></svg><b>${AR(p)}%</b></div><div class="cit"><b>${T('Daily check-in','تسجيل اليوم')}</b><small>${T(done+' of '+tot+' done','تم '+AR(done)+' من '+AR(tot))}</small></div></div>
+ <button class="cis" data-go="home" onclick="document.getElementById('path').scrollIntoView({behavior:'smooth',block:'start'})">${FQI('fajr')}<span>${T('5 salah','الصلوات الخمس')}</span><em>${AR(sal)}/${AR(5)}</em></button>
+ ${CI.map(([k,l,ic])=>`<button class="cir2 ${o[k]?'on':''}" data-ci="${k}" aria-pressed="${!!o[k]}"><span class="ck3">${o[k]?'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':''}</span><span>${l}</span>${o[k]?`<em class="st">+1 ★</em>`:''}</button>`).join('')}`;
+ $$('#ci [data-ci]').forEach(b=>b.onclick=()=>{const k=b.dataset.ci;S.ci[dk]=S.ci[dk]||{};const on=!S.ci[dk][k];S.ci[dk][k]=on;
+  if(on){star('ci-'+k+'-'+dk,CI.find(c=>c[0]===k)[1]);vib([12,30,12]);ciBurst(b)}else if(S.starLog['ci-'+k+'-'+dk]){delete S.starLog['ci-'+k+'-'+dk];S.stars=Math.max(0,S.stars-1)}
+  save();renderCI();renderStars();if(CI.every(c=>S.ci[dk][c[0]])&&on)setTimeout(ciAll,350)});renderStars()}
+function renderStars(){$('hStars').innerHTML=`${STAR_SVG()}<b>${AR(S.stars)}</b><span class="sk">${AR(ciStreak())} ${T('days','يوم')}</span>`}
+function ciBurst(el){const r=el.getBoundingClientRect();for(let i=0;i<8;i++){const p=document.createElement('span');p.className='cib';p.innerHTML=STAR_SVG();const a=i/8*Math.PI*2;p.style.cssText=`left:${r.left+28}px;top:${r.top+r.height/2}px;--x:${Math.cos(a)*46}px;--y:${Math.sin(a)*46}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),700)}}
+function ciAll(){$('cel').innerHTML=`<div class="bs"><span class="ring"></span><svg class="bstar" viewBox="0 0 100 100"><path d="M50 10 61.8 37.8 91.8 40.4 69 60.2 75.9 89.6 50 74 24.1 89.6 31 60.2 8.2 40.4 38.2 37.8Z" fill="#ffc94d" stroke="#ffc94d" stroke-width="9" stroke-linejoin="round"/></svg></div><h2>${T('Check-in complete!','اكتمل تسجيل اليوم!')}</h2><p>${T('MashaAllah. Keep going.','ما شاء الله. واصل.')}</p><button id="celX">${T('Close','إغلاق')}</button>`;$('cel').classList.add('on');vib([30,50,30,50,60]);$('celX').onclick=()=>$('cel').classList.remove('on')}
+$('hStars').onclick=()=>toast(T(S.stars+' stars · '+ciStreak()+' days in a row',AR(S.stars)+' نجمة · '+AR(ciStreak())+' أيام متتالية'));
 function renderHero(){const now=NOW(),{next,prev}=salahState(now);$('hero').dataset.k=next.s[0];
  const ms=next.t-now,h=Math.floor(ms/36e5),m=Math.ceil(ms/6e4)%60||(ms>0&&h===0?1:0),pct=Math.max(0,Math.min(1,(now-prev.t)/(next.t-prev.t))),C=2*Math.PI*30;
  const left=h?T(h+' h '+m+' min',AR(h)+' س '+AR(m)+' د'):T(m+' min',AR(m)+' د');
@@ -808,7 +839,7 @@ function renderTopics(){$('topics').innerHTML=TOP.map((t,i)=>`<button class="tl 
 const INSP=[T('Small deeds, done often, are the most beloved to Allah.','أحبّ الأعمال إلى الله أدومها وإن قلّ.'),T('One step today is still a step forward.','خطوة واحدة اليوم ما زالت تقدّمًا.'),T('You showed up. That counts.','حضرت. وهذا يُحسب لك.'),T('Progress, not perfection.','التقدّم لا الكمال.'),T('Every salah marked is a win.','كل صلاة تسجّلها إنجاز.'),T('Begin with Bismillah and keep going.','ابدأ ببسم الله وتابع.')];
 const inspToday=()=>INSP[Math.floor((NOW()-new Date(NOW().getFullYear(),0,0))/864e5)%INSP.length];
 function greet(){const h=NOW().getHours();return h<12?T('Good morning','صباح الخير'):h<17?T('Good afternoon','نهارك سعيد'):T('Good evening','مساء الخير')}
-R.home=()=>{{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':'en-US',{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
+R.home=()=>{try{renderCI()}catch(e){console.error(e)}{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':'en-US',{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
  const k=S.kh[0];$('khMini').textContent=k?(k.name||T('My khatmah','ختمتي'))+' · '+AR(Math.round(k.done/604*100))+'%':T('Start a new khatmah','ابدأ ختمة جديدة');
  $('cont').innerHTML=S.noCont?'':`<span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b>${T('Continue reading','متابعة القراءة')}</b><small>${T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥')}</small></span><button class="go" data-read="2:255">${T('Open','افتح')}</button>`;$('cont').style.display=S.noCont?'none':''};
 setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);

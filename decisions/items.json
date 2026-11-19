@@ -2,18 +2,18 @@
  "v": 1,
  "items": [
   {
-   "id": "brand-pick-neutral",
+   "id": "brand-pick-bright",
    "t": "Pick the colours (1 to 5)",
    "ar": "اختر الألوان (١ إلى ٥)",
-   "s": "1 Graphite & Amber (recommended), 2 Navy & Sky, 3 Slate & Copper, 4 Midnight & Gold, 5 Black & Orange. Approve = number 1. To pick another, tap Change and type its number.",
+   "s": "Bright and neutral. 1 Sky & Sun (recommended), 2 Blue & Tangerine, 3 Tangerine & Sky, 4 Aqua Blue & Coral, 5 Golden & Blue. All keep your Daily check-in, stars and streak. Approve = number 1. To pick another, tap Change and type its number.",
    "pics": [
-    "decisions/img/brandn1.jpg",
-    "decisions/img/brandn2.jpg",
-    "decisions/img/brandn3.jpg",
-    "decisions/img/brandn4.jpg",
-    "decisions/img/brandn5.jpg"
+    "decisions/img/brandl1.jpg",
+    "decisions/img/brandl2.jpg",
+    "decisions/img/brandl3.jpg",
+    "decisions/img/brandl4.jpg",
+    "decisions/img/brandl5.jpg"
    ],
-   "link": "next/v5/n1/#home"
+   "link": "next/v5/l1/#home"
   }
  ]
 }
