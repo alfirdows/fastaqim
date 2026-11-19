@@ -7996,7 +7996,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v162',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v163',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -10126,6 +10126,13 @@ window.addEventListener('popstate',()=>{const L=$('landing');if(L&&L.classList.c
 {const _am162=apMenu;apMenu=function(){const r=_am162.apply(this,arguments);try{const m=$('apMenu'),f=m&&(m.querySelector('[data-am="pv"]')||m.querySelector('[data-am="fb"]'));
   if(f&&!m.querySelector('[data-am="about"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='about';b.textContent='ℹ️ '+tl('About Fastaqim');
     b.onclick=e=>{e.stopPropagation();abOpen()};f.before(b)}}catch(e){}return r}}
+
+
+/* v163: Islamic day starts at Maghrib: "now" dates after today's Maghrib show the next Hijri day */
+function hjNow(d){try{const n=new Date();if(!(d instanceof Date))d=n;if(Math.abs(d-n)>5*6e4)return d;const P=salahFor(n),m=P&&P.maghrib;if(m instanceof Date&&n>=m){const x=new Date(n);x.setDate(x.getDate()+1);return x}}catch(e){}return d}
+{const _hj163=hijri;hijri=function(d,o){return _hj163(hjNow(d),o)}}
+try{const _hs163=hjS;hjS=function(d){return _hs163(hjNow(d))}}catch(e){}
+try{const _hp163=hijParts;hijParts=function(d){return _hp163(hjNow(d))}}catch(e){}
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
