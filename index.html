@@ -2355,7 +2355,7 @@ html.dark .apv-ch,.dark .apv-ch{color:#f0b35e}
 @media (prefers-reduced-motion:reduce){.apv-star,.apv-toast{animation:none}.apv-go{transition:none}}
 .ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}#fqHome .tp-av{display:none!important}#avCard{display:none!important}#landing.ab-mode .ld-auth,#landing.ab-mode #guestBar,#landing.ab-mode #ldLogin,#landing.ab-mode #ldHaveB,#landing.ab-mode .ld-hs{display:none!important}
 #abBack{display:none}#landing.ab-mode #abBack{display:flex;align-items:center;gap:6px;position:sticky;top:calc(env(safe-area-inset-top) + 8px);z-index:60;margin:calc(env(safe-area-inset-top) + 8px) 0 0 12px;height:44px;padding:0 16px;border:0;border-radius:22px;background:var(--lcard,#fff);color:var(--ltext,#18222F);font-weight:700;font-size:16px;box-shadow:0 4px 14px -6px rgba(20,40,70,.35)}
-</style>
+.tm2 ul{margin:6px 0 0;padding-inline-start:20px;display:grid;gap:8px;line-height:1.5}.tm2 ul,.tm2 li{text-align:start}.tm2 li{font-size:15px}</style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
@@ -7996,7 +7996,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v163',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v164',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -10133,6 +10133,22 @@ function hjNow(d){try{const n=new Date();if(!(d instanceof Date))d=n;if(Math.abs
 {const _hj163=hijri;hijri=function(d,o){return _hj163(hjNow(d),o)}}
 try{const _hs163=hjS;hjS=function(d){return _hs163(hjNow(d))}}catch(e){}
 try{const _hp163=hijParts;hijParts=function(d){return _hp163(hjNow(d))}}catch(e){}
+
+
+/* v164: Terms of use: free, non-commercial, not advice, sources, no warranty, (c) all rights reserved */
+const TERMS={
+ en:['Terms of use',["Fastaqim is free and non-commercial. There are no ads and nothing is for sale.","It is a tool for organising your day. It is not medical, legal or religious advice. For rulings, ask a qualified scholar. For health, ask your doctor.","Qur'an, hadith and adhkar are shown with their sources. If you see a mistake, please use Report a problem.","Salah times are calculated and can differ a little from your local masjid.","The site is provided as it is, without any warranty. Use it at your own discretion.","The name Fastaqim, its design, icons and content are © Fastaqim. All rights reserved. Please don't copy or reuse them without permission.","How your data is kept: see Privacy."]],
+ ar:['شروط الاستخدام',["فاستقم مجاني وغير تجاري. لا إعلانات ولا شيء للبيع.","هو أداة لتنظيم يومك، وليس استشارة طبية أو قانونية أو فتوى شرعية. للأحكام اسأل عالمًا مؤهلًا، وللصحة اسأل طبيبك.","تُعرض الآيات والأحاديث والأذكار مع مصادرها. إن رأيت خطأ فاستخدم «الإبلاغ عن مشكلة».","مواقيت الصلاة محسوبة وقد تختلف قليلًا عن مسجدك المحلي.","يُقدَّم الموقع كما هو دون أي ضمان، واستخدامه على مسؤوليتك.","اسم فاستقم وتصميمه وأيقوناته ومحتواه © فاستقم. جميع الحقوق محفوظة. يُرجى عدم النسخ أو إعادة الاستخدام دون إذن.","كيف تُحفظ بياناتك: انظر الخصوصية."]],
+ om:["Haala itti fayyadamaa",["Fastaqim bilisa fi kan daldalaa miti. Beeksisni hin jiru, wanti gurguramus hin jiru.","Meeshaa guyyaa kee qindeessuuti. Gorsa fayyaa, seeraa ykn fatwaa miti. Murtii amantii hayyuu beekaa gaafadhu, fayyaaf ammoo doktara kee gaafadhu.","Qur'aanni, hadiisni fi azkaarri madda isaanii wajjin argamu. Dogoggora yoo argite, 'Rakkoo gabaasi' fayyadami.","Yeroon salaataa herregamee kan baafame yoo ta'u, masjiida naannoo keetii irraa xiqqoo garaagarummaa qabaachuu danda'a.","Weebsaayitichi akkuma jirutti kenname, wabii tokko malee.","Maqaan Fastaqim, dizaayiniin, astaawonni fi qabiyyeen isaa © Fastaqim. Mirgi hundi eegamaadha. Hayyama malee hin garagalchin.","Odeeffannoon kee akkamitti akka eegamu: Dhuunfaa ilaali."]],
+ so:["Shuruudaha isticmaalka",["Fastaqim waa bilaash, mana aha ganacsi. Xayeysiis ma jiro, waxna lagama iibiyo.","Waa qalab lagu habeeyo maalintaada. Ma aha talo caafimaad, sharci ama fatwo. Xukunnada culimada aqoonta leh weydii, caafimaadkana dhakhtarkaaga.","Qur'aanka, xadiiska iyo adkaarta waxaa lagu soo bandhigaa ilaha ay ka yimaadeen. Haddii aad qalad aragto, isticmaal 'Soo sheeg dhibaato'.","Waqtiyada salaadda waa la xisaabiyaa, waxayna in yar ka duwanaan karaan masjidkaaga.","Bogga sida uu yahay ayaa la bixiyaa, dammaanad la'aan.","Magaca Fastaqim, naqshaddiisa, astaamihiisa iyo waxa ku jira © Fastaqim. Xuquuqda oo dhan way dhowran tahay. Fadlan ha koobiyeyn ogolaansho la'aan.","Sida xogtaada loo ilaaliyo: eeg Arrimaha khaaska ah."]]};
+[["Terms","الشروط","Haala","Shuruudaha"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function termsOpen(){try{$('apMenu').hidden=true}catch(e){}const k=TERMS[LANG]?LANG:'en',P=TERMS[k];
+  modalCard(`<div class="pv2 tm2" dir="${k==='ar'?'rtl':'ltr'}" lang="${k}"><p class="label">📄 ${P[0]}</p><ul>${P[1].map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`)}
+function termsLinks(){try{const pl=document.querySelector('#landing .privLink');if(pl&&!document.getElementById('ldTerms')){const b=document.createElement('button');b.type='button';b.className='ld-fl';b.id='ldTerms';b.textContent=tl('Terms');b.onclick=termsOpen;const d=document.createElement('span');d.setAttribute('aria-hidden','true');d.textContent='·';pl.after(d,b)}
+  const t=document.getElementById('ldTerms');if(t)t.textContent=tl('Terms');const c=$('ldCopy');if(c)c.textContent='© '+new Date().getFullYear()+' Fastaqim · All rights reserved'}catch(e){}}
+{const _am164=apMenu;apMenu=function(){const r=_am164.apply(this,arguments);try{const m=$('apMenu'),f=m&&m.querySelector('[data-am="pv"]');
+  if(f&&!m.querySelector('[data-am="terms"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='terms';b.textContent='📄 '+tl('Terms');b.onclick=e=>{e.stopPropagation();termsOpen()};f.after(b)}}catch(e){}return r}}
+setTimeout(termsLinks,0);{const _ls164=landingShow;landingShow=function(){const r=_ls164.apply(this,arguments);termsLinks();return r}}
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
