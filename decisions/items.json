@@ -2,18 +2,18 @@
  "v": 1,
  "items": [
   {
-   "id": "brand-pick",
-   "t": "Pick Fastaqim's brand (1 to 5)",
-   "ar": "اختر هوية فاستقم (١ إلى ٥)",
-   "s": "5 original designs, each drawn only for Fastaqim. 1 True Dawn (recommended), 2 Firm Mountain, 3 Night Lantern, 4 Maghrib Rose, 5 Ink & Saffron. Approve = number 1. To pick another, tap Change and type its number.",
+   "id": "brand-pick-neutral",
+   "t": "Pick the colours (1 to 5)",
+   "ar": "اختر الألوان (١ إلى ٥)",
+   "s": "1 Graphite & Amber (recommended), 2 Navy & Sky, 3 Slate & Copper, 4 Midnight & Gold, 5 Black & Orange. Approve = number 1. To pick another, tap Change and type its number.",
    "pics": [
-    "decisions/img/brand1.jpg",
-    "decisions/img/brand2.jpg",
-    "decisions/img/brand3.jpg",
-    "decisions/img/brand4.jpg",
-    "decisions/img/brand5.jpg"
+    "decisions/img/brandn1.jpg",
+    "decisions/img/brandn2.jpg",
+    "decisions/img/brandn3.jpg",
+    "decisions/img/brandn4.jpg",
+    "decisions/img/brandn5.jpg"
    ],
-   "link": "next/v5/#home"
+   "link": "next/v5/n1/#home"
   }
  ]
 }
