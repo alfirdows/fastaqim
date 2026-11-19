@@ -1,0 +1,53 @@
+name: Word timings (word-by-word highlight)
+# Free and open: quran-word-align (MIT code + MIT model) run on the per-ayah recordings the sites play:
+# Saad al-Ghamdi (Fastaqim) and Ibrahim Al-Akhdar (Itqan).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [tools/wbw/**, .github/workflows/word-timings.yml]
+permissions:
+  contents: write
+concurrency:
+  group: word-timings
+  cancel-in-progress: true
+jobs:
+  align:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        reciter: [ghamdi, akhdar]
+        part: ["1 2", "3 5", "6 9", "10 16", "17 25", "26 39", "40 60", "61 114"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the aligner (pinned)
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install -q "git+https://github.com/voltarostudio/quran-word-align@6a764a95976421a0dcf03f7f8f8d907b6538871d"
+      - name: Align ${{ matrix.reciter }} surahs ${{ matrix.part }}
+        run: python tools/wbw/run.py ${{ matrix.part }} ${{ matrix.reciter }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wbw-${{ matrix.reciter }}-${{ strategy.job-index }}
+          path: data/wbw/${{ matrix.reciter }}/
+  commit:
+    needs: align
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Commit timings
+        run: |
+          for r in ghamdi akhdar; do mkdir -p data/wbw/$r; cp parts/wbw-$r-*/*.json data/wbw/$r/ 2>/dev/null || true; echo "$r: $(ls data/wbw/$r | wc -l) surahs"; done
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add data/wbw
+          git diff --cached --quiet || (git commit -m "Word timings for Saad al-Ghamdi and Ibrahim Al-Akhdar (quran-word-align, MIT)" && git pull --rebase -q && git push)
