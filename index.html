@@ -2353,7 +2353,9 @@ html.dark .apv-ch,.dark .apv-ch{color:#f0b35e}
 .apv-list{display:grid;gap:8px;margin-top:8px}.apv-row{display:flex;gap:12px;align-items:center;text-align:start;border:0;border-radius:14px;padding:10px 12px;background:color-mix(in srgb,currentColor 6%,transparent);color:inherit;font:inherit}
 .apv-row small{display:block;margin-top:2px}
 @media (prefers-reduced-motion:reduce){.apv-star,.apv-toast{animation:none}.apv-go{transition:none}}
-.ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}#fqHome .tp-av{display:none!important}#avCard{display:none!important}</style>
+.ci-k3{flex-wrap:wrap;justify-content:center!important;row-gap:4px!important;padding:6px 6px!important}.ci-k3 .ci-kv{width:auto;height:auto;display:block;flex:1 0 100%;text-align:center!important;min-width:0;white-space:nowrap;border-radius:0;margin-inline-end:auto;background:none;border:0;padding:0;font:700 .74rem var(--body);color:var(--muted);text-align:start;line-height:1.15;text-decoration:underline dotted;text-underline-offset:3px}.ci-kv span{opacity:.6}.kv-h{font-size:1.05rem;line-height:1.55;font-weight:600}.kv-ar{font-family:var(--qf,"KFGQPC Uthmanic Script HAFS"),serif;font-size:1.25rem;line-height:2}.kv{text-align:start}.kv-go{display:block;margin-top:14px;padding:14px;border-radius:14px;text-align:center;font-weight:700;text-decoration:none;background:#2f6fd8;color:#fff!important}#fqHome .tp-av{display:none!important}#avCard{display:none!important}#landing.ab-mode .ld-auth,#landing.ab-mode #guestBar,#landing.ab-mode #ldLogin,#landing.ab-mode #ldHaveB,#landing.ab-mode .ld-hs{display:none!important}
+#abBack{display:none}#landing.ab-mode #abBack{display:flex;align-items:center;gap:6px;position:sticky;top:calc(env(safe-area-inset-top) + 8px);z-index:60;margin:calc(env(safe-area-inset-top) + 8px) 0 0 12px;height:44px;padding:0 16px;border:0;border-radius:22px;background:var(--lcard,#fff);color:var(--ltext,#18222F);font-weight:700;font-size:16px;box-shadow:0 4px 14px -6px rgba(20,40,70,.35)}
+</style>
 
 <canvas id="confetti"></canvas>
 <div id="landing" hidden>
@@ -7994,7 +7996,7 @@ function missCard(i){const tr=LANG==='ar'?'':(MISSQ[LANG]||MISSQ.en);let n=0;
 [["I prayed it now","صلّيتها الآن","Amma nan salaate","Hadda ayaan tukaday"],["Alhamdulillah","الحمد لله","Alhamdulillaah","Alxamdulillaah"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
 
 /* ===== v108: Home Screen app always runs the newest version, keeps your place on refresh, pull down to refresh ===== */
-const FQ_BUILD='fastaqim-v159',FQ_DAY0=dkey();
+const FQ_BUILD='fastaqim-v162',FQ_DAY0=dkey();
 function fqStateSave(){try{sessionStorage.setItem('fq.state',JSON.stringify({tab:document.body.dataset.tab||'now',hub:HUBV,nowv:document.body.dataset.nowv||'',setv:SETV||null,y:Math.round(scrollY),at:Date.now()}))}catch(e){}}
 function fqReload(){fqStateSave();location.reload()}
 addEventListener('pagehide',fqStateSave);document.addEventListener('visibilitychange',()=>{if(document.hidden)fqStateSave()});
@@ -10112,6 +10114,18 @@ new MutationObserver(()=>fqHidePic()).observe(document.body,{childList:true,subt
 
 
 try{for(const k of ['Your name']){TX[k]=Object.assign(TX[k]||{},{ar:'اسمك',om:'Maqaa kee',so:'Magacaaga'})}}catch(e){}
+
+
+/* v162: About Fastaqim = the first page, opened from inside the app; a Back button returns, nothing signs out */
+[["About Fastaqim","عن فاستقم","Waa'ee Fastaqim","Ku saabsan Fastaqim"],["Back to the app","العودة إلى التطبيق","Gara appii deebi'i","Ku noqo app-ka"]].forEach(([en,ar,om,so])=>{TX[en]=Object.assign(TX[en]||{},{ar,om,so})});
+function abOpen(){try{$('apMenu').hidden=true}catch(e){}const L=$('landing');if(!L)return;L.classList.add('ab-mode');
+  let b=$('abBack');if(!b){b=document.createElement('button');b.id='abBack';b.type='button';L.prepend(b);b.onclick=abClose}
+  b.innerHTML='‹ '+esc(tl('Back to the app'));landingShow(true);L.scrollTop=0;try{history.pushState({ab:1},'')}catch(e){}}
+function abClose(){const L=$('landing');if(!L||!L.classList.contains('ab-mode'))return;L.classList.remove('ab-mode');landingShow(false);try{render()}catch(e){}}
+window.addEventListener('popstate',()=>{const L=$('landing');if(L&&L.classList.contains('ab-mode')&&!L.hidden)abClose()});
+{const _am162=apMenu;apMenu=function(){const r=_am162.apply(this,arguments);try{const m=$('apMenu'),f=m&&(m.querySelector('[data-am="pv"]')||m.querySelector('[data-am="fb"]'));
+  if(f&&!m.querySelector('[data-am="about"]')){const b=document.createElement('button');b.className='apm-i';b.dataset.am='about';b.textContent='ℹ️ '+tl('About Fastaqim');
+    b.onclick=e=>{e.stopPropagation();abOpen()};f.before(b)}}catch(e){}return r}}
 
 function sqBest(){const s=sqStreak();if(!S.sqBest||s>S.sqBest){S.sqBest=s}return S.sqBest||0}
 function sqWeek(){const o=[];for(let k=6;k>=0;k--){const d=new Date();d.setDate(d.getDate()-k);let w='';const WD={om:['Dil','Wix','Kib','Rob','Kam','Jim','San'],so:['Axd','Isn','Tal','Arb','Kha','Jim','Sab']}[LANG];try{w=WD?WD[d.getDay()]:d.toLocaleDateString(LOC(),{weekday:'narrow'})}catch(e){w=''}if(/\d/.test(w))w=['S','M','T','W','T','F','S'][d.getDay()];o.push({w,full:sqFull(d),n:sqCnt(d),today:k===0})}return o}
