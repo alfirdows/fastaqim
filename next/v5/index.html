@@ -483,13 +483,42 @@ html.dark .cg .dy button.wd{background:linear-gradient(180deg,#3a2418,#4a2c1c)!i
 .lg .ls{width:3px!important;height:8px!important;border-radius:2px!important;background:#f08a4b!important}
 .fqi{width:1em;height:1em;display:block}.fqi .hz{stroke:currentColor;opacity:.35}.fqi.on .hz{stroke:#f08a4b;opacity:1}
 .tab a .fqi{font-size:27px}.pi .nd .fqi{font-size:27px}.tab a.on:before{display:none!important}.ps.nx .nd .fqi .hz,.ps.due .nd .fqi .hz{opacity:.6}
+
+.lgb{display:flex;align-items:center;gap:4px;height:36px;padding:0 10px;border:0;border-radius:18px;background:var(--card);color:var(--ink);font-size:13.5px;box-shadow:0 1px 2px rgba(0,0,0,.06);margin-inline-end:2px}
+.lgb i{font-size:16px;color:var(--sub)}.lgb b{font-weight:700}.lgb .ph-caret-down{font-size:12px}
+/* calendar: the month on the horizon */
+.mo2{display:flex;align-items:center;gap:10px;margin:2px 0 14px}.mo2 .tt{flex:1;text-align:center}.mo2 .tt b{display:block;font-size:24px;font-weight:800;letter-spacing:-.3px}.mo2 .tt small{color:var(--sub);font-size:13.5px}
+.mh{background:var(--card);border-radius:24px 24px 24px 8px;padding:16px 12px 10px;box-shadow:0 6px 18px rgba(79,52,119,.07)}
+.mhc{display:flex;align-items:flex-end;gap:2px;position:relative;padding-bottom:6px}
+.mhc:after{content:"";position:absolute;left:-4px;right:-4px;bottom:0;height:3px;border-radius:3px;background:var(--dawn)}
+.hc{flex:1;min-width:0;border:0;background:none;padding:6px 0 6px;border-radius:8px 8px 0 0;display:flex;flex-direction:column-reverse;align-items:center;gap:3px;position:relative}
+.hc i{width:7px;height:7px;border-radius:50%;background:var(--card2)}.hc i.on{background:#f08a4b;box-shadow:0 0 6px rgba(240,138,75,.5)}
+.hc.fu i{background:none;box-shadow:0 0 0 1px var(--line) inset}
+.hc.wd{background:linear-gradient(180deg,transparent,#fde3cf)}html.dark .hc.wd{background:linear-gradient(180deg,transparent,#4a2c1c)}
+.hc.fr:after{content:"";position:absolute;bottom:-7px;width:5px;height:5px;border-radius:50%;background:var(--acc)}
+.hc.sel{background:var(--accT)}.hc.sel.wd{background:linear-gradient(180deg,var(--accT),#fde3cf)}
+.mhn{display:flex;gap:2px;margin-top:8px}.mhn span{flex:1;min-width:0;text-align:center;font-size:11px;font-weight:650;color:var(--sub);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:visible}
+.mhn span.td{color:#fff;background:var(--acc);border-radius:6px;overflow:visible}
+.mhk{display:flex;gap:14px;flex-wrap:wrap;margin:10px 4px 14px;font-size:12.5px;color:var(--sub)}.mhk span{display:flex;align-items:center;gap:6px}
+.mhk i{display:inline-block}.mhk .k1{width:7px;height:7px;border-radius:50%;background:#f08a4b}.mhk .k2{width:14px;height:9px;border-radius:3px;background:linear-gradient(180deg,transparent,#fde3cf);box-shadow:0 0 0 1px #f3c7a6 inset}.mhk .k3{width:6px;height:6px;border-radius:50%;background:var(--acc)}
+.dp{background:var(--card);border-radius:22px 22px 22px 8px;padding:16px}
+.dph{display:flex;align-items:center;gap:14px}.dph>b{font-size:44px;font-weight:800;color:var(--acc);line-height:1;min-width:58px;text-align:center}
+.dph strong{display:block;font-size:17px}.dph small{color:var(--sub);font-size:13.5px}
+.dps{display:flex;justify-content:space-between;margin:14px 0 4px;position:relative}
+.dps:before{content:"";position:absolute;left:8%;right:8%;top:17px;height:2px;background:var(--line)}
+.dps span{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:22px;color:var(--sub)}
+.dps span .fqi{width:36px;height:36px;padding:6px;border-radius:50%;background:var(--card);box-shadow:0 0 0 1.5px var(--line);box-sizing:border-box}
+.dps span.on{color:#fff}.dps span.on .fqi{background:#f08a4b;box-shadow:none}.dps span.on .fqi .hz{stroke:#fff;opacity:.8}
+.dps span.fu{opacity:.5}.dps small{font-size:11.5px;font-weight:600;color:var(--sub)}
+.dpn{display:flex;gap:10px;align-items:center;margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:14.5px}.dpn i{font-size:19px;color:var(--gold)}
+.ps.dn .nd{background:#f08a4b!important;color:#fff!important}.ps.dn .nd .fqi .hz{stroke:#fff}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 <section class="scr" id="s-home">
- <div class="fh"><span class="wm">Fastaqim</span><button class="ib" data-go="cal" aria-label="Calendar"><i class="ph ph-calendar-dots"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
+ <div class="fh"><span class="wm">Fastaqim</span><button class="lgb" id="hLang" aria-label="Language"><i class="ph ph-globe-simple"></i><b></b><i class="ph ph-caret-down"></i></button><button class="ib" data-go="cal" aria-label="Calendar"><i class="ph ph-calendar-dots"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
  <h1 class="gr" id="greet"></h1>
  <div class="nowc" id="hero"></div>
  <div class="sec"><h2 data-t="Today's path|طريق اليوم"></h2><span class="slh" id="slh"></span></div>
@@ -589,11 +618,12 @@ html.dark .cg .dy button.wd{background:linear-gradient(180deg,#3a2418,#4a2c1c)!i
 <!-- CALENDAR -->
 <section class="scr" id="s-cal">
  <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 data-t="Calendar|التقويم"></h1><span style="width:44px"></span></div>
- <div class="cm"><button class="ib" id="cPrev" aria-label="Previous month"><i class="ph ph-caret-left flip"></i></button><button class="ib" id="cNext" aria-label="Next month"><i class="ph ph-caret-right flip"></i></button><div class="tt" id="cTitle"></div></div>
- <div class="cg"><div class="wk" id="cWk"></div><div class="dy" id="cDays"></div></div>
- <div class="lg"><span><i class="lw"></i><span data-t="White days|الأيام البيض"></span></span><span><i class="lu"></i><span data-t="Mon & Thu fast|صيام الاثنين والخميس"></span></span><span><i class="lj"></i><span data-t="Jumu'ah|الجمعة"></span></span><span><i class="ls"></i><span data-t="Salah marked|صلاة مسجّلة"></span></span><span><i class="d-o"></i><span data-t="Islamic day|مناسبة"></span></span><span><i class="d-t"></i><span data-t="My tasks|مهامي"></span></span></div>
- <div class="sec"><h2 data-t="This month|هذا الشهر"></h2></div>
- <div class="tk" id="cList"></div>
+ <div class="mo2"><button class="ib" id="cPrev" aria-label="Previous month"><i class="ph ph-caret-left flip"></i></button><div class="tt" id="cTitle"></div><button class="ib" id="cNext" aria-label="Next month"><i class="ph ph-caret-right flip"></i></button></div>
+ <div class="mh"><div class="mhc" id="cDays"></div><div class="mhn" id="cNums"></div></div>
+ <div class="mhk"><span><i class="k1"></i><span data-t="Salah marked|صلاة مسجّلة"></span></span><span><i class="k2"></i><span data-t="White days|الأيام البيض"></span></span><span><i class="k3"></i><span data-t="Jumu'ah|الجمعة"></span></span></div>
+ <div class="dp" id="cDay"></div>
+ <div class="sec"><h2 data-t="Coming up|قادم"></h2></div>
+ <div id="cList"></div>
 </section>
 
 <nav class="tab" id="tab"></nav>
@@ -888,7 +918,11 @@ $('qa').onsubmit=e=>{e.preventDefault();const v=$('qaIn').value.trim();if(!v)ret
 R.more=()=>{const d7=[...Array(7)].map((_,i)=>{const x=NOW();x.setDate(x.getDate()-i);return Object.keys(S.salah[dkey(x)]||{}).length}).reduce((a,b)=>a+b,0),kp=S.kh[0]?Math.round(S.kh[0].done/604*100):0;
  $('yp').innerHTML=`<div><b class="g">${AR(S.stars)}★</b><small>${T('Stars','نجوم')}</small></div><div><b>${AR(d7)}/${AR(35)}</b><small>${T('Salah this week','صلوات الأسبوع')}</small></div><div><b>${AR(kp)}%</b><small>${T('Khatmah','الختمة')}</small></div>`;$('mStars').innerHTML=AR(S.stars)+' ★';$('mDarkSw').classList.toggle('on',document.documentElement.classList.contains('dark'));$('mNot').textContent=nOn()+' '+T('on','مفعّل')};
 $('mDark').onclick=()=>{const d=document.documentElement.classList.toggle('dark');store('dark',d);R.more()};
-$('mLang').onclick=()=>{const n=L==='ar'?'en':'ar';localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
+const LGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali'],['ur','اردو'],['fr','Français'],['tr','Türkçe'],['id','Bahasa Indonesia']];
+function lgSet(n){if(n!=='en'&&n!=='ar'){toast(T('This preview has English and Arabic. All languages are in the full app.','هذه المعاينة بالإنجليزية والعربية. كل اللغات في التطبيق الكامل.'));return}localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href}
+function lgSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.map(([k,n])=>`<button data-lg="${k}"><span>${n}</span>${k===L?'<i class="ph-bold ph-check" style="color:var(--acc)"></i>':''}</button>`).join('')}</div>`);$$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))}
+$('hLang').querySelector('b').textContent=L.toUpperCase();$('hLang').onclick=lgSheet;
+$('mLang').onclick=lgSheet;const _mLangOld=()=>{const n=L==='ar'?'en':'ar';localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
 
 /* ---------- notifications ---------- */
 const NG=[['sal','ph-clock','c-a',T('Salah','الصلاة'),[['fajr',T('Fajr','الفجر')],['dhuhr',T('Dhuhr','الظهر')],['asr',T('Asr','العصر')],['maghrib',T('Maghrib','المغرب')],['isha',T('Isha','العشاء')]]],
@@ -905,22 +939,26 @@ R.notif=()=>{S.notif=S.notif||nDef();const n=S.notif;
 $('nAll').onclick=()=>{S.notif=S.notif||nDef();S.notif.all=S.notif.all?0:1;save();vib(10);R.notif()};
 
 /* ---------- calendar ---------- */
-let cOff=0;
+let cOff=0,cSel=null;
 R.cal=()=>{const today=NOW(),th=hParts(today);let base=new Date(today);base.setDate(base.getDate()-(th.d-1));
  for(let k=0;k<Math.abs(cOff);k++){if(cOff>0){base.setDate(base.getDate()+30);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}else{base.setDate(base.getDate()-2);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}}
  const h0=hParts(base),days=[];let d=new Date(base);while(hParts(d).m===h0.m){days.push(new Date(d));d.setDate(d.getDate()+1)}
- const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-US',o);
- $('cTitle').innerHTML=`<b>${hms(h0.m)} ${AR(h0.y)}</b><small>${gm(g1,{month:'long'})}${g1.getMonth()!==g2.getMonth()?' – '+gm(g2,{month:'long'}):''} ${AR(g2.getFullYear())}</small>`;
- const wk=[T('Sun','أحد'),T('Mon','اثنين'),T('Tue','ثلاثاء'),T('Wed','أربعاء'),T('Thu','خميس'),T('Fri','جمعة'),T('Sat','سبت')];$('cWk').innerHTML=wk.map((w,i)=>`<span class="${i===5?'fr':''}">${i===5?T('Jumu\'ah','جمعة'):w}</span>`).join('');
+ const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-US',o),tk=dkey(today);
+ $('cTitle').innerHTML=`<b>${hms(h0.m)} ${AR(h0.y)}</b><small>${gm(g1,{month:'short',day:'numeric'})} – ${gm(g2,{month:'short',day:'numeric',year:'numeric'})}</small>`;
+ if(!cSel||!days.some(x=>dkey(x)===cSel))cSel=days.some(x=>dkey(x)===tk)?tk:dkey(days[0]);
  const occ=(m,dd)=>({'1.1':T('Islamic New Year','رأس السنة الهجرية'),'1.10':T("'Ashura fast",'صيام عاشوراء'),'9.1':T('Ramadan begins','بداية رمضان'),'10.1':T("Eid al-Fitr",'عيد الفطر'),'12.9':T("Day of 'Arafah fast",'صيام يوم عرفة'),'12.10':T('Eid al-Adha','عيد الأضحى')})[m+'.'+dd];
- const fast=(x,hd)=>(x.getDay()===1||x.getDay()===4||[13,14,15].includes(hd))&&h0.m!==9;
- let cells='';for(let i=0;i<g1.getDay();i++)cells+='<span></span>';const list=[];
- days.forEach((x,i)=>{const hd=i+1,o=occ(h0.m,hd),f=fast(x,hd),tk=dkey(x)===dkey(today)&&S.tasks.length;if(o)list.push([hd,x,o,'d-o']);if([13,14,15].includes(hd)&&h0.m!==9)list.push([hd,x,T('White day fast','صيام الأيام البيض'),'d-f']);
-  const wd=[13,14,15].includes(hd)&&h0.m!==9,mt=(x.getDay()===1||x.getDay()===4)&&h0.m!==9;
-  cells+=`<button class="${dkey(x)===dkey(today)?'td':''} ${x.getDay()===5?'fr':''} ${wd?'wd w'+(hd-12):''} ${mt&&!wd?'mt':''}" aria-label="${hd}"><b>${AR(hd)}</b><small>${AR(x.getDate())}</small><span class="s5">${x<=today?SAL.map(sx=>`<i class="${(S.salah[dkey(x)]||{})[sx[0]]?'on':''}"></i>`).join(''):''}</span><span class="ds">${o?'<i class="d-o"></i>':''}${tk?'<i class="d-t"></i>':''}</span></button>`});
- $('cDays').innerHTML=cells;
- $('cList').innerHTML=list.length?list.map(([hd,x,t,c])=>`<div class="ag"><span class="db ${c}"><b>${AR(hd)}</b><small>${hms(h0.m)}</small></span><span class="tx"><b>${t}</b><small>${gm(x,{weekday:'long',day:'numeric',month:'long'})}</small></span></div>`).join(''):`<p class="empty">${T('Mondays and Thursdays are Sunnah fasts.','يُسنّ صيام الاثنين والخميس.')}</p>`};
-$('cPrev').onclick=()=>{cOff--;R.cal()};$('cNext').onclick=()=>{cOff++;R.cal()};
+ $('cDays').innerHTML=days.map((x,i)=>{const hd=i+1,dk=dkey(x),past=x<=today||dk===tk,day=S.salah[dk]||{},wd=[13,14,15].includes(hd)&&h0.m!==9;
+  return `<button class="hc ${dk===tk?'td':''} ${dk===cSel?'sel':''} ${wd?'wd':''} ${x.getDay()===5?'fr':''} ${past?'':'fu'}" data-cd="${dk}" aria-label="${hd}">${SAL.map(z=>`<i class="${day[z[0]]?'on':''}"></i>`).join('')}</button>`}).join('');
+ $('cNums').innerHTML=days.map((x,i)=>{const hd=i+1,dk=dkey(x);return `<span class="${dk===tk?'td':''} ${x.getDay()===5?'fr':''}">${dk===tk||dk===cSel||(hd===1||hd%5===0)&&Math.abs(hd-(days.findIndex(y=>dkey(y)===tk)+1))>1&&Math.abs(hd-(days.findIndex(y=>dkey(y)===cSel)+1))>1?AR(hd):''}</span>`}).join('');
+ $$('#cDays [data-cd]').forEach(b=>b.onclick=()=>{cSel=b.dataset.cd;vib(6);R.cal()});
+ const si=days.findIndex(x=>dkey(x)===cSel),x=days[si],hd=si+1,dk=cSel,day=S.salah[dk]||{},past=x<=today||dk===tk,o=occ(h0.m,hd),wd=[13,14,15].includes(hd)&&h0.m!==9,mt=(x.getDay()===1||x.getDay()===4)&&h0.m!==9;
+ const notes=[o?['ph-sparkle',o]:null,wd?['ph-sun',T('White day: a Sunnah fast','من الأيام البيض: صيام سنة')]:null,mt&&!wd?['ph-sun-horizon',T('Sunnah fast ('+gm(x,{weekday:'long'})+')','صيام سنة ('+gm(x,{weekday:'long'})+')')]:null,x.getDay()===5?['ph-users-three',T("Jumu'ah: Surat al-Kahf, salawat, du'a",'الجمعة: سورة الكهف، الصلاة على النبي، الدعاء')]:null,dk===tk&&S.tasks.length?['ph-list-checks',T(S.tasks.length+' tasks today',AR(S.tasks.length)+' مهام اليوم')]:null].filter(Boolean);
+ $('cDay').innerHTML=`<div class="dph"><b>${AR(hd)}</b><span><strong>${hms(h0.m)}</strong><small>${gm(x,{weekday:'long',month:'long',day:'numeric'})}${dk===tk?' · '+T('Today','اليوم'):''}</small></span></div>
+  <div class="dps">${SAL.map(z=>`<span class="${day[z[0]]?'on':past?'':'fu'}">${FQI(z[0])}<small>${T(z[1],z[2])}</small></span>`).join('')}</div>
+  ${notes.map(([ic,t])=>`<p class="dpn"><i class="ph ${ic==='ph-users-three'?'ph-mosque':ic}"></i>${t}</p>`).join('')}`;
+ const list=[];days.forEach((x,i)=>{const hd=i+1,o=occ(h0.m,hd);if(x<today&&dkey(x)!==tk)return;if(o)list.push([hd,x,o,'']);if(hd===13&&h0.m!==9)list.push([hd,x,T('White days fast (13–15)','صيام الأيام البيض (١٣–١٥)'),'d-f'])});
+ $('cList').innerHTML=list.length?list.map(([hd,x,t,c])=>`<div class="ag"><span class="db ${c}"><b>${AR(hd)}</b><small>${hms(h0.m)}</small></span><span class="tx"><b>${t}</b><small>${gm(x,{weekday:'long',day:'numeric',month:'long'})}</small></span></div>`).join(''):`<p class="empty">${T('Nothing special left this month.','لا مناسبات متبقية هذا الشهر.')}</p>`};
+$('cPrev').onclick=()=>{cOff--;cSel=null;R.cal()};$('cNext').onclick=()=>{cOff++;cSel=null;R.cal()};
 
 /* ---------- sheet + audio ---------- */
 const XB=`<button class="ib" data-x aria-label="Close"><i class="ph ph-x"></i></button>`;
