@@ -2,149 +2,18 @@
  "v": 1,
  "items": [
   {
-   "id": "v5-own-identity",
-   "t": "Whole app: Fastaqim's own look",
-   "ar": "التطبيق كله: هوية فستقم الخاصة",
-   "s": "Our own signature design on every screen: indigo and dawn colours (no beige or brown), a salah card whose sky changes with the next salah, the straight path line through Home, Dhikr and the surah list, the Qur'an page with your khatmah as 30 juz steps, tap chips for notifications, and a calendar that shows your salah under each day.",
+   "id": "brand-pick",
+   "t": "Pick Fastaqim's brand (1 to 5)",
+   "ar": "اختر هوية فاستقم (١ إلى ٥)",
+   "s": "5 original designs, each drawn only for Fastaqim. 1 True Dawn (recommended), 2 Firm Mountain, 3 Night Lantern, 4 Maghrib Rose, 5 Ink & Saffron. Approve = number 1. To pick another, tap Change and type its number.",
    "pics": [
-    "decisions/img/own161-home.jpg",
-    "decisions/img/own161-quran.jpg",
-    "decisions/img/own161-dhikr.jpg",
-    "decisions/img/own161-notif.jpg",
-    "decisions/img/own161-cal.jpg"
-   ],
-   "link": "next/v5/#quran"
-  },
-  {
-   "id": "v5-home-own",
-   "t": "Home: Fastaqim's own design",
-   "ar": "الرئيسية: تصميم فستقم الخاص",
-   "s": "Our own look, not a copy: a light 'Next salah' card with one big Mark button, and 'Today's path' with your salah and timed tasks on one line and a red Now marker. The date stays on one line, and the tab bar no longer covers anything.",
-   "pics": [
-    "decisions/img/own1.jpg",
-    "decisions/img/own2.jpg",
-    "decisions/img/own3.jpg",
-    "decisions/img/own4.jpg"
+    "decisions/img/brand1.jpg",
+    "decisions/img/brand2.jpg",
+    "decisions/img/brand3.jpg",
+    "decisions/img/brand4.jpg",
+    "decisions/img/brand5.jpg"
    ],
    "link": "next/v5/#home"
-  },
-  {
-   "id": "v5-after-salah",
-   "t": "After salah: one drop-down",
-   "ar": "بعد الصلاة: قائمة منسدلة واحدة",
-   "s": "Tap a salah: On time / Made up / Excused, then one drop-down with Ayat al-Kursi, Tasbih 33·33·34 and Adhkar, each with its source.",
-   "pics": [
-    "decisions/img/aft.jpg",
-    "decisions/img/aft_ar.jpg"
-   ],
-   "link": "next/v5/?t=13:10#home"
-  },
-  {
-   "id": "v5-energy",
-   "t": "Energy check in To-do",
-   "ar": "فحص الطاقة في المهام",
-   "s": "Low = quick tasks first, High = big tasks first. Each task shows its size.",
-   "pics": [
-    "decisions/img/energy.jpg"
-   ],
-   "link": "next/v5/#todo"
-  },
-  {
-   "id": "v5-quran",
-   "t": "Qur'an tab",
-   "ar": "تبويب القرآن",
-   "s": "Continue reading, all surahs with search, listen, my khatmah",
-   "pics": [
-    "decisions/img/quran.jpg",
-    "decisions/img/index.jpg",
-    "decisions/img/khatmah.jpg"
-   ],
-   "link": "next/v5/#quran"
-  },
-  {
-   "id": "v5-dhikr",
-   "t": "Dhikr: one at a time",
-   "ar": "الأذكار: ذكر واحد في كل مرة",
-   "s": "Big counter button, list of unfinished, animated star when done",
-   "pics": [
-    "decisions/img/dhikr.jpg",
-    "decisions/img/dhikr1.jpg",
-    "decisions/img/done.jpg"
-   ],
-   "link": "next/v5/#dhikr"
-  },
-  {
-   "id": "reader",
-   "t": "Qur'an reader",
-   "ar": "قارئ القرآن",
-   "s": "The ayah being read is shaded; touch and hold an ayah for play, meaning, tafsir, share",
-   "pics": [
-    "decisions/img/reader1.jpg",
-    "decisions/img/reader2.jpg",
-    "decisions/img/reader3.jpg"
-   ],
-   "link": "next/design/read.html"
-  },
-  {
-   "id": "wbw-helper",
-   "t": "Box that follows Saad al-Ghamdi word by word",
-   "ar": "مربع يتبع الشيخ سعد الغامدي كلمة بكلمة",
-   "s": "Approve = add a small free helper on GitHub (MIT licence) that times each of his words. Nothing to pay.",
-   "pics": [
-    "decisions/img/wbw.jpg"
-   ],
-   "link": "next/design/read.html"
-  },
-  {
-   "id": "v5-notif",
-   "t": "Notifications page",
-   "ar": "صفحة الإشعارات",
-   "s": "One switch for all, grouped by Salah, Adhkar, Qur'an, Tasks, Sunnah fasts",
-   "pics": [
-    "decisions/img/notif.jpg"
-   ],
-   "link": "next/v5/#notif"
-  },
-  {
-   "id": "v5-cal",
-   "t": "Hijri calendar",
-   "ar": "التقويم الهجري",
-   "s": "Hijri month with dates, Sunnah fasts and Islamic days marked",
-   "pics": [
-    "decisions/img/cal.jpg"
-   ],
-   "link": "next/v5/#cal"
-  },
-  {
-   "id": "v5-todo-more",
-   "t": "To-do and More",
-   "ar": "المهام والمزيد",
-   "s": "Quick add in one line; More has stars, game, settings",
-   "pics": [
-    "decisions/img/todo.jpg",
-    "decisions/img/more.jpg"
-   ],
-   "link": "next/v5/#todo"
-  },
-  {
-   "id": "v5-dark",
-   "t": "Dark mode",
-   "ar": "الوضع الداكن",
-   "s": "Same design at night, with the mini player",
-   "pics": [
-    "decisions/img/dark.jpg"
-   ],
-   "link": "next/v5/?dark=1"
-  },
-  {
-   "id": "v5-arabic",
-   "t": "Arabic layout",
-   "ar": "الواجهة العربية",
-   "s": "Everything right to left",
-   "pics": [
-    "decisions/img/arabic.jpg"
-   ],
-   "link": "next/v5/?lang=ar"
   }
  ]
 }

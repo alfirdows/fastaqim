@@ -940,7 +940,7 @@ $('nAll').onclick=()=>{S.notif=S.notif||nDef();S.notif.all=S.notif.all?0:1;save(
 
 /* ---------- calendar ---------- */
 let cOff=0,cSel=null;
-R.cal=()=>{const today=NOW(),th=hParts(today);let base=new Date(today);base.setDate(base.getDate()-(th.d-1));
+R.cal=()=>{const today=NOW(),t12=new Date(today);t12.setHours(12,0,0,0);const th=hParts(t12);let base=new Date(t12);base.setDate(base.getDate()-(th.d-1));
  for(let k=0;k<Math.abs(cOff);k++){if(cOff>0){base.setDate(base.getDate()+30);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}else{base.setDate(base.getDate()-2);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}}
  const h0=hParts(base),days=[];let d=new Date(base);while(hParts(d).m===h0.m){days.push(new Date(d));d.setDate(d.getDate()+1)}
  const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-US',o),tk=dkey(today);
