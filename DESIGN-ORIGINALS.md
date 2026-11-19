@@ -12,14 +12,14 @@ Everything below was designed and drawn for Fastaqim. It is not a template, a ki
 ## Original elements
 | Element | What makes it ours | First commit |
 |---|---|---|
-| Wordmark | "Fastaqim" in night plum, with the dawn line underneath | this commit (19 Nov 2026) |
-| Colours | Night plum `#4f3477`, First light `#f08a4b`, the dawn line gradient `#4f3477 → #a24f6e → #f08a4b`, Clear sky `#f8f6fa`, Ink `#211a2e` | this commit |
-| Icon set | 10 icons drawn for Fastaqim (Home, Qur'an, Dhikr, To-do, More, Fajr, Dhuhr, Asr, Maghrib, Isha). Each stands on the horizon line, and the salah icons follow the sun's path over it. | this commit |
-| Salah card | The card's sky follows the next salah (dawn, day, afternoon, sunset, night). The day's 5 salah sit on one straight line, with a glowing "now" point. | this commit |
+| Wordmark | "Fastaqim" in night plum, with the dawn line underneath | 9dc147c (19 Nov 2026) |
+| Colours | Night plum `#4f3477`, First light `#f08a4b`, the dawn line gradient `#4f3477 → #a24f6e → #f08a4b`, Clear sky `#f8f6fa`, Ink `#211a2e` | 9dc147c |
+| Icon set | 10 icons drawn for Fastaqim (Home, Qur'an, Dhikr, To-do, More, Fajr, Dhuhr, Asr, Maghrib, Isha). Each stands on the horizon line, and the salah icons follow the sun's path over it. | 9dc147c |
+| Salah card | The card's sky follows the next salah (dawn, day, afternoon, sunset, night). The day's 5 salah sit on one straight line, with a glowing "now" point. | 9dc147c |
 | Today's path | Salah and timed tasks on one vertical line with a Now marker | 55f9f7e (19 Nov 2026) |
 | Dhikr day path | Morning, after each salah, evening and before sleep as stations on one line | d7c7742 (19 Nov 2026) |
 | Khatmah steps | The khatmah drawn as 30 juz steps | d7c7742 |
-| Calendar | Hijri first, a Jumu'ah column, a glowing White days band (13 to 15), Monday and Thursday fasts underlined, and 5 salah marks under each day | this commit |
+| Calendar | Hijri first, a Jumu'ah column, a glowing White days band (13 to 15), Monday and Thursday fasts underlined, and 5 salah marks under each day | 9dc147c |
 | Surah list | Surahs as steps on one line, filtered with a juz strip | d7c7742 |
 | About page | The meaning of Fastaqim with audio, reachable from inside the app | bdba62c (19 Nov 2026) |
 
