@@ -2,14 +2,15 @@
  "v": 1,
  "items": [
   {
-   "id": "v5-home-2",
-   "t": "New Home: salah card and Ayah of the day",
-   "ar": "الرئيسية الجديدة: بطاقة الصلاة وآية اليوم",
-   "s": "Salah countdown and the 5 salah in one card with a light geometric pattern. Clear date: Wed, Nov 18 · 8 Jumada al-Akhirah 1448 AH. Ayah card: ▶ plays Saad al-Ghamdi, ↻ shows another ayah, no reflect question. A short encouraging line sits under the date.",
+   "id": "v5-home-own",
+   "t": "Home: Fastaqim's own design",
+   "ar": "الرئيسية: تصميم فستقم الخاص",
+   "s": "Our own look, not a copy: a light 'Next salah' card with one big Mark button, and 'Today's path' with your salah and timed tasks on one line and a red Now marker. The date stays on one line, and the tab bar no longer covers anything.",
    "pics": [
-    "decisions/img/home3.jpg",
-    "decisions/img/home4.jpg",
-    "decisions/img/home5.jpg"
+    "decisions/img/own1.jpg",
+    "decisions/img/own2.jpg",
+    "decisions/img/own3.jpg",
+    "decisions/img/own4.jpg"
    ],
    "link": "next/v5/#home"
   },

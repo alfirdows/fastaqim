@@ -308,32 +308,65 @@ html.dark .big{color:#08251d}
 .en{display:flex;align-items:center;gap:8px;margin:0 0 12px;font-size:14px;color:var(--sub)}.en b{font-weight:650;color:var(--ink);margin-inline-end:auto}
 .en button{border:0;border-radius:999px;padding:7px 12px;background:var(--card);color:var(--ink);font-size:13.5px;font-weight:600}.en button.on{background:var(--goldT);box-shadow:0 0 0 1.5px var(--gold) inset}
 .sz{font-style:normal;font-size:12px;color:var(--sub);background:var(--card2);border-radius:999px;padding:2px 8px;margin-inline-start:6px;white-space:nowrap}
+/* v160 Fastaqim home: own identity */
+.fh{display:flex;align-items:center;gap:10px;margin:2px 0 6px;min-height:46px}.fh .wm{flex:1;font-weight:800;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.gr{margin:0 0 14px;font-size:30px;font-weight:780;letter-spacing:-.5px;line-height:1.12}.gr small{display:block;font-size:14px;font-weight:500;color:var(--sub);letter-spacing:0;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gr .insp{font-size:14.5px;letter-spacing:0;margin-top:4px}
+.nowc{position:relative;border-radius:28px 28px 28px 10px;padding:16px 16px 12px;background:linear-gradient(135deg,#fbf3e2 0%,#f3e3c2 100%);box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 6px 18px rgba(120,86,30,.12);overflow:hidden}
+html.dark .nowc{background:linear-gradient(135deg,#2a241a,#3a2f1c)}
+.nowc:after{content:"";position:absolute;inset:0 0 0 55%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M12 0L24 12L12 24L0 12Z' fill='none' stroke='%23b5832f' stroke-opacity='.16'/%3E%3C/svg%3E");-webkit-mask:linear-gradient(90deg,transparent,#000 60%);mask:linear-gradient(90deg,transparent,#000 60%);pointer-events:none}
+.nw{display:flex;align-items:center;gap:12px;position:relative;z-index:1}.nw-t{flex:1}.nw-t small{display:block;font-size:13px;font-weight:650;color:var(--gold);text-transform:uppercase;letter-spacing:.08em}
+.nw-t b{display:block;font-size:32px;font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-top:2px}.nw-t span{font-size:15px;color:var(--sub);font-weight:600}
+.ring{position:relative;width:84px;height:84px;flex:none}.ring svg{width:84px;height:84px;transform:rotate(-90deg)}.ring circle{fill:none;stroke-width:7}.ring .rb{stroke:rgba(181,131,47,.18)}.ring .rf{stroke:var(--acc);stroke-linecap:round;transition:stroke-dashoffset .6s}
+.ring span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.05}.ring b{font-size:14.5px;font-weight:800;white-space:nowrap}.ring small{font-size:11px;color:var(--sub)}
+.nw-mk{position:relative;z-index:1;margin-top:12px;width:100%;height:46px;border:0;border-radius:14px;background:var(--acc);color:#fff;font-weight:700;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:8px}
+html.dark .nw-mk{color:#12110e}.nw-mk i{font-size:20px}.nw-ok{position:relative;z-index:1;margin:12px 0 0;display:flex;gap:8px;align-items:center;font-weight:650;color:var(--ok)}
+.nw-q{position:relative;z-index:1;margin:10px 0 0;font-size:12.5px;color:var(--sub)}.nw-q a{color:var(--gold);text-decoration:none;font-weight:600}
+.sec .slh{margin:0;font-size:13px;font-weight:600;color:var(--gold)}
+.path{position:relative;padding-inline-start:4px}
+.path:before{content:"";position:absolute;top:18px;bottom:18px;inset-inline-start:23px;width:3px;border-radius:3px;background:linear-gradient(var(--gold),var(--acc));opacity:.35}
+.pi{position:relative;display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;text-align:start;padding:7px 0;color:var(--ink);font:inherit}
+.pi .nd{flex:none;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--card);box-shadow:0 0 0 3px var(--bg),0 1px 3px rgba(0,0,0,.08);font-size:19px;color:var(--sub);position:relative;z-index:1}
+.pi .tx{flex:1;min-width:0}.pi .tx b{display:block;font-size:16px;font-weight:650}.pi .tx small{display:block;font-size:13px;color:var(--sub);margin-top:1px}
+.pi em{font-style:normal;font-size:14px;font-weight:600;color:var(--sub);font-variant-numeric:tabular-nums}
+.ps.dn .nd{background:var(--ok);color:#fff}.ps.due .nd{background:var(--goldT);color:var(--gold);box-shadow:0 0 0 3px var(--bg),0 0 0 5px var(--gold)}.ps.due small{color:var(--gold);font-weight:650}
+.ps.nx .nd{background:var(--acc);color:#fff}.ps.nx b{color:var(--acc)}
+.pt{padding-inline-start:9px}.pt .cb{flex:none;width:26px;height:26px;margin:0 7px;border-radius:8px;border:1.8px solid var(--line);background:var(--card);color:transparent;font-weight:800;position:relative;z-index:1;box-shadow:0 0 0 3px var(--bg)}
+.pt .cb.on{background:var(--ok);border-color:var(--ok);color:#fff}.pt .tx b{font-size:15px;font-weight:550}
+.pn{position:relative;display:flex;align-items:center;margin:2px 0;padding-inline-start:16px}.pn:before{content:"";position:absolute;inset-inline-start:17px;width:15px;height:15px;border-radius:50%;background:#d9573b;box-shadow:0 0 0 4px rgba(217,87,59,.18)}
+.pn span{margin-inline-start:30px;font-size:12.5px;font-weight:700;color:#d9573b;text-transform:uppercase;letter-spacing:.06em}
+.pa{margin-top:6px;padding:8px 0 0}.pa>small{display:block;margin-inline-start:56px;font-size:12px;font-weight:700;color:var(--sub);text-transform:uppercase;letter-spacing:.06em}
+.qs{display:flex;gap:10px;overflow-x:auto;margin:16px -16px 0;padding:2px 16px 4px;scrollbar-width:none}.qs::-webkit-scrollbar{display:none}
+.q{flex:none;display:flex;align-items:center;gap:10px;border:0;border-radius:18px 18px 18px 6px;background:var(--card);padding:12px 14px;text-align:start;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.q i{font-size:22px;color:var(--gold)}.q b{display:block;font-size:14.5px;font-weight:650;white-space:nowrap}.q small{display:block;font-size:12.5px;color:var(--sub);white-space:nowrap}
+.scr-row{display:flex;gap:8px;flex-wrap:wrap}
+.scr-row .sc{flex-direction:row;gap:8px;background:var(--card);border-radius:999px;padding:6px 14px 6px 6px;font-size:14px}.scr-row .sc .ic{width:34px;height:34px;border-radius:50%;font-size:18px;background:var(--accT);box-shadow:none}
+.scr-row .sc .ic .tsb{font-size:18px}
+.tab{left:0!important;right:0!important;bottom:0!important;border-radius:0!important;padding:6px 8px calc(env(safe-area-inset-bottom) + 6px)!important;background:var(--card)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;box-shadow:0 -1px 0 var(--line)!important}
+.tab a{border-radius:14px}
+.mp{bottom:calc(env(safe-area-inset-bottom) + 74px)!important}
+.dc{border-radius:24px 24px 24px 8px!important}
 </style>
 </head>
 <body>
 
 <!-- HOME -->
 <section class="scr" id="s-home">
- <div class="hd"><h1 id="greet"></h1><button class="ib" data-go="cal" aria-label="Calendar"><i class="ph ph-calendar-dots"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
- <div class="salc"><div class="hero" id="hero"></div>
- <div class="sl" id="sl"></div>
- <p class="slh" id="slh"></p></div>
- <div class="sec"><h2 data-t="Today|اليوم"></h2></div>
+ <div class="fh"><span class="wm">Fastaqim</span><button class="ib" data-go="cal" aria-label="Calendar"><i class="ph ph-calendar-dots"></i></button><button class="ib" data-go="notif" aria-label="Notifications"><i class="ph ph-bell"></i><span class="dot"></span></button></div>
+ <h1 class="gr" id="greet"></h1>
+ <div class="nowc" id="hero"></div>
+ <div class="sec"><h2 data-t="Today's path|طريق اليوم"></h2><span class="slh" id="slh"></span></div>
+ <div class="path" id="path"></div>
+ <div style="height:18px"></div>
  <div class="car" id="car"></div><div class="dots" id="dots"></div>
- <div class="duo">
-  <button class="hj" data-go="cal" id="hj"></button>
-  <div class="st">
-   <button class="mc" data-z="sleep"><span class="ic c-b"><i class="ph ph-bed"></i></span><span><small data-t="Before you sleep|قبل النوم"></small><b data-t="Sleep adhkar|أذكار النوم"></b></span></button>
-   <button class="mc" data-go="quran"><span class="ic c-g"><i class="ph ph-book-bookmark"></i></span><span><small data-t="My khatmah|ختمتي"></small><b id="khMini"></b></span></button>
-  </div>
+ <div class="qs" id="qs">
+  <button class="q" data-z="sleep"><i class="ph ph-bed"></i><span><b data-t="Sleep adhkar|أذكار النوم"></b><small data-t="Before you sleep|قبل النوم"></small></span></button>
+  <button class="q" data-read="2:255"><i class="ph ph-book-open-text"></i><span><b data-t="Continue reading|متابعة القراءة"></b><small data-t="Al-Baqarah 255|البقرة ٢٥٥"></small></span></button>
+  <button class="q" data-go="quran"><i class="ph ph-book-bookmark"></i><span><b data-t="My khatmah|ختمتي"></b><small id="khMini"></small></span></button>
  </div>
- <div class="cont" id="cont"></div>
  <div class="sec"><h2 data-t="Shortcuts|اختصارات"></h2><button class="lk" id="scEdit"><i class="ph ph-pencil-simple"></i><span data-t="Edit|تعديل"></span></button></div>
- <div class="grid4" id="scs"></div>
- <div class="sec"><h2 data-t="Next tasks|المهام التالية"></h2><button class="lk" data-go="todo"><span data-t="All|الكل"></span><i class="ph ph-caret-right flip"></i></button></div>
- <div class="tk" id="hTasks"></div>
- <div class="sec"><h2 data-t="Everything, by topic|كل شيء حسب الموضوع"></h2></div>
- <div class="tp" id="topics"></div>
+ <div class="scr-row" id="scs"></div>
+ <div hidden><div id="sl"></div><div id="hj"></div><div id="cont"></div><div id="hTasks"></div><div id="topics"></div></div>
 </section>
 
 <!-- QURAN -->
@@ -465,7 +498,7 @@ const hijri=(d,o)=>{try{return new Intl.DateTimeFormat((L==='ar'?'ar-SA':'en')+'
 const hParts=d=>{try{const p=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'}).formatToParts(d);const g=t=>+p.find(x=>x.type===t).value;return{d:g('day'),m:g('month'),y:parseInt(p.find(x=>x.type==='year').value)}}catch(e){return{d:1,m:1,y:1448}}};
 const HM_EN=['Muharram','Safar',"Rabi' al-Awwal","Rabi' al-Akhir",'Jumada al-Ula','Jumada al-Akhirah','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhul-Qa'dah",'Dhul-Hijjah'];
 const HM_AR=['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
-const hm=m=>T(HM_EN[m-1],HM_AR[m-1]);
+const hm=m=>T(HM_EN[m-1],HM_AR[m-1]);const HM_S=['Muharram','Safar','Rabi I','Rabi II','Jumada I','Jumada II','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhul-Qa'dah",'Dhul-Hijjah'];const hms=m=>T(HM_S[m-1],HM_AR[m-1]);
 
 /* ---------- state ---------- */
 let S=store('state')||{};
@@ -498,17 +531,35 @@ function salahState(now){
  const days=[-1,0,1];let list=[];days.forEach(a=>SAL.forEach(s=>list.push({s,t:at(s[3],now,a)})));
  const pr=list.filter(x=>x.s[0]!=='sunrise');let next=pr.find(x=>x.t>now),prev=[...pr].reverse().find(x=>x.t<=now);return{next,prev}}
 function renderHero(){const now=NOW(),{next,prev}=salahState(now);
- const ms=next.t-now,h=Math.floor(ms/36e5),m=Math.floor(ms/6e4)%60,s=Math.floor(ms/1e3)%60,pct=Math.max(0,Math.min(100,(now-prev.t)/(next.t-prev.t)*100));
- const pad=n=>String(n).padStart(2,'0');
- $('hero').innerHTML=`<div class="lb"><span>${T(next.s[1]+' in','باقٍ على '+next.s[2])}</span><span>${f12(next.s[3])}</span></div>
- <div class="cd">${AR(pad(h)+':'+pad(m)+':'+pad(s))}</div>
- <div class="bar"><i style="width:${pct}%"></i><b style="${L==='ar'?'right':'left'}:${pct}%"></b></div>
- <div class="bar-l"><span>${T(prev.s[1],prev.s[2])} · ${f12(prev.s[3])}</span><span>${T(next.s[1],next.s[2])} · ${f12(next.s[3])}</span></div>
- <p class="hq">${T('The deed most beloved to Allah: salah at its time.','أحبّ العمل إلى الله: الصلاة على وقتها.')} <a href="https://sunnah.com/bukhari:527" target="_blank" rel="noopener">${T('Bukhari 527','البخاري ٥٢٧')}</a></p>`}
+ const ms=next.t-now,h=Math.floor(ms/36e5),m=Math.ceil(ms/6e4)%60||(ms>0&&h===0?1:0),pct=Math.max(0,Math.min(1,(now-prev.t)/(next.t-prev.t))),C=2*Math.PI*30;
+ const left=h?T(h+' h '+m+' min',AR(h)+' س '+AR(m)+' د'):T(m+' min',AR(m)+' د');
+ const dk=dkey(now),due=SAL.filter(x=>at(x[3],now)<=now&&!(S.salah[dk]||{})[x[0]]);
+ $('hero').innerHTML=`<div class="nw"><div class="nw-t"><small>${T('Next','التالية')}</small><b>${T(next.s[1],next.s[2])}</b><span>${f12(next.s[3])}</span></div>
+  <div class="ring"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" class="rb"/><circle cx="36" cy="36" r="30" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-pct)}"/></svg><span><b>${left.split(' ').slice(0,2).join(' ')}</b><small>${left.split(' ').slice(2).join(' ')||T('left','باقٍ')}</small></span></div></div>
+  ${due.length?`<button class="nw-mk" data-mk="${due[due.length-1][0]}"><i class="ph ph-check-circle"></i>${T('Mark '+due[due.length-1][1],'سجّل '+due[due.length-1][2])}</button>`:`<p class="nw-ok"><i class="ph ph-check-circle"></i>${T('All prayed salah are marked','سُجّلت كل الصلوات التي حان وقتها')}</p>`}
+  <p class="nw-q">${T('The deed most beloved to Allah: salah at its time.','أحبّ العمل إلى الله: الصلاة على وقتها.')} <a href="https://sunnah.com/bukhari:527" target="_blank" rel="noopener">${T('Bukhari 527','البخاري ٥٢٧')}</a></p>`;
+ const mk=$('hero').querySelector('[data-mk]');if(mk)mk.onclick=()=>salSheet(mk.dataset.mk)}
+
+const tTime=t=>{const m=/(\d{1,2}):(\d{2})\s*(AM|PM)/i.exec(t.due||'');if(!m||!/Today|اليوم/.test(t.due||''))return null;let h=+m[1]%12;if(/pm/i.test(m[3]))h+=12;return h*60+ +m[2]};
+function renderPath(){const now=NOW(),dk=dkey(now),day=S.salah[dk]||{},{next}=salahState(now),nm=now.getHours()*60+now.getMinutes();
+ const it=SAL.map(x=>{const[h,m]=x[3].split(':').map(Number);return{k:'s',x,m:h*60+m}}).concat(S.tasks.map(t=>({k:'t',t,m:tTime(t)})).filter(o=>o.m!==null));
+ it.sort((a,b)=>a.m-b.m);let html='',nowDone=false;
+ const nowRow=()=>`<div class="pn"><span>${T('Now','الآن')} · ${f12(String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0'))}</span></div>`;
+ for(const o of it){if(!nowDone&&o.m>nm){html+=nowRow();nowDone=true}
+  if(o.k==='s'){const x=o.x,v=day[x[0]],past=o.m<=nm,nx=next.s[0]===x[0]&&dkey(next.t)===dk;
+   const st=v==='on'?T('On time','في وقتها'):v==='late'?T('Made up','قضاء'):v==='exc'?T('Excused','معذورة'):past?T('Tap to mark','اضغط للتسجيل'):nx?T('Next','التالية'):'';
+   html+=`<button class="pi ps ${v?'dn':past?'due':nx?'nx':''}" data-sal="${x[0]}"><span class="nd">${v?'<i class="ph-bold ph-check"></i>':`<i class="ph ${x[4]}"></i>`}</span><span class="tx"><b>${T(x[1],x[2])}</b><small>${st}</small></span><em>${f12(x[3])}</em></button>`}
+  else html+=`<div class="pi pt"><button class="cb" data-tk="${o.t.id}" aria-label="${T('Done','تم')}">✓</button><span class="tx"><b>${esc(o.t.t)}</b>${o.t.sz?`<small>${SZ0[o.t.sz]}</small>`:''}</span><em>${f12(String(Math.floor(o.m/60)).padStart(2,'0')+':'+String(o.m%60).padStart(2,'0'))}</em></div>`}
+ if(!nowDone)html+=nowRow();
+ const any=S.tasks.filter(t=>tTime(t)===null&&!/Tomorrow|غد/.test(t.due||'')).slice(0,3);
+ if(any.length)html+=`<div class="pa"><small>${T('Anytime','في أي وقت')}</small>${any.map(t=>`<div class="pi pt"><button class="cb" data-tk="${t.id}" aria-label="${T('Done','تم')}">✓</button><span class="tx"><b>${esc(t.t)}</b><small>${esc(t.due||'')}</small></span></div>`).join('')}</div>`;
+ $('path').innerHTML=html;
+ $$('#path [data-sal]').forEach(b=>b.onclick=()=>{const k=b.dataset.sal,t=at(SAL.find(s=>s[0]===k)[3],now);if(t>now){toast(T('Not time yet','لم يحن وقتها بعد'));return}salSheet(k)});bindTasks($('path'))}
+const SZ0={s:T('5 min','٥ د'),m:T('15 min','١٥ د'),l:T('1 hr+','ساعة+')};
 function renderSalah(){const now=NOW(),dk=dkey(now),{next}=salahState(now),day=S.salah[dk]||{};let todo=0;
  $('sl').innerHTML=SAL.map(s=>{const t=at(s[3],now),past=t<=now,sun=s[0]==='sunrise',dn=day[s[0]],nx=next.s[0]===s[0]&&dkey(next.t)===dk;if(past&&!sun&&!dn)todo++;
   return `<button data-sal="${s[0]}" class="${dn?'dn':''} ${nx?'nx':''} ${past&&!sun&&!dn?'mk':''} ${sun?'sun':''}" aria-label="${s[1]}"><i class="ph ${s[4]}"></i>${T(s[1],s[2])}<b>${f12(s[3]).replace(/ .*/,'')}</b></button>`}).join('');
- $('slh').textContent=todo?T('Tap a salah to mark it prayed · '+todo+' to mark','اضغط على الصلاة لتسجيلها · '+AR(todo)+' للتسجيل'):T('All prayed salah are marked. May Allah accept.','سُجّلت كل الصلوات التي حان وقتها. تقبّل الله.');
+ renderPath();$('slh').textContent=todo?T(todo+' to mark',AR(todo)+' للتسجيل'):T('All marked','كلها مسجّلة');
  $$('#sl [data-sal]').forEach(b=>b.onclick=()=>{const k=b.dataset.sal;if(k==='sunrise')return;const t=at(SAL.find(s=>s[0]===k)[3],now);if(t>now){toast(T('Not time yet','لم يحن وقتها بعد'));return}salSheet(k)})}
 const AFT=[['ky',T('Ayat al-Kursi','آية الكرسي'),T('Whoever recites it after every obligatory salah, nothing stands between him and Paradise except death.','من قرأها دبر كل صلاة مكتوبة لم يمنعه من دخول الجنة إلا أن يموت.'),T("an-Nasa'i, al-Kubra 9848 · sahih",'النسائي، الكبرى ٩٨٤٨ · صحيح'),''],
  ['ts',T('Tasbih 33 · 33 · 34','التسبيح ٣٣ · ٣٣ · ٣٤'),T('SubhanAllah 33, Alhamdulillah 33, Allahu akbar 34.','سبحان الله ٣٣، الحمد لله ٣٣، الله أكبر ٣٤.'),T('Muslim 597','مسلم ٥٩٧'),'https://sunnah.com/muslim:597a'],
@@ -570,7 +621,7 @@ function renderTopics(){$('topics').innerHTML=TOP.map((t,i)=>`<button class="tl 
 const INSP=[T('Small deeds, done often, are the most beloved to Allah.','أحبّ الأعمال إلى الله أدومها وإن قلّ.'),T('One step today is still a step forward.','خطوة واحدة اليوم ما زالت تقدّمًا.'),T('You showed up. That counts.','حضرت. وهذا يُحسب لك.'),T('Progress, not perfection.','التقدّم لا الكمال.'),T('Every salah marked is a win.','كل صلاة تسجّلها إنجاز.'),T('Begin with Bismillah and keep going.','ابدأ ببسم الله وتابع.')];
 const inspToday=()=>INSP[Math.floor((NOW()-new Date(NOW().getFullYear(),0,0))/864e5)%INSP.length];
 function greet(){const h=NOW().getHours();return h<12?T('Good morning','صباح الخير'):h<17?T('Good afternoon','نهارك سعيد'):T('Good evening','مساء الخير')}
-R.home=()=>{{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':'en-US',{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hm(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
+R.home=()=>{{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':'en-US',{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
  const k=S.kh[0];$('khMini').textContent=k?(k.name||T('My khatmah','ختمتي'))+' · '+AR(Math.round(k.done/604*100))+'%':T('Start a new khatmah','ابدأ ختمة جديدة');
  $('cont').innerHTML=S.noCont?'':`<span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b>${T('Continue reading','متابعة القراءة')}</b><small>${T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥')}</small></span><button class="go" data-read="2:255">${T('Open','افتح')}</button>`;$('cont').style.display=S.noCont?'none':''};
 setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);
