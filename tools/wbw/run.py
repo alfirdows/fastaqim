@@ -1,10 +1,10 @@
-"""Word timings for Saad al-Ghamdi, per ayah, for the Qur'an reader's word-by-word highlight.
+"""Word timings, per ayah, for the word-by-word highlight (Saad al-Ghamdi for Fastaqim, Ibrahim Al-Akhdar for Itqan).
 
 Uses quran-word-align (MIT code, MIT model quran-asr-tiny) on the same per-ayah recordings the app plays
 (EveryAyah Ghamadi_40kbps). Each recording holds exactly one ayah, so each is aligned on its own with no
-neighbouring words. Writes data/wbw/ghamdi/<surah>.json: {"<ayah>": [[word, start_ms, end_ms], ...]}.
+neighbouring words. Writes data/wbw/<reciter>/<surah>.json: {"<ayah>": [[word, start_ms, end_ms], ...]}.
 
-  python tools/wbw/run.py 1 114        # surahs 1..114 (inclusive)
+  python tools/wbw/run.py 1 114 [ghamdi|akhdar]   # surahs 1..114 (inclusive); Ghamdi for Fastaqim, Ibrahim Al-Akhdar for Itqan
 """
 import json
 import sys
@@ -14,9 +14,12 @@ from pathlib import Path
 
 import quran_word_align.align as A
 
-SRC = "https://everyayah.com/data/Ghamadi_40kbps/{s:03}{a:03}.mp3"
+# reciter key -> EveryAyah per-ayah folder (the same files the sites play)
+RECITERS = {"ghamdi": "Ghamadi_40kbps", "akhdar": "Ibrahim_Akhdar_32kbps"}
+SRC = "https://everyayah.com/data/{f}/{s:03}{a:03}.mp3"
 CACHE = Path("/tmp/wbw-audio")
 OUT = Path("data/wbw/ghamdi")
+FOLDER = RECITERS["ghamdi"]
 
 
 def fetch(s: int, a: int) -> Path:
@@ -26,7 +29,7 @@ def fetch(s: int, a: int) -> Path:
     p.parent.mkdir(parents=True, exist_ok=True)
     for t in range(5):
         try:
-            req = urllib.request.Request(SRC.format(s=s, a=a), headers={"User-Agent": "fastaqim-wbw"})
+            req = urllib.request.Request(SRC.format(f=FOLDER, s=s, a=a), headers={"User-Agent": "fastaqim-wbw"})
             with urllib.request.urlopen(req, timeout=120) as r:
                 p.write_bytes(r.read())
             return p
@@ -37,7 +40,10 @@ def fetch(s: int, a: int) -> Path:
 
 
 def main() -> None:
+    global OUT, FOLDER
     first, last = int(sys.argv[1]), int(sys.argv[2])
+    rec = sys.argv[3] if len(sys.argv) > 3 else "ghamdi"
+    FOLDER, OUT = RECITERS[rec], Path("data/wbw") / rec
     A.CONTEXT = 0  # one ayah per recording: no neighbouring words in the audio
     words, model = A.hafs_words(), A.Model()
     OUT.mkdir(parents=True, exist_ok=True)
