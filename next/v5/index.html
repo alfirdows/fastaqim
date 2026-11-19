@@ -14,8 +14,8 @@
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");font-weight:400}
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");font-weight:600}
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");font-weight:700}
-:root{--bg:#f6f1e8;--card:#fffdf9;--card2:#f0e9dd;--ink:#221c15;--sub:#8a7d6a;--line:#e6dccd;--acc:#2f4a86;--accT:#e6ebf6;--gold:#b5832f;--goldT:#f6ead3;--night1:#18203a;--night2:#2e3a5c;--ok:#1f8a5c;--r:20px}
-html.dark{--bg:#12110e;--card:#1d1b17;--card2:#26231e;--ink:#f3eee5;--sub:#a59a88;--line:#2f2b24;--acc:#9db8f0;--accT:#1c2645;--gold:#e0b265;--goldT:#3a2f1c;--night1:#0d1226;--night2:#1c2645}
+:root{--bg:#f3f4f8;--card:#ffffff;--card2:#eceff6;--ink:#141b2e;--sub:#69728a;--line:#e1e5ee;--acc:#2e4ba0;--accT:#e7ecfa;--gold:#d48a17;--goldT:#fdf0db;--night1:#18203a;--night2:#2e3a5c;--ok:#1f8a5c;--r:20px}
+html.dark{--bg:#0b1020;--card:#141b30;--card2:#1c2440;--ink:#eef1f8;--sub:#98a1ba;--line:#232c47;--acc:#93abff;--accT:#1b2547;--gold:#f2b252;--goldT:#3a2b14;--night1:#0d1226;--night2:#1c2645}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Inter,Plex,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
 html[dir=rtl] body{font-family:Plex,Inter,-apple-system,sans-serif}
@@ -346,6 +346,95 @@ html.dark .nw-mk{color:#12110e}.nw-mk i{font-size:20px}.nw-ok{position:relative;
 .tab a{border-radius:14px}
 .mp{bottom:calc(env(safe-area-inset-bottom) + 74px)!important}
 .dc{border-radius:24px 24px 24px 8px!important}
+
+/* ===== v161 signature identity: the straight path ===== */
+.pl4{position:relative}.pl4:before{content:"";position:absolute;inset-block:14px;inset-inline-start:0;width:4px;border-radius:0 4px 4px 0;background:linear-gradient(var(--acc),var(--gold))}
+/* sky card: colours follow the next salah */
+.nowc{background:linear-gradient(160deg,#e9e7f8,#fde6d4)!important;box-shadow:0 8px 24px rgba(46,75,160,.12)!important}
+.nowc:after{display:none!important}
+.nowc[data-k=dhuhr]{background:linear-gradient(160deg,#dcebfd,#f6faff)!important}
+.nowc[data-k=asr]{background:linear-gradient(160deg,#fdeccd,#fbf7ee)!important}
+.nowc[data-k=maghrib]{background:linear-gradient(160deg,#fcd8c4,#f3dcec)!important}
+.nowc[data-k=isha],html.dark .nowc{background:linear-gradient(160deg,#1b2654,#33407c)!important;color:#fff}
+.nowc[data-k=isha] *,html.dark .nowc *{color:#fff!important}
+.nowc[data-k=isha] small,.nowc[data-k=isha] .nw-q,html.dark .nowc small,html.dark .nowc .nw-q{color:rgba(255,255,255,.75)!important}
+.nowc[data-k=isha] .nw-q a,html.dark .nowc .nw-q a{color:#ffd28a!important}
+.nowc[data-k=isha] .nw-mk,html.dark .nowc .nw-mk{background:#f2b252!important;color:#141b2e!important}.nowc[data-k=isha] .nw-mk *,html.dark .nowc .nw-mk *{color:#141b2e!important}
+.nowc[data-k=isha] .rb,html.dark .nowc .rb{stroke:rgba(255,255,255,.18)!important}.nowc[data-k=isha] .rf,html.dark .nowc .rf{stroke:#f2b252!important}
+/* tab bar: plain, a short dawn line marks where you are */
+.tab a{position:relative;border-radius:0!important;background:none!important}
+.tab a.on{color:var(--acc)!important}
+.tab a.on:before{content:"";position:absolute;top:-6px;left:28%;right:28%;height:3px;border-radius:0 0 3px 3px;background:linear-gradient(90deg,var(--acc),var(--gold))}
+/* Qur'an */
+.qh{background:var(--card);border-radius:26px 26px 26px 8px;padding:18px 18px 16px 22px;margin-bottom:14px;box-shadow:0 6px 18px rgba(20,27,46,.06)}
+.qh .ey{display:block;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.qh .nm2{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:6px 0 2px}
+.qh .nm2 b{font-size:22px;font-weight:750}.qh .nm2 .a{font-family:"FQ Quran";font-size:40px;line-height:1.2;color:var(--acc)}
+.qh small{color:var(--sub);font-size:14px}
+.qh .act{display:flex;gap:10px;margin-top:14px}
+.qh .act .pr{flex:1;height:48px;border:0;border-radius:16px;background:var(--acc);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px}
+.qh .act .rd{width:48px;height:48px;border:0;border-radius:50%;background:var(--accT);color:var(--acc);font-size:20px;display:grid;place-items:center}
+html.dark .qh .act .pr{color:#0b1020}
+.tk30{display:grid;grid-template-columns:repeat(30,1fr);gap:2px;margin:12px 0 6px}.tk30 i{height:14px;border-radius:3px;background:var(--card2)}.tk30 i.on{background:linear-gradient(var(--acc),#5a74c4)}.tk30 i.td{background:var(--gold)}
+.khe{background:var(--card);border-radius:22px;padding:14px 16px;margin-bottom:14px}.khe p{margin:0;color:var(--sub);font-size:14px}
+.khe .go2,.kh .go2{margin-top:10px;border:0;border-radius:14px;height:42px;padding:0 16px;background:var(--accT);color:var(--acc);font-weight:700;font-size:15px;display:inline-flex;align-items:center;gap:6px}
+.vq{background:var(--card);border-radius:22px;padding:16px;margin-bottom:14px}
+.vq .t{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}.vq .t span{flex:1}
+.vq .t button{width:38px;height:38px;border-radius:50%;border:0;background:var(--accT);color:var(--acc);font-size:17px;display:grid;place-items:center}
+.vq .ar{font-family:"FQ Quran";font-size:24px;line-height:1.9;text-align:center;margin:10px 0 6px;direction:rtl}
+.vq .en2{font-size:15px;line-height:1.55;text-align:center;margin:0}
+.vq a{display:block;text-align:center;margin-top:8px;color:var(--acc);font-weight:600;font-size:13.5px;text-decoration:none}
+.js{display:flex;gap:8px;overflow-x:auto;margin:0 -16px 6px;padding:2px 16px 6px;scrollbar-width:none}.js::-webkit-scrollbar{display:none}
+.js button{flex:none;min-width:46px;height:46px;border:0;border-radius:14px 14px 14px 4px;background:var(--card);font-weight:700;font-size:15px;color:var(--ink);padding:0 10px;font-variant-numeric:tabular-nums}
+.js button small{display:block;font-size:10px;font-weight:600;color:var(--sub);margin-top:-2px}
+.js button.on{background:var(--acc);color:#fff}.js button.on small{color:rgba(255,255,255,.8)}
+/* Index: one straight list, surahs as steps on a line */
+.lr{display:flex;align-items:center;gap:10px;width:100%;border:0;background:var(--card);border-radius:16px;padding:10px 12px;margin-bottom:12px;color:var(--ink);text-align:start}
+.lr i{color:var(--gold);font-size:20px}.lr span{flex:1;font-size:14.5px}.lr b{font-weight:700}
+.sl2{position:relative;margin-top:4px}
+.sl2:before{content:"";position:absolute;top:22px;bottom:22px;inset-inline-start:19px;width:2px;background:linear-gradient(var(--acc),var(--gold));opacity:.25}
+.sr{position:relative;display:flex;align-items:center;gap:12px;width:100%;border:0;background:none;padding:8px 0;text-align:start;color:var(--ink);font:inherit;border-bottom:1px solid var(--line)}
+.sr .n{flex:none;width:40px;height:40px;border-radius:12px 12px 12px 4px;background:var(--card);box-shadow:0 0 0 3px var(--bg);display:grid;place-items:center;font-weight:700;font-size:14px;color:var(--acc);position:relative;z-index:1;font-variant-numeric:tabular-nums}
+.sr .tx{flex:1;min-width:0}.sr .tx b{display:block;font-size:16px;font-weight:650}.sr .tx small{display:block;font-size:12.5px;color:var(--sub)}
+.sr .a{font-family:"FQ Quran";font-size:24px;line-height:1.4;color:var(--ink)}
+.sr.cur .n{background:var(--acc);color:#fff}
+/* Dhikr: the day's remembrance as one path */
+.zp .pi .tx small b{font-weight:700;color:var(--ok)}
+.zp .dots5{display:flex;gap:4px;margin-top:4px}.zp .dots5 i{width:18px;height:5px;border-radius:3px;background:var(--line)}.zp .dots5 i.on{background:var(--ok)}
+.zp .ps.nw .nd{background:var(--gold);color:#fff;box-shadow:0 0 0 3px var(--bg),0 0 0 6px var(--goldT)}.zp .ps.nw b{color:var(--gold)}
+.zp .pi .cv{color:var(--sub)}
+.any{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.any button{display:flex;align-items:center;gap:10px;border:0;background:var(--card);border-radius:18px 18px 18px 6px;padding:12px;text-align:start;color:var(--ink)}
+.any .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-size:21px;flex:none}
+.any b{display:block;font-size:15px;font-weight:650}.any small{display:block;font-size:12px;color:var(--sub)}
+/* Notifications: one switch, then tap chips */
+.nm{background:linear-gradient(135deg,var(--acc),#4561b8)!important;color:#fff;border-radius:22px 22px 22px 8px!important}
+.nm small{color:rgba(255,255,255,.8)!important}.nm .ic{background:rgba(255,255,255,.16)!important}
+.nm .sw.on{background:var(--gold)!important}
+.ng2{margin:18px 0 0}.ng2 h3{display:flex;align-items:center;gap:8px;margin:0 2px 10px;font-size:15px;font-weight:700}.ng2 h3 i,.ng2 h3 .tsb{color:var(--acc);font-size:19px}.ng2 h3 em{margin-inline-start:auto;font-style:normal;font-size:13px;color:var(--sub);font-weight:600}
+.chs{display:flex;flex-wrap:wrap;gap:8px}
+.tg{display:flex;align-items:center;gap:7px;border:0;border-radius:999px;padding:9px 14px 9px 10px;background:var(--card);color:var(--sub);font-size:14.5px;font-weight:600;box-shadow:0 0 0 1px var(--line) inset;text-align:start}
+.tg .ck2{width:20px;height:20px;border-radius:50%;border:1.6px solid var(--line);display:grid;place-items:center;font-size:11px;color:transparent;flex:none}
+.tg small{display:block;font-size:11.5px;font-weight:500;color:var(--sub)}
+.tg.on{background:var(--accT);color:var(--acc);box-shadow:0 0 0 1.5px var(--acc) inset}.tg.on .ck2{background:var(--acc);border-color:var(--acc);color:#fff}
+.off .tg{opacity:.45}
+/* Calendar: Hijri first, salah record under each day */
+.cm{flex-wrap:wrap}.cm .tt{order:-1;flex:1}.cm .tt b{color:var(--ink)!important;font-size:26px!important;letter-spacing:-.3px}
+.cg{border-radius:24px 24px 24px 8px!important;padding:12px 6px!important}
+.cg .dy button.td{background:var(--acc)!important;box-shadow:none!important}.cg .dy button.td b,.cg .dy button.td small{color:#fff!important}
+html.dark .cg .dy button.td b,html.dark .cg .dy button.td small{color:#0b1020!important}
+.cg .dy .s5{display:flex;gap:1.5px;margin-top:3px}.cg .dy .s5 i{width:4px;height:4px;border-radius:1px;background:var(--line)}.cg .dy .s5 i.on{background:var(--ok)}
+.cg .dy button.td .s5 i{background:rgba(255,255,255,.35)}.cg .dy button.td .s5 i.on{background:#fff}
+.ag{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:18px 18px 18px 6px;padding:10px 12px;margin-bottom:10px}
+.ag .db{flex:none;width:52px;height:52px;border-radius:14px;background:var(--accT);color:var(--acc);display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1}
+.ag .db b{font-size:20px;font-weight:750}.ag .db small{font-size:10.5px;font-weight:600}
+.ag .db.d-f{background:var(--goldT);color:var(--gold)}
+.ag .tx b{display:block;font-size:15.5px;font-weight:650}.ag .tx small{color:var(--sub);font-size:13px}
+/* More: your path at the top */
+.yp{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;background:var(--card);border-radius:24px 24px 24px 8px;padding:14px 10px;margin-bottom:16px}
+.yp div{text-align:center}.yp b{display:block;font-size:24px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--acc)}.yp b.g{color:var(--gold)}.yp small{font-size:12.5px;color:var(--sub);font-weight:600}
+/* cards share the leaf corner */
+.gl,.kh,.tk,.qa input{border-radius:20px 20px 20px 6px}
 </style>
 </head>
 <body>
@@ -372,36 +461,40 @@ html.dark .nw-mk{color:#12110e}.nw-mk i{font-size:20px}.nw-ok{position:relative;
 <!-- QURAN -->
 <section class="scr" id="s-quran">
  <div class="hd"><h1 data-t="Qur'an|القرآن"></h1><button class="ib" data-go="index" aria-label="Search"><i class="ph ph-magnifying-glass"></i></button></div>
- <button class="lc hi" data-read="2:255"><span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b data-t="Continue reading|متابعة القراءة"></b><small id="qResume"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-go="index"><span class="ic c-a"><i class="ph ph-list-numbers"></i></span><span class="tx"><b data-t="All surahs|كل السور"></b><small data-t="Surahs · Juz · search|السور · الأجزاء · بحث"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-play="kursi"><span class="ic c-b"><i class="ph ph-headphones"></i></span><span class="tx"><b data-t="Listen|استماع"></b><small data-t="Saad al-Ghamdi · word by word|سعد الغامدي · كلمة بكلمة"></small></span><i class="ph ph-play cv"></i></button>
- <button class="lc" data-day="1"><span class="ic c-p"><i class="ph ph-book-open"></i></span><span class="tx"><b data-t="Ayah of the day|آية اليوم"></b><small id="qVod"></small></span><i class="ph ph-caret-right cv flip"></i></button>
+ <div class="qh pl4"><span class="ey" data-t="Where you stopped|حيث توقفت"></span>
+  <div class="nm2"><span><b id="qSu"></b><br><small id="qResume"></small></span><span class="a">البقرة</span></div>
+  <div class="act"><button class="pr" data-read="2:255"><i class="ph-bold ph-book-open-text"></i><span data-t="Continue|تابع"></span></button><button class="rd" data-play="kursi" aria-label="Listen"><i class="ph-fill ph-play"></i></button></div></div>
  <div class="sec"><h2 data-t="My khatmah|ختمتي"></h2></div>
  <div id="khList"></div>
- <button class="ghost" id="khNew"><i class="ph ph-plus"></i><span data-t="New khatmah|ختمة جديدة"></span></button>
+ <button class="ghost" id="khNew" style="display:none"></button>
+ <div class="sec"><h2 data-t="By juz|حسب الجزء"></h2><button class="lk" data-go="index"><span data-t="All surahs|كل السور"></span><i class="ph ph-caret-right flip"></i></button></div>
+ <div class="js" id="qJs"></div>
+ <div class="vq" id="qVq"></div>
+ <span id="qVod" hidden></span>
 </section>
 
 <!-- INDEX -->
 <section class="scr" id="s-index">
- <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 data-t="Index|الفهرس"></h1><span style="width:44px"></span></div>
- <button class="lc hi" data-read="2:255" style="margin-bottom:12px"><span class="ic c-g"><i class="ph ph-bookmark-simple"></i></span><span class="tx"><small data-t="Last read|آخر قراءة"></small><b id="ixLast"></b></span><i class="ph ph-caret-right cv flip"></i></button>
- <div class="seg" id="ixSeg"><button class="on" data-v="s" data-t="Surahs|السور"></button><button data-v="j" data-t="Juz|الأجزاء"></button></div>
+ <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 data-t="All surahs|كل السور"></h1><span style="width:44px"></span></div>
  <label class="srch"><i class="ph ph-magnifying-glass"></i><input id="ixQ" type="search" autocomplete="off"></label>
- <div class="sg" id="ixList"></div>
+ <div class="js" id="ixJs"></div>
+ <button class="lr" data-read="2:255"><i class="ph-fill ph-bookmark-simple"></i><span><span data-t="Continue|تابع"></span> · <b id="ixLast"></b></span><i class="ph ph-caret-right flip" style="color:var(--sub)"></i></button>
+ <div class="sl2" id="ixList"></div>
 </section>
 
 <!-- DHIKR -->
 <section class="scr" id="s-dhikr">
  <div class="hd"><h1 data-t="Dhikr|الذكر"></h1></div>
- <div class="duo" style="margin-top:0;margin-bottom:12px">
-  <button class="hj" id="tsbBtn"><span class="ic c-a" style="width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;margin:0 auto 8px" id="tsbIc"></span><b style="font-size:17px" data-t="Tasbih|التسبيح"></b><span class="g" data-t="Simple counter|عدّاد بسيط"></span></button>
-  <button class="hj" data-z="sleep"><span class="ic c-b" style="width:54px;height:54px;border-radius:18px;display:grid;place-items:center;font-size:30px;margin:0 auto 8px"><i class="ph ph-bed"></i></span><b style="font-size:17px" data-t="Before sleep|قبل النوم"></b><span class="g" id="zSleepP"></span></button>
+ <div class="sec" style="margin-top:0"><h2 data-t="Through your day|خلال يومك"></h2><span class="slh" id="zDayN"></span></div>
+ <div class="path zp" id="zPath"></div>
+ <div class="sec"><h2 data-t="Anytime|في أي وقت"></h2></div>
+ <div class="any">
+  <button id="tsbBtn"><span class="ic c-a" id="tsbIc"></span><span><b data-t="Tasbih|التسبيح"></b><small id="tsbN"></small></span></button>
+  <button data-soon><span class="ic c-p"><i class="ph ph-book-open"></i></span><span><b data-t="Du'as|الأدعية"></b><small data-t="Qur'an & Sunnah|القرآن والسنة"></small></span></button>
+  <button data-soon><span class="ic c-r"><i class="ph ph-shield-check"></i></span><span><b data-t="Ruqyah|الرقية"></b><small data-t="Qur'an & Sunnah|القرآن والسنة"></small></span></button>
+  <button data-soon><span class="ic c-b"><i class="ph ph-note-pencil"></i></span><span><b data-t="My du'as|أدعيتي"></b><small data-t="Your own list|قائمتك"></small></span></button>
  </div>
- <button class="lc" data-soon><span class="ic c-g"><i class="ph ph-sun-horizon"></i></span><span class="tx"><b data-t="Morning & evening|الصباح والمساء"></b><small data-t="After Fajr and after Asr|بعد الفجر وبعد العصر"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-soon><span class="ic c-a"><i class="ph ph-check-circle"></i></span><span class="tx"><b data-t="After salah|بعد الصلاة"></b><small data-t="Ayat al-Kursi, tasbih and more|آية الكرسي والتسبيح وغيرها"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-soon><span class="ic c-p"><i class="ph ph-book-open"></i></span><span class="tx"><b data-t="Du'as|الأدعية"></b><small data-t="From the Qur'an and sahih Sunnah|من القرآن والسنة الصحيحة"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-soon><span class="ic c-r"><i class="ph ph-shield-check"></i></span><span class="tx"><b data-t="Ruqyah|الرقية"></b><small data-t="From the Qur'an and Sunnah|من القرآن والسنة"></small></span><i class="ph ph-caret-right cv flip"></i></button>
- <button class="lc" data-soon><span class="ic c-b"><i class="ph ph-note-pencil"></i></span><span class="tx"><b data-t="My du'as|أدعيتي"></b><small data-t="Write your own, tick when answered|اكتب أدعيتك وعلّمها عند الإجابة"></small></span><i class="ph ph-caret-right cv flip"></i></button>
+ <span id="zSleepP" hidden></span>
 </section>
 
 <!-- TODO -->
@@ -417,6 +510,7 @@ html.dark .nw-mk{color:#12110e}.nw-mk i{font-size:20px}.nw-ok{position:relative;
 <!-- MORE -->
 <section class="scr" id="s-more">
  <div class="hd"><h1 data-t="More|المزيد"></h1></div>
+ <div class="yp" id="yp"></div>
  <div class="gl">
   <button data-soon><span class="ic c-g"><i class="ph-fill ph-star"></i></span><span data-t="Stars & streaks|النجوم والسلاسل"></span><em id="mStars"></em><i class="ph ph-caret-right cv flip"></i></button>
   <button data-soon><span class="ic c-p"><i class="ph ph-game-controller"></i></span><span data-t="Game|اللعبة"></span><i class="ph ph-caret-right cv flip"></i></button>
@@ -449,7 +543,7 @@ html.dark .nw-mk{color:#12110e}.nw-mk i{font-size:20px}.nw-ok{position:relative;
  <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 data-t="Calendar|التقويم"></h1><span style="width:44px"></span></div>
  <div class="cm"><button class="ib" id="cPrev" aria-label="Previous month"><i class="ph ph-caret-left flip"></i></button><button class="ib" id="cNext" aria-label="Next month"><i class="ph ph-caret-right flip"></i></button><div class="tt" id="cTitle"></div></div>
  <div class="cg"><div class="wk" id="cWk"></div><div class="dy" id="cDays"></div></div>
- <div class="lg"><span><i class="d-f"></i><span data-t="Sunnah fast|صيام سنة"></span></span><span><i class="d-o"></i><span data-t="Islamic day|مناسبة"></span></span><span><i class="d-t"></i><span data-t="My tasks|مهامي"></span></span></div>
+ <div class="lg"><span><i style="background:var(--ok);border-radius:1px;width:6px;height:6px"></i><span data-t="Salah marked|صلاة مسجّلة"></span></span><span><i class="d-f"></i><span data-t="Sunnah fast|صيام سنة"></span></span><span><i class="d-o"></i><span data-t="Islamic day|مناسبة"></span></span><span><i class="d-t"></i><span data-t="My tasks|مهامي"></span></span></div>
  <div class="sec"><h2 data-t="This month|هذا الشهر"></h2></div>
  <div class="tk" id="cList"></div>
 </section>
@@ -530,7 +624,7 @@ const R={};
 function salahState(now){
  const days=[-1,0,1];let list=[];days.forEach(a=>SAL.forEach(s=>list.push({s,t:at(s[3],now,a)})));
  const pr=list.filter(x=>x.s[0]!=='sunrise');let next=pr.find(x=>x.t>now),prev=[...pr].reverse().find(x=>x.t<=now);return{next,prev}}
-function renderHero(){const now=NOW(),{next,prev}=salahState(now);
+function renderHero(){const now=NOW(),{next,prev}=salahState(now);$('hero').dataset.k=next.s[0];
  const ms=next.t-now,h=Math.floor(ms/36e5),m=Math.ceil(ms/6e4)%60||(ms>0&&h===0?1:0),pct=Math.max(0,Math.min(1,(now-prev.t)/(next.t-prev.t))),C=2*Math.PI*30;
  const left=h?T(h+' h '+m+' min',AR(h)+' س '+AR(m)+' د'):T(m+' min',AR(m)+' د');
  const dk=dkey(now),due=SAL.filter(x=>at(x[3],now)<=now&&!(S.salah[dk]||{})[x[0]]);
@@ -627,10 +721,15 @@ R.home=()=>{{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW(
 setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);
 
 /* ---------- quran ---------- */
-R.quran=()=>{$('qResume').textContent=T('Al-Baqarah · Ayah 255 · Page 42','البقرة · الآية ٢٥٥ · الصفحة ٤٢');$('qVod').textContent=T("Ar-Ra'd 13:28 · tap Done for a star",'الرعد ١٣:٢٨ · اضغط تم لتحصل على نجمة');
- $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div><div class="pg"><i style="width:${k.done/604*100}%"></i></div><small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<p class="empty">${T('No khatmah yet. Start your first one.','لا توجد ختمة بعد. ابدأ أولى ختماتك.')}</p>`;
+const TK30=(p,td)=>`<div class="tk30">${Array.from({length:30},(_,i)=>`<i class="${i<Math.floor(p*30)?'on':i===Math.floor(p*30)&&td?'td':''}"></i>`).join('')}</div>`;
+R.quran=()=>{$('qResume').textContent=T('Ayah 255 · Page 42 · Juz 3','الآية ٢٥٥ · الصفحة ٤٢ · الجزء ٣');$('qSu').textContent=T('Al-Baqarah','سورة البقرة');
+ $('qJs').innerHTML=JUZ.map((k,i)=>`<button data-juz="${i+1}" class="${i===2?'on':''}">${AR(i+1)}<small>${T('juz','جزء')}</small></button>`).join('');
+ $$('#qJs [data-juz]').forEach(b=>b.onclick=()=>{ixJ=+b.dataset.juz;go('index')});
+ const v=QD['13:28'];$('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa="13:28" aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${v.a}</div>${L==='ar'?'':`<p class="en2">${esc(v.en)}</p>`}<a href="https://quran.com/13/28" target="_blank" rel="noopener">${T("Qur'an, Surah Ar-Ra'd 13:28 ↗",'القرآن، سورة الرعد ١٣:٢٨ ↗')}</a>`;
+ $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(['13:28'],T("Ar-Ra'd 13:28",'الرعد ١٣:٢٨'));$('qVod').textContent=T("Ar-Ra'd 13:28 · tap Done for a star",'الرعد ١٣:٢٨ · اضغط تم لتحصل على نجمة');
+ $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div>${TK30(k.done/604,k.last!==dkey(NOW()))}<small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<div class="khe">${TK30(0,0)}<p>${T('30 steps, one juz each. Pick your own pace.','٣٠ خطوة، جزء لكل خطوة. اختر وتيرتك.')}</p><button class="go2" data-khn><i class="ph-bold ph-plus"></i>${T('Start a khatmah','ابدأ ختمة')}</button></div>`;
  $$('[data-khd]').forEach(b=>b.onclick=()=>{const k=S.kh[b.dataset.khd],per=Math.ceil(604/k.days),dk=dkey(NOW());if(k.last===dk){toast(T('Already marked today','سُجّل اليوم'));return}k.done=Math.min(604,k.done+per);k.last=dk;star('kh-'+dk,T("Today's khatmah portion",'ورد الختمة اليوم'));save();vib(20);R.quran()})};
-$('khNew').onclick=khSheet;
+$('khNew').onclick=khSheet;document.addEventListener('click',e=>{if(e.target.closest('[data-khn]'))khSheet()});
 function khSheet(){let type='std',days=30;
  const draw=()=>{openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('New khatmah','ختمة جديدة')}</h1>${XB}</div>
  <input class="inp" id="khN" placeholder="${T('Name (optional)','الاسم (اختياري)')}" value="${esc($('khN')?$('khN').value:'')}">
@@ -644,12 +743,16 @@ function khSheet(){let type='std',days=30;
 
 /* ---------- index ---------- */
 const JUZ=['1:1','2:142','2:253','3:93','4:24','4:148','5:82','6:111','7:88','8:41','9:93','11:6','12:53','15:1','17:1','18:75','21:1','23:1','25:21','27:56','29:46','33:31','36:28','39:32','41:47','46:1','51:31','58:1','67:1','78:1'];
-let ixV='s';
-R.index=()=>{$('ixLast').textContent=T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥');$('ixQ').placeholder=T('Search surahs (name or number)','ابحث عن سورة (اسم أو رقم)');drawIx()};
-function drawIx(){const q=$('ixQ').value.trim().toLowerCase();
- if(ixV==='s'){$('ixList').innerHTML=SU.map((s,i)=>({s,i})).filter(({s,i})=>!q||String(i+1)===q||s[0].toLowerCase().replace(/[^a-z]/g,'').includes(q.replace(/[^a-z]/g,''))&&q.replace(/[^a-z]/g,'')||s[1].includes(q)).map(({s,i})=>`<button class="su ${i===1?'cur':''}" data-read="${i+1}:1"><span class="n">${AR(i+1)}</span><span><span class="a">${s[1]}</span>${L==='ar'?'':`<b>${s[0]}</b>`}<small>${T(s[2]+' ayat',AR(s[2])+' آية')}</small></span></button>`).join('')||`<p class="empty">${T('No surah found','لا توجد سورة')}</p>`}
- else{$('ixList').innerHTML=JUZ.map((k,i)=>{const[s,a]=k.split(':');return `<button class="su" data-read="${k}"><span class="n">${AR(i+1)}</span><span><b>${T('Juz '+(i+1),'الجزء '+AR(i+1))}</b><small>${T(SU[s-1][0]+' '+k,SU[s-1][1]+' '+AR(s)+':'+AR(a))}</small></span></button>`}).join('')}}
-$('ixQ').oninput=drawIx;$$('#ixSeg button').forEach(b=>b.onclick=()=>{ixV=b.dataset.v;$$('#ixSeg button').forEach(x=>x.classList.toggle('on',x===b));$('ixQ').parentElement.style.display=ixV==='s'?'':'none';drawIx()});
+let ixJ=0;
+const jOf=(su,a)=>{let j=0;JUZ.forEach((k,i)=>{const[s0,a0]=k.split(':').map(Number);if(su>s0||su===s0&&a>=a0)j=i+1});return j};
+R.index=()=>{$('ixLast').textContent=T('Al-Baqarah 255','البقرة ٢٥٥');$('ixQ').placeholder=T('Search by name or number','ابحث بالاسم أو الرقم');drawIx()};
+function drawIx(){const q=$('ixQ').value.trim().toLowerCase(),qa=q.replace(/[^a-z]/g,'');
+ $('ixJs').innerHTML=`<button data-j="0" class="${ixJ?'':'on'}">${T('All','الكل')}<small>114</small></button>`+JUZ.map((k,i)=>`<button data-j="${i+1}" class="${ixJ===i+1?'on':''}">${AR(i+1)}<small>${T('juz','جزء')}</small></button>`).join('');
+ $$('#ixJs [data-j]').forEach(b=>b.onclick=()=>{ixJ=+b.dataset.j;drawIx()});
+ const on=$('#ixJs .on')||$('ixJs').querySelector('.on');if(on&&ixJ)on.scrollIntoView({inline:'center',block:'nearest'});
+ const rows=SU.map((s,i)=>({s,i,j1:jOf(i+1,1),j2:jOf(i+1,s[2])})).filter(({s,i,j1,j2})=>(!ixJ||j1<=ixJ&&ixJ<=j2)&&(!q||String(i+1)===q||qa&&s[0].toLowerCase().replace(/[^a-z]/g,'').includes(qa)||s[1].includes(q)));
+ $('ixList').innerHTML=rows.map(({s,i,j1,j2})=>`<button class="sr ${i===1?'cur':''}" data-read="${i+1}:1"><span class="n">${AR(i+1)}</span><span class="tx"><b>${L==='ar'?s[1]:s[0]}</b><small>${T(s[2]+' ayat · Juz '+(j1===j2?j1:j1+'–'+j2),AR(s[2])+' آية · الجزء '+(j1===j2?AR(j1):AR(j1)+'–'+AR(j2)))}</small></span>${L==='ar'?'':`<span class="a">${s[1]}</span>`}</button>`).join('')||`<p class="empty">${T('No surah found','لا توجد سورة')}</p>`}
+$('ixQ').oninput=drawIx;
 
 /* ---------- dhikr reader ---------- */
 const QA=k=>QD[k].a+' <span class="an">'+String(k.split(':')[1]).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d])+'</span>';
@@ -665,7 +768,7 @@ const ZK={sleep:{t:T('Before sleep','أذكار النوم'),items:[
 let ZS=null;
 function zProg(set){const dk=dkey(NOW()),p=(S.zk[dk]||{})[set]||{};return p}
 function zOpen(set){const z=ZK[set];if(!z)return;const p=zProg(set);let i=z.items.findIndex((it,j)=>(p[j]||0)<it.n);if(i<0)i=0;ZS={set,i};$('zr').classList.add('on');document.body.style.overflow='hidden';$('zrT').textContent=z.t;zDraw()}
-function zClose(){$('zr').classList.remove('on');document.body.style.overflow='';ZS=null;R.home();$('zSleepP').textContent=zSum('sleep')}
+function zClose(){$('zr').classList.remove('on');document.body.style.overflow='';ZS=null;R.home();$('zSleepP').textContent=zSum('sleep');if($('s-dhikr').classList.contains('on'))R.dhikr()}
 function zSum(set){const z=ZK[set],p=zProg(set),d=z.items.filter((it,j)=>(p[j]||0)>=it.n).length;return d===z.items.length?T('Done today ✓','تمّت اليوم ✓'):T(d+' of '+z.items.length+' done',AR(d)+' من '+AR(z.items.length))}
 function zDraw(anim){const z=ZK[ZS.set],it=z.items[ZS.i],p=zProg(ZS.set),c=p[ZS.i]||0,sz=S.zs.size;
  $('zc').innerHTML=`<div class="zk ${anim?'done':''}" style="--zs:${sz}" id="zCard"><div class="top"><span>${T('Dhikr '+(ZS.i+1)+' of '+z.items.length,'الذكر '+AR(ZS.i+1)+' من '+AR(z.items.length))}</span><b>${T(c+' of '+it.n+(it.n>1?' times':' time'),AR(c)+' من '+AR(it.n))}</b></div>
@@ -697,7 +800,16 @@ function tasbih(){let n=store('tsb')||0;const draw=()=>{openSheet(`<div class="h
  <p class="note" style="text-align:center">${T('Tap the circle to count','اضغط على الدائرة للعدّ')}</p><button class="ghost" style="border-color:var(--line);color:var(--sub)" id="tsb0">${T('Reset to 0','تصفير')}</button>`);
  $('tsbTap').onclick=()=>{n++;store('tsb',n);$('tsbTap').textContent=AR(n);vib(n%33===0?[25,40,25]:8)};$('tsb0').onclick=()=>{n=0;store('tsb',0);draw()}};draw()}
 $('tsbBtn').onclick=tasbih;
-R.dhikr=()=>{$('zSleepP').textContent=zSum('sleep');$('tsbIc').innerHTML=TSB(false)};
+R.dhikr=()=>{$('zSleepP').textContent=zSum('sleep');$('tsbIc').innerHTML=TSB(false);$('tsbN').textContent=T((store('tsb')||0)+' counted',AR(store('tsb')||0)+' عدّة');
+ const now=NOW(),dk=dkey(now),nm=now.getHours()*60+now.getMinutes(),tm=k=>{const[h,m]=SAL.find(x=>x[0]===k)[3].split(':').map(Number);return h*60+m};
+ const aft=(S.aft||{})[dk]||{},aN=SAL.filter(x=>AFT.every(a=>(aft[x[0]]||{})[a[0]])).length,zp=zProg('sleep'),zd=ZK.sleep.items.filter((it,j)=>(zp[j]||0)>=it.n).length;
+ const cur=nm<tm('dhuhr')?'m':nm<tm('asr')?'a':nm<tm('isha')?'e':'s';
+ const st=[['m','ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),T('After Fajr','بعد الفجر'),f12(SAL[0][3]),'data-soon',0],
+  ['a','ph-check-circle',T('After each salah','بعد كل صلاة'),`<span class="dots5">${SAL.map(x=>`<i class="${AFT.every(a=>(aft[x[0]]||{})[a[0]])?'on':''}"></i>`).join('')}</span>`,'',`data-go="home"`,aN===5],
+  ['e','ph-sun-dim',T('Evening adhkar','أذكار المساء'),T('After Asr','بعد العصر'),f12(SAL[2][3]),'data-soon',0],
+  ['s','ph-moon-stars',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
+ $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<i class="ph-bold ph-check"></i>':`<i class="ph ${ic==='ph-moon-stars'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
+ $('zDayN').textContent=T((st.filter(x=>x[6]).length)+' of 4',AR(st.filter(x=>x[6]).length)+' من ٤')};
 
 /* ---------- todo ---------- */
 const SZ={s:T('5 min','٥ د'),m:T('15 min','١٥ د'),l:T('1 hr+','ساعة+')};
@@ -710,7 +822,8 @@ R.todo=()=>{renderEn();$('qaIn').placeholder=T('Add a task… e.g. "Call the cli
 $('qa').onsubmit=e=>{e.preventDefault();const v=$('qaIn').value.trim();if(!v)return;const m=v.match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i);S.tasks.unshift({id:Date.now(),t:m?v.replace(m[0],'').trim():v,due:m?T('Today, '+m[1]+':'+(m[2]||'00')+' '+m[3].toUpperCase(),'اليوم'):T('Today','اليوم'),p:'m'});save();$('qaIn').value='';vib(10);R.todo()};
 
 /* ---------- more ---------- */
-R.more=()=>{$('mStars').innerHTML=AR(S.stars)+' ★';$('mDarkSw').classList.toggle('on',document.documentElement.classList.contains('dark'));$('mNot').textContent=nOn()+' '+T('on','مفعّل')};
+R.more=()=>{const d7=[...Array(7)].map((_,i)=>{const x=NOW();x.setDate(x.getDate()-i);return Object.keys(S.salah[dkey(x)]||{}).length}).reduce((a,b)=>a+b,0),kp=S.kh[0]?Math.round(S.kh[0].done/604*100):0;
+ $('yp').innerHTML=`<div><b class="g">${AR(S.stars)}★</b><small>${T('Stars','نجوم')}</small></div><div><b>${AR(d7)}/${AR(35)}</b><small>${T('Salah this week','صلوات الأسبوع')}</small></div><div><b>${AR(kp)}%</b><small>${T('Khatmah','الختمة')}</small></div>`;$('mStars').innerHTML=AR(S.stars)+' ★';$('mDarkSw').classList.toggle('on',document.documentElement.classList.contains('dark'));$('mNot').textContent=nOn()+' '+T('on','مفعّل')};
 $('mDark').onclick=()=>{const d=document.documentElement.classList.toggle('dark');store('dark',d);R.more()};
 $('mLang').onclick=()=>{const n=L==='ar'?'en':'ar';localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
 
@@ -722,10 +835,9 @@ const NG=[['sal','ph-clock','c-a',T('Salah','الصلاة'),[['fajr',T('Fajr','�
  ['fs','ph-calendar-check','c-r',T('Sunnah fasts','صيام السنة'),[['mt',T('Mondays & Thursdays','الاثنين والخميس'),T('The evening before','في المساء قبلها')],['wd',T('White days (13–15)','الأيام البيض')]]]];
 function nDef(){const o={all:1};NG.forEach(g=>g[4].forEach(i=>o[g[0]+'.'+i[0]]=g[0]==='fs'?0:1));return o}
 function nOn(){const n=S.notif||nDef();return n.all?Object.keys(n).filter(k=>k!=='all'&&n[k]).length:0}
-R.notif=()=>{S.notif=S.notif||nDef();const n=S.notif,open=R.notif.open||{};
+R.notif=()=>{S.notif=S.notif||nDef();const n=S.notif;
  $('nCount').textContent=n.all?T(nOn()+' reminders on',AR(nOn())+' تذكيرات مفعّلة'):T('All off','كلها متوقفة');$('nAll').classList.toggle('on',!!n.all);
- $('nGroups').innerHTML=NG.map(g=>{const on=g[4].filter(i=>n[g[0]+'.'+i[0]]).length;return `<div class="ng ${open[g[0]]?'open':''}" style="${n.all?'':'opacity:.5'}"><button data-ng="${g[0]}"><span class="ic ${g[2]}">${g[1]==='tsb'?TSB(false):`<i class="ph ${g[1]}"></i>`}</span><span>${g[3]}</span><em>${T(on+' of '+g[4].length,AR(on)+' من '+AR(g[4].length))}</em><i class="ph ph-caret-down"></i></button><div class="its">${g[4].map(i=>`<div class="it"><span>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</span><button class="sw ${n[g[0]+'.'+i[0]]?'on':''}" data-nk="${g[0]+'.'+i[0]}" aria-label="${i[1]}"></button></div>`).join('')}</div></div>`}).join('');
- $$('[data-ng]').forEach(b=>b.onclick=()=>{open[b.dataset.ng]=!open[b.dataset.ng];R.notif.open=open;R.notif()});
+ $('nGroups').innerHTML=NG.map(g=>{const on=g[4].filter(i=>n[g[0]+'.'+i[0]]).length;return `<div class="ng2 ${n.all?'':'off'}"><h3>${g[1]==='tsb'?TSB(false):`<i class="ph ${g[1]}"></i>`}${g[3]}<em>${AR(on)}/${AR(g[4].length)}</em></h3><div class="chs">${g[4].map(i=>{const k=g[0]+'.'+i[0],o=!!n[k];return `<button class="tg ${o?'on':''}" data-nk="${k}" aria-pressed="${o}"><span class="ck2">✓</span><span>${i[1]}${i[2]?`<small>${i[2]}</small>`:''}</span></button>`}).join('')}</div></div>`}).join('');
  $$('[data-nk]').forEach(b=>b.onclick=()=>{n[b.dataset.nk]=n[b.dataset.nk]?0:1;save();vib(8);R.notif()})};
 $('nAll').onclick=()=>{S.notif=S.notif||nDef();S.notif.all=S.notif.all?0:1;save();vib(10);R.notif()};
 
@@ -735,15 +847,15 @@ R.cal=()=>{const today=NOW(),th=hParts(today);let base=new Date(today);base.setD
  for(let k=0;k<Math.abs(cOff);k++){if(cOff>0){base.setDate(base.getDate()+30);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}else{base.setDate(base.getDate()-2);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}}
  const h0=hParts(base),days=[];let d=new Date(base);while(hParts(d).m===h0.m){days.push(new Date(d));d.setDate(d.getDate()+1)}
  const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-US',o);
- $('cTitle').innerHTML=`<b>${hm(h0.m)} ${AR(h0.y)}</b><small>${gm(g1,{month:'long'})}${g1.getMonth()!==g2.getMonth()?' – '+gm(g2,{month:'long'}):''} ${AR(g2.getFullYear())}</small>`;
+ $('cTitle').innerHTML=`<b>${hms(h0.m)} ${AR(h0.y)}</b><small>${gm(g1,{month:'long'})}${g1.getMonth()!==g2.getMonth()?' – '+gm(g2,{month:'long'}):''} ${AR(g2.getFullYear())}</small>`;
  const wk=[T('Sun','أحد'),T('Mon','اثنين'),T('Tue','ثلاثاء'),T('Wed','أربعاء'),T('Thu','خميس'),T('Fri','جمعة'),T('Sat','سبت')];$('cWk').innerHTML=wk.map(w=>`<span>${w}</span>`).join('');
  const occ=(m,dd)=>({'1.1':T('Islamic New Year','رأس السنة الهجرية'),'1.10':T("'Ashura fast",'صيام عاشوراء'),'9.1':T('Ramadan begins','بداية رمضان'),'10.1':T("Eid al-Fitr",'عيد الفطر'),'12.9':T("Day of 'Arafah fast",'صيام يوم عرفة'),'12.10':T('Eid al-Adha','عيد الأضحى')})[m+'.'+dd];
  const fast=(x,hd)=>(x.getDay()===1||x.getDay()===4||[13,14,15].includes(hd))&&h0.m!==9;
  let cells='';for(let i=0;i<g1.getDay();i++)cells+='<span></span>';const list=[];
  days.forEach((x,i)=>{const hd=i+1,o=occ(h0.m,hd),f=fast(x,hd),tk=dkey(x)===dkey(today)&&S.tasks.length;if(o)list.push([hd,x,o,'d-o']);if([13,14,15].includes(hd)&&h0.m!==9)list.push([hd,x,T('White day fast','صيام الأيام البيض'),'d-f']);
-  cells+=`<button class="${dkey(x)===dkey(today)?'td':''}" aria-label="${hd}"><b>${AR(hd)}</b><small>${AR(x.getDate())}</small><span class="ds">${f?'<i class="d-f"></i>':''}${o?'<i class="d-o"></i>':''}${tk?'<i class="d-t"></i>':''}</span></button>`});
+  cells+=`<button class="${dkey(x)===dkey(today)?'td':''}" aria-label="${hd}"><b>${AR(hd)}</b><small>${AR(x.getDate())}</small><span class="s5">${x<=today?SAL.map(sx=>`<i class="${(S.salah[dkey(x)]||{})[sx[0]]?'on':''}"></i>`).join(''):''}</span><span class="ds">${f?'<i class="d-f"></i>':''}${o?'<i class="d-o"></i>':''}${tk?'<i class="d-t"></i>':''}</span></button>`});
  $('cDays').innerHTML=cells;
- $('cList').innerHTML=list.length?list.map(([hd,x,t,c])=>`<div class="tr"><span class="pri ${c}" style="width:10px;height:10px"></span><span class="tx"><b>${t}</b><small>${AR(hd)} ${hm(h0.m)} · ${gm(x,{weekday:'short',day:'numeric',month:'short'})}</small></span></div>`).join(''):`<p class="empty">${T('Mondays and Thursdays are Sunnah fasts.','يُسنّ صيام الاثنين والخميس.')}</p>`};
+ $('cList').innerHTML=list.length?list.map(([hd,x,t,c])=>`<div class="ag"><span class="db ${c}"><b>${AR(hd)}</b><small>${hms(h0.m)}</small></span><span class="tx"><b>${t}</b><small>${gm(x,{weekday:'long',day:'numeric',month:'long'})}</small></span></div>`).join(''):`<p class="empty">${T('Mondays and Thursdays are Sunnah fasts.','يُسنّ صيام الاثنين والخميس.')}</p>`};
 $('cPrev').onclick=()=>{cOff--;R.cal()};$('cNext').onclick=()=>{cOff++;R.cal()};
 
 /* ---------- sheet + audio ---------- */

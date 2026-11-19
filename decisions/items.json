@@ -2,6 +2,20 @@
  "v": 1,
  "items": [
   {
+   "id": "v5-own-identity",
+   "t": "Whole app: Fastaqim's own look",
+   "ar": "التطبيق كله: هوية فستقم الخاصة",
+   "s": "Our own signature design on every screen: indigo and dawn colours (no beige or brown), a salah card whose sky changes with the next salah, the straight path line through Home, Dhikr and the surah list, the Qur'an page with your khatmah as 30 juz steps, tap chips for notifications, and a calendar that shows your salah under each day.",
+   "pics": [
+    "decisions/img/own161-home.jpg",
+    "decisions/img/own161-quran.jpg",
+    "decisions/img/own161-dhikr.jpg",
+    "decisions/img/own161-notif.jpg",
+    "decisions/img/own161-cal.jpg"
+   ],
+   "link": "next/v5/#quran"
+  },
+  {
    "id": "v5-home-own",
    "t": "Home: Fastaqim's own design",
    "ar": "الرئيسية: تصميم فستقم الخاص",
