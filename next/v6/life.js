@@ -150,7 +150,8 @@ R.hab=()=>{$('hbT').textContent=U('Habits','العادات','Amaloota','Caadooyi
  const rvSave=()=>{d.rv[dk]={g:$('rvG').value,b:$('rvB').value};save();$('rvS').textContent=U('Saved','حُفظ','Olkaaʼameera','Waa la kaydiyay')};
  if($('rvG')){let t;['rvG','rvB'].forEach(i=>$(i).oninput=()=>{clearTimeout(t);t=setTimeout(rvSave,500)})}
  fillAyat($('hbB'))};
-function allKept(){try{celebrateTool()}catch(e){}}
+function allKept(){const n=HI().length;if(n<3){toast(U('All kept today. Alhamdulillah.','حافظت على الكل اليوم، الحمد لله.',"Har'a hunda eegde. Alhamdulillaah.",'Maanta dhammaan waad ilaalisay. Alxamdulillaah.'));return}
+ try{celebrateTool();const c=$('cel'),h=c.querySelector('h2'),q=c.querySelector('p');if(h)h.textContent=U('All kept today','حافظت على الكل اليوم',"Har'a hunda eegde",'Maanta dhammaan waad ilaalisay');if(q)q.textContent=U('Alhamdulillah. Small and steady.','الحمد لله. قليل دائم.','Alhamdulillaah. Xiqqaa fi itti fufaa.','Alxamdulillaah. Yar oo joogto ah.');clearTimeout(allKept.t);allKept.t=setTimeout(()=>c.classList.remove('on'),2800)}catch(e){}}
 
 /* =================== RULES =================== */
 let RT='fam';

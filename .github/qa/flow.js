@@ -34,8 +34,9 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  ok('money left 77.5',(await p.textContent('.mcard')).includes('77.5'));await snap('6_money');
  await p.click('[data-back]:visible');await p.waitForTimeout(250);
  // habits
- await p.click('#tlg [data-tool="habits"]');await p.waitForTimeout(300);await p.click('#toAdd');await p.waitForTimeout(300);await p.fill('#isT','Walk after Asr');await p.click('#isOk');await p.waitForTimeout(300);
- await p.click('[data-h="0"]');await p.waitForTimeout(300);ok('habit ticked',await p.$eval('.hb',e=>e.classList.contains('on')));await snap('7_habits');
+ // Habits opens its own screen (Life & family: build + leave)
+ await p.click('#tlg [data-tool="habits"]');await p.waitForTimeout(300);await p.click('#hbAdd');await p.waitForTimeout(300);await p.fill('#hsT','Walk after Asr');await p.click('#hsOk');await p.waitForTimeout(300);
+ await p.click('#hbB [data-hd]');await p.waitForTimeout(300);ok('habit ticked',await p.$eval('#hbB .hb',e=>e.classList.contains('on')));await snap('7_habits');
  await p.click('[data-back]:visible');await p.waitForTimeout(250);await p.click('[data-back]:visible');await p.waitForTimeout(250);
  // persistence: reload
  await p.goto('http://fq.test/next/v6/'+L+'#home');await p.waitForTimeout(600);const pt=await p.textContent('#pins');ok('pins persist after reload',pt.includes('Habits')||pt.includes('العادات'));await snap('8_home_after');
