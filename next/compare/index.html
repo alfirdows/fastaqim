@@ -53,6 +53,7 @@ textarea:focus{border-color:var(--acc)}
 @media (min-width:760px){.phd{min-height:78px}.wrap{overflow:visible;justify-content:center;gap:12px}.pane{flex:1 1 0;min-width:0;max-width:460px;padding:10px}.phd small{font-size:12px}} header .hint span.ipad{display:none}
 @media (orientation:landscape) and (max-height:500px){.wrap{overflow:visible}.pane{flex:1 1 0;min-width:0;padding:8px}.phd{min-height:0}.phd small{display:none}header .hint{display:none}.phd b{font-size:13.5px}.tag{width:26px;height:26px;font-size:13px}.chips{margin-top:6px}h1{font-size:17px}textarea{min-height:44px}}
 .sib{display:flex;align-items:center;gap:10px;margin:12px 14px 0;padding:12px 14px;border-radius:14px;background:#f5eedf;border:1px solid var(--gl);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600}.sib[hidden]{display:none}.sib i{font-size:20px;color:var(--goldD);flex:none}
+.paid{margin:8px 0 0;background:#faf8f3;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:13px}.paid summary{font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;color:var(--goldD)}.paid p{margin-top:6px;color:var(--sub);line-height:1.45}.paid a{color:var(--acc)}
 </style>
 </head>
 <body>
@@ -91,6 +92,7 @@ async function send(row,st){putLocal(row);st.className='st';st.innerHTML='<i cla
  try{const c=await sb();if(!SIGNED)throw 0;const r=await c.from('fastaqim_decisions').upsert(row);if(r.error)throw r.error;unq(row.id);st.className='st ok';st.innerHTML='<i class="ph-fill ph-check-circle"></i>Saved. Claude can read it.'}
  catch(e){st.className='st';st.innerHTML='<i class="ph ph-device-mobile"></i>Saved on this phone. It sends when you open Fastaqim signed in.'}}
 async function pull(){try{const c=await sb();if(!SIGNED)return;const {data}=await c.from('fastaqim_decisions').select('id,answer,note,at').like('id','cmp:%');const a=ans();(data||[]).forEach(r=>{a[r.id]={a:r.answer,n:r.note||'',at:r.at}});localStorage.setItem('fq.dec',JSON.stringify(a));draw()}catch(e){}}
+const PAID=`<details class="paid"><summary><i class="ph ph-tag"></i>One-time paid option</summary><p><b>Untitled UI Icons PRO</b>, $59 once (1 person, unlimited projects), <a href="https://www.untitledui.com/pricing" target="_blank" rel="noopener">untitledui.com</a>. Gives 4,600+ icons in 4 matching styles. My advice: not needed now; the free set already used is one consistent family.</p><p><b>Fonts:</b> no paid font beats the free Inter + IBM Plex Arabic for Arabic and English under your rules. Top foundries charge yearly or by page views.</p></details>`;
 let cur=Math.max(0,SCREENS.findIndex(s=>s[0]===(new URLSearchParams(location.search).get('s')||location.hash.slice(1))));
 function src(s,v){const p=new URLSearchParams();if(v!=='b')p.set('v',v);if(s[3]==='z')p.set('z','morning');else if(s[3])p.set('x',s[3]);const q=p.toString();return '../v6/'+(q?'?'+q:'')+s[2]}
 function fit(){document.querySelectorAll('.frame').forEach(f=>{const w=f.clientWidth,sc=w/390;f.style.height=Math.round(844*sc)+'px';f.querySelector('iframe').style.transform=`scale(${sc})`})}
@@ -98,7 +100,7 @@ function draw(){const s=SCREENS[cur],a=ans();
  $('chips').innerHTML=SCREENS.map((x,i)=>{const r=['a','b','c'].map(v=>a['cmp:'+x[0]+':'+v]).filter(Boolean);const d=r.some(y=>y.a==='change')?'ch':r.length?'ok':'';return `<button class="chip ${i===cur?'on':''}" data-i="${i}"><span class="d ${d}"></span>${esc(x[1])}</button>`}).join('');
  const done=SCREENS.filter(x=>['a','b','c'].some(v=>a['cmp:'+x[0]+':'+v])).length;$('prog').textContent=done+' of '+SCREENS.length+' answered';
  $('wrap').innerHTML=V.map(([v,t,d])=>{const id='cmp:'+s[0]+':'+v,o=a[id]||{};return `<section class="pane" data-v="${v}"><div class="phd"><span class="tag t-${v}">${({a:1,b:2,c:3})[v]}</span><div><b>${t}</b><small>${d}</small></div><a class="open" href="${src(s,v)}" target="_blank" rel="noopener" aria-label="Open full screen"><i class="ph ph-arrows-out-simple"></i></a></div>
-  <div class="frame"><iframe src="${src(s,v)}" title="${esc(t)}" loading="lazy"></iframe></div>
+  ${v==='c'?PAID:''}<div class="frame"><iframe src="${src(s,v)}" title="${esc(t)}" loading="lazy"></iframe></div>
   <div class="cm"><div class="ab"><button class="ag ${o.a==='approve'?'on':''}" data-a="approve" aria-pressed="${o.a==='approve'}"><i class="ph ph-thumbs-up"></i>Agree</button><button class="chg ${o.a==='change'?'on':''}" data-a="change" aria-pressed="${o.a==='change'}"><i class="ph ph-pencil-simple"></i>Change</button></div>
   <textarea placeholder="What should change? (optional)" aria-label="Comment for ${esc(t)}">${esc(o.n||'')}</textarea><p class="st" aria-live="polite">${o.a||o.n?'<i class="ph ph-check"></i>Answered':''}</p></div></section>`}).join('');
  document.querySelectorAll('.pane').forEach(p=>{const v=p.dataset.v,id='cmp:'+s[0]+':'+v,st=p.querySelector('.st'),ta=p.querySelector('textarea');let t;
