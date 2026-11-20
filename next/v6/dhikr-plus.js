@@ -321,6 +321,26 @@ if(R&&R.dhikr){const o=R.dhikr;R.dhikr=function(){const r=o.apply(this,arguments
 try{friday()}catch(e){}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)try{friday()}catch(e){}});
 
+/* ---------- Hisn al-Muslim audio per dhikr (cut from the site's own Hisn recording) ---------- */
+const HISN_CLIPS=window.HISN_CLIPS||{};// {set:{itemIndex:'file.m4a'}}
+const HCB='../../hisn/clips/';
+let hA=null,hKey='';
+function hisnBtn(){
+  if(typeof ZS!=='object'||!ZS)return;const f=(HISN_CLIPS[ZS.set]||{})[ZS.i];const top=document.querySelector('#zCard .top');if(!top)return;
+  const old=document.getElementById('zHa');if(old)old.remove();if(!f)return;
+  const key=ZS.set+':'+ZS.i,playing=hA&&!hA.paused&&hKey===key;
+  const b=document.createElement('button');b.id='zHa';b.className='zha'+(playing?' on':'');
+  b.setAttribute('aria-label',TX('Listen','استمع','Dhaggeeffadhu','Dhageyso'));
+  b.innerHTML=`<i class="ph-fill ${playing?'ph-pause':'ph-play'}"></i><span>${esc(TX('Listen','استمع','Dhaggeeffadhu','Dhageyso'))}</span>`;
+  b.onclick=e=>{e.stopPropagation();if(!hA){hA=new Audio();hA.preload='none';hA.onended=hA.onpause=hA.onplay=()=>hisnBtn()}
+    if(hKey===key&&!hA.paused){hA.pause();return}
+    if(hKey!==key){hA.src=HCB+f;hKey=key}hA.play().catch(()=>toast(TX('Audio could not play','تعذّر تشغيل الصوت','Sagaleen hin taphanne','Codka lama shidi karin')))};
+  top.appendChild(b)
+}
+if(typeof window.zDraw==='function'){const oz=window.zDraw;window.zDraw=function(){const r=oz.apply(this,arguments);try{hisnBtn()}catch(e){}return r}}
+if(typeof window.zClose==='function'){const oc=window.zClose;window.zClose=function(){if(hA)hA.pause();return oc.apply(this,arguments)}}
+{const zx=document.getElementById('zrX');if(zx)zx.onclick=()=>window.zClose()}
+
 /* deep links for previews/tests: ?tbx=beads|tap&mat=jade */
 const QP=new URLSearchParams(location.search);
 if(QP.get('mat')&&MAT[QP.get('mat')]){st.mat=QP.get('mat')}
