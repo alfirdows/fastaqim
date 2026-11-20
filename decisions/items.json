@@ -2,18 +2,14 @@
  "v": 1,
  "items": [
   {
-   "id": "brand-pick-bright",
-   "t": "Pick the colours (1 to 5)",
-   "ar": "اختر الألوان (١ إلى ٥)",
-   "s": "Bright and neutral. 1 Sky & Sun (recommended), 2 Blue & Tangerine, 3 Tangerine & Sky, 4 Aqua Blue & Coral, 5 Golden & Blue. All keep your Daily check-in, stars and streak. Approve = number 1. To pick another, tap Change and type its number.",
+   "id": "compare-v6",
+   "t": "Compare every screen: 3 live versions",
+   "ar": "قارن كل شاشة: ٣ نسخ حية",
+   "s": "Tap Open it live. Each screen shows 1 my recommendation, 2 what I built, 3 top experts' choice, side by side. Tap inside them, they work. Under each one tap Agree or Change and type a note. It saves by itself.",
    "pics": [
-    "decisions/img/brandl1.jpg",
-    "decisions/img/brandl2.jpg",
-    "decisions/img/brandl3.jpg",
-    "decisions/img/brandl4.jpg",
-    "decisions/img/brandl5.jpg"
+    "decisions/img/compare-v6.jpg"
    ],
-   "link": "next/v5/l1/#home"
+   "link": "next/compare/"
   }
  ]
 }
