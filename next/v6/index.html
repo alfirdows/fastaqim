@@ -750,8 +750,11 @@ html.lx-long .pchip b{white-space:normal;overflow-wrap:anywhere;line-height:1.2}
 }
 .tab{grid-template-columns:repeat(5,minmax(0,1fr))}.tab a{min-width:0;white-space:nowrap}
 @media (max-width:360px){.tab a{font-size:10.5px;letter-spacing:-.01em}}
-.fh .wm{min-width:28px;overflow:hidden;white-space:nowrap;display:flex;align-items:center;gap:8px}.fh>button{flex:none}
+.fh .wm{white-space:nowrap;display:flex;align-items:center;gap:8px;flex:1 0 auto}.fh>button{flex:none}
 @media (max-width:360px){.pchip small{font-size:10.5px;text-overflow:clip}.pchip{padding:8px 7px}}
+.fh .wm.tight{font-size:0!important;letter-spacing:0!important;flex:1 1 0;min-width:28px;overflow:hidden}
+.locb{flex-wrap:wrap}.locb span{flex:1 1 150px}.locb em{margin-inline-start:auto}
+html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;gap:8px}.any b,.any small{overflow-wrap:break-word}
 </style>
 </head>
 <body>
@@ -1629,6 +1632,9 @@ function acctSheet(){const u=window.FQA&&FQA.user();
 {const g=$('s-more').querySelector('.gl');if(g&&!$('mAcct')){g.insertAdjacentHTML('beforebegin',`<div class="gl"><button id="mAcct" class="acct"><span class="ic c-a"><i class="ph ph-user-circle"></i></span><span class="tx"></span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mAcct').onclick=acctSheet;syBadge()}}
 if(window.FQA&&window.top===window&&!P.has('v')&&!P.has('x')&&!P.has('nosync')){FQA.on(u=>{syBadge();if(u)syPull(u)});FQA.sb().then(()=>{syBadge();const u=FQA.user();if(u)syPull(u)}).catch(()=>{})}
 if(QTR_ID)qtrLoad(Object.keys(QD));
+/* the wordmark hides (logo stays) when the header has no room, so it is never cut */
+function fhFit(){$$('.fh').forEach(h=>{const w=h.querySelector('.wm');if(!w)return;w.classList.toggle('tight',false);if(h.scrollWidth>h.clientWidth+1||h.getBoundingClientRect().right>document.documentElement.clientWidth)w.classList.toggle('tight',true)})}
+fhFit();addEventListener('resize',fhFit);setTimeout(fhFit,400);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fhFit);
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);
