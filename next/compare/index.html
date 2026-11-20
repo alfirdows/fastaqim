@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fbf9f4">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="robots" content="noindex">
+<title>Fastaqim · Compare</title>
+<link rel="stylesheet" href="../design/v/ph-regular/style.css">
+<link rel="stylesheet" href="../design/v/ph-fill/style.css">
+<style>
+@font-face{font-family:Inter;src:url(../design/v/fonts/inter-latin-wght-normal.woff2) format("woff2");font-weight:100 900}
+:root{--bg:#fbf9f4;--ink:#24231f;--sub:#6e6b63;--line:#ece6da;--acc:#4f8a74;--gold:#b8955a;--goldD:#86672e;--gl:rgba(184,149,90,.28)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font:15px/1.45 Inter,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,textarea{font:inherit;color:inherit}
+header{position:sticky;top:0;z-index:10;background:rgba(251,249,244,.96);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:calc(env(safe-area-inset-top) + 8px) 14px 10px}
+.tr{display:flex;align-items:center;gap:8px}
+.back{display:flex;align-items:center;gap:2px;text-decoration:none;color:var(--ink);font-weight:600;padding:6px 6px 6px 0}
+.back i{font-size:20px}
+h1{font-size:19px;font-weight:750;flex:1}
+.prog{font-size:12.5px;color:var(--sub);font-weight:600}
+.chips{display:flex;gap:7px;overflow-x:auto;margin:10px -14px 0;padding:0 14px 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--gl);background:#fff;border-radius:18px;padding:7px 12px;font-size:13.5px;font-weight:600;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.chip .d{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.chip .d.ok{background:var(--acc)}.chip .d.ch{background:var(--gold)}.chip.on .d{background:#fff}
+.hint{font-size:12.5px;color:var(--sub);margin-top:8px;display:flex;gap:6px;align-items:center}
+.wrap{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding:14px 14px calc(env(safe-area-inset-bottom) + 24px);scrollbar-width:none}
+.wrap::-webkit-scrollbar{display:none}
+.pane{flex:0 0 min(86vw,420px);scroll-snap-align:center;background:#fff;border:1px solid var(--gl);border-radius:22px;padding:12px;display:flex;flex-direction:column}
+.phd{display:flex;align-items:flex-start;gap:10px;min-height:58px}.phd>div{flex:1;min-width:0}
+.tag{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:15px}
+.t-a{background:var(--gold)}.t-b{background:var(--acc)}.t-c{background:#5d6470}
+.phd b{display:block;font-size:15.5px}.phd small{display:block;font-size:12.5px;color:var(--sub);line-height:1.4}
+.frame{position:relative;width:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:#fbf9f4;margin-top:8px}
+.frame iframe{position:absolute;left:0;top:0;width:390px;height:844px;border:0;transform-origin:0 0}
+.open{flex:none;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);text-decoration:none}
+.cm{margin-top:12px}
+.ab{display:flex;gap:8px}
+.ab button{flex:1;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:10px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.ab .ag.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.ab .chg.on{background:var(--gold);border-color:var(--gold);color:#fff}
+textarea{width:100%;margin-top:8px;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;font-size:16px;min-height:72px;resize:vertical;outline:none;background:#fff}
+textarea:focus{border-color:var(--acc)}
+.st{font-size:12px;color:var(--sub);margin-top:6px;min-height:17px;display:flex;align-items:center;gap:5px}
+.st.ok{color:var(--acc)}
+.nav{display:flex;gap:10px;padding:0 14px calc(env(safe-area-inset-bottom) + 18px)}
+.nav button{flex:1;border:1px solid var(--gl);background:#fff;border-radius:14px;padding:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
+.nav .nx{background:var(--acc);border-color:var(--acc);color:#fff}
+@media (min-width:900px){.wrap{overflow:visible;justify-content:center}.pane{flex:1 1 0;max-width:440px}}
+@media (orientation:landscape) and (max-height:500px){.wrap{overflow:visible}.pane{flex:1 1 0;min-width:0;padding:8px}.phd{min-height:0}.phd small{display:none}header .hint{display:none}.phd b{font-size:13.5px}.tag{width:26px;height:26px;font-size:13px}.chips{margin-top:6px}h1{font-size:17px}textarea{min-height:44px}}
+.sib{display:flex;align-items:center;gap:10px;margin:12px 14px 0;padding:12px 14px;border-radius:14px;background:#f5eedf;border:1px solid var(--gl);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600}.sib[hidden]{display:none}.sib i{font-size:20px;color:var(--goldD);flex:none}
+</style>
+</head>
+<body>
+<header>
+ <div class="tr"><a class="back" href="../../#approve" aria-label="Back to Approvals"><i class="ph ph-caret-left"></i>Approvals</a><h1>Compare</h1><span class="prog" id="prog"></span></div>
+ <div class="chips" id="chips"></div>
+ <p class="hint"><i class="ph ph-hand-swipe-left"></i><span id="hint">Swipe to see all 3. Tap inside each one, it really works. Turn your phone sideways to see all 3 at once.</span></p>
+</header>
+<main>
+ <a class="sib" id="sib" href="../../" hidden><i class="ph ph-sign-in"></i><span>Sign in to Fastaqim in this browser so your answers reach Claude. Then come back here.</span><i class="ph ph-caret-right"></i></a>
+ <div class="wrap" id="wrap"></div>
+ <div class="nav"><button id="prev"><i class="ph ph-caret-left"></i>Previous</button><button class="nx" id="next">Next screen<i class="ph ph-caret-right"></i></button></div>
+</main>
+<script>
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const SCREENS=[
+ ['home','Home','#home',''],['path',"Today's path",'#home','path'],['salah','Mark a salah','#home','salah'],['tools','Tools','#tools',''],['newlist','New list','#tools','newlist'],
+ ['water','Water','#tool','tool-water'],['money','Money','#tool','tool-money'],['habits','Habits','#tool','tool-habits'],
+ ['quran',"Qur'an",'#quran',''],['dhikr','Dhikr','#dhikr',''],['adhkar','Adhkar reader','#dhikr','z'],['tasbih','Tasbih','#dhikr','tasbih'],
+ ['todo','To-do','#todo',''],['cal','Calendar','#cal',''],['more','More','#more',''],['notif','Notifications','#notif','']];
+const V=[
+ ['a','My recommendation',"What I'd choose: salah first, shortcuts under Today's path, calmer cards with gold only on the salah card."],
+ ['b','What I built','The version you liked: shortcuts at the top, gold lines on every card, soft green buttons.'],
+ ['c',"Top experts' choice",'Plain and quiet: no borders, soft shadows, one green colour, system font. Original, not copied.']];
+/* answers: saved to the owner-only Approvals table; kept on this phone until sent */
+const SUPA={url:'https://xnxqibdjjrgjqpszvdbe.supabase.co',key:'sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId'};
+const REMST={getItem:k=>{try{return localStorage.getItem(k)??sessionStorage.getItem(k)}catch(e){return null}},setItem:(k,v)=>{try{const rem=localStorage.getItem('fastaqim.rem')!=='0';(rem?localStorage:sessionStorage).setItem(k,v);(rem?sessionStorage:localStorage).removeItem(k)}catch(e){}},removeItem:k=>{try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch(e){}}};
+let SB=null,SIGNED=null;
+function loadSb(){return new Promise((res,rej)=>{if(window.supabase)return res();const s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';s.onload=res;s.onerror=rej;document.head.appendChild(s)})}
+async function sb(){if(SB)return SB;await loadSb();SB=window.supabase.createClient(SUPA.url,SUPA.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storage:REMST}});const {data}=await SB.auth.getSession();SIGNED=!!(data&&data.session);return SB}
+const ans=()=>{try{return JSON.parse(localStorage.getItem('fq.dec')||'{}')}catch(e){return{}}};
+function putLocal(row){try{const q=JSON.parse(localStorage.getItem('fq.dec.q')||'[]').filter(x=>x.id!==row.id);q.push(row);localStorage.setItem('fq.dec.q',JSON.stringify(q));const a=ans();a[row.id]={a:row.answer,n:row.note,at:row.at};localStorage.setItem('fq.dec',JSON.stringify(a))}catch(e){}}
+function unq(id){try{localStorage.setItem('fq.dec.q',JSON.stringify(JSON.parse(localStorage.getItem('fq.dec.q')||'[]').filter(x=>x.id!==id)))}catch(e){}}
+async function send(row,st){putLocal(row);st.className='st';st.innerHTML='<i class="ph ph-circle-notch"></i>Saving…';
+ try{const c=await sb();if(!SIGNED)throw 0;const r=await c.from('fastaqim_decisions').upsert(row);if(r.error)throw r.error;unq(row.id);st.className='st ok';st.innerHTML='<i class="ph-fill ph-check-circle"></i>Saved. Claude can read it.'}
+ catch(e){st.className='st';st.innerHTML='<i class="ph ph-device-mobile"></i>Saved on this phone. It sends when you open Fastaqim signed in.'}}
+async function pull(){try{const c=await sb();if(!SIGNED)return;const {data}=await c.from('fastaqim_decisions').select('id,answer,note,at').like('id','cmp:%');const a=ans();(data||[]).forEach(r=>{a[r.id]={a:r.answer,n:r.note||'',at:r.at}});localStorage.setItem('fq.dec',JSON.stringify(a));draw()}catch(e){}}
+let cur=Math.max(0,SCREENS.findIndex(s=>s[0]===(new URLSearchParams(location.search).get('s')||location.hash.slice(1))));
+function src(s,v){const p=new URLSearchParams();if(v!=='b')p.set('v',v);if(s[3]==='z')p.set('z','morning');else if(s[3])p.set('x',s[3]);const q=p.toString();return '../v6/'+(q?'?'+q:'')+s[2]}
+function fit(){document.querySelectorAll('.frame').forEach(f=>{const w=f.clientWidth,sc=w/390;f.style.height=Math.round(844*sc)+'px';f.querySelector('iframe').style.transform=`scale(${sc})`})}
+function draw(){const s=SCREENS[cur],a=ans();
+ $('chips').innerHTML=SCREENS.map((x,i)=>{const r=['a','b','c'].map(v=>a['cmp:'+x[0]+':'+v]).filter(Boolean);const d=r.some(y=>y.a==='change')?'ch':r.length?'ok':'';return `<button class="chip ${i===cur?'on':''}" data-i="${i}"><span class="d ${d}"></span>${esc(x[1])}</button>`}).join('');
+ const done=SCREENS.filter(x=>['a','b','c'].some(v=>a['cmp:'+x[0]+':'+v])).length;$('prog').textContent=done+' of '+SCREENS.length+' answered';
+ $('wrap').innerHTML=V.map(([v,t,d])=>{const id='cmp:'+s[0]+':'+v,o=a[id]||{};return `<section class="pane" data-v="${v}"><div class="phd"><span class="tag t-${v}">${({a:1,b:2,c:3})[v]}</span><div><b>${t}</b><small>${d}</small></div><a class="open" href="${src(s,v)}" target="_blank" rel="noopener" aria-label="Open full screen"><i class="ph ph-arrows-out-simple"></i></a></div>
+  <div class="frame"><iframe src="${src(s,v)}" title="${esc(t)}" loading="lazy"></iframe></div>
+  <div class="cm"><div class="ab"><button class="ag ${o.a==='approve'?'on':''}" data-a="approve" aria-pressed="${o.a==='approve'}"><i class="ph ph-thumbs-up"></i>Agree</button><button class="chg ${o.a==='change'?'on':''}" data-a="change" aria-pressed="${o.a==='change'}"><i class="ph ph-pencil-simple"></i>Change</button></div>
+  <textarea placeholder="What should change? (optional)" aria-label="Comment for ${esc(t)}">${esc(o.n||'')}</textarea><p class="st" aria-live="polite">${o.a||o.n?'<i class="ph ph-check"></i>Answered':''}</p></div></section>`}).join('');
+ document.querySelectorAll('.pane').forEach(p=>{const v=p.dataset.v,id='cmp:'+s[0]+':'+v,st=p.querySelector('.st'),ta=p.querySelector('textarea');let t;
+  const row=()=>{const o=ans()[id]||{};return{id,answer:o.a||'change',note:ta.value.trim(),at:new Date().toISOString()}};
+  p.querySelectorAll('[data-a]').forEach(b=>b.onclick=()=>{p.querySelectorAll('[data-a]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});const r={id,answer:b.dataset.a,note:ta.value.trim(),at:new Date().toISOString()};send(r,st);try{navigator.vibrate&&navigator.vibrate(10)}catch(e){}setTimeout(drawChips,50)});
+  ta.oninput=()=>{clearTimeout(t);st.className='st';st.textContent='Typing…';t=setTimeout(()=>{send(row(),st);drawChips()},900)}});
+ requestAnimationFrame(fit);$('prev').disabled=cur===0;$('next').innerHTML=cur===SCREENS.length-1?'All screens done <i class="ph ph-check"></i>':'Next screen<i class="ph ph-caret-right"></i>';
+ const ch=$('chips').children[cur];if(ch)ch.scrollIntoView({inline:'center',block:'nearest'});$('wrap').scrollLeft=0;history.replaceState(null,'','?s='+s[0])}
+function drawChips(){const a=ans();[...$('chips').children].forEach((c,i)=>{const x=SCREENS[i],r=['a','b','c'].map(v=>a['cmp:'+x[0]+':'+v]).filter(Boolean);c.querySelector('.d').className='d '+(r.some(y=>y.a==='change')?'ch':r.length?'ok':'')});$('prog').textContent=SCREENS.filter(x=>['a','b','c'].some(v=>a['cmp:'+x[0]+':'+v])).length+' of '+SCREENS.length+' answered'}
+$('chips').onclick=e=>{const b=e.target.closest('[data-i]');if(b){cur=+b.dataset.i;draw()}};
+$('prev').onclick=()=>{if(cur>0){cur--;draw();scrollTo(0,0)}};$('next').onclick=()=>{if(cur<SCREENS.length-1){cur++;draw();scrollTo(0,0)}};
+addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,300));
+draw();pull().then(()=>{if(SIGNED===false)$('sib').hidden=false});
+</script>
+</body>
+</html>
