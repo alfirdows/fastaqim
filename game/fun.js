@@ -116,7 +116,7 @@ const CI=()=>COINS[(coinQ||ST.coinS||1)-1]||COINS[0];
 {const _m=menuShow;menuShow=function(h){return _m.call(this,typeof h==='string'?h.split('🪙').join(CI()):h)}}
 st.textContent+=`.ci{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.2em;flex:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2))}#hc{display:inline-flex;align-items:center;gap:5px}#hc[hidden]{display:none}`;
 /* ---------- game Settings + picture guide ---------- */
-Object.assign(T,{ok:['OK','حسنًا','Tole','Hagaag'],view:['View','زاوية الكاميرا','Mul\'ata','Muuqaal'],v_close:['Close','قريبة','Dhihoo','Dhow'],v_high:['High','عالية','Ol','Sare'],v_top:['Top','من فوق','Gubbaa','Kor'],v_classic:['Low','منخفضة','Gadi','Hoose'],set_t:['Game settings','إعدادات اللعبة','Qindaa\'ina taphaa','Dejinta ciyaarta'],snd_l:['Sound effects','المؤثرات الصوتية','Sagalee','Codadka'],vib_l:['Vibration','الاهتزاز','Raafama','Gariir'],
+Object.assign(T,{ok:['OK','حسنًا','Tole','Hagaag'],view:['View','زاوية الكاميرا','Mul\'ata','Muuqaal'],v_close:['Close','قريبة','Dhihoo','Dhow'],v_car:['In car','داخل السيارة','Konkolaataa keessa','Gaariga dhexdiisa'],v_chase:['Behind','من الخلف','Duuba','Gadaal'],v_high:['High','عالية','Ol','Sare'],v_top:['Top','من فوق','Gubbaa','Kor'],v_classic:['Low','منخفضة','Gadi','Hoose'],set_t:['Game settings','إعدادات اللعبة','Qindaa\'ina taphaa','Dejinta ciyaarta'],snd_l:['Sound effects','المؤثرات الصوتية','Sagalee','Codadka'],vib_l:['Vibration','الاهتزاز','Raafama','Gariir'],
  on:['On','تشغيل','Banaa','Shidan'],off:['Off','إيقاف','Cufaa','Damsan'],g_t:['How it works','كيف تعمل','Akkamitti hojjeta','Sida ay u shaqeyso'],
  g_coin:['1 coin = 1 dhikr (in a Dhikr run)','عملة = ذكر واحد (في سباق الذكر)','Saantima 1 = zikrii 1','1 qadaadiic = 1 dhikri'],
  g_gift:['Gift: a surprise reward','هدية: مكافأة مفاجئة','Kennaa: badhaasa dinqisiisaa','Hadiyad: abaalmarin layaab ah'],
@@ -148,7 +148,7 @@ function guideHTML(){const row=(i,t)=>`<div class="gr">${i}<span>${t}</span></di
 if(ST.vib===undefined)ST.vib=true;
 try{if(navigator.vibrate){const _v=navigator.vibrate.bind(navigator);navigator.vibrate=p=>ST.vib===false?false:_v(p)}}catch(e){}
 function setHTML(){const tg=(id,on)=>`<div class="tg"><button data-t="${id}" data-v="1" class="${on?'on':''}">${tl('on')}</button><button data-t="${id}" data-v="0" class="${on?'':'on'}">${tl('off')}</button></div>`;
- return `<h1>${tl('set_t')}</h1><div class="sr"><span>${tl('snd_l')}</span>${tg('snd',ST.snd)}</div><div class="sr"><span>${tl('vib_l')}</span>${tg('vib',ST.vib!==false)}</div><div class="sr"><span>${tl('view')}</span><div class="tg">${['close','high','top'].map(v=>`<button data-vw="${v}" class="${(ST.view||'close')===v?'on':''}">${tl('v_'+v)}</button>`).join('')}</div></div>
+ return `<h1>${tl('set_t')}</h1><div class="sr"><span>${tl('snd_l')}</span>${tg('snd',ST.snd)}</div><div class="sr"><span>${tl('vib_l')}</span>${tg('vib',ST.vib!==false)}</div><div class="sr"><span>${tl('view')}</span><div class="tg">${['car','chase','high'].map(v=>`<button data-vw="${v}" class="${(ST.view||'chase')===v?'on':''}">${tl('v_'+v)}</button>`).join('')}</div></div>
  <button class="sec" id="sGd">${tl('g_t')}</button><button class="go" id="sOk">${tl('ok')}</button>`}
 function sheet(html){if(state==='play')pause();const ctx=state==='pause'&&G?'pause':state;menuShow(html);
  return ()=>{if(ctx==='pause'){state='play';pause()}else if(ctx==='menu')showMenu();else menuHide()}}
