@@ -5,7 +5,7 @@ const ENGINE=process.env.ENGINE||'webkit',ROOT=process.env.ROOT||path.resolve(__
 const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg'};
 const DEVS=[['iPhone SE',pw.devices['iPhone SE']],['iPhone 13',pw.devices['iPhone 13']],['iPad Pro 11',pw.devices['iPad Pro 11']],['iPad Pro 11 landscape',pw.devices['iPad Pro 11 landscape']],['Desktop 1440',{viewport:{width:1440,height:900}}]];
 const LANGS=(process.env.LANGS||'en,ar,om,so').split(',');
-const SCREENS=['#home','#tools','?x=tool-water#home','?x=tool-money#home','?x=newlist#home','?x=path#home','?x=salah#home','#quran','#index','#dhikr','?z=morning#dhikr','?x=tasbih#dhikr','#todo','#more','#notif','#cal','#read','#stars','#qibla'];
+const SCREENS=['#home','#tools','?x=tool-water#home','?x=tool-money#home','?x=newlist#home','?x=path#home','?x=salah#home','#quran','#index','#dhikr','?z=morning#dhikr','?x=tasbih#dhikr','?tbx=tap#dhikr','?tbs=1&tbx=beads#dhikr','?fri=1#dhikr','#todo','#more','#notif','#cal','#read','#stars','#qibla'];
 fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await pw[ENGINE].launch();let bad=0,total=0;
  for(const [dn,dev] of DEVS){const isMobile=ENGINE!=='firefox'?dev.isMobile:undefined;const c=await b.newContext({...dev,isMobile,deviceScaleFactor:1});
@@ -15,7 +15,7 @@ fs.mkdirSync(OUT,{recursive:true});
   for(const L of LANGS)for(const sc of SCREENS){total++;errs=[];const [q,h]=sc.includes('#')?sc.split('#'):[sc,''];const qs=(q.startsWith('?')?q.slice(1)+'&':'')+'lang='+L;
    await p.goto('http://fq.test/next/v6/?'+qs+'&n='+total+'#'+(h||'home'));await p.waitForTimeout(700);
    const r=await p.evaluate(()=>{const W=document.documentElement.clientWidth,o=[],cut=[];
-    const root=[...document.querySelectorAll('.scr.on, #sh.on, .tab, .zr.on')];
+    const root=[...document.querySelectorAll('.scr.on, #sh.on, .tab, .zr.on, .tbx.on')];
     root.forEach(R=>R.querySelectorAll('*').forEach(e=>{const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')return;const rc=e.getBoundingClientRect();if(!rc.width||!rc.height)return;
      const clipped=()=>{for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement){const s=getComputedStyle(a);if(/(hidden|auto|scroll|clip)/.test(s.overflowX)){const ar=a.getBoundingClientRect();return ar.right<=W+1&&ar.left>=-1}}return false};
      if(cs.position!=='fixed'&&(rc.right>W+1||rc.left<-1)&&!clipped())o.push((e.id?'#'+e.id:e.tagName.toLowerCase()+'.'+[...e.classList].join('.'))+'['+Math.round(rc.left)+','+Math.round(rc.right)+']');
