@@ -99,7 +99,7 @@ function catchGame(){const dk=M.mode==='dhikr',z=DZ[ST.dz||0],tg=ST.tgt||33;
   if(!dk)M.coins=Math.round(M.score/4);M.raf=requestAnimationFrame(frame)}
  M.raf=requestAnimationFrame(frame)}
 /* ---------- Memory Match ---------- */
-function matchGame(lv){lv=lv||1;const ICONS=['🌙','⭐','🕌','📖','🧭','💎','🌴','🏮','🍉','🎁','🌿','☀️'];const pairs=lv===1?6:lv===2?8:10,cols=lv===1?3:4;
+function matchGame(lv){lv=lv||1;const ICONS=(window.MINI&&MINI.icons&&MINI.icons())||['🌙','⭐','🕌','📖','🧭','💎','🌴','🏮','🍉','🎁','🌿','☀️'];const pairs=lv===1?6:lv===2?8:10,cols=lv===1?3:4;
  const d=shell(`<div style="text-align:center;font:800 14px Inter,system-ui;opacity:.85;margin-top:2px">${tt('mi_lvl')} ${lv} · ${tt('mi_moves')}: <b id="mMv">0</b></div>`);d.insertAdjacentHTML('beforeend','<div class="board"><div class="mm" id="mG"></div></div>');hintBox(d,'mi_hint_m');
  const deck=ICONS.slice(0,pairs).flatMap(i=>[i,i]).sort(()=>Math.random()-.5),G0=$('mG');G0.style.gridTemplateColumns=`repeat(${cols},1fr)`;G0.style.width=`min(100%,${cols*104}px)`;
  G0.innerHTML=deck.map((ic,i)=>`<div class="mc" data-i="${i}"><div><b></b><u>${ic}</u></div></div>`).join('');let open=[],moves=0,found=0,lock=false,last0=performance.now();
