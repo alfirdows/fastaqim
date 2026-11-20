@@ -618,7 +618,7 @@ html body .nowc[data-k]::after{display:none!important}
 .hbt{flex:1;border:0;background:none;padding:8px 0;text-align:start;font:inherit;color:var(--ink)}.hbt b{display:block;font-size:15.5px}.hbt small{color:var(--sub);font-size:13px}
 .tlh2{font-size:12px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--goldD);margin:8px 2px 8px}
 .empty2{text-align:center;color:var(--sub);padding:34px 20px}.empty2 .ti2{color:var(--gold);margin-bottom:8px}.empty2 p{margin:0;font-size:15px;line-height:1.5}
-.cnt{text-align:center;padding-top:8px}
+.tcnt{text-align:center;padding-top:8px}
 .cring{position:relative;width:200px;height:200px;margin:6px auto 18px}.cring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .cring .rb{fill:none;stroke:var(--line);stroke-width:12}.cring .rf{fill:none;stroke:var(--gold);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .4s}
 .cring span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.cring b{font-size:52px;font-weight:750;line-height:1}.cring small{font-size:13.5px;color:var(--sub);margin-top:4px;max-width:130px}
@@ -719,6 +719,42 @@ html.v-c .stp,html.v-c .lgb,html.v-c .fh .ib{border:0!important;box-shadow:0 1px
  .tgrid{grid-template-columns:repeat(4,1fr)}
  .zr{left:232px!important}
 }
+
+/* v6: location prompt on the salah card, account row, sign-in form, language list */
+.locb{display:flex;align-items:center;gap:10px;width:100%;margin:-4px 0 12px;padding:10px 12px;border:1px solid rgba(184,149,90,.45);border-radius:14px;background:rgba(255,255,255,.72);text-align:start;color:var(--ink);font:inherit}
+.locb>i{font-size:20px;color:#86672e;flex:none}.locb span{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.locb b{font-size:13.5px}.locb small{font-size:12.5px;color:var(--sub);line-height:1.35}
+.locb em{font-style:normal;flex:none;font-size:13px;font-weight:700;color:#fff;background:var(--acc);border-radius:999px;padding:7px 11px;white-space:nowrap}
+.acct .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.acct .tx b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.acct .tx small{font-size:13px;color:var(--sub);line-height:1.35}
+.arow{display:flex;align-items:center;gap:12px;padding:14px}.arow>i{font-size:30px;color:var(--acc)}.arow span{display:flex;flex-direction:column;min-width:0}.arow b{overflow-wrap:anywhere}.arow small{color:var(--sub);font-size:13px}
+.fqa{display:flex;flex-direction:column;gap:12px;padding:2px 2px 8px}.fqa-g{min-height:44px;display:flex;justify-content:center}
+.fqa-or{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:2px 0}.fqa-or::before,.fqa-or::after{content:"";flex:1;height:1px;background:var(--line)}
+.fqa-l{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--sub)}
+.fqa-l input{font:inherit;font-size:16px;font-weight:400;color:var(--ink);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;min-height:46px}
+.fqa-l input:focus{outline:2px solid rgba(79,138,116,.35);border-color:var(--acc)}
+.fqa-b{display:flex;gap:10px}.fqa-b button{flex:1;min-height:46px;border-radius:999px;font:inherit;font-weight:700;font-size:15px}
+.fqa-in{background:linear-gradient(180deg,#5a9480,#4f8a74);color:#fff;border:0;box-shadow:inset 0 0 0 1px rgba(210,180,122,.75)}.fqa-up{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.fqa-f{align-self:center;background:none;border:0;color:var(--acc);font:inherit;font-size:14px;font-weight:600;padding:6px}.fqa-m{min-height:1.2em;text-align:center;color:var(--sub);font-size:14px;margin:0}
+.lgx{max-height:46vh;overflow-y:auto}
+html[dir=rtl] .locb,html[dir=rtl] .acct{text-align:right}
+#gtEl,.goog-te-banner-frame,.skiptranslate>iframe,#goog-gt-tt,.goog-te-balloon-frame,.goog-tooltip{display:none!important}body{top:0!important}.goog-text-highlight{background:none!important;box-shadow:none!important}
+/* longer words (Oromo, Somali, other languages): pinned tools stack the icon above the name on phones so nothing is cut */
+@media (max-width:699px){html.lx-long .pchip{flex-direction:column;align-items:flex-start;gap:4px;padding:9px 10px}html.lx-long .pchip span{width:100%}html.lx-long .pchip.add{flex-direction:row;align-items:center}}
+.stp .sk i{font-size:14px;margin-inline-end:3px;vertical-align:-2px}
+/* small-screen polish (iPhone SE and long words) */
+.qa input{min-width:0}.qa button{flex:none;color:#fff}
+.any{grid-template-columns:repeat(2,minmax(0,1fr))}.any button,.any button>span{min-width:0}.any b,.any small{overflow-wrap:anywhere}
+html.lx-long .pchip b{white-space:normal;overflow-wrap:anywhere;line-height:1.2}html.lx-long .pchip small{white-space:normal}
+@media (max-width:360px){
+ .fh .wm{font-size:0;letter-spacing:0;flex:1}.fh{gap:5px}.stp,.lgb{padding:0 8px}
+ .pchip{flex-direction:column;align-items:flex-start;gap:4px;padding:8px}.pchip span{width:100%}.pchip b{white-space:normal;overflow-wrap:anywhere;line-height:1.2}.pchip small{white-space:normal}.pchip.add{flex-direction:row;align-items:center;flex-basis:34px}
+}
+.tab{grid-template-columns:repeat(5,minmax(0,1fr))}.tab a{min-width:0;white-space:nowrap}
+@media (max-width:360px){.tab a{font-size:10.5px;letter-spacing:-.01em}}
+.fh .wm{white-space:nowrap;display:flex;align-items:center;gap:8px;flex:1 0 auto}.fh>button{flex:none}
+@media (max-width:360px){.pchip small{font-size:10.5px;text-overflow:clip}.pchip{padding:8px 7px}}
+.fh .wm.tight{font-size:0!important;letter-spacing:0!important;flex:1 1 0;min-width:28px;overflow:hidden}
+.locb{flex-wrap:wrap}.locb span{flex:1 1 150px}.locb em{margin-inline-start:auto}
+html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;gap:8px}.any b,.any small{overflow-wrap:break-word}
 </style>
 </head>
 <body>
@@ -855,15 +891,189 @@ html.v-c .stp,html.v-c .lgb,html.v-c .fh .ib{border:0!important;box-shadow:0 1px
 <div class="sh" id="sh" role="dialog" aria-modal="true"></div>
 <div class="toast" id="toast"></div>
 
+<script src="fq-auth.js"></script>
 <script>
 const DATA={"Q":{"2:255":{"a":"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٌ وَلَا نَوۡمٌۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٍ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ","en":"Allāh - there is no deity except Him, the Ever-Living, the Self-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursī extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great."},"2:285":{"a":"ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٍ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ","en":"The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\""},"2:286":{"a":"لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرًا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ","en":"Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\""},"94:5":{"a":"فَإِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا","en":"For indeed, with hardship [will be] ease [i.e., relief]."},"94:6":{"a":"إِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا","en":"Indeed, with hardship [will be] ease."},"94:7":{"a":"فَإِذَا فَرَغۡتَ فَٱنصَبۡ","en":"So when you have finished [your duties], then stand up [for worship]."},"94:8":{"a":"وَإِلَىٰ رَبِّكَ فَٱرۡغَب","en":"And to your Lord direct [your] longing."},"112:1":{"a":"قُلۡ هُوَ ٱللَّهُ أَحَدٌ","en":"Say, \"He is Allāh, [who is] One,"},"112:2":{"a":"ٱللَّهُ ٱلصَّمَدُ","en":"Allāh, the Eternal Refuge."},"112:3":{"a":"لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ","en":"He neither begets nor is born,"},"112:4":{"a":"وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ","en":"Nor is there to Him any equivalent.\""},"113:1":{"a":"قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ","en":"Say, \"I seek refuge in the Lord of daybreak"},"113:2":{"a":"مِن شَرِّ مَا خَلَقَ","en":"From the evil of that which He created"},"113:3":{"a":"وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ","en":"And from the evil of darkness when it settles"},"113:4":{"a":"وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ","en":"And from the evil of the blowers in knots"},"113:5":{"a":"وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ","en":"And from the evil of an envier when he envies.\""},"114:1":{"a":"قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ","en":"Say, \"I seek refuge in the Lord of mankind,"},"114:2":{"a":"مَلِكِ ٱلنَّاسِ","en":"The Sovereign of mankind,"},"114:3":{"a":"إِلَٰهِ ٱلنَّاسِ","en":"The God of mankind,"},"114:4":{"a":"مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ","en":"From the evil of the retreating whisperer -"},"114:5":{"a":"ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ","en":"Who whispers [evil] into the breasts of mankind -"},"114:6":{"a":"مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ","en":"From among the jinn and mankind.\""},"13:28":{"a":"ٱلَّذِينَ ءَامَنُواْ وَتَطۡمَئِنُّ قُلُوبُهُم بِذِكۡرِ ٱللَّهِۗ أَلَا بِذِكۡرِ ٱللَّهِ تَطۡمَئِنُّ ٱلۡقُلُوبُ","en":"Those who have believed and whose hearts are assured by the remembrance of Allāh. Unquestionably, by the remembrance of Allāh hearts are assured."}},"S":[["Al-Fatihah","الفاتحة",7],["Al-Baqarah","البقرة",286],["Ali 'Imran","آل عمران",200],["An-Nisa","النساء",176],["Al-Ma'idah","المائدة",120],["Al-An'am","الأنعام",165],["Al-A'raf","الأعراف",206],["Al-Anfal","الأنفال",75],["At-Tawbah","التوبة",129],["Yunus","يونس",109],["Hud","هود",123],["Yusuf","يوسف",111],["Ar-Ra'd","الرعد",43],["Ibrahim","إبراهيم",52],["Al-Hijr","الحجر",99],["An-Nahl","النحل",128],["Al-Isra","الإسراء",111],["Al-Kahf","الكهف",110],["Maryam","مريم",98],["Ta-Ha","طه",135],["Al-Anbiya","الأنبياء",112],["Al-Hajj","الحج",78],["Al-Mu'minun","المؤمنون",118],["An-Nur","النور",64],["Al-Furqan","الفرقان",77],["Ash-Shu'ara","الشعراء",227],["An-Naml","النمل",93],["Al-Qasas","القصص",88],["Al-'Ankabut","العنكبوت",69],["Ar-Rum","الروم",60],["Luqman","لقمان",34],["As-Sajdah","السجدة",30],["Al-Ahzab","الأحزاب",73],["Saba","سبأ",54],["Fatir","فاطر",45],["Ya-Sin","يس",83],["As-Saffat","الصافات",182],["Sad","ص",88],["Az-Zumar","الزمر",75],["Ghafir","غافر",85],["Fussilat","فصلت",54],["Ash-Shura","الشورى",53],["Az-Zukhruf","الزخرف",89],["Ad-Dukhan","الدخان",59],["Al-Jathiyah","الجاثية",37],["Al-Ahqaf","الأحقاف",35],["Muhammad","محمد",38],["Al-Fath","الفتح",29],["Al-Hujurat","الحجرات",18],["Qaf","ق",45],["Adh-Dhariyat","الذاريات",60],["At-Tur","الطور",49],["An-Najm","النجم",62],["Al-Qamar","القمر",55],["Ar-Rahman","الرحمن",78],["Al-Waqi'ah","الواقعة",96],["Al-Hadid","الحديد",29],["Al-Mujadilah","المجادلة",22],["Al-Hashr","الحشر",24],["Al-Mumtahanah","الممتحنة",13],["As-Saff","الصف",14],["Al-Jumu'ah","الجمعة",11],["Al-Munafiqun","المنافقون",11],["At-Taghabun","التغابن",18],["At-Talaq","الطلاق",12],["At-Tahrim","التحريم",12],["Al-Mulk","الملك",30],["Al-Qalam","القلم",52],["Al-Haqqah","الحاقة",52],["Al-Ma'arij","المعارج",44],["Nuh","نوح",28],["Al-Jinn","الجن",28],["Al-Muzzammil","المزمل",20],["Al-Muddaththir","المدثر",56],["Al-Qiyamah","القيامة",40],["Al-Insan","الإنسان",31],["Al-Mursalat","المرسلات",50],["An-Naba","النبأ",40],["An-Nazi'at","النازعات",46],["'Abasa","عبس",42],["At-Takwir","التكوير",29],["Al-Infitar","الانفطار",19],["Al-Mutaffifin","المطففين",36],["Al-Inshiqaq","الانشقاق",25],["Al-Buruj","البروج",22],["At-Tariq","الطارق",17],["Al-A'la","الأعلى",19],["Al-Ghashiyah","الغاشية",26],["Al-Fajr","الفجر",30],["Al-Balad","البلد",20],["Ash-Shams","الشمس",15],["Al-Layl","الليل",21],["Ad-Duha","الضحى",11],["Ash-Sharh","الشرح",8],["At-Tin","التين",8],["Al-'Alaq","العلق",19],["Al-Qadr","القدر",5],["Al-Bayyinah","البينة",8],["Az-Zalzalah","الزلزلة",8],["Al-'Adiyat","العاديات",11],["Al-Qari'ah","القارعة",11],["At-Takathur","التكاثر",8],["Al-'Asr","العصر",3],["Al-Humazah","الهمزة",9],["Al-Fil","الفيل",5],["Quraysh","قريش",4],["Al-Ma'un","الماعون",7],["Al-Kawthar","الكوثر",3],["Al-Kafirun","الكافرون",6],["An-Nasr","النصر",3],["Al-Masad","المسد",5],["Al-Ikhlas","الإخلاص",4],["Al-Falaq","الفلق",5],["An-Nas","الناس",6]]};const QD=DATA.Q,SU=DATA.S;for(const k in QD)QD[k].a=QD[k].a.replace(/\u08F0/g,'\u064B').replace(/\u08F1/g,'\u064C').replace(/\u08F2/g,'\u064D');
 const P=new URLSearchParams(location.search);
-let L=P.get('lang')==='ar'||localStorage.getItem('fq5.lang')==='ar'?'ar':'en';if(P.get('lang')==='en')L='en';
-const T=(e,a)=>L==='ar'?a:e;
+/* ===== v6 languages: Afaan Oromoo + Somali word lists (Fastaqim's own), every other language by Google's free website translator ===== */
+const DICT={
+'PM':['WB','GD'],'AM':['WD','GH'],
+'Reply to the school email':['Imeelii mana barumsaa deebisi','Ka jawaab iimaylka dugsiga'],
+'Today, 4:00 PM':["Har'a, 4:00 WB",'Maanta, 4:00 GD'],
+'Buy groceries':['Nyaata bitadhu','Iibso cuntada'],
+"Read 2 pages of Qur'an":["Fuula Qur'aanaa 2 dubbisi",'Akhri 2 bog oo Quraanka ah'],
+'After Isha':["Ishaa'ii booda",'Cishe kadib'],
+'Call the clinic':['Kilinikii bilbili','Wac rugta caafimaadka'],
+'Tomorrow, 10:00 AM':['Boru, 10:00 WD','Berri, 10:00 GH'],
+'Home':['Mana','Hoyga'],"Qur'an":["Qur'aana",'Quraan'],'Dhikr':['Zikrii','Dikri'],
+'Today':["Har'a",'Maanta'],'To-do':['Hojii','Hawlo'],'More':['Dabalata','Wax kale'],
+'Coming in the full build':['Gutuu isaa keessatti ni dhufa','Waxay ku imanaysaa nooca buuxa'],
+'Ayat al-Kursi after salah':['Aayaat al-Kursii salaata booda','Aayatul Kursi salaadda kadib'],
+'Morning adhkar':['Zikrii ganamaa','Adkaarta subaxa'],'Evening adhkar':['Zikrii galgalaa','Adkaarta fiidka'],
+'Duha':['Duhaa','Duhaa'],'Witr':['Witrii','Witir'],'Before-sleep adhkar':['Zikrii hirriba dura','Adkaarta hurdada ka hor'],
+"Today's path":["Karaa har'aa",'Waddada maanta'],'5 salah':['Salaata 5','5 salaadood'],'days':['guyyaa','maalmood'],
+"Today's path complete!":["Karaan har'aa xumurame!",'Waddada maanta waa dhammaatay!'],
+'MashaAllah. Keep going.':["MaashaaAllaah. Itti fufi.",'MaashaaAllaah. Sii wad.'],
+'Close':['Cufi','Xir'],'Next':['Itti aanu','Xiga'],'left':['hafe','haray'],
+'All prayed salah are marked':['Salaanni sagadamte hundi galmaa\'eera','Salaadaha la tukaday dhammaan waa la calaamadeeyay'],
+'The deed most beloved to Allah: salah at its time.':["Hojiin Rabbiin biratti caalaa jaallatamu: salaata yeroo ishee keessatti.",'Camalka Alle ugu jecel yahay: salaadda waqtigeeda.'],
+'Bukhari 527':['Bukhaarii 527','Bukhaari 527'],'Now':['Amma','Hadda'],
+'On time':['Yeroon','Waqtigeeda'],'Made up':['Booda baafame','La gudday'],'Excused':['Dhimma qaba','Cudurdaar'],
+'Tap to mark':['Galmeessuuf tuqi','Taabo si aad u calaamadeyso'],'Done':['Xumurame','La dhammeeyay'],
+'Anytime':['Yeroo kamiyyuu','Waqti kasta'],'Not time yet':["Yeroon isaa hin geenye",'Waqtigii ma gaarin'],
+'5 min':['Daq 5','5 daq'],'15 min':['Daq 15','15 daq'],'1 hr+':["Sa'aatii 1+",'1 saac+'],'All marked':['Hundi galmaa\'e','Dhammaan waa la calaamadeeyay'],
+'Ayat al-Kursi':['Aayaat al-Kursii','Aayatul Kursi'],
+'Whoever recites it after every obligatory salah, nothing stands between him and Paradise except death.':['Namni salaata dirqamaa hunda booda ishee qara\'u, isaa fi Jannata gidduu du\'a malee wanti dhorku hin jiru.','Qofkii akhriya salaad kasta oo waajib ah kadib, isaga iyo Jannada waxaan dhimasho ahayn waxba u dhexeyn.'],
+"an-Nasa'i, al-Kubra 9848 · sahih":["an-Nasaa'ii, al-Kubraa 9848 · saahih","an-Nasaa'i, al-Kubraa 9848 · saxiix"],
+'Tasbih 33 · 33 · 34':['Tasbiiha 33 · 33 · 34','Tasbiix 33 · 33 · 34'],
+'SubhanAllah 33, Alhamdulillah 33, Allahu akbar 34.':['SubhaanAllaah 33, Alhamdulillaah 33, Allaahu akbar 34.','SubxaanAllaah 33, Alxamdulillaah 33, Allaahu akbar 34.'],
+'Muslim 597':['Muslim 597','Muslim 597'],'Adhkar after salah':['Zikrii salaata booda','Adkaarta salaadda kadib'],
+'Astaghfirullah ×3, then Allahumma anta as-salam…':['Astaghfirullaah ×3, achiin Allaahumma anta as-salaam…','Astaqfirullaah ×3, kadib Allaahumma anta as-salaam…'],
+'Muslim 591':['Muslim 591','Muslim 591'],'After salah':['Salaata booda','Salaadda kadib'],
+'How did you pray it?':['Akkamitti sagadde?','Sidee u tukatay?'],'Prayed in its time':['Yeroo ishee keessatti sagadame','Waqtigeeda ayaa la tukaday'],
+'Prayed after its time':['Yeroo ishee booda sagadame','Waqtigeeda kadib ayaa la tukaday'],'Clear':['Haqi','Tirtir'],
+'Ayah of the day':["Aayaa guyyaa har'aa",'Aayadda maanta'],'Dhikr of the day':["Zikrii guyyaa har'aa",'Dikriga maanta'],
+'There is no might nor power except with Allah. A treasure from the treasures of Paradise.':["Humnis jijjiiramnis Rabbiin malee hin jiru. Qabeenya Jannataa keessaa tokko.",'Xoog iyo awood midna ma jiro Alle mooyee. Waa khasnad ka mid ah khasnadaha Jannada.'],
+'Bukhari 6384, Muslim 2704':['Bukhaarii 6384, Muslim 2704','Bukhaari 6384, Muslim 2704'],'Sunnah of the day':["Sunnaa guyyaa har'aa",'Sunnada maanta'],
+'The two rak\'ahs before Fajr are better than this world and everything in it.':["Rak'aan lamaan Fajrii dura addunyaa fi waan ishee keessa jiru hunda caala.",'Labada rakcadood ee Fajarka ka horreeya ayaa ka khayr badan adduunka iyo waxa ku jira.'],
+'Muslim 725':['Muslim 725','Muslim 725'],'Listen':['Dhaggeeffadhu','Dhageyso'],'Another':['Kan biraa','Mid kale'],'Copy':['Garagalchi','Koobiyee'],'Share':['Qooddi','La wadaag'],
+'Done today':["Har'a xumurame",'Maanta waa la dhammeeyay'],'Copied':['Garagalfameera','Waa la koobiyeeyay'],'Could not copy':['Garagalchuun hin danda\'amne','Lama koobiyeyn karin'],
+'Ayah of the day read':["Aayaa guyyaa dubbiste",'Aayadda maanta waad akhrisay'],' AH':[' H',' H'],
+'Tasbih':['Tasbiiha','Tasbiix'],'Sleep adhkar':['Zikrii hirribaa','Adkaarta hurdada'],'Qibla':['Qiblaa','Qibla'],'Calendar':['Dabtara guyyaa','Kalandar'],
+'Surahs':['Suuraawwan','Suuradaha'],'Khatmah':['Khatmii','Khatmi'],'Stars':['Urjiilee','Xiddigo'],'Reminders':['Yaadachiiftuu','Xasuusin'],'Add':['Dabaladhu','Ku dar'],
+'Salah & day':['Salaataa fi guyyaa','Salaadda iyo maalinta'],'Tasks & rewards':['Hojiiwwanii fi badhaasa','Hawlaha iyo abaalmarinta'],'Shortcuts':['Karaa gabaabaa','Gaaba-wadayaal'],
+'Full · tap one to remove it':['Guutameera · baasuuf tokko tuqi','Waa buuxaa · mid taabo si aad uga saarto'],'Full · remove one first':['Guutameera · dura tokko baasi','Waa buuxaa · marka hore mid ka saar'],
+'Task done':['Hojiin xumurame','Hawshii waa dhammaatay'],'All done. Add one in To-do.':['Hundi xumurame. Hojii keessatti tokko dabali.','Dhammaan waa dhammaadeen. Mid ku dar Hawlaha.'],
+'Read, listen, khatmah':['Dubbisi, dhaggeeffadhu, khatmii','Akhri, dhageyso, khatmi'],'Salah':['Salaata','Salaad'],'Times, Qibla, reminders':['Yeroowwan, Qiblaa, yaadachiiftuu','Waqtiyada, Qibla, xasuusin'],
+"Dhikr & du'a":["Zikrii fi du'aa",'Dikri iyo duco'],'Morning, evening, sleep':['Ganama, galgala, hirriba','Subax, fiid, hurdo'],'Tasks & focus':['Hojiiwwanii fi xiyyeeffannoo','Hawlaha iyo diirad-saarka'],
+'To-do, plan your day':['Hojii, guyyaa kee karoorsi','Hawlo, qorshee maalintaada'],'Stars & game':['Urjiilee fi tapha','Xiddigo iyo ciyaar'],'Rewards for real work':['Badhaasa hojii dhugaaf','Abaalmarin shaqo dhab ah'],'Hijri dates, fasts':['Guyyaawwan Hijrii, soomana','Taariikhda Hijriga, soonka'],
+'Small deeds, done often, are the most beloved to Allah. <a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">Bukhari 6464</a>':['Hojiin xiqqoon yeroo hunda hojjetamu Rabbiin biratti caalaa jaallatama. <a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">Bukhaarii 6464</a>','Camalka yar ee joogtada ah ayaa Alle ugu jecel. <a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">Bukhaari 6464</a>'],
+'One step today is still a step forward.':["Tarkaanfiin har'aa tokko illee gara fuulduraati.",'Hal tallaabo maanta weli waa horumar.'],
+'You showed up. That counts.':['Dhufteetta. Sun ni lakkaa\'ama.','Waad timid. Taasi waa tirsan tahay.'],'Progress, not perfection.':['Guddina, guutummaa miti.','Horumar, ma aha kaamilnimo.'],
+'Every salah marked is a win.':['Salaanni galmaa\'e hundi milkaa\'ina.','Salaad kasta oo la calaamadeeyo waa guul.'],'Begin with Bismillah and keep going.':['Bismillaahiin jalqabiitii itti fufi.','Ku bilow Bismillaah oo sii wad.'],
+'Good morning':['Akkam bulte','Subax wanaagsan'],'Good afternoon':['Akkam ooltee','Galab wanaagsan'],'Good evening':['Akkam galgalte','Fiid wanaagsan'],
+'My khatmah':['Khatmii koo','Khatmigayga'],'Start a new khatmah':['Khatmii haaraa jalqabi','Bilow khatmi cusub'],'Continue reading':['Dubbisuu itti fufi','Sii wad akhriska'],
+'Al-Baqarah · Ayah 255':['Al-Baqaraa · Aayaa 255','Al-Baqara · Aayadda 255'],'Open':['Bani','Fur'],'Ayah 255 · Page 42 · Juz 3':['Aayaa 255 · Fuula 42 · Juz 3','Aayadda 255 · Bogga 42 · Juz 3'],
+'Al-Baqarah':['Al-Baqaraa','Al-Baqara'],'juz':['juz','juz'],
+"Qur'an, Surah Ar-Ra'd 13:28 ↗":["Qur'aana, Suuraa Ar-Ra'd 13:28 ↗","Quraan, Suuradda Ar-Racd 13:28 ↗"],"Ar-Ra'd 13:28":["Ar-Ra'd 13:28","Ar-Racd 13:28"],
+"Ar-Ra'd 13:28 · tap Done for a star":["Ar-Ra'd 13:28 · urjii argachuuf Xumurame tuqi","Ar-Racd 13:28 · taabo La dhammeeyay si aad xiddig u hesho"],
+'Read today':["Har'a dubbisi",'Maanta akhri'],'30 steps, one juz each. Pick your own pace.':["Tarkaanfii 30, tokkoon tokkoon isaanii juz tokko. Saffisa kee filadhu.",'30 tallaabo, mid kasta hal juz. Dooro xawaarahaaga.'],
+'Start a khatmah':['Khatmii jalqabi','Bilow khatmi'],'Already marked today':["Har'a dursee galmaa'eera",'Maanta horay ayaa loo calaamadeeyay'],"Today's khatmah portion":["Qooda khatmii har'aa",'Qaybta khatmiga maanta'],
+'New khatmah':['Khatmii haaraa','Khatmi cusub'],'Name (optional)':['Maqaa (filannoo)','Magac (ikhtiyaari)'],'How to split it':['Akkamitti qooduun','Sida loo qaybinayo'],
+'Even pages a day':['Fuula walqixa guyyaatti','Bogag siman maalintii'],'The 604 pages split evenly over the days you choose':["Fuulli 604 guyyoota ati filattu irratti walqixxeessee qoodama",'604-ta bog si siman ayaa loogu qaybiyaa maalmaha aad doorato'],
+'One juz a day':['Guyyaatti juz tokko','Maalintii hal juz'],'30 days, one juz each day':['Guyyaa 30, guyyaa guyyaan juz tokko','30 maalmood, maalin kasta hal juz'],
+'In one week':['Torban tokko keessatti','Hal toddobaad gudihiis'],'About 87 pages a day':['Guyyaatti fuula 87 naannoo','Qiyaastii 87 bog maalintii'],'Days':['Guyyoota','Maalmo'],
+'Start khatmah':['Khatmii jalqabi','Bilow khatmiga'],'Khatmah started':['Khatmiin jalqabameera','Khatmigii waa bilaabmay'],'Al-Baqarah 255':['Al-Baqaraa 255','Al-Baqara 255'],
+'Search by name or number':['Maqaa ykn lakkoofsaan barbaadi','Ku raadi magac ama lambar'],'All':['Hunda','Dhammaan'],'No surah found':['Suuraan hin argamne','Suurad lama helin'],'Before sleep':['Hirriba dura','Hurdada ka hor'],
+'A guardian from Allah stays with you, and no devil comes near you until morning.':['Eegduun Rabbii biraa si wajjin tura, sheyxaanni tokkollee hanga ganamaatti sitti hin dhiyaatu.','Ilaaliye xagga Alle ah ayaa kula jira, shaydaanna kuuma soo dhowaanayo ilaa subaxa.'],
+'Whoever recites the last two ayat of Al-Baqarah at night, they will suffice him.':["Namni aayaa lamaan dhumaa Al-Baqaraa halkan qara'e, isaaniif ni ga'u.",'Qofkii habeenkii akhriya labada aayadood ee ugu dambeeya Al-Baqara, way ku filnaanayaan.'],
+'Al-Ikhlas, Al-Falaq and An-Nas: blow lightly into your cupped palms, recite them, then wipe over as much of your body as you can, starting with your head, face and front. Do this three times.':["Al-Ikhlaas, Al-Falaq fi An-Naas: barruu harka kee walitti qabatteetti salphaatti afuufi, isaan qara'i, achiin hanga dandeessu qaama kee haxaawi, mataa, fuula fi fuuldura irraa jalqabi. Kana yeroo sadii godhi.",'Al-Ikhlaas, Al-Falaq iyo An-Naas: si fudud ugu af-buuf calaacalahaaga isku duuban, akhri, kadib marsii jidhkaaga intii aad kari karto, ka bilow madaxa, wejiga iyo xagga hore. Saddex jeer samee.'],
+'In Your name, my Lord, I lay down my side, and by You I raise it. If You take my soul, have mercy on it; and if You send it back, protect it as You protect Your righteous servants.':["Yaa Rabbii koo, maqaa keetiin cinaacha koo kaa'e, siinan ol kaasa. Lubbuu koo yoo qabatte ishee rahmadi; yoo deebifte, akkuma gabroota kee gaggaarii eegdu ishee eegi.",'Rabbiyow, magacaaga ayaan ku jiifsaday, adigaana igu kicinaya. Haddaad naftayda qaado u naxariiso; haddaad soo celiso, u ilaali sida aad u ilaaliso addoomadaada wanaagsan.'],
+'In Your name, O Allah, I die and I live.':["Yaa Allaah, maqaa keetiin du'a, nan jiraadha.",'Allahayow, magacaaga ayaan ku dhintaa kuna noolahay.'],
+'Glory be to Allah (33 times)':['Rabbiin qulqulluu dha (yeroo 33)','Alle waa nasahan yahay (33 jeer)'],'All praise is for Allah (33 times)':['Galanni hundi kan Rabbiiti (yeroo 33)','Mahad oo dhan Alle ayay u sugnaatay (33 jeer)'],
+'Allah is the Greatest (34 times). Better for you than a servant.':['Rabbiin hunda caala (yeroo 34). Hojjetaa caalaa siif gaarii dha.','Alle ayaa ka weyn (34 jeer). Waa kuu khayr badan yahay adeege.'],
+'Done today ✓':["Har'a xumurame ✓",'Maanta waa la dhammeeyay ✓'],'Source: ':['Madda: ','Isha: '],'tap':['tuqi','taabo'],'Text size ':['Guddina barreeffamaa ','Cabbirka qoraalka '],
+'Moves to the next dhikr by itself':['Ofuma gara zikrii itti aanuutti darba','Iskiis ayuu ugu gudbaa dikriga xiga'],'Auto-next off':['Ofumaan darbuun cufameera','Gudbinta tooska ah waa dansan tahay'],'Text shown':['Barreeffama mul\'atu','Qoraalka la muujiyo'],
+'Arabic':['Arabiffaa','Carabi'],'Transliteration':['Akkaataa dubbisaa','Dhawaaqa'],'Meaning':['Hiika','Macnaha'],'All in this set':['Hunduu garee kana keessaa','Dhammaan kooxdan'],
+'Unfinished only':['Kan hin xumuramne qofa','Kuwa aan dhammaan oo keliya'],'All finished today':["Hundi har'a xumurame",'Dhammaan maanta waa dhammaadeen'],'All done. Sleep well.':['Hundi xumurame. Nagaan rafi.','Dhammaan waa dhammaadeen. Si nabad ah u seexo.'],
+'complete':['xumurame','dhammaatay'],'Tap the circle to count':["Lakkaa'uuf geengoo tuqi",'Taabo goobada si aad u tiriso'],'Reset to 0':['Gara 0 deebisi','Ku celi 0'],'Counter reset to 0':["Lakkaa'aan gara 0 deebi'e",'Tiriyaha waxaa lagu celiyay 0'],
+'After Fajr':['Fajrii booda','Fajarka kadib'],'After each salah':['Salaata hunda booda','Salaad kasta kadib'],'After Asr':['Asrii booda','Casarka kadib'],
+'Energy right now':['Humna amma qabdu','Tamarta hadda'],'Low':['Gadi aanaa','Hoose'],'Okay':['Tole','Hagaag'],'High':['Ol aanaa','Sare'],
+'Add a task… e.g. "Call the clinic 3pm"':['Hojii dabali… fkn. "Kilinikii bilbili 3 WB"','Ku dar hawl… tusaale "Wac rugta 3 GD"'],
+'Quick ones first.':['Kan saffisaa dura.','Kuwa degdegga ah marka hore.'],'Big ones first, while you have the energy.':['Kan gurguddaa dura, osoo humna qabduu.','Kuwa waaweyn marka hore, inta aad tamar leedahay.'],
+'Nothing left. Well done!':['Wanti hafe hin jiru. Baay\'ee gaarii!','Waxba ma harin. Mahadsanid, si fiican!'],'Finished tasks show here':['Hojiiwwan xumuraman asitti mul\'atu','Hawlaha la dhammeeyay halkan ayay ka muuqdaan'],
+'Salah this week':['Salaata torban kanaa','Salaadda toddobaadkan'],'on':['banaa','shidan'],'Language':['Afaan','Luqad'],
+'Fajr':['Fajrii','Fajar'],'Dhuhr':['Zuhrii','Duhur'],'Asr':['Asrii','Casar'],'Maghrib':['Magribii','Maqrib'],'Isha':["Ishaa'ii",'Cishe'],'Adhkar':['Azkaara','Adkaar'],
+'15 min after Isha':["Ishaa'ii booda daq 15",'15 daq Cishe kadib'],'Khatmah portion':['Qooda khatmii','Qaybta khatmiga'],'Tasks':['Hojiiwwan','Hawlo'],'When a task is due':['Yeroo hojiin ga\'u','Marka hawsha waqtigeedu yimaado'],
+'Plan my day':['Guyyaa koo karoorsi','Qorshee maalintayda'],'8:00 AM':['8:00 WD','8:00 GH'],'Sunnah fasts':['Soomana sunnaa','Soonka sunnada'],'Mondays & Thursdays':['Wiixataa fi Kamisa','Isniinta iyo Khamiista'],
+'The evening before':['Galgala dura','Fiidka ka horreeya'],'White days (13–15)':['Guyyoota adii (13–15)','Maalmaha cad (13–15)'],'All off':['Hundi cufameera','Dhammaan waa dansan yihiin'],
+'Islamic New Year':['Waggaa Haaraa Islaamaa','Sannadka Cusub ee Islaamka'],"'Ashura fast":["Soomana 'Aashuuraa",'Soonka Caashuuraa'],'Ramadan begins':['Ramadaan jalqaba','Ramadaan ayaa bilaabmaya'],'Eid al-Fitr':['Iid al-Fitrii','Ciid al-Fidri'],
+"Day of 'Arafah fast":["Soomana guyyaa 'Arafaa",'Soonka maalinta Carafo'],'Eid al-Adha':['Iid al-Adhaa','Ciid al-Adxa'],'White day: a Sunnah fast':['Guyyaa adii: soomana sunnaa','Maalin cad: soon sunno ah'],
+"Jumu'ah: Surat al-Kahf, salawat, du'a":["Jum'aa: Suuraa al-Kahf, salawaata, du'aa",'Jimce: Suuradda al-Kahf, salawaad, duco'],'White days fast (13–15)':['Soomana guyyoota adii (13–15)','Soonka maalmaha cad (13–15)'],
+'Nothing special left this month.':['Ji\'a kana wanti addaa hafe hin jiru.','Bishan wax gaar ah kama harin.'],'Could not play. Check your internet.':['Taphachiisuun hin danda\'amne. Interneetii kee ilaali.','Lama shidi karin. Hubi internetkaaga.'],
+'Saad al-Ghamdi':["Sa'ad al-Ghaamidii",'Sacad al-Qaamidi'],'All made up':['Hundi booda baafameera','Dhammaan waa la gudday'],'No budget':['Baajata hin qabu','Miisaaniyad maleh'],'None yet':['Ammaaf hin jiru','Weli midna'],'Empty':['Duwwaa','Madhan'],
+'Undo':['Deebisi','Ka noqo'],'Tools':['Meeshaalee','Qalabka'],'Where you stopped':['Bakka itti dhaabatte','Meeshii aad ku joogsatay'],'Surah Al-Baqarah':['Suuraa Al-Baqaraa','Suuradda Al-Baqara'],'Ayah 255 · Juz 3':['Aayaa 255 · Juz 3','Aayadda 255 · Juz 3'],
+'Continue':['Itti fufi','Sii wad'],'Remove from Home':['Mana irraa baasi','Ka saar Hoyga'],'Add to Home':['Manatti dabali','Ku dar Hoyga'],'Tap the pin to put a tool on Home (up to 3).':['Meeshaa Manatti kaa\'uuf qabduu tuqi (hanga 3).','Taabo biinka si aad qalab ugu dhigto Hoyga (ilaa 3).'],
+'Your trackers':['Hordoftoota kee','Raad-raacayaashaada'],'Everyday tools':['Meeshaalee guyyaa guyyaa','Qalabka maalin kasta'],'My lists':['Tarreewwan koo','Liisaskayga'],'New list':['Tarree haaraa','Liis cusub'],
+'Home holds 3. Unpin one first.':['Manni 3 qofa qaba. Dura tokko baasi.','Hoygu wuxuu qaadaa 3. Marka hore mid ka saar.'],'Added to Home':['Manatti dabalameera','Waxaa lagu daray Hoyga'],'Cancel':['Dhiisi','Jooji'],'Edit list':['Tarree gulaali','Wax ka beddel liiska'],'Save':["Olkaa'i",'Kaydi'],
+'Create':['Uumi','Samee'],'Name':['Maqaa','Magac'],'e.g. Gift ideas':['fkn. Yaada kennaa','tusaale Fikradaha hadiyadda'],'Icon':['Mallattoo','Astaan'],'A list with notes':['Tarree yaadannoo qabu','Liis qoraallo leh'],
+'Add, edit and delete items. Rename or delete the list any time, and pin it to Home.':['Wantoota dabali, gulaali fi haqi. Yeroo kamiyyuu tarree maqaa jijjiiri ykn haqi, Manattis qabadhu.','Ku dar, wax ka beddel oo tirtir walxaha. Liiska magaca u beddel ama tirtir waqti kasta, oo ku dhaji Hoyga.'],
+'Delete list':['Tarree haqi','Tirtir liiska'],'List deleted':['Tarreen haqameera','Liiskii waa la tirtiray'],'Title':['Mata-duree','Cinwaan'],'Note (optional)':['Yaadannoo (filannoo)','Qoraal (ikhtiyaari)'],'Note':['Yaadannoo','Qoraal'],'Edit':['Gulaali','Wax ka beddel'],
+'What for':['Maaliif','Maxaa loogu talagalay'],'Amount':["Hanga",'Qaddarka'],'Delete':['Haqi','Tirtir'],'Deleted':['Haqameera','Waa la tirtiray'],'Nothing here yet. Tap Add to start.':['Ammaaf wanti asii hin jiru. Jalqabuuf Dabaladhu tuqi.','Weli waxba halkan ma jiraan. Taabo Ku dar si aad u bilowdo.'],
+'Add habit':['Amala dabali','Ku dar caado'],'Add a small habit you want to keep, like a walk after Asr.':['Amala xiqqaa eeguu barbaaddu dabali, akka deemsa Asrii booda.','Ku dar caado yar oo aad rabto inaad sii waddo, sida socod Casarka kadib.'],'days to make up':['guyyoota baafamuu qaban','maalmo la gudo'],
+'Minus one':['Tokko hir\'isi','Mid ka jar'],'Plus one':['Tokko dabali','Mid ku dar'],'Tap + each time you drink a cup.':['Yeroo kubbaayyaa tokko dhugdu hunda + tuqi.','Taabo + mar kasta oo aad cabto koob.'],
+'Tap + for each day you missed, and − when you make one up.':['Guyyaa dhabde hundaaf + tuqi, yeroo tokko baaftu immoo − tuqi.','Taabo + maalin kasta oo kaa dhaafay, iyo − marka aad mid guddo.'],'Goal reached!':["Galmi ga'ameera!",'Hadafka waa la gaaray!'],'Well done. Keep it up.':["Baay'ee gaarii. Itti fufi.",'Si fiican. Sii wad.'],
+'This week':['Torban kana','Toddobaadkan'],'No budget yet':['Ammaaf baajata hin qabu','Weli miisaaniyad ma jirto'],'Change budget':['Baajata jijjiiri','Beddel miisaaniyadda'],'Set a weekly budget':['Baajata torbanii kaa\'i','Dhig miisaaniyad toddobaadle ah'],
+'Add spending':['Baasii dabali','Ku dar kharash'],'No spending this week yet.':['Torban kana ammaaf baasiin hin jiru.','Toddobaadkan weli kharash ma jiro.'],'Weekly budget':['Baajata torbanii','Miisaaniyadda toddobaadka'],'Amount per week':['Hanga torbanitti','Qaddarka toddobaadkii'],
+'By juz':['Juziin','Juz ahaan'],'All surahs':['Suuraawwan hunda','Dhammaan suuradaha'],'Through your day':['Guyyaa kee keessatti','Maalintaada oo dhan'],"Du'as":["Du'aawwan",'Ducooyin'],"Qur'an & Sunnah":["Qur'aanaa fi Sunnaa",'Quraanka iyo Sunnada'],'Ruqyah':['Ruqyaa','Ruqyo'],
+"My du'as":["Du'aawwan koo",'Ducooyinkayga'],'Your own list':['Tarree kee','Liiskaaga gaarka ah'],'Stars & streaks':['Urjiilee fi walitti fufiinsa','Xiddigo iyo isku xigxig'],'Game':['Tapha','Ciyaar'],'Notifications':['Beeksisa','Ogeysiisyo'],'Settings':["Qindaa'ina",'Dejinta'],
+'English':['English','English'],'Feedback':['Yaada','Ra\'yi'],'Report a problem':['Rakkoo gabaasi','Soo sheeg dhibaato'],'Salah marked':['Salaanni galmaa\'e','Salaad la calaamadeeyay'],'White days':['Guyyoota adii','Maalmaha cad'],"Jumu'ah":["Jum'aa",'Jimce'],'Coming up':['Dhufaa jira','Soo socda'],
+'Text size':['Guddina barreeffamaa','Cabbirka qoraalka'],'Auto-next':['Ofumaan darbi','Toos u gudub'],'Dark':['Dukkana','Mugdi'],
+/* tools (v6) */
+'Habits':['Amaloota','Caadooyin'],'Water':['Bishaan','Biyo'],'Medicine':["Qoricha",'Daawo'],'e.g. Vitamin D':['fkn. Vitaamin D','tusaale Fiitamiin D'],'When? e.g. 9:00 PM with dinner':['Yoom? fkn. 9:00 WB irbaata wajjin','Goorma? tusaale 9:00 GD cashada'],
+'Fasting':['Soomana','Soon'],'Money':['Maallaqa','Lacag'],'Recipes':['Akkaataa nyaata qopheessuu','Cunto karis'],'Recipe name':['Maqaa nyaataa','Magaca cuntada'],'Ingredients and steps':['Wantoota fi tarkaanfiiwwan','Waxyaabaha iyo tallaabooyinka'],
+'Nasheeds':['Nashiidaawwan','Anaashiid'],'Nasheed name':['Maqaa nashiidaa','Magaca anaashiidka'],'Link (YouTube or other)':['Liinkii (YouTube ykn kan biraa)','Xiriir (YouTube ama mid kale)'],'Saved':["Kan olkaa'e",'La kaydiyay'],'Link or note':['Liinkii ykn yaadannoo','Xiriir ama qoraal'],
+'e.g. Walk after Asr':['fkn. Asrii booda deemsa','tusaale Socod Casarka kadib'],'Habit':['Amala','Caado'],'e.g. Groceries':['fkn. Nyaata','tusaale Cunto'],
+/* sign-in + sync (v6) */
+'Sign in':['Seeni','Gal'],'Sign out':['Ba\'i','Ka bax'],'Continue with Google':["Google'n itti fufi",'Ku sii wad Google'],'or with email':["ykn imeelii'n",'ama iimayl'],'Email':['Imeelii','Iimayl'],'Password':['Jecha icciitii','Furaha sirta'],
+'Create account':['Herrega uumi','Samee akoon'],'Forgot password?':['Jecha icciitii irraanfatte?','Furaha sirta ma ilowday?'],'Signed in':['Seenteetta','Waad gashay'],'Synced':["Walsimsiifameera",'Waa la isku dubbariday'],'Saved on this device':["Meeshaa kana irratti olkaa'ameera",'Waxaa lagu kaydiyay qalabkan'],
+'Sign in to keep your data safe on all your devices':['Odeeffannoo kee meeshaalee kee hunda irratti eeguuf seeni','Gal si xogtaadu ugu badbaaddo dhammaan qalabkaaga'],'Account':['Herrega','Akoon'],
+'Set your location for exact salah times':['Yeroo salaataa sirrii argachuuf bakka kee kaa\'i','Dhig goobtaada si aad u hesho waqtiyada salaadda saxda ah'],'Use my location':['Bakka koo fayyadami','Isticmaal goobtayda'],'Sample times':['Yeroo fakkeenyaa','Waqtiyo tusaale ah'],
+'Finding your location…':['Bakka kee barbaadaa jira…','Goobtaada ayaa la raadinayaa…'],'Location was not allowed.':['Bakki hin hayyamamne.','Goobta lama oggolaan.'],'Salah times set':['Yeroon salaataa kaa\'ameera','Waqtiyada salaadda waa la dejiyay'],
+'Your data was brought over from Fastaqim':['Odeeffannoon kee Fastaqim irraa fidameera','Xogtaada waxaa laga keenay Fastaqim'],'More languages':['Afaanota dabalataa','Luqado kale']
+};
+const DICT_T={/* templates: {0},{1}… are filled with the translated pieces */
+'{0} of {1} done':['{1} keessaa {0} xumurame','{0} ka mid ah {1} waa la dhammeeyay'],
+'{0} stars · {1} days in a row':['Urjii {0} · guyyaa {1} walitti aansee','{0} xiddig · {1} maalmood oo xiriir ah'],
+'{0} h {1} min':["Sa'aa {0} daq {1}",'{0} saac {1} daq'],'{0} min':['Daq {0}','{0} daq'],'I prayed {0}':['{0} sagadeera','Waan tukaday {0}'],
+'{0} to mark':['{0} galmeessuuf hafe','{0} ayaa harsan in la calaamadeeyo'],'{0} on time':['{0} yeroo ishee','{0} waqtigeeda'],"Qur'an, Surah {0} {1}":["Qur'aana, Suuraa {0} {1}",'Quraan, Suuradda {0} {1}'],
+'Room for {0} more':['Kan {0} dabalataaf bakka qaba','Waxaa bannaan {0} kale'],'Today: pages {0}–{1}':["Har'a: fuula {0}–{1}",'Maanta: bogagga {0}–{1}'],'{0} days':['Guyyaa {0}','{0} maalmood'],
+'≈ {0} pages a day':['≈ guyyaatti fuula {0}','≈ {0} bog maalintii'],'{0} ayat · Juz {1}':['Aayaa {0} · Juz {1}','{0} aayadood · Juz {1}'],'Dhikr {0} of {1}':['Zikrii {1} keessaa {0}','Dikriga {0} ee {1}'],
+'{0} of {1} times':['Yeroo {1} keessaa {0}','{0} ka mid ah {1} jeer'],'{0} of {1} time':['Yeroo {1} keessaa {0}','{0} ka mid ah {1} jeer'],'Repeat {0} times · ':['Yeroo {0} irra deebi\'i · ','Ku celi {0} jeer · '],
+'{0} of {1}':['{1} keessaa {0}','{0} / {1}'],'{0} counted':["{0} lakkaa'ame",'{0} la tiriyay'],'Today, {0}':["Har'a, {0}",'Maanta, {0}'],'{0} reminders on':['Yaadachiiftuu {0} banaa','{0} xasuusin oo shidan'],
+'Sunnah fast ({0})':['Soomana sunnaa ({0})','Soon sunno ah ({0})'],'{0} tasks today':["Har'a hojii {0}",'{0} hawlood maanta'],'of {0} cups today':["har'a kubbaayyaa {0} keessaa",'ka mid ah {0} koob maanta'],
+'{0} to make up':['{0} baafamuu qaba','{0} in la gudo'],'{0} left':['{0} hafe','{0} haray'],'{0} of {1} today':["Har'a {1} keessaa {0}",'{0} ka mid ah {1} maanta'],'{0} item':['Wanta {0}','{0} shay'],'{0} items':['Wantoota {0}','{0} shay'],
+'{0} days in a row':['Guyyaa {0} walitti aansee','{0} maalmood oo xiriir ah'],'Khatmah {0}%':['Khatmii {0}%','Khatmi {0}%'],'left of {0}':['{0} keessaa hafe','ka haray {0}'],'{0} on Home':['{0} Mana irra','{0} Hoyga ku yaal']
+};
+const PINL=['en','ar','om','so'],RTL_L=['ar','ur','fa','ps','ckb','dv','sd','ug'];
+const LANGS2=[['am','አማርኛ'],['az','Azərbaycanca'],['bn','বাংলা'],['bs','Bosanski'],['ckb','کوردی'],['de','Deutsch'],['dv','ދިވެހި'],['es','Español'],['fa','فارسی'],['ff','Fulfulde'],['fr','Français'],['ha','Hausa'],['hi','हिन्दी'],['id','Bahasa Indonesia'],['it','Italiano'],['kk','Қазақша'],['ku','Kurdî'],['ky','Кыргызча'],['ms','Bahasa Melayu'],['nl','Nederlands'],['ps','پښتو'],['pt','Português'],['ru','Русский'],['sd','سنڌي'],['sq','Shqip'],['sw','Kiswahili'],['tg','Тоҷикӣ'],['ti','ትግርኛ'],['tk','Türkmençe'],['tr','Türkçe'],['ug','ئۇيغۇرچە'],['ur','اردو'],['uz','Oʻzbek'],['wo','Wolof'],['yo','Yorùbá'],['zh-CN','中文']];
+const LX=(()=>{const q=P.get('lang');const v=q||localStorage.getItem('fq5.lang')||'en';return PINL.includes(v)||LANGS2.some(x=>x[0]===v)?v:'en'})();
+if(P.get('lang'))try{localStorage.setItem('fq5.lang',LX)}catch(e){}
+let L=LX==='ar'?'ar':'en';
+const LI=LX==='om'?0:LX==='so'?1:-1;
+const LOCX=LI>=0?LX:'en';
+const TPL=Object.keys(DICT_T).sort((a,b)=>b.replace(/\{\d\}/g,'').length-a.replace(/\{\d\}/g,'').length).map(k=>[new RegExp('^'+k.replace(/[.*+?^$()|[\]\\]/g,'\\$&').replace(/\{\d\}/g,'(.+?)')+'$'),k]);
+function tr(e){if(LI<0||e==null)return e;const s=String(e);const d=DICT[s];if(d)return d[LI];if(!/[A-Za-z]/.test(s))return s;
+  for(const[re,k]of TPL){const m=s.match(re);if(m)return DICT_T[k][LI].replace(/\{(\d)\}/g,(_,i)=>tr(m[+i+1]))}
+  const t=s.trim();if(t!==s&&DICT[t])return s.replace(t,DICT[t][LI]);return s}
+/* every other language: Google's free website translator (same as the full app) */
+function gtCookie(v){const d=location.hostname;['',';domain='+d,';domain=.'+d].forEach(x=>{document.cookie='googtrans='+(v?'/en/'+v:'')+';path=/'+x+(v?'':';expires=Thu, 01 Jan 1970 00:00:00 GMT')})}
+if(!PINL.includes(LX)){gtCookie(LX);window.gtInit=()=>{try{new google.translate.TranslateElement({pageLanguage:'en',autoDisplay:false},'gtEl')}catch(e){}};
+  addEventListener('DOMContentLoaded',()=>{const d=document.createElement('div');d.id='gtEl';d.style.display='none';document.body.appendChild(d);const sc=document.createElement('script');sc.src='https://translate.google.com/translate_a/element.js?cb=gtInit';document.head.appendChild(sc)})}
+else if(/googtrans=\/en\/\w/.test(document.cookie))gtCookie('');
+document.documentElement.lang=LX;if(LX!=='en'&&LX!=='ar')document.documentElement.classList.add('lx-long');if(RTL_L.includes(LX))document.documentElement.dir='rtl';
+/* Qur'an meanings in Oromo (Ghali Apapur, Quran.com 111) and Somali (Mahmud Abduh, Quran.com 46), cached on the device */
+const QTR_ID=LX==='om'?111:LX==='so'?46:0;
+async function qtrLoad(keys){if(!QTR_ID)return;const ck='fq5.qtr.'+QTR_ID;let c={};try{c=JSON.parse(localStorage.getItem(ck)||'{}')}catch(e){}
+  keys.forEach(k=>{if(c[k]&&QD[k])QD[k].en=c[k]});const miss=keys.filter(k=>!c[k]);let got=0;
+  await Promise.all(miss.map(async k=>{try{const r=await fetch('https://api.quran.com/api/v4/quran/translations/'+QTR_ID+'?verse_key='+k);const j=await r.json();const t=j.translations&&j.translations[0]&&j.translations[0].text;
+    if(t){c[k]=t.replace(/<sup[^>]*>.*?<\/sup>/g,'').replace(/<[^>]+>/g,'').trim();if(QD[k])QD[k].en=c[k];got++}}catch(e){}}));
+  if(got){try{localStorage.setItem(ck,JSON.stringify(c))}catch(e){}try{const c=$$('.scr.on')[0];if(c&&R[c.id.slice(2)])R[c.id.slice(2)]()}catch(e){}}}
+if(QTR_ID){try{const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');for(const k in c)if(QD[k])QD[k].en=c[k]}catch(e){}}
+/* dates in Oromo and Somali with Fastaqim's own names (phones often have no Oromo or Somali date names) */
+if(LI>=0){const WD=[['Dilbata','Wiixata','Kibxata','Roobii','Kamiisa','Jimaata','Sanbata'],['Axad','Isniin','Talaado','Arbaco','Khamiis','Jimco','Sabti']][LI],
+  MO=[['Amajjii','Guraandhala','Bitootessa','Ebla','Caamsaa','Waxabajjii','Adoolessa','Hagayya','Fulbaana','Onkoloolessa','Sadaasa','Mudde'],['Janaayo','Febraayo','Maarso','Abriil','Maajo','Juun','Luuliyo','Agoosto','Sebtembar','Oktoobar','Nofembar','Desembar']][LI];
+  const _tld=Date.prototype.toLocaleDateString;
+  Date.prototype.toLocaleDateString=function(loc,o){if(loc!==LX)return _tld.call(this,loc,o);o=o||{day:'numeric',month:'numeric',year:'numeric'};const p=[];
+    if(o.weekday)p.push(o.weekday==='long'?WD[this.getDay()]:WD[this.getDay()].slice(0,3));
+    const dm=[];if(o.day)dm.push(this.getDate());if(o.month)dm.push(o.month==='long'?MO[this.getMonth()]:o.month==='short'?MO[this.getMonth()].slice(0,3):this.getMonth()+1);
+    let s=dm.join(o.month==='numeric'||o.month==='2-digit'?'/':' ');if(o.year)s+=(s?(o.month==='numeric'?'/':' '):'')+this.getFullYear();if(s)p.push(s);return p.join(', ')}}
+
+const T=(e,a)=>L==='ar'?a:(LI<0?e:tr(e));
 const $=id=>document.getElementById(id),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const AR=n=>L==='ar'?String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]):String(n);
-const store=(k,v)=>{if(v===undefined){try{return JSON.parse(localStorage.getItem('fq5.'+k))}catch(e){return null}}localStorage.setItem('fq5.'+k,JSON.stringify(v))};
+const store=(k,v)=>{if(v===undefined){try{return JSON.parse(localStorage.getItem('fq5.'+k))}catch(e){return null}}if(k==='state'&&v&&typeof v==='object')v._at=Date.now();localStorage.setItem('fq5.'+k,JSON.stringify(v));if(typeof syncSoon==='function')try{syncSoon()}catch(e){}};
 const vib=n=>{try{navigator.vibrate&&navigator.vibrate(n)}catch(e){}};
 function toast(m){const t=$('toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),1700)}
 const TSB=(fill)=>{const n=11,R=76,cx=128,cy=106;let b='';for(let i=0;i<n;i++){const d=(118+i*(304/(n-1)))*Math.PI/180;b+=`<circle cx="${(cx+R*Math.cos(d)).toFixed(1)}" cy="${(cy+R*Math.sin(d)).toFixed(1)}" r="${fill?15:13}" ${fill?'fill="currentColor"':'fill="none" stroke="currentColor" stroke-width="13"'}/>`}
@@ -871,7 +1081,7 @@ const TSB=(fill)=>{const n=11,R=76,cx=128,cy=106;let b='';for(let i=0;i<n;i++){c
 const STAR=(sz,c)=>`<svg viewBox="0 0 100 100" width="${sz}" height="${sz}"><path d="M50 10 61.8 37.8 91.8 40.4 69 60.2 75.9 89.6 50 74 24.1 89.6 31 60.2 8.2 40.4 38.2 37.8Z" fill="${c}" stroke="${c}" stroke-width="9" stroke-linejoin="round"/></svg>`;
 if(L==='ar'){document.documentElement.dir='rtl';document.documentElement.lang='ar'}
 /* light only (v6) */
-$$('[data-t]').forEach(e=>{const[a,b]=e.dataset.t.split('|');e.textContent=T(a,b)});
+$$('[data-t]').forEach(e=>{const[a,b]=e.dataset.t.split('|');e.textContent=T(a,b)});$$('[placeholder]').forEach(e=>{const p=e.getAttribute('placeholder');if(LI>=0&&p)e.setAttribute('placeholder',tr(p))});
 
 /* ---------- time ---------- */
 const NOW=()=>{if(P.get('t')){const[h,m]=P.get('t').split(':').map(Number);const d=new Date();d.setHours(h,m,0,0);return d}return new Date()};
@@ -879,7 +1089,7 @@ const SAL=[['fajr','Fajr','الفجر','05:35','ph-sun-horizon'],['dhuhr','Dhuhr
 const at=(hm,base,add=0)=>{const[h,m]=hm.split(':').map(Number);const d=new Date(base);d.setHours(h,m,0,0);d.setDate(d.getDate()+add);return d};
 const f12=hm=>{let[h,m]=hm.split(':').map(Number);const s=h>=12?T('PM','م'):T('AM','ص');h=h%12||12;return AR(h+':'+String(m).padStart(2,'0'))+' '+s};
 const dkey=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
-const hijri=(d,o)=>{try{return new Intl.DateTimeFormat((L==='ar'?'ar-SA':'en')+'-u-ca-islamic-umalqura'+(L==='ar'?'-nu-latn':''),o).format(d)}catch(e){return ''}};
+const hijri=(d,o)=>{try{return new Intl.DateTimeFormat((L==='ar'?'ar-SA':(LI>=0?LX:'en'))+'-u-ca-islamic-umalqura'+(L==='ar'?'-nu-latn':''),o).format(d)}catch(e){return ''}};
 const hParts=d0=>{let d=d0;try{const n=NOW();if(Math.abs(d-n)<3e5){const[mh,mm]=SAL[3][3].split(':').map(Number);if(n.getHours()*60+n.getMinutes()>=mh*60+mm){d=new Date(n);d.setDate(d.getDate()+1)}}}catch(e){}try{const p=new Intl.DateTimeFormat('en-u-ca-islamic-umalqura-nu-latn',{day:'numeric',month:'numeric',year:'numeric'}).formatToParts(d);const g=t=>+p.find(x=>x.type===t).value;return{d:g('day'),m:g('month'),y:parseInt(p.find(x=>x.type==='year').value)}}catch(e){return{d:1,m:1,y:1448}}};
 const HM_EN=['Muharram','Safar',"Rabi' al-Awwal","Rabi' al-Akhir",'Jumada al-Ula','Jumada al-Akhirah','Rajab',"Sha'ban",'Ramadan','Shawwal',"Dhul-Qa'dah",'Dhul-Hijjah'];
 const HM_AR=['محرم','صفر','ربيع الأول','ربيع الآخر','جمادى الأولى','جمادى الآخرة','رجب','شعبان','رمضان','شوال','ذو القعدة','ذو الحجة'];
@@ -911,7 +1121,7 @@ const TABS=[['home','ph-house',T('Home','الرئيسية')],['quran','ph-book-o
 const TABOF={home:'home',quran:'quran',index:'quran',dhikr:'dhikr',todo:'todo',more:'more',notif:'more',cal:'home',tools:'more',tool:'more'};
 let hist=[];
 function go(s,push=true){if(!$('s-'+s))s='home';const cur=$$('.scr.on')[0];if(push&&cur&&cur.id!=='s-'+s)hist.push(cur.id.slice(2));
- $$('.scr').forEach(e=>e.classList.toggle('on',e.id==='s-'+s));scrollTo(0,0);renderTab(TABOF[s]);(R[s]||(()=>{}))();if(location.hash!=='#'+s)history.replaceState(null,'','#'+s+location.search.replace(/^\?/,'?'))}
+ $$('.scr').forEach(e=>e.classList.toggle('on',e.id==='s-'+s));scrollTo(0,0);renderTab(TABOF[s]);(R[s]||(()=>{}))();if(location.hash!=='#'+s)history.replaceState(null,'',location.pathname+location.search+'#'+s)}
 function renderTab(on){const zn=dzCount();$('tab').innerHTML=TABS.map(([k,ic,l])=>`<a href="#${k}" data-tab="${k}" class="${k===on?'on':''}">${FQI(k,k===on)}${k==='dhikr'&&zn?`<span class="tbd">${AR(zn>999?'999+':zn)}</span>`:''}${l}</a>`).join('')}
 function dzCount(){const t=store('tsbDay')||{};return t[dkey(NOW())]||0}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(t){e.preventDefault();hist=[];go(t.dataset.tab,false);return}
@@ -944,7 +1154,7 @@ function renderCI(){S.ci=S.ci||{};const dk=dkey(NOW()),o=S.ci[dk]||{},sal=Object
  ciTrim();$('ciH').onclick=()=>{CIOPEN=!CIOPEN;renderCI()};$$('#ci [data-ci]').forEach(b=>b.onclick=()=>{const k=b.dataset.ci;S.ci[dk]=S.ci[dk]||{};const on=!S.ci[dk][k];S.ci[dk][k]=on;
   if(on){star('ci-'+k+'-'+dk,CI.find(c=>c[0]===k)[1]);vib([12,30,12]);ciBurst(b)}else if(S.starLog['ci-'+k+'-'+dk]){delete S.starLog['ci-'+k+'-'+dk];S.stars=Math.max(0,S.stars-1)}
   save();renderCI();renderStars();if(CI.every(c=>S.ci[dk][c[0]])&&on)setTimeout(ciAll,350)});renderStars()}
-function renderStars(){$('hStars').innerHTML=`${STAR_SVG()}<b>${AR(S.stars)}</b><span class="sk">${AR(ciStreak())} ${T('days','يوم')}</span>`}
+function renderStars(){$('hStars').innerHTML=`${STAR_SVG()}<b>${AR(S.stars)}</b><span class="sk" aria-label="${T(ciStreak()+' days in a row',AR(ciStreak())+' أيام متتالية')}"><i class="ph ph-calendar-check"></i>${AR(ciStreak())}</span>`}
 function ciBurst(el){const r=el.getBoundingClientRect();for(let i=0;i<8;i++){const p=document.createElement('span');p.className='cib';p.innerHTML=STAR_SVG();const a=i/8*Math.PI*2;p.style.cssText=`left:${r.left+28}px;top:${r.top+r.height/2}px;--x:${Math.cos(a)*46}px;--y:${Math.sin(a)*46}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),700)}}
 function ciAll(){$('cel').innerHTML=`<div class="bs"><span class="ring"></span><svg class="bstar" viewBox="0 0 100 100"><path d="M50 10 61.8 37.8 91.8 40.4 69 60.2 75.9 89.6 50 74 24.1 89.6 31 60.2 8.2 40.4 38.2 37.8Z" fill="#c9a96a" stroke="#c9a96a" stroke-width="9" stroke-linejoin="round"/></svg></div><h2>${T("Today's path complete!",'اكتمل طريق اليوم!')}</h2><p>${T('MashaAllah. Keep going.','ما شاء الله. واصل.')}</p><button id="celX">${T('Close','إغلاق')}</button>`;$('cel').classList.add('on');vib([30,50,30,50,60]);$('celX').onclick=()=>$('cel').classList.remove('on')}
 $('hStars').onclick=()=>toast(T(S.stars+' stars · '+ciStreak()+' days in a row',AR(S.stars)+' نجمة · '+AR(ciStreak())+' أيام متتالية'));
@@ -1016,7 +1226,7 @@ function renderCar(){const D=DAILY(),dk=dkey(NOW());
  const vn=$('car').querySelector('[data-van]');if(vn)vn.onclick=()=>{S.vaI=((S.vaI||0)+1)%VA.length;save();vib(10);renderCar()};
  const vd=$('car').querySelector('[data-vd]');if(vd)vd.onclick=e=>{e.preventDefault();if(star('vod-'+dk,T('Ayah of the day read','قرأت آية اليوم'))){vib(20);renderCar()}}}
 function renderHj(){const d=NOW(),h=hParts(d);
- $('hj').innerHTML=`<span class="w">${d.toLocaleDateString(L==='ar'?'ar':'en',{weekday:'long'})}</span><span class="d">${AR(h.d)}</span><span class="mo">${hm(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</span><span class="g">${d.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-GB',{day:'numeric',month:'long',year:'numeric'})}</span>`}
+ $('hj').innerHTML=`<span class="w">${d.toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en'),{weekday:'long'})}</span><span class="d">${AR(h.d)}</span><span class="mo">${hm(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</span><span class="g">${d.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':(LI>=0?LX:'en-GB'),{day:'numeric',month:'long',year:'numeric'})}</span>`}
 const SCALL={kursi:['ph-book-open',T('Ayat al-Kursi','آية الكرسي'),()=>playKursi()],tasbih:['tsb',T('Tasbih','التسبيح'),()=>tasbih()],morning:['ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),()=>toast(T('Coming in the full build','قريبًا في النسخة الكاملة'))],evening:['ph-sun-dim',T('Evening adhkar','أذكار المساء'),()=>toast(T('Coming in the full build','قريبًا في النسخة الكاملة'))],
  sleep:['ph-bed',T('Sleep adhkar','أذكار النوم'),()=>zOpen('sleep')],qibla:['ph-compass',T('Qibla','القبلة'),()=>toast(T('Coming in the full build','قريبًا في النسخة الكاملة'))],cal:['ph-calendar-dots',T('Calendar','التقويم'),()=>go('cal')],todo:['ph-list-checks',T('To-do','المهام'),()=>go('todo')],
  index:['ph-list-numbers',T('Surahs','السور'),()=>go('index')],khatmah:['ph-book-bookmark',T('Khatmah','الختمة'),()=>go('quran')],stars:['ph-star',T('Stars','النجوم'),()=>go('more')],notif:['ph-bell',T('Reminders','التذكيرات'),()=>go('notif')]};
@@ -1040,7 +1250,7 @@ function renderTopics(){$('topics').innerHTML=TOP.map((t,i)=>`<button class="tl 
 const INSP=[T('Small deeds, done often, are the most beloved to Allah. <a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">Bukhari 6464</a>','أحبّ الأعمال إلى الله أدومها وإن قلّ. <a href="https://sunnah.com/bukhari:6464" target="_blank" rel="noopener">البخاري ٦٤٦٤</a>'),T('One step today is still a step forward.','خطوة واحدة اليوم ما زالت تقدّمًا.'),T('You showed up. That counts.','حضرت. وهذا يُحسب لك.'),T('Progress, not perfection.','التقدّم لا الكمال.'),T('Every salah marked is a win.','كل صلاة تسجّلها إنجاز.'),T('Begin with Bismillah and keep going.','ابدأ ببسم الله وتابع.')];
 const inspToday=()=>INSP[Math.floor((NOW()-new Date(NOW().getFullYear(),0,0))/864e5)%INSP.length];
 function greet(){const h=NOW().getHours();return h<12?T('Good morning','صباح الخير'):h<17?T('Good afternoon','نهارك سعيد'):T('Good evening','مساء الخير')}
-R.home=()=>{try{renderPins();renderQC()}catch(e){console.error(e)}try{renderCI()}catch(e){console.error(e)}{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':'en-US',{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
+R.home=()=>{try{renderPins();renderQC()}catch(e){console.error(e)}try{renderCI()}catch(e){console.error(e)}{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en-US'),{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
  const k=S.kh[0];$('khMini').textContent=k?(k.name||T('My khatmah','ختمتي'))+' · '+AR(Math.round(k.done/604*100))+'%':T('Start a new khatmah','ابدأ ختمة جديدة');
  $('cont').innerHTML=S.noCont?'':`<span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b>${T('Continue reading','متابعة القراءة')}</b><small>${T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥')}</small></span><button class="go" data-read="2:255">${T('Open','افتح')}</button>`;$('cont').style.display=S.noCont?'none':''};
 setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);
@@ -1153,7 +1363,7 @@ R.more=()=>{const d7=[...Array(7)].map((_,i)=>{const x=NOW();x.setDate(x.getDate
 const LGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali'],['ur','اردو'],['fr','Français'],['tr','Türkçe'],['id','Bahasa Indonesia']];
 function lgSet(n){if(n!=='en'&&n!=='ar'){toast(T('This preview has English and Arabic. All languages are in the full app.','هذه المعاينة بالإنجليزية والعربية. كل اللغات في التطبيق الكامل.'));return}localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href}
 function lgSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.map(([k,n])=>`<button data-lg="${k}"><span>${n}</span>${k===L?'<i class="ph-bold ph-check" style="color:var(--acc)"></i>':''}</button>`).join('')}</div>`);$$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))}
-$('hLang').querySelector('b').textContent=L.toUpperCase();$('hLang').onclick=lgSheet;
+$('hLang').querySelector('b').textContent=LX.slice(0,2).toUpperCase();$('hLang').onclick=lgSheet;
 $('mLang').onclick=lgSheet;const _mLangOld=()=>{const n=L==='ar'?'en':'ar';localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
 
 /* ---------- notifications ---------- */
@@ -1175,7 +1385,7 @@ let cOff=0,cSel=null;
 R.cal=()=>{const today=NOW(),t12=new Date(today);t12.setHours(12,0,0,0);const th=hParts(t12);let base=new Date(t12);base.setDate(base.getDate()-(th.d-1));
  for(let k=0;k<Math.abs(cOff);k++){if(cOff>0){base.setDate(base.getDate()+30);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}else{base.setDate(base.getDate()-2);const h=hParts(base);base.setDate(base.getDate()-(h.d-1))}}
  const h0=hParts(base),days=[];let d=new Date(base);while(hParts(d).m===h0.m){days.push(new Date(d));d.setDate(d.getDate()+1)}
- const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':'en-US',o),tk=dkey(today);
+ const g1=days[0],g2=days[days.length-1],gm=(x,o)=>x.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':(LI>=0?LX:'en-US'),o),tk=dkey(today);
  $('cTitle').innerHTML=`<b>${hms(h0.m)} ${AR(h0.y)}</b><small>${gm(g1,{month:'short',day:'numeric'})} – ${gm(g2,{month:'short',day:'numeric',year:'numeric'})}</small>`;
  if(!cSel||!days.some(x=>dkey(x)===cSel))cSel=days.some(x=>dkey(x)===tk)?tk:dkey(days[0]);
  const occ=(m,dd)=>({'1.1':T('Islamic New Year','رأس السنة الهجرية'),'1.10':T("'Ashura fast",'صيام عاشوراء'),'9.1':T('Ramadan begins','بداية رمضان'),'10.1':T("Eid al-Fitr",'عيد الفطر'),'12.9':T("Day of 'Arafah fast",'صيام يوم عرفة'),'12.10':T('Eid al-Adha','عيد الأضحى')})[m+'.'+dd];
@@ -1325,7 +1535,7 @@ function drawHabits(t){const it=tItems(t.id),d=tData(t.id),dk=dkey(NOW());d.d=d.
  $$('#toB [data-i]').forEach(b=>b.onclick=()=>{const x=it[+b.dataset.i];itemSheet({ph:['Habit','العادة']},x,v=>{x.t=v.t;x.n=v.n},()=>delWithUndo(it,x))})}
 function drawCount(t){const d=tData(t.id),dk=dkey(NOW());let n,goal=t.goal||0;
  if(t.daily){d.d=d.d||{};n=d.d[dk]||0}else n=d.n||0;const C=2*Math.PI*70,f=goal?Math.min(1,n/goal):0;
- $('toB').innerHTML=`<div class="cnt"><div class="cring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="70" class="rb"/>${goal?`<circle cx="80" cy="80" r="70" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-f)}"/>`:''}</svg><span><b>${AR(n)}</b><small>${t.daily?T('of '+goal+' cups today','من '+AR(goal)+' أكواب اليوم'):T('days to make up','أيام للقضاء')}</small></span></div>
+ $('toB').innerHTML=`<div class="tcnt"><div class="cring"><svg viewBox="0 0 160 160"><circle cx="80" cy="80" r="70" class="rb"/>${goal?`<circle cx="80" cy="80" r="70" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-f)}"/>`:''}</svg><span><b>${AR(n)}</b><small>${t.daily?T('of '+goal+' cups today','من '+AR(goal)+' أكواب اليوم'):T('days to make up','أيام للقضاء')}</small></span></div>
  <div class="cbtn"><button id="cMinus" aria-label="${T('Minus one','ناقص واحد')}">−</button><button id="cPlus" class="pr" aria-label="${T('Plus one','زائد واحد')}">+</button></div>
  <p class="note2">${t.daily?T('Tap + each time you drink a cup.','اضغط + كلما شربت كوبًا.'):T('Tap + for each day you missed, and − when you make one up.','اضغط + لكل يوم فاتك، و− عندما تقضي يومًا.')}</p></div>`;
  const set=v=>{v=Math.max(0,v);if(t.daily)d.d[dk]=v;else d.n=v;save();R.tool()};
@@ -1355,6 +1565,76 @@ const VAR=P.get('v')||'';if(VAR)document.documentElement.classList.add('v-'+VAR)
 if(VAR==='a'){CIOPEN=false;const _rh=R.home;R.home=()=>{_rh();const ci=$('ci'),pins=$('pins');if(ci&&pins&&ci.nextElementSibling!==pins)ci.after(pins)}}
 setTimeout(()=>{const x=P.get('x');if(!x)return;
  if(x==='path'){CIOPEN=true;renderCI()}else if(x==='newlist'){listSheet()}else if(x.startsWith('tool-')){openTool(x.slice(5))}else if(x==='tasbih'){tasbih()}else if(x==='salah'){salSheet('dhuhr')}},120);
+
+/* ===== v6: languages sheet, real salah times, sign-in and sync ===== */
+/* language sheet: Fastaqim's 4 own languages first, then every other language */
+{const nm=(LGS.concat(LANGS2).find(x=>x[0]===LX)||[,'English'])[1];const em=$('mLang')&&$('mLang').querySelector('em');if(em)em.textContent=nm}
+lgSet=function(n){try{localStorage.setItem('fq5.lang',n)}catch(e){}const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
+lgSheet=function(){const row=([k,n])=>`<button data-lg="${k}" lang="${k}"><span class="notranslate">${n}</span>${k===LX?'<i class="ph-bold ph-check" style="color:var(--acc)"></i>':''}</button>`;
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.slice(0,4).map(row).join('')}</div><p class="glh">${T('More languages','لغات أخرى')}</p><div class="gl lgx">${LANGS2.map(row).join('')}</div>`);
+  $$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))};
+$('mLang').onclick=lgSheet;
+
+/* ---------- salah times, calculated on the device (same method as the full app). Shown only for a place the person chose. ---------- */
+const PMETH={mwl:[18,17],isna:[15,15],egypt:[19.5,17.5],makkah:[18.5,'90'],karachi:[18,18],gulf:[18.2,18.2],kuwait:[18,17.5],turkey:[18,17],sea:[20,18],tehran:[17.7,14],france:[12,12],russia:[16,15],morocco:[19,17],algeria:[18,17],tunisia:[18,18],jordan:[18,18]};
+const CCM={US:'isna',CA:'isna',SA:'makkah',YE:'makkah',AE:'gulf',QA:'gulf',BH:'gulf',OM:'gulf',KW:'kuwait',EG:'egypt',SD:'egypt',LY:'egypt',SY:'egypt',LB:'egypt',IQ:'egypt',PK:'karachi',IN:'karachi',BD:'karachi',AF:'karachi',MY:'sea',SG:'sea',ID:'sea',BN:'sea',TR:'turkey',IR:'tehran',FR:'france',RU:'russia',MA:'morocco',DZ:'algeria',TN:'tunisia',JO:'jordan'};
+function methGuess(lat,lng){let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}if(/^America\//.test(tz)||(lng<-50&&lat>14))return 'isna';if(/Riyadh|Aden/.test(tz))return 'makkah';if(/Dubai|Qatar|Bahrain|Muscat/.test(tz))return 'gulf';if(/Cairo|Khartoum/.test(tz))return 'egypt';if(/Karachi|Kolkata|Calcutta|Dhaka|Kabul/.test(tz))return 'karachi';if(/Istanbul/.test(tz))return 'turkey';return 'mwl'}
+function prayerTimes(date,lat,lng,meth,hanafi){const M=PMETH[meth]||PMETH.mwl,rad=Math.PI/180,dsin=x=>Math.sin(x*rad),dcos=x=>Math.cos(x*rad),dtan=x=>Math.tan(x*rad),
+  darcsin=x=>Math.asin(x)/rad,darccos=x=>Math.acos(Math.max(-1,Math.min(1,x)))/rad,darctan2=(y,x)=>Math.atan2(y,x)/rad,darccot=x=>Math.atan(1/x)/rad,fixA=a=>{a=a-360*Math.floor(a/360);return a<0?a+360:a},fixH=a=>{a=a-24*Math.floor(a/24);return a<0?a+24:a};
+  let y=date.getFullYear(),m=date.getMonth()+1,d=date.getDate();if(m<=2){y--;m+=12}const A=Math.floor(y/100),B=2-A+Math.floor(A/4);const jd0=Math.floor(365.25*(y+4716))+Math.floor(30.6001*(m+1))+d+B-1524.5-lng/(15*24);
+  const sun=t=>{const D=jd0+t-2451545,g=fixA(357.529+0.98560028*D),q=fixA(280.459+0.98564736*D),Ls=fixA(q+1.915*dsin(g)+0.020*dsin(2*g)),e=23.439-0.00000036*D,RA=fixH(darctan2(dcos(e)*dsin(Ls),dcos(Ls))/15);return{decl:darcsin(dsin(e)*dsin(Ls)),eqt:q/15-RA}};
+  const mid=t=>fixH(12-sun(t).eqt);const ang=(a,t,ccw)=>{const de=sun(t).decl,n=mid(t),Tt=darccos((-dsin(a)-dsin(de)*dsin(lat))/(dcos(de)*dcos(lat)))/15;return n+(ccw?-Tt:Tt)};
+  const asr=(f,t)=>{const de=sun(t).decl;return ang(-darccot(f+dtan(Math.abs(lat-de))),t)};
+  let X={fajr:5,sunrise:6,dhuhr:12,asr:13,maghrib:18,isha:18};
+  for(let k=0;k<2;k++){const p=Object.fromEntries(Object.entries(X).map(([a,b])=>[a,b/24]));
+    X={fajr:ang(M[0],p.fajr,true),sunrise:ang(0.833,p.sunrise,true),dhuhr:mid(p.dhuhr),asr:asr(hanafi?2:1,p.asr),maghrib:ang(0.833,p.maghrib),isha:typeof M[1]==='string'?0:ang(M[1],p.isha)};
+    if(typeof M[1]==='string')X.isha=X.maghrib+(+M[1])/60}
+  {const night=24-(X.maghrib-X.sunrise),fp=M[0]/60*night,ip=(typeof M[1]==='string'?18:M[1])/60*night;if(!isFinite(X.fajr)||X.sunrise-X.fajr>fp)X.fajr=X.sunrise-fp;if(typeof M[1]!=='string'&&(!isFinite(X.isha)||X.isha-X.maghrib>ip))X.isha=X.maghrib+ip}
+  const tz=-date.getTimezoneOffset()/60,out={};for(const [k,v] of Object.entries(X)){const h=v+tz-lng/15+(k==='dhuhr'?1/60:0);const mins=Math.round(fixH(h)*60);out[k]=String(Math.floor(mins/60)%24).padStart(2,'0')+':'+String(mins%60).padStart(2,'0')}return out}
+let SALDAY='';
+function salApply(){const L0=S.loc;if(!L0||!isFinite(L0.lat))return false;const d=NOW(),k=dkey(d);if(SALDAY===k+JSON.stringify(L0))return true;
+  const p=prayerTimes(d,L0.lat,L0.lng,L0.meth||'mwl',L0.hanafi),A=L0.adj||{};
+  SAL.forEach(s=>{let hm=p[s[0]];if(A[s[0]]){const[h,m]=hm.split(':').map(Number);const t=(h*60+m+A[s[0]]+1440)%1440;hm=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}s[3]=hm});SALDAY=k+JSON.stringify(L0);return true}
+function locGPS(){if(!navigator.geolocation){toast(T('Location was not allowed.','لم يُسمح بالموقع.'));return}toast(T('Finding your location…','جارٍ تحديد موقعك…'));
+  navigator.geolocation.getCurrentPosition(p=>{const lat=+p.coords.latitude.toFixed(3),lng=+p.coords.longitude.toFixed(3);S.loc=Object.assign({},S.loc||{},{lat,lng,name:'',cc:'',meth:methGuess(lat,lng)});save();SALDAY='';salApply();toast(T('Salah times set','تم ضبط أوقات الصلاة'));R.home&&R.home()},
+    ()=>toast(T('Location was not allowed.','لم يُسمح بالموقع.')),{timeout:15000,enableHighAccuracy:false})}
+salApply();
+{const _rh=renderHero;renderHero=function(){salApply();const r=_rh.apply(this,arguments);try{const h=$('hero');if(!S.loc&&h&&!h.querySelector('.locb')){h.insertAdjacentHTML('afterbegin',`<button class="locb" id="locB"><i class="ph ph-map-pin"></i><span><b>${T('Sample times','أوقات تجريبية')}</b><small>${T('Set your location for exact salah times','حدّد موقعك لأوقات صلاة دقيقة')}</small></span><em>${T('Use my location','استخدم موقعي')}</em></button>`);$('locB').onclick=e=>{e.stopPropagation();locGPS()}}}catch(e){}return r}}
+
+/* ---------- sign-in + sync: v6 keeps its own copy (column v6 of the same row), so the full app's data is never overwritten ---------- */
+const SY={busy:false,t:0,last:'',st:'local'};
+const SYK=['state','tsb','tsbDay'];
+const syPack=()=>{const o={};SYK.forEach(k=>{o[k]=store(k)});return o};
+const syLocalAt=()=>{const s=store('state');return(s&&s._at)||0};
+function syncSoon(){if(!window.FQA||!FQA.user())return;clearTimeout(SY.t);SY.t=setTimeout(syPush,1500)}
+async function syPush(){const u=FQA.user();if(!u||SY.busy)return;const pk=syPack(),j=JSON.stringify(pk);if(j===SY.last)return;SY.busy=true;
+  try{const c=await FQA.sb();const at=new Date().toISOString();const {data,error}=await c.from('fastaqim_state').update({v6:pk,v6_at:at}).eq('user_id',u.id).select('user_id');if(error)throw error;
+    if(!data||!data.length){const r=await c.from('fastaqim_state').insert({user_id:u.id,state:{},v6:pk,v6_at:at});if(r.error)throw r.error}
+    SY.last=j;SY.st='ok'}catch(e){SY.st='err'}SY.busy=false;syBadge()}
+/* first sign-in: bring over the person's own tasks, place (for salah times) and name from the full app */
+function syImport(st){if(!st||typeof st!=='object')return false;let n=0;
+  if(Array.isArray(st.tasks)){const open=st.tasks.filter(x=>x&&!x.done&&(x.title||x.t));S.tasks=open.slice(0,200).map((x,i)=>({id:Date.now()+i,t:String(x.title||x.t).slice(0,300),due:'',p:x.top?'h':'m',sz:'m'}));n++}
+  if(st.loc&&isFinite(st.loc.lat)){S.loc={lat:st.loc.lat,lng:st.loc.lng,name:st.loc.name||'',cc:st.loc.cc||'',meth:st.loc.meth||'mwl',hanafi:!!st.loc.hanafi,adj:st.loc.adj||undefined};SALDAY='';n++}
+  if(st.name&&!S.name){S.name=String(st.name).slice(0,60);n++}
+  if(n){save();return true}return false}
+async function syPull(u){try{const c=await FQA.sb();const {data,error}=await c.from('fastaqim_state').select('state,v6,v6_at').eq('user_id',u.id).maybeSingle();if(error)throw error;
+    const rAt=data&&data.v6_at?Date.parse(data.v6_at):0;
+    if(data&&data.v6&&rAt>syLocalAt()){SYK.forEach(k=>{if(data.v6[k]!==undefined&&data.v6[k]!==null)localStorage.setItem('fq5.'+k,JSON.stringify(data.v6[k]))});SY.last=JSON.stringify(syPack());
+      if(!sessionStorage.getItem('fq5.pulled')){sessionStorage.setItem('fq5.pulled','1');location.reload();return}}
+    else if(data&&!data.v6&&data.state){if(syImport(data.state)){toast(T('Your data was brought over from Fastaqim','تم نقل بياناتك من Fastaqim'));R.home&&R.home()}await syPush()}
+    else await syPush();SY.st='ok'}catch(e){SY.st='err'}syBadge()}
+function syBadge(){const b=$('mAcct');if(!b)return;const u=window.FQA&&FQA.user();b.querySelector('.tx').innerHTML=u?`<b>${esc(u.email||T('Signed in','تم الدخول'))}</b><small>${SY.st==='err'?T('Saved on this device','محفوظ على هذا الجهاز'):T('Synced','تمت المزامنة')}</small>`:`<b>${T('Sign in','تسجيل الدخول')}</b><small>${T('Sign in to keep your data safe on all your devices','سجّل الدخول لتبقى بياناتك محفوظة على كل أجهزتك')}</small>`}
+function acctSheet(){const u=window.FQA&&FQA.user();
+  if(u){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Account','الحساب')}</h1>${XB}</div><div class="gl"><div class="arow"><i class="ph ph-user-circle"></i><span><b>${esc(u.email||'')}</b><small>${SY.st==='err'?T('Saved on this device','محفوظ على هذا الجهاز'):T('Synced','تمت المزامنة')}</small></span></div></div><button class="dang" id="acOut">${T('Sign out','تسجيل الخروج')}</button>`);
+    $('acOut').onclick=async()=>{await FQA.signOut();closeSheet();syBadge()};return}
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Sign in','تسجيل الدخول')}</h1>${XB}</div><p class="note">${T('Sign in to keep your data safe on all your devices','سجّل الدخول لتبقى بياناتك محفوظة على كل أجهزتك')}</p><div id="acBox"></div>`);
+  FQA.mount($('acBox'),{google:T('Continue with Google','المتابعة باستخدام Google'),or:T('or with email','أو بالبريد الإلكتروني'),email:T('Email','البريد الإلكتروني'),pw:T('Password','كلمة المرور'),in:T('Sign in','تسجيل الدخول'),up:T('Create account','إنشاء حساب'),forgot:T('Forgot password?','نسيت كلمة المرور؟')},u2=>{if(u2){closeSheet();syPull(u2);syBadge()}})}
+{const g=$('s-more').querySelector('.gl');if(g&&!$('mAcct')){g.insertAdjacentHTML('beforebegin',`<div class="gl"><button id="mAcct" class="acct"><span class="ic c-a"><i class="ph ph-user-circle"></i></span><span class="tx"></span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mAcct').onclick=acctSheet;syBadge()}}
+if(window.FQA&&window.top===window&&!P.has('v')&&!P.has('x')&&!P.has('nosync')){FQA.on(u=>{syBadge();if(u)syPull(u)});FQA.sb().then(()=>{syBadge();const u=FQA.user();if(u)syPull(u)}).catch(()=>{})}
+if(QTR_ID)qtrLoad(Object.keys(QD));
+/* the wordmark hides (logo stays) when the header has no room, so it is never cut */
+function fhFit(){$$('.fh').forEach(h=>{const w=h.querySelector('.wm');if(!w)return;w.classList.toggle('tight',false);if(h.scrollWidth>h.clientWidth+1||h.getBoundingClientRect().right>document.documentElement.clientWidth)w.classList.toggle('tight',true)})}
+fhFit();addEventListener('resize',fhFit);setTimeout(fhFit,400);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fhFit);
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);

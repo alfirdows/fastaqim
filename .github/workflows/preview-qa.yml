@@ -1,0 +1,54 @@
+name: Preview check in Safari's engine (WebKit)
+# Opens every preview screen in every language on iPhone, iPad and desktop sizes with WebKit (the engine inside Safari),
+# runs the tap tests, and lists anything cut off, overflowing or erroring. Read-only: changes nothing in the repo.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: [next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
+permissions:
+  contents: read
+concurrency:
+  group: preview-qa-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        engine: [webkit, firefox]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright and the browser
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps ${{ matrix.engine }}
+      - name: Every screen, every language, 5 screen sizes
+        env:
+          ENGINE: ${{ matrix.engine }}
+          ROOT: ${{ github.workspace }}
+          OUT: qa-shots
+        run: node .github/qa/screens.js
+      - name: Tap tests (iPhone 13 and iPad)
+        if: matrix.engine == 'webkit'
+        env:
+          ENGINE: webkit
+          ROOT: ${{ github.workspace }}
+        run: |
+          for L in "" "?lang=ar" "?lang=om" "?lang=so"; do echo "== iPhone 13 $L"; LANGQ="$L" DEV="iPhone 13" node .github/qa/flow.js qa-flow; done
+          echo "== iPad Pro 11"; DEV="iPad Pro 11" node .github/qa/flow.js qa-flow-ipad
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: qa-${{ matrix.engine }}
+          path: |
+            qa-shots
+            qa-flow
+            qa-flow-ipad
+          retention-days: 7
