@@ -15,3 +15,4 @@ for f in ['waking','after-salah','istikhara','morning-evening','sleep']:
 os.makedirs('tools/hisn/out',exist_ok=True)
 json.dump(out,open('tools/hisn/out/transcript.json','w'),ensure_ascii=False,indent=0)
 print('WORDS_JSON_BEGIN');print(json.dumps(out,ensure_ascii=False));print('WORDS_JSON_END')
+# rerun
