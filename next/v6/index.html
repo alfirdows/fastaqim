@@ -675,6 +675,30 @@ html.v-c .nw-mk,html.v-c .addb,html.v-c #zCnt,html.v-c .cbtn .pr{background:var(
 html.v-c .lm{background:var(--acc);box-shadow:none}
 html.v-c .insp{color:var(--sub)!important;font-weight:500}
 html.v-c .stp,html.v-c .lgb,html.v-c .fh .ib{border:0!important;box-shadow:0 1px 3px rgba(0,0,0,.08)!important}
+/* ===== iPad and wide screens: use the width, never a stretched phone ===== */
+@media (min-width:700px){
+ .scr{max-width:1040px;margin:0 auto;padding-left:28px!important;padding-right:28px!important}
+ #s-home.on{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);column-gap:20px;align-content:start}
+ #s-home>.fh,#s-home>.gr{grid-column:1/-1}
+ #s-home>#hero{grid-column:1;grid-row:3;align-self:start}
+ #s-home>#ci{grid-column:1;grid-row:4;align-self:start}
+ #s-home>#pins{grid-column:2;grid-row:3;align-self:start;flex-direction:column;margin:0}
+ #s-home>#qc{grid-column:2;grid-row:4;align-self:start}
+ #s-home .pchip{flex:none;padding:14px 16px;gap:12px}#s-home .pchip .ti2{font-size:22px!important}#s-home .pchip b{font-size:15px}#s-home .pchip small{font-size:12.5px}
+ #s-home .pchip.add{flex:none;padding:12px}
+ #s-home .pchip.add::after{content:attr(aria-label);font-weight:650;font-size:14px;color:var(--acc)}
+ #s-home .ci{margin-top:14px}#s-home .qc{margin-top:14px}
+ .gr{font-size:34px!important}
+ .tgrid{grid-template-columns:repeat(4,1fr)}
+ #s-tool #toB,#s-more>.gl,#s-more>.yp,#s-more>.glh,#s-notif>*:not(.hd),#s-todo>*:not(.hd){max-width:760px;margin-left:auto;margin-right:auto}
+ #s-tool .addb{max-width:760px;margin-left:auto;margin-right:auto}
+ .tab{display:flex!important;justify-content:center;gap:8px}.tab a{flex:0 1 130px}
+ .sh{left:calc(50% - 320px)!important;right:calc(50% - 320px)!important}
+ .utoast{left:calc(50% - 280px);right:calc(50% - 280px)}
+ .zr .zk,.zr #zc{max-width:720px;margin-left:auto;margin-right:auto}
+}
+@media (min-width:700px){html.v-a #s-home>#pins{grid-row:3}}
+@media (min-width:700px){.igrid{grid-template-columns:repeat(6,58px);justify-content:start}}
 </style>
 </head>
 <body>
@@ -910,7 +934,7 @@ function renderHero(){const now=NOW(),{next,prev}=salahState(now);$('hero').data
  const dk=dkey(now),due=SAL.filter(x=>at(x[3],now)<=now&&!(S.salah[dk]||{})[x[0]]);
  $('hero').innerHTML=`<div class="nw"><div class="nw-t"><small>${T('Next','التالية')}</small><b>${T(next.s[1],next.s[2])}</b><span>${f12(next.s[3])}</span></div>
   <div class="ring"><svg viewBox="0 0 72 72" aria-hidden="true"><circle cx="36" cy="36" r="30" class="rb"/><circle cx="36" cy="36" r="30" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-pct)}"/></svg><span><b>${left.split(' ').slice(0,2).join(' ')}</b><small>${left.split(' ').slice(2).join(' ')||T('left','باقٍ')}</small></span></div></div>
-  ${due.length?`<button class="nw-mk" data-mk="${due[due.length-1][0]}"><i class="ph ph-check-circle"></i>${T('Mark '+due[due.length-1][1],'سجّل '+due[due.length-1][2])}</button>`:`<p class="nw-ok"><i class="ph ph-check-circle"></i>${T('All prayed salah are marked','سُجّلت كل الصلوات التي حان وقتها')}</p>`}
+  ${due.length?`<button class="nw-mk" data-mk="${due[due.length-1][0]}"><i class="ph ph-check-circle"></i>${T('I prayed '+due[due.length-1][1],'صلّيت '+due[due.length-1][2])}</button>`:`<p class="nw-ok"><i class="ph ph-check-circle"></i>${T('All prayed salah are marked','سُجّلت كل الصلوات التي حان وقتها')}</p>`}
   ${dayLine(now)}
   <p class="nw-q">${T('The deed most beloved to Allah: salah at its time.','أحبّ العمل إلى الله: الصلاة على وقتها.')} <a href="https://sunnah.com/bukhari:527" target="_blank" rel="noopener">${T('Bukhari 527','البخاري ٥٢٧')}</a></p>`;
  const mk=$('hero').querySelector('[data-mk]');if(mk)mk.onclick=()=>salSheet(mk.dataset.mk)}
