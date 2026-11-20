@@ -86,6 +86,6 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 [dir=rtl].tb-fsw .tb-sw input:checked:before,.tb-fsw [dir=rtl] .tb-sw input:checked:before{transform:translateX(20px)}
 .tbx.tap .tb-cn b{display:none}.tbx.tap .tb-cn small{margin-top:6px}
 /* Hisn audio button in the adhkar reader */
-.zk .top{flex-wrap:wrap}
-.zha{margin-inline-start:auto;height:34px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 12px 0 10px;display:inline-flex;align-items:center;gap:6px;font:650 13px Inter,Plex,sans-serif;color:var(--acc)}
+.zk .top{flex-wrap:wrap;gap:6px 10px}.zk .top>span{margin-inline-end:auto}
+.zha{height:34px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 12px 0 10px;display:inline-flex;align-items:center;gap:6px;font:650 13px Inter,Plex,sans-serif;color:var(--acc)}
 .zha i{font-size:15px}.zha.on{background:var(--accT);border-color:var(--accT)}

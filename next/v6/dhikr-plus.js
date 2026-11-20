@@ -322,7 +322,13 @@ try{friday()}catch(e){}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)try{friday()}catch(e){}});
 
 /* ---------- Hisn al-Muslim audio per dhikr (cut from the site's own Hisn recording) ---------- */
-const HISN_CLIPS=window.HISN_CLIPS||{};// {set:{itemIndex:'file.m4a'}}
+// set -> item index -> clip in /hisn/clips (cut by tools/hisn/cut.py from the site's Hisn recording).
+// Qur'an items read only by name in that recording (Ayat al-Kursi, the 3 Quls) and evening "Amsayna" (read as a note) have no clip.
+const HISN_CLIPS={
+ morning:{1:'m-asbahna.m4a',2:'m-bika-asbahna.m4a',3:'sayyid-istighfar.m4a',4:'bismillah-la-yadurr.m4a',5:'subhan-adada.m4a',6:'subhan-wabihamdih.m4a',7:'astaghfir-atub.m4a'},
+ evening:{2:'e-bika-amsayna.m4a',3:'sayyid-istighfar.m4a',4:'bismillah-la-yadurr.m4a',5:'audhu-kalimat.m4a',6:'subhan-wabihamdih.m4a'},
+ sleep:{1:'baqarah-285-286.m4a',3:'bismika-rabbi.m4a',4:'bismika-amutu.m4a',5:'subhanallah.m4a',6:'alhamdulillah.m4a',7:'allahu-akbar.m4a'}
+};
 const HCB='../../hisn/clips/';
 let hA=null,hKey='';
 function hisnBtn(){
@@ -340,6 +346,7 @@ function hisnBtn(){
 if(typeof window.zDraw==='function'){const oz=window.zDraw;window.zDraw=function(){const r=oz.apply(this,arguments);try{hisnBtn()}catch(e){}return r}}
 if(typeof window.zClose==='function'){const oc=window.zClose;window.zClose=function(){if(hA)hA.pause();return oc.apply(this,arguments)}}
 {const zx=document.getElementById('zrX');if(zx)zx.onclick=()=>window.zClose()}
+try{if(typeof ZS==='object'&&ZS)hisnBtn()}catch(e){}
 
 /* deep links for previews/tests: ?tbx=beads|tap&mat=jade */
 const QP=new URLSearchParams(location.search);

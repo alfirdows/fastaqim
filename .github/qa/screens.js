@@ -2,10 +2,10 @@
 // and reports page errors, sideways overflow and text cut off with "…". Run: ENGINE=webkit node screens.js
 const pw=require('playwright');const fs=require('fs'),path=require('path');
 const ENGINE=process.env.ENGINE||'webkit',ROOT=process.env.ROOT||path.resolve(__dirname,'../..'),OUT=process.env.OUT||'qa-shots';
-const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg'};
+const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.m4a':'audio/mp4'};
 const DEVS=[['iPhone SE',pw.devices['iPhone SE']],['iPhone 13',pw.devices['iPhone 13']],['iPad Pro 11',pw.devices['iPad Pro 11']],['iPad Pro 11 landscape',pw.devices['iPad Pro 11 landscape']],['Desktop 1440',{viewport:{width:1440,height:900}}]];
 const LANGS=(process.env.LANGS||'en,ar,om,so').split(',');
-const SCREENS=['#home','#tools','?x=tool-water#home','?x=tool-money#home','?x=newlist#home','?x=path#home','?x=salah#home','#quran','#index','#dhikr','?z=morning#dhikr','?x=tasbih#dhikr','?tbx=tap#dhikr','?tbs=1&tbx=beads#dhikr','?fri=1#dhikr','#todo','#more','#notif','#cal','#read','#stars','#qibla'];
+const SCREENS=['#home','#tools','?x=tool-water#home','?x=tool-money#home','?x=newlist#home','?x=path#home','?x=salah#home','#quran','#index','#dhikr','?z=morning#dhikr','?x=tasbih#dhikr','?tbx=tap#dhikr','?tbs=1&tbx=beads#dhikr','?fri=1#dhikr','?z=morning&zi=1#dhikr','?z=sleep&zi=3#dhikr','#todo','#more','#notif','#cal','#read','#stars','#qibla'];
 fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await pw[ENGINE].launch();let bad=0,total=0;
  for(const [dn,dev] of DEVS){const isMobile=ENGINE!=='firefox'?dev.isMobile:undefined;const c=await b.newContext({...dev,isMobile,deviceScaleFactor:1});

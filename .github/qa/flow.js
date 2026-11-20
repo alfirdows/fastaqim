@@ -1,5 +1,5 @@
 const pw=require('playwright');const devices=pw.devices;const chromium=pw[process.env.ENGINE||'chromium'];const fs=require('fs'),path=require('path');
-const ROOT=process.env.ROOT||'/home/user/fastaqim';const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.otf':'font/otf','.mp3':'audio/mpeg'};
+const ROOT=process.env.ROOT||'/home/user/fastaqim';const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.otf':'font/otf','.mp3':'audio/mpeg','.m4a':'audio/mp4'};
 const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const c=await b.newContext({...devices[process.env.DEV||'iPhone 13'],deviceScaleFactor:+(process.env.DSF||1)});
  await c.route('**/*',r=>{const u0=new URL(r.request().url());if(u0.host!=='fq.test')return r.abort();let u=u0.pathname;if(u.endsWith('/'))u+='index.html';const f=path.join(ROOT,decodeURIComponent(u));if(fs.existsSync(f))r.fulfill({body:fs.readFileSync(f),contentType:MT[path.extname(f)]||'application/octet-stream'});else r.fulfill({status:404,body:''})});
