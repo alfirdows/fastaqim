@@ -28,6 +28,7 @@ const css=document.createElement('style');css.textContent=`
 .mc b::after{content:'';width:42%;aspect-ratio:1;border-radius:50%;border:3px solid rgba(255,255,255,.35)}
 .mc u{text-decoration:none;background:#fff;transform:rotateY(180deg);font-size:clamp(26px,9vw,40px);box-shadow:0 6px 14px -6px rgba(0,0,0,.5)}
 .mc.ok u{background:#fefce8;box-shadow:0 0 0 3px #facc15}
+.mc u>*,.mc u{transition:visibility 0s .17s}.mc:not(.f):not(.ok) u{visibility:hidden}.mc.f b,.mc.ok b{visibility:hidden;transition:visibility 0s .17s}
 .g2{position:relative;width:min(100%,400px);aspect-ratio:1;background:rgba(15,23,42,.28);border-radius:18px;padding:8px}
 .g2 .c,.g2 .t{position:absolute;width:calc((100% - 40px)/4);height:calc((100% - 40px)/4);border-radius:12px}
 .g2 .c{background:rgba(255,255,255,.08)}
