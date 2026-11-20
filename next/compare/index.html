@@ -50,7 +50,7 @@ textarea:focus{border-color:var(--acc)}
 .nav{display:flex;gap:10px;padding:0 14px calc(env(safe-area-inset-bottom) + 18px)}
 .nav button{flex:1;border:1px solid var(--gl);background:#fff;border-radius:14px;padding:13px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
 .nav .nx{background:var(--acc);border-color:var(--acc);color:#fff}
-@media (min-width:900px){.wrap{overflow:visible;justify-content:center}.pane{flex:1 1 0;max-width:440px}}
+@media (min-width:760px){.phd{min-height:78px}.wrap{overflow:visible;justify-content:center;gap:12px}.pane{flex:1 1 0;min-width:0;max-width:460px;padding:10px}.phd small{font-size:12px}} header .hint span.ipad{display:none}
 @media (orientation:landscape) and (max-height:500px){.wrap{overflow:visible}.pane{flex:1 1 0;min-width:0;padding:8px}.phd{min-height:0}.phd small{display:none}header .hint{display:none}.phd b{font-size:13.5px}.tag{width:26px;height:26px;font-size:13px}.chips{margin-top:6px}h1{font-size:17px}textarea{min-height:44px}}
 .sib{display:flex;align-items:center;gap:10px;margin:12px 14px 0;padding:12px 14px;border-radius:14px;background:#f5eedf;border:1px solid var(--gl);color:var(--ink);text-decoration:none;font-size:14px;font-weight:600}.sib[hidden]{display:none}.sib i{font-size:20px;color:var(--goldD);flex:none}
 </style>
@@ -75,9 +75,9 @@ const SCREENS=[
  ['quran',"Qur'an",'#quran',''],['dhikr','Dhikr','#dhikr',''],['adhkar','Adhkar reader','#dhikr','z'],['tasbih','Tasbih','#dhikr','tasbih'],
  ['todo','To-do','#todo',''],['cal','Calendar','#cal',''],['more','More','#more',''],['notif','Notifications','#notif','']];
 const V=[
- ['a','My recommendation',"What I'd choose: salah first, shortcuts under Today's path, calmer cards with gold only on the salah card."],
- ['b','What I built','The version you liked: shortcuts at the top, gold lines on every card, soft green buttons.'],
- ['c',"Top experts' choice",'Plain and quiet: no borders, soft shadows, one green colour, system font. Original, not copied.']];
+ ['a','My recommendation',"Salah first, shortcuts under Today's path, gold only on the salah card."],
+ ['b','What I built','What you liked: shortcuts on top, fine gold lines on every card.'],
+ ['c',"Top experts' choice",'No borders, soft shadows, one green, system font. Original, not copied.']];
 /* answers: saved to the owner-only Approvals table; kept on this phone until sent */
 const SUPA={url:'https://xnxqibdjjrgjqpszvdbe.supabase.co',key:'sb_publishable_FEdG6lWjiGjEhwXEpUw77Q_YxFohEId'};
 const REMST={getItem:k=>{try{return localStorage.getItem(k)??sessionStorage.getItem(k)}catch(e){return null}},setItem:(k,v)=>{try{const rem=localStorage.getItem('fastaqim.rem')!=='0';(rem?localStorage:sessionStorage).setItem(k,v);(rem?sessionStorage:localStorage).removeItem(k)}catch(e){}},removeItem:k=>{try{localStorage.removeItem(k);sessionStorage.removeItem(k)}catch(e){}}};
@@ -111,6 +111,7 @@ function drawChips(){const a=ans();[...$('chips').children].forEach((c,i)=>{cons
 $('chips').onclick=e=>{const b=e.target.closest('[data-i]');if(b){cur=+b.dataset.i;draw()}};
 $('prev').onclick=()=>{if(cur>0){cur--;draw();scrollTo(0,0)}};$('next').onclick=()=>{if(cur<SCREENS.length-1){cur++;draw();scrollTo(0,0)}};
 addEventListener('resize',fit);addEventListener('orientationchange',()=>setTimeout(fit,300));
+const setHint=()=>{$('hint').textContent=innerWidth>=760?'All 3 are live. Tap inside each one, it really works.':'Swipe to see all 3. Tap inside each one, it really works. Turn your phone sideways to see all 3 at once.'};setHint();addEventListener('resize',setHint);
 draw();pull().then(()=>{if(SIGNED===false)$('sib').hidden=false});
 </script>
 </body>
