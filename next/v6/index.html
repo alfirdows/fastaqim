@@ -834,6 +834,7 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .npc small{font-weight:400;color:#86672e;font-size:13px}.npc .go{border:0;background:var(--acc);color:#fff;border-radius:999px;height:40px;padding:0 16px;font-weight:700;font-size:14px;margin-inline-start:auto}
 .npc .go.ghost2{background:var(--accT);color:var(--acc)}.npc.on>i{color:var(--ok)}
 </style>
+<link rel="stylesheet" href="life.css">
 </head>
 <body>
 
@@ -1986,5 +1987,7 @@ if(P.get('z')){zOpen(P.get('z'));if(P.get('zi')){ZS.i=+P.get('zi');const c=+P.ge
 if(P.get('cel'))celebrate('sleep');if(P.get('mp')){$('mpT').textContent=T('Ayat al-Kursi','آية الكرسي');$('mpS').textContent=T('Saad al-Ghamdi','سعد الغامدي');$('mp').classList.add('on','pl');$('mpB').style.width='42%'}
 if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.get('open')+'"]');if(b)b.click()},50);
 </script>
+<script src="life-data.js"></script>
+<script src="life.js"></script>
 </body>
 </html>
