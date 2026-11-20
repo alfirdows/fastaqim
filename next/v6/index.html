@@ -755,6 +755,84 @@ html.lx-long .pchip b{white-space:normal;overflow-wrap:anywhere;line-height:1.2}
 .fh .wm.tight{font-size:0!important;letter-spacing:0!important;flex:1 1 0;min-width:28px;overflow:hidden}
 .locb{flex-wrap:wrap}.locb span{flex:1 1 150px}.locb em{margin-inline-start:auto}
 html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;gap:8px}.any b,.any small{overflow-wrap:break-word}
+
+/* v6: Qur'an reader (reading-text rules: medium Arabic, generous spacing, centred on white, small grey source under a thin line) */
+#s-read{padding-bottom:150px}
+.rdh{position:sticky;top:0;z-index:5;background:var(--bg);margin:0 -16px 10px;padding:4px 16px 6px;padding-top:max(4px,env(safe-area-inset-top))}
+.rdh h1{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#rdB{--rz:1;background:var(--card);border-radius:24px;padding:22px 18px 10px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.rsh{text-align:center;padding:4px 0 14px;margin-bottom:6px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:3px;align-items:center}
+.rsn{font-family:"FQ Quran",serif;font-size:calc(var(--rz)*27px);color:var(--ink);line-height:1.6}
+.rsh b{font-size:16px;font-weight:650}.rsh small{color:var(--sub);font-size:13px}
+.rbs{font-family:"FQ Quran",serif;text-align:center;font-size:calc(var(--rz)*23px);line-height:2;margin:12px 0 4px;color:var(--ink)}
+.ra{padding:14px 6px 16px;transition:background .3s;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ra+.ra{border-top:1px solid rgba(236,230,218,.7)}
+.rar{font-family:"FQ Quran",serif;font-size:calc(var(--rz)*25px);line-height:2.25;text-align:center;margin:0;color:var(--ink);text-wrap:pretty;word-spacing:.04em}
+.rme{font-size:calc(var(--rz)*15px);line-height:1.65;color:#4a4842;text-align:center;margin:8px auto 0;max-width:34em;text-wrap:pretty}
+.ra.sel,.ra.pl,.ra.flash{border-radius:16px;border-top-color:transparent!important}.ra.sel{background:var(--accT)}.ra.pl{background:#f6efdf}.ra.flash{background:#f6efdf}
+.rac{display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.rac button,.rac a{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px;font-weight:600;text-decoration:none}
+.rac i{font-size:16px;color:var(--acc)}.rac a{padding:0 11px}
+.rpg{display:flex;align-items:center;gap:10px;margin:8px 0;color:var(--sub);font-size:12px;font-weight:600;letter-spacing:.02em}
+.rpg::before,.rpg::after{content:"";flex:1;height:1px;background:var(--line)}
+.rend{margin-top:10px}
+.rsrc{border-top:1px solid var(--line);padding:12px 2px 4px;display:flex;flex-wrap:wrap;gap:4px 12px;justify-content:center;text-align:center;color:var(--sub);font-size:12px;line-height:1.5}
+.rsrc a{color:var(--acc);font-weight:600;text-decoration:none}
+.rnav{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0 8px}
+.rnb{display:flex;align-items:center;gap:8px;min-height:56px;padding:8px 12px;border-radius:16px;border:1px solid var(--line);background:var(--bg);font:inherit;color:var(--ink);text-align:start;min-width:0}
+.rnb span{display:flex;flex-direction:column;min-width:0}.rnb small{color:var(--sub);font-size:12px}.rnb b{font-size:14px;font-weight:650;overflow-wrap:anywhere;line-height:1.25}
+.rnb.nx{justify-content:flex-end;text-align:end}.rnb i{color:var(--acc);font-size:18px;flex:none}
+.rload,.rerr{text-align:center;color:var(--sub);padding:40px 10px}.rerr p{margin:0 0 6px}
+.rop{display:flex;align-items:center;gap:12px;padding:12px 0}.rop+.rop{border-top:1px solid var(--line)}
+.rop>span{flex:1;font-weight:600;display:flex;flex-direction:column;gap:2px}.rop small{font-weight:400;color:var(--sub);font-size:13px}.rop .seg{margin:0;flex:none;width:200px}
+.khop{display:inline-flex;align-items:center;gap:6px;margin-top:10px;border:1px solid var(--line);background:#fff;color:var(--acc);border-radius:999px;height:36px;padding:0 13px;font:inherit;font-size:13.5px;font-weight:650}
+.zml{font-size:11.5px;color:var(--sub);text-align:center;margin:4px 12px 0;line-height:1.4}
+/* Stars */
+.sth{display:flex;flex-direction:column;align-items:center;padding:8px 0 14px}
+.sts{position:relative;width:110px;height:110px;display:grid;place-items:center}
+.stsv{filter:drop-shadow(0 6px 14px rgba(184,149,90,.35));animation:stIn .9s cubic-bezier(.2,1.4,.4,1) both,stBr 3.2s ease-in-out 1s infinite}
+.sts i{position:absolute;width:6px;height:6px;border-radius:50%;background:#d8c08e;opacity:0;animation:stSp 2.6s ease-out infinite}
+.sts i:nth-of-type(1){top:10px;left:18px}.sts i:nth-of-type(2){top:22px;right:8px;animation-delay:.9s}.sts i:nth-of-type(3){bottom:14px;left:10px;animation-delay:1.7s}
+@keyframes stIn{from{transform:scale(.3) rotate(-30deg);opacity:0}to{transform:none;opacity:1}}@keyframes stBr{50%{transform:scale(1.06)}}@keyframes stSp{0%{opacity:0;transform:scale(.2)}30%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(.4) translateY(-14px)}}
+@media (prefers-reduced-motion:reduce){.stsv,.sts i{animation:none}.sts i{display:none}}
+.stn{font-size:44px;font-weight:750;letter-spacing:-.02em;line-height:1.1;margin-top:4px}.sth small{color:var(--sub);font-size:14px}
+.stg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:0 0 12px}.stg>div{background:var(--card);border-radius:20px;padding:14px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.stg b{font-size:24px;font-weight:700}.stg small{color:var(--sub);font-size:13px}
+.kh h3{margin:2px 0 12px;font-size:15px}
+.stbars{display:grid;grid-template-columns:repeat(14,minmax(0,1fr));gap:4px;align-items:end;height:120px}
+.stb{display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+.stb span{width:100%;max-width:18px;height:var(--h);min-height:3px;border-radius:6px 6px 3px 3px;background:linear-gradient(180deg,#d8c08e,#b8955a);position:relative}
+.stb span em{position:absolute;top:-17px;left:50%;transform:translateX(-50%);font-style:normal;font-size:10.5px;color:var(--sub);font-weight:600}
+.stb small{font-size:10px;color:var(--sub)}.stb.td small{color:var(--acc);font-weight:700}
+.stw{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.stw:first-of-type{border-top:0}
+.stw i{font-size:20px;color:var(--acc);flex:none}.stw span{flex:1;font-size:14.5px}.stw b{color:#86672e;font-size:14px}
+.stnote{color:var(--sub);font-size:13px;margin:8px 0 0}
+/* Qibla */
+.qbw{position:relative;width:min(78vw,300px);aspect-ratio:1;margin:6px auto 8px}
+.qbd{width:100%;height:100%;transition:transform .18s linear;will-change:transform}
+.qbs{width:100%;height:100%;display:block}
+.qbs .qr{fill:var(--card);stroke:var(--line);stroke-width:2}
+.qbs line{stroke:#cfc7b6;stroke-width:1.4}.qbs line.tm{stroke:#8a8476;stroke-width:2}
+.qbs text{font:700 15px Inter,sans-serif;text-anchor:middle;fill:var(--sub)}.qbs .qn{fill:#c0563b}
+.qbs .qa{fill:#b8955a}.qbs .qc{fill:#fff;stroke:#b8955a;stroke-width:3}.qbs .qk{fill:#24231f}.qbs .qkb{fill:#d8c08e}
+.qbi{position:absolute;inset:0;pointer-events:none}.qbtop{position:absolute;top:-8px;left:50%;width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:12px solid var(--acc);transform:translateX(-50%)}
+#qbB.ok .qr{stroke:var(--acc);stroke-width:5}#qbB.ok .qbm{color:var(--acc);font-weight:700}
+.qbm{text-align:center;font-size:15px;margin:4px 12px 14px;min-height:2.6em}
+.qbe{text-align:center;padding:30px 10px}.qbe>i{font-size:40px;color:var(--acc)}.qbe p{margin:8px 0 6px}
+.qbn{text-align:center;margin-top:10px}#qbGo i{vertical-align:-3px;margin-inline-end:6px}
+/* Game overlay */
+.gmo{position:fixed;inset:0;z-index:90;background:#fff;display:none;flex-direction:column}.gmo.on{display:flex}
+.gmh{display:none;position:absolute;top:max(8px,env(safe-area-inset-top));right:10px;z-index:2}html[dir=rtl] .gmh{right:auto;left:10px}
+.gmh .ib{box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.gmo iframe{flex:1;width:100%;border:0}
+/* Feedback */
+.fbt{height:auto;min-height:130px;padding:12px 14px;resize:vertical;line-height:1.5}
+.fbi{display:flex;align-items:flex-start;gap:10px;margin:12px 2px 4px;font-size:14px;color:var(--sub)}.fbi input{width:20px;height:20px;accent-color:var(--acc);flex:none;margin:0}
+/* reminders card */
+.npc{display:flex;align-items:center;gap:12px;background:var(--card);border-radius:20px;padding:14px;margin-bottom:12px;flex-wrap:wrap}
+.npc>i{font-size:26px;color:var(--acc);flex:none}.npc>span{flex:1 1 160px;min-width:0;font-weight:600;font-size:14.5px;display:flex;flex-direction:column;gap:3px}
+.npc small{font-weight:400;color:#86672e;font-size:13px}.npc .go{border:0;background:var(--acc);color:#fff;border-radius:999px;height:40px;padding:0 16px;font-weight:700;font-size:14px;margin-inline-start:auto}
+.npc .go.ghost2{background:var(--accT);color:var(--acc)}.npc.on>i{color:var(--ok)}
 </style>
 </head>
 <body>
@@ -1128,7 +1206,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(
  const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return}
  if(e.target.closest('[data-back]')){go(hist.pop()||'home',false);return}
  const z=e.target.closest('[data-z]');if(z){zOpen(z.dataset.z);return}
- const r=e.target.closest('[data-read]');if(r){location.href='../design/read.html?set=kursi'+(L==='ar'?'&lang=ar':'');return}
+ 
  const pl=e.target.closest('[data-play]');if(pl){playKursi();return}
  const dy=e.target.closest('[data-day]');if(dy){go('home');setTimeout(()=>$('car').scrollIntoView({block:'center',behavior:'smooth'}),60);return}
  if(e.target.closest('[data-soon]'))toast(T('Coming in the full build','قريبًا في النسخة الكاملة'))});
@@ -1339,9 +1417,9 @@ R.dhikr=()=>{$('zSleepP').textContent=zSum('sleep');$('tsbIc').innerHTML=TSB(fal
  const now=NOW(),dk=dkey(now),nm=now.getHours()*60+now.getMinutes(),tm=k=>{const[h,m]=SAL.find(x=>x[0]===k)[3].split(':').map(Number);return h*60+m};
  const aft=(S.aft||{})[dk]||{},aN=SAL.filter(x=>AFT.every(a=>(aft[x[0]]||{})[a[0]])).length,zp=zProg('sleep'),zd=ZK.sleep.items.filter((it,j)=>(zp[j]||0)>=it.n).length;
  const cur=nm<tm('dhuhr')?'m':nm<tm('asr')?'a':nm<tm('isha')?'e':'s';
- const st=[['m','ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),T('After Fajr','بعد الفجر'),f12(SAL[0][3]),'data-soon',0],
+ const st=[['m','ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),T('After Fajr','بعد الفجر'),f12(SAL[0][3]),'data-z="morning"',zDoneAll('morning')],
   ['a','ph-check-circle',T('After each salah','بعد كل صلاة'),`<span class="dots5">${SAL.map(x=>`<i class="${AFT.every(a=>(aft[x[0]]||{})[a[0]])?'on':''}"></i>`).join('')}</span>`,'',`data-go="home"`,aN===5],
-  ['e','ph-sun-dim',T('Evening adhkar','أذكار المساء'),T('After Asr','بعد العصر'),f12(SAL[2][3]),'data-soon',0],
+  ['e','ph-sun-dim',T('Evening adhkar','أذكار المساء'),T('After Asr','بعد العصر'),f12(SAL[2][3]),'data-z="evening"',zDoneAll('evening')],
   ['s','ph-moon-stars',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
  $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':`<i class="ph ${ic==='ph-moon-stars'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
  $('zDayN').textContent=T((st.filter(x=>x[6]).length)+' of 4',AR(st.filter(x=>x[6]).length)+' من ٤')};
@@ -1635,6 +1713,271 @@ if(QTR_ID)qtrLoad(Object.keys(QD));
 /* the wordmark hides (logo stays) when the header has no room, so it is never cut */
 function fhFit(){$$('.fh').forEach(h=>{const w=h.querySelector('.wm');if(!w)return;w.classList.toggle('tight',false);if(h.scrollWidth>h.clientWidth+1||h.getBoundingClientRect().right>document.documentElement.clientWidth)w.classList.toggle('tight',true)})}
 fhFit();addEventListener('resize',fhFit);setTimeout(fhFit,400);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fhFit);
+
+/* v6: morning, evening, ruqyah and du'a sets (generated by gen_zk.py) */
+Object.assign(QD,{"1:1": {"a": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", "en": "In the name of Allah, the Entirely Merciful, the Especially Merciful"}, "1:2": {"a": "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ", "en": "[All] praise is [due] to Allah, Lord of the worlds"}, "1:3": {"a": "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ", "en": "The Entirely Merciful, the Especially Merciful"}, "1:4": {"a": "مَٰلِكِ يَوۡمِ ٱلدِّينِ", "en": "Sovereign of the Day of Recompense"}, "1:5": {"a": "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ", "en": "It is You we worship and You we ask for help"}, "1:6": {"a": "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ", "en": "Guide us to the straight path"}, "1:7": {"a": "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ", "en": "The path of those upon whom You have bestowed favor, not of those who have evoked [Your] anger or of those who are astray"}, "3:173": {"a": "ٱلَّذِينَ قَالَ لَهُمُ ٱلنَّاسُ إِنَّ ٱلنَّاسَ قَدۡ جَمَعُواْ لَكُمۡ فَٱخۡشَوۡهُمۡ فَزَادَهُمۡ إِيمَٰنٗا وَقَالُواْ حَسۡبُنَا ٱللَّهُ وَنِعۡمَ ٱلۡوَكِيلُ", "en": "Those to whom hypocrites said, \"Indeed, the people have gathered against you, so fear them.\" But it [merely] increased them in faith, and they said, \"Sufficient for us is Allah, and [He is] the best Disposer of affairs"}, "21:87": {"a": "وَذَا ٱلنُّونِ إِذ ذَّهَبَ مُغَٰضِبٗا فَظَنَّ أَن لَّن نَّقۡدِرَ عَلَيۡهِ فَنَادَىٰ فِي ٱلظُّلُمَٰتِ أَن لَّآ إِلَٰهَ إِلَّآ أَنتَ سُبۡحَٰنَكَ إِنِّي كُنتُ مِنَ ٱلظَّـٰلِمِينَ", "en": "And [mention] the man of the fish, when he went off in anger and thought that We would not decree [anything] upon him. And he called out within the darknesses, \"There is no deity except You; exalted are You. Indeed, I have been of the wrongdoers"}});
+Object.assign(DICT,{"We have entered the morning and the dominion belongs to Allah, and praise is for Allah. None has the right to be worshipped but Allah alone, with no partner. His is the dominion and His is the praise, and He is over all things capable. My Lord, I ask You for the good of this day and what follows it, and seek refuge in You from its evil and the evil of what follows it. My Lord, I seek refuge in You from laziness and the misery of old age, and from punishment in the Fire and in the grave.": ["Ganama seenneerra, mootummaanis kan Rabbiiti, galanni hundis kan Rabbiiti. Rabbii tokkicha malee dhugaan gabbaramu hin jiru, hiriyaa hin qabu. Mootummaanis kan Isaa, galannis kan Isaa, Inni waan hundumaa irratti danda'aadha. Yaa Rabbii, gaarii guyyaa kanaa fi gaarii isa booda dhufu Si kadhadha; hamaa isaa fi hamaa isa booda dhufu irraa Sitti maganfadha. Yaa Rabbii, dadhabbii fi hamaa dulloomuu irraa, adabbii Ibiddaa fi adabbii qabrii irraas Sitti maganfadha.", "Waxaan gallay subaxa, mulkiguna waa u Ilaahay, mahadna Ilaahay baa iska leh. Ma jiro cid xaq loogu caabudo Ilaahay mooyee, keligiis, shariig ma leh. Isagaa leh mulkiga, isagaana leh mahadda, wax walbana wuu karaa. Rabbiyow, waxaan ku weydiisanayaa khayrka maalintan iyo khayrka waxa ka dambeeya, waxaanan kaa magan galayaa sharkeeda iyo sharka waxa ka dambeeya. Rabbiyow, waxaan kaa magan galayaa caajis iyo dhibta gabowga, iyo cadaabta Naarta iyo cadaabta qabriga."], "We have entered the evening and the dominion belongs to Allah, and praise is for Allah. None has the right to be worshipped but Allah alone, with no partner. His is the dominion and His is the praise, and He is over all things capable. My Lord, I ask You for the good of this night and what follows it, and seek refuge in You from its evil and the evil of what follows it. My Lord, I seek refuge in You from laziness and the misery of old age, and from punishment in the Fire and in the grave.": ["Galgala seenneerra, mootummaanis kan Rabbiiti, galanni hundis kan Rabbiiti. Rabbii tokkicha malee dhugaan gabbaramu hin jiru, hiriyaa hin qabu. Mootummaanis kan Isaa, galannis kan Isaa, Inni waan hundumaa irratti danda'aadha. Yaa Rabbii, gaarii halkan kanaa fi gaarii ishee booda dhufu Si kadhadha; hamaa ishee fi hamaa ishee booda dhufu irraa Sitti maganfadha. Yaa Rabbii, dadhabbii fi hamaa dulloomuu irraa, adabbii Ibiddaa fi adabbii qabrii irraas Sitti maganfadha.", "Waxaan gallay fiidka, mulkiguna waa u Ilaahay, mahadna Ilaahay baa iska leh. Ma jiro cid xaq loogu caabudo Ilaahay mooyee, keligiis, shariig ma leh. Isagaa leh mulkiga, isagaana leh mahadda, wax walbana wuu karaa. Rabbiyow, waxaan ku weydiisanayaa khayrka habeenkan iyo khayrka waxa ka dambeeya, waxaanan kaa magan galayaa sharkiisa iyo sharka waxa ka dambeeya. Rabbiyow, waxaan kaa magan galayaa caajis iyo dhibta gabowga, iyo cadaabta Naarta iyo cadaabta qabriga."], "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.": ["Yaa Rabbii, Siin ganama seenne, Siin galgala seenne, Siin jiraanna, Siin duuna, kaafamuunis gara Keeti.", "Ilaahayow, adigaan kugu gallay subaxa, adigaan kugu gallay fiidka, adigaan kugu noolnahay, adigaan kugu dhimanaynaa, xaggaagana waa loo soo bixi doonaa."], "O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the return.": ["Yaa Rabbii, Siin galgala seenne, Siin ganama seenne, Siin jiraanna, Siin duuna, deebiinis gara Keeti.", "Ilaahayow, adigaan kugu gallay fiidka, adigaan kugu gallay subaxa, adigaan kugu noolnahay, adigaan kugu dhimanaynaa, xaggaagana waa loo noqonayaa."], "O Allah, You are my Lord; none has the right to be worshipped but You. You created me and I am Your servant, and I keep Your covenant and promise as best I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins but You.": ["Yaa Rabbii, Ati Rabbii kooti; Si malee dhugaan gabbaramu hin jiru. Ati na uumte, ani gabra Keeti; hanga danda'etti waadaa fi abdachiisa Kee irra jira. Hamaa waan hojjedhe irraa Sitti maganfadha. Qananii Ati natti oolte nan amana, cubbuu koos nan amana; kanaaf naaf dhiisi, cubbuu kan dhiisu Si malee hin jiru.", "Ilaahayow, adigaa Rabbigay ah, ma jiro cid xaq loogu caabudo adiga mooyee. Adigaa i abuuray, anna waxaan ahay addoonkaaga, waxaanan ku taaganahay ballankaaga iyo yabooshaada inta aan karo. Waxaan kaa magan galayaa sharka waxaan sameeyay. Waxaan qirayaa nicmadaada aad igu galisay, waxaanan qirayaa dambigayga, ee i dambi dhaaf, maxaa yeelay cid dambiyada dhaafta ma jirto adiga mooyee."], "In the name of Allah, with whose name nothing on earth or in the heavens can cause harm, and He is the All-Hearing, the All-Knowing.": ["Maqaa Rabbii, isa maqaa Isaa wajjin wanti tokkollee dachii irrattis ta'e samii keessatti hin miidne; Inni Dhagahaa, Beekaadha.", "Magaca Ilaahay, ee aan magaciisa la jirkiisa waxba dhibi karin dhulka iyo samada midna, isaguna waa Maqle, Ogaal."], "Glory be to Allah and praise be to Him, as many as His creation, as much as pleases Him, the weight of His Throne, and the ink of His words.": ["Rabbiin qulqulleessa, Isa faarsas: lakkoofsa uumama Isaa, hanga Inni jaallatu, ulfaatina Arshii Isaa, fi bal'ina qalama jechoota Isaa.", "Ilaahay waa ka hufan yahay ceeb kasta, waana mahadsan yahay: tirada abuurkiisa, inta uu raalli ku yahay, culayska Carshigiisa, iyo khadka ereyadiisa."], "Glory be to Allah and praise be to Him.": ["Rabbiin hir'ina hundumaa irraa qulqulleessa, Isa faarsas.", "Ilaahay waa ka hufan yahay ceeb kasta, mahadna isagaa iska leh."], "I seek Allah's forgiveness and turn to Him in repentance.": ["Rabbiin dhiifama kadhadha, gara Isaattis tawbadha.", "Waxaan Ilaahay weydiisanayaa dambi dhaaf, waxaanan u toobad keenayaa xaggiisa."], "I seek refuge in the perfect words of Allah from the evil of what He has created.": ["Jechoota Rabbii guutuu ta'aniin hamaa waan Inni uume irraa maganfadha.", "Waxaan ku magan galayaa ereyada Ilaahay ee dhammaystiran sharka waxa uu abuuray."], "I seek refuge in the perfect words of Allah from every devil and harmful creature, and from every evil eye.": ["Jechoota Rabbii guutuu ta'aniin shayxaana hundumaa fi uumama miidhu hundumaa irraa, akkasumas ija hamaa hundumaa irraa maganfadha.", "Waxaan ku magan galayaa ereyada Ilaahay ee dhammaystiran shayddaan kasta iyo wax kasta oo waxyeello leh, iyo il kasta oo xun."], "Hand on the place that hurts. In the name of Allah. I seek refuge in Allah and His power from the evil of what I find and what I fear.": ["Harka kee iddoo si dhukkubu irra kaa'i. Bismillaah. Rabbii fi humna Isaatti hamaa waan natti dhagahamuu fi waan sodaadhu irraa maganfadha.", "Gacanta saar meesha ku xanuunaysa. Bismillaah. Waxaan ku magan galayaa Ilaahay iyo awoodiisa sharka waxaan dareemayo iyo waxaan ka cabsanayo."], "In the name of Allah I do ruqyah for you, from everything that harms you, from the evil of every soul or envious eye. May Allah cure you. In the name of Allah I do ruqyah for you. (Jibrīl's ruqyah, said over someone else.)": ["Maqaa Rabbiitiin si ruqyaa'a, waan si miidhu hundumaa irraa, hamaa lubbuu hundumaa ykn ija hinaafaa irraa. Rabbiin si haa fayyisu. Maqaa Rabbiitiin si ruqyaa'a. (Ruqyaa Jibriil, nama biraa irratti kan dubbatamu.)", "Magaca Ilaahay ayaan kugu ruqyaynayaa, wax kasta oo ku dhibaya, sharka naf kasta ama il xaasid. Ilaahay ha ku bogsiiyo. Magaca Ilaahay ayaan kugu ruqyaynayaa. (Ruqyaddii Jibriil, qof kale ayaa loo akhriyaa.)"], "I seek refuge in Allah from the accursed shayṭān.": ["Shayxaana abaaramaa irraa Rabbiitti maganfadha.", "Waxaan Ilaahay ka magan galayaa shayddaanka la naclay."], "O Allah, I seek refuge in You from worry and grief, from helplessness and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by people.": ["Yaa Rabbii, yaaddoo fi gadda irraa, dadhabbii fi hojii jibbuu irraa, harka cimaa ta'uu fi sodaa irraa, ba'aa liqii fi namoonni na mo'uu irraa Sitti maganfadha.", "Ilaahayow, waxaan kaa magan galayaa walwal iyo murug, itaal darro iyo caajis, bakhaylnimo iyo fulaynimo, culayska deynta iyo in dadku iga adkaadaan."], "Al-Ikhlas, Al-Falaq and An-Nas: blow lightly into your cupped palms, recite them, then wipe over as much of your body as you can, starting with your head, face and front. Do this three times.": ["Al-Ikhlaas, Al-Falaq fi An-Naas: barruu harka kee lamaan keessatti suuta afuufi, isaan qara'i, achiis hanga dandeessetti qaama kee haxaa'i; mataa, fuula fi qaama fuulduraa irraa jalqabi. Si'a sadii godhi.", "Al-Ikhlaas, Al-Falaq iyo An-Naas: si khafiif ah ugu tuf calaacalahaaga, akhri, kadibna ku mari jidhkaaga inta aad karto, ka bilow madaxa, wejiga iyo jidhka hore. Saddex jeer samee."], "In Your name, my Lord, I lay down my side, and by You I raise it. If You take my soul, have mercy on it; and if You send it back, protect it as You protect Your righteous servants.": ["Yaa Rabbii koo, maqaa Keetiin cinaacha koo kaa'e, Siinis ol kaasa. Yoo lubbuu koo qabatte ishee rahmadhu; yoo ishee deebifte, akkuma gabroota Kee gaggaarii eegdutti ishee eegi.", "Magacaaga Rabbiyow ayaan dhinacayga ku dhigay, adigaana ku kicinayaa. Haddii aad naftayda qabato u naxariiso, haddii aad soo celisana u ilaali sida aad u ilaaliso addoomadaada wanaagsan."], "In Your name, O Allah, I die and I live.": ["Yaa Rabbii, maqaa Keetiin nan du'a, nan jiraadhas.", "Ilaahayow, magacaaga ayaan ku dhimanayaa kuna noolaanayaa."], "Glory be to Allah (33 times)": ["Rabbiin qulqulleessa (si'a 33)", "Ilaahay waa ka hufan yahay ceeb kasta (33 jeer)"], "All praise is for Allah (33 times)": ["Galanni hundi kan Rabbiiti (si'a 33)", "Mahad oo dhan Ilaahay baa iska leh (33 jeer)"], "Allah is the Greatest (34 times). Better for you than a servant.": ["Rabbiin guddaadha (si'a 34). Tajaajilaa caalaa isinii wayya.", "Ilaahay waa ka weyn yahay wax walba (34 jeer). Waxay idiin dhaantaa adeege."]});
+const ZK2={"morning": [{"q": 1, "qk": ["112:1", "112:2", "112:3", "112:4", "|", "113:1", "113:2", "113:3", "113:4", "113:5", "|", "114:1", "114:2", "114:3", "114:4", "114:5", "114:6"], "n": 3, "src": ["Abu Dawud 5082", "https://sunnah.com/abudawud:5082"], "mt": "q", "pre": "", "why": "Say them three times in the morning and evening; they will suffice you against everything."}, {"ar": "أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَٰذَا الْيَوْمِ وَخَيْرَ مَا بَعْدَهُ، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَٰذَا الْيَوْمِ وَشَرِّ مَا بَعْدَهُ، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ", "tr": "Aṣbaḥnā wa aṣbaḥal-mulku lillāh, wal-ḥamdu lillāh, lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamdu wa huwa ʿalā kulli shayʾin qadīr. Rabbi asʾaluka khayra mā fī hādhal-yawmi wa khayra mā baʿdah, wa aʿūdhu bika min sharri mā fī hādhal-yawmi wa sharri mā baʿdah. Rabbi aʿūdhu bika minal-kasali wa sūʾil-kibar. Rabbi aʿūdhu bika min ʿadhābin fin-nāri wa ʿadhābin fil-qabr.", "me": "We have entered the morning and the dominion belongs to Allah, and praise is for Allah. None has the right to be worshipped but Allah alone, with no partner. His is the dominion and His is the praise, and He is over all things capable. My Lord, I ask You for the good of this day and what follows it, and seek refuge in You from its evil and the evil of what follows it. My Lord, I seek refuge in You from laziness and the misery of old age, and from punishment in the Fire and in the grave.", "n": 1, "src": ["Muslim 2723", "https://sunnah.com/muslim:2723a"], "mt": "h"}, {"ar": "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ", "tr": "Allāhumma bika aṣbaḥnā, wa bika amsaynā, wa bika naḥyā, wa bika namūtu, wa ilaykan-nushūr", "me": "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection.", "n": 1, "src": ["Tirmidhi 3391", "https://sunnah.com/tirmidhi:3391"], "mt": "h"}, {"ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ", "tr": "Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana ʿabduk, wa ana ʿalā ʿahdika wa waʿdika mastaṭaʿt, aʿūdhu bika min sharri mā ṣanaʿt, abū'u laka bi niʿmatika ʿalayy, wa abū'u bi dhanbī, faghfir lī fa innahu lā yaghfirudh-dhunūba illā ant", "me": "O Allah, You are my Lord; none has the right to be worshipped but You. You created me and I am Your servant, and I keep Your covenant and promise as best I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins but You.", "n": 1, "src": ["Bukhari 6306", "https://sunnah.com/bukhari:6306"], "mt": "h", "why": "Whoever says it in the day with firm faith and dies before evening is among the people of Paradise."}, {"ar": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", "tr": "Bismillāhil-ladhī lā yaḍurru maʿasmihi shay'un fil-arḍi wa lā fis-samā', wa huwas-Samīʿul-ʿAlīm", "me": "In the name of Allah, with whose name nothing on earth or in the heavens can cause harm, and He is the All-Hearing, the All-Knowing.", "n": 3, "src": ["Abu Dawud 5088", "https://sunnah.com/abudawud:5088"], "mt": "h", "why": "Nothing will harm the one who says it three times."}, {"ar": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ", "tr": "Subḥānallāhi wa bi ḥamdih, ʿadada khalqih, wa riḍā nafsih, wa zinata ʿarshih, wa midāda kalimātih", "me": "Glory be to Allah and praise be to Him, as many as His creation, as much as pleases Him, the weight of His Throne, and the ink of His words.", "n": 3, "src": ["Muslim 2726", "https://sunnah.com/muslim:2726a"], "mt": "h"}, {"ar": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "tr": "Subḥānallāhi wa bi ḥamdih", "me": "Glory be to Allah and praise be to Him.", "n": 100, "src": ["Muslim 2692", "https://sunnah.com/muslim:2692"], "mt": "h"}, {"ar": "أَسْتَغْفِرُ اللَّهَ وَأَتُوبُ إِلَيْهِ", "tr": "Astaghfirullāha wa atūbu ilayh", "me": "I seek Allah's forgiveness and turn to Him in repentance.", "n": 100, "src": ["Muslim 2702", "https://sunnah.com/muslim:2702a"], "mt": "h", "why": "The Prophet ﷺ sought forgiveness a hundred times a day."}], "evening": [{"q": 1, "qk": ["112:1", "112:2", "112:3", "112:4", "|", "113:1", "113:2", "113:3", "113:4", "113:5", "|", "114:1", "114:2", "114:3", "114:4", "114:5", "114:6"], "n": 3, "src": ["Abu Dawud 5082", "https://sunnah.com/abudawud:5082"], "mt": "q", "pre": "", "why": "Say them three times in the morning and evening; they will suffice you against everything."}, {"ar": "أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، رَبِّ أَسْأَلُكَ خَيْرَ مَا فِي هَٰذِهِ اللَّيْلَةِ وَخَيْرَ مَا بَعْدَهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فِي هَٰذِهِ اللَّيْلَةِ وَشَرِّ مَا بَعْدَهَا، رَبِّ أَعُوذُ بِكَ مِنَ الْكَسَلِ وَسُوءِ الْكِبَرِ، رَبِّ أَعُوذُ بِكَ مِنْ عَذَابٍ فِي النَّارِ وَعَذَابٍ فِي الْقَبْرِ", "tr": "Amsaynā wa amsal-mulku lillāh, wal-ḥamdu lillāh, lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamdu wa huwa ʿalā kulli shayʾin qadīr. Rabbi asʾaluka khayra mā fī hādhihil-laylati wa khayra mā baʿdahā, wa aʿūdhu bika min sharri mā fī hādhihil-laylati wa sharri mā baʿdahā. Rabbi aʿūdhu bika minal-kasali wa sūʾil-kibar. Rabbi aʿūdhu bika min ʿadhābin fin-nāri wa ʿadhābin fil-qabr.", "me": "We have entered the evening and the dominion belongs to Allah, and praise is for Allah. None has the right to be worshipped but Allah alone, with no partner. His is the dominion and His is the praise, and He is over all things capable. My Lord, I ask You for the good of this night and what follows it, and seek refuge in You from its evil and the evil of what follows it. My Lord, I seek refuge in You from laziness and the misery of old age, and from punishment in the Fire and in the grave.", "n": 1, "src": ["Muslim 2723", "https://sunnah.com/muslim:2723a"], "mt": "h"}, {"ar": "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ", "tr": "Allāhumma bika amsaynā, wa bika aṣbaḥnā, wa bika naḥyā, wa bika namūtu, wa ilaykal-maṣīr", "me": "O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and to You is the return.", "n": 1, "src": ["Tirmidhi 3391", "https://sunnah.com/tirmidhi:3391"], "mt": "h"}, {"ar": "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَٰهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي، فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ", "tr": "Allāhumma anta rabbī lā ilāha illā ant, khalaqtanī wa ana ʿabduk, wa ana ʿalā ʿahdika wa waʿdika mastaṭaʿt, aʿūdhu bika min sharri mā ṣanaʿt, abū'u laka bi niʿmatika ʿalayy, wa abū'u bi dhanbī, faghfir lī fa innahu lā yaghfirudh-dhunūba illā ant", "me": "O Allah, You are my Lord; none has the right to be worshipped but You. You created me and I am Your servant, and I keep Your covenant and promise as best I can. I seek refuge in You from the evil of what I have done. I acknowledge Your favour upon me and I acknowledge my sin, so forgive me, for none forgives sins but You.", "n": 1, "src": ["Bukhari 6306", "https://sunnah.com/bukhari:6306"], "mt": "h", "why": "Whoever says it at night with firm faith and dies before morning is among the people of Paradise."}, {"ar": "بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ", "tr": "Bismillāhil-ladhī lā yaḍurru maʿasmihi shay'un fil-arḍi wa lā fis-samā', wa huwas-Samīʿul-ʿAlīm", "me": "In the name of Allah, with whose name nothing on earth or in the heavens can cause harm, and He is the All-Hearing, the All-Knowing.", "n": 3, "src": ["Abu Dawud 5088", "https://sunnah.com/abudawud:5088"], "mt": "h", "why": "Nothing will harm the one who says it three times."}, {"ar": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", "tr": "Aʿūdhu bi kalimātillāhit-tāmmāti min sharri mā khalaq", "me": "I seek refuge in the perfect words of Allah from the evil of what He has created.", "n": 3, "src": ["Muslim 2709", "https://sunnah.com/muslim:2709a"], "mt": "h"}, {"ar": "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ", "tr": "Subḥānallāhi wa bi ḥamdih", "me": "Glory be to Allah and praise be to Him.", "n": 100, "src": ["Muslim 2692", "https://sunnah.com/muslim:2692"], "mt": "h"}], "ruqyah": [{"q": 1, "qk": ["1:1", "1:2", "1:3", "1:4", "1:5", "1:6", "1:7"], "n": 1, "src": ["Bukhari 5736", "https://sunnah.com/bukhari:5736"], "mt": "q", "pre": ""}, {"q": 1, "qk": ["2:255"], "n": 1, "src": ["Bukhari 2311", "https://sunnah.com/bukhari:2311"], "mt": "q", "pre": "isti"}, {"q": 1, "qk": ["2:285", "2:286"], "n": 1, "src": ["Bukhari 5009", "https://sunnah.com/bukhari:5009"], "mt": "q", "pre": ""}, {"q": 1, "qk": ["112:1", "112:2", "112:3", "112:4", "|", "113:1", "113:2", "113:3", "113:4", "113:5", "|", "114:1", "114:2", "114:3", "114:4", "114:5", "114:6"], "n": 1, "src": ["Bukhari 5016", "https://sunnah.com/bukhari:5016"], "mt": "q", "pre": ""}, {"ar": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ، مِنْ كُلِّ شَيْطَانٍ وَهَامَّةٍ، وَمِنْ كُلِّ عَيْنٍ لَامَّةٍ", "tr": "Aʿūdhu bi kalimātillāhit-tāmmah, min kulli shayṭānin wa hāmmah, wa min kulli ʿaynin lāmmah", "me": "I seek refuge in the perfect words of Allah from every devil and harmful creature, and from every evil eye.", "n": 3, "src": ["Bukhari 3371", "https://sunnah.com/bukhari:3371"], "mt": "h"}, {"ar": "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ", "tr": "Aʿūdhu bi kalimātillāhit-tāmmāti min sharri mā khalaq", "me": "I seek refuge in the perfect words of Allah from the evil of what He has created.", "n": 3, "src": ["Muslim 2708", "https://sunnah.com/muslim:2708a"], "mt": "h"}, {"ar": "بِسْمِ اللَّهِ (×3) ۝ أَعُوذُ بِاللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ", "tr": "Bismillāh (3 times), then: Aʿūdhu billāhi wa qudratihi min sharri mā ajidu wa uḥādhir", "me": "Hand on the place that hurts. In the name of Allah. I seek refuge in Allah and His power from the evil of what I find and what I fear.", "n": 7, "src": ["Muslim 2202", "https://sunnah.com/muslim:2202"], "mt": "h"}, {"ar": "بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ", "tr": "Bismillāhi arqīk, min kulli shay'in yu'dhīk, min sharri kulli nafsin aw ʿayni ḥāsid, Allāhu yashfīk, bismillāhi arqīk", "me": "In the name of Allah I do ruqyah for you, from everything that harms you, from the evil of every soul or envious eye. May Allah cure you. In the name of Allah I do ruqyah for you. (Jibrīl's ruqyah, said over someone else.)", "n": 3, "src": ["Muslim 2186", "https://sunnah.com/muslim:2186"], "mt": "h"}, {"ar": "أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ", "tr": "Aʿūdhu billāhi minash-shayṭānir-rajīm", "me": "I seek refuge in Allah from the accursed shayṭān.", "n": 3, "src": ["Bukhari 3282", "https://sunnah.com/bukhari:3282"], "mt": "h"}], "dua": [{"ar": "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَالْعَجْزِ وَالْكَسَلِ، وَالْبُخْلِ وَالْجُبْنِ، وَضَلَعِ الدَّيْنِ، وَغَلَبَةِ الرِّجَالِ", "tr": "Allāhumma innī aʿūdhu bika minal-hammi wal-ḥazan, wal-ʿajzi wal-kasal, wal-bukhli wal-jubn, wa ḍalaʿid-dayni wa ghalabatir-rijāl", "me": "O Allah, I seek refuge in You from worry and grief, from helplessness and laziness, from miserliness and cowardice, from the burden of debt and from being overpowered by people.", "n": 1, "src": ["Bukhari 6369", "https://sunnah.com/bukhari:6369"], "mt": "h"}, {"q": 1, "qk": ["21:87"], "n": 1, "src": ["Tirmidhi 3505", "https://sunnah.com/tirmidhi:3505"], "mt": "q", "pre": "", "why": "No Muslim calls on his Lord with it about anything except that He answers him."}, {"q": 1, "qk": ["3:173"], "n": 1, "src": ["Bukhari 4563", "https://sunnah.com/bukhari:4563"], "mt": "q", "pre": ""}]};
+
+
+/* ================= v6 launch pieces: adhkar sets, Qur'an reader, Stars, Qibla, Game, Feedback, reminders ================= */
+Object.assign(DICT,{
+'Ruqyah':['Ruqyaa','Ruqyo'],"Du'as for worry":['Duwaa yaaddootaaf','Ducooyinka walwalka'],'Reading options':['Filannoo dubbisuu','Doorashooyinka akhriska'],
+'Text size':['Hamma barreeffamaa','Cabbirka qoraalka'],'Meaning':['Hiika','Macnaha'],'Show the meaning under each ayah':['Hiika aayaa tokkoon tokkoon isaa jala agarsiisi','Tus macnaha hoosta aayad kasta'],
+'Play from here':['Asii taphachiisi','Halkan ka shid'],'Save my place':['Iddoo koo qabadhu','Kaydi meeshayda'],'Place saved':['Iddoon qabameera','Meeshii waa la kaydiyay'],
+'Previous':['Kan duraa','Kii hore'],'Next':['Kan itti aanu','Kan xiga'],'Loading…':["Fe'amaa jira…",'Waa la soo rarayaa…'],'Try again':['Irra deebi\'ii yaali','Isku day mar kale'],
+"Couldn't load this surah. Check your internet and try again.":["Suuraan kun hin feene. Interneetii kee mirkaneessii irra deebi'ii yaali.",'Suuraddan lama soo rari karin. Hubi internetkaaga oo isku day mar kale.'],
+'Stars & streaks':['Urjii fi walitti aansuu','Xiddigo iyo isku xigxig'],'Stars':['Urjii','Xiddigo'],'Days in a row':['Guyyoota walitti aansan','Maalmo isku xiga'],'This week':["Torban kana",'Toddobaadkan'],
+'Last 14 days':['Guyyoota 14 darban','14-kii maalmood ee la soo dhaafay'],'How to earn a star':['Urjii akkamitti argatta','Sida xiddig loo helo'],
+'Each salah prayed on time':['Salaata tokkoon tokkoon yeroo ishee','Salaad kasta oo waqtigeeda lagu tukado'],"Each step of Today's path":["Tarkaanfii karaa har'aa hundumaa",'Tallaabo kasta oo jidka maanta'],
+'Finishing a set of adhkar':['Tuuta azkaaraa xumuruu','Dhammaystirka koox adkaar ah'],'Reading the ayah of the day':["Aayaa guyyaa dubbisuu",'Akhrinta aayadda maanta'],
+"Today's khatmah portion":["Qooda khatmii har'aa",'Qaybta khatmiga maanta'],'Finishing a task':['Hojii xumuruu','Dhammaystirka hawl'],
+'Undo takes the star back, so the count stays honest.':['Yoo haqxe urjiin ni deebi\'a, lakkoofsi dhugaa ta\'ee hafa.','Haddii aad ka noqoto xiddigga waa la celiyaa, si tiradu run u ahaato.'],
+'Qibla':['Qiblaa','Qiblada'],'Start compass':['Kompaasii jalqabi','Bilow kombaaska'],'You are facing the Qibla':['Gara Qiblaatti garagalteetta','Waxaad u jeeddaa Qiblada'],
+'Turn slowly until the gold arrow points up.':['Hanga xiyyaan warqee ol agarsiisutti suuta garagali.','Si tartiib ah u wareeg ilaa fallaadha dahabka ahi ay kor u tilmaanto.'],
+'Hold your phone flat, away from metal and magnets.':['Bilbila kee lafaan qabadhu, sibiila fi maagneetii irraa fageessi.','Taleefankaaga si siman u hay, kana fogee birta iyo birlabta.'],
+'Set your location to find the Qibla':['Qiblaa argachuuf iddoo kee saagi','Deji goobtaada si aad u hesho Qiblada'],'Use my location':['Iddoo koo fayyadami','Isticmaal goobtayda'],
+'No compass on this device. Use the angle from North below.':['Meeshaan kun kompaasii hin qabu. Kofa Kaabaa irraa jiru armaan gadii fayyadami.','Qalabkan kombaas ma laha. Isticmaal xagalka Waqooyiga ee hoose.'],
+'from North':['Kaabaa irraa','Waqooyiga ka'],'to Makkah':['hanga Makkaa','ilaa Makka'],'Compass was not allowed.':['Kompaasiin hin eeyyamamne.','Kombaaska lama oggolaan.'],
+'Game':['Tapha','Ciyaar'],'Close':['Cufi','Xir'],'Feedback':['Yaada','Faallo'],'Report a problem':['Rakkoo gabaasi','Soo sheeg dhibaato'],
+'Share an idea or something you like. We read every message.':['Yaada ykn waan jaallattu qoodi. Ergaa hunda ni dubbisna.','La wadaag fikrad ama wax aad jeceshahay. Fariin kasta waan akhrinnaa.'],
+'Tell us what happened and on which screen. We read every message.':['Maal akka ta\'e fi fuula kam irratti akka ta\'e nutti himi. Ergaa hunda ni dubbisna.','Noo sheeg waxa dhacay iyo shaashadda ay ka dhacday. Fariin kasta waan akhrinnaa.'],
+'Write here…':['Asitti barreessi…','Halkan ku qor…'],'Include device details (phone type, screen size)':['Odeeffannoo meeshaa dabali (gosa bilbilaa, hamma fuulaa)','Ku dar faahfaahinta qalabka (nooca taleefanka, cabbirka shaashadda)'],
+'Send':['Ergi','Dir'],'Sending…':['Ergamaa jira…','Waa la dirayaa…'],'Sent. Thank you!':['Ergameera. Galatoomi!','Waa la diray. Mahadsanid!'],'Please write a few words first.':['Dura jechoota muraasa barreessi.','Fadlan marka hore qor dhowr eray.'],
+"Couldn't send. Check your internet and try again.":["Erguu hin dandeenye. Interneetii kee mirkaneessii irra deebi'ii yaali.",'Lama diri karin. Hubi internetkaaga oo isku day mar kale.'],
+'Reminders on this phone':['Yaadachiiftuu bilbila kana irratti','Xasuusinta taleefankan'],'Turn on':['Bani','Shid'],'On':['Banaa','Shidan'],'Send a test':['Yaalii ergi','Dir tijaabo'],
+'Sign in so reminders can reach this phone.':['Akka yaadachiiftuun bilbila kana ga\'uuf seeni.','Gal si xasuusintu u gaarto taleefankan.'],'Sign in':['Seeni','Gal'],
+'On iPhone, open Fastaqim from your Home Screen to get reminders.':['iPhone irratti, yaadachiiftuu argachuuf Fastaqim Home Screen irraa bani.','iPhone-ka, ka fur Fastaqim Home Screen-ka si aad u hesho xasuusin.'],
+'This browser cannot show reminders.':['Biraawzariin kun yaadachiiftuu agarsiisuu hin danda\'u.','Biraawsarkani ma tusi karo xasuusin.'],
+'Reminders were not allowed. You can allow them in your phone settings.':['Yaadachiiftuun hin eeyyamamne. Qindaa\'ina bilbila keetii keessatti eeyyamuu dandeessa.','Xasuusinta lama oggolaan. Waxaad ka oggolaan kartaa dejinta taleefankaaga.'],
+'Set your location first so salah reminders are on time.':['Akka yaadachiiftuun salaataa yeroon ta\'uuf dura iddoo kee saagi.','Marka hore deji goobtaada si xasuusinta salaaddu waqtigeeda u noqoto.'],
+'Reminders are on for this phone':['Yaadachiiftuun bilbila kanaaf banaa dha','Xasuusintu way u shidan yihiin taleefankan'],'A test reminder will arrive in about a minute.':['Yaadachiiftuun yaalii daqiiqaa tokko keessatti ni dhufa.','Xasuusin tijaabo ah ayaa imanaysa qiyaastii hal daqiiqo gudaheed.'],
+"Couldn't turn on reminders. Please try again.":["Yaadachiiftuu banuu hin dandeenye. Irra deebi'ii yaali.",'Lama shidi karin xasuusinta. Fadlan isku day mar kale.'],
+'Morning adhkar':['Azkaara ganamaa','Adkaarta subaxa'],'Evening adhkar':['Azkaara galgalaa','Adkaarta fiidka'],'Ayah of the day':['Aayaa guyyaa','Aayadda maanta'],
+'Plan your day':['Guyyaa kee karoorfadhu','Qorshee maalintaada'],'Tomorrow is a sunnah fast':["Boru soomana sunnaa ti",'Berri waa soon sunno ah'],
+'Arabic: Uthmani script (QuranEnc). Meaning:':['Arabiffa: barreeffama Usmaanii (QuranEnc). Hiika:','Carabi: far Cusmaani (QuranEnc). Macnaha:'],
+'Meaning: Fastaqim translation, still to be reviewed. Sheikh Mohammed Rashad Abdulle\'s meaning is not available for this.':['Hiikkaa: hiikkaa Fastaqim, ammallee kan hin mirkanaa\'in. Hiikkaan Sheekh Mohammed Rashad Abdulle kanaaf hin argamne.','Macnaha: tarjumaadda Fastaqim, weli dib u eegis u baahan.'],
+'English meaning':['Hiika Afaan Ingiliffaa','Macnaha Ingiriisiga']});
+Object.assign(DICT_T,{'Ayah {0} · Page {1} · Juz {2}':['Aayaa {0} · Fuula {1} · Juz {2}','Aayadda {0} · Bogga {1} · Juz {2}'],'Page {0}':['Fuula {0}','Bogga {0}'],'Juz {0}':['Juz {0}','Juz {0}'],
+'Surah {0}':['Suuraa {0}','Suuradda {0}'],'{0} ayat · Juz {1} · Page {2}':['Aayaa {0} · Juz {1} · Fuula {2}','{0} aayadood · Juz {1} · Bogga {2}'],'Ayah {0} · Juz {1}':['Aayaa {0} · Juz {1}','Aayadda {0} · Juz {1}'],
+'Open page {0}':['Fuula {0} bani','Fur bogga {0}'],'Time for {0}':['Yeroon {0} ga\'eera','Waa waqtigii {0}'],'{0} km':['km {0}','{0} km']});
+TPL.splice(0,TPL.length,...Object.keys(DICT_T).sort((a,b)=>b.replace(/\{\d\}/g,'').length-a.replace(/\{\d\}/g,'').length).map(k=>[new RegExp('^'+k.replace(/[.*+?^$()|[\]\\]/g,'\\$&').replace(/\{\d\}/g,'(.+?)')+'$'),k]));
+
+/* ---- adhkar sets from the live site (only sahih or hasan, each with its sunnah.com page) ---- */
+const BASM='<p style="margin:0 0 6px;font-size:.82em">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</p>',ISTI='<p style="margin:0 0 6px;font-size:.82em">أَعُوذُ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ</p>';
+const zkQ=keys=>keys.filter(k=>k!=='|').map(k=>QD[k].en).join(' ');
+function zkMake(o){const x=Object.assign({},o);
+  if(o.qk){const ks=o.qk,surStart=ks[0]&&/^11[234]:1$/.test(ks[0]);x.ar=(o.pre==='isti'?ISTI:'')+(surStart?BASM:'')+ks.map(k=>k==='|'?'<br>'+BASM.replace('margin:0 0 6px','margin:6px 0'):QA(k)).join(' ');
+    x._qk=ks;Object.defineProperty(x,'me',{get(){return zkQ(ks)},enumerable:true})}
+  else{const en=o.me;x._en=en;Object.defineProperty(x,'me',{get(){return T(en,'')},enumerable:true})}
+  if(o.why){const w=o.why;Object.defineProperty(x,'why',{get(){return w},enumerable:true})}return x}
+ZK.morning={t:T('Morning adhkar','أذكار الصباح'),items:ZK2.morning.map(zkMake)};
+ZK.evening={t:T('Evening adhkar','أذكار المساء'),items:ZK2.evening.map(zkMake)};
+ZK.ruqyah={t:T('Ruqyah','الرقية'),items:ZK2.ruqyah.map(zkMake)};
+ZK.dua={t:T("Du'as for worry",'أدعية الهمّ'),items:ZK2.dua.map(zkMake)};
+ZK.sleep.items.forEach((x,i)=>{x.mt=i<2?'q':'h';if(i<2){const ks=i?['2:285','2:286']:['2:255'];x._qk=ks;Object.defineProperty(x,'me',{get(){return zkQ(ks)},configurable:true,enumerable:true})}});
+const QTRN=['Ghali Apapur Ghali (Quran.com)','Mahmud Muhammad Abduh (Quran.com)'];
+function zDoneAll(set){const z=ZK[set],p=zProg(set);return z.items.every((it,j)=>(p[j]||0)>=it.n)}
+{const _zd=zDraw;zDraw=function(a){_zd(a);try{if(LI<0||L==='ar'||!S.zs.me)return;const it=ZK[ZS.set].items[ZS.i],m=$('zc').querySelector('.zm');if(!m)return;
+  let qOk=false;try{const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');qOk=(it._qk||[]).filter(k=>k!=='|').every(k=>c[k])}catch(e){}
+  const lab=it.mt==='q'?(qOk?T('Meaning','المعنى')+': '+QTRN[LI]:T('English meaning','')):(it.me===it._en?T('English meaning',''):T("Meaning: Fastaqim translation, still to be reviewed. Sheikh Mohammed Rashad Abdulle's meaning is not available for this.",''));
+  m.insertAdjacentHTML('afterend',`<p class="zml">${esc(lab)}</p>`)}catch(e){}}}
+SCALL.morning[2]=()=>zOpen('morning');SCALL.evening[2]=()=>zOpen('evening');
+
+/* ---- screens added to the page ---- */
+$('s-index').insertAdjacentHTML('afterend',`
+<section class="scr" id="s-read">
+ <div class="hd sub rdh"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 id="rdT"></h1><button class="ib" id="rdO" aria-label="Reading options"><i class="ph ph-text-aa"></i></button></div>
+ <div id="rdB"></div>
+</section>
+<section class="scr" id="s-stars">
+ <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 id="stT"></h1><span style="width:44px"></span></div>
+ <div id="stB"></div>
+</section>
+<section class="scr" id="s-qibla">
+ <div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 id="qbT"></h1><span style="width:44px"></span></div>
+ <div id="qbB"></div>
+</section>`);
+Object.assign(TABOF,{read:'quran',stars:'more',qibla:'more'});
+document.body.insertAdjacentHTML('beforeend',`<div class="gmo" id="gmO" aria-hidden="true"><div class="gmh"><button class="ib" id="gmX" aria-label="Close"><i class="ph ph-x"></i></button></div><iframe id="gmF" title="Game" allow="autoplay; fullscreen"></iframe></div>`);
+
+/* ---- Qur'an reader: all 114 surahs ---- */
+const RQ={c:{},tr:{},su:0,key:''};let QMETA=null,RD={su:2,ay:255,scroll:true};
+const suName=n=>L==='ar'?SU[n-1][1]:SU[n-1][0];
+const qLast=()=>S.qLast||{su:2,ay:255,p:42,j:3};
+async function qJ(n){if(RQ.c[n])return RQ.c[n];const r=await fetch('q/'+n+'.json');if(!r.ok)throw new Error('q'+n);return RQ.c[n]=await r.json()}
+async function qMeta(){if(QMETA)return QMETA;try{QMETA=await (await fetch('q/meta.json')).json()}catch(e){}return QMETA}
+async function qTrCh(n){if(!QTR_ID)return null;if(RQ.tr[n])return RQ.tr[n];const ck='fq5.qch.'+QTR_ID+'.'+n;
+  try{const c=JSON.parse(localStorage.getItem(ck)||'null');if(c)return RQ.tr[n]=c}catch(e){}
+  try{const r=await fetch('https://api.quran.com/api/v4/quran/translations/'+QTR_ID+'?chapter_number='+n);const j=await r.json();
+    const a=(j.translations||[]).map(t=>String(t.text||'').replace(/<sup[^>]*>.*?<\/sup>/g,'').replace(/<[^>]+>/g,'').trim());
+    if(a.length===SU[n-1][2]){RQ.tr[n]=a;try{localStorage.setItem(ck,JSON.stringify(a))}catch(e){}return a}}catch(e){}return null}
+function qOpen(k){const[a,b]=String(k).split(':').map(Number);RD={su:Math.min(114,Math.max(1,a||1)),ay:Math.max(1,b||1),scroll:true};go('read')}
+const rdO=()=>S.rd=S.rd||{sz:1,me:1};
+R.read=()=>{rdDraw()};
+async function rdDraw(){const su=RD.su,s=SU[su-1],B=$('rdB'),o=rdO(),showMe=L!=='ar'&&!!o.me;
+ $('rdT').textContent=suName(su);B.style.setProperty('--rz',o.sz);const key=su+'|'+LX+'|'+showMe;
+ if(RQ.key!==key){B.innerHTML=`<p class="rload">${T('Loading…','جارٍ التحميل…')}</p>`;let d;
+  try{d=await qJ(su)}catch(e){if(RD.su!==su)return;B.innerHTML=`<div class="rerr"><p>${T("Couldn't load this surah. Check your internet and try again.",'تعذّر تحميل السورة. تحقق من الإنترنت وحاول مجددًا.')}</p><button class="go2" id="rdRe">${T('Try again','حاول مرة أخرى')}</button></div>`;$('rdRe').onclick=rdDraw;return}
+  const mt=showMe&&LI>=0?await qTrCh(su):null;if(RD.su!==su)return;
+  const j1=d.j[0],j2=d.j[d.j.length-1],p1=d.p[0],p2=d.p[d.p.length-1],rg=(a,b)=>a===b?a:a+'–'+b,rgA=(a,b)=>a===b?AR(a):AR(a)+'–'+AR(b);
+  let h=`<div class="rsh"><div class="rsn" lang="ar" dir="rtl">سُورَةُ ${s[1]}</div>${L==='ar'?'':`<b>${esc(s[0])}</b>`}<small>${T(s[2]+' ayat · Juz '+rg(j1,j2)+' · Page '+rg(p1,p2),AR(s[2])+' آية · الجزء '+rgA(j1,j2)+' · الصفحة '+rgA(p1,p2))}</small></div>`;
+  if(su!==1&&su!==9)h+=`<p class="rbs" lang="ar" dir="rtl">بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ</p>`;
+  d.v.forEach(([a,en],i)=>{const n=i+1;
+   if(i>0&&d.p[i]!==d.p[i-1])h+=`<div class="rpg"><span>${T('Page '+d.p[i],'الصفحة '+AR(d.p[i]))}${d.j[i]!==d.j[i-1]?' · '+T('Juz '+d.j[i],'الجزء '+AR(d.j[i])):''}</span></div>`;
+   const w=a.split(' '),txt=w.length>2?w.slice(0,-1).join(' ')+' '+w[w.length-1]:a;
+   h+=`<div class="ra" id="a${n}" data-n="${n}"><p class="rar" lang="ar" dir="rtl">${txt} ${ARD(n)}</p>${showMe?`<p class="rme notranslate" translate="no">${esc(mt&&mt[i]||en)}</p>`:''}</div>`});
+  const mn=L==='ar'?'':(mt?QTRN[LI]:'Saheeh International');
+  h+=`<div class="rend"><div class="rsrc"><span>${L==='ar'?'الرسم العثماني (QuranEnc)':T('Arabic: Uthmani script (QuranEnc). Meaning:','')+' '+esc(mn)}</span><a href="https://quran.com/${su}" target="_blank" rel="noopener">Quran.com ↗</a></div>
+   <div class="rnav">${su>1?`<button class="rnb" data-rn="${su-1}"><i class="ph ph-caret-left flip"></i><span><small>${T('Previous','السابقة')}</small><b>${esc(suName(su-1))}</b></span></button>`:'<span></span>'}${su<114?`<button class="rnb nx" data-rn="${su+1}"><span><small>${T('Next','التالية')}</small><b>${esc(suName(su+1))}</b></span><i class="ph ph-caret-right flip"></i></button>`:'<span></span>'}</div></div>`;
+  B.innerHTML=h;RQ.key=key;RQ.su=su;rdHl()}
+ if(RD.scroll){RD.scroll=false;const n=RD.ay;requestAnimationFrame(()=>{const el=n>1&&$('a'+n);if(el){scrollTo(0,el.getBoundingClientRect().top+scrollY-74);el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1600)}else scrollTo(0,0)})}}
+$('rdB').addEventListener('click',e=>{const B=$('rdB');
+ const nb=e.target.closest('[data-rn]');if(nb){RD={su:+nb.dataset.rn,ay:1,scroll:true};rdDraw();return}
+ const ac=e.target.closest('[data-ra]');if(ac){const n=+ac.closest('.ra').dataset.n,su=RD.su;
+  if(ac.dataset.ra==='play'){const ks=[];for(let i=n;i<=SU[su-1][2];i++)ks.push(su+':'+i);playAyat(ks,suName(su)+' '+AR(su)+':'+AR(n))}
+  else{qSave(su,n);vib(12);toast(T('Place saved','تم حفظ الموضع'))}return}
+ const ra=e.target.closest('.ra');if(!ra||e.target.closest('a'))return;const was=ra.classList.contains('sel');
+ $$('.ra.sel',B).forEach(x=>{x.classList.remove('sel');const c=x.querySelector('.rac');if(c)c.remove()});
+ if(!was){ra.classList.add('sel');const su=RD.su,n=ra.dataset.n;ra.insertAdjacentHTML('beforeend',`<div class="rac"><button data-ra="play"><i class="ph-fill ph-play"></i>${T('Play from here','شغّل من هنا')}</button><button data-ra="mark"><i class="ph ph-bookmark-simple"></i>${T('Save my place','احفظ موضعي')}</button><a href="https://quran.com/${su}/${n}" target="_blank" rel="noopener" aria-label="Quran.com"><i class="ph ph-arrow-square-out"></i></a></div>`)}});
+function qSave(su,ay){const d=RQ.c[su];if(!d)return;const o=qLast();if(o.su===su&&o.ay===ay)return;S.qLast={su,ay,p:d.p[ay-1],j:d.j[ay-1]};save()}
+{let t=0;addEventListener('scroll',()=>{if(!$('s-read').classList.contains('on'))return;clearTimeout(t);t=setTimeout(()=>{const els=$$('#rdB .ra');for(const el of els){if(el.getBoundingClientRect().bottom>90){qSave(RQ.su,+el.dataset.n);break}}},700)},{passive:true})}
+function rdHl(){const m=String(AU.src||'').match(/(\d{3})(\d{3})\.mp3/);$$('#rdB .ra.pl').forEach(x=>x.classList.remove('pl'));if(!m||AU.paused&&AU.ended)return;
+ const su=+m[1],n=+m[2];if(su!==RQ.su||!$('s-read').classList.contains('on'))return;const el=$('a'+n);if(!el)return;el.classList.add('pl');
+ const r=el.getBoundingClientRect();if(r.top<70||r.bottom>innerHeight-150)scrollTo({top:r.top+scrollY-110,behavior:'smooth'})}
+AU.addEventListener('playing',rdHl);
+$('rdO').onclick=()=>{const o=rdO();const draw=()=>{openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Reading options','خيارات القراءة')}</h1>${XB}</div>
+ <div class="kh"><div class="rop"><span>${T('Text size','حجم الخط')}</span><div class="seg">${[[.9,'A−'],[1,'A'],[1.15,'A+'],[1.3,'A++']].map(([v,l])=>`<button class="${o.sz===v?'on':''}" data-sz="${v}">${l}</button>`).join('')}</div></div>
+ ${L==='ar'?'':`<div class="rop"><span>${T('Meaning','المعنى')}<small>${T('Show the meaning under each ayah','')}</small></span><button class="sw ${o.me?'on':''}" id="ropMe" aria-label="${T('Meaning','المعنى')}"></button></div>`}</div>`);
+ $$('#sh [data-sz]').forEach(b=>b.onclick=()=>{o.sz=+b.dataset.sz;save();$('rdB').style.setProperty('--rz',o.sz);draw()});
+ const m=$('ropMe');if(m)m.onclick=()=>{o.me=o.me?0:1;save();m.classList.toggle('on',!!o.me);rdDraw()}};draw()};
+/* every "Continue" or surah row opens the reader */
+addEventListener('click',e=>{const r=e.target.closest('[data-read]');if(r){e.preventDefault();e.stopPropagation();qOpen(r.dataset.read);return}
+ const pl=e.target.closest('.qh [data-play]');if(pl){e.preventDefault();e.stopPropagation();const q=qLast(),ks=[];for(let i=q.ay;i<=SU[q.su-1][2];i++)ks.push(q.su+':'+i);playAyat(ks,suName(q.su))}},true);
+function qLabels(){const q=qLast(),nm=suName(q.su),k=q.su+':'+q.ay;
+ $$('[data-read="2:255"],.qh [data-read],#cont [data-read],.cont2,#s-index .lr').forEach(b=>{if(b.closest('#ixList'))return;b.dataset.read=k});
+ const sub=T('Ayah '+q.ay+' · Page '+q.p+' · Juz '+q.j,'الآية '+AR(q.ay)+' · الصفحة '+AR(q.p)+' · الجزء '+AR(q.j));
+ if($('qSu'))$('qSu').textContent=nm;if($('qResume'))$('qResume').textContent=sub;const a=document.querySelector('.qh .nm2 .a');if(a)a.textContent=SU[q.su-1][1];
+ if($('ixLast'))$('ixLast').textContent=nm+' '+AR(q.ay);
+ const qb=document.querySelector('#qc .qct b'),qs=document.querySelector('#qc .qct small:not(.ey)');if(qb)qb.textContent=T('Surah '+SU[q.su-1][0],'سورة '+SU[q.su-1][1]);if(qs)qs.textContent=T('Ayah '+q.ay+' · Juz '+q.j,'الآية '+AR(q.ay)+' · الجزء '+AR(q.j));
+ const cb=document.querySelector('#cont .tx small');if(cb)cb.textContent=nm+' · '+T('Ayah '+q.ay,'الآية '+AR(q.ay));
+ $$('#qJs [data-juz]').forEach(b=>b.classList.toggle('on',+b.dataset.juz===q.j))}
+{const _q=R.quran;R.quran=()=>{_q();qLabels();qMeta().then(m=>{if(!m)return;$$('#khList [data-khd]').forEach(b=>{const k=S.kh[+b.dataset.khd];if(!k||k.done>=604)return;const pg=k.done+1,st=m.page[pg-1];if(!st)return;
+  const row=b.closest('.kh');if(row.querySelector('.khop'))return;row.insertAdjacentHTML('beforeend',`<button class="khop" data-read="${st[0]}:${st[1]}"><i class="ph ph-book-open-text"></i>${T('Open page '+pg,'افتح الصفحة '+AR(pg))}</button>`)})})};
+ const _i=R.index;R.index=()=>{_i();qLabels()};const _qc=renderQC;renderQC=function(){_qc.apply(this,arguments);qLabels()};const _h=R.home;R.home=()=>{_h();qLabels()}}
+
+/* ---- Stars & streaks ---- */
+function stDays(n){const out=[],c={};for(const k in S.starLog){const m=k.match(/\d{4}-\d{2}-\d{2}/);if(m)c[m[0]]=(c[m[0]]||0)+1}
+ for(let i=n-1;i>=0;i--){const d=NOW();d.setDate(d.getDate()-i);out.push([d,c[dkey(d)]||0])}return out}
+R.stars=()=>{$('stT').textContent=T('Stars & streaks','النجوم والسلاسل');const d14=stDays(14),wk=d14.slice(-7).reduce((a,x)=>a+x[1],0),mx=Math.max(3,...d14.map(x=>x[1]));
+ const loc=L==='ar'?'ar':(LI>=0?LX:'en');
+ $('stB').innerHTML=`<div class="sth"><div class="sts">${STAR(84,'url(#stg)').replace('<svg ','<svg class="stsv" ').replace('<path','<defs><linearGradient id="stg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6cf9c"/><stop offset="1" stop-color="#b8955a"/></linearGradient></defs><path')}<i></i><i></i><i></i></div>
+  <b class="stn">${AR(S.stars)}</b><small>${T('Stars','النجوم')}</small></div>
+ <div class="stg"><div><b>${AR(ciStreak())}</b><small>${T('Days in a row','أيام متتالية')}</small></div><div><b>${AR(wk)}</b><small>${T('This week','هذا الأسبوع')}</small></div></div>
+ <div class="kh stc"><h3>${T('Last 14 days','آخر ١٤ يومًا')}</h3><div class="stbars">${d14.map(([d,v],i)=>`<div class="stb ${i===13?'td':''}"><span style="--h:${Math.round(v/mx*100)}%"><em>${v?AR(v):''}</em></span><small>${d.toLocaleDateString(loc,{weekday:'short'}).slice(0,2)}</small></div>`).join('')}</div></div>
+ <div class="kh"><h3>${T('How to earn a star','كيف تكسب نجمة')}</h3>${[['ph-clock',T('Each salah prayed on time','كل صلاة في وقتها')],['ph-path',T("Each step of Today's path",'كل خطوة في طريق اليوم')],['ph-hands-clapping',T('Finishing a set of adhkar','إتمام مجموعة أذكار')],['ph-book-open-text',T('Reading the ayah of the day','قراءة آية اليوم')],['ph-book-bookmark',T("Today's khatmah portion",'ورد الختمة اليوم')],['ph-check-square',T('Finishing a task','إنجاز مهمة')]].map(([ic,t])=>`<div class="stw"><i class="ph ${ic}"></i><span>${t}</span><b>+${AR(1)}</b></div>`).join('')}
+ <p class="stnote">${T('Undo takes the star back, so the count stays honest.','التراجع يُرجع النجمة، ليبقى العدد صادقًا.')}</p></div>`};
+SCALL.stars[2]=()=>go('stars');
+
+/* ---- Qibla ---- */
+const KAABA=[21.422487,39.826206];
+function qbBear(la,lo){const r=Math.PI/180,f1=la*r,f2=KAABA[0]*r,dl=(KAABA[1]-lo)*r;return (Math.atan2(Math.sin(dl)*Math.cos(f2),Math.cos(f1)*Math.sin(f2)-Math.sin(f1)*Math.cos(f2)*Math.cos(dl))/r+360)%360}
+function qbDist(la,lo){const r=Math.PI/180,a=Math.sin((KAABA[0]-la)*r/2)**2+Math.cos(la*r)*Math.cos(KAABA[0]*r)*Math.sin((KAABA[1]-lo)*r/2)**2;return Math.round(12742*Math.asin(Math.sqrt(a)))}
+const QB={on:false,h:null,ok:false,fn:null};
+function qbStop(){if(QB.fn){removeEventListener('deviceorientation',QB.fn,true);removeEventListener('deviceorientationabsolute',QB.fn,true)}QB.on=false;QB.fn=null}
+R.qibla=()=>{$('qbT').textContent=T('Qibla','القبلة');qbStop();const B=$('qbB');
+ if(!S.loc||!isFinite(S.loc.lat)){B.innerHTML=`<div class="qbe"><i class="ph ph-map-pin"></i><p>${T('Set your location to find the Qibla','حدّد موقعك لمعرفة القبلة')}</p><button class="big" id="qbLoc">${T('Use my location','استخدم موقعي')}</button></div>`;
+  $('qbLoc').onclick=()=>{locGPS();let n=0;const iv=setInterval(()=>{if(S.loc&&isFinite(S.loc.lat)||++n>40){clearInterval(iv);if($('s-qibla').classList.contains('on'))R.qibla()}},500)};return}
+ const b=qbBear(S.loc.lat,S.loc.lng),km=qbDist(S.loc.lat,S.loc.lng),tk=[];for(let i=0;i<72;i++)tk.push(`<line x1="130" y1="${i%18===0?14:i%6===0?18:20}" x2="130" y2="26" transform="rotate(${i*5} 130 130)" class="${i%6===0?'tm':''}"/>`);
+ B.innerHTML=`<div class="qbw"><div class="qbd" id="qbD"><svg viewBox="0 0 260 260" class="qbs"><circle cx="130" cy="130" r="124" class="qr"/>${tk.join('')}
+  <text x="130" y="48" class="qn">N</text><text x="216" y="135" class="qx">E</text><text x="130" y="222" class="qx">S</text><text x="44" y="135" class="qx">W</text>
+  <g transform="rotate(${b.toFixed(1)} 130 130)"><path d="M130 40 L141 120 L130 112 L119 120Z" class="qa"/><circle cx="130" cy="130" r="7" class="qc"/><rect x="121" y="22" width="18" height="18" rx="3" class="qk"/><rect x="121" y="27" width="18" height="3.5" class="qkb"/></g></svg></div>
+  <div class="qbi"><span class="qbtop"></span></div></div>
+  <p class="qbm" id="qbM">${T('Turn slowly until the gold arrow points up.','استدر ببطء حتى يشير السهم الذهبي إلى الأعلى.')}</p>
+  <div class="stg"><div><b>${AR(Math.round(b))}°</b><small>${T('from North','من الشمال')}</small></div><div><b>${T(km.toLocaleString('en')+' km',AR(km)+' كم')}</b><small>${T('to Makkah','إلى مكة')}</small></div></div>
+  <button class="big" id="qbGo"><i class="ph ph-compass"></i> ${T('Start compass','شغّل البوصلة')}</button><p class="note qbn">${T('Hold your phone flat, away from metal and magnets.','أمسك الهاتف بشكل مستوٍ بعيدًا عن المعادن والمغناطيس.')}</p>`;
+ const D=$('qbD'),set=h=>{QB.h=h;D.style.transform=`rotate(${-h}deg)`;const diff=Math.abs(((b-h)%360+540)%360-180),ok=diff<4;
+  if(ok!==QB.ok){QB.ok=ok;B.classList.toggle('ok',ok);$('qbM').textContent=ok?T('You are facing the Qibla','أنت تتجه إلى القبلة'):T('Turn slowly until the gold arrow points up.','استدر ببطء حتى يشير السهم الذهبي إلى الأعلى.');if(ok)vib([15,40,15])}};
+ const start=()=>{let got=false;QB.fn=e=>{let h=null;if(typeof e.webkitCompassHeading==='number')h=e.webkitCompassHeading;else if(e.absolute&&typeof e.alpha==='number')h=360-e.alpha;if(h==null)return;
+   h=(h+((screen.orientation&&screen.orientation.angle)||0)+360)%360;got=true;set(h)};
+  addEventListener('deviceorientationabsolute',QB.fn,true);addEventListener('deviceorientation',QB.fn,true);QB.on=true;$('qbGo').style.display='none';
+  setTimeout(()=>{if(!got&&QB.on){$('qbM').textContent=T('No compass on this device. Use the angle from North below.','لا توجد بوصلة في هذا الجهاز. استخدم الزاوية من الشمال أدناه.')}},2500)};
+ $('qbGo').onclick=()=>{const DOE=window.DeviceOrientationEvent;if(DOE&&typeof DOE.requestPermission==='function'){DOE.requestPermission().then(r=>{if(r==='granted')start();else toast(T('Compass was not allowed.','لم يُسمح بالبوصلة.'))}).catch(()=>toast(T('Compass was not allowed.','لم يُسمح بالبوصلة.')))}else start()}};
+{const _go=go;go=function(s,p){if(s!=='qibla')qbStop();return _go.apply(this,arguments)}}
+SCALL.qibla[2]=()=>go('qibla');
+
+/* ---- Game (opens on top, with a close button back to Fastaqim) ---- */
+function gameOpen(){const o=$('gmO'),f=$('gmF');if(!f.src)f.src='../../game-next.html?from=v6';o.classList.add('on');o.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';try{AU.pause()}catch(e){}}
+function gameClose(){const o=$('gmO');o.classList.remove('on');o.setAttribute('aria-hidden','true');document.body.style.overflow='';$('gmF').removeAttribute('src')}
+$('gmF').addEventListener('load',()=>{try{const d=$('gmF').contentDocument;if(d)d.addEventListener('click',e=>{const a=e.target.closest('a[href*="go=app"]');if(a){e.preventDefault();gameClose()}},true)}catch(e){}});
+$('gmX').onclick=()=>{const o=$('gmO');o.classList.remove('on');o.setAttribute('aria-hidden','true');document.body.style.overflow='';const f=$('gmF');f.removeAttribute('src')};
+
+/* ---- Feedback and Report a problem ---- */
+function fbSheet(kind){const pr=kind==='problem';
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${pr?T('Report a problem','الإبلاغ عن مشكلة'):T('Feedback','ملاحظات')}</h1>${XB}</div>
+ <p class="note">${pr?T('Tell us what happened and on which screen. We read every message.','أخبرنا بما حدث وفي أي شاشة. نقرأ كل رسالة.'):T('Share an idea or something you like. We read every message.','شاركنا فكرة أو شيئًا أعجبك. نقرأ كل رسالة.')}</p>
+ <textarea id="fbT" class="inp fbt" rows="5" maxlength="2000" placeholder="${T('Write here…','اكتب هنا…')}"></textarea>
+ ${pr?`<label class="fbi"><input type="checkbox" id="fbI" checked><span>${T('Include device details (phone type, screen size)','أرفق معلومات الجهاز (نوع الهاتف، حجم الشاشة)')}</span></label>`:''}
+ <button class="big" id="fbS">${T('Send','إرسال')}</button><p class="fqa-m" id="fbM"></p>`);
+ $('fbS').onclick=async()=>{const body=$('fbT').value.trim(),M=$('fbM'),btn=$('fbS');if(body.length<3){M.textContent=T('Please write a few words first.','اكتب بضع كلمات أولًا.');return}
+  btn.disabled=true;M.textContent=T('Sending…','جارٍ الإرسال…');let txt=body;
+  if(pr&&$('fbI').checked)txt+='\n\n['+navigator.userAgent+' · '+innerWidth+'x'+innerHeight+((navigator.standalone||matchMedia('(display-mode: standalone)').matches)?' · Home Screen':'')+' · v6 · '+LX+']';
+  try{const sb=await FQA.sb(),u=FQA.user(),row=u?{user_id:u.id,email:u.email||'',name:S.name||'',kind,body:txt,lang:LX}:{name:'visitor',kind,body:txt,lang:LX};
+   const {error}=await sb.from('fastaqim_feedback').insert(row);if(error)throw error;closeSheet();vib([10,30,10]);toast(T('Sent. Thank you!','أُرسلت. شكرًا لك!'))}
+  catch(e){console.warn('feedback',e);btn.disabled=false;M.textContent=T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.')}}}
+
+/* ---- reminders on this phone (server sends them; same push service as the live site) ---- */
+const PUSHFN='https://xnxqibdjjrgjqpszvdbe.supabase.co/functions/v1/push';
+const u8k=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return Uint8Array.from(atob(s),c=>c.charCodeAt(0))};
+const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1),isSA=!!(navigator.standalone||matchMedia('(display-mode: standalone)').matches);
+const pushCan=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+let SWR=null;if('serviceWorker' in navigator&&location.protocol==='https:'&&window.top===window)SWR=navigator.serviceWorker.register('../../sw.js',{scope:'../../'}).catch(()=>null);
+function pushState(){if(!pushCan())return isIOS&&!isSA?'ios':'no';if(isIOS&&!isSA)return 'ios';if(!(window.FQA&&FQA.user()))return 'in';if(Notification.permission==='denied')return 'den';return S.pushOn&&Notification.permission==='granted'?'on':'off'}
+async function pushOn(){try{if(await Notification.requestPermission()!=='granted'){R.notif();return}await SWR;const r2=await navigator.serviceWorker.ready;
+  let sub=await r2.pushManager.getSubscription();if(!sub){const {key}=await (await fetch(PUSHFN+'?key=1')).json();sub=await r2.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:u8k(key)})}
+  const sb=await FQA.sb(),u=FQA.user(),j=sub.toJSON();const {error}=await sb.from('push_subs').upsert({endpoint:j.endpoint,user_id:u.id,p256dh:j.keys.p256dh,auth:j.keys.auth});if(error)throw error;
+  S.pushOn=1;save();await pushSyncNow(true);vib([10,30,10]);R.notif()}catch(e){console.warn('push',e);toast(T("Couldn't turn on reminders. Please try again.",'تعذّر تفعيل التذكيرات. حاول مجددًا.'))}}
+function pushItems(){const n=S.notif||nDef(),out=[],now=Date.now(),on=k=>n.all&&n[k],url=location.pathname.replace(/index\.html$/,'');if(!n.all)return out;
+ const at=(d,hm,add)=>{const[h,m]=hm.split(':').map(Number);return new Date(d.getFullYear(),d.getMonth(),d.getDate(),h,m+(add||0)).getTime()};
+ for(let i=0;i<14;i++){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+i);let P=null;
+  if(S.loc&&isFinite(S.loc.lat)){P=prayerTimes(d,S.loc.lat,S.loc.lng,S.loc.meth||'mwl',S.loc.hanafi);const A=S.loc.adj||{};for(const k in A)if(P[k]){const[h,m]=P[k].split(':').map(Number),t=(h*60+m+A[k]+1440)%1440;P[k]=String(Math.floor(t/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0')}}
+  if(P)SAL.forEach(s=>{if(on('sal.'+s[0]))out.push({at:at(d,P[s[0]]),title:T('Time for '+s[1],'حان وقت '+s[2]),body:f12(P[s[0]]),tag:'sal-'+s[0]})});
+  if(P&&on('zk.morning'))out.push({at:at(d,P.fajr,30),title:T('Morning adhkar','أذكار الصباح'),body:'',tag:'zk-m'});
+  if(P&&on('zk.evening'))out.push({at:at(d,P.asr,30),title:T('Evening adhkar','أذكار المساء'),body:'',tag:'zk-e'});
+  if(P&&on('zk.sleep'))out.push({at:at(d,P.isha,15),title:T('Before sleep','أذكار النوم'),body:'',tag:'zk-s'});
+  if(on('qu.vod'))out.push({at:at(d,'09:00'),title:T('Ayah of the day','آية اليوم'),body:'',tag:'vod'});
+  if(on('qu.kh')&&S.kh.length)out.push({at:at(d,'20:00'),title:T("Today's khatmah portion",'ورد الختمة اليوم'),body:'',tag:'kh'});
+  if(on('tk.plan'))out.push({at:at(d,'08:00'),title:T('Plan your day','خطّط يومك'),body:'',tag:'plan'});
+  const wd=d.getDay();if(on('fs.mt')&&(wd===0||wd===3))out.push({at:at(d,'20:00'),title:T('Tomorrow is a sunnah fast','غدًا صيام سنة'),body:'',tag:'fs'});
+  if(on('fs.wd')&&!(wd===0||wd===3)){try{const nx=new Date(d);nx.setDate(nx.getDate()+1);const hd=+new Intl.DateTimeFormat('en-u-ca-islamic-umalqura',{day:'numeric'}).format(nx);if(hd>=13&&hd<=15)out.push({at:at(d,'20:00'),title:T('Tomorrow is a sunnah fast','غدًا صيام سنة'),body:'',tag:'fs'})}catch(e){}}}
+ return out.filter(x=>x.at>now+30000).sort((a,b)=>a.at-b.at).slice(0,400).map(x=>Object.assign(x,{url}))}
+let _psT=0;function pushSync(){clearTimeout(_psT);_psT=setTimeout(()=>pushSyncNow(false),4000)}
+async function pushSyncNow(force){try{if(pushState()!=='on')return;const items=pushItems(),h=JSON.stringify([LX,items.map(x=>[x.at,x.title])]),hk='fq5.pushH';let last={};try{last=JSON.parse(localStorage.getItem(hk)||'{}')}catch(e){}
+  if(!force&&last.h===h&&Date.now()-(last.t||0)<864e5)return;const sb=await FQA.sb(),uid=FQA.user().id;
+  let {error}=await sb.from('push_queue').delete().eq('user_id',uid).eq('sent',false);if(error)throw error;
+  for(let i=0;i<items.length;i+=200){({error}=await sb.from('push_queue').insert(items.slice(i,i+200).map(x=>({user_id:uid,at:new Date(x.at).toISOString(),title:x.title.slice(0,120),body:(x.body||'').slice(0,200),tag:x.tag,url:x.url}))));if(error)throw error}
+  localStorage.setItem(hk,JSON.stringify({h,t:Date.now()}))}catch(e){console.warn('pushSync',e)}}
+async function pushTest(){try{const sb=await FQA.sb(),u=FQA.user();const {error}=await sb.from('push_queue').insert({user_id:u.id,at:new Date(Date.now()+5000).toISOString(),title:'Fastaqim',body:T('Reminders are on for this phone','التذكيرات مفعّلة على هذا الهاتف'),tag:'test',url:location.pathname.replace(/index\.html$/,'')});if(error)throw error;toast(T('A test reminder will arrive in about a minute.','سيصل تذكير تجريبي خلال دقيقة تقريبًا.'))}catch(e){toast(T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.'))}}
+{const _ss=syncSoon;syncSoon=function(){_ss.apply(this,arguments);try{if(S.pushOn)pushSync()}catch(e){}}}
+if(window.FQA)FQA.on(u=>{if(u&&S.pushOn)setTimeout(()=>pushSyncNow(false),3000);if($('s-notif').classList.contains('on'))R.notif()});
+{const _rn=R.notif;R.notif=()=>{_rn();const st=pushState(),host=$('nGroups');let h='';
+  const msg={ios:T('On iPhone, open Fastaqim from your Home Screen to get reminders.','على iPhone، افتح فستقم من الشاشة الرئيسية لتصلك التذكيرات.'),no:T('This browser cannot show reminders.','هذا المتصفح لا يعرض التذكيرات.'),
+   in:T('Sign in so reminders can reach this phone.','سجّل الدخول لتصل التذكيرات إلى هذا الهاتف.'),den:T('Reminders were not allowed. You can allow them in your phone settings.','لم يُسمح بالتذكيرات. يمكنك السماح بها من إعدادات الهاتف.'),
+   off:T('Reminders on this phone','التذكيرات على هذا الهاتف'),on:T('Reminders are on for this phone','التذكيرات مفعّلة على هذا الهاتف')}[st];
+  const btn=st==='in'?`<button class="go" id="npB">${T('Sign in','تسجيل الدخول')}</button>`:st==='off'?`<button class="go" id="npB">${T('Turn on','تفعيل')}</button>`:st==='on'?`<button class="go ghost2" id="npT">${T('Send a test','إرسال تجربة')}</button>`:'';
+  const noLoc=!(S.loc&&isFinite(S.loc.lat))&&(st==='on'||st==='off');
+  h=`<div class="npc ${st}"><i class="ph ${st==='on'?'ph-check-circle':'ph-device-mobile'}"></i><span>${esc(msg)}${noLoc?`<small>${T('Set your location first so salah reminders are on time.','حدّد موقعك أولًا لتكون تذكيرات الصلاة في وقتها.')}</small>`:''}</span>${btn}</div>`;
+  const old=$('npC');if(old)old.remove();host.insertAdjacentHTML('beforebegin',`<div id="npC">${h}</div>`);
+  const b=$('npB');if(b)b.onclick=st==='in'?acctSheet:pushOn;const t=$('npT');if(t)t.onclick=pushTest}}
+
+/* ---- More screen, Dhikr tiles and Home tools: everything that said "coming soon" now opens ---- */
+{const by=(root,t)=>[...$$('#'+root+' [data-soon]')].find(b=>(b.innerHTML||'').includes('data-t="'+t));
+ const wire=(root,t,fn)=>{const b=by(root,t);if(b){b.removeAttribute('data-soon');b.onclick=fn}};
+ wire('s-more','Stars & streaks|',()=>go('stars'));wire('s-more','Game|',gameOpen);wire('s-more','Qibla|',()=>go('qibla'));
+ wire('s-more','Feedback|',()=>fbSheet('idea'));wire('s-more','Report a problem|',()=>fbSheet('problem'));
+ wire('s-dhikr',"Du'as|",()=>zOpen('dua'));wire('s-dhikr','Ruqyah|',()=>zOpen('ruqyah'));
+ const my=by('s-dhikr',"My du'as|");if(my)my.remove()}
+{const q=qLast();RD={su:q.su,ay:q.ay,scroll:true}}
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);
