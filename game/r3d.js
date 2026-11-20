@@ -18,8 +18,8 @@ let comp=null,bloom=null,useBloom=true;
 function mkComp(){comp=new EffectComposer(R);comp.addPass(new RenderPass(scene,cam));bloom=new UnrealBloomPass(new T.Vector2(256,256),.28,.35,1.05);comp.addPass(bloom);comp.addPass(new OutputPass())}
 try{mkComp()}catch(e){comp=null;useBloom=false}
 /* camera views: [height, distance behind, look-at distance ahead, look-at height]; 'high' is the default */
-const VIEWS={close:[2.2,3.7,-10,.7],classic:[3.3,4.6,-9,.4],high:[5.0,3.6,-5.5,0],top:[7.2,2.2,-4.4,0]};const VW=()=>VIEWS[ST.view]||VIEWS.close;
-function fitCam(){const a=innerWidth/innerHeight,v=VW(),D=Math.hypot(v[0],v[1]),half=VIEWS[ST.view]&&ST.view!=='close'?(ST.view==='classic'?2.15:2.45):2.0;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(40,Math.min(80,f));cam.userData.vk=ST.view}
+const VIEWS={car:[1.05,.35,-14,.85],chase:[1.9,3.2,-9,.85],close:[2.2,3.7,-10,.7],classic:[3.3,4.6,-9,.4],high:[5.0,3.6,-5.5,0],top:[7.2,2.2,-4.4,0]};const VW=()=>VIEWS[ST.view]||(window.FQNEXT?VIEWS.chase:VIEWS.close);
+function fitCam(){const a=innerWidth/innerHeight,v=VW(),D=Math.hypot(v[0],v[1]),half=ST.view==='car'?1.25:(window.FQNEXT&&!VIEWS[ST.view])||ST.view==='chase'?1.85:VIEWS[ST.view]&&ST.view!=='close'?(ST.view==='classic'?2.15:2.45):2.0;let f=2*Math.atan(half/(D*a))*180/Math.PI;cam.userData.f0=Math.max(window.FQNEXT&&a>1?72:40,Math.min(80,f));cam.userData.vk=ST.view}
 function rs(){const w=innerWidth,h=innerHeight;R.setPixelRatio(PR);R.setSize(w,h,false);cam.aspect=w/h;fitCam();cam.fov=cam.userData.f0;cam.updateProjectionMatrix();if(comp){comp.setPixelRatio(PR);comp.setSize(w,h)}}
 addEventListener('resize',rs);
 
@@ -103,7 +103,7 @@ function disposeWorld(){if(WG){scene.remove(WG);WG=null}VCM=null;for(const d of 
 function buildWorld(key){disposeWorld();curW=key;const w=WORLDS[key]||WORLDS.gold,s=W3[key]||w.w3||W3.gold;
  {const nd=wkNeeds(key);const ck=(ST.car||'').startsWith('k:')?[ST.car.slice(2)]:[];if(!glbHas(nd.concat(ck)))glbLoad(nd.concat(ck)).then(()=>{if(curW===key)curW=null})}WG=new T.Group();scene.add(WG);
  const sk=s.sky||w.sky;SKU.top.value.set(sk[0]);SKU.mid.value.set(sk[1]);SKU.hor.value.set(sk[2]);SKU.sunC.value.set(w.sun);
- scene.fog=new T.Fog(col(sk[2]).lerp(col(sk[1]),.3),s.fogN,s.fogF);
+ const nearV=window.FQNEXT&&(!ST.view||ST.view==='close'||ST.view==='car'||ST.view==='chase');scene.fog=new T.Fog(col(sk[2]).lerp(col(sk[1]),.3),nearV?22:s.fogN,nearV?95:s.fogF);
  hemi.color.set(s.hS);hemi.groundColor.set(s.hG);hemi.intensity=s.hI;sun.color.set(s.sun);sun.intensity=s.sunI;R.toneMappingExposure=s.exp;
  /* grass with mowing stripes */
  grassT=cTex(256,256,(g,W_,H_)=>{g.fillStyle=w.ground[0];g.fillRect(0,0,W_,H_);g.fillStyle=sh(w.ground[1],.02);g.fillRect(0,0,W_,H_/2);speck(g,W_,H_,2600,[sh(w.ground[0],-.06),sh(w.ground[1],.05),sh(w.ground[0],.03)],2.2)},40,30);
@@ -332,7 +332,7 @@ function sync(t,noW){const g=G,dt=Math.min(.05,Math.max(0,t-tPrev));tPrev=t;fram
  const u=car.userData,ducking=g&&g.duck>0;sq+=((ducking?.6:1)-sq)*Math.min(1,dt*18);
  car.position.set(cx,cy+(g&&state==='play'&&cy===0?Math.sin(t*22)*.006:0),0);car.rotation.set(cy>0?-Math.min(.12,(g.vy||0)*.008):0,carYaw,carRoll);if(pY>.05&&cy===0)landT=.3;pY=cy;landT=Math.max(0,landT-dt);const lb=landT>0?Math.sin((1-landT/.3)*Math.PI)*.16:0;u.body.scale.set(1+(1-sq)*.12+lb*.45,sq*(1-lb),1+(1-sq)*.08+lb*.3);
  wSpin-=sp*dt/.22;for(const w of u.wh)w.rotation.x=wSpin;
- car.visible=!(g&&g.inv>0&&g.boost<=0&&Math.floor(g.t*14)%2);
+ car.visible=ST.view!=='car'&&!(g&&g.inv>0&&g.boost<=0&&Math.floor(g.t*14)%2);
  blob.position.x=cx;const bs=1-Math.min(.5,cy*.18);blob.scale.set(bs,1,bs);blob.material.opacity=1-Math.min(.6,cy*.2);
  shieldM.visible=!!(g&&g.shield);shieldM.position.set(cx,cy+.5,0);magM.visible=!!(g&&g.mag>0);magM.position.set(cx,cy+.45,0);magM.scale.setScalar(1+.08*Math.sin(t*8));
  /* objects */
