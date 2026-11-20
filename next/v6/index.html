@@ -1118,7 +1118,7 @@ const TABS=[['home','ph-house',T('Home','الرئيسية')],['quran','ph-book-o
 const TABOF={home:'home',quran:'quran',index:'quran',dhikr:'dhikr',todo:'todo',more:'more',notif:'more',cal:'home',tools:'more',tool:'more'};
 let hist=[];
 function go(s,push=true){if(!$('s-'+s))s='home';const cur=$$('.scr.on')[0];if(push&&cur&&cur.id!=='s-'+s)hist.push(cur.id.slice(2));
- $$('.scr').forEach(e=>e.classList.toggle('on',e.id==='s-'+s));scrollTo(0,0);renderTab(TABOF[s]);(R[s]||(()=>{}))();if(location.hash!=='#'+s)history.replaceState(null,'','#'+s+location.search.replace(/^\?/,'?'))}
+ $$('.scr').forEach(e=>e.classList.toggle('on',e.id==='s-'+s));scrollTo(0,0);renderTab(TABOF[s]);(R[s]||(()=>{}))();if(location.hash!=='#'+s)history.replaceState(null,'',location.pathname+location.search+'#'+s)}
 function renderTab(on){const zn=dzCount();$('tab').innerHTML=TABS.map(([k,ic,l])=>`<a href="#${k}" data-tab="${k}" class="${k===on?'on':''}">${FQI(k,k===on)}${k==='dhikr'&&zn?`<span class="tbd">${AR(zn>999?'999+':zn)}</span>`:''}${l}</a>`).join('')}
 function dzCount(){const t=store('tsbDay')||{};return t[dkey(NOW())]||0}
 document.addEventListener('click',e=>{const t=e.target.closest('[data-tab]');if(t){e.preventDefault();hist=[];go(t.dataset.tab,false);return}

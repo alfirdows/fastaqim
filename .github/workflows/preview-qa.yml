@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   check:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 40
     strategy:
       fail-fast: false
@@ -27,7 +27,7 @@ jobs:
       - name: Install Playwright and the browser
         run: |
           npm init -y >/dev/null
-          npm install --no-audit --no-fund playwright@1.49.1
+          npm install --no-audit --no-fund playwright@1.63.0
           npx playwright install --with-deps ${{ matrix.engine }}
       - name: Every screen, every language, 5 screen sizes
         env:
