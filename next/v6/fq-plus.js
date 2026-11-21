@@ -50,7 +50,7 @@ if(window.FQA)FQA.on(()=>{ROLE.team=null;moreRows()});
 
 /* ================= profile picture ================= */
 const AV=[['letter',''],['leaf','ph-leaf'],['plant','ph-plant'],['tree','ph-tree'],['pine','ph-tree-evergreen'],['mount','ph-mountains'],['sun','ph-sun-horizon'],['drop','ph-drop'],['waves','ph-waves'],['cloud','ph-cloud'],['book','ph-book-open'],['pen','ph-pen-nib'],['cactus','ph-cactus'],['coffee','ph-coffee'],['tulip','ph-flower-tulip']];
-const AVC=[['sage','#e7f0eb','#3f7a64'],['sand','#f5eedf','#86672e'],['mist','#eceff1','#4f5b62'],['stone','#efebe6','#6e6458'],['sea','#e6eff2','#3c6e7a']];
+const AVC=[['sage','var(--accT)','var(--acc)'],['sand','#f5eedf','#86672e'],['mist','#eceff1','#4f5b62'],['stone','#efebe6','#6e6458'],['sea','#e6eff2','#3c6e7a']];
 const prof=()=>S.prof=S.prof||{av:'letter',c:'sage',home:0};
 function avHTML(size,p){p=p||prof();const c=AVC.find(x=>x[0]===p.c)||AVC[0],a=AV.find(x=>x[0]===p.av)||AV[0];
  const ini=(String(S.name||'').trim()[0]||'').toUpperCase();

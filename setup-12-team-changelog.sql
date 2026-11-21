@@ -1,0 +1,4 @@
+-- 21 Nov 2026 (applied with the Supabase connector): team chat for the owner + admin, and the owner-only change log.
+-- fastaqim_team_chat / fastaqim_team_reads / team_members() / fastaqim_team_chat_notify (push title = sender's name, never the site name)
+-- is_team() = is_admin() or is_helper(); fastaqim_changelog readable only by is_admin().
+-- See the migration "team_chat_and_changelog_v6" in Supabase for the exact statements.
