@@ -54,12 +54,13 @@ const AVC=[['sage','var(--accT)','var(--acc)'],['sand','#f5eedf','#86672e'],['mi
 const prof=()=>S.prof=S.prof||{av:'letter',c:'sage',home:0};
 function avHTML(size,p){p=p||prof();const c=AVC.find(x=>x[0]===p.c)||AVC[0],a=AV.find(x=>x[0]===p.av)||AV[0];
  const ini=(String(S.name||'').trim()[0]||'').toUpperCase();
- const inner=a[0]==='letter'?(ini?`<b>${esc(ini)}</b>`:'<i class="ph ph-user"></i>'):`<i class="ph ${a[1]}"></i>`;
+ const own=p.av==='photo'&&localStorage.getItem('fq5.avImg');if(own)return `<span class="fqp-av" style="--s:${size}px" aria-hidden="true"><img src="${own}" alt=""></span>`;
+ const inner=a[0]==='letter'?(ini?`<b>${esc(ini)}</b>`:'<i class="ph ph-leaf"></i>'):`<i class="ph ${a[1]}"></i>`;
  return `<span class="fqp-av" style="--s:${size}px;background:${c[1]};color:${c[2]}" aria-hidden="true">${inner}</span>`}
 function homeAv(){const fh=document.querySelector('#s-home .fh');if(!fh)return;let b=$('fqpHAv');
- if(!prof().home){if(b)b.remove();return}
+ if(!prof().home){if(b){b.remove();try{fhFit()}catch(e){}}return}
  if(!b){fh.querySelector('.wm').insertAdjacentHTML('afterend',`<button class="fqp-hav" id="fqpHAv" aria-label="${esc(X('Settings','الإعدادات','Qindaa’ina','Dejinta'))}"></button>`);b=$('fqpHAv');b.onclick=()=>go('settings')}
- b.innerHTML=avHTML(36)}
+ b.innerHTML=avHTML(36);try{if(typeof fhFit==='function')fhFit()}catch(e){}}
 
 /* ================= Settings ================= */
 addScreen('settings',`<div class="hd sub">${BACK}<h1>${X('Settings','الإعدادات','Qindaa’ina','Dejinta')}</h1><span style="width:44px"></span></div><div id="fqpSet"></div>`);
@@ -68,11 +69,15 @@ R.settings=()=>{const p=prof(),B=$('fqpSet'),u=window.FQA&&FQA.user(),bak=ls.get
  <div class="kh fqp-prof"><div class="fqp-pv" id="fqpPv">${avHTML(64)}</div>
   <label class="fqp-nm"><small>${X('Your name','اسمك','Maqaa kee','Magacaaga')}</small><input class="inp" id="fqpName" maxlength="40" autocomplete="given-name" value="${esc(S.name||'')}" placeholder="${esc(X('Optional','اختياري','Filannoo','Ikhtiyaari'))}"></label></div>
  <p class="glh">${X('Profile picture','صورة الملف','Suuraa piroofaayilii','Sawirka astaanta')}</p>
- <div class="kh"><div class="fqp-avg" role="radiogroup" aria-label="${esc(X('Profile picture','صورة الملف'))}">${AV.map(a=>`<button role="radio" aria-checked="${p.av===a[0]}" class="${p.av===a[0]?'on':''}" data-av="${a[0]}">${avHTML(46,{av:a[0],c:p.c})}</button>`).join('')}</div>
+ <div class="kh"><div class="fqp-avg" role="radiogroup" aria-label="${esc(X('Profile picture','صورة الملف'))}"><button class="fqp-own ${p.av==='photo'?'on':''}" id="fqpAvOwn" aria-label="${esc(X('Your photo','صورتك'))}">${localStorage.getItem('fq5.avImg')?avHTML(46,{av:'photo',c:p.c}):`<span class="fqp-av fqp-add" style="--s:46px"><i class="ph ph-camera-plus"></i></span>`}</button>${AV.map(a=>`<button role="radio" aria-checked="${p.av===a[0]}" class="${p.av===a[0]?'on':''}" data-av="${a[0]}">${avHTML(46,{av:a[0],c:p.c})}</button>`).join('')}</div>
   <div class="fqp-avc" role="radiogroup" aria-label="${esc(X('Colour','اللون'))}">${AVC.map(c=>`<button role="radio" aria-checked="${p.c===c[0]}" class="${p.c===c[0]?'on':''}" data-avc="${c[0]}" style="background:${c[1]};color:${c[2]}" aria-label="${c[0]}"><i class="ph ph-check"></i></button>`).join('')}</div>
-  <p class="fqp-hint">${X('Icons from nature and everyday things only. No pictures of people or animals.','أيقونات من الطبيعة والأشياء اليومية فقط، بلا صور أشخاص أو حيوانات.')}</p></div>
+</div>
  <div class="gl">${tog('fqpHome','ph-house',X('Show on Home','إظهارها في الرئيسية','Mana irratti agarsiisi','Ku muuji Hoyga'),X('Off by default. Turn on if you like it.','متوقف افتراضيًا. فعّله إن أحببت.'),p.home)}</div>
 
+ <p class="glh">${X('Home background','خلفية الرئيسية','Duuba Manaa','Asalka Hoyga')}</p>
+ <div class="kh"><div class="fqp-wpg">${WP.map(w=>`<button class="${(S.wp||'none')===w[0]?'on':''}" data-wp="${w[0]}"><span class="fqp-wps" style="${w[0]==='photo'?(localStorage.getItem('fq5.wpImg')?`background-image:url(${localStorage.getItem('fq5.wpImg')})`:''):w[2]}">${w[0]==='photo'&&!localStorage.getItem('fq5.wpImg')?'<i class="ph ph-image"></i>':w[0]==='none'?'<i class="ph ph-prohibit"></i>':''}</span><small>${w[1]}</small></button>`).join('')}</div>
+  ${localStorage.getItem('fq5.wpImg')?`<button class="fqp-link" id="fqpWpNew"><i class="ph ph-image"></i>${X('Choose a different photo','اختر صورة أخرى')}</button>`:''}</div>
+ <input type="file" id="fqpFileAv" accept="image/*" hidden><input type="file" id="fqpFileWp" accept="image/*" hidden>
  <p class="glh">${X('General','عام','Waliigala','Guud')}</p>
  <div class="gl">${row('fqpLang','ph-translate',X('Language','اللغة','Afaan','Luqadda'),esc(($('mLang')&&$('mLang').querySelector('em')||{}).textContent||''))}
   ${row('fqpNot','ph-bell',X('Notifications','الإشعارات','Beeksisa','Ogeysiisyada'),null)}
@@ -87,20 +92,59 @@ R.settings=()=>{const p=prof(),B=$('fqpSet'),u=window.FQA&&FQA.user(),bak=ls.get
  <p class="glh">${X('Your data','بياناتك','Odeeffannoo kee','Xogtaada')}</p>
  <div class="gl">${row('fqpAcct','ph-user-circle',u?X('Account','الحساب','Herrega','Akoonka'):X('Sign in','تسجيل الدخول','Seeni','Gal'),u?esc(u.email||''):null)}
   ${row('fqpDl','ph-download-simple',X('Download my data','تنزيل بياناتي','Odeeffannoo koo buufadhu','Soo dejiso xogtayda'),null)}
+  ${ls.get('fq5.restoreCh',null)?row('fqpRc','ph-arrows-left-right',X('Change restore choice','تغيير اختيار الاستعادة'),esc(X('until ','حتى ')+new Date(ls.get('fq5.restoreCh',{}).until).toLocaleDateString(L==='ar'?'ar':'en-US',{day:'numeric',month:'short'}))):''}
   ${bak?row('fqpUndo','ph-arrow-counter-clockwise',X('Undo reset','تراجع عن إعادة الضبط','Deebisi','Ka noqo dib-u-dejinta'),esc(X('until ','حتى ')+new Date(bak.until).toLocaleDateString(L==='ar'?'ar':'en-US',{day:'numeric',month:'short'}))):''}</div>
  <button class="dang fqp-reset" id="fqpReset"><i class="ph ph-arrow-counter-clockwise"></i>${X('Reset everything','إعادة ضبط كل شيء','Hunda haaromsi','Dib u deji wax walba')}</button>
+ ${u?`<button class="fqp-delacc" id="fqpDel">${X('Delete my account','حذف حسابي')}</button>`:''}
  <p class="fqp-ver">Fastaqim · v6</p>`;
  const nm=$('fqpName');nm.onchange=nm.onblur=()=>{const v=nm.value.trim().slice(0,40);if(v===(S.name||''))return;S.name=v;save();$('fqpPv').innerHTML=avHTML(64);B.querySelectorAll('[data-av="letter"]').forEach(b=>b.innerHTML=avHTML(46,{av:'letter',c:p.c}));homeAv()};
  $$('#fqpSet [data-av]').forEach(b=>b.onclick=()=>{p.av=b.dataset.av;save();vib(8);R.settings();homeAv()});
  $$('#fqpSet [data-avc]').forEach(b=>b.onclick=()=>{p.c=b.dataset.avc;save();vib(8);R.settings();homeAv()});
+ $('fqpAvOwn').onclick=()=>{if(localStorage.getItem('fq5.avImg')&&p.av!=='photo'){p.av='photo';save();vib(8);R.settings();homeAv();return}$('fqpFileAv').click()};
+ $('fqpFileAv').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)pickPhoto(f,'av')};
+ $('fqpFileWp').onchange=e=>{const f=e.target.files[0];e.target.value='';if(f)pickPhoto(f,'wp')};
+ $$('#fqpSet [data-wp]').forEach(b=>b.onclick=()=>{const k=b.dataset.wp;if(k==='photo'&&!localStorage.getItem('fq5.wpImg')){$('fqpFileWp').click();return}S.wp=k;save();vib(8);applyWp();R.settings()});
+ if($('fqpWpNew'))$('fqpWpNew').onclick=()=>$('fqpFileWp').click();
  $('fqpHome').onclick=()=>{p.home=p.home?0:1;save();vib(8);R.settings();homeAv()};
  $('fqpLang').onclick=()=>{const m=$('mLang');if(m)m.click()};$('fqpNot').onclick=()=>go('notif');
  $('fqpShake').onclick=async()=>{const on=!shakeOn();if(on&&!(await shakeAsk())){toast(X('Motion was not allowed. You can allow it in your phone settings.','لم يُسمح بالحركة. يمكنك السماح بها من إعدادات الهاتف.'));return}ls.set('fq5.shake',on?1:0);shakeArm();R.settings()};
  $('fqpNews2').onclick=()=>go('news');$('fqpGuide').onclick=()=>go('guide');$('fqpRep').onclick=()=>reportSheet(null);$('fqpIdea').onclick=()=>OLD_FB('idea');
- $('fqpAcct').onclick=()=>acctSheet();$('fqpDl').onclick=dlData;if($('fqpUndo'))$('fqpUndo').onclick=undoReset;$('fqpReset').onclick=resetSheet};
+ $('fqpAcct').onclick=()=>acctSheet();$('fqpDl').onclick=dlData;if($('fqpUndo'))$('fqpUndo').onclick=undoReset;if($('fqpRc'))$('fqpRc').onclick=changeRestore;if($('fqpDel'))$('fqpDel').onclick=delSheet;$('fqpReset').onclick=resetSheet};
+
+/* ---- the person's own photo (profile or Home background): kept only on this phone, checked first ---- */
+const WP=[['none',X('None','بلا','Homaa','Midna'),''],
+ ['dawn',X('Dawn','الفجر','Barii','Waaberi'),'background:linear-gradient(180deg,#f7ecdc 0%,#fbf6ee 55%,#fbf9f4 100%)'],
+ ['sage',X('Sage','مريمية','Magariisa','Cagaar'),'background:linear-gradient(180deg,#e4eee6 0%,#f3f7f2 60%,#fbf9f4 100%)'],
+ ['mist',X('Mist','ضباب','Hurrii','Ceeryaamo'),'background:linear-gradient(180deg,#e6ecf1 0%,#f4f6f8 60%,#fbf9f4 100%)'],
+ ['sand',X('Sand','رمل','Cirracha','Ciid'),'background:linear-gradient(180deg,#efe6d6 0%,#f7f2e9 60%,#fbf9f4 100%)'],
+ ['photo',X('Your photo','صورتك','Suuraa kee','Sawirkaaga'),'']];
+const BAD_FILE=['nsfw','xxx','porn','nude','naked','sex','sexy','bikini','lingerie','onlyfans','hentai','weed','marijuana','cannabis','kush','joint','blunt','cocaine','coke','heroin','meth','drug','drugs','pills','vape','vaping','cigarette','cigar','smoke','smoking','hookah','shisha','beer','wine','vodka','whiskey','whisky','alcohol','drunk','cocktail','champagne','tequila','rum','casino','gamble','poker','cross','crucifix','jesus','christ','church','buddha','idol','statue','shrine','temple','pagoda','tarot','zodiac','horoscope','satan','devil','demon','pentagram','evil eye','nazar','hamsa','amulet','talisman','christmas','xmas','halloween','valentine','pride','rainbow flag','anime','cartoon'];
+function badName(n){const t=String(n||'').toLowerCase().replace(/[_\-.]+/g,' ');if(typeof blocked==='function'&&blocked(t))return true;return BAD_FILE.some(w=>new RegExp('(^|[^a-z])'+w.replace(/\s/g,'\\s')+'([^a-z]|$)').test(t))}
+let NS=null;function nsLoad(){if(NS)return NS;const base=H2C_SRC.replace(/h2c\.min\.js$/,'nsfw/');const add=f=>new Promise((ok,no)=>{const s=document.createElement('script');s.src=base+f;s.onload=ok;s.onerror=no;document.head.appendChild(s)});
+ NS=(async()=>{await add('model.min.js');await add('group1-shard1of1.min.js');await add('nsfwjs.min.js');return window.nsfwjs.load('MobileNetV2')})();NS.catch(()=>{NS=null});return NS}
+function loadImg(file){return new Promise((ok,no)=>{const i=new Image();i.onload=()=>ok(i);i.onerror=no;i.src=URL.createObjectURL(file)})}
+function toJpeg(img,max,sq){const c=document.createElement('canvas');let w=img.naturalWidth,h=img.naturalHeight,sx=0,sy=0,sw=w,sh=h;
+ if(sq){const m=Math.min(w,h);sx=(w-m)/2;sy=(h-m)/2;sw=sh=m;w=h=Math.min(max,m)}else{const k=Math.min(1,max/Math.max(w,h));w=Math.round(w*k);h=Math.round(h*k)}
+ c.width=w;c.height=h;c.getContext('2d').drawImage(img,sx,sy,sw,sh,0,0,w,h);return c.toDataURL('image/jpeg',.78)}
+function photoNo(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X("This picture can't be used",'لا يمكن استخدام هذه الصورة')}</h1>${XB}</div>
+ <div class="kh"><p class="fqp-pn">${X('Please choose another one, like a view of nature, your favourite place or something calm.','اختر صورة أخرى، مثل منظر طبيعي أو مكانك المفضل أو شيء هادئ.')}</p></div><button class="big" data-x>${X('Okay','حسنًا')}</button>`);vib([20,40,20])}
+async function pickPhoto(file,kind){if(!/^image\//.test(file.type||'image/')||file.size>25e6){toast(X('Please choose a photo.','اختر صورة.'));return}
+ if(badName(file.name)){photoNo();return}
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Checking your photo…','جارٍ فحص صورتك…')}</h1><span style="width:44px"></span></div><div class="fqp-chk"><span class="fqp-spin"></span><p>${X('This takes a few seconds the first time.','يستغرق هذا بضع ثوانٍ في المرة الأولى.')}</p></div>`);
+ let img;try{img=await loadImg(file)}catch(e){closeSheet();toast(X("Couldn't open this photo.",'تعذّر فتح هذه الصورة.'));return}
+ let ok=false;try{const m=await nsLoad();const pr=await m.classify(img,5);const P={};pr.forEach(x=>P[x.className]=x.probability);
+  ok=((P.Porn||0)+(P.Hentai||0)+(P.Sexy||0))<0.2&&(P.Drawing||0)<0.6}catch(e){console.warn('check',e);closeSheet();toast(X("Couldn't check this photo. Check your internet and try again.",'تعذّر فحص الصورة. تحقق من الإنترنت وحاول مجددًا.'));URL.revokeObjectURL(img.src);return}
+ if(!ok){URL.revokeObjectURL(img.src);photoNo();return}
+ const d=kind==='av'?toJpeg(img,256,true):toJpeg(img,1080,false);URL.revokeObjectURL(img.src);
+ try{localStorage.setItem(kind==='av'?'fq5.avImg':'fq5.wpImg',d)}catch(e){closeSheet();toast(X('Not enough space on this phone for this photo.','لا توجد مساحة كافية لهذه الصورة.'));return}
+ if(kind==='av'){prof().av='photo'}else{S.wp='photo';applyWp()}save();closeSheet();vib([10,30,10]);toast(X('Saved. Only you can see it.','تم الحفظ. لا يراها أحد غيرك.'));R.settings();homeAv()}
+function applyWp(){let el=$('fqpWp');const k=S.wp||'none',w=WP.find(x=>x[0]===k);const img=k==='photo'&&localStorage.getItem('fq5.wpImg');
+ if(k==='none'||!w||(k==='photo'&&!img)){if(el)el.remove();document.documentElement.classList.remove('fqp-haswp');return}
+ if(!el){document.body.insertAdjacentHTML('afterbegin','<div id="fqpWp" aria-hidden="true"></div>');el=$('fqpWp')}
+ el.className=k==='photo'?'ph2':'';el.setAttribute('style',k==='photo'?`background-image:url(${img})`:w[2]);document.documentElement.classList.add('fqp-haswp')}
 
 /* ---- download / reset / undo ---- */
-const MY_KEYS=()=>Object.keys(localStorage).filter(k=>/^fq5\./.test(k)&&!/^fq5\.(lang|liveImp|resetBak|newsSeen|shake|pushH|qtr\.|qch\.)/.test(k));
+const MY_KEYS=()=>Object.keys(localStorage).filter(k=>/^fq5\./.test(k)&&!/^fq5\.(lang|liveImp|resetBak|restoreCh|newsSeen|shake|shakeAsked|pushH|qtr\.|qch\.)/.test(k));
 function dlData(){const o={app:'Fastaqim',at:new Date().toISOString(),data:{}};MY_KEYS().forEach(k=>{try{o.data[k]=JSON.parse(localStorage.getItem(k))}catch(e){o.data[k]=localStorage.getItem(k)}});
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(o,null,1)],{type:'application/json'}));a.download='fastaqim-my-data-'+new Date().toISOString().slice(0,10)+'.json';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500);toast(X('Your data file is ready.','ملف بياناتك جاهز.'))}
 function resetSheet(){const u=window.FQA&&FQA.user();
@@ -115,10 +159,61 @@ async function doReset(){const b=$('fqpRsGo');b.disabled=true;const data={};MY_K
  try{for(const k in S)delete S[k];Object.assign(S,{salah:{},stars:0,starLog:{},tasks:[],done:[],kh:[],zk:{},ci:{},resetAt:Date.now()});save();
   if(window.FQA&&FQA.user()&&typeof syPush==='function'){SY.last='';await syPush()}}catch(e){console.warn('reset',e)}
  sessionStorage.setItem('fq5.pulled','1');location.hash='#home';location.reload()}
-async function undoReset(){const bak=ls.get('fq5.resetBak',null);if(!bak)return;
- MY_KEYS().forEach(k=>localStorage.removeItem(k));for(const k in bak.data)try{localStorage.setItem(k,bak.data[k])}catch(e){}
- localStorage.removeItem('fq5.resetBak');try{const st=JSON.parse(bak.data['fq5.state']||'{}');for(const k in S)delete S[k];Object.assign(S,st);save();if(window.FQA&&FQA.user()&&typeof syPush==='function'){SY.last='';await syPush()}}catch(e){}
- sessionStorage.setItem('fq5.pulled','1');toast(X('Your data is back.','عادت بياناتك.'));setTimeout(()=>location.reload(),500)}
+/* restore: ask whether to keep what was added since the reset; the answer can be changed for 7 days */
+const jp=v=>{try{return JSON.parse(v)}catch(e){return v}};
+const isO=v=>v&&typeof v==='object'&&!Array.isArray(v);
+const idOf=x=>isO(x)?(x.id!=null?'i'+x.id:x.k!=null?'k'+x.k:JSON.stringify(x)):JSON.stringify(x);
+function mAdd(base,add,top){if(isO(base)&&isO(add)){const o=Object.assign({},base);for(const k in add){if(k==='_at')continue;if(top&&k==='stars'&&typeof add[k]==='number'){o[k]=(base[k]||0)+add[k];continue}o[k]=k in base?mAdd(base[k],add[k],false):add[k]}return o}
+ if(Array.isArray(base)&&Array.isArray(add)){const have=new Set(base.map(idOf));return base.concat(add.filter(x=>!have.has(idOf(x))))}return base}
+function mSub(cur,add,pre,top){if(isO(cur)&&isO(add)){const o=Object.assign({},cur);for(const k in add){if(k==='_at'||!(k in o))continue;if(top&&k==='stars'&&typeof add[k]==='number'){o[k]=Math.max(0,(o[k]||0)-add[k]);continue}
+  if(!pre||!isO(pre)||!(k in pre))delete o[k];else o[k]=mSub(o[k],add[k],pre[k],false)}return o}
+ if(Array.isArray(cur)&&Array.isArray(add)){const p=new Set((Array.isArray(pre)?pre:[]).map(idOf)),rm=new Set(add.map(idOf).filter(i=>!p.has(i)));return cur.filter(x=>!rm.has(idOf(x)))}return cur}
+const mapAll=(a,b,f)=>{const o={},ks=new Set([...Object.keys(a||{}),...Object.keys(b||{})]);ks.forEach(k=>{const x=(a||{})[k],y=(b||{})[k];o[k]=x==null?y:y==null?x:f(k,x,y)});return o};
+function writeKeys(d){MY_KEYS().forEach(k=>localStorage.removeItem(k));for(const k in d)if(d[k]!=null)try{localStorage.setItem(k,d[k])}catch(e){}}
+async function finishRestore(msg){try{const st=JSON.parse(localStorage.getItem('fq5.state')||'{}');for(const k in S)delete S[k];Object.assign(S,st);save();if(window.FQA&&FQA.user()&&typeof syPush==='function'){SY.last='';await syPush()}}catch(e){}
+ sessionStorage.setItem('fq5.pulled','1');toast(msg);setTimeout(()=>location.reload(),600)}
+function undoReset(){const bak=ls.get('fq5.resetBak',null);if(!bak)return;const since=new Date(bak.at).toLocaleDateString(L==='ar'?'ar':'en-US',{day:'numeric',month:'long'});
+ const now={};MY_KEYS().forEach(k=>now[k]=localStorage.getItem(k));const st=jp(now['fq5.state']||'{}');
+ const added=Object.keys(st).some(k=>!['_at','resetAt','salah','stars','starLog','tasks','done','kh','zk','ci'].includes(k))||Object.keys(st.salah||{}).length||Object.keys(st.ci||{}).length||(st.tasks||[]).length||(st.stars||0)>0||Object.keys(st.zk||{}).length;
+ if(!added){doRestore(bak,now,false);return}
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Bring your data back','استعادة بياناتك')}</h1>${XB}</div>
+ <div class="kh"><p class="fqp-pn">${X('You also used Fastaqim since the reset on '+since+'. Do you want to keep what you added from then until today?','استخدمت فستقم أيضًا منذ إعادة الضبط في '+since+'. هل تريد إبقاء ما أضفته من ذلك اليوم حتى اليوم؟')}</p>
+ <p class="fqp-pn fqp-sm">${X('You can change this answer for 7 days in Settings.','يمكنك تغيير هذا الجواب خلال ٧ أيام من الإعدادات.')}</p></div>
+ <button class="big" id="fqpRsM">${X('Yes, keep both','نعم، أبقِ الاثنين')}</button><button class="fqp-cancel" id="fqpRsO" style="margin-top:8px">${X('No, only my old data','لا، بياناتي القديمة فقط')}</button>`);
+ $('fqpRsM').onclick=()=>doRestore(bak,now,true);$('fqpRsO').onclick=()=>doRestore(bak,now,false)}
+function combine(pre,post){return mapAll(pre,post,(k,x,y)=>{const a=jp(x),b=jp(y);if(isO(a)||Array.isArray(a)){return JSON.stringify(k==='fq5.state'?Object.assign(mAdd(a,b,true),{_at:Date.now()}):mAdd(a,b,false))}return x})}
+function doRestore(bak,post,keep){closeSheet();writeKeys(keep?combine(bak.data,post):bak.data);localStorage.removeItem('fq5.resetBak');
+ ls.set('fq5.restoreCh',{until:Date.now()+7*864e5,at:bak.at,keep,pre:bak.data,post});finishRestore(X('Your data is back.','عادت بياناتك.'))}
+function changeRestore(){const rc=ls.get('fq5.restoreCh',null);if(!rc)return;const since=new Date(rc.at).toLocaleDateString(L==='ar'?'ar':'en-US',{day:'numeric',month:'long'});
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Your restore choice','اختيار الاستعادة')}</h1>${XB}</div>
+ <div class="kh"><p class="fqp-pn">${rc.keep?X('Right now you kept both: your old data and what you added after the reset on '+since+'.','حاليًا أبقيت الاثنين: بياناتك القديمة وما أضفته بعد إعادة الضبط في '+since+'.'):X('Right now you kept only your old data, without what you added after the reset on '+since+'.','حاليًا أبقيت بياناتك القديمة فقط، بدون ما أضفته بعد إعادة الضبط في '+since+'.')}</p></div>
+ <button class="big" id="fqpRcGo">${rc.keep?X('Remove what I added after the reset','أزل ما أضفته بعد إعادة الضبط'):X('Add back what I added after the reset','أعد ما أضفته بعد إعادة الضبط')}</button><button class="fqp-cancel" data-x style="margin-top:8px">${X('Keep it as it is','أبقِه كما هو')}</button>`);
+ $('fqpRcGo').onclick=()=>{const cur={};MY_KEYS().forEach(k=>cur[k]=localStorage.getItem(k));let out;
+  if(rc.keep){out=mapAll(cur,rc.post,(k,x,y)=>{const a=jp(x),b=jp(y),p=jp((rc.pre||{})[k]);return (isO(a)||Array.isArray(a))?JSON.stringify(k==='fq5.state'?Object.assign(mSub(a,b,p,true),{_at:Date.now()}):mSub(a,b,p,false)):x});
+   for(const k in rc.post)if(!(k in (rc.pre||{}))&&out[k]===rc.post[k])delete out[k]}
+  else out=combine(cur,rc.post);
+  closeSheet();writeKeys(out);rc.keep=!rc.keep;ls.set('fq5.restoreCh',rc);finishRestore(X('Done. Your data is updated.','تم. حُدّثت بياناتك.'))}}
+{const rc=ls.get('fq5.restoreCh',null);if(rc&&rc.until<Date.now())localStorage.removeItem('fq5.restoreCh')}
+
+/* ---- delete account: signed out now, removed for good after 30 days; signing in again within 30 days can keep it ---- */
+async function delStatus(){try{const sb=await FQA.sb(),u=FQA.user();if(!u)return null;const {data}=await sb.from('fastaqim_state').select('state').eq('user_id',u.id).maybeSingle();const d=data&&data.state&&data.state.deletedAt;return d?+d:null}catch(e){return null}}
+function delSheet(){const u=window.FQA&&FQA.user();if(!u){acctSheet();return}
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Delete your account?','حذف حسابك؟')}</h1>${XB}</div>
+ <div class="kh fqp-rs"><ul><li>${X('You will be signed out on every device and reminders stop.','سيتم تسجيل خروجك من كل الأجهزة وتتوقف التذكيرات.')}</li><li>${X('After 30 days your account and everything in it are removed for good.','بعد ٣٠ يومًا يُحذف حسابك وكل ما فيه نهائيًا.')}</li><li>${X('Changed your mind? Sign in again within 30 days and tap Keep my account.','غيّرت رأيك؟ سجّل الدخول خلال ٣٠ يومًا واضغط «أبقِ حسابي».')}</li></ul></div>
+ <button class="dang fqp-reset" id="fqpDelAcc">${X('Delete my account','احذف حسابي')}</button><button class="fqp-cancel" data-x>${X('Keep my account','أبقِ حسابي')}</button><p class="fqa-m" id="fqpDelM"></p>`);
+ $('fqpDelAcc').onclick=async()=>{const b=$('fqpDelAcc');b.disabled=true;try{const sb=await FQA.sb(),u2=FQA.user();const {data,error}=await sb.from('fastaqim_state').select('state').eq('user_id',u2.id).maybeSingle();if(error)throw error;
+   const st=Object.assign({},(data&&data.state)||{},{deletedAt:Date.now()});const r=data?await sb.from('fastaqim_state').update({state:st}).eq('user_id',u2.id):await sb.from('fastaqim_state').insert({user_id:u2.id,state:st});if(r.error)throw r.error;
+   try{await sb.from('push_queue').delete().eq('user_id',u2.id).eq('sent',false)}catch(e){}try{await sb.from('push_subs').delete().eq('user_id',u2.id)}catch(e){}
+   S.pushOn=0;save();await FQA.signOut();closeSheet();toast(X('Your account will be deleted in 30 days.','سيُحذف حسابك بعد ٣٠ يومًا.'));R.settings()}
+  catch(e){b.disabled=false;$('fqpDelM').textContent=T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.')}}}
+async function delCheck(){const d=await delStatus();if(!d)return;const end=new Date(d+30*864e5).toLocaleDateString(L==='ar'?'ar':'en-US',{day:'numeric',month:'long'});
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Keep your account?','إبقاء حسابك؟')}</h1>${XB}</div>
+ <div class="kh"><p class="fqp-pn">${X('Your account is set to be deleted on '+end+'. Do you want to keep it?','حسابك سيُحذف في '+end+'. هل تريد إبقاءه؟')}</p></div>
+ <button class="big" id="fqpKeepAcc">${X('Keep my account','أبقِ حسابي')}</button><button class="fqp-cancel" id="fqpStillDel" style="margin-top:8px">${X('No, delete it','لا، احذفه')}</button>`);
+ $('fqpKeepAcc').onclick=async()=>{try{const sb=await FQA.sb(),u=FQA.user();const {data}=await sb.from('fastaqim_state').select('state').eq('user_id',u.id).maybeSingle();const st=Object.assign({},(data&&data.state)||{});delete st.deletedAt;const r=await sb.from('fastaqim_state').update({state:st}).eq('user_id',u.id);if(r.error)throw r.error;closeSheet();vib([10,30,10]);toast(X('Your account is kept.','تم إبقاء حسابك.'))}catch(e){toast(T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.'))}};
+ $('fqpStillDel').onclick=async()=>{await FQA.signOut();closeSheet();toast(X('Signed out. Your account will be deleted on '+end+'.','تم تسجيل الخروج. سيُحذف حسابك في '+end+'.'))}}
+if(window.FQA){let last=null;FQA.on(u=>{const id=u&&u.id;if(id&&id!==last)setTimeout(delCheck,1200);last=id})}
+
 {const bak=ls.get('fq5.resetBak',null);if(bak&&bak.until<Date.now())localStorage.removeItem('fq5.resetBak')}
 
 /* ================= Report a problem: screenshot + shake ================= */
@@ -167,6 +262,7 @@ function onMotion(e){const a=e.accelerationIncludingGravity;if(!a)return;const m
  if(m>24){if(now-shk.t>900)shk.n=0;shk.n++;shk.t=now;if(shk.n>=3&&now-shk.last>4000){shk.last=now;shk.n=0;shakeReport()}}}
 function shakeArm(){const on=shakeOn();if(on&&!shk.armed){addEventListener('devicemotion',onMotion);shk.armed=true}else if(!on&&shk.armed){removeEventListener('devicemotion',onMotion);shk.armed=false}}
 shakeArm();
+setTimeout(()=>{if(shakeOn())h2cLoad().catch(()=>{})},4000);
 if(needAsk&&shakeOn()&&!ls.get('fq5.shakeAsked',0)){const once=async()=>{removeEventListener('touchend',once,true);ls.set('fq5.shakeAsked',1);try{await DeviceMotionEvent.requestPermission()}catch(e){}};addEventListener('touchend',once,true)}
 
 /* ================= Today's path guide ================= */
@@ -191,7 +287,7 @@ R.guide=()=>{const G=[
   src(X('The last two ayat of Al-Baqarah at night suffice you · Bukhari 5009','الآيتان من آخر البقرة كفتاه · البخاري ٥٠٠٩'),SN('bukhari',5009))]];
  $('fqpGd').innerHTML=`<div class="kh fqp-howto"><p><b>${X('How it works','كيف يعمل')}</b></p><p>${X('Tap an item when you have done it. Tap again to undo. Each real tick gives +1 star; nothing is ever ticked for you.','اضغط على العنصر بعد أدائه، واضغط مرة أخرى للتراجع. كل علامة حقيقية تعطي نجمة، ولا يُعلَّم شيء نيابةً عنك.')}</p></div>`+
  G.map(([ic,t,what,when,s])=>`<div class="kh fqp-gi"><div class="fqp-gh"><span class="ic c-a">${ic.startsWith('f:')?FQI(ic.slice(2)):`<i class="ph ${ic}"></i>`}</span><h3>${t}</h3></div><p>${what}</p><p class="fqp-when"><i class="ph ph-clock"></i><span><b>${X('When','متى')}</b> ${when}</span></p><div class="fqp-srcs">${s}</div></div>`).join('')+
- `<p class="fqp-gd-f">${X('Hadith: sahih only, with sunnah.com links.','الأحاديث صحيحة فقط مع روابط sunnah.com.')}</p>`};
+ ''};
 /* the ? on Today's path */
 {const rc=window.renderCI;if(typeof rc==='function'){window.renderCI=renderCI=function(){const r=rc.apply(this,arguments);try{pathQ()}catch(e){}return r}}}
 function pathQ(){const ci=$('ci');if(!ci||$('fqpQ'))return;const h=$('ciH');if(!h)return;h.insertAdjacentHTML('afterend',`<button class="fqp-q" id="fqpQ" aria-label="${esc(X("What is each item?",'ما معنى كل عنصر؟'))}"><i class="ph ph-question"></i></button>`);$('fqpQ').onclick=e=>{e.stopPropagation();go('guide')}}
@@ -309,8 +405,8 @@ function moreRows(){const more=$('s-more');if(!more)return;
 moreRows();
 {const rm=R.more;R.more=function(){const r=rm?rm.apply(this,arguments):undefined;try{moreRows();teamBadge()}catch(e){}return r}}
 {const rh=R.home;R.home=function(){const r=rh.apply(this,arguments);try{homeAv();pathQ()}catch(e){}return r}}
-homeAv();pathQ();
+homeAv();pathQ();applyWp();
 /* open the screen in the address (#settings, #guide, #news, #team, #log) once these screens exist */
 {const h=(window.__fqHash||location.hash||'').slice(1);if(['settings','guide','news','team','log'].includes(h))go(h,false)}
-const QP=new URLSearchParams(location.search);if(QP.get('x')==='report2')setTimeout(()=>reportSheet(null),300);if(QP.get('x')==='reset')setTimeout(resetSheet,300);
+const QP=new URLSearchParams(location.search);if(QP.get('x')==='report2')setTimeout(()=>reportSheet(null),300);if(QP.get('x')==='reset')setTimeout(resetSheet,300);window.__fqp={undoReset,changeRestore,doRestore,combine,mSub,mAdd,pickPhoto,applyWp,delSheet};
 })();
