@@ -875,6 +875,16 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .fambar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top) + 8px) 14px 8px;background:var(--acc);color:#fff;font-size:14px}
 .fambar span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fambar i{font-size:18px}
 .fambar button{flex:none;border:0;border-radius:12px;background:rgba(255,255,255,.2);color:#fff;font:inherit;font-weight:700;padding:7px 12px}
+/* Jannah garden on the Dhikr tab */
+.g6{background:var(--card);border-radius:20px;padding:14px 14px 12px;margin:16px 0 8px;overflow:hidden}
+.g6h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.g6h b{display:flex;align-items:center;gap:8px;font-size:16px}.g6h b i{color:var(--acc);font-size:20px}.g6h span{color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
+.g6svg{display:block;width:100%;height:auto;border-radius:14px;background:linear-gradient(#fbf9f4,#f2f6f2)}
+.g6new{animation:g6n .9s cubic-bezier(.2,.9,.3,1.2) both;transform-box:fill-box;transform-origin:50% 100%}@keyframes g6n{from{opacity:0;transform:scale(.6) translateY(6px)}to{opacity:1;transform:none}}
+.g6rv{stroke-dasharray:6 10;animation:g6f 3s linear infinite}@keyframes g6f{to{stroke-dashoffset:-32}}
+@media (prefers-reduced-motion:reduce){.g6rv,.g6new{animation:none}}
+.g6e{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--card2);color:var(--sub);font-size:14px}.g6e i{font-size:28px;color:var(--acc)}.g6e p{margin:0}
+.g6n{margin:10px 2px 2px;font-size:14px;color:var(--ink);text-align:center}
+.g6q{display:block;text-align:center;font-size:12px;color:var(--gold);margin-top:4px;text-decoration:none}
 </style>
 <link rel="stylesheet" href="life.css">
 </head>
@@ -2201,6 +2211,43 @@ if(ACT6){
 {const acct=$('mAcct');if(acct&&!$('mFam')){acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl" id="mFamG"${ACT6?' hidden':''}><button id="mFam"><span class="ic c-a"><i class="ph ph-users-three"></i></span><span class="tx"><b>${T('Family','العائلة')}</b><small>${T('Profiles with their own PIN','ملفات برمز خاص لكل شخص')}</small></span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mFam').onclick=famSheet}}
 if(!ACT6){const _as=acctSheet;acctSheet=function(){const r=_as.apply(this,arguments);try{if(!(window.FQA&&FQA.user())){const sh=$('sh');if(sh&&!$('acFam'))sh.insertAdjacentHTML('beforeend',`<button class="rzo" id="acFam"><i class="ph ph-users-three"></i> ${T('Family sign in (code and PIN)','دخول العائلة (رمز ورقم سري)')}</button>`);if($('acFam'))$('acFam').onclick=famSignIn}}catch(e){}return r};if($('mAcct'))$('mAcct').onclick=acctSheet;
  if(window.FQA&&!P.has('nosync'))FQA.on(u=>{if(u)setTimeout(famClaimCheck,1500)})}
+
+/* ===== Jannah garden (kept from the old main page, redrawn in the v6 palette): every dhikr counted today adds to a calm garden
+   (grass, flowers, rivers of water, milk and honey, trees, fruit, a palace, light). It grows through the day and starts fresh tomorrow.
+   No beings with souls, no star shapes. ===== */
+const ZG6=[[1,'Grass','عشب'],[4,'Flowers','زهور'],[8,'River of water','نهر من ماء'],[12,'A tree','شجرة'],[18,'Another tree','شجرة أخرى'],[25,'Fruit','ثمار'],[33,'A palace','قصر'],[45,'Palms','نخيل'],[60,'More flowers','زهور أكثر'],[80,'River of milk','نهر من لبن'],[100,'River of honey','نهر من عسل'],[130,'Light','نور'],[170,'Soft light','ضياء'],[220,'More trees','أشجار أكثر'],[300,'Full light','نور تام']];
+function g6Tree(x,s,c,fr){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-2 0 Q-1 -14 -3 -26 L3 -26 Q1 -14 2 0z" fill="#8a6a4a"/><circle cx="0" cy="-34" r="13" fill="${c}"/><circle cx="-10" cy="-27" r="9" fill="${c}"/><circle cx="10" cy="-27" r="9" fill="${c}"/><circle cx="0" cy="-42" r="9" fill="${c}" opacity=".92"/>${fr?`<g><circle cx="-6" cy="-32" r="2.5" fill="#c9a96a"/><circle cx="7" cy="-36" r="2.5" fill="#b8955a"/><circle cx="2" cy="-26" r="2.5" fill="#c9a96a"/><circle cx="-11" cy="-24" r="2.2" fill="#b8955a"/><circle cx="11" cy="-25" r="2.2" fill="#c9a96a"/></g>`:''}</g>`}
+function g6Palm(x,s){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-1.5 0 Q2 -18 0 -34 L3 -34 Q5 -18 1.5 0z" fill="#9a7650"/><g transform="translate(1.5 -34)" fill="none" stroke="#2e6b32" stroke-width="3" stroke-linecap="round"><path d="M0 0 q-10 -6 -20 2"/><path d="M0 0 q10 -6 20 2"/><path d="M0 0 q-6 -10 -15 -10"/><path d="M0 0 q6 -10 15 -10"/><path d="M0 0 q0 -8 1 -14"/></g><circle cx="0" cy="-31" r="2.1" fill="#b8955a"/><circle cx="3.5" cy="-31" r="2.1" fill="#b8955a"/></g>`}
+function g6Flowers(xs){return xs.map((x,j)=>{const c=['#ffffff','#e8d3a5','#f5eedf','#d8c08e'][j%4];return `<g transform="translate(${x} ${103+(j%2)})"><path d="M0 0 V-7" stroke="#4d8a52" stroke-width="1.3"/><circle cy="-9" r="2.1" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="-2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cy="-8.3" r="1" fill="#b8955a"/></g>`}).join('')}
+function g6River(y,c,edge){const d=`M-4 ${y} C40 ${y-4} 80 ${y+4} 120 ${y} S200 ${y-4} 240 ${y} S300 ${y+3} 324 ${y}`;return `<path d="${d}" stroke="${edge}" stroke-width="5.4" fill="none" stroke-linecap="round"/><path class="g6rv" d="${d}" stroke="${c}" stroke-width="3.6" fill="none" stroke-linecap="round"/>`}
+function g6Svg(tot,fresh){const on=k=>tot>=ZG6[k][0],nw=k=>fresh===k?' g6new':'';let g='';
+ g+=`<defs><radialGradient id="g6L" cx="50%" cy="60%" r="55%"><stop offset="0" stop-color="#f6e7bf" stop-opacity=".95"/><stop offset="1" stop-color="#f6e7bf" stop-opacity="0"/></radialGradient></defs>`;
+ if(on(14))g+=`<rect class="${nw(14)}" x="0" y="0" width="320" height="130" fill="url(#g6L)" opacity=".6"/>`;
+ if(on(12))g+=`<g class="g6glow${nw(12)}">${[[24,20],[70,12],[118,26],[200,14],[250,28],[298,16],[160,8],[140,40],[226,44]].map(([a,b],i)=>`<circle cx="${a}" cy="${b}" r="${1.6+(i%3)*.7}" fill="#e3c98e" opacity=".85"/>`).join('')}</g>`;
+ if(on(11))g+=`<g class="${nw(11)}"><ellipse cx="160" cy="74" rx="80" ry="46" fill="url(#g6L)"/></g>`;
+ if(on(6)){const lit=on(11);g+=`<g class="${nw(6)}" opacity="${lit?1:.6}"><rect x="128" y="74" width="64" height="30" rx="2" fill="#fbf8f1" stroke="#d8c9a8"/><path d="M146 74 Q160 46 174 74z" fill="${lit?'#d8c08e':'#ece6da'}" stroke="#d8c9a8"/><rect x="122" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M120.5 62 L125.5 52 L130.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/><rect x="191" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M189.5 62 L194.5 52 L199.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/>${[136,148,160,172,184].map(x=>`<path d="M${x-3.5} 104 V91 Q${x} 85 ${x+3.5} 91 V104z" fill="${lit?'#e8d3a5':'#e3ded3'}"/>`).join('')}</g>`}
+ if(on(13))g+=`<g class="${nw(13)}">${g6Tree(98,.62,'#6f9e72',on(5))}${g6Tree(222,.62,'#6f9e72',on(5))}</g>`;
+ g+=`<path d="M0 104 Q80 94 160 102 T320 100 V130 H0z" fill="#dfe9dc"/><path d="M0 108 Q90 100 170 106 T320 104 V130 H0z" fill="#c9dcc6"/>`;
+ if(on(0))g+=`<g class="${nw(0)}">${[...Array(16)].map((_,j)=>{const x=8+j*20;return `<path d="M${x} 108 q1 -6 3 -8 M${x+3} 108 q0 -7 -2 -9 M${x+6} 108 q-1 -5 2 -7" stroke="#4d8a52" stroke-width="1.2" fill="none"/>`}).join('')}</g>`;
+ if(on(2))g+=`<g class="${nw(2)}">${g6River(113,'#a9d3e6','#6fa9c4')}</g>`;
+ if(on(9))g+=`<g class="${nw(9)}">${g6River(119,'#fdfbf5','#d8d0bc')}</g>`;
+ if(on(10))g+=`<g class="${nw(10)}">${g6River(125,'#e3c17a','#b8955a')}</g>`;
+ if(on(3))g+=`<g class="${nw(3)}">${g6Tree(56,1,'#2e6b32',on(5))}</g>`;
+ if(on(4))g+=`<g class="${nw(4)}">${g6Tree(266,1,'#2e6b32',on(5))}</g>`;
+ if(on(7))g+=`<g class="${nw(7)}">${g6Palm(18,1)}${g6Palm(304,1)}</g>`;
+ if(on(1))g+=`<g class="${nw(1)}">${g6Flowers([84,94,104,112])}</g>`;
+ if(on(8))g+=`<g class="${nw(8)}">${g6Flowers([208,218,228,238,246])}</g>`;
+ const top=on(11)||on(12)||on(14)?0:on(6)?38:on(3)?52:70;return `<svg viewBox="0 ${top} 320 ${130-top}" class="g6svg" aria-hidden="true">${g}</svg>`}
+function gardenDraw(){const box=$('g6');if(!box)return;const tot=dzCount(),k=ZG6.filter(x=>tot>=x[0]).length-1,dk=dkey(NOW());
+ let seen=null;try{seen=JSON.parse(localStorage.getItem('fq5.g6')||'null')}catch(e){}const last=seen&&seen.d===dk?seen.k:-1,fresh=k>last?k:-1;localStorage.setItem('fq5.g6',JSON.stringify({d:dk,k}));
+ const nx=ZG6[k+1],lbl=x=>T(x[1],x[2]);
+ box.innerHTML=`<div class="g6h"><b><i class="ph ph-plant"></i>${T('Your garden today','حديقتك اليوم')}</b><span>${AR(Math.max(0,k+1))}/${AR(ZG6.length)}</span></div>
+  ${tot>0?g6Svg(tot,fresh):`<div class="g6e"><i class="ph ph-plant"></i><p>${T('Every dhikr you count today grows your garden.','كل ذكر تعدّه اليوم يُنمي حديقتك.')}</p></div>`}
+  <p class="g6n">${nx?T(`Next: ${nx[1]} at ${nx[0]} dhikr`,`التالي: ${nx[2]} عند ${AR(nx[0])} ذكر`):T('Your garden is complete for today. MashaAllah.','اكتملت حديقتك اليوم. ما شاء الله.')}</p>
+  <a class="g6q" href="https://quran.com/47/15" target="_blank" rel="noopener">${T('Rivers of water, milk and honey: Qur\'an, Surah Muhammad 47:15','أنهار من ماء ولبن وعسل: القرآن، سورة محمد ٤٧:١٥')}</a>`;
+ if(fresh>0)vib([15,40,15])}
+{const any=$('s-dhikr')&&$('s-dhikr').querySelector('.any');if(any&&!$('g6'))any.insertAdjacentHTML('afterend',`<div class="g6" id="g6"></div>`)}
+{const _rd=R.dhikr;R.dhikr=function(){const r=_rd.apply(this,arguments);try{gardenDraw()}catch(e){}return r}}
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);
