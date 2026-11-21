@@ -457,6 +457,12 @@ function beadSettings(mats){
   const b=document.createElement('button');b.id='mBeads';
   b.innerHTML=`<span class="ic c-g"><i class="ph ph-vibrate"></i></span><span>${esc(TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</span><i class="ph ph-caret-right cv flip"></i>`;
   b.onclick=()=>{ac();beadSettings(false)};lang.after(b)})();
+/* The Settings screen (fq-plus.js) loads after this file: add the same row to its General group */
+function settingsRow(){const after=document.getElementById('fqpNot')||document.getElementById('fqpLang');if(!after||document.getElementById('fqpBeads'))return;
+  const b=document.createElement('button');b.id='fqpBeads';
+  b.innerHTML=`<span class="ic c-a"><i class="ph ph-vibrate"></i></span><span>${esc(TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</span><i class="ph ph-caret-right cv flip"></i>`;
+  b.onclick=()=>{ac();beadSettings(false)};after.after(b)}
+document.addEventListener('DOMContentLoaded',()=>{if(R&&R.settings&&!R.settings._tb){const rs=R.settings;R.settings=function(){const r=rs.apply(this,arguments);try{settingsRow()}catch(e){}return r};R.settings._tb=1}settingsRow()});
 
 /* browsers without the native switch (Chrome, Android) get a styled one */
 if(!('switch' in HTMLInputElement.prototype))document.documentElement.classList.add('tb-fsw');
