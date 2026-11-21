@@ -13,7 +13,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const IS_IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
 
 /* ---------- settings ---------- */
-const DEF={mode:'beads',mat:'olive',goal:33,mute:false,vib:true,snd:true};
+const DEF={mode:'beads',mat:'olive',goal:33,mute:false,vib:true,snd:true,vol:30};
 const st=Object.assign({},DEF,store('tbx')||{});
 const saveSt=()=>store('tbx',st);
 
@@ -22,19 +22,25 @@ const saveSt=()=>store('tbx',st);
    when an <input type=checkbox switch> is toggled through its label, so we click a hidden one.
    It only works inside a tap/swipe handler, so we always call it from pointerup/click/keydown.
    iPad has no vibration motor, so nothing happens there. */
+let HL=null;
+function hapticEl(){
+  // one switch kept in the page (rendered but invisible). Older code put it in <head> with display:none,
+  // which newer iOS versions ignore, so nothing was felt.
+  if(HL&&HL.isConnected)return HL;
+  HL=document.createElement('label');HL.setAttribute('aria-hidden','true');HL.id='tbHL';
+  HL.style.cssText='position:fixed;left:0;bottom:0;width:1px;height:1px;opacity:.01;overflow:hidden;pointer-events:none;z-index:-1';
+  const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');i.tabIndex=-1;HL.appendChild(i);
+  document.body.appendChild(HL);return HL
+}
 function tick(){
-  if(navigator.vibrate){try{navigator.vibrate(12)}catch(e){}return}
-  if(!IS_IOS)return;
-  try{const lb=document.createElement('label');lb.setAttribute('aria-hidden','true');lb.style.display='none';
-    const i=document.createElement('input');i.type='checkbox';i.setAttribute('switch','');lb.appendChild(i);
-    document.head.appendChild(lb);lb.click();lb.remove()}catch(e){}
+  if(IS_IOS){try{hapticEl().click()}catch(e){}return}   // iPhone: always the switch (never navigator.vibrate)
+  if(navigator.vibrate){try{navigator.vibrate(12)}catch(e){}}
 }
 function haptic(strong){
   if(st.mute||!st.vib)return;
-  if(navigator.vibrate){try{navigator.vibrate(strong?[35,70,35,70,60]:12)}catch(e){}return}
-  tick();if(strong){setTimeout(tick,120);setTimeout(tick,240)}
+  if(!IS_IOS&&navigator.vibrate){try{navigator.vibrate(strong?[35,70,35,70,60]:12)}catch(e){}return}
+  tick();if(strong){setTimeout(tick,110);setTimeout(tick,220)}
 }
-
 /* ---------- soft bead click (Web Audio, generated; respects the iPhone silent switch) ---------- */
 let AC=null,NB=null;
 function ac(){
@@ -55,8 +61,9 @@ function knock(a,t,f,q,dec,vol){
 }
 function clack(strong){
   if(st.mute||!st.snd)return;const a=ac();if(!a)return;const m=MAT[st.mat]||MAT.olive,t=a.currentTime+.005;
-  knock(a,t,m.f,m.q,m.dec,.22);knock(a,t+.022,m.f*1.08,m.q,m.dec*.8,.09);
-  if(strong){knock(a,t+.16,m.f*.9,m.q,m.dec*1.3,.2);knock(a,t+.18,m.f,m.q,m.dec,.08)}
+  const V=Math.pow(Math.max(0,Math.min(100,st.vol))/100,1.6)*.22;if(V<.001)return; // volume slider (default 30 = soft)
+  knock(a,t,m.f,m.q,m.dec,V);knock(a,t+.022,m.f*1.08,m.q,m.dec*.8,V*.4);
+  if(strong){knock(a,t+.16,m.f*.9,m.q,m.dec*1.3,V*.9);knock(a,t+.18,m.f,m.q,m.dec,V*.36)}
 }
 
 /* ---------- bead materials, drawn per pixel (sphere + light + texture) ---------- */
@@ -276,21 +283,38 @@ function Beads(stage){
   return{step(dir){finish();count();animTo(phase-dir,150)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){POOL.forEach(b=>b._m=null);layout()}}
 }
 
-/* ---------- bead style sheet (materials + vibration/sound switches) ---------- */
-function styleSheet(){
+/* ---------- bead settings sheet: materials (optional) + vibration + bead sound + volume ---------- */
+function styleSheet(){beadSettings(true)}
+function beadSettings(mats){
   const keys=Object.keys(MAT);
-  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(TX('Bead style','شكل الحبّات','Akkaataa callee','Qaabka kuusha'))}</h1>${XB}</div>
-  <div class="tb-mg">${keys.map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('')}</div>
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(mats?TX('Bead style','شكل الحبّات','Akkaataa callee','Qaabka kuusha'):TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</h1>${XB}</div>
+  ${mats?`<div class="tb-mg">${keys.map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('')}</div>`:''}
+  <p class="tb-sh">${esc(TX('Vibration','الاهتزاز','Raafama','Gariir'))}</p>
   <div class="tb-sw">
-   <label><span><b>${esc(TX('Vibration','الاهتزاز','Raafama','Gariir'))}</b><small>${esc(TX('On every bead, stronger at 33 and 100','مع كل حبّة، وأقوى عند ٣٣ و١٠٠','Callee hundaaf, 33 fi 100 irratti cimaa','Kuul kasta, 33 iyo 100 way ka xoog badan tahay'))}</small></span><input type="checkbox" switch id="tbVib" ${st.vib?'checked':''}></label>
-   <label><span><b>${esc(TX('Bead click sound','صوت طقطقة الحبّات','Sagalee callee','Codka kuusha'))}</b><small>${esc(TX('A soft click only. No music, no voice.','طقطقة خفيفة فقط، بلا موسيقى ولا صوت بشري.','Sagalee laafaa qofa. Muuziqaa fi sagalee namaa hin qabu.','Cod jilicsan oo keliya. Muusig iyo cod qof midna ma leh.'))}</small></span><input type="checkbox" switch id="tbSnd" ${st.snd?'checked':''}></label>
+   <label><span><b>${esc(TX('Bead vibration','اهتزاز الحبّات','Raafama callee','Gariirka kuusha'))}</b><small>${esc(TX('On every bead, stronger at 33 and 100','مع كل حبّة، وأقوى عند ٣٣ و١٠٠','Callee hundaaf, 33 fi 100 irratti cimaa','Kuul kasta, 33 iyo 100 way ka xoog badan tahay'))}</small></span><input type="checkbox" switch id="tbVib" ${st.vib?'checked':''}></label>
+   <button class="tb-try" id="tbTryV"><i class="ph ph-vibrate"></i><span>${esc(TX('Test vibration','جرّب الاهتزاز','Raafama yaali','Tijaabi gariirka'))}</span></button>
   </div>
-  <p class="tb-note">${esc(TX('iPhone with iOS 18 or newer: a light tap on every bead. iPad has no vibration motor, so it stays still. The click sound follows your silent switch.','آيفون بنظام iOS 18 أو أحدث: نقرة خفيفة مع كل حبّة. آيباد لا يحتوي على محرّك اهتزاز. صوت الطقطقة يتبع زرّ الصامت.','iPhone iOS 18 ykn haaraa: callee hundaaf tuqaa laafaa. iPad motora raafamaa hin qabu. Sagaleen furtuu callisaa hordofa.','iPhone iOS 18 ama ka cusub: taabasho fudud kuul kasta. iPad ma laha matoor gariir. Codku wuxuu raacaa furaha aamusnaanta.'))}</p>`);
+  <p class="tb-sh">${esc(TX('Bead sound','صوت الحبّات','Sagalee callee','Codka kuusha'))}</p>
+  <div class="tb-sw">
+   <label><span><b>${esc(TX('Bead click','طقطقة الحبّات','Sagalee callee','Shanqarta kuusha'))}</b><small>${esc(TX('A soft click only. No music, no voice.','طقطقة خفيفة فقط، بلا موسيقى ولا صوت بشري.','Sagalee laafaa qofa. Muuziqaa fi sagalee namaa hin qabu.','Cod jilicsan oo keliya. Muusig iyo cod qof midna ma leh.'))}</small></span><input type="checkbox" switch id="tbSnd" ${st.snd?'checked':''}></label>
+   <div class="tb-vol${st.snd?'':' off'}" id="tbVolW"><i class="ph ph-speaker-low"></i><input type="range" id="tbVol" min="0" max="100" step="5" value="${st.vol}" aria-label="${esc(TX('Bead click volume','مستوى صوت الطقطقة','Sagalee callee hammam','Heerka codka kuusha'))}"><i class="ph ph-speaker-high"></i></div>
+  </div>
+  <p class="tb-note">${esc(TX('Feel nothing on iPhone? It needs iOS 18 or newer, and System Haptics on (iPhone Settings, Sounds & Haptics). iPad has no vibration motor. The click follows your silent switch.','لا تشعر بشيء على الآيفون؟ يلزم iOS 18 أو أحدث، وتفعيل «اهتزازات النظام» (الإعدادات، الأصوات والاهتزازات). آيباد لا يحتوي على محرّك اهتزاز. الطقطقة تتبع زرّ الصامت.','iPhone irratti homaa hin dhaga\'attu? iOS 18 ykn haaraa fi System Haptics banuu barbaachisa (Settings, Sounds & Haptics). iPad motora raafamaa hin qabu.','iPhone waxba ma dareentid? Waxay u baahan tahay iOS 18 ama ka cusub, iyo System Haptics oo shidan (Settings, Sounds & Haptics). iPad ma laha matoor gariir.'))}</p>`);
   document.querySelectorAll('#sh [data-mat]').forEach(b=>b.onclick=()=>{st.mat=b.dataset.mat;saveSt();haptic(false);clack(false);
-    document.querySelectorAll('#sh [data-mat]').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on))});paintMat();if(beads)beads.refresh()});
+    document.querySelectorAll('#sh [data-mat]').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on))});if(document.getElementById('tbMatI'))paintMat();if(beads)beads.refresh()});
   document.getElementById('tbVib').onchange=e=>{st.vib=e.target.checked;saveSt();if(st.vib)haptic(false)};
-  document.getElementById('tbSnd').onchange=e=>{st.snd=e.target.checked;saveSt();if(st.snd)clack(false)};
+  document.getElementById('tbTryV').onclick=()=>{if(!st.vib){st.vib=true;saveSt();document.getElementById('tbVib').checked=true}
+    const m=st.mute;st.mute=false;haptic(false);st.mute=m};
+  document.getElementById('tbSnd').onchange=e=>{st.snd=e.target.checked;saveSt();document.getElementById('tbVolW').classList.toggle('off',!st.snd);if(st.snd)clack(false)};
+  let lt=0;const vr=document.getElementById('tbVol'),vp=()=>vr.style.setProperty('--p',vr.value+'%');vp();
+  vr.oninput=()=>{st.vol=+vr.value;saveSt();vp();const n=performance.now();if(n-lt>120&&st.snd){lt=n;const m=st.mute;st.mute=false;clack(false);st.mute=m}};
+  vr.onchange=()=>{st.vol=+vr.value;saveSt()};
 }
+/* Settings row in More: "Tasbih beads" (separate from everything else) */
+(function addSettingsRow(){const lang=document.getElementById('mLang');if(!lang||document.getElementById('mBeads'))return;
+  const b=document.createElement('button');b.id='mBeads';
+  b.innerHTML=`<span class="ic c-g"><i class="ph ph-vibrate"></i></span><span>${esc(TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</span><i class="ph ph-caret-right cv flip"></i>`;
+  b.onclick=()=>{ac();beadSettings(false)};lang.after(b)})();
 
 /* browsers without the native switch (Chrome, Android) get a styled one */
 if(!('switch' in HTMLInputElement.prototype))document.documentElement.classList.add('tb-fsw');
@@ -353,5 +377,6 @@ const QP=new URLSearchParams(location.search);
 if(QP.get('mat')&&MAT[QP.get('mat')]){st.mat=QP.get('mat')}
 if(QP.get('tbx')){st.mode=QP.get('tbx')==='tap'?'tap':'beads';setTimeout(()=>QP.get('sal')?tasbihPlus(salCtx()):tasbihPlus(null),60)}
 if(QP.get('tbs'))setTimeout(styleSheet,400);
+if(QP.get('tbset'))setTimeout(()=>beadSettings(false),400);
 window.__tbx={MAT,beadImg,haptic,st};
 })();

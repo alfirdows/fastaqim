@@ -53,6 +53,7 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#tbMat');await p.waitForTimeout(400);ok('bead styles',(await p.$$('#sh [data-mat]')).length===8);await p.click('#sh [data-mat="jade"]');await p.click('#sh [data-x]');await p.waitForTimeout(300);
  await p.click('#tbMute');ok('mute on',(await p.getAttribute('#tbMute','aria-pressed'))==='true');await p.click('#tbMute');
  await p.click('#tbBack');await p.waitForTimeout(300);ok('tasbih closes',!(await p.isVisible('#tbx')));
+ await p.click('[data-tab="more"]');await p.waitForTimeout(300);ok('bead settings row',await p.isVisible('#mBeads'));await p.click('#mBeads');await p.waitForTimeout(400);ok('bead settings sheet',await p.isVisible('#tbVol')&&await p.isVisible('#tbTryV'));{const g=()=>p.evaluate(()=>{const i=document.querySelector('#tbHL input');return i?i.checked:null});const h0=await g();await p.click('#tbTryV');await p.waitForTimeout(60);const h1=await g();ok('iPhone haptic switch toggles',h0!==h1&&h1!==null)}await snap('12_bead_settings');await p.click('#sh [data-x]');await p.waitForTimeout(300);
  // Friday salawat card (forced with ?fri=1)
  await p.goto('http://fq.test/next/v6/?fri=1'+(L?'&'+L.replace('?',''):'')+'#dhikr');await p.waitForTimeout(700);ok('friday card',await p.isVisible('#frC'));await snap('11_friday');
  await p.click('#frGo');await p.waitForTimeout(400);ok('salawat counter',await p.isVisible('#tbPh'));
