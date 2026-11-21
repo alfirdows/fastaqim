@@ -2043,7 +2043,7 @@ function apvDraw(){const B=$('apB'),Ls=APV.items,n=Ls.length;
  $('apL').onclick=()=>{APV.i++;apvDraw();scrollTo(0,0)}}
 /* the Approvals row appears on More only for the owner */
 function apvRow(){apvOwner().then(o=>{const ex=$('mApv');if(!o){if(ex)ex.closest('.gl').style.display='none';return}if(ex){ex.closest('.gl').style.display='';return}const acct=$('mAcct');if(!acct)return;
- acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl"><button id="mApv"><span class="ic c-g"><i class="ph ph-seal-check"></i></span><span>${T('Approvals','الموافقات')}</span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mApv').onclick=()=>go('apv')})}
+ acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl"><button id="mApv"><span class="ic c-g"><i class="ph ph-check-circle"></i></span><span>${T('Approvals','الموافقات')}</span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mApv').onclick=()=>go('apv')})}
 if(window.FQA){FQA.on(()=>{APV.own=null;apvRow()});FQA.sb().then(apvRow).catch(()=>{})}
 
 /* ---------- start ---------- */
