@@ -177,3 +177,4 @@ html[dir=rtl] .sh.fq-full{transform:translateX(-105%)}
 #zCnt.cnt{height:auto!important;min-height:64px;padding-top:8px!important;padding-bottom:10px!important}
 #zCntT .lb b{line-height:1.15}
 @media (max-width:360px){#zCntT .lb b{font-size:16px}#zCnt .fq-arc{--w:38px}#zCntT{gap:9px}}
+.zr .zk .zm br{display:none}.zr .zk .zm{text-wrap:pretty}
