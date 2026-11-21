@@ -86,8 +86,8 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 .fr-n{font-size:13.5px;color:var(--sub);font-weight:600;font-variant-numeric:tabular-nums}
 .tb-fsw .tb-sw input[type=checkbox]:not(.tb-hs){-webkit-appearance:none;appearance:none;width:51px;height:31px;border-radius:16px;background:#e3ddd1;position:relative;margin:0;transition:background .2s}
 .tb-fsw .tb-sw input[type=checkbox]:not(.tb-hs):before{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.18);transition:transform .2s}
-.tb-fsw .tb-sw input:checked{background:var(--acc)}.tb-fsw .tb-sw input:checked:before{transform:translateX(20px)}
-[dir=rtl].tb-fsw .tb-sw input:checked:before,.tb-fsw [dir=rtl] .tb-sw input:checked:before{transform:translateX(20px)}
+.tb-fsw .tb-sw input[type=checkbox]:not(.tb-hs):checked{background:var(--acc)}.tb-fsw .tb-sw input[type=checkbox]:not(.tb-hs):checked:before{transform:translateX(20px)}
+[dir=rtl].tb-fsw .tb-sw input[type=checkbox]:not(.tb-hs):checked:before,.tb-fsw [dir=rtl] .tb-sw input[type=checkbox]:not(.tb-hs):checked:before{transform:translateX(20px)}
 .tbx.tap .tb-cn b{display:none}.tbx.tap .tb-cn small{margin-top:6px}
 /* Hisn audio button in the adhkar reader */
 .zk .top{flex-wrap:wrap;gap:6px 10px}.zk .top>span{margin-inline-end:auto}
