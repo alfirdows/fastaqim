@@ -1,8 +1,10 @@
-import json,subprocess,re,numpy as np
+import json,subprocess,re,os,numpy as np
+VAR=os.environ.get('VARIANTS')  # set to write 3-second head variants for checking
+SHIFT=json.load(open('tools/hisn/shift.json')) if os.path.exists('tools/hisn/shift.json') else {}
 ENV={}
 def env(f):
   if f not in ENV:
-    a=np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',f'/home/user/fastaqim/hisn/{f}.m4a','-ac','1','-ar','8000','-f','s16le','-'],capture_output=True).stdout,dtype=np.int16).astype(float)
+    a=np.frombuffer(subprocess.run(['ffmpeg','-v','error','-i',f'hisn/{f}.m4a','-ac','1','-ar','8000','-f','s16le','-'],capture_output=True).stdout,dtype=np.int16).astype(float)
     ENV[f]=np.array([np.sqrt(np.mean(a[i:i+80]**2)) for i in range(0,len(a)-80,80)])
   return ENV[f]
 def quiet(f,lo,hi):
@@ -45,5 +47,11 @@ for name,f,a,fw,b,lw in JOBS:
   nx=(nxt[0] if nxt else en+0.6)
   s0=quiet(f,max(0,st-0.45),st+0.05)
   e0=quiet(f,en-0.1,min(en+0.6,max(nx+0.15,en+0.1)))+0.03
+  s0+=SHIFT.get(name,0)
+  if VAR:
+    os.makedirs('tools/hisn/variants',exist_ok=True)
+    for off in (0,.08,.16,.24,.32,.40):
+      subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0+off:.2f}','-t','3','-i',f'hisn/{f}.m4a','-ac','1','-c:a','aac','-b:a','64k',f'tools/hisn/variants/{name}__{int(off*100):02d}.m4a'],check=True)
+    continue
   print(f"{name:22s} {s0:7.2f}-{e0:7.2f} ({e0-s0:5.1f}s) | {' '.join(w[2] for w in W[i:j+1])[:80]}")
-  subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0:.2f}','-to',f'{e0:.2f}','-i',f'/home/user/fastaqim/hisn/{f}.m4a','-af','afade=t=in:d=0.04,areverse,afade=t=in:d=0.08,areverse','-ac','1','-c:a','aac','-b:a','64k','-movflags','+faststart',f'/home/user/fastaqim/hisn/clips/{name}.m4a'],check=True)
+  subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0:.2f}','-to',f'{e0:.2f}','-i',f'hisn/{f}.m4a','-af','afade=t=in:d=0.04,areverse,afade=t=in:d=0.08,areverse','-ac','1','-c:a','aac','-b:a','64k','-movflags','+faststart',f'hisn/clips/{name}.m4a'],check=True)
