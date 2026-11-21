@@ -51,7 +51,7 @@ function fqReader(){if(!ZS)return;const z=ZK[ZS.set],it=z.items[ZS.i],p=zProg(ZS
   w.innerHTML=steps(z.items.length,j=>(p[j]||0)>=z.items[j].n,ZS.i)+`<div class="top fq-zt"><b>${FT('Dhikr '+(ZS.i+1),'الذكر '+A(ZS.i+1),'Zikrii '+(ZS.i+1),'Dhikr '+(ZS.i+1))}</b>${np?`<span class="fq-sub">${parts.map((_,k)=>`<i class="${k===ZS.sub?'on':k<ZS.sub?'dn':''}"></i>`).join('')}</span>`:''}</div>`;
   top.replaceWith(w);w.querySelectorAll('[data-fqj]').forEach(b=>b.onclick=e=>{e.stopPropagation();ZS.i=+b.dataset.fqj;zDraw();$('zc').scrollTop=0})}
  // say "N times" once: drop "(33 times)" from the meaning and "Repeat 33 times ·" from the source line
- const zm=card.querySelector('.zm');if(zm)zm.innerHTML=zm.innerHTML.replace(/\s*\((\d+|[٠-٩]+) times\)/,'').replace(/\s*\(\d+ times\)/,'');
+ const zm=card.querySelector('.zm');if(zm)zm.innerHTML=zm.innerHTML.replace(/\s*<br\s*\/?>\s*/g,' ').replace(/\s*\((\d+|[٠-٩]+) times\)/,'').replace(/\s*\(\d+ times\)/,'');
  const zs=card.querySelector('.zs');if(zs){zs.innerHTML=zs.innerHTML.replace(/^[^<]*·\s*/,'');const a=zs.querySelector('a');if(a)a.innerHTML=a.innerHTML.replace(/\s*↗\s*$/,'&nbsp;↗')}
  const t=$('zCntT'),last=!np||ZS.sub>=np-1;
  if(t)t.innerHTML=c>=it.n?`${arc(c,it.n,{w:46,lt:1})}<span class="lb"><b>${doneTxt()}</b><small>${ZS.i<z.items.length-1?FT('Tap for the next one','اضغط للتالي','Kan itti aanuuf tuqi','Taabo kan xiga'):FT('Set complete','اكتملت','Guutameera','Waa dhammaatay')}</small></span>`
