@@ -1,0 +1,91 @@
+/* Fastaqim v6 · Dhikr plus: bead tasbih page + Friday salawat card */
+.tbx{position:fixed;inset:0;z-index:36;background:var(--bg);display:none;overscroll-behavior:none}
+.tbx.on{display:block}
+html.tbx-open,html.tbx-open body{overflow:hidden}
+.tbw{height:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 6px) 16px calc(env(safe-area-inset-bottom) + 14px);box-sizing:border-box}
+.tbx .hd{margin:0 0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tbx .hd h1{margin:0;flex:1;min-width:0;text-align:center;font-size:18px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tbx .tb-mu.off{background:var(--card2);color:var(--sub)}
+.tb-seg{margin:0 auto 8px;width:100%;max-width:320px}
+.tb-seg button{height:36px;border:0;background:none;border-radius:11px;font:600 14.5px Inter,Plex,sans-serif;color:var(--sub)}
+.tb-ph{margin:2px 0 0;text-align:center;font:600 20px/1.6 Plex,serif;color:var(--ink)}
+.tb-cn{position:relative;display:flex;flex-direction:column;align-items:center;margin:6px 0 2px}
+.tb-cn b{font-size:56px;line-height:1.05;font-weight:700;letter-spacing:-.5px;font-variant-numeric:tabular-nums;color:var(--ink)}
+.tb-cn b.bp{animation:tbBump .22s ease-out}
+@keyframes tbBump{40%{transform:scale(1.07)}}
+.tb-cn small{font-size:13.5px;color:var(--sub);font-weight:550;margin-top:2px;font-variant-numeric:tabular-nums}
+.tb-pr{display:block;width:150px;height:4px;border-radius:3px;background:var(--line);margin-top:8px;overflow:hidden}
+.tb-pr i{display:block;height:100%;width:0;border-radius:3px;background:linear-gradient(90deg,var(--acc),#b8955a);transition:width .18s ease-out}
+.tb-cn.nog .tb-pr{visibility:hidden}
+.tb-rg{position:absolute;left:50%;top:30px;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;border:2px solid #b8955a;opacity:0;pointer-events:none}
+.tb-rg.go{animation:tbRing .9s ease-out}
+@keyframes tbRing{0%{opacity:.85;transform:scale(.6)}100%{opacity:0;transform:scale(1.9)}}
+.tb-fx{position:absolute;left:50%;top:30px;width:0;height:0;pointer-events:none}
+.tb-fx i{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff7e3,#d8b46a 60%,#b8955a);animation:tbSp 1.1s cubic-bezier(.15,.7,.3,1) forwards}
+.tb-fx i:nth-child(3n){width:5px;height:5px;background:var(--acc)}
+@keyframes tbSp{0%{transform:translate(0,0) scale(.3);opacity:1}70%{opacity:1}100%{transform:translate(var(--x),var(--y)) scale(1);opacity:0}}
+.tb-fx em{position:absolute;left:50%;top:64px;transform:translateX(-50%);white-space:nowrap;font-style:normal;font-weight:700;font-size:13.5px;color:#86672e;background:#f5eedf;border-radius:999px;padding:5px 12px;animation:tbTag 1.6s ease forwards}
+@keyframes tbTag{0%{opacity:0;transform:translate(-50%,6px)}15%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0}}
+.tb-stage{flex:1;min-height:240px;position:relative;margin:4px 0}
+.tb-str{position:absolute;inset:0;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;outline:none;overflow:hidden;cursor:grab;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.tb-str:focus-visible{box-shadow:inset 0 0 0 2px var(--accT);border-radius:20px}
+.tb-th{position:absolute;left:50%;top:0;bottom:0;width:2px;margin-left:-1px;background:linear-gradient(180deg,#a8957a,#8a7658);border-radius:1px;opacity:.85}
+.tb-bd{position:absolute;left:50%;top:0;background-size:100% 100%;will-change:transform;pointer-events:none}
+.tb-tap{position:absolute;left:50%;top:50%;width:min(230px,62vw);height:min(230px,62vw);transform:translate(-50%,-50%);border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,var(--card),var(--card2));box-shadow:0 10px 30px rgba(0,0,0,.12),0 0 0 8px var(--accT);color:var(--acc);touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.tb-tap b{font-size:60px;font-weight:750;font-variant-numeric:tabular-nums}
+.tb-tap.pr{animation:tbPress .16s ease-out}
+@keyframes tbPress{50%{transform:translate(-50%,-50%) scale(.96)}}
+.tb-hint{margin:0 0 10px;text-align:center;color:var(--sub);font-size:13.5px}
+.tb-goal{display:flex;justify-content:center;gap:8px;margin:0 0 12px}
+.tb-goal button{min-width:58px;height:38px;border-radius:12px;border:1.5px solid var(--line);background:var(--card);font:650 14.5px Inter,Plex,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums}
+.tb-goal button.on{border-color:var(--acc);background:var(--accT);color:var(--acc)}
+.tb-bar{display:flex;gap:10px}
+.tb-mat,.tb-rs{height:48px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);display:flex;align-items:center;gap:8px;padding:0 14px;font:600 14.5px Inter,Plex,sans-serif;color:var(--ink)}
+.tb-mat{flex:1;min-width:0}.tb-mat span{flex:1;min-width:0;text-align:start;line-height:1.2}
+.tb-mat img{width:30px;height:30px;margin:0 -2px}
+.tb-mat i,.tb-rs i{font-size:18px;color:var(--sub)}
+.tb-mat[hidden]{display:none}
+.tb-rs{flex:none;color:var(--sub)}
+.tb-bar .tb-mat[hidden]+.tb-rs{flex:1;justify-content:center}
+/* style sheet */
+.tb-mg{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 14px}
+.tb-mg button{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font:600 12px/1.25 Inter,Plex,sans-serif;color:var(--ink);min-height:96px}
+.tb-mg button img{width:56px;height:56px}
+.tb-mg button span{text-align:center;padding:0 2px}
+.tb-mg button.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--accT)}
+.tb-sw{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.tb-sw label{display:flex;align-items:center;gap:12px;padding:12px 14px}
+.tb-sw label+label{border-top:1px solid var(--line)}
+.tb-sw label span{flex:1;min-width:0;display:flex;flex-direction:column}
+.tb-sw b{font-size:15px;font-weight:650}.tb-sw small{font-size:12.5px;color:var(--sub);line-height:1.35}
+.tb-sw input{flex:none;accent-color:var(--acc)}
+.tb-note{margin:12px 4px 0;font-size:12.5px;line-height:1.45;color:var(--sub)}
+@media(min-width:1100px){.tbx{left:232px}}
+@media(max-height:640px){.tb-cn b{font-size:44px}.tb-goal button{height:34px}.tb-mat,.tb-rs{height:44px}.tb-hint{margin-bottom:6px}}
+
+/* Friday salawat card */
+.fr-c{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 16px 14px;margin:0 0 18px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.fr-t{display:flex;align-items:center;gap:12px}
+.fr-i{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:#f5eedf;color:#86672e;font-size:21px}
+.fr-t span{display:flex;flex-direction:column;min-width:0}
+.fr-t small{font-size:12px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#86672e}
+.fr-t b{font-size:16px;font-weight:650;line-height:1.3}
+.fr-ar{margin:14px 0 0;text-align:center;font:500 18.5px/2 Plex,serif;color:var(--ink)}
+.fr-ar span{display:block}
+.fr-src{display:block;margin:10px auto 0;padding-top:8px;border-top:1px solid var(--line);width:60%;text-align:center;font-size:12.5px;color:var(--sub);text-decoration:none}
+.fr-why{margin:12px 0 0;font-size:14px;line-height:1.55;color:var(--sub)}
+.fr-why a{display:inline-block;margin-inline-start:4px;color:#86672e;font-weight:600;text-decoration:none;font-size:13px}
+.fr-row{display:flex;align-items:center;gap:12px;margin-top:14px}
+.fr-go{height:44px;border:0;border-radius:14px;background:var(--acc);color:#fff;font:700 14.5px Inter,Plex,sans-serif;padding:0 16px;display:flex;align-items:center;gap:8px}
+.fr-bi{display:inline-grid;width:22px;height:22px}.fr-bi svg{width:22px;height:22px}
+.fr-n{font-size:13.5px;color:var(--sub);font-weight:600;font-variant-numeric:tabular-nums}
+.tb-fsw .tb-sw input{-webkit-appearance:none;appearance:none;width:51px;height:31px;border-radius:16px;background:#e3ddd1;position:relative;margin:0;transition:background .2s}
+.tb-fsw .tb-sw input:before{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.18);transition:transform .2s}
+.tb-fsw .tb-sw input:checked{background:var(--acc)}.tb-fsw .tb-sw input:checked:before{transform:translateX(20px)}
+[dir=rtl].tb-fsw .tb-sw input:checked:before,.tb-fsw [dir=rtl] .tb-sw input:checked:before{transform:translateX(20px)}
+.tbx.tap .tb-cn b{display:none}.tbx.tap .tb-cn small{margin-top:6px}
+/* Hisn audio button in the adhkar reader */
+.zk .top{flex-wrap:wrap;gap:6px 10px}.zk .top>span{margin-inline-end:auto}
+.zha{height:34px;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:0 12px 0 10px;display:inline-flex;align-items:center;gap:6px;font:650 13px Inter,Plex,sans-serif;color:var(--acc)}
+.zha i{font-size:15px}.zha.on{background:var(--accT);border-color:var(--accT)}

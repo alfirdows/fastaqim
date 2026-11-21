@@ -10,6 +10,17 @@
     "decisions/img/compare-v6.jpg"
    ],
    "link": "next/compare/"
+  },
+  {
+   "id": "life-v6",
+   "t": "Life & family: habits, rules, family schedule, 52 guides",
+   "ar": "الحياة والعائلة: العادات، القواعد، جدول العائلة، ٥٢ دليلًا",
+   "s": "Fastaqim meaning + recitation is now on More. New: Habits (build and leave), Rules (family, mine, each person), Family schedule everyone can see, and guides for calm, relationships, kids and students, life skills, memory and family coping. Tap Open it live. The full source list is in Sources.",
+   "pics": [
+    "decisions/img/life-v6.jpg"
+   ],
+   "link": "next/v6/?#life",
+   "link2": "next/v6/sources.html"
   }
  ]
 }
