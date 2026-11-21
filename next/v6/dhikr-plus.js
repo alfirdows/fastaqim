@@ -76,15 +76,22 @@ function clack(strong){
 
 /* ---------- bead materials, drawn per pixel (sphere + light + texture) ---------- */
 const MAT={
- olive:   {n:['Olive wood','خشب الزيتون','Muka ejersaa','Alwaax saytuun'],f:1500,q:3,dec:.035},
- sandal:  {n:['Sandalwood','خشب الصندل','Muka sandal','Alwaax sandal'],f:1700,q:3,dec:.03},
- amber:   {n:['Amber','كهرمان','Ambar','Cambar'],f:2600,q:5,dec:.045},
- pearl:   {n:['Pearl','لؤلؤ',"Lu'lu'",'Luul'],f:3000,q:6,dec:.05},
- onyx:    {n:['Onyx','عقيق أسود','Oniksii','Oniks'],f:3300,q:7,dec:.055},
- jade:    {n:['Jade','يَشْم','Jeedii','Jeyd'],f:3100,q:7,dec:.055},
- lapis:   {n:['Lapis','لازورد','Laaziwardii','Laajward'],f:3200,q:7,dec:.05},
- hematite:{n:['Hematite','هيماتيت','Hemaatayitii','Hematayt'],f:3800,q:8,dec:.06}
+ // modern
+ crystal: {g:'m',n:['Crystal','كريستال','Kiristaala','Kiristaal'],f:4300,q:12,dec:.07,sq:.84,sp:'gold'},
+ frost:   {g:'m',n:['Frosted glass','زجاج مُثلَّج','Burcuqqoo cabbii','Muraayad baraf'],f:3600,q:8,dec:.05},
+ smoky:   {g:'m',n:['Smoky quartz','كوارتز مدخّن','Kuwaartsii aaraa','Kuwaarts qiiq'],f:3900,q:10,dec:.06},
+ pearl:   {g:'m',n:['Pearl white','أبيض لؤلؤي',"Adii lu'lu'",'Luul cad'],f:3000,q:6,dec:.05},
+ steel:   {g:'m',n:['Brushed steel','فولاذ مصقول','Sibiila','Bir la sifeeyay'],f:4500,q:12,dec:.08},
+ ceramic: {g:'m',n:['White ceramic','سيراميك أبيض','Seeramikii adii','Dhoobo cad'],f:2900,q:6,dec:.04},
+ // classic
+ olive:   {g:'c',n:['Olive wood','خشب الزيتون','Muka ejersaa','Alwaax saytuun'],f:1500,q:3,dec:.035},
+ sandal:  {g:'c',n:['Sandalwood','خشب الصندل','Muka sandal','Alwaax sandal'],f:1700,q:3,dec:.03},
+ amber:   {g:'c',n:['Amber','كهرمان','Ambar','Cambar'],f:2600,q:5,dec:.045},
+ onyx:    {g:'c',n:['Onyx','عقيق أسود','Oniksii','Oniks'],f:3300,q:7,dec:.055},
+ jade:    {g:'c',n:['Jade','يَشْم','Jeedii','Jeyd'],f:3100,q:7,dec:.055},
+ lapis:   {g:'c',n:['Lapis','لازورد','Laaziwardii','Laajward'],f:3200,q:7,dec:.05}
 };
+if(st.mat==='hematite')st.mat='steel';if(!MAT[st.mat])st.mat='olive';
 const matName=k=>{const n=(MAT[k]||MAT.olive).n;return TX(n[0],n[1],n[2],n[3])};
 
 // gradient noise (3D) + fbm
@@ -114,9 +121,43 @@ function surface(k,P){
   case 'jade':{const n=fbm(x*1.4,y*1.4,z*1.4,5)*.5+.5,v=Math.abs(fbm(x*3+7,y*3,z*3,3));let c=mix([.30,.56,.42],[.58,.76,.62],sst(.3,.75,n));c=mix(c,[.80,.88,.80],sst(.06,0,v)*.35);return{c,spec:.75,pow:70,trans:[.55,.8,.6]}}
   case 'lapis':{const n=fbm(x*1.8,y*1.8,z*1.8,5)*.5+.5,fl=noise(x*22,y*22,z*22),wv=Math.abs(fbm(x*2.5+5,y*2.5,z*2.5,3));let c=mix([.09,.17,.47],[.18,.30,.66],n);
     c=mix(c,[.80,.82,.86],sst(.05,0,wv)*.45);if(fl>.42)c=mix(c,[.86,.70,.36],sst(.42,.6,fl));return{c,spec:.6,pow:60}}
-  case 'hematite':return{c:[.23,.24,.27],spec:1.2,pow:110,metal:1,env:.9};
+  case 'steel':{const br=noise(x*1.5,y*46,z*1.5)*.07+noise(x*3,y*90,z*3)*.04;return{c:[.60+br,.62+br,.65+br],spec:.9,pow:50,metal:1,env:.85}}
+  case 'ceramic':{const n=fbm(x*3,y*3,z*3,2)*.012;return{c:[.94+n,.935+n,.92+n],spec:.55,pow:46}}
+  case 'gold':return{c:[.80,.60,.24],spec:1.1,pow:80,metal:1,env:.9,et:[1,.82,.48]};
   }
   return{c:[.5,.5,.5],spec:.3,pow:20}
+}
+/* glass family: faceted crystal with a soft rainbow (AB) shimmer, frosted glass, smoky quartz.
+   Returns [r,g,b,alpha]; alpha < 1 so the thread shows through, like real glass. */
+const fr=x=>x-Math.floor(x);
+function glass(k,nx,ny,nz,HZ,seed){
+  const ndh=Math.max(0,nx*H3[0]+ny*H3[1]+nz*H3[2]),ndl=nx*L3[0]+ny*L3[1]+nz*L3[2],rim=Math.pow(1-nz,2.2);
+  if(k==='crystal'){
+    // faceted rondelle with diamond-shaped facets. Mostly clear and bright, a few facets catch the darker
+    // surroundings (that contrast is what makes cut glass read as glass), some carry a soft rainbow coat.
+    const ox=HZ?ny:nx,oy=HZ?nx:ny,lat=Math.asin(Math.max(-1,Math.min(1,oy))),lon=Math.atan2(ox,nz)+seed*1.7;
+    const A=lon/(2*Math.PI)*14,B=lat/Math.PI*5.2,pp=A+B,qq=A-B,pi=Math.floor(pp),qi=Math.floor(qq);
+    const de=Math.min(fr(pp),1-fr(pp),fr(qq),1-fr(qq))*Math.max(.35,Math.cos(lat));
+    const Ac=(pi+qi+1)/2,Bc=(pi-qi)/2,latC=Bc/5.2*Math.PI,lonC=Ac/14*2*Math.PI-seed*1.7;
+    const fy=Math.sin(latC),fx=Math.cos(latC)*Math.sin(lonC),fz=Math.cos(latC)*Math.cos(lonC);
+    const vx=HZ?fy:fx,vy=HZ?fx:fy,vz=fz,h=fr(Math.sin(pi*12.99+qi*78.23+seed*37.7)*43758.5);
+    const ry=-vy*.8+vx*.3;let env=.93+.07*sst(-.5,.6,ry)+.04*nz;
+    if(h<.13)env=.66+h*1.2;else if(h<.25)env=.86;                                          // darker facets = depth
+    let c=[env*.97,env*.982,env];
+    if(h>.76){const hu=fr(h*5.3+seed*.37),t=(h-.76)/.24*.5,rb=[.5+.5*Math.cos(6.283*hu),.5+.5*Math.cos(6.283*(hu+.33)),.5+.5*Math.cos(6.283*(hu+.67))].map(v=>.66+.34*v);c=mix(c,rb,t)}
+    const edge=1-sst(0,.05,de);c=c.map(v=>v*(1-.11*edge));
+    const fdh=Math.max(0,vx*H3[0]+vy*H3[1]+vz*H3[2]),sp=Math.pow(fdh,60)*1.1+Math.pow(ndh,300)*.8;
+    c=c.map(v=>v*(1-.28*rim)+sp);
+    return[c[0],c[1],c[2],.90+.10*rim]}
+  if(k==='frost'){
+    const gr=noise(nx*40+seed,ny*40,nz*40)*.02,b=.86+.08*sst(-.3,.9,ny)+.06*Math.max(0,ndl)+gr;
+    let c=[b*.985,b*.99,b];c=c.map(v=>v*(1-.10*rim)+Math.pow(ndh,14)*.22);
+    return[c[0],c[1],c[2],.92]}
+  // smoky quartz
+  const tint=[.50,.43,.37],caus=Math.pow(Math.max(0,-ndl*.7+.35),2)*1.1;
+  let c=tint.map((v,ix)=>v*(.55+.45*sst(-.4,.9,ny))+[.95,.78,.6][ix]*caus*.35);
+  c=c.map(v=>v*(1-.45*rim)+Math.pow(ndh,130)*1.4+Math.pow(ndh,18)*.08);
+  return[c[0],c[1],c[2],.86+.14*rim]
 }
 const L3=(()=>{const v=[-.48,-.62,.62],m=Math.hypot(...v);return v.map(a=>a/m)})();
 const H3=(()=>{const v=[L3[0],L3[1],L3[2]+1],m=Math.hypot(...v);return v.map(a=>a/m)})();
@@ -129,9 +170,12 @@ function drawBead(k,seed,px,ax){
   g.fillStyle=sh;g.beginPath();g.arc(cx+r*.12,cy+r*.22,r*1.12,0,7);g.fill();
   const img=g.getImageData(0,0,px,px),d=img.data;
   const ca=Math.cos(seed*2.1),sa=Math.sin(seed*2.1),cb=Math.cos(seed*1.3),sb=Math.sin(seed*1.3);
+  const SQ=(MAT[k]&&MAT[k].sq)||1,GL=k==='crystal'||k==='frost'||k==='smoky';
   for(let j=0;j<px;j++)for(let i=0;i<px;i++){
-    const nx=(i+.5-cx)/r,ny=(j+.5-cy)/r,q=nx*nx+ny*ny;if(q>1.02)continue;
-    const nz=Math.sqrt(Math.max(0,1-q)),aa=Math.min(1,Math.max(0,(1-Math.sqrt(q))*r+.5));
+    const ex=(i+.5-cx)/r,ey=(j+.5-cy)/r,nx=HZ?ex/SQ:ex,ny=HZ?ey:ey/SQ,q=nx*nx+ny*ny;if(q>1.02)continue;
+    const nz=Math.sqrt(Math.max(0,1-q)),aa=Math.min(1,Math.max(0,(1-Math.sqrt(q))*r*SQ+.5));
+    if(GL){const o=(j*px+i)*4,gc=glass(k,nx,ny,nz,HZ,seed),A=aa*gc[3];
+      d[o]=d[o]*(1-A)+Math.min(255,gc[0]*255)*A;d[o+1]=d[o+1]*(1-A)+Math.min(255,gc[1]*255)*A;d[o+2]=d[o+2]*(1-A)+Math.min(255,gc[2]*255)*A;d[o+3]=Math.max(d[o+3],A*255);continue}
     // object-space point (rotated per seed so beads differ)
     const ox=HZ?ny:nx,oy=HZ?nx:ny;let px1=ox*ca-nz*sa,pz1=ox*sa+nz*ca,py1=oy*cb-pz1*sb,pz2=oy*sb+pz1*cb;
     const s=surface(k,[px1*1.3+seed*5.7,py1*1.3,pz2*1.3]);
@@ -140,7 +184,7 @@ function drawBead(k,seed,px,ax){
     if(s.trans){const back=Math.pow(Math.max(0,-ndl*.6+.45),2)*.9;col=col.map((v,ix)=>v+s.trans[ix]*back*.55)}
     if(s.pearl){const t=Math.pow(1-nz,1.6);col=[col[0]+.025*Math.sin(t*7)+.02*t,col[1]+.015*Math.sin(t*7+2),col[2]+.03*Math.sin(t*7+4)]}
     const ry=2*nz*ny,env=.55-.45*ry;
-    if(s.env){const e=Math.max(0,env)*s.env;col=col.map(v=>v*(1-(s.metal?.55:0))+e*(s.metal?.75:.22))}
+    if(s.env){const e=Math.max(0,env)*s.env;col=col.map((v,ix)=>v*(1-(s.metal?.55:0))+e*(s.metal?.75:.22)*(s.et?s.et[ix]:1))}
     const fres=Math.pow(1-nz,3)*(s.metal?.35:.28);col=col.map(v=>v*(1-fres)+fres*.92);
     const sp=Math.pow(ndh,s.pow)*s.spec+Math.pow(ndh,s.pow/6)*s.spec*.12;col=col.map(v=>v+sp);
     // darken where beads touch the string hole (poles)
@@ -150,7 +194,7 @@ function drawBead(k,seed,px,ax){
   g.putImageData(img,0,0);return c.toDataURL('image/png')
 }
 const BCACHE={};
-function beadImg(k,v,px,ax){ax=ax==='h'?'h':'v';const key=k+v+ax+'_'+px;return BCACHE[key]||(BCACHE[key]=drawBead(k,v+(Object.keys(MAT).indexOf(k)*.37),px,ax))}
+function beadImg(k,v,px,ax){ax=ax==='h'?'h':'v';const key=k+v+ax+'_'+px;return BCACHE[key]||(BCACHE[key]=drawBead(k,v+(Math.max(0,Object.keys(MAT).indexOf(k))*.37),px,ax))}
 
 /* ---------- counting ---------- */
 let ctx=null; // {key, title, phrase, goal}
@@ -293,7 +337,7 @@ function Clicker(stage){
    a bead crosses the gap. Pulling it back in the same drag takes that count back (silently). */
 let beads=null;
 const clampN=(a,b,...v)=>Math.round(Math.max(a,Math.min(b,...v)));
-const DET=.35,disp=r=>r-DET*Math.sin(2*Math.PI*(r-.5))/(2*Math.PI);
+const DET=.22,disp=r=>r-DET*Math.sin(2*Math.PI*(r-.5))/(2*Math.PI);
 function uncount(){const n=getN();if(n<=0)return;setN(n-1);dzAdd(-1);try{renderTab(curTab())}catch(e){}paintCount(n-1)}
 function Beads(stage,kind){
   stage.innerHTML=`<div class="tb-str k-${kind}" id="tbStr" tabindex="0" role="button"><svg class="tb-th" aria-hidden="true"><path/></svg><label class="tb-hl" aria-hidden="true">${HSW}</label></div>`;
@@ -301,7 +345,7 @@ function Beads(stage,kind){
   el.setAttribute('aria-label',TX('Bead counter. Drag a bead across the gap, or press the arrow keys.','عدّاد المسبحة. اسحب حبّة عبر الفراغ أو استخدم الأسهم.',"Lakkaa'aa callee. Callee tokko harkisi.",'Tiriyaha kuusha. Kuul jiid.'));
   const dpr=Math.min(3,window.devicePixelRatio||2),RTL=document.documentElement.dir==='rtl';
   const tapDir=(kind==='h'||kind==='loop')&&RTL?-1:1;
-  let W=0,H=0,D=0,E=0,S=0,GAP=0,N=0,LV=0,POOL=[],raw=.5,anim=null,alive=true,P=null,periodic=false,px=0,C=0,R=0,cx=0,cy=0;
+  let SPC=false,SPP=[],W=0,H=0,D=0,E=0,S=0,GAP=0,N=0,LV=0,POOL=[],raw=.5,anim=null,alive=true,P=null,periodic=false,px=0,C=0,R=0,cx=0,cy=0;
   const uOf=s=>s+(GAP/2)*Math.tanh(s/(S*.55));
   function layout(){
     W=el.clientWidth||340;H=el.clientHeight||360;cx=W/2;cy=H/2;periodic=false;let d='';
@@ -317,11 +361,14 @@ function Beads(stage,kind){
         const A=pts[lo],B=pts[hi],k=(t-A[0])/((B[0]-A[0])||1),f=A[3]+(B[3]-A[3])*k,tx=a*Math.cos(f),ty=-b*Math.sin(f),m=Math.hypot(tx,ty)||1;
         return[A[1]+(B[1]-A[1])*k,A[2]+(B[2]-A[2])*k,tx/m,ty/m]};
       d=`M${cx-a} -30V${cyE}A${a} ${b} 0 0 0 ${cx+a} ${cyE}V-30`}
-    S=D*.97;GAP=D*(kind==='ring'?.9:.95);
+    SPC=!!(MAT[st.mat]||{}).sp;S=D*(SPC?1.2:.97);GAP=D*(kind==='ring'?.9:.95);
     if(kind==='ring'){N=Math.max(12,Math.floor((C-GAP)/S));S=(C-GAP)/N;periodic=true}
     const need=periodic?N:Math.ceil((LV+GAP)/S)*2+4;
     if(POOL.length!==need){POOL.forEach(b=>b.remove());POOL=[];for(let i=0;i<need;i++){const b=document.createElement('i');b.className='tb-bd';b.setAttribute('aria-hidden','true');el.appendChild(b);POOL.push(b)}}
     E=D/.8;px=Math.round(E*dpr);POOL.forEach(b=>{b.style.width=b.style.height=E+'px';b._k=''});
+    SPP.forEach(b=>b.remove());SPP=[];
+    if(SPC){const se=D*.36/.8,spx=Math.round(se*dpr),img=`url(${beadImg('gold',0,spx,'v')})`;
+      for(let i=0;i<POOL.length;i++){const b=document.createElement('i');b.className='tb-bd tb-sp';b.setAttribute('aria-hidden','true');b.style.width=b.style.height=se+'px';b.style.backgroundImage=img;b._e=se;el.appendChild(b);SPP.push(b)}}
     svg.setAttribute('width',W);svg.setAttribute('height',H);thp.setAttribute('d',d);draw()
   }
   function place(b,s,vi){
@@ -330,10 +377,15 @@ function Beads(stage,kind){
     if(b._k!==key){b.style.backgroundImage=`url(${beadImg(st.mat,vi,px,ax)})`;b._k=key}
     b.style.visibility='';b.style.transform=`translate3d(${(p[0]-E/2).toFixed(2)}px,${(p[1]-E/2).toFixed(2)}px,0)`;b.style.zIndex=String(1000+Math.round(p[1]))
   }
+  function spacer(k,s){const b=SPP[k];if(!b)return;const s2=s+S/2;
+    // no spacer inside the gap (it fades out as its pair of beads separates)
+    const op=sst(S*.3,S*.62,Math.abs(s2));if(op<.02){b.style.visibility='hidden';return}b.style.opacity=op.toFixed(2);
+    const u=uOf(s2);if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
+    const p=P(u);b.style.visibility='';b.style.transform=`translate3d(${(p[0]-b._e/2).toFixed(2)}px,${(p[1]-b._e/2).toFixed(2)}px,0)`;b.style.zIndex=String(999+Math.round(p[1]))}
   function draw(){
     const ph=disp(raw);
-    if(periodic){const L2=N*S;for(let k=0;k<N;k++){let s=((k-ph)*S)%L2;if(s>L2/2)s-=L2;if(s<=-L2/2)s+=L2;place(POOL[k],s,k%5)}}
-    else{const base=Math.floor(ph),half=Math.floor(POOL.length/2);for(let k=0;k<POOL.length;k++){const j=base-half+k;place(POOL[k],(j-ph)*S,((j%5)+5)%5)}}
+    if(periodic){const L2=N*S;for(let k=0;k<N;k++){let s=((k-ph)*S)%L2;if(s>L2/2)s-=L2;if(s<=-L2/2)s+=L2;place(POOL[k],s,k%5);spacer(k,s)}}
+    else{const base=Math.floor(ph),half=Math.floor(POOL.length/2);for(let k=0;k<POOL.length;k++){const j=base-half+k;place(POOL[k],(j-ph)*S,((j%5)+5)%5);spacer(k,(j-ph)*S)}}
   }
   function animTo(target,ms){
     if(anim)cancelAnimationFrame(anim.id);const from=raw,t0=performance.now(),ease=t=>1-Math.pow(1-t,3);
@@ -363,13 +415,14 @@ function Beads(stage,kind){
     const tot=Math.hypot(e.clientX-g.x0,e.clientY-g.y0),dt=performance.now()-g.t0;
     if(e.type!=='pointercancel'){
       if(g.c===0&&g.mx<8&&dt<450){TAPH=true;count();TAPH=false;animTo(g.r0-tapDir,190);return}                     // tap = pull one bead
-      if(g.c===0&&Math.abs(g.v)>.45&&tot>12){count();animTo(g.r0-Math.sign(g.v),170);return}  // quick flick
+      if(g.c===0&&Math.abs(g.v)>.3&&tot>8){count();animTo(g.r0-Math.sign(g.v),170);return}   // quick flick
+      if(g.c===0&&Math.abs(raw-g.r0)>.2){const dir=Math.sign(g.r0-raw);count();animTo(g.r0-dir,200);return}  // light nudge: bead slides over by itself
       if(g.pend&&IS_IOS)haptic(false)}  // iPhone only allows the tick inside a finger-up, so it lands here too
     const tg=Math.floor(raw)+.5;animTo(tg,Math.max(110,Math.min(260,Math.abs(tg-raw)*420)))};
   el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
   const ro=('ResizeObserver' in window)?new ResizeObserver(()=>{if(!dn)layout()}):null;if(ro)ro.observe(el);
   requestAnimationFrame(layout);
-  return{step(dir){finish();count();animTo(raw-dir,170)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){POOL.forEach(b=>b._k='');draw()}}
+  return{step(dir){finish();count();animTo(raw-dir,170)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){layout()}}
 }
 
 /* ---------- bead settings sheet: materials (optional) + vibration + bead sound + volume ---------- */
@@ -377,7 +430,7 @@ function styleSheet(){beadSettings(true)}
 function beadSettings(mats){
   const keys=Object.keys(MAT);
   openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(mats?TX('Bead style','شكل الحبّات','Akkaataa callee','Qaabka kuusha'):TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</h1>${XB}</div>
-  ${mats?`<div class="tb-mg">${keys.map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('')}</div>`:''}
+  ${mats?[['m',TX('Modern','عصري','Ammayyaa','Casri')],['c',TX('Classic','كلاسيكي','Durii','Caadi')]].map(([gk,gt])=>`<p class="tb-sh">${esc(gt)}</p><div class="tb-mg">${keys.filter(k=>MAT[k].g===gk).map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('')}</div>`).join(''):''}
   <p class="tb-sh">${esc(TX('Vibration','الاهتزاز','Raafama','Gariir'))}</p>
   <div class="tb-sw">
    <label><span><b>${esc(TX('Bead vibration','اهتزاز الحبّات','Raafama callee','Gariirka kuusha'))}</b><small>${esc(TX('On every bead, stronger at 33 and 100','مع كل حبّة، وأقوى عند ٣٣ و١٠٠','Callee hundaaf, 33 fi 100 irratti cimaa','Kuul kasta, 33 iyo 100 way ka xoog badan tahay'))}</small></span><input type="checkbox" switch id="tbVib" ${st.vib?'checked':''}></label>
