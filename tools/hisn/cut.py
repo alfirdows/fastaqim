@@ -54,4 +54,4 @@ for name,f,a,fw,b,lw in JOBS:
       subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0+off:.2f}','-t','3','-i',f'hisn/{f}.m4a','-ac','1','-c:a','aac','-b:a','64k',f'tools/hisn/variants/{name}__{int(off*100):02d}.m4a'],check=True)
     continue
   print(f"{name:22s} {s0:7.2f}-{e0:7.2f} ({e0-s0:5.1f}s) | {' '.join(w[2] for w in W[i:j+1])[:80]}")
-  subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0:.2f}','-to',f'{e0:.2f}','-i',f'hisn/{f}.m4a','-af','afade=t=in:d=0.04,areverse,afade=t=in:d=0.08,areverse','-ac','1','-c:a','aac','-b:a','64k','-movflags','+faststart',f'hisn/clips/{name}.m4a'],check=True)
+  subprocess.run(['ffmpeg','-v','error','-y','-ss',f'{s0:.2f}','-to',f'{e0:.2f}','-i',f'hisn/{f}.m4a','-af','afade=t=in:d=0.03,areverse,afade=t=in:d=0.08,areverse,adelay=250:all=1','-ac','1','-c:a','aac','-b:a','64k','-movflags','+faststart',f'hisn/clips/{name}.m4a'],check=True)
