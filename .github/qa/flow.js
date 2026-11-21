@@ -50,9 +50,14 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#tbx [data-m="beads"]');await p.waitForTimeout(400);const bb=await (await p.$('#tbStr')).boundingBox();const cx=bb.x+bb.width/2,cy=bb.y+bb.height/2;
  for(const d of [60,60,-60]){await p.mouse.move(cx,cy-d/2);await p.mouse.down();await p.mouse.move(cx,cy+d/2,{steps:6});await p.mouse.up();await p.waitForTimeout(260)}
  ok('beads count 8',['8','٨'].includes((await p.textContent('#tbN')).trim()));await snap('10_beads');
- await p.click('#tbMat');await p.waitForTimeout(400);ok('bead styles',(await p.$$('#sh [data-mat]')).length===8);await p.click('#sh [data-mat="jade"]');await p.click('#sh [data-x]');await p.waitForTimeout(300);
+ for(const m of ['side','ring','loop']){await p.click(`#tbx [data-m="${m}"]`);await p.waitForTimeout(450);ok('style '+m+' shows beads',(await p.$$('#tbStr .tb-bd')).length>8);await snap('10_'+m)}
+ {const sb=await (await p.$('#tbStr')).boundingBox();await p.mouse.click(sb.x+sb.width/2,sb.y+sb.height-30);await p.waitForTimeout(300);ok('hanging tap counts 9',['9','٩'].includes((await p.textContent('#tbN')).trim()))}
+ await p.click('#tbx [data-m="clicker"]');await p.waitForTimeout(400);await p.click('#tbCkB');await p.waitForTimeout(200);ok('counter device counts 10',['10','١٠'].includes((await p.textContent('#tbN')).trim()));await snap('10_counter');
+ await p.click('#tbx [data-m="beads"]');await p.waitForTimeout(300);
+ await p.click('#tbMat');await p.waitForTimeout(400);ok('bead styles',(await p.$$('#sh [data-mat]')).length===12);await p.click('#sh [data-mat="jade"]');await p.click('#sh [data-x]');await p.waitForTimeout(300);
  await p.click('#tbMute');ok('mute on',(await p.getAttribute('#tbMute','aria-pressed'))==='true');await p.click('#tbMute');
  await p.click('#tbBack');await p.waitForTimeout(300);ok('tasbih closes',!(await p.isVisible('#tbx')));
+ await p.click('[data-tab="more"]');await p.waitForTimeout(300);ok('bead settings row',await p.isVisible('#mBeads'));await p.click('#mBeads');await p.waitForTimeout(400);ok('bead settings sheet',await p.isVisible('#tbVol')&&await p.isVisible('#tbTryV'));{const g=()=>p.evaluate(()=>{const i=document.querySelector('#tbTryV .tb-hs');return i?i.checked:null});const h0=await g();await p.click('#tbTryV');await p.waitForTimeout(60);const h1=await g();ok('iPhone haptic switch flips on a real tap',h0!==h1&&h1!==null)}await snap('12_bead_settings');await p.click('#sh [data-x]');await p.waitForTimeout(300);
  // Friday salawat card (forced with ?fri=1)
  await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+'?fri=1'+(L?'&'+L.replace('?',''):'')+'#dhikr');await p.waitForTimeout(700);ok('friday card',await p.isVisible('#frC'));await snap('11_friday');
  await p.click('#frGo');await p.waitForTimeout(400);ok('salawat counter',await p.isVisible('#tbPh'));
