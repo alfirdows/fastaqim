@@ -88,7 +88,10 @@ try{fqCI()}catch(e){}
 const FR=/^\s*([0-9٠-٩]{1,3})\s*\/\s*([0-9٠-٩]{1,3})\s*$/;
 function fracs(root){(root||document).querySelectorAll('em,b,small,span').forEach(e=>{if(e.children.length||e.closest('.fq-arc,input,textarea,[contenteditable],.mhn,.cg'))return;const m=e.textContent.match(FR);if(!m)return;const c=N(m[1]),n=N(m[2]);if(!n||c>n)return;
  e.innerHTML=arc(c,n,{w:30});e.classList.add('fq-fr');e.style.background='none';e.style.padding='0'})}
-let qd=0;const mo=new MutationObserver(()=>{if(qd)return;qd=requestAnimationFrame(()=>{qd=0;try{fracs(document.querySelector('.scr.on'));fracs($('sh'))}catch(e){}})});
+/* her rule: no icons of people; family = house, account = key */
+const NOP={'ph-users-three':'ph-house-line','ph-users':'ph-house-line','ph-user-circle':'ph-key','ph-user':'ph-key'};
+function noPeople(){document.querySelectorAll('i[class*="ph-user"]').forEach(i=>{for(const k in NOP)if(i.classList.contains(k)){i.classList.remove(k);i.classList.add(NOP[k]);break}})}
+let qd=0;const mo=new MutationObserver(()=>{if(qd)return;qd=requestAnimationFrame(()=>{qd=0;try{noPeople();fracs(document.querySelector('.scr.on'));fracs($('sh'))}catch(e){}})});
 mo.observe(document.body,{subtree:true,childList:true,characterData:true});
 
 /* ---------- own tab icons: each stands on the horizon ---------- */

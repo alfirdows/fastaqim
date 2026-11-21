@@ -63,7 +63,7 @@ async function aboutSheet(){
  $('lfAbL').onclick=playName;fillAyat($('sh'))}
 
 /* =================== TOOLS registry (Tools page + pin to Home) =================== */
-Object.assign(PH,{rules:'scroll',family:'calendar-blank',guides:'book-bookmark',calm:'wind',life:'compass-rose'});
+Object.assign(PH,{rules:'scroll',family:'calendar-blank',guides:'book-bookmark',calm:'wind',life:'tree'});
 TOOLS.push({id:'rules',g:'lf',ic:'rules',n:['Rules','القواعد'],type:'life',go:'rules'},{id:'family',g:'lf',ic:'family',n:['Family schedule','جدول العائلة'],type:'life',go:'fam'},
  {id:'guides',g:'lf',ic:'guides',n:['Guides','الأدلة'],type:'life',go:'life'},{id:'calm',g:'lf',ic:'calm',n:['Calm down now','تهدئة الآن'],type:'life',go:'g',arg:'calm/breath'});
 const TNO={rules:['Seerota','Xeerarka'],family:['Sagantaa maatii','Jadwalka qoyska'],guides:['Qajeelfamoota','Hagayaal'],calm:['Amma tasgabbaaʼi','Hadda deg'],habits:['Amaloota','Caadooyinka']};
@@ -85,7 +85,7 @@ const TNO={rules:['Seerota','Xeerarka'],family:['Sagantaa maatii','Jadwalka qoys
 /* =================== MORE page: About card + Life row =================== */
 {const _rm=R.more;R.more=function(){_rm();
  if(!$('lfAb')){const a=$('mAcct');const anchor=a?a.closest('.gl'):$('yp');anchor.insertAdjacentHTML('afterend',aboutCard());$('lfAbO').onclick=aboutSheet;$('lfAbP').onclick=e=>{e.stopPropagation();playName()}}
- if(!$('mLife')){const tb=$('s-more').querySelector('[data-go="tools"]');if(tb)tb.insertAdjacentHTML('afterend',`<button id="mLife" data-go="life"><span class="ic c-a">${IC('compass-rose',22)}</span><span>${U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska')}</span><em>${U('Habits, rules, guides','العادات، القواعد، الأدلة','Amaloota, seerota, qajeelfama','Caadooyin, xeerar, hagayaal')}</em><i class="ph ph-caret-right cv flip"></i></button>`)}}}
+ if(!$('mLife')){const tb=$('s-more').querySelector('[data-go="tools"]');if(tb)tb.insertAdjacentHTML('afterend',`<button id="mLife" data-go="life"><span class="ic c-a">${IC('tree',22)}</span><span>${U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska')}</span><em>${U('Habits, rules, guides','العادات، القواعد، الأدلة','Amaloota, seerota, qajeelfama','Caadooyin, xeerar, hagayaal')}</em><i class="ph ph-caret-right cv flip"></i></button>`)}}}
 
 /* =================== LIFE HUB =================== */
 R.life=()=>{$('lfT').textContent=U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska');
