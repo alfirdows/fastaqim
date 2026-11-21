@@ -851,6 +851,53 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .apbtn .ok{background:var(--acc);border-color:var(--acc);color:#fff}.apbtn .sel{box-shadow:0 0 0 3px rgba(184,149,90,.45)}
 .aplater{display:block;margin:4px auto 0;border:0;background:none;color:var(--sub);font:inherit;font-size:14px;font-weight:600;padding:8px}
 .apdone{text-align:center}.apdone .sts{margin:0 auto;width:80px;height:80px}
+
+/* reminder card, family profiles, PIN pad */
+.dang{display:block;width:100%;height:52px;margin-top:12px;border-radius:16px;border:1.5px solid rgba(181,84,60,.35);background:var(--card);color:#b5543c;font:inherit;font-weight:700;font-size:16px}
+.rzo{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:48px;margin-top:8px;border:0;background:none;color:var(--acc);font:inherit;font-weight:700;font-size:15.5px}
+.rzh{display:flex;align-items:center;gap:8px;margin:18px 2px 8px;font-weight:700;color:var(--ink)}.rzh i{color:var(--gold);font-size:20px}
+.rzc{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.rzc button{height:62px;border-radius:16px;border:1.5px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;font:inherit;color:var(--ink)}
+.rzc b{font-size:20px;line-height:1.1}.rzc small{font-size:12px;color:var(--sub)}
+.rzc button:active{background:var(--accT);border-color:var(--acc)}
+.rzm{display:flex;gap:8px;margin-top:10px}.rzm .inp{flex:1;height:48px}.rzm .chip{height:48px;flex:none}
+.rzn{text-align:center;color:var(--sub);font-size:13px;margin:12px 0 4px}
+.gl .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.gl .tx b{font-weight:600;overflow:hidden;text-overflow:ellipsis}.gl .tx small{font-size:13px;color:var(--sub);line-height:1.35}
+.fcode{background:var(--card);border-radius:20px;padding:16px;margin-bottom:12px;text-align:center}
+.fcode small{display:block;color:var(--sub);font-size:13px}.fcode b{display:block;font-size:28px;letter-spacing:.12em;margin:4px 0 10px;font-variant-numeric:tabular-nums}
+.fcode div{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.fcode .chip{display:inline-flex;align-items:center;gap:6px}
+.fcode p{color:var(--sub);font-size:13px;line-height:1.45;margin:12px 0 0}
+.pnd{display:flex;justify-content:center;gap:16px;margin:8px 0 4px}
+.pnd i{width:15px;height:15px;border-radius:50%;border:2px solid var(--acc);transition:background .15s}.pnd i.on{background:var(--acc)}
+.pnd.sh{animation:pnsh .35s}@keyframes pnsh{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.pne{min-height:20px;text-align:center;color:#b5543c;font-size:14px;margin:4px 0}
+.pnk{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:300px;margin:4px auto 0}
+.pnk button{height:62px;border-radius:50%;width:62px;justify-self:center;border:0;background:var(--card2);font:600 24px Inter,Plex,sans-serif;color:var(--ink);display:grid;place-items:center}
+.pnk button:active{background:var(--accT)}.pnk i{font-size:24px}
+.pnf{text-align:center;color:var(--sub);font-size:13px;margin:12px 0 0}
+.fambar{position:sticky;top:0;z-index:40;display:flex;align-items:center;gap:8px;padding:calc(env(safe-area-inset-top) + 8px) 14px 8px;background:var(--acc);color:#fff;font-size:14px}
+.fambar span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fambar i{font-size:18px}
+.fambar button{flex:none;border:0;border-radius:12px;background:rgba(255,255,255,.2);color:#fff;font:inherit;font-weight:700;padding:7px 12px}
+/* Jannah garden on the Dhikr tab */
+.g6{background:var(--card);border-radius:20px;padding:14px 14px 12px;margin:16px 0 8px;overflow:hidden}
+.g6h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.g6h b{display:flex;align-items:center;gap:8px;font-size:16px}.g6h b i{color:var(--acc);font-size:20px}.g6h span{color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
+.g6svg{display:block;width:100%;height:auto;border-radius:14px;background:linear-gradient(#fbf9f4,#f2f6f2)}
+.g6new{animation:g6n .9s cubic-bezier(.2,.9,.3,1.2) both;transform-box:fill-box;transform-origin:50% 100%}@keyframes g6n{from{opacity:0;transform:scale(.6) translateY(6px)}to{opacity:1;transform:none}}
+.g6rv{stroke-dasharray:6 10;animation:g6f 3s linear infinite}@keyframes g6f{to{stroke-dashoffset:-32}}
+@media (prefers-reduced-motion:reduce){.g6rv,.g6new{animation:none}}
+.g6e{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--card2);color:var(--sub);font-size:14px}.g6e i{font-size:28px;color:var(--acc)}.g6e p{margin:0}
+.g6n{margin:10px 2px 2px;font-size:14px;color:var(--ink);text-align:center}
+.g6q{display:block;text-align:center;font-size:12px;color:var(--gold);margin-top:4px;text-decoration:none}
+.blkm{font-size:15.5px;line-height:1.55;color:var(--ink);margin:0 2px 10px}
+/* owner tools */
+.adst{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:16px}.adst div{background:var(--card);border-radius:18px;padding:12px 8px;text-align:center}.adst b{display:block;font-size:24px;font-variant-numeric:tabular-nums}.adst small{color:var(--sub);font-size:12px;line-height:1.3;display:block}
+.adnew{background:var(--accT);color:var(--acc);border-radius:10px;padding:2px 8px;font-size:12px;text-transform:none;letter-spacing:0;margin-inline-start:6px}
+.adfr{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}.adfr:last-child{border-bottom:0}.adfr.seen{opacity:.6}
+.adfr .tx small{white-space:pre-wrap;overflow-wrap:anywhere}.adfr em{font-style:normal;font-weight:500;color:var(--sub);font-size:12px;margin-inline-start:4px}.adfr .chip{flex:none;height:34px;padding:0 10px;font-size:13px}
+.adrq,.adbw{background:var(--card);border-radius:20px;padding:14px;margin:-6px 0 16px}.adrq div{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 8px}.adrq .note,.adbw .note{margin:0 2px 8px}
+.adbw textarea{height:auto;padding:12px 14px;min-height:110px}
+.vrc{background:var(--card);border:1.5px solid var(--gold);border-radius:20px;padding:14px;margin-bottom:16px}.vrc p{margin:0 0 10px;line-height:1.5;font-size:14.5px}.vrc div{display:flex;gap:8px}.vrc .chip.ok{background:var(--acc);border-color:var(--acc);color:#fff}
+.gl .adfr .chip,.adfr .chip{width:auto;flex:none;display:inline-flex;align-items:center;height:34px;padding:0 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;font-weight:600;color:var(--ink)}
 </style>
 <link rel="stylesheet" href="life.css">
 </head>
@@ -885,7 +932,7 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
  <div class="hd"><h1 data-t="Qur'an|القرآن"></h1><button class="ib" data-go="index" aria-label="Search"><i class="ph ph-magnifying-glass"></i></button></div>
  <div class="qh pl4"><span class="ey" data-t="Where you stopped|حيث توقفت"></span>
   <div class="nm2"><span><b id="qSu"></b><br><small id="qResume"></small></span><span class="a">البقرة</span></div>
-  <div class="act"><button class="pr" data-read="2:255"><i class="ph-bold ph-book-open-text"></i><span data-t="Continue|تابع"></span></button><button class="rd" data-play="kursi" aria-label="Listen"><i class="ph-fill ph-play"></i></button></div></div>
+  <div class="act"><button class="pr" data-read="2:255"><i class="ph ph-book-open-text"></i><span data-t="Continue|تابع"></span></button><button class="rd" data-play="kursi" aria-label="Listen"><i class="ph-fill ph-play"></i></button></div></div>
  <div class="sec"><h2 data-t="My khatmah|ختمتي"></h2></div>
  <div id="khList"></div>
  <button class="ghost" id="khNew" style="display:none"></button>
@@ -1361,7 +1408,7 @@ R.quran=()=>{$('qResume').textContent=T('Ayah 255 · Page 42 · Juz 3','الآي
  $$('#qJs [data-juz]').forEach(b=>b.onclick=()=>{ixJ=+b.dataset.juz;go('index')});
  const v=QD['13:28'];$('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa="13:28" aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${v.a}</div>${L==='ar'?'':`<p class="en2">${esc(v.en)}</p>`}<a href="https://quran.com/13/28" target="_blank" rel="noopener">${T("Qur'an, Surah Ar-Ra'd 13:28 ↗",'القرآن، سورة الرعد ١٣:٢٨ ↗')}</a>`;
  $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(['13:28'],T("Ar-Ra'd 13:28",'الرعد ١٣:٢٨'));$('qVod').textContent=T("Ar-Ra'd 13:28 · tap Done for a star",'الرعد ١٣:٢٨ · اضغط تم لتحصل على نجمة');
- $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div>${TK30(k.done/604,k.last!==dkey(NOW()))}<small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<div class="khe">${TK30(0,0)}<p>${T('30 steps, one juz each. Pick your own pace.','٣٠ خطوة، جزء لكل خطوة. اختر وتيرتك.')}</p><button class="go2" data-khn><i class="ph-bold ph-plus"></i>${T('Start a khatmah','ابدأ ختمة')}</button></div>`;
+ $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div>${TK30(k.done/604,k.last!==dkey(NOW()))}<small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<div class="khe">${TK30(0,0)}<p>${T('30 steps, one juz each. Pick your own pace.','٣٠ خطوة، جزء لكل خطوة. اختر وتيرتك.')}</p><button class="go2" data-khn><i class="ph ph-plus"></i>${T('Start a khatmah','ابدأ ختمة')}</button></div>`;
  $$('[data-khd]').forEach(b=>b.onclick=()=>{const k=S.kh[b.dataset.khd],per=Math.ceil(604/k.days),dk=dkey(NOW());if(k.last===dk){toast(T('Already marked today','سُجّل اليوم'));return}k.done=Math.min(604,k.done+per);k.last=dk;star('kh-'+dk,T("Today's khatmah portion",'ورد الختمة اليوم'));save();vib(20);R.quran()})};
 $('khNew').onclick=khSheet;document.addEventListener('click',e=>{if(e.target.closest('[data-khn]'))khSheet()});
 function khSheet(){let type='std',days=30;
@@ -1461,7 +1508,7 @@ R.more=()=>{const d7=[...Array(7)].map((_,i)=>{const x=NOW();x.setDate(x.getDate
 
 const LGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali'],['ur','اردو'],['fr','Français'],['tr','Türkçe'],['id','Bahasa Indonesia']];
 function lgSet(n){if(n!=='en'&&n!=='ar'){toast(T('This preview has English and Arabic. All languages are in the full app.','هذه المعاينة بالإنجليزية والعربية. كل اللغات في التطبيق الكامل.'));return}localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href}
-function lgSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.map(([k,n])=>`<button data-lg="${k}"><span>${n}</span>${k===L?'<i class="ph-bold ph-check" style="color:var(--acc)"></i>':''}</button>`).join('')}</div>`);$$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))}
+function lgSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.map(([k,n])=>`<button data-lg="${k}"><span>${n}</span>${k===L?'<i class="ph ph-check" style="color:var(--acc)"></i>':''}</button>`).join('')}</div>`);$$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))}
 $('hLang').querySelector('b').textContent=LX.slice(0,2).toUpperCase();$('hLang').onclick=lgSheet;
 $('mLang').onclick=lgSheet;const _mLangOld=()=>{const n=L==='ar'?'en':'ar';localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
 
@@ -1669,7 +1716,7 @@ setTimeout(()=>{const x=P.get('x');if(!x)return;
 /* language sheet: Fastaqim's 4 own languages first, then every other language */
 {const nm=(LGS.concat(LANGS2).find(x=>x[0]===LX)||[,'English'])[1];const em=$('mLang')&&$('mLang').querySelector('em');if(em)em.textContent=nm}
 lgSet=function(n){try{localStorage.setItem('fq5.lang',n)}catch(e){}const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href};
-lgSheet=function(){const row=([k,n])=>`<button data-lg="${k}" lang="${k}"><span class="notranslate">${n}</span>${k===LX?'<i class="ph-bold ph-check" style="color:var(--acc)"></i>':''}</button>`;
+lgSheet=function(){const row=([k,n])=>`<button data-lg="${k}" lang="${k}"><span class="notranslate">${n}</span>${k===LX?'<i class="ph ph-check" style="color:var(--acc)"></i>':''}</button>`;
   openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Language','اللغة')}</h1>${XB}</div><div class="gl">${LGS.slice(0,4).map(row).join('')}</div><p class="glh">${T('More languages','لغات أخرى')}</p><div class="gl lgx">${LANGS2.map(row).join('')}</div>`);
   $$('#sh [data-lg]').forEach(b=>b.onclick=()=>lgSet(b.dataset.lg))};
 $('mLang').onclick=lgSheet;
@@ -1977,8 +2024,8 @@ function pushItems(){const n=S.notif||nDef(),out=[],now=Date.now(),on=k=>n.all&&
 let _psT=0;function pushSync(){clearTimeout(_psT);_psT=setTimeout(()=>pushSyncNow(false),4000)}
 async function pushSyncNow(force){try{if(pushState()!=='on')return;const items=pushItems(),h=JSON.stringify([LX,items.map(x=>[x.at,x.title])]),hk='fq5.pushH';let last={};try{last=JSON.parse(localStorage.getItem(hk)||'{}')}catch(e){}
   if(!force&&last.h===h&&Date.now()-(last.t||0)<864e5)return;const sb=await FQA.sb(),uid=FQA.user().id;
-  let {error}=await sb.from('push_queue').delete().eq('user_id',uid).eq('sent',false);if(error)throw error;
-  for(let i=0;i<items.length;i+=200){({error}=await sb.from('push_queue').insert(items.slice(i,i+200).map(x=>({user_id:uid,at:new Date(x.at).toISOString(),title:x.title.slice(0,120),body:(x.body||'').slice(0,200),tag:x.tag,url:x.url}))));if(error)throw error}
+  let {error}=await sb.from('push_queue').delete().eq('user_id',uid).eq('sent',false).eq('keep',false);if(error)throw error;
+  for(let i=0;i<items.length;i+=200){({error}=await sb.from('push_queue').insert(items.slice(i,i+200).map(x=>({user_id:uid,at:new Date(x.at).toISOString(),title:x.title.slice(0,120),body:(x.body||'').slice(0,200),tag:x.tag,url:x.url,ref:(x.tag||'fq')+'.'+Math.round(x.at/60000).toString(36),keep:false}))));if(error)throw error}
   localStorage.setItem(hk,JSON.stringify({h,t:Date.now()}))}catch(e){console.warn('pushSync',e)}}
 async function pushTest(){try{const sb=await FQA.sb(),u=FQA.user();const {error}=await sb.from('push_queue').insert({user_id:u.id,at:new Date(Date.now()+5000).toISOString(),title:'Fastaqim',body:T('Reminders are on for this phone','التذكيرات مفعّلة على هذا الهاتف'),tag:'test',url:location.pathname.replace(/index\.html$/,'')});if(error)throw error;toast(T('A test reminder will arrive in about a minute.','سيصل تذكير تجريبي خلال دقيقة تقريبًا.'))}catch(e){toast(T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.'))}}
 {const _ss=syncSoon;syncSoon=function(){_ss.apply(this,arguments);try{if(S.pushOn)pushSync()}catch(e){}}}
@@ -2038,7 +2085,7 @@ function apvDraw(){const B=$('apB'),Ls=APV.items,n=Ls.length;
   <small class="apn">${AR(APV.i+1)} / ${AR(n)}</small><h3 dir="auto">${esc(L==='ar'&&x.ar?x.ar:x.t)}</h3><p dir="auto" class="aps">${esc(x.s||'')}</p>
   ${x.link?`<a class="khop" href="${esc(apvLink(x.link))}" target="_blank" rel="noopener"><i class="ph ph-arrow-square-out"></i>${T('Open it live','افتحه مباشرة')}</a>`:''}
   ${a.a==='change'&&a.n?`<p class="apnote" dir="auto">✎ ${esc(a.n)}</p>`:''}
-  <div class="apbtn"><button class="ok ${a.a==='approve'?'sel':''}" id="apOk"><i class="ph-bold ph-check"></i>${T('Approve','موافق')}</button><button class="ch ${a.a==='change'?'sel':''}" id="apCh"><i class="ph ph-pencil-simple"></i>${T('Change','تغيير')}</button></div>
+  <div class="apbtn"><button class="ok ${a.a==='approve'?'sel':''}" id="apOk"><i class="ph ph-check"></i>${T('Approve','موافق')}</button><button class="ch ${a.a==='change'?'sel':''}" id="apCh"><i class="ph ph-pencil-simple"></i>${T('Change','تغيير')}</button></div>
   <div id="apF" hidden><textarea class="inp fbt" id="apN" rows="3" maxlength="600" dir="auto" placeholder="${T('What should change?','ما الذي يجب تغييره؟')}">${esc(a.a==='change'?a.n||'':'')}</textarea><button class="big" id="apS">${T('Send','إرسال')}</button></div>
   <button class="aplater" id="apL">${T('Later','لاحقًا')} <i class="ph ph-caret-right flip"></i></button></div>`;
  $$('#apB [data-k]').forEach(b=>b.onclick=()=>{APV.i=+b.dataset.k;apvDraw()});
@@ -2050,6 +2097,259 @@ function apvDraw(){const B=$('apB'),Ls=APV.items,n=Ls.length;
 function apvRow(){apvOwner().then(o=>{const ex=$('mApv');if(!o){if(ex)ex.closest('.gl').style.display='none';return}if(ex){ex.closest('.gl').style.display='';return}const acct=$('mAcct');if(!acct)return;
  acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl"><button id="mApv"><span class="ic c-g"><i class="ph ph-check-circle"></i></span><span>${T('Approvals','الموافقات')}</span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mApv').onclick=()=>go('apv')})}
 if(window.FQA){FQA.on(()=>{APV.own=null;apvRow()});FQA.sb().then(apvRow).catch(()=>{})}
+
+/* ---- tapping a reminder opens a Done / Snooze card (kept from the old main page, in the v6 look) ---- */
+let REM0=null;
+if(/^#rem=/.test(location.hash)){try{REM0=JSON.parse(decodeURIComponent(location.hash.slice(5)))}catch(e){}history.replaceState(null,'',location.pathname+location.search+'#home')}
+async function snzClear(ref){if(!ref||pushState()!=='on')return;try{const sb=await FQA.sb();await sb.from('push_queue').delete().eq('user_id',FQA.user().id).eq('sent',false).eq('ref',ref)}catch(e){}}
+async function snzSet(info,min){min=Math.max(1,Math.min(720,Math.round(min)||0));
+ if(pushState()!=='on'){toast(T('Turn on reminders on this phone first (More, Reminders).','فعّل التذكيرات على هذا الهاتف أولًا (المزيد، التذكيرات).'));return}
+ const ref=info.ref||((info.tag||'fq').split('.')[0]+'.z'+Date.now().toString(36));
+ try{const sb=await FQA.sb();await snzClear(ref);const {error}=await sb.from('push_queue').insert({user_id:FQA.user().id,at:new Date(Date.now()+min*60000).toISOString(),title:(info.title||'Fastaqim').slice(0,120),body:(info.body||'').slice(0,200),tag:'z-'+ref,url:location.pathname.replace(/index\.html$/,''),ref,rep:min,left_n:6,keep:true});if(error)throw error;
+  vib(12);toast(T('Snoozed for '+min+' min','تم التأجيل '+AR(min)+' د'))}catch(e){toast(T("Couldn't snooze. Check your internet and try again.",'تعذّر التأجيل. تحقّق من الإنترنت وحاول مجددًا.'))}}
+const REMZ={'zk-m':'morning','zk-e':'evening','zk-s':'sleep'},REMCI={'zk-m':'morning','zk-e':'evening','zk-s':'sleep'};
+function remSheet(info){if(!info||!info.title)return;const base=(info.tag||'').replace(/^z-/,'').split('.')[0],sal=/^sal-/.test(base)?base.slice(4):null,z=REMZ[base];
+ const open=z?[T('Open the adhkar','افتح الأذكار'),()=>{closeSheet();zOpen(z)}]:base==='kh'?[T('Open my khatmah','افتح ختمتي'),()=>{closeSheet();go('quran');khSheet()}]:base==='vod'?[T('Read the ayah','اقرأ الآية'),()=>{closeSheet();go('home')}]:null;
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1 dir="auto">${esc(info.title)}</h1>${XB}</div>
+  ${info.body?`<p class="note" dir="auto" style="text-align:center">${esc(info.body)}</p>`:''}
+  <button class="big" id="rzD"><i class="ph ph-check"></i> ${sal?T('I prayed','صلّيت'):T('Done','تم')}</button>
+  ${open?`<button class="rzo" id="rzO">${open[0]} <i class="ph ph-caret-right flip"></i></button>`:''}
+  <p class="rzh"><i class="ph ph-alarm"></i>${T('Snooze','تأجيل')}</p>
+  <div class="rzc">${[5,10,15,30].map(m=>`<button data-rz="${m}"><b>${AR(m)}</b><small>${T('min','د')}</small></button>`).join('')}</div>
+  <div class="rzm"><input class="inp" type="number" id="rzN" min="1" max="720" inputmode="numeric" placeholder="${T('Other (minutes)','غير ذلك (دقائق)')}"><button class="chip" id="rzG">${T('Snooze','تأجيل')}</button></div>
+  <p class="rzn">${T('It comes back until you tap Done.','يعود التذكير حتى تضغط تم.')}</p>`);
+ $('rzD').onclick=()=>{vib([12,50,12]);closeSheet();snzClear(info.ref);
+  if(sal&&SAL.some(x=>x[0]===sal)){salSheet(sal);return}
+  if(REMCI[base]){const dk=dkey(NOW());S.ci=S.ci||{};S.ci[dk]=S.ci[dk]||{};if(!S.ci[dk][REMCI[base]]){S.ci[dk][REMCI[base]]=true;const c=CI.find(x=>x[0]===REMCI[base]);if(c)star('ci-'+c[0]+'-'+dk,c[1]);save();try{renderCI()}catch(e){}}}
+  toast(T('Done','تم'))};
+ if(open)$('rzO').onclick=open[1];
+ $$('#sh [data-rz]').forEach(b=>b.onclick=()=>{closeSheet();snzSet(info,+b.dataset.rz)});
+ $('rzG').onclick=()=>{const n=+$('rzN').value;if(!n){$('rzN').focus();return}closeSheet();snzSet(info,n)}}
+try{navigator.serviceWorker&&navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.fqRem)setTimeout(()=>remSheet(e.data.fqRem),300)})}catch(e){}
+(async()=>{try{if(REM0){setTimeout(()=>remSheet(REM0),500);return}if(!('caches' in window))return;const c=await caches.open('fq-rem');const r=await c.match('rem');if(!r)return;const j=await r.json();await c.delete('rem');if(j&&j.at&&Date.now()-j.at<15*60000)setTimeout(()=>remSheet(j),500)}catch(e){}})();
+
+/* ===== Family profiles (kept from the old main page, same database): the account owner adds profiles with a 4-digit PIN.
+   A family member signs in on their own phone with the family code and their PIN (checked in the database, locks after 5 wrong tries).
+   While a profile is open, this phone's own data is set aside and comes back with "Back to my plan" / "Sign out". ===== */
+const ACTK='fq5.act',HOMEK='fq5.home';
+let ACT6=null;try{ACT6=JSON.parse(localStorage.getItem(ACTK)||'null')}catch(e){}
+const fmtCode=c=>c?String(c).slice(0,4)+'-'+String(c).slice(4):'';
+const famErr=()=>toast(T("Couldn't save. Check your internet.",'تعذّر الحفظ. تحقّق من الإنترنت.'));
+function famStash(){if(localStorage.getItem(HOMEK))return;const o={};SYK.forEach(k=>{o[k]=localStorage.getItem('fq5.'+k)});localStorage.setItem(HOMEK,JSON.stringify(o))}
+function famUnstash(){let o=null;try{o=JSON.parse(localStorage.getItem(HOMEK)||'null')}catch(e){}SYK.forEach(k=>{const v=o&&o[k];if(v==null)localStorage.removeItem('fq5.'+k);else localStorage.setItem('fq5.'+k,v)});localStorage.removeItem(HOMEK);localStorage.removeItem(ACTK)}
+async function famEnter(act,state){try{if(!ACT6&&window.FQA&&FQA.user()){clearTimeout(SY.t);await syPush()}}catch(e){}
+ famStash();SYK.forEach(k=>localStorage.removeItem('fq5.'+k));const v=state&&state.v6;if(v)SYK.forEach(k=>{if(v[k]!=null)localStorage.setItem('fq5.'+k,JSON.stringify(v[k]))});
+ localStorage.setItem(ACTK,JSON.stringify(act));sessionStorage.setItem('fq5.pulled','1');location.hash='#home';location.reload()}
+async function famLeave(gone){try{clearTimeout(SY.t);if(!gone)await famPush(true)}catch(e){}
+ try{if(ACT6&&ACT6.k==='fam'&&!gone){const sb=await FQA.sb();await sb.rpc('fam_logout',{p_token:ACT6.token})}}catch(e){}
+ famUnstash();sessionStorage.removeItem('fq5.pulled');location.hash='#home';location.reload()}
+async function famPush(force){if(!ACT6)return;const pk=syPack(),j=JSON.stringify(pk);if(!force&&j===SY.last)return;SY.busy=true;
+ try{const sb=await FQA.sb(),st={v6:pk,v6_at:new Date().toISOString(),name:ACT6.name};
+  if(ACT6.k==='fam'){const {data,error}=await sb.rpc('fam_set',{p_token:ACT6.token,p_state:st});if(error)throw error;if(data===false){SY.busy=false;famLeave(true);return}}
+  else{const {error}=await sb.from('fastaqim_profiles').update({state:st,updated_at:st.v6_at}).eq('id',ACT6.id);if(error)throw error}
+  SY.last=j;SY.st='ok'}catch(e){SY.st='err'}SY.busy=false;famBadge()}
+/* a 4-digit PIN pad in the v6 look */
+function pinPad(title,sub,onDone,extra){let v='';
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1 dir="auto">${esc(title)}</h1>${XB}</div><p class="note" style="text-align:center">${esc(sub)}</p>
+  <div class="pnd" aria-hidden="true"><i></i><i></i><i></i><i></i></div><p class="pne" role="alert"></p>
+  <div class="pnk" dir="ltr">${[1,2,3,4,5,6,7,8,9,'',0,'del'].map(k=>k===''?'<span></span>':`<button data-k="${k}" aria-label="${k==='del'?T('Delete','حذف'):k}">${k==='del'?'<i class="ph ph-backspace"></i>':AR(k)}</button>`).join('')}</div>${extra||''}`);
+ const sh=$('sh'),dots=()=>$$('.pnd i',sh).forEach((d,i)=>d.classList.toggle('on',i<v.length));
+ const api={err:t=>{sh.querySelector('.pne').textContent=t;const d=sh.querySelector('.pnd');d.classList.remove('sh');void d.offsetWidth;d.classList.add('sh');vib([30,40,30]);v='';dots()},close:closeSheet};
+ $$('[data-k]',sh).forEach(b=>b.onclick=()=>{const k=b.dataset.k;if(k==='del')v=v.slice(0,-1);else if(v.length<4)v+=k;vib(6);dots();if(v.length===4){const p=v;setTimeout(()=>onDone(p,api),140)}});return api}
+function pinNew(title,cb){pinPad(title,T('Choose a 4-digit PIN','اختر رمزًا من 4 أرقام'),(p1)=>{pinPad(title,T('Enter it again','أدخله مرة أخرى'),(p2,a2)=>{if(p1!==p2){pinNew(title,cb);setTimeout(()=>{const e=$('sh').querySelector('.pne');if(e)e.textContent=T('PINs did not match. Start again.','الرمزان غير متطابقين. ابدأ من جديد.')},60);return}a2.close();cb(p1)})})}
+function inSheet(title,ph,val,cb,type){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(title)}</h1>${XB}</div><input class="inp" id="fiI" type="${type||'text'}" maxlength="${type==='email'?120:40}" dir="auto" autocomplete="off" placeholder="${esc(ph)}" value="${esc(val||'')}"><button class="big" id="fiGo">${T('Next','التالي')}</button>`);
+ const go2=()=>{const n=$('fiI').value.trim();if(!n||(type==='email'&&!/\S+@\S+\.\S+/.test(n))){$('fiI').focus();return}cb(n)};$('fiGo').onclick=go2;$('fiI').onkeydown=e=>{if(e.key==='Enter')go2()};setTimeout(()=>$('fiI').focus(),250)}
+function famConfirm(title,body,yes,cb){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(title)}</h1>${XB}</div><p class="note">${esc(body)}</p><button class="dang" id="fcY">${esc(yes)}</button><button class="rzo" data-x>${T('Cancel','إلغاء')}</button>`);$$('#sh [data-x]').forEach(b=>b.onclick=closeSheet);$('fcY').onclick=cb}
+/* owner side: More, Family */
+const PF6={rows:null,code:null};
+async function pfLoad(){const sb=await FQA.sb(),u=FQA.user();const {data,error}=await sb.from('fastaqim_profiles').select('id,name,transfer_email').eq('owner',u.id).order('created_at');if(error)throw error;PF6.rows=data||[];
+ if(PF6.rows.length){try{const r=await sb.rpc('family_code');PF6.code=r.data||null}catch(e){}}}
+async function famSheet(){const u=window.FQA&&FQA.user();
+ if(!u){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Family','العائلة')}</h1>${XB}</div><p class="note">${T('Sign in to add family profiles. Each person gets their own plan and a 4-digit PIN.','سجّل الدخول لإضافة ملفات العائلة. لكل شخص خطته الخاصة ورمز من 4 أرقام.')}</p><button class="big" id="fsIn">${T('Sign in','تسجيل الدخول')}</button>`);$('fsIn').onclick=acctSheet;return}
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Family','العائلة')}</h1>${XB}</div><p class="rload">${T('Loading…','جارٍ التحميل…')}</p>`);
+ try{await pfLoad()}catch(e){famErr();closeSheet();return}const R6=PF6.rows;
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Family','العائلة')}</h1>${XB}</div>
+  ${R6.length?`<div class="gl">${R6.map(r=>`<button data-pf="${r.id}"><span class="ic c-a"><i class="ph ph-user"></i></span><span class="tx"><b dir="auto">${esc(r.name)}</b>${r.transfer_email?`<small>${T('Waiting for','بانتظار')} ${esc(r.transfer_email)}</small>`:''}</span><i class="ph ph-caret-right cv flip"></i></button>`).join('')}</div>`:`<p class="note">${T('Add a profile for each person. They get their own plan, and sign in on their own phone with the family code and their PIN.','أضف ملفًا لكل شخص. لكل منهم خطته، ويدخل من هاتفه برمز العائلة ورمزه الخاص.')}</p>`}
+  ${R6.length&&PF6.code?`<div class="fcode"><small>${T('Family code','رمز العائلة')}</small><b dir="ltr" class="notranslate">${fmtCode(PF6.code)}</b><div><button class="chip" id="fcCp"><i class="ph ph-copy"></i> ${T('Copy','نسخ')}</button><button class="chip" id="fcNw">${T('New code','رمز جديد')}</button></div><p>${T('Family members sign in on their own phone with this code and their own PIN. They never use your email or password.','يدخل أفراد العائلة من هواتفهم بهذا الرمز ورمزهم الخاص، ولا يستخدمون بريدك أو كلمة مرورك أبدًا.')}</p></div>`:''}
+  <button class="big" id="pfAdd"><i class="ph ph-plus"></i> ${T('Add profile','أضف ملفًا')}</button>`);
+ $$('#sh [data-pf]').forEach(b=>b.onclick=()=>pfManage(b.dataset.pf));
+ $('pfAdd').onclick=()=>inSheet(T('Add profile','أضف ملفًا'),T('Profile name','اسم الملف'),'',n=>pinNew(n,async pin=>{try{const sb=await FQA.sb(),id=(crypto.randomUUID?crypto.randomUUID():'10000000-1000-4000-8000-100000000000'.replace(/[018]/g,c=>(c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16)));
+  let r=await sb.from('fastaqim_profiles').insert({id,owner:FQA.user().id,name:n,state:{name:n,v6_at:new Date().toISOString()}});if(r.error)throw r.error;r=await sb.rpc('set_profile_pin',{p_id:id,p_pin:pin});if(r.error)throw r.error;
+  toast(T('Saved','تم الحفظ'));famSheet()}catch(e){famErr()}}));
+ if($('fcCp'))$('fcCp').onclick=async()=>{try{await navigator.clipboard.writeText(fmtCode(PF6.code));toast(T('Copied','تم النسخ'))}catch(e){}};
+ if($('fcNw'))$('fcNw').onclick=()=>famConfirm(T('New code','رمز جديد'),T('A new code signs every family member out. They sign in again with the new code.','الرمز الجديد يُخرج كل أفراد العائلة، ويدخلون مجددًا بالرمز الجديد.'),T('New code','رمز جديد'),async()=>{try{const sb=await FQA.sb();const {error}=await sb.rpc('family_code',{p_new:true});if(error)throw error;famSheet()}catch(e){famErr()}})}
+function pfManage(id){const r=(PF6.rows||[]).find(x=>x.id===id);if(!r)return;
+ const upd=async o=>{try{const sb=await FQA.sb();const {error}=await sb.from('fastaqim_profiles').update(o).eq('id',id);if(error)throw error;toast(T('Saved','تم الحفظ'));famSheet()}catch(e){famErr()}};
+ openSheet(`<div class="hd sub"><button class="ib" id="pmB" aria-label="${T('Back','رجوع')}"><i class="ph ph-caret-left flip"></i></button><h1 dir="auto">${esc(r.name)}</h1>${XB}</div>
+  <button class="big" id="pmO"><i class="ph ph-pencil-simple"></i> ${T('Open their plan','افتح خطته')}</button>
+  <div class="gl" style="margin-top:12px"><button id="pmR"><span class="ic c-a"><i class="ph ph-textbox"></i></span><span class="tx"><b>${T('Rename','إعادة التسمية')}</b></span><i class="ph ph-caret-right cv flip"></i></button>
+  <button id="pmP"><span class="ic c-a"><i class="ph ph-lock-key"></i></span><span class="tx"><b>${T('Reset PIN','إعادة تعيين الرمز')}</b></span><i class="ph ph-caret-right cv flip"></i></button>
+  <button id="pmM"><span class="ic c-a"><i class="ph ph-paper-plane-tilt"></i></span><span class="tx"><b>${T('Move to own account','انقل إلى حساب خاص')}</b>${r.transfer_email?`<small>${T('Waiting for','بانتظار')} ${esc(r.transfer_email)}</small>`:''}</span><i class="ph ph-caret-right cv flip"></i></button></div>
+  <button class="dang" id="pmD">${T('Delete profile','احذف الملف')}</button>`);
+ $('pmB').onclick=famSheet;
+ $('pmO').onclick=async()=>{try{const sb=await FQA.sb();const {data,error}=await sb.from('fastaqim_profiles').select('name,state').eq('id',id).maybeSingle();if(error||!data)throw error;famEnter({k:'pf',id,name:data.name},data.state)}catch(e){famErr()}};
+ $('pmR').onclick=()=>inSheet(T('Rename','إعادة التسمية'),T('Profile name','اسم الملف'),r.name,n=>upd({name:n}));
+ $('pmP').onclick=()=>pinNew(r.name,async pin=>{try{const sb=await FQA.sb();const {error}=await sb.rpc('set_profile_pin',{p_id:id,p_pin:pin});if(error)throw error;toast(T('Saved','تم الحفظ'))}catch(e){famErr()}});
+ $('pmM').onclick=()=>{if(r.transfer_email){famConfirm(T('Move to own account','انقل إلى حساب خاص'),T('Waiting for','بانتظار')+' '+r.transfer_email,T('Cancel the move','ألغِ النقل'),()=>upd({transfer_email:null}));return}
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Move to own account','انقل إلى حساب خاص')}</h1>${XB}</div><p class="note">${T('Ask them to sign in to Fastaqim with this email. Everything moves to their account when they accept.','اطلب منه الدخول إلى Fastaqim بهذا البريد. ينتقل كل شيء إلى حسابه عند الموافقة.')}</p><input class="inp" id="pmE" type="email" dir="ltr" autocomplete="off" placeholder="${T('Their email','بريده الإلكتروني')}"><button class="big" id="pmEG">${T('Send','إرسال')}</button>`);
+  $('pmEG').onclick=()=>{const e=$('pmE').value.trim().toLowerCase();if(!/\S+@\S+\.\S+/.test(e)){$('pmE').focus();return}upd({transfer_email:e})}};
+ $('pmD').onclick=()=>famConfirm(T('Delete profile','احذف الملف'),T('Delete this profile and all its history?','حذف هذا الملف وكل سجله؟'),T('Delete','احذف'),async()=>{try{const sb=await FQA.sb();const {error}=await sb.from('fastaqim_profiles').delete().eq('id',id);if(error)throw error;famSheet()}catch(e){famErr()}})}
+/* someone moved a profile to this email: offer to bring it in */
+async function famClaimCheck(){if(ACT6)return;try{const sb=await FQA.sb();const {data,error}=await sb.rpc('pending_profiles');if(error||!data||!data.length)return;const r=data[0];
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('A family profile is waiting for you','ملف عائلي بانتظارك')}</h1>${XB}</div><p class="note"><b dir="auto">${esc(r.name)}</b><br>${T('Move it into this account? It replaces what is saved here now.','نقله إلى هذا الحساب؟ سيحلّ محلّ المحفوظ هنا الآن.')}</p><button class="big" id="pcY">${T('Move it here','انقله هنا')}</button><button class="rzo" data-x>${T('Not now','ليس الآن')}</button>`);
+ $$('#sh [data-x]').forEach(b=>b.onclick=closeSheet);
+ $('pcY').onclick=async()=>{try{const u=FQA.user();let q=await sb.rpc('claim_profile',{p_id:r.id});if(q.error)throw q.error;q=await sb.from('fastaqim_state').select('state').eq('user_id',u.id).maybeSingle();const v=q.data&&q.data.state&&q.data.state.v6;
+  SYK.forEach(k=>localStorage.removeItem('fq5.'+k));if(v)SYK.forEach(k=>{if(v[k]!=null)localStorage.setItem('fq5.'+k,JSON.stringify(v[k]))});else localStorage.setItem('fq5.state',JSON.stringify({name:r.name,_at:Date.now()}));
+  SY.last='';await syPush();sessionStorage.setItem('fq5.pulled','1');location.reload()}catch(e){famErr()}}}catch(e){}}
+/* family member side: sign in with the family code and PIN */
+function famSignIn(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Family sign in','دخول العائلة')}</h1>${XB}</div><p class="note">${T('Ask the account owner for the family code.','اطلب رمز العائلة من صاحب الحساب.')}</p><input class="inp" id="fmC" dir="ltr" maxlength="12" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="${T('Family code','رمز العائلة')}" style="text-transform:uppercase;letter-spacing:.14em;text-align:center"><button class="big" id="fmGo">${T('Next','التالي')}</button><p class="pne" id="fmE" role="alert"></p>`);
+ $('fmGo').onclick=async()=>{const code=$('fmC').value.replace(/[^a-z0-9]/gi,'').toUpperCase();if(code.length<6){$('fmC').focus();return}let data=null;try{const sb=await FQA.sb();const r=await sb.rpc('family_list',{p_code:code});if(r.error)throw r.error;data=r.data}catch(e){$('fmE').textContent=T("Couldn't connect. Check your internet.",'تعذّر الاتصال. تحقّق من الإنترنت.');return}
+  if(!data||!data.length){$('fmE').textContent=T('Code not found. Check it with the account owner.','الرمز غير موجود. تحقّق منه مع صاحب الحساب.');return}
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Who are you?','من أنت؟')}</h1>${XB}</div><div class="gl">${data.map(r=>`<button data-fp="${r.id}"><span class="ic c-a"><i class="ph ph-user"></i></span><span class="tx"><b dir="auto">${esc(r.name)}</b></span><i class="ph ph-caret-right cv flip"></i></button>`).join('')}</div>`);
+  $$('#sh [data-fp]').forEach(b=>b.onclick=()=>{const r=data.find(x=>x.id===b.dataset.fp);
+   pinPad(r.name,T('Enter your PIN','أدخل رمزك'),async(pin,api)=>{let res=null;try{const sb=await FQA.sb();const q=await sb.rpc('family_login',{p_code:code,p_id:r.id,p_pin:pin});if(q.error)throw q.error;res=q.data}catch(e){api.err(T("Couldn't connect. Check your internet.",'تعذّر الاتصال. تحقّق من الإنترنت.'));return}
+    if(!res||!res.ok){api.err(res&&res.err==='locked'?T('Too many tries. Wait 15 minutes or ask the account owner.','محاولات كثيرة. انتظر 15 دقيقة أو اسأل صاحب الحساب.'):res&&res.err==='pin'?T('Wrong PIN.','رمز خاطئ.')+' '+T(res.left+' tries left','المحاولات المتبقية: '+AR(res.left)):T('Code not found. Check it with the account owner.','الرمز غير موجود. تحقّق منه مع صاحب الحساب.'));return}
+    try{const sb=await FQA.sb();const q=await sb.rpc('fam_get',{p_token:res.token});if(q.error||!q.data)throw q.error;famEnter({k:'fam',token:res.token,id:q.data.id,name:q.data.name},q.data.state)}catch(e){api.err(T("Couldn't connect. Check your internet.",'تعذّر الاتصال. تحقّق من الإنترنت.'))}},
+    `<p class="pnf">${T('Forgot your PIN? Ask the account owner.','نسيت رمزك؟ اسأل صاحب الحساب.')}</p>`)})}}
+/* account row, banner and More row */
+function famBadge(){if(!ACT6)return;const b=$('mAcct');if(b)b.querySelector('.tx').innerHTML=`<b dir="auto">${esc(ACT6.name)}</b><small>${ACT6.k==='fam'?T('Signed in with the family code','داخل برمز العائلة'):T('Editing this family profile','تعدّل هذا الملف العائلي')}</small>`}
+function famActSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1 dir="auto">${esc(ACT6.name)}</h1>${XB}</div><p class="note">${ACT6.k==='fam'?T('Signed in with the family code. Your plan is saved to your family profile.','داخل برمز العائلة. تُحفظ خطتك في ملفك العائلي.'):T('You are editing this family profile. Changes save to it.','أنت تعدّل هذا الملف العائلي، وتُحفظ التغييرات فيه.')}</p><button class="big" id="faB">${ACT6.k==='fam'?T('Sign out','تسجيل الخروج'):T('Back to my plan','العودة إلى خطتي')}</button>`);$('faB').onclick=()=>famLeave(false)}
+if(ACT6){
+ syncSoon=function(){clearTimeout(SY.t);SY.t=setTimeout(()=>famPush(false),1500)};syPull=async function(){};syBadge=famBadge;acctSheet=famActSheet;
+ if(!S.name){S.name=ACT6.name;save()}
+ document.body.insertAdjacentHTML('afterbegin',`<div class="fambar" id="famBar"><i class="ph ph-user"></i><span dir="auto">${ACT6.k==='fam'?esc(ACT6.name):T('Editing','تعديل')+' <b>'+esc(ACT6.name)+'</b>'}</span><button id="famBk">${ACT6.k==='fam'?T('Sign out','خروج'):T('Back to my plan','العودة إلى خطتي')}</button></div>`);document.documentElement.classList.add('famon');
+ $('famBk').onclick=()=>famLeave(false);if($('mAcct'))$('mAcct').onclick=famActSheet;famBadge();
+ if(ACT6.k==='fam')FQA.sb().then(async sb=>{const q=await sb.rpc('fam_get',{p_token:ACT6.token});if(!q.error&&!q.data)famLeave(true)}).catch(()=>{});
+ setTimeout(()=>famPush(false),2500)}
+{const acct=$('mAcct');if(acct&&!$('mFam')){acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl" id="mFamG"${ACT6?' hidden':''}><button id="mFam"><span class="ic c-a"><i class="ph ph-users-three"></i></span><span class="tx"><b>${T('Family','العائلة')}</b><small>${T('Profiles with their own PIN','ملفات برمز خاص لكل شخص')}</small></span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mFam').onclick=famSheet}}
+if(!ACT6){const _as=acctSheet;acctSheet=function(){const r=_as.apply(this,arguments);try{if(!(window.FQA&&FQA.user())){const sh=$('sh');if(sh&&!$('acFam'))sh.insertAdjacentHTML('beforeend',`<button class="rzo" id="acFam"><i class="ph ph-users-three"></i> ${T('Family sign in (code and PIN)','دخول العائلة (رمز ورقم سري)')}</button>`);if($('acFam'))$('acFam').onclick=famSignIn}}catch(e){}return r};if($('mAcct'))$('mAcct').onclick=acctSheet;
+ if(window.FQA&&!P.has('nosync'))FQA.on(u=>{if(u)setTimeout(famClaimCheck,1500)})}
+
+/* ===== Jannah garden (kept from the old main page, redrawn in the v6 palette): every dhikr counted today adds to a calm garden
+   (grass, flowers, rivers of water, milk and honey, trees, fruit, a palace, light). It grows through the day and starts fresh tomorrow.
+   No beings with souls, no star shapes. ===== */
+const ZG6=[[1,'Grass','عشب'],[4,'Flowers','زهور'],[8,'River of water','نهر من ماء'],[12,'A tree','شجرة'],[18,'Another tree','شجرة أخرى'],[25,'Fruit','ثمار'],[33,'A palace','قصر'],[45,'Palms','نخيل'],[60,'More flowers','زهور أكثر'],[80,'River of milk','نهر من لبن'],[100,'River of honey','نهر من عسل'],[130,'Light','نور'],[170,'Soft light','ضياء'],[220,'More trees','أشجار أكثر'],[300,'Full light','نور تام']];
+function g6Tree(x,s,c,fr){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-2 0 Q-1 -14 -3 -26 L3 -26 Q1 -14 2 0z" fill="#8a6a4a"/><circle cx="0" cy="-34" r="13" fill="${c}"/><circle cx="-10" cy="-27" r="9" fill="${c}"/><circle cx="10" cy="-27" r="9" fill="${c}"/><circle cx="0" cy="-42" r="9" fill="${c}" opacity=".92"/>${fr?`<g><circle cx="-6" cy="-32" r="2.5" fill="#c9a96a"/><circle cx="7" cy="-36" r="2.5" fill="#b8955a"/><circle cx="2" cy="-26" r="2.5" fill="#c9a96a"/><circle cx="-11" cy="-24" r="2.2" fill="#b8955a"/><circle cx="11" cy="-25" r="2.2" fill="#c9a96a"/></g>`:''}</g>`}
+function g6Palm(x,s){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-1.5 0 Q2 -18 0 -34 L3 -34 Q5 -18 1.5 0z" fill="#9a7650"/><g transform="translate(1.5 -34)" fill="none" stroke="#2e6b32" stroke-width="3" stroke-linecap="round"><path d="M0 0 q-10 -6 -20 2"/><path d="M0 0 q10 -6 20 2"/><path d="M0 0 q-6 -10 -15 -10"/><path d="M0 0 q6 -10 15 -10"/><path d="M0 0 q0 -8 1 -14"/></g><circle cx="0" cy="-31" r="2.1" fill="#b8955a"/><circle cx="3.5" cy="-31" r="2.1" fill="#b8955a"/></g>`}
+function g6Flowers(xs){return xs.map((x,j)=>{const c=['#ffffff','#e8d3a5','#f5eedf','#d8c08e'][j%4];return `<g transform="translate(${x} ${103+(j%2)})"><path d="M0 0 V-7" stroke="#4d8a52" stroke-width="1.3"/><circle cy="-9" r="2.1" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="-2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cy="-8.3" r="1" fill="#b8955a"/></g>`}).join('')}
+function g6River(y,c,edge){const d=`M-4 ${y} C40 ${y-4} 80 ${y+4} 120 ${y} S200 ${y-4} 240 ${y} S300 ${y+3} 324 ${y}`;return `<path d="${d}" stroke="${edge}" stroke-width="5.4" fill="none" stroke-linecap="round"/><path class="g6rv" d="${d}" stroke="${c}" stroke-width="3.6" fill="none" stroke-linecap="round"/>`}
+function g6Svg(tot,fresh){const on=k=>tot>=ZG6[k][0],nw=k=>fresh===k?' g6new':'';let g='';
+ g+=`<defs><radialGradient id="g6L" cx="50%" cy="60%" r="55%"><stop offset="0" stop-color="#f6e7bf" stop-opacity=".95"/><stop offset="1" stop-color="#f6e7bf" stop-opacity="0"/></radialGradient></defs>`;
+ if(on(14))g+=`<rect class="${nw(14)}" x="0" y="0" width="320" height="130" fill="url(#g6L)" opacity=".6"/>`;
+ if(on(12))g+=`<g class="g6glow${nw(12)}">${[[24,20],[70,12],[118,26],[200,14],[250,28],[298,16],[160,8],[140,40],[226,44]].map(([a,b],i)=>`<circle cx="${a}" cy="${b}" r="${1.6+(i%3)*.7}" fill="#e3c98e" opacity=".85"/>`).join('')}</g>`;
+ if(on(11))g+=`<g class="${nw(11)}"><ellipse cx="160" cy="74" rx="80" ry="46" fill="url(#g6L)"/></g>`;
+ if(on(6)){const lit=on(11);g+=`<g class="${nw(6)}" opacity="${lit?1:.6}"><rect x="128" y="74" width="64" height="30" rx="2" fill="#fbf8f1" stroke="#d8c9a8"/><path d="M146 74 Q160 46 174 74z" fill="${lit?'#d8c08e':'#ece6da'}" stroke="#d8c9a8"/><rect x="122" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M120.5 62 L125.5 52 L130.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/><rect x="191" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M189.5 62 L194.5 52 L199.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/>${[136,148,160,172,184].map(x=>`<path d="M${x-3.5} 104 V91 Q${x} 85 ${x+3.5} 91 V104z" fill="${lit?'#e8d3a5':'#e3ded3'}"/>`).join('')}</g>`}
+ if(on(13))g+=`<g class="${nw(13)}">${g6Tree(98,.62,'#6f9e72',on(5))}${g6Tree(222,.62,'#6f9e72',on(5))}</g>`;
+ g+=`<path d="M0 104 Q80 94 160 102 T320 100 V130 H0z" fill="#dfe9dc"/><path d="M0 108 Q90 100 170 106 T320 104 V130 H0z" fill="#c9dcc6"/>`;
+ if(on(0))g+=`<g class="${nw(0)}">${[...Array(16)].map((_,j)=>{const x=8+j*20;return `<path d="M${x} 108 q1 -6 3 -8 M${x+3} 108 q0 -7 -2 -9 M${x+6} 108 q-1 -5 2 -7" stroke="#4d8a52" stroke-width="1.2" fill="none"/>`}).join('')}</g>`;
+ if(on(2))g+=`<g class="${nw(2)}">${g6River(113,'#a9d3e6','#6fa9c4')}</g>`;
+ if(on(9))g+=`<g class="${nw(9)}">${g6River(119,'#fdfbf5','#d8d0bc')}</g>`;
+ if(on(10))g+=`<g class="${nw(10)}">${g6River(125,'#e3c17a','#b8955a')}</g>`;
+ if(on(3))g+=`<g class="${nw(3)}">${g6Tree(56,1,'#2e6b32',on(5))}</g>`;
+ if(on(4))g+=`<g class="${nw(4)}">${g6Tree(266,1,'#2e6b32',on(5))}</g>`;
+ if(on(7))g+=`<g class="${nw(7)}">${g6Palm(18,1)}${g6Palm(304,1)}</g>`;
+ if(on(1))g+=`<g class="${nw(1)}">${g6Flowers([84,94,104,112])}</g>`;
+ if(on(8))g+=`<g class="${nw(8)}">${g6Flowers([208,218,228,238,246])}</g>`;
+ const top=on(11)||on(12)||on(14)?0:on(6)?38:on(3)?52:70;return `<svg viewBox="0 ${top} 320 ${130-top}" class="g6svg" aria-hidden="true">${g}</svg>`}
+function gardenDraw(){const box=$('g6');if(!box)return;const tot=dzCount(),k=ZG6.filter(x=>tot>=x[0]).length-1,dk=dkey(NOW());
+ let seen=null;try{seen=JSON.parse(localStorage.getItem('fq5.g6')||'null')}catch(e){}const last=seen&&seen.d===dk?seen.k:-1,fresh=k>last?k:-1;localStorage.setItem('fq5.g6',JSON.stringify({d:dk,k}));
+ const nx=ZG6[k+1],lbl=x=>T(x[1],x[2]);
+ box.innerHTML=`<div class="g6h"><b><i class="ph ph-plant"></i>${T('Your garden today','حديقتك اليوم')}</b><span>${AR(Math.max(0,k+1))}/${AR(ZG6.length)}</span></div>
+  ${tot>0?g6Svg(tot,fresh):`<div class="g6e"><i class="ph ph-plant"></i><p>${T('Every dhikr you count today grows your garden.','كل ذكر تعدّه اليوم يُنمي حديقتك.')}</p></div>`}
+  <p class="g6n">${nx?T(`Next: ${nx[1]} at ${nx[0]} dhikr`,`التالي: ${nx[2]} عند ${AR(nx[0])} ذكر`):T('Your garden is complete for today. MashaAllah.','اكتملت حديقتك اليوم. ما شاء الله.')}</p>
+  <a class="g6q" href="https://quran.com/47/15" target="_blank" rel="noopener">${T('Rivers of water, milk and honey: Qur\'an, Surah Muhammad 47:15','أنهار من ماء ولبن وعسل: القرآن، سورة محمد ٤٧:١٥')}</a>`;
+ if(fresh>0)vib([15,40,15])}
+{const any=$('s-dhikr')&&$('s-dhikr').querySelector('.any');if(any&&!$('g6'))any.insertAdjacentHTML('afterend',`<div class="g6" id="g6"></div>`)}
+{const _rd=R.dhikr;R.dhikr=function(){const r=_rd.apply(this,arguments);try{gardenDraw()}catch(e){}return r}}
+
+/* ===== gentle filter (kept from the old main page): haram items in plans, to-dos and lists, and rude words anywhere ===== */
+const BLOCK_EN=['alcohol','alcoholic','beer','beers','wine','wines','vodka','whiskey','whisky','rum','tequila','gin','liquor','champagne','cocktail','cocktails','booze','drunk','get drunk','hangover','nightclub','night club','bar crawl','pub crawl','happy hour',
+ 'weed','marijuana','cannabis','cocaine','coke line','heroin','meth','mdma','ecstasy','lsd','shrooms','drug','drugs','get high','smoke weed',
+ 'music','song','songs','concert','concerts','music festival','festival music','playlist','dj','rave','karaoke','singing lesson','guitar','piano','drums',
+ 'gamble','gambling','casino','bet','bets','betting','lottery','lotto','poker','slots','blackjack','porn','pornography','strip club','girlfriend','girlfriends','boyfriend','boyfriends','dating','date night','hookup','hook up','tinder','bumble','situationship','pork','bacon'];
+const BLOCK_AR=['خمر','الخمر','كحول','كحولي','بيرة','بيره','نبيذ','فودكا','ويسكي','مخدرات','مخدر','حشيش','كوكايين','هيروين','موسيقى','موسيقي','أغنية','أغاني','اغاني','اغنية','حفلة موسيقية','حفل غنائي','مهرجان موسيقي','ديسكو','ملهى','قمار','كازينو','يانصيب','مراهنة','رهان','إباحية','خنزير','بوي فريند','بويفريند','جيرل فريند','مواعدة'];
+const BLOCK_OM=['alkoolii','araqee','farsoo','daadhii','biiraa','wayinii','muuziqaa','qumaara','qoricha sammuu','jaalallee','michuu jaalalaa'];
+const BLK={extra:[]};
+const blkNorm=s=>String(s).toLowerCase().replace(/[ً-ْـ]/g,'').replace(/[إأآ]/g,'ا');
+const BLOCK_BAD=['fuck','fucking','fucked','fucker','motherfucker','fck','fuk','shit','shitty','bullshit','bitch','bitches','bastard','asshole','ass','damn','dick','dickhead','pussy','cunt','whore','slut','piss','cock','wtf','stfu','sex','sexy','sexting','nude','nudes','horny','boobs','tits','hoe',
+ 'merde','putain','puta','puto','mierda','joder','cabrón','scheiße','scheisse','arschloch','siktir','amk','orospu','bhenchod','madarchod','chutiya','harami','wasmo','dhillo','siil','sharmuuto','kintir','anjing','bangsat','kontol','memek'];
+const BLOCK_BAD_AR=['كس','زب','شرموطة','شرموطه','عاهرة','قحبة','قحبه','منيوك','نيك','يلعن','سكس'];
+const blkEsc=n=>n.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+function blkWords(t,L,AR){for(const w of L){const n=blkNorm(w).trim();if(!n)continue;
+    if(/[؀-ۿ]/.test(n)){if(t.includes(n))return w;continue}
+    if(new RegExp('(^|[^\\p{L}])'+blkEsc(n)+'([^\\p{L}]|$)','u').test(t))return w}
+  for(const w of AR){const n=blkNorm(w);if(new RegExp('(^|[^\\u0600-\\u06FF])(و|ف|ب|ل|ال|وال|بال|لل)?'+n+'([^\\u0600-\\u06FF]|$)').test(t))return w}return null}
+const blockedBad=text=>text?blkWords(blkNorm(text),BLOCK_BAD,BLOCK_BAD_AR):null;
+const BAD_EMO=/🏳\uFE0F?\u200D(?:🌈|⚧)|🇮🇱|[🎵🎶🎸🎹🎷🎺🥁🎻🎤🎧📯🪕🪗🪘🍷🍺🍻🥂🍸🍹🥃🍾🍶🐷🐖🐽🥓🎲🃏🎰♠♣♦💀☠😈👿👹👺🎄🎅🤶🎃👻✝☦✡🕉☸☯🔯🕎⛪🛕🕍⛩🍆🍑🖕💋💏💑😘😚😙👙🩲🔞💩🚬🤘💃🕺🪩]/u;
+function blocked(text){if(!text)return null;const t=blkNorm(text);if(quitIntent(text))return (BAD_EMO.test(text)?'emoji':null)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR);return (BAD_EMO.test(text)?'emoji':null)||blkWords(t,[...BLOCK_EN,...BLOCK_OM,...BLK.extra],BLOCK_AR)||blkWords(t,BLOCK_BAD,BLOCK_BAD_AR)}
+const QUIT_RE=/\b(quit|quitting|stop|stopping|avoid|avoiding|leave|leaving|give up|giving up|cut (down|back|out)|reduce|less|no more|without|overcome|resist|break free|recover|recovery|sober|tawbah|tawba|repent|repentance|clean from|days? (free|clean|without))\b|ترك|اترك|أترك|الإقلاع|اقلع|أقلع|التوقف|توقف|أتوقف|تجنب|اجتنب|بدون|بلا|التوبة|أتوب|توبة|الابتعاد|ابتعد|dhiisuu|dhiisi|dhiisa|irraa fagaadhu|irraa fagaachuu|joojin|jooji|joojiyo|ka fogow|ka tag|ka dheeraw|toobad/i;
+function quitIntent(t){return QUIT_RE.test(t||'')}
+const BLK_MSG=[["Let's leave this one out. Fastaqim is for plans that bring you closer to Allah. What could go here instead, like a walk, a nasheed, a lecture or time with family?",'لنترك هذا. Fastaqim لخطط تقرّبك من الله. ماذا يمكن أن تضع بدلًا منه، كمشي أو محاضرة أو وقت مع العائلة؟'],
+ ["This one won't be added. Pick something halal you'd enjoy instead. You deserve rest you are glad about after.",'لن يُضاف هذا. اختر شيئًا حلالًا تستمتع به بدلًا منه. تستحق راحة تسعد بها بعدها.']];
+function blkWarn(text){const bad=blockedBad(text),m=BLK_MSG[Math.random()<.5?0:1];
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${bad?T("Let's keep it clean",'لنحافظ على الكلام الطيب'):T("Let's swap this one",'لنستبدل هذا')}</h1>${XB}</div>
+  <p class="blkm">${bad?T("Curse words and rude words aren't allowed here. Try saying it another way. You can still write what is on your mind.",'الكلمات البذيئة والجارحة غير مسموحة هنا. جرّب أن تقولها بطريقة أخرى، وما زال بإمكانك كتابة ما في بالك.'):T(m[0],m[1])}</p>
+  ${bad?'':`<p class="note">${T('If you meant medicine, write "medicine" or its name. Words like "drink water" are fine.','إن قصدت دواءً فاكتب «دواء» أو اسمه. عبارات مثل «اشرب ماء» لا بأس بها.')}</p>`}
+  <button class="big" data-x>${T('Okay','حسنًا')}</button>`);vib([20,40,20])}
+const BLK_SOFT='#fbT,#fiI,#apN,#pmE';
+const blkSkip=el=>!el.matches||el.matches('[type=search],[type=email],[type=password],[type=number],[type=time],[type=date],[type=checkbox]')||!!el.closest('#acBox,#fmC,#rzN,.fqa');
+const blkCheck=el=>{const v=el.value;return el.matches(BLK_SOFT)?blockedBad(v):blocked(v)};
+document.addEventListener('submit',e=>{const f=e.target;const els=[...f.querySelectorAll('input,textarea')].filter(x=>!blkSkip(x));const hit=els.find(x=>x.value&&blkCheck(x));
+ if(hit){e.preventDefault();e.stopImmediatePropagation();const v=hit.value;hit.value='';blkWarn(v)}},true);
+document.addEventListener('change',e=>{const el=e.target;if(!el.matches||!el.matches('input,textarea')||blkSkip(el)||!el.value)return;
+ if(blkCheck(el)){e.stopImmediatePropagation();const v=el.value;el.value='';blkWarn(v)}},true);
+/* buttons that read a field right away (feedback, approvals note): check before they send */
+document.addEventListener('click',e=>{const b=e.target.closest&&e.target.closest('#fbS,#apS,#fiGo');if(!b)return;const el=$(b.id==='fbS'?'fbT':b.id==='apS'?'apN':'fiI');if(el&&el.value&&blockedBad(el.value)){e.preventDefault();e.stopImmediatePropagation();const v=el.value;blkWarn(v)}},true);
+/* the owner's own extra words (same table as before) */
+if(window.FQA&&!P.has('nosync'))FQA.sb().then(async sb=>{try{const {data,error}=await sb.from('fastaqim_blocklist').select('word');if(!error)BLK.extra=(data||[]).map(r=>r.word)}catch(e){}}).catch(()=>{});
+
+/* ===== Owner tools (kept from the old main page, owner only): users, feedback inbox, view requests, blocked words.
+   And for everyone: answer a view request from the owner (Allow / Decline, stop any time). ===== */
+const ADM6={rows:null,fb:null};
+$('s-apv').insertAdjacentHTML('afterend',`<section class="scr" id="s-adm"><div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1>${T('Owner tools','أدوات المالك')}</h1><span style="width:44px"></span></div><div id="admB"></div></section>`);
+TABOF.adm='more';
+const admDay=d=>{try{return new Date(d).toLocaleDateString(LX==='ar'?'ar':'en',{month:'short',day:'numeric'})}catch(e){return ''}};
+R.adm=async()=>{const B=$('admB');if(!(await apvOwner())){B.innerHTML=`<div class="qbe"><i class="ph ph-lock-simple"></i><p>${T('Only the owner can open this.','هذه الصفحة للمالك فقط.')}</p></div>`;return}
+ B.innerHTML=`<p class="rload">${T('Loading…','جارٍ التحميل…')}</p>`;
+ try{const sb=await FQA.sb();const [u,f,w]=await Promise.all([sb.rpc('admin_users'),sb.from('fastaqim_feedback').select('id,kind,area,body,name,email,created_at,seen').order('created_at',{ascending:false}).limit(100),sb.from('fastaqim_blocklist').select('word')]);
+  if(u.error)throw u.error;ADM6.rows=u.data||[];ADM6.fb=f.error?[]:(f.data||[]);BLK.extra=w.error?BLK.extra:(w.data||[]).map(r=>r.word)}catch(e){B.innerHTML=`<p class="rerr">${T("Couldn't load. Check your internet.",'تعذّر التحميل. تحقّق من الإنترنت.')}</p>`;return}
+ admDraw()};
+function admDraw(){const B=$('admB'),Rw=ADM6.rows,wk=7*864e5,me=FQA.user().id,nw=ADM6.fb.filter(r=>!r.seen).length;
+ const linked=Rw.filter(r=>r.user_id!==me&&(r.request==='allowed'||r.request==='pending'));
+ B.innerHTML=`<div class="adst"><div><b>${AR(Rw.length)}</b><small>${T('Users','المستخدمون')}</small></div><div><b>${AR(Rw.filter(r=>Date.now()-new Date(r.joined)<wk).length)}</b><small>${T('New this week','جدد هذا الأسبوع')}</small></div><div><b>${AR(Rw.filter(r=>r.last_active&&Date.now()-new Date(r.last_active)<wk).length)}</b><small>${T('Active this week','نشطون هذا الأسبوع')}</small></div></div>
+  <p class="glh">${T('Feedback','الملاحظات')}${nw?` <span class="adnew">${AR(nw)} ${T('new','جديد')}</span>`:''}</p>
+  <div class="gl adfb">${ADM6.fb.length?ADM6.fb.slice(0,40).map(r=>`<div class="adfr ${r.seen?'seen':''}"><span class="ic c-a"><i class="ph ph-${r.kind==='problem'?'wrench':r.kind==='idea'?'lightbulb':'chat-circle'}"></i></span><span class="tx"><b dir="auto">${esc(r.name||r.email||T('Someone','شخص ما'))} <em>${admDay(r.created_at)}</em></b><small dir="auto" class="notranslate">${esc(r.body||'')}</small></span>${r.seen?'':`<button class="chip" data-fs="${r.id}">${T('Seen','تمت القراءة')}</button>`}</div>`).join(''):`<p class="note" style="padding:14px">${T('No feedback yet.','لا ملاحظات بعد.')}</p>`}</div>
+  <p class="glh">${T('Shared plans','الخطط المشتركة')}</p>
+  <div class="gl">${linked.length?linked.map(r=>`<div class="adfr"><span class="ic c-a"><i class="ph ph-user"></i></span><span class="tx"><b dir="auto">${esc(r.name||'—')}</b><small>${esc(r.email||'')}${r.request==='pending'?' · '+T('Asked','بانتظار الرد'):''}</small></span>${r.request==='allowed'?`<button class="chip" data-av="${r.user_id}">${T('View','عرض')}</button><button class="chip" data-ax="${r.user_id}">${T('Remove','إزالة')}</button>`:''}</div>`).join(''):`<p class="note" style="padding:14px">${T('None yet.','لا شيء بعد.')}</p>`}</div>
+  <div class="adrq"><input class="inp" id="admE" type="email" dir="ltr" autocomplete="off" placeholder="${T('Their email','بريده الإلكتروني')}"><div><button class="chip" id="admQ">${T('Request to view','اطلب العرض')}</button><button class="chip" id="admG">${T('Family admin (under 18)','مسؤول عائلي (دون 18)')}</button></div><p class="note">${T('They choose Allow or Decline. Read only.','يختار هو السماح أو الرفض. للقراءة فقط.')}</p></div>
+  <p class="glh">${T('Blocked words','الكلمات المحظورة')}</p>
+  <div class="adbw"><p class="note">${T('The built-in list covers alcohol, drugs, music, gambling and more, in English, Arabic and Oromo. Add your own, one per line.','القائمة المدمجة تشمل الخمر والمخدرات والموسيقى والقمار وغيرها بالإنجليزية والعربية والأورومية. أضف كلماتك، كل كلمة في سطر.')}</p><textarea class="inp" id="blkTa" rows="4" dir="auto">${esc(BLK.extra.join('\n'))}</textarea><button class="big" id="blkSave">${T('Save words','احفظ الكلمات')}</button></div>`;
+ const rpc=async(n,a,ok)=>{try{const sb=await FQA.sb();const {error}=await sb.rpc(n,a);if(error)throw error;toast(ok);R.adm()}catch(e){toast(T("Couldn't send. Check your internet.",'تعذّر الإرسال. تحقّق من الإنترنت.'))}};
+ const byEmail=()=>{const e=$('admE').value.trim().toLowerCase(),r=e&&Rw.find(x=>(x.email||'').toLowerCase()===e);if(!r)toast(T('No account with that email.','لا يوجد حساب بهذا البريد.'));return r};
+ $('admQ').onclick=()=>{const r=byEmail();if(r)rpc('request_view',{p_user:r.user_id},T('Request sent','تم إرسال الطلب'))};
+ $('admG').onclick=()=>{const r=byEmail();if(r)rpc('request_view',{p_user:r.user_id,p_guardian:true},T('Request sent','تم إرسال الطلب'))};
+ $$('#admB [data-ax]').forEach(b=>b.onclick=()=>rpc('remove_view',{p_user:b.dataset.ax},T('Removed','تمت الإزالة')));
+ $$('#admB [data-av]').forEach(b=>b.onclick=()=>admView(b.dataset.av));
+ $$('#admB [data-fs]').forEach(b=>b.onclick=async()=>{try{const sb=await FQA.sb();await sb.from('fastaqim_feedback').update({seen:true}).eq('id',b.dataset.fs);const r=ADM6.fb.find(x=>String(x.id)===b.dataset.fs);if(r)r.seen=true;admDraw()}catch(e){}});
+ $('blkSave').onclick=async()=>{const W=[...new Set($('blkTa').value.split('\n').map(x=>x.trim().toLowerCase()).filter(Boolean))];
+  try{const sb=await FQA.sb();let r=await sb.from('fastaqim_blocklist').delete().neq('word','');if(r.error)throw r.error;if(W.length){r=await sb.from('fastaqim_blocklist').insert(W.map(word=>({word})));if(r.error)throw r.error}BLK.extra=W;toast(T('Saved','تم الحفظ'))}catch(e){toast(T("Couldn't save. Check your internet.",'تعذّر الحفظ. تحقّق من الإنترنت.'))}}}
+async function admView(id){const r=ADM6.rows.find(x=>x.user_id===id);openSheet(`<div class="hd sub"><span style="width:44px"></span><h1 dir="auto">${esc((r&&r.name)||T('Shared plan','خطة مشتركة'))}</h1>${XB}</div><p class="rload">${T('Loading…','جارٍ التحميل…')}</p>`);
+ try{const sb=await FQA.sb();const {data,error}=await sb.from('fastaqim_state').select('state,v6,updated_at').eq('user_id',id).maybeSingle();if(error)throw error;
+  if(!data){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T('Shared plan','خطة مشتركة')}</h1>${XB}</div><p class="note">${T('Nothing to show. They may have stopped sharing.','لا شيء للعرض. ربما أوقف المشاركة.')}</p>`);return}
+  const v=(data.v6&&data.v6.state)||{},o=data.state||{},tasks=(v.tasks||[]).map(t=>[t.t,t.done]).concat(v.tasks?[]:(o.tasks||[]).map(t=>[t.title,t.done]));
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1 dir="auto">${esc((r&&r.name)||T('Shared plan','خطة مشتركة'))}</h1>${XB}</div><p class="note">${T('Shared with you · read only','مشتركة معك · للقراءة فقط')}</p>
+   <p class="glh">${T('To-dos','المهام')}</p><div class="gl">${tasks.length?tasks.slice(0,40).map(([t,d])=>`<div class="adfr"><i class="ph ph-${d?'check-circle':'circle'}" style="font-size:20px;color:var(--acc)"></i><span class="tx"><b dir="auto">${esc(t||'')}</b></span></div>`).join(''):`<p class="note" style="padding:14px">—</p>`}</div>`)}catch(e){toast(T("Couldn't load. Check your internet.",'تعذّر التحميل. تحقّق من الإنترنت.'));closeSheet()}}
+/* the More row appears only for the owner (next to Approvals) */
+function admRow(){apvOwner().then(o=>{const ex=$('mAdm');if(!o){if(ex)ex.closest('.gl').style.display='none';return}if(ex){ex.closest('.gl').style.display='';return}const a=$('mApv')||$('mAcct');if(!a)return;
+ a.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl"><button id="mAdm"><span class="ic c-g"><i class="ph ph-chart-bar"></i></span><span>${T('Owner tools','أدوات المالك')}</span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mAdm').onclick=()=>go('adm')})}
+/* everyone: a view request from the owner waits on More until answered */
+async function vrCheck(){const u=window.FQA&&FQA.user();if(!u||ACT6)return;try{const sb=await FQA.sb();const {data,error}=await sb.from('view_requests').select('status,guardian').eq('user_id',u.id).maybeSingle();if(error)throw error;vrDraw(data)}catch(e){}}
+function vrDraw(d){let c=$('vrC');if(!d||(d.status!=='pending'&&d.status!=='allowed')){if(c)c.remove();return}const acct=$('mAcct');if(!acct)return;
+ if(!c){acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="vrc" id="vrC"></div>`);c=$('vrC')}
+ const set=async st=>{try{const sb=await FQA.sb();const {error}=await sb.from('view_requests').update({status:st,decided_at:new Date().toISOString()}).eq('user_id',FQA.user().id);if(error)throw error;toast(st==='allowed'?T('Shared. You can stop any time on More.','تمت المشاركة. يمكنك الإيقاف في أي وقت من المزيد.'):T('Okay, not shared.','حسنًا، لم تتم المشاركة.'));vrDraw({status:st,guardian:d.guardian})}catch(e){toast(T("Couldn't save. Check your internet.",'تعذّر الحفظ. تحقّق من الإنترنت.'))}};
+ if(d.status==='pending'){c.innerHTML=`<p><b>${d.guardian?T('The Fastaqim owner asked to be your family admin here.','طلب مالك Fastaqim أن يكون مسؤولك العائلي هنا.'):T('The Fastaqim owner asked to see your plan.','طلب مالك Fastaqim الاطلاع على خطتك.')}</b> ${T('Read only: your to-dos.','للقراءة فقط: مهامك.')}${d.guardian?' '+T('For under 18s: once you allow it, only your family admin can remove it.','لمن هم دون 18: بعد السماح، لا يزيله إلا المسؤول العائلي.'):''}</p><div><button class="chip ok" id="vrY">${T('Allow','سماح')}</button><button class="chip" id="vrN">${T('Decline','رفض')}</button></div>`;$('vrY').onclick=()=>set('allowed');$('vrN').onclick=()=>set('declined')}
+ else{c.innerHTML=`<p>${d.guardian?T('Linked to a family admin. They can view your plan.','مرتبط بمسؤول عائلي يمكنه عرض خطتك.'):T('The Fastaqim owner can view your plan (you allowed it).','يمكن لمالك Fastaqim عرض خطتك (بإذنك).')}</p>${d.guardian?'':`<div><button class="chip" id="vrS">${T('Stop sharing','أوقف المشاركة')}</button></div>`}`;if($('vrS'))$('vrS').onclick=()=>set('declined')}}
+if(window.FQA&&!P.has('nosync')){FQA.on(()=>{admRow();vrCheck()});FQA.sb().then(()=>{admRow();vrCheck()}).catch(()=>{})}
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);
