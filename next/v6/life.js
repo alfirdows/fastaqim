@@ -14,7 +14,7 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 /* ---------- state ---------- */
 S.life=S.life||{};const LF=S.life;
 LF.fam=LF.fam||[];LF.rules=LF.rules||{fam:[],me:[]};LF.sch=LF.sch||[];LF.th=LF.th||[];
-const COLORS=['#45806a','#b8955a','#5b7fb5','#b5684a','#3f8f98','#7d8a3e','#8a6a4f','#6b7280'];
+const COLORS=['#3f7a64','#b8955a','#5b7fb5','#b5684a','#3f8f98','#7d8a3e','#8a6a4f','#6b7280'];
 const person=id=>LF.fam.find(p=>p.id===id);
 
 /* ---------- screens ---------- */

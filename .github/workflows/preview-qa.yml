@@ -1,11 +1,11 @@
 name: Preview check in Safari's engine (WebKit)
 # Opens every preview screen in every language on iPhone, iPad and desktop sizes with WebKit (the engine inside Safari),
-# runs the tap tests, and lists anything cut off, overflowing or erroring. Read-only: changes nothing in the repo.
+# (the main page, which is v6 since 21 Nov) runs the tap tests, and lists anything cut off, overflowing or erroring. Read-only: changes nothing in the repo.
 on:
   workflow_dispatch:
   push:
     branches: ['claude/**']
-    paths: [next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
+    paths: [index.html, sw.js, fq-auth.js, life*, dhikr-plus.*, q/**, ph/**, next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
 permissions:
   contents: read
 concurrency:
@@ -33,6 +33,7 @@ jobs:
         env:
           ENGINE: ${{ matrix.engine }}
           ROOT: ${{ github.workspace }}
+          BASE: /
           OUT: qa-shots
         run: node .github/qa/screens.js
       - name: Tap tests (iPhone 13 and iPad)
@@ -40,6 +41,7 @@ jobs:
         env:
           ENGINE: webkit
           ROOT: ${{ github.workspace }}
+          BASE: /
         run: |
           for L in "" "?lang=ar" "?lang=om" "?lang=so"; do echo "== iPhone 13 $L"; LANGQ="$L" DEV="iPhone 13" node .github/qa/flow.js qa-flow; done
           echo "== iPad Pro 11"; DEV="iPad Pro 11" node .github/qa/flow.js qa-flow-ipad
