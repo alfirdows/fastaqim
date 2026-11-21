@@ -178,3 +178,11 @@ html[dir=rtl] .sh.fq-full{transform:translateX(-105%)}
 #zCntT .lb b{line-height:1.15}
 @media (max-width:360px){#zCntT .lb b{font-size:16px}#zCnt .fq-arc{--w:38px}#zCntT{gap:9px}}
 .zr .zk .zm br{display:none}.zr .zk .zm{text-wrap:pretty}
+/* notifications header: light card, no blue gradient */
+.nm{background:#fff!important;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--hz)!important}
+.nm small{color:var(--sub)!important}.nm .ic{background:var(--accT)!important;color:var(--fqA)!important}
+.nm b{color:var(--ink)!important}
+.fq-fr .fq-arc b{font-size:11px}
+/* mini player: light, not a dark floating bar */
+.mp{background:#fff!important;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--hz),0 6px 18px rgba(60,50,30,.10)!important}
+.mp button{background:var(--accT)!important;color:var(--fqA)!important}.mp small{color:var(--sub)}.mp .pb{background:var(--hz)!important}
