@@ -1,0 +1,109 @@
+/* Fastaqim plus (21 Nov 2026): Settings, profile, guide, What's new, report, team chat, word highlight */
+/* bell dot: only while something new is unseen */
+.fh .ib .dot{display:none}
+html.fqp-new .fh .ib .dot{display:block}
+.fqp-nd{display:inline-block;background:var(--acc);color:#fff;font-size:11.5px;font-weight:700;border-radius:999px;padding:2px 8px;font-style:normal;letter-spacing:.2px}
+
+/* shared */
+.fqp-c{text-align:center}
+.fqp-tg{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.gl .fqp-tg:last-child{border-bottom:0}
+.fqp-tg .tx{flex:1;display:flex;flex-direction:column;min-width:0}.fqp-tg .tx b{font-weight:500;font-size:16px}.fqp-tg .tx small{color:var(--sub);font-size:13px;margin-top:2px;line-height:1.35}
+.gl button em,.gl .fqp-tg em{font-style:normal;color:var(--sub);font-size:14px;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fqp-reset{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;margin:6px 0 10px;border:1px solid rgba(181,84,60,.35);background:var(--card);color:#b5543c;font:inherit;font-weight:700;font-size:16px;border-radius:16px}
+.fqp-reset:disabled{opacity:.5}
+.fqp-cancel{display:block;width:100%;height:50px;border:0;background:var(--card2);color:var(--ink);font:inherit;font-weight:650;border-radius:16px}
+.fqp-ver{text-align:center;color:var(--sub);font-size:12.5px;margin:6px 0 20px}
+
+/* profile */
+.fqp-av{width:var(--s);height:var(--s);border-radius:50%;display:inline-grid;place-items:center;font-size:calc(var(--s)*.5);flex:none;line-height:1}
+.fqp-av b{font-weight:700;font-size:calc(var(--s)*.44)}
+.fqp-prof{display:flex;align-items:center;gap:14px}
+.fqp-nm{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}.fqp-nm small{color:var(--sub);font-size:13px;font-weight:600}.fqp-nm .inp{height:46px}
+.fqp-avg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;justify-items:center}
+.fqp-avg button{border:0;background:none;padding:3px;border-radius:50%;box-shadow:0 0 0 2px transparent;transition:box-shadow .15s}
+.fqp-avg button.on{box-shadow:0 0 0 2px var(--acc)}
+.fqp-avc{display:flex;gap:12px;justify-content:center;margin:14px 0 4px}
+.fqp-avc button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;font-size:15px}
+.fqp-avc button i{opacity:0}.fqp-avc button.on{box-shadow:0 0 0 2px var(--card),0 0 0 4px currentColor}.fqp-avc button.on i{opacity:1}
+.fqp-hint{color:var(--sub);font-size:12.5px;text-align:center;margin:10px 0 2px}
+.fqp-hav{border:0;background:none;padding:0;width:40px;height:40px;display:grid;place-items:center;flex:none;border-radius:50%}
+.fqp-seg{margin-bottom:0}
+
+/* reset sheet */
+.fqp-rs p{margin:0 0 8px;line-height:1.5}.fqp-rs ul{margin:0;padding-inline-start:20px;color:var(--sub);font-size:14.5px;line-height:1.6}
+
+/* What's new + change log */
+.fqp-list{padding:4px 16px}
+.fqp-li{display:flex;gap:10px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}.fqp-li:last-child{border-bottom:0}
+.fqp-li p{margin:0;flex:1;line-height:1.45;font-size:15px}
+.fqp-tag{flex:none;font-size:11.5px;font-weight:700;border-radius:8px;padding:3px 8px;margin-top:1px;background:var(--accT);color:var(--acc);min-width:54px;text-align:center}
+.fqp-tag.fix,.fqp-tag.fixed{background:#f5eedf;color:#86672e}.fqp-tag.removed{background:#f3ece9;color:#9a5a48}.fqp-tag.changed{background:#eceff1;color:#4f5b62}
+
+/* Today's path ? */
+.ci{position:relative}
+.fqp-q{position:absolute;top:23px;inset-inline-end:46px;width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--acc);display:grid;place-items:center;font-size:16px;padding:0}
+#ci .cit{padding-inline-end:44px}
+/* guide */
+.fqp-howto p{margin:0 0 6px;line-height:1.5}.fqp-howto p:last-child{margin:0;color:var(--sub);font-size:14.5px}
+.fqp-gi .fqp-gh{display:flex;align-items:center;gap:10px;margin-bottom:6px}.fqp-gi h3{margin:0;font-size:17px}
+.fqp-gi .ic{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none}.fqp-gi .ic svg{width:24px;height:24px}
+.fqp-gi>p{margin:0 0 8px;line-height:1.5;font-size:15px}
+.fqp-when{display:flex;gap:8px;align-items:flex-start;background:var(--card2);border-radius:12px;padding:9px 11px;font-size:14.5px!important}
+.fqp-when i{color:var(--acc);font-size:17px;margin-top:1px}.fqp-when b{font-weight:700;margin-inline-end:4px}
+.fqp-srcs{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:8px;margin-top:4px}
+.fqp-src{color:var(--gold);font-size:13px;text-decoration:none;line-height:1.4}.fqp-src i{font-size:12px;vertical-align:-1px}
+
+/* report */
+.fqp-shot{display:flex;gap:12px;align-items:center;background:var(--card2);border-radius:16px;padding:10px;margin-bottom:10px}
+.fqp-shot img{width:64px;height:auto;max-height:120px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line);flex:none}
+.fqp-shot span{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}.fqp-shot small{color:var(--sub)}
+.fqp-shot button{align-self:flex-start;border:0;background:none;color:#b5543c;font:inherit;font-weight:650;font-size:14px;padding:4px 0}
+.fqp-addshot{display:flex;gap:12px;align-items:center;width:100%;text-align:start;border:1.5px dashed var(--line);background:none;border-radius:16px;padding:12px;margin-bottom:10px;font:inherit;color:var(--ink)}
+.fqp-addshot i{font-size:24px;color:var(--acc)}.fqp-addshot span{display:flex;flex-direction:column}.fqp-addshot small{color:var(--sub);font-size:13px}
+.fqp-flash{position:fixed;inset:0;background:#fff;z-index:99999;pointer-events:none;animation:fqpFl .45s ease-out forwards}
+@keyframes fqpFl{0%{opacity:.85}100%{opacity:0}}
+
+/* Qur'an reader */
+.fqp-rb{display:flex;gap:8px;justify-content:center;margin:-4px 0 12px;flex-wrap:wrap}
+.fqp-rb button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--sub);font:600 13.5px Inter,Plex,sans-serif}
+.fqp-rb button.on{background:var(--accT);border-color:transparent;color:var(--acc)}
+.rar .w{border-radius:8px;transition:background .12s,color .12s;padding:0 1px}
+.rar .w.on{background:color-mix(in srgb,var(--acc) 16%,transparent);color:var(--acc)}
+.rar .w.tap{background:rgba(184,149,90,.22)}
+.fqp-wm{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;margin:4px auto 6px;max-width:520px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:9px 12px;font-size:14.5px;position:relative;padding-inline-end:40px}
+.fqp-wm b{font-family:"FQ Quran",serif;font-size:22px;font-weight:400;color:var(--acc)}.fqp-wm i{color:var(--sub);font-size:13px}.fqp-wm span{flex-basis:100%;line-height:1.4}
+.fqp-wm .ld{color:var(--sub)}
+.fqp-wm .pl{display:inline-flex;align-items:center;gap:5px;color:var(--acc);font-weight:650;font-size:13.5px;cursor:pointer}
+.fqp-wm>button{position:absolute;top:6px;inset-inline-end:6px;width:30px;height:30px;border:0;background:none;color:var(--sub);font-size:16px;display:grid;place-items:center}
+
+/* team */
+.fqp-chat{display:flex;flex-direction:column;gap:6px;padding-bottom:150px}
+.fqp-day{text-align:center;color:var(--sub);font-size:12.5px;margin:10px 0 4px}
+.fqp-m{max-width:82%;align-self:flex-start;background:var(--card);border-radius:18px 18px 18px 6px;padding:8px 12px 6px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.fqp-m.me{align-self:flex-end;background:var(--accT);border-radius:18px 18px 6px 18px}
+.fqp-m .who{display:block;color:var(--gold);font-weight:700;font-size:12.5px;margin-bottom:2px}
+.fqp-m p{margin:0;white-space:pre-wrap;word-wrap:break-word;line-height:1.45;font-size:15.5px}
+.fqp-m img{display:block;max-width:100%;max-height:260px;border-radius:12px;margin:4px 0}
+.fqp-m time{display:block;text-align:end;color:var(--sub);font-size:11px;margin-top:2px}
+.fqp-m .ab{display:inline-flex;gap:4px;align-items:center;font-size:12px;color:var(--acc);background:var(--card2);border-radius:8px;padding:2px 8px;margin-bottom:4px}
+.fqp-empty{text-align:center;color:var(--sub);padding:40px 20px}.fqp-empty i{font-size:40px;color:var(--acc)}
+.fqp-cmp{position:fixed;left:0;right:0;bottom:calc(64px + env(safe-area-inset-bottom));background:var(--bg);border-top:1px solid var(--line);padding:8px 12px;z-index:30;max-width:760px;margin:0 auto}
+.fqp-cmpr{display:flex;align-items:flex-end;gap:8px}
+.fqp-cmpr textarea{flex:1;min-height:44px;max-height:140px;border-radius:22px;border:1.5px solid var(--line);background:var(--card);padding:11px 16px;font:16px Inter,Plex,sans-serif;color:var(--ink);resize:none;outline:none;line-height:1.35}
+.fqp-send{width:44px;height:44px;border-radius:50%;border:0;background:var(--acc);color:#fff;display:grid;place-items:center;font-size:19px;flex:none}.fqp-send:disabled{opacity:.5}
+.fqp-abt{display:flex;align-items:center;gap:8px;background:var(--card2);border-radius:12px;padding:6px 8px;margin-bottom:6px;font-size:13.5px}
+.fqp-abt span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.fqp-abt img{width:34px;height:34px;object-fit:cover;border-radius:8px}
+.fqp-abt button{border:0;background:none;color:var(--sub);font-size:16px;width:28px;height:28px}
+.fqp-big{width:100%;border-radius:14px}
+.fqp-pv2 h3{margin:10px 0 4px;font-size:16.5px}.fqp-pv2 p{margin:0 0 8px;color:var(--sub);font-size:14px;line-height:1.45}
+.fqp-pvb{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.fqp-pvb button.khop{border:0;font:inherit}
+.fqp-st{font-size:13px;color:var(--sub);font-weight:600}
+#s-team .seg{margin-bottom:12px}
+
+/* icons written as ph-bold had no font loaded (invisible): draw them with the regular set */
+.ph-bold{font-family:"Phosphor"!important;font-style:normal;font-weight:normal;line-height:1;-webkit-font-smoothing:antialiased}
+.ph-bold.ph-check:before{content:"\e182"}.ph-bold.ph-plus:before{content:"\e3d4"}.ph-bold.ph-book-open-text:before{content:"\e8f2"}
+.fqp-gd-f{color:var(--sub);font-size:13px;text-align:center;margin:4px 0 24px}
+.gl .fqp-tg button.sw{width:52px;height:32px;padding:0;border:0;border-radius:16px;display:block;flex:none;gap:0}
+.gl .fqp-tg .tx{flex:1 1 auto}
