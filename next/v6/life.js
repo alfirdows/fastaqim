@@ -28,9 +28,9 @@ $('s-more').insertAdjacentHTML('afterend',`
 Object.assign(TABOF,{life:'more',hab:'more',rules:'more',fam:'more',gc:'more',g:'more'});
 
 /* ---------- small shared pieces ---------- */
-const srcChip=()=>`<button class="lf-src" data-lfsrc>${IC('seal-check',15,1)}<span>${U('Backed by sources','مدعوم بالمصادر','Madda qaba','Il-lo leh')}</span></button>`;
+const srcChip=()=>`<button class="lf-src" data-lfsrc>${IC('check-circle',15,1)}<span>${U('Backed by sources','مدعوم بالمصادر','Madda qaba','Il-lo leh')}</span></button>`;
 function srcSheet(){openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${U('Backed by sources','مدعوم بالمصادر','Madda qaba','Il-lo leh')}</h1>${XB}</div>
- <div class="lf-srcb">${IC('seal-check',38,1)}<p>${U('Every method here comes from established research and practice (psychology, CBT, DBT, child and family therapy) and from trusted Islamic scholars. Fastaqim rewrote them in simple words.','كل طريقة هنا مأخوذة من أبحاث وممارسات راسخة (علم النفس، العلاج المعرفي السلوكي، العلاج السلوكي الجدلي، علاج الطفل والأسرة) ومن علماء مسلمين موثوقين. أعادت فاستقم صياغتها بكلمات بسيطة.','Malli asii jiru hundi qorannoo fi hojii mirkanaaʼe (saayikoloojii, CBT, DBT, yaala ijoollee fi maatii) fi beekota Islaamaa amanamoo irraa dhufe. Fastaqim jecha salphaan irra deebiʼee barreesse.','Hab kasta oo halkan ah wuxuu ka yimid cilmi-baaris iyo ku-dhaqan la aqoonsan yahay (cilmi-nafsiga, CBT, DBT, daaweynta carruurta iyo qoyska) iyo culimo Islaam ah oo la isku halleyn karo. Fastaqim ayaa ku qortay erayo fudud.')}</p>
+ <div class="lf-srcb">${IC('check-circle',38,1)}<p>${U('Every method here comes from established research and practice (psychology, CBT, DBT, child and family therapy) and from trusted Islamic scholars. Fastaqim rewrote them in simple words.','كل طريقة هنا مأخوذة من أبحاث وممارسات راسخة (علم النفس، العلاج المعرفي السلوكي، العلاج السلوكي الجدلي، علاج الطفل والأسرة) ومن علماء مسلمين موثوقين. أعادت فاستقم صياغتها بكلمات بسيطة.','Malli asii jiru hundi qorannoo fi hojii mirkanaaʼe (saayikoloojii, CBT, DBT, yaala ijoollee fi maatii) fi beekota Islaamaa amanamoo irraa dhufe. Fastaqim jecha salphaan irra deebiʼee barreesse.','Hab kasta oo halkan ah wuxuu ka yimid cilmi-baaris iyo ku-dhaqan la aqoonsan yahay (cilmi-nafsiga, CBT, DBT, daaweynta carruurta iyo qoyska) iyo culimo Islaam ah oo la isku halleyn karo. Fastaqim ayaa ku qortay erayo fudud.')}</p>
  <p>${U("Qur'an and hadith are quoted word for word, only sahih or hasan, with links to Quran.com and Sunnah.com.",'القرآن والحديث منقولان بنصّهما، الصحيح والحسن فقط، مع روابط إلى Quran.com وSunnah.com.',"Qur'aanni fi hadiisni akkuma jirutti, sahiih ykn hasan qofa, Quran.com fi Sunnah.com waliin.",'Quraanka iyo xadiiska waa erey-erey, saxiix ama xasan kaliya, oo leh xiriirro Quran.com iyo Sunnah.com.')}</p>
  <p class="lf-mut">${U('This is general guidance, not a diagnosis. For ongoing problems, please see a doctor or therapist.','هذه إرشادات عامة وليست تشخيصًا. للمشكلات المستمرة، راجع طبيبًا أو معالجًا.','Kun qajeelfama waliigalaa malee qorannoo dhukkubaa miti. Rakkoo itti fufaaf ogeessa fayyaa ilaali.','Tani waa hage guud, ma aha baaritaan. Dhibaatooyinka joogtada ah, la kulan dhakhtar.')}</p></div>`)}
 document.addEventListener('click',e=>{if(e.target.closest('[data-lfsrc]')){e.preventDefault();srcSheet()}
@@ -63,7 +63,7 @@ async function aboutSheet(){
  $('lfAbL').onclick=playName;fillAyat($('sh'))}
 
 /* =================== TOOLS registry (Tools page + pin to Home) =================== */
-Object.assign(PH,{rules:'scroll',family:'calendar-blank',guides:'book-bookmark',calm:'wind',life:'compass-rose'});
+Object.assign(PH,{rules:'scroll',family:'calendar-blank',guides:'book-bookmark',calm:'wind',life:'tree'});
 TOOLS.push({id:'rules',g:'lf',ic:'rules',n:['Rules','القواعد'],type:'life',go:'rules'},{id:'family',g:'lf',ic:'family',n:['Family schedule','جدول العائلة'],type:'life',go:'fam'},
  {id:'guides',g:'lf',ic:'guides',n:['Guides','الأدلة'],type:'life',go:'life'},{id:'calm',g:'lf',ic:'calm',n:['Calm down now','تهدئة الآن'],type:'life',go:'g',arg:'calm/breath'});
 const TNO={rules:['Seerota','Xeerarka'],family:['Sagantaa maatii','Jadwalka qoyska'],guides:['Qajeelfamoota','Hagayaal'],calm:['Amma tasgabbaaʼi','Hadda deg'],habits:['Amaloota','Caadooyinka']};
@@ -85,7 +85,7 @@ const TNO={rules:['Seerota','Xeerarka'],family:['Sagantaa maatii','Jadwalka qoys
 /* =================== MORE page: About card + Life row =================== */
 {const _rm=R.more;R.more=function(){_rm();
  if(!$('lfAb')){const a=$('mAcct');const anchor=a?a.closest('.gl'):$('yp');anchor.insertAdjacentHTML('afterend',aboutCard());$('lfAbO').onclick=aboutSheet;$('lfAbP').onclick=e=>{e.stopPropagation();playName()}}
- if(!$('mLife')){const tb=$('s-more').querySelector('[data-go="tools"]');if(tb)tb.insertAdjacentHTML('afterend',`<button id="mLife" data-go="life"><span class="ic c-a">${IC('compass-rose',22)}</span><span>${U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska')}</span><em>${U('Habits, rules, guides','العادات، القواعد، الأدلة','Amaloota, seerota, qajeelfama','Caadooyin, xeerar, hagayaal')}</em><i class="ph ph-caret-right cv flip"></i></button>`)}}}
+ if(!$('mLife')){const tb=$('s-more').querySelector('[data-go="tools"]');if(tb)tb.insertAdjacentHTML('afterend',`<button id="mLife" data-go="life"><span class="ic c-a">${IC('tree',22)}</span><span>${U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska')}</span><em>${U('Habits, rules, guides','العادات، القواعد، الأدلة','Amaloota, seerota, qajeelfama','Caadooyin, xeerar, hagayaal')}</em><i class="ph ph-caret-right cv flip"></i></button>`)}}}
 
 /* =================== LIFE HUB =================== */
 R.life=()=>{$('lfT').textContent=U('Life & family','الحياة والعائلة','Jireenya fi maatii','Nolosha iyo qoyska');
