@@ -1,0 +1,189 @@
+/* =====================================================================
+   Fastaqim "Horizon" design language  (c) Fastaqim, all rights reserved
+   Made only for Fastaqim. One idea runs through every control:
+   the straight path ( فاستقم , Hud 11:112 ) drawn as a horizon line,
+   with a rising arc for progress and a leaf corner on every surface.
+   Loaded last, so it refines the shared styles without touching them.
+   ===================================================================== */
+:root{--hz:#e8e0cf;--hz2:#d9ccb0;--leaf:18px;--leafS:6px;--fqG:#b8955a;--fqGD:#86672e;--fqA:var(--acc)}
+
+/* ---------- 1. The leaf corner: one small corner at the reading-end bottom ---------- */
+.fq-leaf,.gl,.kh,.tk,.lc,.vq,.khe,.mc,.su,.any button,.opt,.step,.srch,.ix,.qa input,.zk,.ag,.dp,.mh,.yp,.tile,.lst,.mcard,.pchip,.qc,.ci,.nowc,.dc,.qh{
+ border-radius:var(--leaf)!important;border-end-start-radius:var(--leafS)!important}
+
+/* ---------- 2. Section labels: words that sit on a horizon line ---------- */
+.glh,.tlh,.tgh{display:flex!important;align-items:center;gap:10px;text-transform:none!important;letter-spacing:0!important;
+ font-size:13.5px!important;font-weight:700!important;color:var(--fqGD)!important;margin:18px 4px 8px!important}
+.glh:after,.tlh:after,.tgh:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--hz2),transparent)}
+html[dir=rtl] .glh:after,html[dir=rtl] .tlh:after,html[dir=rtl] .tgh:after{background:linear-gradient(270deg,var(--hz2),transparent)}
+
+/* ---------- 3. Grouped lists: no tinted icon tiles, a fine thread instead ---------- */
+.gl{border:1px solid var(--hz)!important;background:#fff!important}
+.gl button,.gl a{border-bottom:0!important;position:relative;min-height:54px}
+.gl>*+*:before{content:"";position:absolute;top:0;inset-inline-start:52px;inset-inline-end:14px;height:1px;background:var(--hz)}
+.gl .ic{background:none!important;width:26px!important;height:26px!important;border-radius:0!important;color:var(--fqA)!important;font-size:21px!important;position:relative}
+.gl .ic:after{content:"";position:absolute;left:3px;right:3px;bottom:-3px;height:1.5px;border-radius:2px;background:var(--fqG);opacity:.55}
+.gl .cv,.lc .cv,.zp .pi .cv,.pi .cv{color:var(--hz2)!important;font-size:15px!important}
+
+/* ---------- 4. Leaf checkbox (replaces round "reminders" circles) ---------- */
+.cb,.pt .cb,.aft .ck,.tg .ck2,.ck3,.ck3b{border-radius:9px!important;border-end-start-radius:3px!important;border:1.6px solid var(--hz2)!important;background:#fff!important;box-shadow:none!important;color:transparent!important;position:relative;transition:background .2s,border-color .2s,transform .2s}
+.cb.on,.pt .cb.on,.aft .on .ck,.tg.on .ck2,.cir2.on .ck3,.ck3b.on,.hb.on .ck3b{background:var(--fqA)!important;border-color:var(--fqA)!important;color:#fff!important;animation:fqTick .38s cubic-bezier(.3,1.5,.5,1)}
+.cb.on:after,.pt .cb.on:after,.aft .on .ck:after,.cir2.on .ck3:after,.ck3b.on:after,.hb.on .ck3b:after{content:"";position:absolute;left:18%;right:18%;bottom:-4px;height:2px;border-radius:2px;background:var(--fqG)}
+.tg .ck2{width:18px!important;height:18px!important;font-size:10px!important}
+@keyframes fqTick{0%{transform:scale(.7)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+
+/* ---------- 5. Toggle: a leaf on a line (replaces the stock round switch) ---------- */
+.sw{width:50px!important;height:30px!important;border-radius:11px!important;border-end-start-radius:4px!important;background:#efe9dc!important;box-shadow:inset 0 0 0 1px var(--hz2)!important}
+.sw:after{top:4px!important;left:4px!important;width:22px!important;height:22px!important;border-radius:8px!important;border-end-start-radius:3px!important;background:#fff!important;box-shadow:0 1px 2px rgba(60,50,30,.25)!important}
+.sw:before{content:"";position:absolute;left:10px;right:10px;top:50%;height:1.5px;margin-top:-.75px;border-radius:2px;background:var(--hz2);transition:opacity .2s}
+.sw.on{background:var(--fqA)!important;box-shadow:none!important}
+.sw.on:before{opacity:0}
+.sw.on:after{transform:translateX(20px)!important;background:#fff!important;box-shadow:0 1px 2px rgba(0,0,0,.2),inset 0 -2px 0 var(--fqG)!important}
+html[dir=rtl] .sw:after{left:auto!important;right:4px!important}html[dir=rtl] .sw.on:after{transform:translateX(-20px)!important}
+.nm .sw.on{background:var(--fqG)!important}
+
+/* ---------- 6. Chips: leaf shape, the chosen one rests on a gold line ---------- */
+.chip,.tg,.en button,.lf-chips button,.zha{border-radius:12px!important;border-end-start-radius:4px!important}
+.chip.on,.tg.on,.en button.on,.lf-chips button.on{position:relative;background:var(--accT)!important;color:var(--fqA)!important;border-color:transparent!important;box-shadow:inset 0 0 0 1.5px var(--fqA)!important}
+.chip.on:after,.tg.on:after,.en button.on:after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2.5px;border-radius:3px 3px 0 0;background:var(--fqG)}
+.en button{box-shadow:inset 0 0 0 1px var(--hz)!important}
+
+/* ---------- 7. Horizon tabs (replaces the stock segmented control) ---------- */
+.seg{background:none!important;border-radius:0!important;padding:0!important;position:relative;gap:4px}
+.seg:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--hz2)}
+.seg button{border-radius:0!important;background:none!important;box-shadow:none!important;height:42px!important;position:relative;color:var(--sub)!important}
+.seg button.on{color:var(--ink)!important;font-weight:700!important}
+.seg button.on:after{content:"";position:absolute;left:22%;right:22%;bottom:0;height:3px;border-radius:3px 3px 0 0;background:linear-gradient(90deg,var(--fqA),var(--fqG));z-index:1}
+
+/* ---------- 8. Number marks: a numeral standing on a short horizon ---------- */
+.sr .n,.su .n,.lf-n{background:none!important;box-shadow:none!important;border-radius:0!important;color:var(--fqGD)!important;font-weight:750!important;position:relative;font-variant-numeric:tabular-nums}
+.sr .n:after,.su .n:after,.lf-n:after{content:"";position:absolute;left:25%;right:25%;bottom:5px;height:2px;border-radius:2px;background:var(--hz2)}
+.sr.cur .n{color:var(--fqA)!important}.sr.cur .n:after{background:linear-gradient(90deg,var(--fqA),var(--fqG));left:15%;right:15%}
+.sr{border-bottom:0!important}.sr+.sr{box-shadow:inset 0 1px 0 var(--hz)}
+.sl2:before{opacity:.18!important}
+.js button{border-radius:12px!important;border-end-start-radius:4px!important;box-shadow:inset 0 0 0 1px var(--hz)!important;background:#fff!important}
+.js button.on{background:var(--accT)!important;color:var(--fqA)!important;box-shadow:inset 0 0 0 1.5px var(--fqA)!important;position:relative}
+.js button.on small{color:var(--fqA)!important}
+.js button.on:after{content:"";position:absolute;left:10px;right:10px;bottom:-1px;height:2.5px;border-radius:3px 3px 0 0;background:var(--fqG)}
+
+/* ---------- 9. The rising arc: Fastaqim's own progress mark ---------- */
+.fq-arc{display:inline-grid;place-items:end center;position:relative;flex:none;width:var(--w,44px);height:calc(var(--w,44px)*.62);vertical-align:middle}
+.fq-arc svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fq-arc .t{fill:none;stroke:var(--hz);stroke-width:3.2;stroke-linecap:round}
+.fq-arc .p{fill:none;stroke:url(#fqArcG);stroke:var(--fqG);stroke-width:3.2;stroke-linecap:round;transition:stroke-dasharray .45s cubic-bezier(.3,.8,.3,1)}
+.fq-arc .b{stroke:var(--hz2);stroke-width:1.6;stroke-linecap:round}
+.fq-arc .f{fill:var(--accT);opacity:0;transition:opacity .3s}
+.fq-arc b{position:relative;font-size:calc(var(--w,44px)*.3);line-height:1;font-weight:800;color:var(--ink);font-variant-numeric:tabular-nums;padding-bottom:calc(var(--w,44px)*.06)}
+.fq-arc.done .p{stroke:var(--fqA)}.fq-arc.done .f{opacity:1}.fq-arc.done b{color:var(--fqA)}
+.fq-arc.lt .t{stroke:rgba(255,255,255,.28)}.fq-arc.lt .p{stroke:#f1dcab}.fq-arc.lt .b{stroke:rgba(255,255,255,.45)}.fq-arc.lt b{color:#fff}.fq-arc.lt .f{fill:rgba(255,255,255,.18)}
+.fq-arc.lt.done .p{stroke:#fff}
+
+/* ---------- 10. The path strip: one dash per step, on one line ---------- */
+.fq-steps{display:flex;align-items:center;gap:3px;width:100%;margin:2px 0 12px}
+.fq-steps button{flex:1;min-width:0;height:22px;border:0;background:none;padding:0;display:flex;align-items:center;cursor:pointer}
+.fq-steps button i{display:block;width:100%;height:4px;border-radius:3px;background:var(--hz);transition:background .3s,height .3s}
+.fq-steps button.dn i{background:var(--fqA)}
+.fq-steps button.cur i{height:7px;background:linear-gradient(90deg,var(--fqG),#d8c08e);box-shadow:0 0 0 3px rgba(184,149,90,.16)}
+.fq-steps button.cur.dn i{background:var(--fqA);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 16%,transparent)}
+
+/* ---------- 11. Adhkar list sheet: full text, never cut ---------- */
+.fq-zl{display:flex;flex-direction:column;gap:10px}
+.fq-zh{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 2px 2px;font-size:14px;color:var(--sub);font-weight:600}
+.fq-zh b{color:var(--ink);font-size:15px;font-weight:750}
+.fq-zi{display:block;width:100%;border:0;background:#fff;text-align:start;padding:14px 16px 12px;border-radius:var(--leaf);border-end-start-radius:var(--leafS);box-shadow:inset 0 0 0 1px var(--hz);position:relative;color:var(--ink);font:inherit;cursor:pointer}
+.fq-zi:before{content:"";position:absolute;top:14px;bottom:14px;inset-inline-start:0;width:3px;border-radius:0 3px 3px 0;background:transparent}
+html[dir=rtl] .fq-zi:before{border-radius:3px 0 0 3px}
+.fq-zi.cur{box-shadow:inset 0 0 0 1.5px var(--fqG),0 6px 16px rgba(184,149,90,.12)}
+.fq-zi.cur:before{background:linear-gradient(var(--fqG),#d8c08e)}
+.fq-zi.fin{background:linear-gradient(180deg,#fff,#f6faf8)}
+.fq-zi.fin:before{background:var(--fqA)}
+.fq-zi .ar{display:block;font-family:"FQ Quran",Plex,serif;direction:rtl;text-align:center;font-size:20px;line-height:2;color:var(--ink);text-wrap:balance;word-break:normal;overflow-wrap:normal;white-space:normal}
+.fq-zi .ar.h{font-family:Plex,"FQ Quran",serif;font-weight:600;font-size:18.5px;line-height:1.95}
+.fq-zi.fin .ar{color:#4f5a55}
+.fq-zi .mt{display:flex;align-items:center;gap:10px;margin-top:10px;padding-top:10px;border-top:1px solid var(--hz)}
+.fq-zi .mt span{flex:1;font-size:13px;color:var(--sub);font-weight:600}
+.fq-zi .mt span em{font-style:normal;color:var(--fqGD);font-weight:700}
+.fq-zi.fin .mt span em{color:var(--fqA)}
+.fq-zi .no{font-size:12px;font-weight:750;color:var(--fqGD);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+
+/* ---------- 12. Dhikr reader: count on the arc, steps on the line ---------- */
+.zk .top{flex-wrap:wrap;gap:6px 10px}
+.zk .top.fq{display:block}
+.zk .fq-zt{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--sub);font-weight:650}
+.zk .fq-zt b{color:var(--ink);font-size:14.5px;font-weight:750}
+.zk .fq-zt .rp{display:inline-flex;align-items:center;gap:6px;color:var(--fqGD);font-weight:700}
+.zk .fq-zt .rp i{display:inline-block;width:16px;height:2px;border-radius:2px;background:var(--fqG)}
+#zCnt{display:flex;align-items:center;justify-content:center;gap:14px}
+#zCnt .fq-arc{--w:46px}
+#zCntT{display:flex;align-items:center;gap:12px}
+#zCntT .lb{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15;text-align:start}
+#zCntT .lb b{font-size:18px;font-weight:800}
+#zCntT .lb small{font-size:12.5px;font-weight:600;opacity:.85}
+
+/* ---------- 13. Bottom tab bar: own icons on a horizon, a rising arc marks "here" ---------- */
+.tab a{position:relative}
+.tab a.on:after{content:"";position:absolute;top:-1px;left:50%;width:26px;height:13px;margin-left:-13px;border-radius:0 0 13px 13px;background:radial-gradient(60% 100% at 50% 0,rgba(184,149,90,.38),transparent 70%);pointer-events:none}
+.fq-ti{width:27px;height:27px;display:block}
+.fq-ti .s{fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.fq-ti .h{stroke:currentColor;stroke-width:1.7;stroke-linecap:round;opacity:.32}
+.fq-ti .a{fill:none;stroke:var(--fqG);stroke-width:1.8;stroke-linecap:round;opacity:0}
+.on>.fq-ti .h,.on .fq-ti .h{stroke:var(--fqG);opacity:1}
+.on>.fq-ti .w,.on .fq-ti .w{fill:currentColor;fill-opacity:.12}
+
+/* ---------- 14. Stats: numbers stand on a line, fractions become arcs ---------- */
+.yp{border:1px solid var(--hz)!important;background:#fff!important;align-items:end}
+.yp>div{display:flex;flex-direction:column;align-items:center;gap:4px}
+.yp .fq-arc{--w:58px}
+.yp small{margin-top:2px}
+
+/* ---------- 15. Cards: hairline edge instead of stock drop shadows ---------- */
+.lc,.kh,.tk,.vq,.khe,.mc,.su,.any button,.opt,.step,.srch,.ag,.dp,.tile,.lst,.mcard,.pchip,.q{box-shadow:inset 0 0 0 1px var(--hz)!important}
+.opt.on{box-shadow:inset 0 0 0 1.5px var(--fqG)!important}
+.opt .rd{border-radius:9px!important;border-end-start-radius:3px!important;border:1.6px solid var(--hz2)!important}
+.opt.on .rd{background:var(--fqG)!important;border-color:var(--fqG)!important}
+
+/* ---------- 16. Never cut a word with "…" ---------- */
+.gr small,.ix .tx b,.q b,.q small,.lf-pn button span,.tbx .hd h1,.pchip span,.pchip b,.li b,.ttx b,.ttx small{white-space:normal!important;overflow:visible!important;text-overflow:clip!important}
+
+/* ---------- 17. Motion: calm, one curve everywhere ---------- */
+@media (prefers-reduced-motion:no-preference){
+ .fq-zi,.gl button,.gl a,.lc,.chip,.tg,.opt{transition:transform .18s cubic-bezier(.3,.8,.3,1),box-shadow .2s}
+ .fq-zi:active,.gl button:active,.gl a:active,.lc:active,.opt:active{transform:scale(.985)}
+}
+
+/* ---------- 18. Dhikr reader, calm and complete ---------- */
+.zr .zk{min-height:0!important;box-shadow:inset 0 0 0 1px var(--hz)!important}
+.zr .zk .zs{margin-top:14px!important}
+.zr .zk .zs a{white-space:nowrap}
+.zr .zk .za br{display:none}
+.zr .zk .za{text-wrap:balance;line-height:2.15!important}
+.zr .zk .za .an{white-space:nowrap}
+.fq-sub{display:inline-flex;gap:5px;align-items:center}
+.fq-sub i{width:18px;height:4px;border-radius:3px;background:var(--hz)}.fq-sub i.dn{background:var(--fqA)}.fq-sub i.on{background:var(--fqG)}
+.zb{grid-template-columns:repeat(3,1fr)!important}
+.zf .sk{flex-direction:column;gap:1px;width:62px!important;height:64px!important;border-radius:16px!important;border-end-start-radius:5px!important;background:#fff!important;box-shadow:inset 0 0 0 1px var(--hz)!important;color:var(--ink);display:flex!important;align-items:center;justify-content:center}
+.zf .sk small{font-size:11.5px;font-weight:650;color:var(--sub)}
+#zCnt.cnt{border-radius:20px!important;border-end-start-radius:6px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 88%,#fff),var(--acc))!important;box-shadow:0 8px 20px color-mix(in srgb,var(--acc) 22%,transparent)!important;border:0!important;justify-content:flex-start!important;padding:0 18px!important}
+#zCnt.cnt:before{content:"";position:absolute;left:18px;right:18px;bottom:8px;height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(241,220,171,.0),rgba(241,220,171,.7),rgba(241,220,171,0))}
+#zCnt .fl{display:none}
+.zr .zk .za .ay{display:inline-block;max-width:100%}
+/* the adhkar list opens as a normal full page, not a layer over the reader */
+.sh.fq-full{top:0;max-height:none;height:100%;border-radius:0;z-index:45;padding-top:calc(env(safe-area-inset-top) + 8px);transform:translateX(105%);transition:transform .3s cubic-bezier(.3,.8,.3,1)}
+html[dir=rtl] .sh.fq-full{transform:translateX(-105%)}
+.sh.fq-full.on{transform:none!important}
+.sh.fq-full .grab{display:none}
+.scrim.fq-none{background:transparent!important}
+@media (min-width:700px){.sh.fq-full{left:0!important;right:0!important;max-width:none!important;margin:0!important}.sh.fq-full>*{max-width:720px;margin-left:auto;margin-right:auto}}
+#zCnt.cnt{height:auto!important;min-height:64px;padding-top:8px!important;padding-bottom:10px!important}
+#zCntT .lb b{line-height:1.15}
+@media (max-width:360px){#zCntT .lb b{font-size:16px}#zCnt .fq-arc{--w:38px}#zCntT{gap:9px}}
+.zr .zk .zm{text-wrap:pretty}
+/* notifications header: light card, no blue gradient */
+.nm{background:#fff!important;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--hz)!important}
+.nm small{color:var(--sub)!important}.nm .ic{background:var(--accT)!important;color:var(--fqA)!important}
+.nm b{color:var(--ink)!important}
+.fq-fr .fq-arc b{font-size:11px}
+/* mini player: light, not a dark floating bar */
+.mp{background:#fff!important;color:var(--ink)!important;box-shadow:inset 0 0 0 1px var(--hz),0 6px 18px rgba(60,50,30,.10)!important}
+.mp button{background:var(--accT)!important;color:var(--fqA)!important}.mp small{color:var(--sub)}.mp .pb{background:var(--hz)!important}
+.gl em{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;text-align:end;max-width:52%;line-height:1.25}
