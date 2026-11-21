@@ -84,7 +84,7 @@ html[dir=rtl] .sw:after{left:auto!important;right:4px!important}html[dir=rtl] .s
 .fq-steps button i{display:block;width:100%;height:4px;border-radius:3px;background:var(--hz);transition:background .3s,height .3s}
 .fq-steps button.dn i{background:var(--fqA)}
 .fq-steps button.cur i{height:7px;background:linear-gradient(90deg,var(--fqG),#d8c08e);box-shadow:0 0 0 3px rgba(184,149,90,.16)}
-.fq-steps button.cur.dn i{background:var(--fqA);box-shadow:0 0 0 3px rgba(63,122,100,.16)}
+.fq-steps button.cur.dn i{background:var(--fqA);box-shadow:0 0 0 3px color-mix(in srgb,var(--acc) 16%,transparent)}
 
 /* ---------- 11. Adhkar list sheet: full text, never cut ---------- */
 .fq-zl{display:flex;flex-direction:column;gap:10px}
@@ -163,7 +163,7 @@ html[dir=rtl] .fq-zi:before{border-radius:3px 0 0 3px}
 .zb{grid-template-columns:repeat(3,1fr)!important}
 .zf .sk{flex-direction:column;gap:1px;width:62px!important;height:64px!important;border-radius:16px!important;border-end-start-radius:5px!important;background:#fff!important;box-shadow:inset 0 0 0 1px var(--hz)!important;color:var(--ink);display:flex!important;align-items:center;justify-content:center}
 .zf .sk small{font-size:11.5px;font-weight:650;color:var(--sub)}
-#zCnt.cnt{border-radius:20px!important;border-end-start-radius:6px!important;background:linear-gradient(180deg,#4a876f,var(--acc))!important;box-shadow:0 8px 20px rgba(63,122,100,.22)!important;border:0!important;justify-content:flex-start!important;padding:0 18px!important}
+#zCnt.cnt{border-radius:20px!important;border-end-start-radius:6px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--acc) 88%,#fff),var(--acc))!important;box-shadow:0 8px 20px color-mix(in srgb,var(--acc) 22%,transparent)!important;border:0!important;justify-content:flex-start!important;padding:0 18px!important}
 #zCnt.cnt:before{content:"";position:absolute;left:18px;right:18px;bottom:8px;height:1.5px;border-radius:2px;background:linear-gradient(90deg,rgba(241,220,171,.0),rgba(241,220,171,.7),rgba(241,220,171,0))}
 #zCnt .fl{display:none}
 .zr .zk .za .ay{display:inline-block;max-width:100%}
