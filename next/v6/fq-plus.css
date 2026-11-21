@@ -107,3 +107,4 @@ html.fqp-new .fh .ib .dot{display:block}
 .fqp-gd-f{color:var(--sub);font-size:13px;text-align:center;margin:4px 0 24px}
 .gl .fqp-tg button.sw{width:52px;height:32px;padding:0;border:0;border-radius:16px;display:block;flex:none;gap:0}
 .gl .fqp-tg .tx{flex:1 1 auto}
+body:has(#mp.on) .fqp-cmp{bottom:calc(64px + 74px + env(safe-area-inset-bottom))}body:has(#mp.on) .fqp-chat{padding-bottom:230px}
