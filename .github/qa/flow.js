@@ -3,7 +3,7 @@ const ROOT=process.env.ROOT||'/home/user/fastaqim';const MT={'.html':'text/html'
 const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const c=await b.newContext({...devices[process.env.DEV||'iPhone 13'],deviceScaleFactor:+(process.env.DSF||1)});
  await c.route('**/*',r=>{const u0=new URL(r.request().url());if(u0.host!=='fq.test')return r.abort();let u=u0.pathname;if(u.endsWith('/'))u+='index.html';const f=path.join(ROOT,decodeURIComponent(u));if(fs.existsSync(f))r.fulfill({body:fs.readFileSync(f),contentType:MT[path.extname(f)]||'application/octet-stream'});else r.fulfill({status:404,body:''})});
- const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ await c.addInitScript(()=>{if(!sessionStorage.getItem('qa')){sessionStorage.setItem('qa','1');localStorage.setItem('fq5.state',JSON.stringify({pins:['water','money','saved'],pinsV:2}))}});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const L=process.env.LANGQ||'';
  await p.goto('http://fq.test/next/v6/'+L+'#home');await p.waitForTimeout(700);
  const ok=(n,v)=>console.log((v?'PASS ':'FAIL ')+n);const snap=async n=>p.screenshot({path:OUT+'/'+n+'.png'});

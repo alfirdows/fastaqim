@@ -1,7 +1,7 @@
 /* Fastaqim v6 · Life & family (light only; green + gold brand) */
 /* About Fastaqim card on More */
 .lf-ab{display:flex;align-items:center;gap:6px;background:var(--card);border-radius:20px;margin-bottom:16px;padding:6px 10px 6px 6px;position:relative;overflow:hidden}
-.lf-ab:before{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--dawn,linear-gradient(90deg,#4f8a74,#b8955a))}
+.lf-ab:before{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--dawn,linear-gradient(90deg,#45806a,#b8955a))}
 .lf-abm{flex:1;display:flex;align-items:center;gap:12px;border:0;background:none;padding:10px 6px;text-align:start;min-width:0}
 .lf-abw{font-family:"FQ Quran",serif;font-size:30px;line-height:1.5;color:var(--acc);flex:none;min-width:84px;text-align:center}
 .lf-abt{display:flex;flex-direction:column;min-width:0}.lf-abt b{font-size:16.5px;font-weight:700}.lf-abt small:not(.ey){color:var(--sub);font-size:13px}
@@ -30,7 +30,7 @@
 .lf-calm{display:flex;align-items:center;gap:14px;width:100%;border:0;text-align:start;border-radius:22px;padding:16px;margin:2px 0 6px;background:linear-gradient(135deg,#eef5f1,#f7f1e4);color:var(--ink)}
 .lf-calm b{display:block;font-size:17px}.lf-calm small{color:var(--sub);font-size:13.5px}.lf-calm>span:nth-child(2){flex:1}
 .lf-calmr{position:relative;width:52px;height:52px;display:grid;place-items:center;color:var(--acc);flex:none}
-.lf-calmr i:first-child{position:absolute;inset:0;border-radius:50%;background:rgba(79,138,116,.16);animation:lfpulse 5s ease-in-out infinite}
+.lf-calmr i:first-child{position:absolute;inset:0;border-radius:50%;background:rgba(69,128,106,.16);animation:lfpulse 5s ease-in-out infinite}
 @keyframes lfpulse{0%,100%{transform:scale(.72)}40%{transform:scale(1)}}
 .lf-gl button{min-height:60px}.lf-rt{flex:1;display:flex;flex-direction:column;min-width:0}.lf-rt b{font-weight:600}.lf-rt small{color:var(--sub);font-size:13px;line-height:1.35}
 .lf-gh{display:flex;align-items:center;justify-content:space-between;gap:8px}.lf-gh .tgh{margin-bottom:9px}
@@ -69,7 +69,7 @@
 .lf-chips button.on{border-color:var(--acc);background:var(--accT);color:var(--acc)}
 .lf-chips .lf-add{border-style:dashed;color:var(--gold);border-color:#d8c9a8}
 .lf-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}.lf-dot.lg{width:14px;height:14px;margin:0 14px}
-.lf-dot.all{background:conic-gradient(#4f8a74 0 33%,#b8955a 0 66%,#5b7fb5 0)}
+.lf-dot.all{background:conic-gradient(#45806a 0 33%,#b8955a 0 66%,#5b7fb5 0)}
 .lf-cols{display:flex;flex-wrap:wrap;gap:10px}
 .lf-cols button{width:38px;height:38px;border-radius:50%;border:3px solid #fff;background:var(--c);box-shadow:0 0 0 1.5px var(--line)}
 .lf-cols button.on{box-shadow:0 0 0 2.5px var(--ink)}
@@ -111,7 +111,7 @@
 .lf-pn button span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.lf-pn .nx{justify-content:flex-end;text-align:end;margin-inline-start:auto}
 /* breathing */
 .lf-br{background:linear-gradient(180deg,#f3f8f5,#fbf9f4);border:1px solid var(--line);border-radius:22px;padding:22px 16px 6px;margin:0 0 14px;text-align:center}
-.lf-brc{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#ffffff,#e4efe9);box-shadow:0 0 0 10px rgba(79,138,116,.08),0 0 0 22px rgba(184,149,90,.07);transform:scale(.72);transition:transform .6s ease-in-out}
+.lf-brc{width:150px;height:150px;margin:0 auto 18px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,#ffffff,#e4efe9);box-shadow:0 0 0 10px rgba(69,128,106,.08),0 0 0 22px rgba(184,149,90,.07);transform:scale(.72);transition:transform .6s ease-in-out}
 .lf-brc.in{transform:scale(1)}.lf-brc.out{transform:scale(.72)}
 .lf-brc span{font-weight:700;color:var(--acc);font-size:16px;max-width:120px;line-height:1.25}.lf-brc small{color:var(--sub);margin-top:3px}
 /* thought check */

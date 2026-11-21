@@ -14,7 +14,7 @@
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-400-normal.woff2) format("woff2");font-weight:400}
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-600-normal.woff2) format("woff2");font-weight:600}
 @font-face{font-family:Plex;src:url(../design/v/fonts/ibm-plex-sans-arabic-arabic-700-normal.woff2) format("woff2");font-weight:700}
-:root{--bg:#fbf9f4;--card:#ffffff;--card2:#f5f2ea;--ink:#24231f;--sub:#6e6b63;--line:#ece6da;--acc:#4f8a74;--accT:#eaf2ee;--gold:#86672e;--goldT:#f5eedf;--night1:#18203a;--night2:#2e3a5c;--ok:#1f8a5c;--r:20px}
+:root{--bg:#fbf9f4;--card:#ffffff;--card2:#f5f2ea;--ink:#24231f;--sub:#6e6b63;--line:#ece6da;--acc:#45806a;--accT:#eaf2ee;--gold:#86672e;--goldT:#f5eedf;--night1:#18203a;--night2:#2e3a5c;--ok:#1f8a5c;--r:20px}
 html.dark{--bg:#120e1b;--card:#1c1628;--card2:#261f35;--ink:#f7f5ef;--sub:#a79fb8;--line:#2e2641;--acc:#c6aef0;--accT:#2a2140;--gold:#b8955a;--goldT:#3a2418;--night1:#0d1226;--night2:#1c2645}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Inter,Plex,-apple-system,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -437,14 +437,14 @@ html.dark .cg .dy button.td b,html.dark .cg .dy button.td small{color:#0b1020!im
 .gl,.kh,.tk,.qa input{border-radius:20px 20px 20px 6px}
 
 /* ===== v162 brand: the true-dawn line (Muslim 1094) ===== */
-:root{--dawn:linear-gradient(90deg,#4f8a74,#b8955a 55%,#b8955a)}
+:root{--dawn:linear-gradient(90deg,#45806a,#b8955a 55%,#b8955a)}
 .wm{color:var(--acc)!important;letter-spacing:.02em!important;text-transform:none!important;font-size:22px!important;font-weight:800!important;position:relative;padding-bottom:7px}
 .wm:after{content:"";position:absolute;left:0;bottom:0;width:118px;height:3px;border-radius:3px;background:var(--dawn)}
-.pl4:before{background:linear-gradient(#4f8a74,#b8955a)!important}
+.pl4:before{background:linear-gradient(#45806a,#b8955a)!important}
 .tab a.on:before{background:var(--dawn)!important}
-.path:before{background:linear-gradient(#4f8a74,#b8955a)!important}.sl2:before{background:linear-gradient(#4f8a74,#b8955a)!important}
+.path:before{background:linear-gradient(#45806a,#b8955a)!important}.sl2:before{background:linear-gradient(#45806a,#b8955a)!important}
 /* salah card skies */
-.nowc{background:linear-gradient(160deg,#f3f6f4,#f5eedf)!important;box-shadow:0 8px 24px rgba(79,138,116,.12)!important}
+.nowc{background:linear-gradient(160deg,#f3f6f4,#f5eedf)!important;box-shadow:0 8px 24px rgba(69,128,106,.12)!important}
 .nowc[data-k=fajr]{background:linear-gradient(165deg,#3b2860 0%,#8a4a72 60%,#f0a06a 100%)!important;color:#fff}
 .nowc[data-k=dhuhr]{background:linear-gradient(160deg,#f7f5ef,#fff7ef)!important}
 .nowc[data-k=asr]{background:linear-gradient(160deg,#f5eedf,#fbf4ee)!important}
@@ -455,10 +455,10 @@ html.dark .cg .dy button.td b,html.dark .cg .dy button.td small{color:#0b1020!im
 .nowc[data-k=fajr] .nw-mk,.nowc[data-k=isha] .nw-mk,html.dark .nowc .nw-mk{background:#b8955a!important}.nowc[data-k=fajr] .nw-mk *,.nowc[data-k=fajr] .nw-mk{color:#24231f!important}
 .nowc[data-k=isha] .nw-mk *,html.dark .nowc .nw-mk *,.nowc[data-k=isha] .nw-mk,html.dark .nowc .nw-mk{color:#24231f!important}
 .nowc[data-k=fajr] .rb{stroke:rgba(255,255,255,.2)!important}.nowc[data-k=fajr] .rf,.nowc[data-k=isha] .rf,html.dark .nowc .rf{stroke:#b8955a!important}
-.ring .rb{stroke:rgba(79,138,116,.14)}
+.ring .rb{stroke:rgba(69,128,106,.14)}
 /* the day line: your 5 salah on one straight line */
 .dl{position:relative;z-index:1;margin:14px 2px 2px;height:34px}
-.dl .ln{position:absolute;left:0;right:0;top:6px;height:3px;border-radius:3px;background:rgba(79,138,116,.15)}
+.dl .ln{position:absolute;left:0;right:0;top:6px;height:3px;border-radius:3px;background:rgba(69,128,106,.15)}
 .dl .fl{position:absolute;left:0;top:6px;height:3px;border-radius:3px;background:var(--dawn)}
 .dl .mk{position:absolute;top:0;width:15px;height:15px;margin-left:-7.5px;border-radius:50%;background:var(--card);box-shadow:0 0 0 2px #d8c9a8}
 .dl .mk.on{background:#b8955a;box-shadow:0 0 0 2px #b8955a}
@@ -488,7 +488,7 @@ html.dark .cg .dy button.wd{background:linear-gradient(180deg,#3a2418,#4a2c1c)!i
 .lgb i{font-size:16px;color:var(--sub)}.lgb b{font-weight:700}.lgb .ph-caret-down{font-size:12px}
 /* calendar: the month on the horizon */
 .mo2{display:flex;align-items:center;gap:10px;margin:2px 0 14px}.mo2 .tt{flex:1;text-align:center}.mo2 .tt b{display:block;font-size:24px;font-weight:800;letter-spacing:-.3px}.mo2 .tt small{color:var(--sub);font-size:13.5px}
-.mh{background:var(--card);border-radius:24px 24px 24px 8px;padding:16px 12px 10px;box-shadow:0 6px 18px rgba(79,138,116,.07)}
+.mh{background:var(--card);border-radius:24px 24px 24px 8px;padding:16px 12px 10px;box-shadow:0 6px 18px rgba(69,128,106,.07)}
 .mhc{display:flex;align-items:flex-end;gap:2px;position:relative;padding-bottom:6px}
 .mhc:after{content:"";position:absolute;left:-4px;right:-4px;bottom:0;height:3px;border-radius:3px;background:var(--dawn)}
 .hc{flex:1;min-width:0;border:0;background:none;padding:6px 0 6px;border-radius:8px 8px 0 0;display:flex;flex-direction:column-reverse;align-items:center;gap:3px;position:relative}
@@ -528,12 +528,12 @@ html.dark .cg .dy button.wd{background:linear-gradient(180deg,#3a2418,#4a2c1c)!i
 .stp,.lgb{white-space:nowrap}.stp .sk{white-space:nowrap}.cir2 .st{white-space:nowrap;display:inline-block!important}.fh{gap:6px}
 
 /* ================= v6 brand: Ivory, soft gold, soft green. Light only ================= */
-:root,html.dark{--bg:#fbf9f4;--card:#ffffff;--card2:#f5f2ea;--ink:#24231f;--sub:#6e6b63;--line:#ece6da;--acc:#4f8a74;--accT:#eaf2ee;--gold:#b8955a;--goldD:#86672e;--goldT:#f5eedf;--gl:rgba(184,149,90,.28);--dawn:linear-gradient(90deg,#b8955a,#d8c08e);--ok:#4f8a74}
+:root,html.dark{--bg:#fbf9f4;--card:#ffffff;--card2:#f5f2ea;--ink:#24231f;--sub:#6e6b63;--line:#ece6da;--acc:#45806a;--accT:#eaf2ee;--gold:#b8955a;--goldD:#86672e;--goldT:#f5eedf;--gl:rgba(184,149,90,.28);--dawn:linear-gradient(90deg,#b8955a,#d8c08e);--ok:#45806a}
 html,body{background:var(--bg)!important;color:var(--ink)}
 /* header + wordmark */
 .wm{display:flex!important;align-items:center;gap:8px;color:var(--ink)!important;font-size:20px!important;padding-bottom:0!important}
 .wm::after,.wm::before{display:none!important}
-.lm{width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,#5a9480,#4f8a74);box-shadow:inset 0 0 0 1.5px #d2b47a;position:relative;flex:none}
+.lm{width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,#45806a,#45806a);box-shadow:inset 0 0 0 1.5px #d2b47a;position:relative;flex:none}
 .lm i{position:absolute;left:6px;right:6px;top:12.5px;height:2px;border-radius:2px;background:#e8d3a5}
 .stp,.lgb,.fh .ib{background:#fff!important;box-shadow:none!important;border:1px solid var(--gl)!important;color:var(--ink)!important}
 .stp svg{color:var(--gold)}
@@ -549,7 +549,7 @@ html body .nowc[data-k] .nw-t small{color:var(--goldD)!important;letter-spacing:
 html body .nowc[data-k] .nw-t span,html body .nowc[data-k] .ring small,html body .nowc[data-k] .nw-q,html body .nowc[data-k] .dl .mk small{color:var(--sub)!important}
 html body .nowc[data-k] .nw-t b,html body .nowc[data-k] .ring b{color:var(--ink)!important}
 html body .nowc[data-k] .nw-q a{color:var(--goldD)!important}
-html body .nowc[data-k] .nw-mk{background:linear-gradient(180deg,#5a9480,#4f8a74)!important;color:#fff!important;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75),0 4px 12px rgba(79,138,116,.18)!important}
+html body .nowc[data-k] .nw-mk{background:linear-gradient(180deg,#45806a,#45806a)!important;color:#fff!important;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75),0 4px 12px rgba(69,128,106,.18)!important}
 html body .nowc[data-k] .nw-mk *{color:#fff!important}
 html body .nowc[data-k] .rb{stroke:var(--line)!important}
 html body .nowc[data-k] .rf{stroke:var(--gold)!important}
@@ -582,7 +582,7 @@ html body .nowc[data-k]::after{display:none!important}
 .qcr{display:flex;align-items:center;gap:12px}.qcr>.ti2{color:var(--acc);flex:none}
 .qct{flex:1;min-width:0}.qct b{display:block;font-size:16px;margin-top:2px}.qct small{display:block;font-size:12.5px;color:var(--sub)}
 .ey{font-size:10.5px!important;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--goldD)!important}
-.cont2{flex:none;border:1px solid rgba(79,138,116,.45);background:#fff;color:var(--acc);font:inherit;font-weight:700;font-size:13.5px;border-radius:12px;padding:8px 13px}
+.cont2{flex:none;border:1px solid rgba(69,128,106,.45);background:#fff;color:var(--acc);font:inherit;font-weight:700;font-size:13.5px;border-radius:12px;padding:8px 13px}
 .qbar{height:5px;background:var(--line);border-radius:4px;margin-top:12px;overflow:hidden}.qbar i{display:block;height:100%;background:var(--gold);border-radius:4px}
 .qbl{display:block;font-size:12px;color:var(--sub);margin-top:6px}
 .lnk{border:0;background:none;color:var(--acc);font:inherit;font-weight:650;font-size:13.5px;padding:8px 0 0;text-align:start}
@@ -600,14 +600,14 @@ html body .nowc[data-k]::after{display:none!important}
 .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .tile{position:relative;display:flex;background:#fff;border:1px solid var(--gl);border-radius:16px;min-height:64px;overflow:hidden}
 .tmain{flex:1;min-width:0;display:flex;align-items:center;gap:9px;border:0;background:none;padding:10px 0 10px 9px;font:inherit;color:var(--ink);text-align:start}
-.tic{flex:none;width:38px;height:38px;border-radius:12px;background:#f1f6f3;border:1px solid rgba(79,138,116,.15);display:grid;place-items:center;color:var(--acc)}
+.tic{flex:none;width:38px;height:38px;border-radius:12px;background:#f1f6f3;border:1px solid rgba(69,128,106,.15);display:grid;place-items:center;color:var(--acc)}
 .ttx{min-width:0}.ttx b{display:block;font-size:14.5px;line-height:1.25;overflow-wrap:anywhere}.ttx small{display:block;font-size:11.5px;color:var(--sub);line-height:1.3}
 .tpin{flex:none;width:34px;border:0;background:none;display:grid;place-items:center;color:#bdb6a6}
 .tpin.on{color:var(--gold)}.tpin.on .ti2{background:#f6efe1;border-radius:50%;padding:5px;width:28px;height:28px}
 .tnew{align-items:center;justify-content:center;gap:6px;border-style:dashed;color:var(--acc);font:inherit;font-weight:700;font-size:14.5px}
 /* tool screens */
 .tom{width:44px;display:flex;justify-content:flex-end}
-.addb{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px;font:inherit;font-weight:700;font-size:15.5px;color:#fff;background:linear-gradient(180deg,#5a9480,#4f8a74);box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75);margin:4px 0 14px}
+.addb{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:14px;padding:13px;font:inherit;font-weight:700;font-size:15.5px;color:#fff;background:linear-gradient(180deg,#45806a,#45806a);box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75);margin:4px 0 14px}
 .lst{background:#fff;border:1px solid var(--gl);border-radius:18px;overflow:hidden}
 .li{display:block;width:100%;border:0;background:none;padding:13px 14px;border-top:1px solid var(--line);text-align:start;font:inherit;color:var(--ink)}
 .li:first-child,.hb:first-child{border-top:0}
@@ -623,7 +623,7 @@ html body .nowc[data-k]::after{display:none!important}
 .cring .rb{fill:none;stroke:var(--line);stroke-width:12}.cring .rf{fill:none;stroke:var(--gold);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset .4s}
 .cring span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}.cring b{font-size:52px;font-weight:750;line-height:1}.cring small{font-size:13.5px;color:var(--sub);margin-top:4px;max-width:130px}
 .cbtn{display:flex;gap:16px;justify-content:center}.cbtn button{width:76px;height:56px;border-radius:16px;border:1px solid var(--gl);background:#fff;font-size:28px;font-weight:500;color:var(--ink)}
-.cbtn .pr{background:linear-gradient(180deg,#5a9480,#4f8a74);color:#fff;border:0;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75)}
+.cbtn .pr{background:linear-gradient(180deg,#45806a,#45806a);color:#fff;border:0;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75)}
 .note2{font-size:14px;color:var(--sub);margin:16px 20px 0;line-height:1.5}
 .mcard{background:#fff;border:1px solid var(--gl);border-radius:20px;padding:16px;margin-bottom:12px}.mcard b{display:block;font-size:34px;font-weight:750;margin:4px 0 0}.mcard b.neg{color:#b5543c}.mcard>small{display:block;color:var(--sub);font-size:13.5px}
 /* sheet forms */
@@ -648,7 +648,7 @@ html body .nowc[data-k]::after{display:none!important}
 .toast{background:#2f2d28!important;color:#fff!important}
 .za{font-size:calc(var(--zs,1)*24px)!important;line-height:2.15!important}
 .zm,.dc .m,.vq .m{font-size:calc(var(--zs,1)*16.5px)!important;line-height:1.75!important;text-align:center!important}
-#zCnt{background:linear-gradient(180deg,#5a9480,#4f8a74)!important;color:#fff!important;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75)!important}
+#zCnt{background:linear-gradient(180deg,#45806a,#45806a)!important;color:#fff!important;box-shadow:inset 0 0 0 1.5px rgba(210,180,122,.75)!important}
 #zCnt *{color:#fff!important}
 .c-a,.c-b,.c-p,.c-r,.c-g{background:#f1f6f3!important;color:var(--acc)!important}
 .insp{font-size:13px!important;color:var(--goldD)!important;font-weight:600}.insp a{color:var(--goldD);font-weight:500;text-decoration:underline;text-underline-offset:2px}
@@ -703,7 +703,7 @@ html.v-c .stp,html.v-c .lgb,html.v-c .fh .ib{border:0!important;box-shadow:0 1px
 @media (min-width:1100px){
  .tab{top:0!important;bottom:0!important;left:0!important;right:auto!important;width:232px;display:flex!important;flex-direction:column;justify-content:flex-start!important;gap:4px!important;padding:88px 14px 20px!important;border-top:0!important;border-right:1px solid var(--gl)!important;box-shadow:none!important}
  .tab::before{content:"Fastaqim";position:absolute;top:28px;left:22px;font-weight:800;font-size:21px;color:var(--ink);padding-left:38px;line-height:28px}
- .tab::after{content:"";position:absolute;top:28px;left:22px;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,#5a9480,#4f8a74);box-shadow:inset 0 0 0 1.5px #d2b47a}
+ .tab::after{content:"";position:absolute;top:28px;left:22px;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,#45806a,#45806a);box-shadow:inset 0 0 0 1.5px #d2b47a}
  .tab a{flex:none!important;flex-direction:row!important;justify-content:flex-start;gap:12px!important;padding:11px 14px!important;font-size:15px!important;border-radius:12px!important}
  .tab a i.fqi{margin:0!important;font-size:22px}
  .tab a.on{background:#f1f6f3}
@@ -730,9 +730,9 @@ html.v-c .stp,html.v-c .lgb,html.v-c .fh .ib{border:0!important;box-shadow:0 1px
 .fqa-or{display:flex;align-items:center;gap:10px;color:var(--sub);font-size:13px;margin:2px 0}.fqa-or::before,.fqa-or::after{content:"";flex:1;height:1px;background:var(--line)}
 .fqa-l{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600;color:var(--sub)}
 .fqa-l input{font:inherit;font-size:16px;font-weight:400;color:var(--ink);padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:#fff;min-height:46px}
-.fqa-l input:focus{outline:2px solid rgba(79,138,116,.35);border-color:var(--acc)}
+.fqa-l input:focus{outline:2px solid rgba(69,128,106,.35);border-color:var(--acc)}
 .fqa-b{display:flex;gap:10px}.fqa-b button{flex:1;min-height:46px;border-radius:999px;font:inherit;font-weight:700;font-size:15px}
-.fqa-in{background:linear-gradient(180deg,#5a9480,#4f8a74);color:#fff;border:0;box-shadow:inset 0 0 0 1px rgba(210,180,122,.75)}.fqa-up{background:#fff;color:var(--ink);border:1px solid var(--line)}
+.fqa-in{background:linear-gradient(180deg,#45806a,#45806a);color:#fff;border:0;box-shadow:inset 0 0 0 1px rgba(210,180,122,.75)}.fqa-up{background:#fff;color:var(--ink);border:1px solid var(--line)}
 .fqa-f{align-self:center;background:none;border:0;color:var(--acc);font:inherit;font-size:14px;font-weight:600;padding:6px}.fqa-m{min-height:1.2em;text-align:center;color:var(--sub);font-size:14px;margin:0}
 .lgx{max-height:46vh;overflow-y:auto}
 html[dir=rtl] .locb,html[dir=rtl] .acct{text-align:right}
@@ -755,6 +755,7 @@ html.lx-long .pchip b{white-space:normal;overflow-wrap:anywhere;line-height:1.2}
 .fh .wm.tight{font-size:0!important;letter-spacing:0!important;flex:1 1 0;min-width:28px;overflow:hidden}
 .locb{flex-wrap:wrap}.locb span{flex:1 1 150px}.locb em{margin-inline-start:auto}
 html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;gap:8px}.any b,.any small{overflow-wrap:break-word}
+.nowc .locb b,#hero .locb b{color:var(--ink)!important}.nowc .locb small,#hero .locb small{color:var(--sub)!important}#hero .locb>i{color:#86672e!important}
 
 /* v6: Qur'an reader (reading-text rules: medium Arabic, generous spacing, centred on white, small grey source under a thin line) */
 #s-read{padding-bottom:150px}
@@ -833,6 +834,20 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .npc>i{font-size:26px;color:var(--acc);flex:none}.npc>span{flex:1 1 160px;min-width:0;font-weight:600;font-size:14.5px;display:flex;flex-direction:column;gap:3px}
 .npc small{font-weight:400;color:#86672e;font-size:13px}.npc .go{border:0;background:var(--acc);color:#fff;border-radius:999px;height:40px;padding:0 16px;font-weight:700;font-size:14px;margin-inline-start:auto}
 .npc .go.ghost2{background:var(--accT);color:var(--acc)}.npc.on>i{color:var(--ok)}
+
+/* Approvals */
+.apcmp{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid rgba(184,149,90,.45);border-radius:20px;padding:14px;margin-bottom:12px;color:var(--ink);text-decoration:none}
+.apcmp>i{font-size:24px;color:var(--acc);flex:none}.apcmp span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.apcmp b{font-size:15px}.apcmp small{color:var(--sub);font-size:13px;line-height:1.4}
+.apd{display:flex;gap:6px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:none}.apd::-webkit-scrollbar{display:none}
+.apd button{flex:none;width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:var(--card);font:inherit;font-size:13px;font-weight:700;color:var(--sub)}
+.apd button.ok{background:var(--acc);border-color:var(--acc);color:#fff}.apd button.ch{background:#f5eedf;border-color:#b8955a;color:#86672e}.apd button.cur{box-shadow:0 0 0 3px rgba(69,128,106,.3)}
+.appics{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;margin:-2px 0 10px}.appics img{flex:none;width:100%;max-height:52vh;object-fit:contain;border-radius:14px;background:var(--card2);scroll-snap-align:center}
+.apn{color:var(--sub);font-size:12px}.apc h3{margin:4px 0 6px;font-size:17px}.aps{color:#4a4842;font-size:14.5px;line-height:1.55;margin:0 0 4px}
+.apnote{background:#f5eedf;border-radius:12px;padding:8px 12px;font-size:14px;color:#86672e}
+.apbtn{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 8px}.apbtn button{height:50px;border-radius:16px;font:inherit;font-weight:700;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.apbtn .ok{background:var(--acc);border-color:var(--acc);color:#fff}.apbtn .sel{box-shadow:0 0 0 3px rgba(184,149,90,.45)}
+.aplater{display:block;margin:4px auto 0;border:0;background:none;color:var(--sub);font:inherit;font-size:14px;font-weight:600;padding:8px}
+.apdone{text-align:center}.apdone .sts{margin:0 auto;width:80px;height:80px}
 </style>
 <link rel="stylesheet" href="life.css">
 </head>
@@ -970,9 +985,9 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 <div class="sh" id="sh" role="dialog" aria-modal="true"></div>
 <div class="toast" id="toast"></div>
 
-<script src="fq-auth.js"></script>
 <link rel="stylesheet" href="dhikr-plus.css">
 <script src="dhikr-plus.js" defer></script>
+<script src="fq-auth.js"></script>
 <script>
 const DATA={"Q":{"2:255":{"a":"ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٌ وَلَا نَوۡمٌۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٍ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ","en":"Allāh - there is no deity except Him, the Ever-Living, the Self-Sustaining. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is [presently] before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursī extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great."},"2:285":{"a":"ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٍ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ","en":"The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allāh and His angels and His books and His messengers, [saying], \"We make no distinction between any of His messengers.\" And they say, \"We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.\""},"2:286":{"a":"لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرًا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ","en":"Allāh does not charge a soul except [with that within] its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. \"Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.\""},"94:5":{"a":"فَإِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا","en":"For indeed, with hardship [will be] ease [i.e., relief]."},"94:6":{"a":"إِنَّ مَعَ ٱلۡعُسۡرِ يُسۡرًا","en":"Indeed, with hardship [will be] ease."},"94:7":{"a":"فَإِذَا فَرَغۡتَ فَٱنصَبۡ","en":"So when you have finished [your duties], then stand up [for worship]."},"94:8":{"a":"وَإِلَىٰ رَبِّكَ فَٱرۡغَب","en":"And to your Lord direct [your] longing."},"112:1":{"a":"قُلۡ هُوَ ٱللَّهُ أَحَدٌ","en":"Say, \"He is Allāh, [who is] One,"},"112:2":{"a":"ٱللَّهُ ٱلصَّمَدُ","en":"Allāh, the Eternal Refuge."},"112:3":{"a":"لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ","en":"He neither begets nor is born,"},"112:4":{"a":"وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ","en":"Nor is there to Him any equivalent.\""},"113:1":{"a":"قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ","en":"Say, \"I seek refuge in the Lord of daybreak"},"113:2":{"a":"مِن شَرِّ مَا خَلَقَ","en":"From the evil of that which He created"},"113:3":{"a":"وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ","en":"And from the evil of darkness when it settles"},"113:4":{"a":"وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِي ٱلۡعُقَدِ","en":"And from the evil of the blowers in knots"},"113:5":{"a":"وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ","en":"And from the evil of an envier when he envies.\""},"114:1":{"a":"قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ","en":"Say, \"I seek refuge in the Lord of mankind,"},"114:2":{"a":"مَلِكِ ٱلنَّاسِ","en":"The Sovereign of mankind,"},"114:3":{"a":"إِلَٰهِ ٱلنَّاسِ","en":"The God of mankind,"},"114:4":{"a":"مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ","en":"From the evil of the retreating whisperer -"},"114:5":{"a":"ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ","en":"Who whispers [evil] into the breasts of mankind -"},"114:6":{"a":"مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ","en":"From among the jinn and mankind.\""},"13:28":{"a":"ٱلَّذِينَ ءَامَنُواْ وَتَطۡمَئِنُّ قُلُوبُهُم بِذِكۡرِ ٱللَّهِۗ أَلَا بِذِكۡرِ ٱللَّهِ تَطۡمَئِنُّ ٱلۡقُلُوبُ","en":"Those who have believed and whose hearts are assured by the remembrance of Allāh. Unquestionably, by the remembrance of Allāh hearts are assured."}},"S":[["Al-Fatihah","الفاتحة",7],["Al-Baqarah","البقرة",286],["Ali 'Imran","آل عمران",200],["An-Nisa","النساء",176],["Al-Ma'idah","المائدة",120],["Al-An'am","الأنعام",165],["Al-A'raf","الأعراف",206],["Al-Anfal","الأنفال",75],["At-Tawbah","التوبة",129],["Yunus","يونس",109],["Hud","هود",123],["Yusuf","يوسف",111],["Ar-Ra'd","الرعد",43],["Ibrahim","إبراهيم",52],["Al-Hijr","الحجر",99],["An-Nahl","النحل",128],["Al-Isra","الإسراء",111],["Al-Kahf","الكهف",110],["Maryam","مريم",98],["Ta-Ha","طه",135],["Al-Anbiya","الأنبياء",112],["Al-Hajj","الحج",78],["Al-Mu'minun","المؤمنون",118],["An-Nur","النور",64],["Al-Furqan","الفرقان",77],["Ash-Shu'ara","الشعراء",227],["An-Naml","النمل",93],["Al-Qasas","القصص",88],["Al-'Ankabut","العنكبوت",69],["Ar-Rum","الروم",60],["Luqman","لقمان",34],["As-Sajdah","السجدة",30],["Al-Ahzab","الأحزاب",73],["Saba","سبأ",54],["Fatir","فاطر",45],["Ya-Sin","يس",83],["As-Saffat","الصافات",182],["Sad","ص",88],["Az-Zumar","الزمر",75],["Ghafir","غافر",85],["Fussilat","فصلت",54],["Ash-Shura","الشورى",53],["Az-Zukhruf","الزخرف",89],["Ad-Dukhan","الدخان",59],["Al-Jathiyah","الجاثية",37],["Al-Ahqaf","الأحقاف",35],["Muhammad","محمد",38],["Al-Fath","الفتح",29],["Al-Hujurat","الحجرات",18],["Qaf","ق",45],["Adh-Dhariyat","الذاريات",60],["At-Tur","الطور",49],["An-Najm","النجم",62],["Al-Qamar","القمر",55],["Ar-Rahman","الرحمن",78],["Al-Waqi'ah","الواقعة",96],["Al-Hadid","الحديد",29],["Al-Mujadilah","المجادلة",22],["Al-Hashr","الحشر",24],["Al-Mumtahanah","الممتحنة",13],["As-Saff","الصف",14],["Al-Jumu'ah","الجمعة",11],["Al-Munafiqun","المنافقون",11],["At-Taghabun","التغابن",18],["At-Talaq","الطلاق",12],["At-Tahrim","التحريم",12],["Al-Mulk","الملك",30],["Al-Qalam","القلم",52],["Al-Haqqah","الحاقة",52],["Al-Ma'arij","المعارج",44],["Nuh","نوح",28],["Al-Jinn","الجن",28],["Al-Muzzammil","المزمل",20],["Al-Muddaththir","المدثر",56],["Al-Qiyamah","القيامة",40],["Al-Insan","الإنسان",31],["Al-Mursalat","المرسلات",50],["An-Naba","النبأ",40],["An-Nazi'at","النازعات",46],["'Abasa","عبس",42],["At-Takwir","التكوير",29],["Al-Infitar","الانفطار",19],["Al-Mutaffifin","المطففين",36],["Al-Inshiqaq","الانشقاق",25],["Al-Buruj","البروج",22],["At-Tariq","الطارق",17],["Al-A'la","الأعلى",19],["Al-Ghashiyah","الغاشية",26],["Al-Fajr","الفجر",30],["Al-Balad","البلد",20],["Ash-Shams","الشمس",15],["Al-Layl","الليل",21],["Ad-Duha","الضحى",11],["Ash-Sharh","الشرح",8],["At-Tin","التين",8],["Al-'Alaq","العلق",19],["Al-Qadr","القدر",5],["Al-Bayyinah","البينة",8],["Az-Zalzalah","الزلزلة",8],["Al-'Adiyat","العاديات",11],["Al-Qari'ah","القارعة",11],["At-Takathur","التكاثر",8],["Al-'Asr","العصر",3],["Al-Humazah","الهمزة",9],["Al-Fil","الفيل",5],["Quraysh","قريش",4],["Al-Ma'un","الماعون",7],["Al-Kawthar","الكوثر",3],["Al-Kafirun","الكافرون",6],["An-Nasr","النصر",3],["Al-Masad","المسد",5],["Al-Ikhlas","الإخلاص",4],["Al-Falaq","الفلق",5],["An-Nas","الناس",6]]};const QD=DATA.Q,SU=DATA.S;for(const k in QD)QD[k].a=QD[k].a.replace(/\u08F0/g,'\u064B').replace(/\u08F1/g,'\u064C').replace(/\u08F2/g,'\u064D');
 const P=new URLSearchParams(location.search);
@@ -1533,14 +1548,14 @@ FQI=(k,on)=>`<i class="fqi ph${on?'-fill':''} ph-${PH[k]||'circle'}" aria-hidden
 const LIST_ICONS=['list','gift','recipes','book','cart','leaf','plane','pen','bulb','heartbeat','home2','saved'];
 const TOOLS=[
  {id:'habits',g:'tr',ic:'habits',n:['Habits','العادات'],type:'habits'},
- {id:'water',g:'tr',ic:'water',n:['Water','الماء'],type:'count',goal:8,daily:1},
  {id:'medicine',g:'tr',ic:'medicine',n:['Medicine','الدواء'],type:'list',ph:['e.g. Vitamin D','مثال: فيتامين د'],nph:['When? e.g. 9:00 PM with dinner','متى؟ مثال: ٩ م مع العشاء']},
  {id:'fasting',g:'tr',ic:'fasting',n:['Fasting','الصيام'],type:'count',daily:0},
  {id:'money',g:'ev',ic:'money',n:['Money','المال'],type:'money'},
  {id:'recipes',g:'ev',ic:'recipes',n:['Recipes','الوصفات'],type:'list',ph:['Recipe name','اسم الوصفة'],nph:['Ingredients and steps','المكونات والخطوات']},
  {id:'nasheeds',g:'ev',ic:'nasheeds',n:['Nasheeds','الأناشيد'],type:'list',ph:['Nasheed name','اسم النشيد'],nph:['Link (YouTube or other)','الرابط']},
- {id:'saved',g:'ev',ic:'saved',n:['Saved','المحفوظ'],type:'list',ph:['Title','العنوان'],nph:['Link or note','رابط أو ملاحظة']}];
-S.pins=S.pins||['water','money','saved'];S.tl=S.tl||{};S.lists=S.lists||[];
+ {id:'saved',g:'ev',ic:'saved',n:['Saved','المحفوظ'],type:'list',ph:['Title','العنوان'],nph:['Link or note','رابط أو ملاحظة']},
+ {id:'water',g:'ev',ic:'water',n:['Water','الماء'],type:'count',goal:8,daily:1}];
+S.pins=S.pins||['money','saved','habits'];if(!S.pinsV){S.pins=S.pins.filter(x=>x!=='water');if(S.pins.length<3&&!S.pins.includes('habits'))S.pins.push('habits');S.pinsV=2}S.tl=S.tl||{};S.lists=S.lists||[];
 const tName=t=>T(t.n[0],t.n[1]);
 const toolOf=id=>{const t=TOOLS.find(x=>x.id===id);if(t)return t;const l=S.lists.find(x=>x.id===id);return l?{id:l.id,ic:l.icon,n:[l.name,l.name],type:'list',own:1}:null};
 const tData=id=>{S.tl[id]=S.tl[id]||{};return S.tl[id]};
@@ -1981,6 +1996,55 @@ if(window.FQA)FQA.on(u=>{if(u&&S.pushOn)setTimeout(()=>pushSyncNow(false),3000);
  wire('s-dhikr',"Du'as|",()=>zOpen('dua'));wire('s-dhikr','Ruqyah|',()=>zOpen('ruqyah'));
  const my=by('s-dhikr',"My du'as|");if(my)my.remove()}
 {const q=qLast();RD={su:q.su,ay:q.ay,scroll:true}}
+/* review links: ?x=game, ?x=feedback, ?x=report open those directly */
+setTimeout(()=>{const x=P.get('x');if(x==='game')gameOpen();else if(x==='feedback')fbSheet('idea');else if(x==='report')fbSheet('problem')},350);
+
+/* ---- Approvals (owner only): same items and answers as the live site, plus the side-by-side review ---- */
+const ROOTP=/\/next\/v6\//.test(location.pathname)?'../../':'';
+const APV={items:null,ans:{},own:null,ownU:null,i:0};
+const apvQ=()=>{try{return JSON.parse(localStorage.getItem('fq.dec.q')||'[]')}catch(e){return[]}};
+function apvLoadLocal(){try{APV.ans=JSON.parse(localStorage.getItem('fq.dec')||'{}')}catch(e){APV.ans={}}}
+async function apvOwner(){const u=window.FQA&&FQA.user();if(!u)return false;if(APV.ownU===u.id&&APV.own!==null)return APV.own;
+ try{const sb=await FQA.sb();const {data,error}=await sb.rpc('is_admin');APV.own=!error&&data===true}catch(e){APV.own=false}APV.ownU=u.id;return APV.own}
+async function apvFlush(){const q=apvQ();if(!q.length||!(window.FQA&&FQA.user()))return;const sb=await FQA.sb(),keep=[];
+ for(const x of q){try{const r=x.answer==='undo'?await sb.from('fastaqim_decisions').delete().eq('id',x.id):await sb.from('fastaqim_decisions').upsert({id:x.id,answer:x.answer,note:x.note||null,at:x.at});if(r.error)throw r.error}catch(e){keep.push(x)}}
+ localStorage.setItem('fq.dec.q',JSON.stringify(keep))}
+async function apvPull(){try{const sb=await FQA.sb();const {data,error}=await sb.from('fastaqim_decisions').select('id,answer,note,at');if(error)throw error;const pend=new Set(apvQ().map(x=>x.id));
+ (data||[]).forEach(r=>{if(!pend.has(r.id))APV.ans[r.id]={a:r.answer,n:r.note||'',at:r.at}});localStorage.setItem('fq.dec',JSON.stringify(APV.ans))}catch(e){}}
+function apvPut(id,a,n){const at=new Date().toISOString();if(a)APV.ans[id]={a,n:n||'',at};else delete APV.ans[id];localStorage.setItem('fq.dec',JSON.stringify(APV.ans));
+ const q=apvQ().filter(x=>x.id!==id);q.push({id,answer:a||'undo',note:n||'',at});localStorage.setItem('fq.dec.q',JSON.stringify(q));apvFlush()}
+$('s-qibla').insertAdjacentHTML('afterend',`<section class="scr" id="s-apv"><div class="hd sub"><button class="ib" data-back aria-label="Back"><i class="ph ph-caret-left flip"></i></button><h1 id="apT"></h1><span style="width:44px"></span></div><div id="apB"></div></section>`);
+TABOF.apv='more';
+const apvLink=u=>/^https?:/.test(u)?u:ROOTP+u;
+R.apv=async()=>{$('apT').textContent=T('Approvals','الموافقات');const B=$('apB');B.innerHTML=`<p class="rload">${T('Loading…','جارٍ التحميل…')}</p>`;apvLoadLocal();
+ if(!(window.FQA&&FQA.user())){B.innerHTML=`<div class="qbe"><i class="ph ph-lock-simple"></i><p>${T('Sign in to see your approvals.','سجّل الدخول لرؤية الموافقات.')}</p><button class="big" id="apSi">${T('Sign in','تسجيل الدخول')}</button></div>`;$('apSi').onclick=acctSheet;return}
+ if(!(await apvOwner())){B.innerHTML=`<div class="qbe"><i class="ph ph-lock-simple"></i><p>${T('Only the owner can open this.','هذه الصفحة للمالك فقط.')}</p></div>`;return}
+ if(!APV.items){try{APV.items=(await (await fetch(ROOTP+'decisions/items.json',{cache:'no-store'})).json()).items||[]}catch(e){APV.items=[]}}
+ await apvFlush();await apvPull();const f=APV.items.findIndex(x=>!APV.ans[x.id]);APV.i=f<0?APV.items.length:f;apvDraw()};
+function apvDraw(){const B=$('apB'),Ls=APV.items,n=Ls.length;
+ const dots=`<div class="apd">${Ls.map((x,k)=>{const a=(APV.ans[x.id]||{}).a;return `<button class="${a==='approve'?'ok':a==='change'?'ch':''} ${k===APV.i?'cur':''}" data-k="${k}">${a==='approve'?'✓':a==='change'?'✎':AR(k+1)}</button>`}).join('')}</div>`;
+ const cmp=`<a class="apcmp" href="${ROOTP}next/compare/" target="_blank" rel="noopener"><i class="ph ph-columns"></i><span><b>${T('Review every screen side by side','راجع كل شاشة جنبًا إلى جنب')}</b><small>${T('3 live versions of each screen. Agree or Change, and your note saves by itself.','٣ نسخ حية لكل شاشة. موافق أو تغيير، وملاحظتك تُحفظ تلقائيًا.')}</small></span><i class="ph ph-arrow-square-out"></i></a>`;
+ if(!n){B.innerHTML=cmp+`<p class="note" style="text-align:center">${T('Nothing waiting right now.','لا شيء ينتظر الآن.')}</p>`;return}
+ if(APV.i>=n){const c=k=>Ls.filter(x=>(APV.ans[x.id]||{}).a===k).length;
+  B.innerHTML=cmp+dots+`<div class="kh apdone"><div class="sts">${STAR(64,'#c9a96a')}</div><h3>${T('All done','تمّ كل شيء')}</h3><p>✓ ${AR(c('approve'))} · ✎ ${AR(c('change'))}</p></div>`;
+  $$('#apB [data-k]').forEach(b=>b.onclick=()=>{APV.i=+b.dataset.k;apvDraw()});return}
+ const x=Ls[APV.i],a=APV.ans[x.id]||{};
+ B.innerHTML=cmp+dots+`<div class="kh apc"><div class="appics">${(x.pics||[]).map(p=>`<img src="${esc(apvLink(p))}" alt="" loading="lazy">`).join('')}</div>
+  <small class="apn">${AR(APV.i+1)} / ${AR(n)}</small><h3 dir="auto">${esc(L==='ar'&&x.ar?x.ar:x.t)}</h3><p dir="auto" class="aps">${esc(x.s||'')}</p>
+  ${x.link?`<a class="khop" href="${esc(apvLink(x.link))}" target="_blank" rel="noopener"><i class="ph ph-arrow-square-out"></i>${T('Open it live','افتحه مباشرة')}</a>`:''}
+  ${a.a==='change'&&a.n?`<p class="apnote" dir="auto">✎ ${esc(a.n)}</p>`:''}
+  <div class="apbtn"><button class="ok ${a.a==='approve'?'sel':''}" id="apOk"><i class="ph-bold ph-check"></i>${T('Approve','موافق')}</button><button class="ch ${a.a==='change'?'sel':''}" id="apCh"><i class="ph ph-pencil-simple"></i>${T('Change','تغيير')}</button></div>
+  <div id="apF" hidden><textarea class="inp fbt" id="apN" rows="3" maxlength="600" dir="auto" placeholder="${T('What should change?','ما الذي يجب تغييره؟')}">${esc(a.a==='change'?a.n||'':'')}</textarea><button class="big" id="apS">${T('Send','إرسال')}</button></div>
+  <button class="aplater" id="apL">${T('Later','لاحقًا')} <i class="ph ph-caret-right flip"></i></button></div>`;
+ $$('#apB [data-k]').forEach(b=>b.onclick=()=>{APV.i=+b.dataset.k;apvDraw()});
+ const next=()=>{const k=APV.i,nx=Ls.findIndex((y,j)=>j>k&&!APV.ans[y.id]),fu=Ls.findIndex(y=>!APV.ans[y.id]);APV.i=nx<0?(fu<0?n:fu):nx;apvDraw();scrollTo(0,0)};
+ const answer=(ans,note)=>{const prev=APV.ans[x.id]?Object.assign({},APV.ans[x.id]):null,k=APV.i;apvPut(x.id,ans,note);vib(12);next();undoToast(T('Saved','تم الحفظ'),()=>{apvPut(x.id,prev&&prev.a,prev&&prev.n);APV.i=k;apvDraw()})};
+ $('apOk').onclick=()=>answer('approve','');$('apCh').onclick=()=>{$('apF').hidden=false;$('apN').focus()};$('apS').onclick=()=>answer('change',$('apN').value.trim());
+ $('apL').onclick=()=>{APV.i++;apvDraw();scrollTo(0,0)}}
+/* the Approvals row appears on More only for the owner */
+function apvRow(){apvOwner().then(o=>{const ex=$('mApv');if(!o){if(ex)ex.closest('.gl').style.display='none';return}if(ex){ex.closest('.gl').style.display='';return}const acct=$('mAcct');if(!acct)return;
+ acct.closest('.gl').insertAdjacentHTML('afterend',`<div class="gl"><button id="mApv"><span class="ic c-g"><i class="ph ph-seal-check"></i></span><span>${T('Approvals','الموافقات')}</span><i class="ph ph-caret-right cv flip"></i></button></div>`);$('mApv').onclick=()=>go('apv')})}
+if(window.FQA){FQA.on(()=>{APV.own=null;apvRow()});FQA.sb().then(apvRow).catch(()=>{})}
 
 /* ---------- start ---------- */
 go((location.hash||'#home').slice(1),false);
