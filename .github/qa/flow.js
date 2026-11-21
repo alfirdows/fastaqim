@@ -5,7 +5,7 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await c.route('**/*',r=>{const u0=new URL(r.request().url());if(u0.host!=='fq.test')return r.abort();let u=u0.pathname;if(u.endsWith('/'))u+='index.html';const f=path.join(ROOT,decodeURIComponent(u));if(fs.existsSync(f))r.fulfill({body:fs.readFileSync(f),contentType:MT[path.extname(f)]||'application/octet-stream'});else r.fulfill({status:404,body:''})});
  await c.addInitScript(()=>{if(!sessionStorage.getItem('qa')){sessionStorage.setItem('qa','1');localStorage.setItem('fq5.state',JSON.stringify({pins:['water','money','saved'],pinsV:2}))}});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const L=process.env.LANGQ||'';
- await p.goto('http://fq.test/next/v6/'+L+'#home');await p.waitForTimeout(700);
+ await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+L+'#home');await p.waitForTimeout(700);
  const ok=(n,v)=>console.log((v?'PASS ':'FAIL ')+n);const snap=async n=>p.screenshot({path:OUT+'/'+n+'.png'});
  // Today's path expand
  await p.click('#ciH');await p.waitForTimeout(300);ok('path expands',await p.$eval('#ci',e=>e.classList.contains('open')));await p.click('#ciH');
@@ -39,7 +39,7 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#hbB [data-hd]');await p.waitForTimeout(300);ok('habit ticked',await p.$eval('#hbB .hb',e=>e.classList.contains('on')));await snap('7_habits');
  await p.click('[data-back]:visible');await p.waitForTimeout(250);await p.click('[data-back]:visible');await p.waitForTimeout(250);
  // persistence: reload
- await p.goto('http://fq.test/next/v6/'+L+'#home');await p.waitForTimeout(600);const pt=await p.textContent('#pins');ok('pins persist after reload',pt.includes('Habits')||pt.includes('العادات'));await snap('8_home_after');
+ await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+L+'#home');await p.waitForTimeout(600);const pt=await p.textContent('#pins');ok('pins persist after reload',pt.includes('Habits')||pt.includes('العادات'));await snap('8_home_after');
  // tasbih badge + reset undo
  await p.click('[data-tab="dhikr"]');await p.waitForTimeout(300);await p.click('#tsbBtn');await p.waitForTimeout(400);
  ok('tasbih page opens',await p.isVisible('#tbx'));await p.click('#tbx [data-m="tap"]');await p.waitForTimeout(200);
@@ -54,6 +54,6 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#tbMute');ok('mute on',(await p.getAttribute('#tbMute','aria-pressed'))==='true');await p.click('#tbMute');
  await p.click('#tbBack');await p.waitForTimeout(300);ok('tasbih closes',!(await p.isVisible('#tbx')));
  // Friday salawat card (forced with ?fri=1)
- await p.goto('http://fq.test/next/v6/?fri=1'+(L?'&'+L.replace('?',''):'')+'#dhikr');await p.waitForTimeout(700);ok('friday card',await p.isVisible('#frC'));await snap('11_friday');
+ await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+'?fri=1'+(L?'&'+L.replace('?',''):'')+'#dhikr');await p.waitForTimeout(700);ok('friday card',await p.isVisible('#frC'));await snap('11_friday');
  await p.click('#frGo');await p.waitForTimeout(400);ok('salawat counter',await p.isVisible('#tbPh'));
  console.log('errors:',errs.join(' | ')||'none');await b.close()})()

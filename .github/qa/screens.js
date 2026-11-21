@@ -13,7 +13,7 @@ fs.mkdirSync(OUT,{recursive:true});
    let u=u0.pathname;if(u.endsWith('/'))u+='index.html';const f=path.join(ROOT,decodeURIComponent(u));if(fs.existsSync(f))r.fulfill({body:fs.readFileSync(f),contentType:MT[path.extname(f)]||'application/octet-stream'});else r.fulfill({status:404,body:''})});
   const p=await c.newPage();let errs=[];p.on('pageerror',e=>errs.push(e.message));
   for(const L of LANGS)for(const sc of SCREENS){total++;errs=[];const [q,h]=sc.includes('#')?sc.split('#'):[sc,''];const qs=(q.startsWith('?')?q.slice(1)+'&':'')+'lang='+L;
-   await p.goto('http://fq.test/next/v6/?'+qs+'&n='+total+'#'+(h||'home'));await p.waitForTimeout(700);
+   await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+'?'+qs+'&n='+total+'#'+(h||'home'));await p.waitForTimeout(700);
    const r=await p.evaluate(()=>{const W=document.documentElement.clientWidth,o=[],cut=[];
     const root=[...document.querySelectorAll('.scr.on, #sh.on, .tab, .zr.on, .tbx.on')];
     root.forEach(R=>R.querySelectorAll('*').forEach(e=>{const cs=getComputedStyle(e);if(cs.display==='none'||cs.visibility==='hidden')return;const rc=e.getBoundingClientRect();if(!rc.width||!rc.height)return;
