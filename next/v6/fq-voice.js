@@ -7,7 +7,7 @@
    Own file so other work on index.html never overwrites it. Uses the page's globals:
    $, $$, T, L, LI, S, save, go, R, openSheet, closeSheet, XB, toast, vib, esc, AR, f12, dkey, SAL, NOW, undoToast, blocked, prayerTimes. */
 (function(){'use strict';
-const X=(en,ar)=>L==='ar'?ar:(LI>=0&&typeof DICT==='object'&&DICT[en])?DICT[en][LI]:en;
+const X=(en,ar,om,so)=>L==='ar'?ar:(LI===0&&om)?om:(LI===1&&so)?so:(LI>=0&&typeof DICT==='object'&&DICT[en])?DICT[en][LI]:en;
 const pad=n=>String(n).padStart(2,'0');
 const hm=m=>pad(Math.floor(m/60)%24)+':'+pad(Math.round(m)%60);
 const fm=m=>f12(hm(m));
@@ -21,8 +21,10 @@ const dayLabel=k=>{const t=today();if(k===t)return X('Today','اليوم');if(k=
  try{return dOf(k).toLocaleDateString(loc(),{weekday:'short',day:'numeric',month:'short'})}catch(e){return k}};
 const enLabel=k=>{const t=today();if(k===t)return'Today';if(k===addD(t,1))return'Tomorrow';return dOf(k).toLocaleDateString('en-US',{weekday:'short',day:'numeric',month:'short'})};
 const en12=m=>{let h=Math.floor(m/60)%24;const s=h>=12?'PM':'AM';h=h%12||12;return h+':'+pad(m%60)+' '+s};
-const durTx=m=>m<60?X(m+' min',AR(m)+' د'):(m%60?X((m/60).toFixed(1).replace('.0','')+' h',AR((m/60).toFixed(1))+' س'):X(m/60+' h',AR(m/60)+' س'));
+const durTx=m=>m<60?X(m+' min',AR(m)+' د',m+' daq',m+' daq'):(m%60?X((m/60).toFixed(1).replace('.0','')+' h',AR((m/60).toFixed(1))+' س'):X(m/60+' h',AR(m/60)+' س',m/60+' saʼa',m/60+' saac'));
 
+/* Afaan Oromoo + Somali words (Fastaqim's own translation, to be reviewed); only added where the page has none */
+{const VD={"Your day": ["Guyyaa kee", "Maalintaada"], "Say it, I’ll fit it": ["Jedhi, ani siif qindeessa", "Dheh, anigaa kuu habeynaya"], "Nothing timed yet. Talk it out and I’ll place it around salah.": ["Ammaaf wanti yeroo qabu hin jiru. Dubbadhu, ani salaata naannoo kaaʼa.", "Weli wax waqti leh ma jiraan. Hadal, anigaa salaadda agteeda dhigaya."], "Tap the circle and talk": ["Geengoo tuqiitii dubbadhu", "Taabo goobada oo hadal"], "Listening… tap to stop": ["Dhaggeeffachaa jira… dhaabuuf tuqi", "Waan dhegaysanayaa… taabo si aad u joojiso"], "Fit into my day": ["Guyyaa koo keessa galchi", "Maalintayda ku habee"], "Your voice becomes text on your phone’s own speech service. Fastaqim keeps no recording.": ["Sagaleen kee tajaajila sagalee bilbila keetiin barreeffamatti jijjiirama. Fastaqim waraabbii hin kuusu.", "Codkaagu wuxuu qoraal ku noqdaa adeegga codka ee taleefankaaga. Fastaqim ma kaydiyo duubis."], "Add it": ["Dabali", "Ku dar"], "Your time": ["Yeroo kee", "Waqtigaaga"], "Fitted": ["Qindaaʼe", "La habeeyay"], "Every week": ["Torban torbaniin", "Toddobaad kasta"], "Any time": ["Yeroo kamiyyuu", "Waqti kasta"], "any time": ["yeroo kamiyyuu", "waqti kasta"], "Moved to make room": ["Iddoo banuuf sochoʼe", "Loo raray si meel loo banneeyo"], "My day runs": ["Guyyaan koo", "Maalintaydu waa"], "Start": ["Jalqaba", "Bilow"], "End": ["Xumura", "Dhammaad"], "Re-fit": ["Irra deebiʼii qindeessi", "Dib u habee"], "Day": ["Guyyaa", "Maalin"], "Time": ["Yeroo", "Waqti"], "Length": ["Dheerina", "Muddo"], "Done": ["Xumurame", "Dhammaad"], "Find a time for me": ["Yeroo naaf barbaadi", "Waqti ii raadi"], "Remove": ["Haqi", "Ka saar"], "Added to your day": ["Guyyaa keetti dabalame", "Maalintaada lagu daray"], "Taken back": ["Deebifameera", "Waa la celiyay"], "Plan this day": ["Guyyaa kana karoorsi", "Qorshee maalintan"], "weekly": ["torbanaan", "toddobaadle"], "Learning": ["Barumsa", "Waxbarasho"], "Work": ["Hojii", "Shaqo"], "Calls": ["Bilbila", "Wicitaan"], "Home": ["Mana", "Guri"], "Out": ["Ala", "Dibadda"], "Other": ["Kan biraa", "Kale"], "Salah": ["Salaata", "Salaad"], "Use your keyboard’s mic": ["Maaykiroofoonii kiiboordii kee fayyadami", "Isticmaal makarafoonka kiiboodhkaaga"], "Tap the box below, then the mic key on your keyboard, and talk.": ["Saanduqa armaan gadii tuqi, achiin furtuu maaykiroofoonii kiiboordii irratti tuqiitii dubbadhu.", "Taabo sanduuqa hoose, kadib furaha makarafoonka ee kiiboodhka, oo hadal."], "Saved to your weekly schedule.": ["Sagantaa torbanii keessatti olkaaʼama.", "Waxaa lagu kaydiyaa jadwalkaaga toddobaadlaha."], "Back": ["Duubatti", "Dib u noqo"], "Today": ["Har'a", "Maanta"], "Tomorrow": ["Boru", "Berri"], "Everyone": ["Hunda", "Dhammaan"]};if(typeof DICT==='object')for(const k in VD)if(!DICT[k])DICT[k]=VD[k]}
 S.vp=S.vp||{};const VP=S.vp;if(!VP.ws)VP.ws='08:00';if(!VP.we)VP.we='22:00';
 const LF=()=>(S.life=S.life||{},S.life.sch=S.life.sch||[],S.life.fam=S.life.fam||[],S.life);
 
@@ -165,19 +167,19 @@ function plan(text){const base=today(),out=[],left=[],mv=[];let last=null;
   const k=it.date||base;it.dt=k;
   if(it.s!=null){it.kind='fix';taken.push(it);const sl=salFor(k);
    const hit=SK.filter(s=>sl[s]>=it.s&&sl[s]<it.e),before=SK.find(s=>sl[s]<it.s&&sl[s]+25>it.s);
-   it.note=hit.length?{w:1,t:X('Salah during this: ','صلاة أثناء هذا: ')+hit.map(s=>salName(s)+' '+fm(sl[s])).join(', ')+'. '+X('Plan a short break to pray.','خطّط لاستراحة قصيرة للصلاة.')}
-    :before?{t:X('Pray '+SN[before][0]+' first ('+fm(sl[before])+').','صلِّ '+SN[before][1]+' أولًا ('+fm(sl[before])+').')}:null;
-   const cl=overlap(it.s,it.e,busy(k).filter(x=>!x.sal&&!x.id));if(cl.length)it.note={w:1,t:X('Overlaps','يتداخل مع')+' “'+cl[0].t+'” ('+fm(cl[0].a)+').'};
-   if(it.past)it.note={w:1,t:X('That time has passed today, so it’s set for tomorrow.','فات هذا الوقت اليوم، فوُضع غدًا.')};
+   it.note=hit.length?{w:1,t:X('Salah during this: ','صلاة أثناء هذا: ','Yeroo kana salaata: ','Salaad inta lagu jiro: ')+hit.map(s=>salName(s)+' '+fm(sl[s])).join(', ')+'. '+X('Plan a short break to pray.','خطّط لاستراحة قصيرة للصلاة.','Salaatiif boqonnaa gabaabaa karoorsi.','Qorshee nasasho gaaban oo aad ku tukato.')}
+    :before?{t:X('Pray '+SN[before][0]+' first ('+fm(sl[before])+').','صلِّ '+SN[before][1]+' أولًا ('+fm(sl[before])+').','Dura '+salName(before)+' salaadhu ('+fm(sl[before])+').','Marka hore tuko '+salName(before)+' ('+fm(sl[before])+').')}:null;
+   const cl=overlap(it.s,it.e,busy(k).filter(x=>!x.sal&&!x.id));if(cl.length)it.note={w:1,t:X('Overlaps','يتداخل مع','Walitti buʼa:','Wuu ku dhacaa:')+' “'+cl[0].t+'” ('+fm(cl[0].a)+').'};
+   if(it.past)it.note={w:1,t:X('That time has passed today, so it’s set for tomorrow.','فات هذا الوقت اليوم، فوُضع غدًا.',"Yeroon sun har'a darbeera, kanaaf boruuf kaaʼameera.",'Waqtigaas maanta wuu dhaafay, sidaa darteed berri ayaa loo dhigay.')};
    /* move flexible voice tasks out of the way */
    S.tasks.forEach(t=>{if(t.dt===k&&t.flex&&t.s!=null&&t.s<it.e&&it.s<t.s+(t.du||30)&&!mv.find(x=>x.id===t.id))mv.push({id:t.id,t:t.t,from:t.s,du:t.du||30,k})})}}
  const skip=new Set(mv.map(x=>x.id));
  for(const it of out){if(it.kind)continue;let k=it.date||base,t=gap(k,it,taken,skip),moved=0;
   if(t==null&&!it.date&&!it.by){for(let n=1;n<=6&&t==null;n++){k=addD(base,n);t=gap(k,it,taken,skip);moved=n}}
-  it.dt=k;if(t==null){it.kind='any';it.note={w:1,t:X('No free '+durTx(it.du)+' left that day. Added without a time.','لا يوجد وقت فارغ كافٍ في ذلك اليوم. أُضيف بلا وقت.')};continue}
+  it.dt=k;if(t==null){it.kind='any';it.note={w:1,t:X('No free '+durTx(it.du)+' left that day. Added without a time.','لا يوجد وقت فارغ كافٍ في ذلك اليوم. أُضيف بلا وقت.','Guyyaa sana yeroon duwwaa '+durTx(it.du)+' hin jiru. Yeroo malee dabalame.','Maalintaas ma jiro '+durTx(it.du)+' bannaan. Waqti la’aan ayaa lagu daray.')};continue}
   it.kind='fit';it.s=t;it.e=t+it.du;taken.push(it);
   const sl=salFor(k),pv=SK.filter(s=>sl[s]+20<=t).pop(),nx=SK.find(s=>sl[s]>=it.e);
-  it.note={t:(moved?X('No room today, so ','لا متسع اليوم، لذا ')+dayLabel(k)+'. ':'')+(pv&&nx?X('Fits after '+SN[pv][0]+', before '+SN[nx][0]+'.','بعد '+SN[pv][1]+' وقبل '+SN[nx][1]+'.'):pv?X('Fits after '+SN[pv][0]+'.','بعد '+SN[pv][1]+'.'):nx?X('Fits before '+SN[nx][0]+'.','قبل '+SN[nx][1]+'.'):X('Fits a free gap.','في وقت فارغ.'))}}
+  it.note={t:(moved?X('No room today, so ','لا متسع اليوم، لذا ',"Har'a iddoon hin jiru, kanaaf ",'Maanta meel ma jirto, sidaa darteed ')+dayLabel(k)+'. ':'')+(pv&&nx?X('Fits after '+SN[pv][0]+', before '+SN[nx][0]+'.','بعد '+SN[pv][1]+' وقبل '+SN[nx][1]+'.',salName(pv)+' booda, '+salName(nx)+' dura.','Kadib '+salName(pv)+', ka hor '+salName(nx)+'.'):pv?X('Fits after '+SN[pv][0]+'.','بعد '+SN[pv][1]+'.',salName(pv)+' booda.','Kadib '+salName(pv)+'.'):nx?X('Fits before '+SN[nx][0]+'.','قبل '+SN[nx][1]+'.',salName(nx)+' dura.','Ka hor '+salName(nx)+'.'):X('Fits a free gap.','في وقت فارغ.','Yeroo duwwaa keessa.','Waqti bannaan.'))}}
  for(const x of mv){const t=gap(x.k,{du:x.du},taken,skip);x.to=t;if(t!=null)taken.push({dt:x.k,s:t,du:x.du,t:x.t})}
  return{items:out,left,mv}}
 
@@ -202,26 +204,26 @@ function startRec(){const ta=$('vpT');if(!SR||!ta)return;try{REC=new SR()}catch(
  REC.onend=()=>{if(LIS){BASE=ta.value?ta.value.replace(/\s*$/,' '):'';try{REC.start();return}catch(e){}}stopRec()};
  try{REC.start();vib(12);const b=$('vpMic');b.classList.add('on');b.setAttribute('aria-label',X('Stop','إيقاف'));$('vpSt').textContent=X('Listening… tap to stop','أستمع… اضغط للإيقاف')}catch(e){noMic()}}
 function noMic(why){stopRec();const w=$('vpMicW');if(w)w.outerHTML=kbHint(why);const ta=$('vpT');if(ta)ta.focus()}
-const kbHint=why=>`<div class="vp-kb" id="vpMicW">${IC('microphone',22)}<p><b>${why==='not-allowed'?X('The microphone was not allowed.','لم يُسمح بالميكروفون.'):X('Use your keyboard’s mic','استخدم ميكروفون لوحة المفاتيح')}</b><small>${X('Tap the box below, then the mic key on your keyboard, and talk.','اضغط المربع بالأسفل، ثم زر الميكروفون في لوحة المفاتيح، وتكلّم.')}</small></p></div>`;
+const kbHint=why=>`<div class="vp-kb" id="vpMicW">${IC('microphone',22)}<p><b>${why==='not-allowed'?X('The microphone was not allowed.','لم يُسمح بالميكروفون.','Maaykiroofooniin hin eeyyamamne.','Makarafoonka lama oggolaan.'):X('Use your keyboard’s mic','استخدم ميكروفون لوحة المفاتيح')}</b><small>${X('Tap the box below, then the mic key on your keyboard, and talk.','اضغط المربع بالأسفل، ثم زر الميكروفون في لوحة المفاتيح، وتكلّم.')}</small></p></div>`;
 function vpBtn(){const b=$('vpGo');if(b)b.disabled=!$('vpT').value.trim()}
 function openVoice(pre){PL=null;stopRec();
  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Say it, I’ll fit it','قلها، وأنا أرتّبها')}</h1>${XB}</div>
  <div class="vp">
   ${SR?`<div class="vp-mw" id="vpMicW"><button class="vp-mic" id="vpMic" aria-label="${X('Start talking','ابدأ الكلام')}"><span class="vp-r1"></span><span class="vp-r2"></span>${IC('microphone',30)}</button><p class="vp-st" id="vpSt">${X('Tap the circle and talk','اضغط الدائرة وتكلّم')}</p></div>`:kbHint()}
-  <textarea id="vpT" rows="4" dir="auto" placeholder="${X('Say everything on your mind. For example: “I have class at 5 pm tomorrow, call the clinic, study 2 hours after Asr, and every Monday Qur’an class 6 to 7.”','قل كل ما في بالك. مثال: «عندي درس الساعة ٥ مساءً غدًا، اتصل بالعيادة، مذاكرة ساعتين بعد العصر.»')}">${esc(pre||TXT||'')}</textarea>
+  <textarea id="vpT" rows="4" dir="auto" placeholder="${X('Say everything on your mind. For example: “I have class at 5 pm tomorrow, call the clinic, study 2 hours after Asr, and every Monday Qur’an class 6 to 7.”','قل كل ما في بالك. مثال: «عندي درس الساعة ٥ مساءً غدًا، اتصل بالعيادة، مذاكرة ساعتين بعد العصر.»','Waan sammuu kee keessa jiru hunda jedhi. Fkn: “Boru saʼaatii 5 WB barnoota qaba, kilinikii bilbili, Asrii booda saʼaatii 2 qoʼadhu.”','Sheeg wax kasta oo maskaxdaada ku jira. Tusaale: “Berri 5ta galabnimo ayaan fasal leeyahay, wac rugta caafimaadka, laba saac wax baro kadib Casar.”')}">${esc(pre||TXT||'')}</textarea>
   <p class="vp-fine">${IC('lock-simple',14)}${X('Your voice becomes text on your phone’s own speech service. Fastaqim keeps no recording.','يتحوّل صوتك إلى نص بخدمة الكلام في هاتفك. لا يحفظ Fastaqim أي تسجيل.')}</p>
   <button class="big vp-go" id="vpGo" disabled>${IC('magic-wand',20)} ${X('Fit into my day','رتّبها في يومي')}</button>
  </div>`);
  const ta=$('vpT');ta.oninput=vpBtn;vpBtn();
  if($('vpMic'))$('vpMic').onclick=()=>LIS?stopRec():startRec();
- $('vpGo').onclick=()=>{stopRec();TXT=ta.value;const p=plan(ta.value);if(!p.items.length){toast(p.left.length?X('That one can’t be added.','لا يمكن إضافة هذا.'):X('I didn’t find a task in that. Try “call the clinic at 3 pm”.','لم أجد مهمة. جرّب «الاتصال بالعيادة الساعة ٣ م».'));return}PL=p;review()};
+ $('vpGo').onclick=()=>{stopRec();TXT=ta.value;const p=plan(ta.value);if(!p.items.length){toast(p.left.length?X('That one can’t be added.','لا يمكن إضافة هذا.','Kun dabalamuu hin dandaʼu.','Kan lama dari karo.'):X('I didn’t find a task in that. Try “call the clinic at 3 pm”.','لم أجد مهمة. جرّب «الاتصال بالعيادة الساعة ٣ م».',"Hojii hin arganne. Yaali: “kilinikii saʼaatii 3tti bilbili”.",'Hawl lama helin. Isku day: “wac rugta caafimaadka 3da”.'));return}PL=p;review()};
  $$('#sh [data-x]').forEach(b=>b.addEventListener('click',stopRec))}
 
 /* a horizon line for one day: salah marks + what is already there + the new items */
 function strip(k,items){const sl=salFor(k),a0=Math.min(toM(VP.ws),sl.fajr)-15,b0=Math.max(toM(VP.we),sl.isha+30),W=b0-a0,P=m=>((Math.max(a0,Math.min(b0,m))-a0)/W*100).toFixed(2)+'%';
  const old=busy(k,new Set(PL?PL.mv.map(x=>x.id):[])).filter(x=>!x.sal);
  let lx=-99;const lab=SK.map(s=>{const x=(Math.max(a0,Math.min(b0,sl[s]))-a0)/W*100,up=x-lx<11;lx=up?-99:x;return up});const nn=items.length;
- return `<div class="vp-day"><div class="vp-dh"><b>${esc(dayLabel(k))}</b><small>${X(nn+' new','جديد: '+AR(nn))}</small></div><div class="vp-hz">
+ return `<div class="vp-day"><div class="vp-dh"><b>${esc(dayLabel(k))}</b><small>${X(nn+' new','جديد: '+AR(nn),nn+' haaraa',nn+' cusub')}</small></div><div class="vp-hz">
   ${old.map(x=>`<i class="vp-old" style="inset-inline-start:${P(x.a)};width:calc(${P(x.b)} - ${P(x.a)})"></i>`).join('')}
   ${items.filter(i=>i.s!=null&&i.kind!=='any').map(i=>`<i class="vp-new c-${catOf(i.raw+' '+i.t)}" style="inset-inline-start:${P(i.s)};width:max(6px,calc(${P(i.e)} - ${P(i.s)}))"></i>`).join('')}
   ${SK.map((s,j)=>`<span class="vp-sm${lab[j]?' up':''}" style="inset-inline-start:${P(sl[s])}"><em>${esc(salName(s))}</em></span>`).join('')}</div></div>`}
@@ -234,19 +236,19 @@ function card(it,i){const when=it.kind==='rep'?it.rep.map(DN).join(', ')+' · '+
   <input class="vp-tt" data-tt="${i}" value="${esc(it.t)}" dir="auto" maxlength="120" aria-label="${X('Title','العنوان')}">
   <button class="vp-wh" data-ed="${i}"><span>${esc(when)}</span>${IC('pencil-simple',14)}<em class="vp-tag k-${it.kind}">${tag}</em></button>
   ${it.note?`<p class="vp-nt${it.note.w?' w':''}">${IC(it.note.w?'info':'check-circle',14)}${esc(it.note.t)}</p>`:''}
-  ${it.kind==='rep'?`<p class="vp-nt">${IC('calendar-blank',14)}${X('Saved to your weekly schedule.','يُحفظ في جدولك الأسبوعي.')}${it.guess?' '+X('Check the time.','تأكّد من الوقت.'):''}</p>${whoRow(it)}`:''}
+  ${it.kind==='rep'?`<p class="vp-nt">${IC('calendar-blank',14)}${X('Saved to your weekly schedule.','يُحفظ في جدولك الأسبوعي.')}${it.guess?' '+X('Check the time.','تأكّد من الوقت.','Yeroo mirkaneessi.','Hubi waqtiga.'):''}</p>${whoRow(it)}`:''}
   <div class="vp-ef" id="vpE${i}" hidden></div></div>
   <button class="vp-x" data-rm="${i}" aria-label="${X('Remove','إزالة')}">${IC('x',16)}</button></div>`}
 function review(){const p=PL;let ks=[...new Set(p.items.filter(i=>i.dt&&i.kind!=='rep').map(i=>i.dt))].sort().slice(0,3);if(!ks.length)ks=[today()];
  openSheet(`<div class="hd sub"><button class="tlk" id="vpBk">${IC('caret-left flip',16)} ${X('Back','رجوع')}</button><h1>${X('Your day','يومك')}</h1><span style="width:60px"></span></div>
  <div class="vp">
   ${ks.map(k=>strip(k,p.items.filter(i=>i.dt===k).concat(p.items.filter(i=>i.kind==='rep'&&i.rep.includes(dOf(k).getDay()))))).join('')}
-  <p class="vp-cnt">${X(p.items.length+(p.items.length===1?' thing':' things')+' to add','سيُضاف '+AR(p.items.length))}${p.left.length?' · '+X(p.left.length+' left out','تُرك '+AR(p.left.length)):''}</p>
+  <p class="vp-cnt">${X(p.items.length+(p.items.length===1?' thing':' things')+' to add','سيُضاف '+AR(p.items.length),'Kan dabalamu: '+p.items.length,'Waxa lagu darayo: '+p.items.length)}${p.left.length?' · '+X(p.left.length+' left out','تُرك '+AR(p.left.length),p.left.length+' hafe',p.left.length+' laga reebay'):''}</p>
   <div class="vp-list">${p.items.map(card).join('')}</div>
   ${p.mv.length?`<p class="vp-mvh">${IC('arrows-clockwise',16)}${X('Moved to make room','نُقل لإفساح المجال')}</p><div class="vp-list">${p.mv.map(x=>`<div class="vp-it vp-mv c-${catOf(x.t)}"><span class="vp-ic">${IC('arrow-bend-down-right',18)}</span><div class="vp-bd"><b dir="auto">${esc(x.t)}</b><p class="vp-nt">${fm(x.from)} → ${x.to!=null?fm(x.to):X('any time','أي وقت')}</p></div></div>`).join('')}</div>`:''}
   <button class="vp-day2" id="vpWin">${IC('sun-horizon',16)}${X('My day runs','يومي من')} <b>${fm(toM(VP.ws))} – ${fm(toM(VP.we))}</b>${IC('pencil-simple',14)}</button>
   <div class="vp-ef" id="vpWinE" hidden><label>${X('Start','البداية')}<input type="time" id="vpWs" value="${VP.ws}"></label><label>${X('End','النهاية')}<input type="time" id="vpWe" value="${VP.we}"></label><button class="vp-ok" id="vpWok">${X('Re-fit','أعد الترتيب')}</button></div>
-  <button class="big vp-go" id="vpAdd" ${p.items.length?'':'disabled'}>${IC('check',20)} ${p.items.length===1?X('Add it','أضفها'):X('Add all '+p.items.length,'أضف الكل ('+AR(p.items.length)+')')}</button>
+  <button class="big vp-go" id="vpAdd" ${p.items.length?'':'disabled'}>${IC('check',20)} ${p.items.length===1?X('Add it','أضفها'):X('Add all '+p.items.length,'أضف الكل ('+AR(p.items.length)+')','Hunda dabali ('+p.items.length+')','Ku dar dhammaan ('+p.items.length+')')}</button>
  </div>`);
  $('vpBk').onclick=()=>openVoice(TXT);
  $$('#sh [data-rm]').forEach(b=>b.onclick=()=>{p.items.splice(+b.dataset.rm,1);vib(8);refit()});
@@ -255,7 +257,7 @@ function review(){const p=PL;let ks=[...new Set(p.items.filter(i=>i.dt&&i.kind!=
   b.parentNode.querySelectorAll('[data-vw]').forEach(y=>y.classList.toggle('on',it.who.includes(y.dataset.vw)))});
  $$('#sh [data-ed]').forEach(b=>b.onclick=()=>editor(+b.dataset.ed));
  $('vpWin').onclick=()=>{$('vpWinE').hidden=!$('vpWinE').hidden};
- $('vpWok').onclick=()=>{const a=$('vpWs').value,b=$('vpWe').value;if(a&&b&&toM(b)>toM(a)+60){VP.ws=a;VP.we=b;save();refit()}else toast(X('End must be after start','النهاية بعد البداية'))};
+ $('vpWok').onclick=()=>{const a=$('vpWs').value,b=$('vpWe').value;if(a&&b&&toM(b)>toM(a)+60){VP.ws=a;VP.we=b;save();refit()}else toast(X('End must be after start','النهاية بعد البداية','Xumurri jalqaba booda taʼuu qaba','Dhammaadku waa inuu bilowga ka dambeeyaa'))};
  $('vpAdd').onclick=commit}
 function refit(){const keep=PL.items;/* re-run the fitting with the user's edits kept */
  keep.forEach(it=>{if(it.kind==='fit'||it.kind==='any'){if(!it.pin){it.s=null;it.e=null;it.kind=null}}});
@@ -272,14 +274,14 @@ function editor(i){const it=PL.items[i],e=$('vpE'+i);if(!e)return;if(!e.hidden){
    <button class="vp-ok" id="vpO${i}">${X('Done','تم')}</button><button class="vp-auto" id="vpA${i}">${IC('magic-wand',14)}${X('Find a time for me','اختر لي وقتًا')}</button>`;
  e.hidden=false;
  $$('[data-rd]',e).forEach(b=>b.onclick=()=>{const d=+b.dataset.rd,j=it.rep.indexOf(d);if(j>=0){if(it.rep.length>1)it.rep.splice(j,1)}else it.rep.push(d);it.rep.sort();$$('[data-rd]',e).forEach(y=>y.classList.toggle('on',it.rep.includes(+y.dataset.rd)))});
- $('vpO'+i).onclick=()=>{if(it.kind==='rep'){const a=$('vpS'+i).value,b=$('vpT'+i).value;if(!a||!b||toM(b)<=toM(a)){toast(X('End must be after start','النهاية بعد البداية'));return}it.s=toM(a);it.e=toM(b);it.du=it.e-it.s;it.guess=0;review();return}
+ $('vpO'+i).onclick=()=>{if(it.kind==='rep'){const a=$('vpS'+i).value,b=$('vpT'+i).value;if(!a||!b||toM(b)<=toM(a)){toast(X('End must be after start','النهاية بعد البداية','Xumurri jalqaba booda taʼuu qaba','Dhammaadku waa inuu bilowga ka dambeeyaa'));return}it.s=toM(a);it.e=toM(b);it.du=it.e-it.s;it.guess=0;review();return}
   const d=$('vpD'+i).value||it.dt,s=$('vpS'+i).value,du=+$('vpL'+i).value;it.du=du;it.date=d;it.dt=d;
-  if(s){it.s=toM(s);it.e=it.s+du;it.kind='fix';it.pin=1;it.note=null;const sl=salFor(d),hit=SK.filter(k=>sl[k]>=it.s&&sl[k]<it.e);if(hit.length)it.note={w:1,t:X('Salah during this: ','صلاة أثناء هذا: ')+hit.map(k=>salName(k)+' '+fm(sl[k])).join(', ')+'. '+X('Plan a short break to pray.','خطّط لاستراحة قصيرة للصلاة.')};review()}
+  if(s){it.s=toM(s);it.e=it.s+du;it.kind='fix';it.pin=1;it.note=null;const sl=salFor(d),hit=SK.filter(k=>sl[k]>=it.s&&sl[k]<it.e);if(hit.length)it.note={w:1,t:X('Salah during this: ','صلاة أثناء هذا: ','Yeroo kana salaata: ','Salaad inta lagu jiro: ')+hit.map(k=>salName(k)+' '+fm(sl[k])).join(', ')+'. '+X('Plan a short break to pray.','خطّط لاستراحة قصيرة للصلاة.','Salaatiif boqonnaa gabaabaa karoorsi.','Qorshee nasasho gaaban oo aad ku tukato.')};review()}
   else{it.kind=null;it.pin=0;it.note=null;refit()}};
  if($('vpA'+i))$('vpA'+i).onclick=()=>{it.date=$('vpD'+i).value||it.dt;it.du=+$('vpL'+i).value;it.kind=null;it.pin=0;it.s=null;it.note=null;refit()}}
 
 /* ---------------- save + undo ---------------- */
-function due(k,s,du){return (s==null?(enLabel(k)==='Today'?T('Today','اليوم'):enLabel(k)):enLabel(k)+', '+en12(s))+(du?' · '+durTx(du):'')}
+function due(k,s,du){return (s==null?dayLabel(k):dayLabel(k)+(L==='ar'?'، ':', ')+fm(s))+(du?' · '+durTx(du):'')}
 const szOf=m=>m<=10?'s':m<=45?'m':'l';
 function commit(){$$('#sh [data-tt]').forEach(b=>{const v=b.value.trim();if(v)PL.items[+b.dataset.tt].t=v});
  const bad=PL.items.find(it=>blocked(it.t));if(bad){blkWarn(bad.t);return}
@@ -288,7 +290,7 @@ function commit(){$$('#sh [data-tt]').forEach(b=>{const v=b.value.trim();if(v)PL
   else{const t={id:now+(n++),t:it.t,due:due(it.dt,it.kind==='any'?null:it.s,it.du),p:it.ev?'h':'m',dt:it.dt,du:it.du,vp:1};if(it.kind!=='any')t.s=it.s;if(it.kind==='fit')t.flex=1;S.tasks.unshift(t);add.push(t.id)}}
  for(const x of PL.mv){const t=S.tasks.find(y=>y.id===x.id);if(!t)continue;moved.push({id:t.id,s:t.s,due:t.due});if(x.to!=null){t.s=x.to;t.due=due(t.dt,x.to,t.du)}else{delete t.s;t.due=due(t.dt,null,t.du)}}
  const cnt=add.length+sch.length;VP.last={add,sch,moved,at:now};save();closeSheet();TXT='';PL=null;vib([18,40,18]);rer();
- undoToast(cnt===1?X('Added to your day','أُضيف إلى يومك'):X(cnt+' added to your day','أُضيف '+AR(cnt)+' إلى يومك'),undo)}
+ undoToast(cnt===1?X('Added to your day','أُضيف إلى يومك'):X(cnt+' added to your day','أُضيف '+AR(cnt)+' إلى يومك',cnt+' guyyaa keetti dabalame',cnt+' ayaa maalintaada lagu daray'),undo)}
 function undo(){const l=VP.last;if(!l)return;S.tasks=S.tasks.filter(t=>!l.add.includes(t.id));LF().sch=LF().sch.filter(x=>!l.sch.includes(x.id));
  l.moved.forEach(m=>{const t=S.tasks.find(y=>y.id===m.id);if(t){if(m.s==null)delete t.s;else t.s=m.s;t.due=m.due}});VP.last=null;save();rer();toast(X('Taken back','تم التراجع'))}
 function rer(){try{R.todo&&R.todo()}catch(e){}try{R.home&&R.home()}catch(e){}try{R.fam&&$('s-fam')&&$('s-fam').classList.contains('on')&&R.fam()}catch(e){}}
