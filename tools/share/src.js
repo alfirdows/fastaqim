@@ -156,7 +156,7 @@ async function wirdItem(p){const po=await portion(p);if(!po)return null;const ds
  if(p.n)blocks.unshift({label:X('A NOTE','تذكير','YAADACHIISA','XUSUUSIN'),ar:p.n,q:0});
  const lines=[`*${X('Fastaqim · Daily wird','فاستقم · الورد اليومي','Fastaqim · Wirdii guyyaa','Fastaqim · Wirdiga maalinta')}*`,dateLine(),'',`*${X("Today's Qur'an",'قرآن اليوم',"Qur'aana har'aa","Qur'aanka maanta")}* (${X('day '+po.day+' of '+po.total,'اليوم '+ARD(po.day)+' من '+ARD(po.total),'guyyaa '+po.day+'/'+po.total,'maalinta '+po.day+'/'+po.total)})`,big+' · '+rg,qcUrl(po)];
  if(p.n)lines.push('',p.n);
- if(ds.length){lines.push('',`*${X("Du'as for today",'أدعية اليوم',"Kadhannaa har'aa",'Ducooyinka maanta')}*`);ds.forEach((d,k)=>{lines.push('',(k+1)+'. '+d.ar);const m=duaMe(d);if(m)lines.push(m);if(d.src)lines.push(d.src[0]+' '+d.src[1])})}
+ if(ds.length){lines.push('',`*${X("Du'as for today",'أدعية اليوم',"Kadhannaa har'aa",'Ducooyinka maanta')}*`);ds.forEach((d,k)=>{lines.push('',(k+1)+'. '+(isQ(d)?d.ar.replace(/ ([٠-٩]+)(?= |$)/g,' ﴿$1﴾'):d.ar));const m=duaMe(d);if(m)lines.push(m);if(d.src)lines.push(d.src[0]+' '+d.src[1])})}
  const lk=link(p);lines.push('',X('Read with us every day','اقرأ معنا كل يوم','Guyyaa guyyaan nu waliin dubbisi','Maalin kasta nala akhri')+': '+lk);
  return{kind:'wird',po,ds,link:lk,card:{prog:[po.day,po.total],kick:X("TODAY'S QUR'AN",'ورد اليوم',"QUR'AANA HAR'AA","QUR'AANKA MAANTA"),title:big,sub:rg,blocks},text:lines.join('\n')}}
 
