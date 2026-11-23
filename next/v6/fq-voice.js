@@ -185,6 +185,14 @@ function plan(text){const base=today(),out=[],left=[],mv=[];let last=null;
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 let REC=null,LIS=false,BASE='',PL=null,TXT='';
 const IC=(n,s)=>`<i class="ph ph-${n}"${s?` style="font-size:${s}px"`:''}></i>`;
+/* soft colour by kind of thing: learning, work, calls, home, errands, other (salah stays gold) */
+const CATS=[['learn',/\b(class|lecture|lesson|course|halaqa|halaqah|seminar|study|homework|revise|review|essay|assignment|exam|test|quran|qur'an|tafsir|read|memori[sz]e|hifz|school|training)\b|درس|محاضرة|حلقة|مذاكرة|دراسة|امتحان|قرآن|مدرسة/i],
+ ['work',/\b(work|shift|meeting|appointment|appt|doctor|dentist|therapy|interview|session|clinic|office|job|client|project)\b|دوام|عمل|موعد|اجتماع|طبيب/i],
+ ['talk',/\b(call|ring|phone|text|email|e-mail|message|reply|whatsapp|visit|meet)\b|اتصل|اتصال|رسالة|زيارة/i],
+ ['home',/\b(clean|tidy|laundry|dishes|vacuum|iron|cook|bake|dinner|lunch|breakfast|family|kids|room|house|home|trash|meal)\b|تنظيف|طبخ|غسيل|عائلة|البيت/i],
+ ['out',/\b(shop|shopping|groceries|grocery|market|mall|errands?|bank|buy|pick up|pickup|drop off|post office|pharmacy|store|gym|walk|run|exercise|workout|swim)\b|تسوق|شراء|بنك|صيدلية|رياضة|مشي/i]];
+const catOf=t=>{t=String(t||'');const c=CATS.find(x=>x[1].test(t));return c?c[0]:'other'};
+const CATN={learn:['Learning','تعلّم'],work:['Work','عمل'],talk:['Calls','تواصل'],home:['Home','البيت'],out:['Out','خارج البيت'],other:['Other','أخرى']};
 const icon=it=>it.kind==='rep'?'repeat':it.ev?'calendar-dots':/\b(call|ring|phone)\b/i.test(it.raw)?'phone':/\b(email|text|message|reply)\b/i.test(it.raw)?'chat-text':/\b(study|read|homework|quran|revise|essay)\b/i.test(it.raw)?'book-open-text':/\b(shop|groceries|buy|market)\b/i.test(it.raw)?'basket':/\b(clean|laundry|dishes|tidy)\b/i.test(it.raw)?'broom':/\b(gym|walk|run|exercise|workout)\b/i.test(it.raw)?'person-simple-walk':'check-square-offset';
 function stopRec(){LIS=false;try{REC&&REC.stop()}catch(e){}const b=$('vpMic');if(b){b.classList.remove('on');b.setAttribute('aria-label',X('Start talking','ابدأ الكلام'))}const s=$('vpSt');if(s)s.textContent=SR?X('Tap the circle and talk','اضغط الدائرة وتكلّم'):''}
 function startRec(){const ta=$('vpT');if(!SR||!ta)return;try{REC=new SR()}catch(e){noMic();return}
@@ -215,14 +223,14 @@ function strip(k,items){const sl=salFor(k),a0=Math.min(toM(VP.ws),sl.fajr)-15,b0
  let lx=-99;const lab=SK.map(s=>{const x=(Math.max(a0,Math.min(b0,sl[s]))-a0)/W*100,up=x-lx<11;lx=up?-99:x;return up});const nn=items.length;
  return `<div class="vp-day"><div class="vp-dh"><b>${esc(dayLabel(k))}</b><small>${X(nn+' new','جديد: '+AR(nn))}</small></div><div class="vp-hz">
   ${old.map(x=>`<i class="vp-old" style="inset-inline-start:${P(x.a)};width:calc(${P(x.b)} - ${P(x.a)})"></i>`).join('')}
-  ${items.filter(i=>i.s!=null&&i.kind!=='any').map(i=>`<i class="vp-new" style="inset-inline-start:${P(i.s)};width:max(6px,calc(${P(i.e)} - ${P(i.s)}))"></i>`).join('')}
+  ${items.filter(i=>i.s!=null&&i.kind!=='any').map(i=>`<i class="vp-new c-${catOf(i.raw+' '+i.t)}" style="inset-inline-start:${P(i.s)};width:max(6px,calc(${P(i.e)} - ${P(i.s)}))"></i>`).join('')}
   ${SK.map((s,j)=>`<span class="vp-sm${lab[j]?' up':''}" style="inset-inline-start:${P(sl[s])}"><em>${esc(salName(s))}</em></span>`).join('')}</div></div>`}
 function whoRow(it){const f=LF().fam;if(!f.length)return'';const w=it.who||(VP.me?[VP.me]:['all']);it.who=w;
  return `<div class="vp-who">${[['all',X('Everyone','الجميع'),null],...f.map(p=>[p.id,p.n,p.c])].map(([id,n,c])=>`<button data-vw="${id}" class="${w.includes(id)?'on':''}"><i class="vp-dot" style="background:${c||'var(--acc)'}"></i>${esc(n)}</button>`).join('')}</div>`}
 const DN=i=>new Date(2026,10,15+i).toLocaleDateString(loc(),{weekday:'short'});
 function card(it,i){const when=it.kind==='rep'?it.rep.map(DN).join(', ')+' · '+fm(it.s)+' – '+fm(it.e):it.kind==='any'?dayLabel(it.dt)+' · '+X('any time','أي وقت'):dayLabel(it.dt)+' · '+fm(it.s)+' – '+fm(it.e);
  const tag=it.kind==='fix'?X('Your time','وقتك'):it.kind==='fit'?X('Fitted','رُتّب'):it.kind==='rep'?X('Every week','أسبوعيًا'):X('Any time','أي وقت');
- return `<div class="vp-it" data-i="${i}"><span class="vp-ic">${IC(icon(it),20)}</span><div class="vp-bd">
+ return `<div class="vp-it c-${catOf(it.raw+' '+it.t)}" data-i="${i}"><span class="vp-ic">${IC(icon(it),20)}</span><div class="vp-bd">
   <input class="vp-tt" data-tt="${i}" value="${esc(it.t)}" dir="auto" maxlength="120" aria-label="${X('Title','العنوان')}">
   <button class="vp-wh" data-ed="${i}"><span>${esc(when)}</span>${IC('pencil-simple',14)}<em class="vp-tag k-${it.kind}">${tag}</em></button>
   ${it.note?`<p class="vp-nt${it.note.w?' w':''}">${IC(it.note.w?'info':'check-circle',14)}${esc(it.note.t)}</p>`:''}
@@ -235,7 +243,7 @@ function review(){const p=PL;let ks=[...new Set(p.items.filter(i=>i.dt&&i.kind!=
   ${ks.map(k=>strip(k,p.items.filter(i=>i.dt===k).concat(p.items.filter(i=>i.kind==='rep'&&i.rep.includes(dOf(k).getDay()))))).join('')}
   <p class="vp-cnt">${X(p.items.length+(p.items.length===1?' thing':' things')+' to add','سيُضاف '+AR(p.items.length))}${p.left.length?' · '+X(p.left.length+' left out','تُرك '+AR(p.left.length)):''}</p>
   <div class="vp-list">${p.items.map(card).join('')}</div>
-  ${p.mv.length?`<p class="vp-mvh">${IC('arrows-clockwise',16)}${X('Moved to make room','نُقل لإفساح المجال')}</p><div class="vp-list">${p.mv.map(x=>`<div class="vp-it vp-mv"><span class="vp-ic">${IC('arrow-bend-down-right',18)}</span><div class="vp-bd"><b dir="auto">${esc(x.t)}</b><p class="vp-nt">${fm(x.from)} → ${x.to!=null?fm(x.to):X('any time','أي وقت')}</p></div></div>`).join('')}</div>`:''}
+  ${p.mv.length?`<p class="vp-mvh">${IC('arrows-clockwise',16)}${X('Moved to make room','نُقل لإفساح المجال')}</p><div class="vp-list">${p.mv.map(x=>`<div class="vp-it vp-mv c-${catOf(x.t)}"><span class="vp-ic">${IC('arrow-bend-down-right',18)}</span><div class="vp-bd"><b dir="auto">${esc(x.t)}</b><p class="vp-nt">${fm(x.from)} → ${x.to!=null?fm(x.to):X('any time','أي وقت')}</p></div></div>`).join('')}</div>`:''}
   <button class="vp-day2" id="vpWin">${IC('sun-horizon',16)}${X('My day runs','يومي من')} <b>${fm(toM(VP.ws))} – ${fm(toM(VP.we))}</b>${IC('pencil-simple',14)}</button>
   <div class="vp-ef" id="vpWinE" hidden><label>${X('Start','البداية')}<input type="time" id="vpWs" value="${VP.ws}"></label><label>${X('End','النهاية')}<input type="time" id="vpWe" value="${VP.we}"></label><button class="vp-ok" id="vpWok">${X('Re-fit','أعد الترتيب')}</button></div>
   <button class="big vp-go" id="vpAdd" ${p.items.length?'':'disabled'}>${IC('check',20)} ${p.items.length===1?X('Add it','أضفها'):X('Add all '+p.items.length,'أضف الكل ('+AR(p.items.length)+')')}</button>
@@ -293,17 +301,30 @@ function dayCard(){const k=VPD||today(),items=busy(k).filter(x=>!x.sal),sl=salFo
  const rows=SK.map(s=>({a:sl[s],sal:s})).concat(items).sort((x,y)=>x.a-y.a);
  return `<div class="vp-card"><div class="vp-ch"><b>${X('Your day','يومك')}</b><div class="vp-seg">${[today(),addD(today(),1)].map(d=>`<button data-vd="${d}" class="${d===k?'on':''}">${esc(dayLabel(d))}</button>`).join('')}</div></div>
   ${(function(){const a0=Math.min(toM(VP.ws),sl.fajr)-15,b0=Math.max(toM(VP.we),sl.isha+30),W=b0-a0,P=m=>((Math.max(a0,Math.min(b0,m))-a0)/W*100).toFixed(2)+'%';
-   return `<div class="vp-hz sm">${items.map(x=>`<i class="vp-new" style="inset-inline-start:${P(x.a)};width:max(5px,calc(${P(x.b)} - ${P(x.a)}))"></i>`).join('')}${SK.map(s=>`<span class="vp-sm" style="inset-inline-start:${P(sl[s])}"></span>`).join('')}${isT&&nm>a0&&nm<b0?`<span class="vp-now" style="inset-inline-start:${P(nm)}"></span>`:''}</div>`})()}
-  ${items.length?`<div class="vp-ag">${rows.map(r=>r.sal?`<p class="vp-as">${esc(salName(r.sal))}<span>${fm(r.a)}</span></p>`:`<p class="vp-ai${isT&&r.b<=nm?' past':''}"><span class="vp-at">${fm(r.a)}</span><b dir="auto">${esc(r.t)}</b>${r.sch?`<em>${X('weekly','أسبوعي')}</em>`:''}</p>`).join('')}</div>`
+   return `<div class="vp-hz sm">${items.map(x=>`<i class="vp-new c-${catOf(x.t)}" style="inset-inline-start:${P(x.a)};width:max(5px,calc(${P(x.b)} - ${P(x.a)}))"></i>`).join('')}${SK.map(s=>`<span class="vp-sm" style="inset-inline-start:${P(sl[s])}"></span>`).join('')}${isT&&nm>a0&&nm<b0?`<span class="vp-now" style="inset-inline-start:${P(nm)}"></span>`:''}</div>`})()}
+  ${items.length?`<div class="vp-lg">${[...new Set(items.map(x=>catOf(x.t)))].map(c=>`<span class="c-${c}"><i></i>${X(CATN[c][0],CATN[c][1])}</span>`).join('')}<span class="c-sal"><i></i>${X('Salah','الصلاة')}</span></div><div class="vp-ag">${rows.map(r=>r.sal?`<p class="vp-as">${esc(salName(r.sal))}<span>${fm(r.a)}</span></p>`:`<p class="vp-ai c-${catOf(r.t)}${isT&&r.b<=nm?' past':''}"><span class="vp-at">${fm(r.a)}</span><b dir="auto">${esc(r.t)}</b>${r.sch?`<em>${X('weekly','أسبوعي')}</em>`:''}</p>`).join('')}</div>`
    :`<p class="vp-emp">${X('Nothing timed yet. Talk it out and I’ll place it around salah.','لا شيء بوقت بعد. تكلّم وأنا أرتّبه حول الصلاة.')}</p>`}
   <button class="vp-talk" id="vpOpen">${IC('microphone',19)}<span>${X('Say it, I’ll fit it','قلها، وأنا أرتّبها')}</span></button></div>`}
 let VPD=null;
-function mount(){const td=$('s-todo');if(!td)return;roll();
+function tint(){const byId={};S.tasks.concat(S.done||[]).forEach(t=>{byId[t.id]=catOf(t.t)});
+ $$('#tList [data-tk],#tDone [data-tk]').forEach(b=>{const c=byId[+b.dataset.tk],r=b.closest('.tr');if(r){r.className=r.className.replace(/\s*vc-\S+/g,'');if(c)r.className+=' vc-'+c}})}
+function mount(){const td=$('s-todo');if(!td)return;roll();try{tint()}catch(e){}
  const qa=$('qa');if(qa&&!$('vpQ')){qa.insertAdjacentHTML('beforeend',`<button type="button" class="vp-q" id="vpQ" aria-label="${X('Talk it out','تكلّم')}">${IC('microphone',22)}</button>`);$('vpQ').onclick=()=>openVoice()}
  let box=$('vpBox');if(!box){(qa||td.firstElementChild).insertAdjacentHTML('afterend','<div id="vpBox"></div>');box=$('vpBox')}
  box.innerHTML=dayCard();$('vpOpen').onclick=()=>openVoice();$$('#vpBox [data-vd]').forEach(b=>b.onclick=()=>{VPD=b.dataset.vd;mount()})}
 if(typeof R!=='undefined'&&R.todo){const _t=R.todo;R.todo=function(){const r=_t.apply(this,arguments);try{mount()}catch(e){console.error(e)}return r}}
 try{mount()}catch(e){}
+/* Calendar: colour dots on days that have plans, and that day's plan under the salah row */
+function calPaint(){const cd=$('cDays');if(!cd)return;
+ $$('#cDays [data-cd]').forEach(b=>{const k=b.dataset.cd,l=busy(k).filter(x=>!x.sal);const old=b.querySelector('.vp-cdots');if(old)old.remove();
+  if(l.length)b.insertAdjacentHTML('beforeend',`<span class="vp-cdots">${[...new Set(l.map(x=>catOf(x.t)))].slice(0,3).map(c=>`<em class="c-${c}"></em>`).join('')}</span>`)});
+ const k=typeof cSel==='string'?cSel:null,box=$('cDay');if(!k||!box)return;const l=busy(k).filter(x=>!x.sal),any=S.tasks.filter(t=>t.dt===k&&t.s==null);
+ const old=$('vpCalD');if(old)old.remove();
+ box.insertAdjacentHTML('beforeend',`<div id="vpCalD" class="vp-cald">${l.length||any.length?`<div class="vp-ag">${l.map(r=>`<p class="vp-ai c-${catOf(r.t)}"><span class="vp-at">${fm(r.a)}</span><b dir="auto">${esc(r.t)}</b>${r.sch?`<em>${X('weekly','أسبوعي')}</em>`:''}</p>`).join('')}${any.map(t=>`<p class="vp-ai c-${catOf(t.t)}"><span class="vp-at">${X('Any time','أي وقت')}</span><b dir="auto">${esc(t.t)}</b></p>`).join('')}</div>`:''}
+  <button class="vp-talk sm" id="vpCalT">${IC('microphone',17)}<span>${X('Plan this day','خطّط لهذا اليوم')}</span></button></div>`);
+ $('vpCalT').onclick=()=>{const d=dOf(k),t=today();TXT='';openVoice(k===t?'':(k===addD(t,1)?'Tomorrow ':'On '+d.toLocaleDateString('en-US',{month:'long',day:'numeric'})+' '))}}
+if(typeof R!=='undefined'&&R.cal){const _c=R.cal;R.cal=function(){const r=_c.apply(this,arguments);try{calPaint()}catch(e){console.error(e)}return r}}
+
 /* open from a link: ?x=voice or #voice */
 if(/[?&]x=voice\b/.test(location.search)||location.hash==='#voice')setTimeout(()=>{try{go('todo')}catch(e){}openVoice()},500);
 window.FQV={plan,parse,split,openVoice,busy,salFor};
