@@ -1,0 +1,4 @@
+# name url   (all Creative Commons 0)
+345511-hq.mp3 https://cdn.freesound.org/previews/345/345511_3846564-hq.mp3
+345511-hq.ogg https://cdn.freesound.org/previews/345/345511_3846564-hq.ogg
+345511-lq.mp3 https://cdn.freesound.org/previews/345/345511_3846564-lq.mp3
