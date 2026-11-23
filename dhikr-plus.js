@@ -15,6 +15,7 @@ const IS_IOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='
 /* ---------- settings ---------- */
 const DEF={mode:'beads',mat:'olive',goal:33,mute:false,vib:true,snd:true,vol:30};
 const st=Object.assign({},DEF,store('tbx')||{});
+if(st.mute){st.snd=false;st.vib=false}st.mute=false;   // old single mute button -> two separate switches
 const saveSt=()=>store('tbx',st);
 
 /* ---------- haptics ----------
@@ -37,8 +38,8 @@ function tick(){
   if(navigator.vibrate){try{navigator.vibrate(12)}catch(e){}}
 }
 function haptic(strong){
-  if(st.mute||!st.vib)return;
-  if(!IS_IOS&&navigator.vibrate){try{navigator.vibrate(strong?[35,70,35,70,60]:12)}catch(e){}return}
+  if(!st.vib)return;
+  if(!IS_IOS&&navigator.vibrate){try{navigator.vibrate(strong?[14,45,22,110,14,45,22,110,30]:[7,38,13])}catch(e){}return}
   tick();if(strong){setTimeout(tick,110);setTimeout(tick,220)}
 }
 /* iOS 26.5+ only buzzes for a REAL finger tap on a <label> that holds a switch (script clicks are
@@ -47,7 +48,7 @@ function haptic(strong){
    can't buzz; a tap can. TAPH tells count() the native tick already covers this tap. */
 let TAPH=false;
 const HSW='<input type="checkbox" switch class="tb-hs" tabindex="-1" aria-hidden="true">';
-function hsw(root){(root||document).querySelectorAll('.tb-hs').forEach(i=>{i.disabled=st.mute||!st.vib;if(!i._w){i._w=1;i.addEventListener('click',e=>e.stopPropagation())}})}
+function hsw(root){(root||document).querySelectorAll('.tb-hs').forEach(i=>{i.disabled=!st.vib;if(!i._w){i._w=1;i.addEventListener('click',e=>e.stopPropagation())}})}
 /* ---------- soft bead click (Web Audio, generated; respects the iPhone silent switch) ---------- */
 let AC=null,NB=null;
 function ac(){
@@ -56,6 +57,7 @@ function ac(){
     try{AC=new C()}catch(e){return null}
     NB=AC.createBuffer(1,Math.floor(AC.sampleRate*.05),AC.sampleRate);const d=NB.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
   if(AC.state==='suspended')AC.resume().catch(()=>{});
+  loadBeads(AC);
   return AC
 }
 function knock(a,t,f,q,dec,vol){
@@ -66,10 +68,25 @@ function knock(a,t,f,q,dec,vol){
   const og=a.createGain();og.gain.setValueAtTime(.0001,t);og.gain.exponentialRampToValueAtTime(vol*.5,t+.001);og.gain.exponentialRampToValueAtTime(.0001,t+dec*.7);
   o.connect(og).connect(a.destination);o.start(t);o.stop(t+dec+.01)
 }
+/* real bead clicks: short cuts from a CC0 field recording of beads (Freesound #345511 by juliansmart, Creative Commons 0).
+   Five takes, picked at random and tuned per material (rate = pitch, lp = warmth), so no two clicks sound the same. */
+// [rate, lowpass Hz, gain] - gain evens out loudness between warm (filtered) and bright materials
+const SND={olive:[.95,3000,1.46],sandal:[1,3400,1.42],amber:[1.08,4800,1.26],onyx:[1.18,0,.6],jade:[1.15,0,.6],lapis:[1.12,0,.6],
+  crystal:[1.42,0,.6],frost:[1.28,6500,1.28],smoky:[1.32,0,.6],pearl:[1.2,5800,1.28],steel:[1.55,0,.65],ceramic:[1.24,6200,1.26]};
+let BEADS=null,BLOAD=false;
+function loadBeads(a){if(BLOAD||!a)return;BLOAD=true;const base=HCB.replace('hisn/clips/','sfx/');
+  Promise.all([1,2,3,4,5].map(i=>fetch(base+'bead-'+i+'.wav').then(r=>r.arrayBuffer()).then(b=>new Promise((ok,no)=>{const pr=a.decodeAudioData(b,ok,no);if(pr&&pr.then)pr.then(ok,no)}))))
+   .then(L=>{BEADS=L}).catch(()=>{BLOAD=false})}
+function bead(a,t,gain,rate,lp){const src=a.createBufferSource();src.buffer=BEADS[Math.floor(Math.random()*BEADS.length)];
+  src.playbackRate.value=rate*(.96+Math.random()*.08);const g=a.createGain();g.gain.value=gain;let n=src;
+  if(lp){const f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=lp;f.Q.value=.5;n.connect(f);n=f}
+  n.connect(g).connect(a.destination);src.start(t)}
 function clack(strong){
-  if(st.mute||!st.snd)return;const a=ac();if(!a)return;const m=MAT[st.mat]||MAT.olive,t=a.currentTime+.005;
+  if(!st.snd)return;const a=ac();if(!a)return;const m=MAT[st.mat]||MAT.olive,t=a.currentTime+.005;
   const V=Math.pow(Math.max(0,Math.min(100,st.vol))/100,1.6)*.22;if(V<.001)return; // volume slider (default 30 = soft)
   if(st.mode==='clicker'&&OPEN){knock(a,t,4300,9,.018,V*1.1);knock(a,t+.009,2100,4,.03,V*.6);if(strong){knock(a,t+.15,4300,9,.018,V);knock(a,t+.16,2100,4,.03,V*.5)}return}
+  if(BEADS){const p=SND[st.mat]||SND.olive,G=V*1.6*p[2];bead(a,t,G,p[0],p[1]);if(strong){bead(a,t+.14,G*.9,p[0]*.97,p[1]);bead(a,t+.2,G*.55,p[0]*1.02,p[1])}return}
+  loadBeads(a);
   knock(a,t,m.f,m.q,m.dec,V);knock(a,t+.022,m.f*1.08,m.q,m.dec*.8,V*.4);
   if(strong){knock(a,t+.16,m.f*.9,m.q,m.dec*1.3,V*.9);knock(a,t+.18,m.f,m.q,m.dec,V*.36)}
 }
@@ -222,28 +239,29 @@ function tasbihPlus(o){
   ctx=o&&o.key?o:null;
   const p=ensurePage();OPEN=true;
   p.innerHTML=`<div class="tbw">
-  <div class="hd sub"><button class="ib" id="tbBack" aria-label="${esc(TX('Back','رجوع','Duubatti','Dib u noqo'))}"><i class="ph ph-caret-left flip"></i></button><h1 id="tbT"></h1><button class="ib tb-mu" id="tbMute"></button></div>
+  <div class="hd sub"><button class="ib" id="tbBack" aria-label="${esc(TX('Back','رجوع','Duubatti','Dib u noqo'))}"><i class="ph ph-caret-left flip"></i></button><h1 id="tbT"></h1><span class="tb-av"><button class="ib tb-mu" id="tbSndB"></button><button class="ib tb-mu" id="tbVibB"></button></span></div>
   ${styRow()}
   <p class="tb-ph" id="tbPh" lang="ar" dir="rtl" hidden></p>
   <div class="tb-cn" id="tbCn" aria-live="polite"><b id="tbN"></b><small id="tbOf"></small><span class="tb-pr"><i id="tbPr"></i></span><span class="tb-rg" id="tbRg"></span></div>
   <div class="tb-stage" id="tbStage"></div>
   <p class="tb-hint" id="tbHint"></p>
   <div class="tb-goal" role="group" aria-label="${esc(TX('Goal','الهدف','Galma','Hadaf'))}">${[33,99,100,0].map(g=>`<button data-g="${g}">${g?AR(g):'∞'}</button>`).join('')}</div>
-  <div class="tb-bar"><button class="tb-mat" id="tbMat"><img alt="" id="tbMatI"><span id="tbMatN"></span><i class="ph ph-caret-down"></i></button><button class="tb-rs" id="tbReset"><i class="ph ph-arrow-counter-clockwise"></i><span>${TX('Reset','تصفير','Haqi','Tirtir')}</span></button></div>
+  <div class="tb-bar"><button class="tb-mat" id="tbMat"><img alt="" id="tbMatI"><span id="tbMatN"></span><i class="ph ph-caret-down"></i></button><button class="tb-rs" id="tbUndo"><i class="ph ph-arrow-u-up-left flip"></i><span>${TX('Undo','تراجع','Deebisi','Ka noqo')}</span></button><button class="tb-rs" id="tbReset"><i class="ph ph-arrow-counter-clockwise"></i><span>${TX('Reset','تصفير','Haqi','Tirtir')}</span></button></div>
   </div>`;
   document.getElementById('tbT').textContent=ctx?ctx.title:T('Tasbih','التسبيح');
   if(ctx&&ctx.phrase){const ph=document.getElementById('tbPh');ph.textContent=ctx.phrase;ph.hidden=false}
   p.classList.add('on');document.documentElement.classList.add('tbx-open');
   document.getElementById('tbBack').onclick=closePage;
-  document.getElementById('tbMute').onclick=()=>{st.mute=!st.mute;saveSt();paintMute();hsw();
-    if(!st.mute){haptic(false);clack(false)}
-    toast(st.mute?TX('Sound and vibration off','الصوت والاهتزاز مُطفآن','Sagaleen fi raafamni dhaamsameera','Codka iyo gariirku waa damsan yihiin'):TX('Sound and vibration on','الصوت والاهتزاز يعملان','Sagaleen fi raafamni hojii irra jiru','Codka iyo gariirku waa shidan yihiin'))};
+  // sound and vibration are two separate switches (no popup: the button itself shows on / off)
+  document.getElementById('tbSndB').onclick=()=>{st.snd=!st.snd;saveSt();paintAV();if(st.snd)clack(false)};
+  document.getElementById('tbVibB').onclick=()=>{st.vib=!st.vib;saveSt();paintAV();hsw();if(st.vib&&!IS_IOS)haptic(false)};
   p.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{if(st.mode===b.dataset.m)return;st.mode=b.dataset.m;saveSt();haptic(false);paintMode()});
   p.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{const g=+b.dataset.g;if(ctx){ctx.goal=g;st.salGoal=g}else st.goal=g;saveSt();haptic(false);paintGoal();paintCount(getN())});
   document.getElementById('tbMat').onclick=styleSheet;
+  document.getElementById('tbUndo').onclick=()=>{if(!getN())return;if(beads&&beads.undo)beads.undo();else uncount();if(beads&&beads.paint)beads.paint()};
   document.getElementById('tbReset').onclick=()=>{const was=getN();if(!was)return;setN(0);paintCount(0);try{renderTab(curTab())}catch(e){}
     undoToast(T('Counter reset to 0','تم التصفير'),()=>{setN(was);paintCount(was)})};
-  paintMute();paintGoal();paintMode();paintMat();paintCount(getN());
+  paintAV();paintGoal();paintMode();paintMat();paintCount(getN());
   document.addEventListener('keydown',onKey);
   ac();// prepare audio inside the opening tap
 }
@@ -256,11 +274,15 @@ function onKey(e){if(!OPEN)return;if(document.getElementById('sh').classList.con
   if(e.key==='ArrowDown'||e.key===' '||e.key==='Enter'){if(e.target&&e.target.tagName==='BUTTON'&&e.key!=='ArrowDown')return;e.preventDefault();beads?beads.step(1):count()}
   else if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();beads?beads.step(-1):count()}
   else if(e.key==='ArrowRight'){e.preventDefault();beads?beads.step(1):count()}}
-function paintMute(){const b=document.getElementById('tbMute');b.innerHTML=`<i class="ph ${st.mute?'ph-speaker-slash':'ph-speaker-high'}"></i>`;b.setAttribute('aria-pressed',String(st.mute));
-  b.setAttribute('aria-label',TX('Mute sound and vibration','كتم الصوت والاهتزاز','Sagalee fi raafama dhaamsi','Aamusi codka iyo gariirka'));b.classList.toggle('off',st.mute)}
+function paintAV(){
+  const sb=document.getElementById('tbSndB'),vb=document.getElementById('tbVibB');if(!sb)return;
+  sb.innerHTML=`<i class="ph ${st.snd?'ph-speaker-high':'ph-speaker-slash'}"></i>`;sb.setAttribute('aria-pressed',String(st.snd));sb.classList.toggle('off',!st.snd);
+  sb.setAttribute('aria-label',TX('Bead sound','صوت الحبّات','Sagalee callee','Codka kuusha')+': '+(st.snd?TX('on','يعمل','banaa','shidan'):TX('off','مُطفأ','cufaa','dansan')));
+  vb.innerHTML=`<i class="ph ph-vibrate"></i>`;vb.setAttribute('aria-pressed',String(st.vib));vb.classList.toggle('off',!st.vib);
+  vb.setAttribute('aria-label',TX('Vibration','الاهتزاز','Raafama','Gariir')+': '+(st.vib?TX('on','يعمل','banaa','shidan'):TX('off','مُطفأ','cufaa','dansan')))}
 function paintGoal(){const g=goal();document.querySelectorAll('#tbx [data-g]').forEach(b=>{const on=+b.dataset.g===g;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on))})}
 function paintMat(){document.getElementById('tbMatI').src=beadImg(st.mat,0,72);document.getElementById('tbMatN').textContent=matName(st.mat)}
-function paintCount(n,bump){
+function paintCount(n,bump){const ub=document.getElementById('tbUndo');if(ub)ub.disabled=!n;
   const g=goal(),b=document.getElementById('tbN');if(!b)return;b.textContent=AR(n);
   const within=g>0?(n>0?((n-1)%g)+1:0):n,round=g>0?Math.max(1,Math.ceil(n/g)):0;
   document.getElementById('tbOf').textContent=g>0?TX(`${within} of ${g} · Round ${round}`,`${AR(within)} من ${AR(g)} · الجولة ${AR(round)}`,`${within} keessaa ${g} · Marsaa ${round}`,`${within} ka mid ah ${g} · Wareeg ${round}`):TX('No goal','بلا هدف','Galma malee','Hadaf la\'aan');
@@ -281,14 +303,14 @@ const STY=(()=>{
   const ring=(()=>{let s='<circle cx="12" cy="12.5" r="8" class="t"/>';for(let i=0;i<9;i++){const a=-Math.PI/2+(i+1)*2*Math.PI/10.6,x=12+8*Math.cos(a),y=12.5+8*Math.sin(a);s+=`<circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="1.9" class="b"/>`}return s})();
   const loop=(()=>{let s='<path d="M4.5 1.5V9a7.5 8.5 0 0 0 15 0V1.5" class="t"/>';const P=[[4.5,4],[4.9,9.2],[6.6,13.3],[9.4,16.4],[14.6,16.4],[17.4,13.3],[19.1,9.2],[19.5,4]];P.forEach(p=>s+=`<circle cx="${p[0]}" cy="${p[1]}" r="1.9" class="b"/>`);return s})();
   return[
-  {k:'beads',kind:'v',n:['Up-down','أعلى وأسفل','Ol-gad','Kor-hoos'],h:['Swipe or tap a bead','اسحب حبّة أو المسها','Callee harkisi ykn tuqi','Kuul jiid ama taabo'],
+  {k:'beads',kind:'v',n:['Up-down','أعلى وأسفل','Ol-gad','Kor-hoos'],h:['Slide a bead until it touches the next one','حرّك الحبّة حتى تلامس التي بعدها','Callee itti aanu tuqutti harkisi','Kuul jiid ilaa ay taabato tan xigta'],
    i:'<path d="M12 1v22" class="t"/><circle cx="12" cy="4.6" r="2.7" class="b"/><circle cx="12" cy="10.2" r="2.7" class="b"/><circle cx="12" cy="18.6" r="2.7" class="b"/>'},
-  {k:'side',kind:'h',n:['Side','جانبي','Gama-gama','Dhinac'],h:['Swipe or tap a bead','اسحب حبّة أو المسها','Callee harkisi ykn tuqi','Kuul jiid ama taabo'],
+  {k:'side',kind:'h',n:['Side','جانبي','Gama-gama','Dhinac'],h:['Slide a bead until it touches the next one','حرّك الحبّة حتى تلامس التي بعدها','Callee itti aanu tuqutti harkisi','Kuul jiid ilaa ay taabato tan xigta'],
    i:'<path d="M1 12h22" class="t"/><circle cx="4.6" cy="12" r="2.7" class="b"/><circle cx="10.2" cy="12" r="2.7" class="b"/><circle cx="18.6" cy="12" r="2.7" class="b"/>'},
-  {k:'ring',kind:'ring',n:['Round','دائري','Geengoo','Goobo'],h:['Swipe or tap a bead','اسحب حبّة أو المسها','Callee harkisi ykn tuqi','Kuul jiid ama taabo'],i:ring},
-  {k:'loop',kind:'loop',n:['Hanging','معلّقة','Fannifamaa','Sudhan'],h:['Swipe or tap a bead','اسحب حبّة أو المسها','Callee harkisi ykn tuqi','Kuul jiid ama taabo'],i:loop},
+  {k:'ring',kind:'ring',n:['Round','دائري','Geengoo','Goobo'],h:['Slide a bead until it touches the next one','حرّك الحبّة حتى تلامس التي بعدها','Callee itti aanu tuqutti harkisi','Kuul jiid ilaa ay taabato tan xigta'],i:ring},
+  {k:'loop',kind:'loop',n:['Hanging','معلّقة','Fannifamaa','Sudhan'],h:['Slide a bead until it touches the next one','حرّك الحبّة حتى تلامس التي بعدها','Callee itti aanu tuqutti harkisi','Kuul jiid ilaa ay taabato tan xigta'],i:loop},
   {k:'clicker',n:['Counter','عدّاد','Lakkooftuu','Tiriye'],h:['Press the button to count','اضغط الزرّ للعدّ',"Lakkaa'uuf qabduu tuqi",'Riix badhanka si aad u tiriso'],
-   i:'<rect x="5" y="2" width="14" height="20" rx="5.5" class="t"/><rect x="8" y="5.2" width="8" height="4.6" rx="1.2" class="t"/><circle cx="12" cy="15.6" r="3.1" class="b"/>'},
+   i:'<path d="M10.6 2.6a1.4 1.4 0 0 1 2.8 0" class="t"/><path d="M12 3.6c4.5 0 7.6 3.6 7.6 9.1 0 5-3.4 8.7-7.6 8.7s-7.6-3.7-7.6-8.7c0-5.5 3.1-9.1 7.6-9.1z" class="t"/><rect x="8.7" y="7" width="6.6" height="3.2" rx="1" class="t"/><circle cx="12" cy="15.2" r="3.3" class="b"/>'},
   {k:'tap',n:['Tap','لمس','Tuqi','Taabo'],h:['Tap the circle to count','اضغط على الدائرة للعدّ',"Lakkaa'uuf geengoo tuqi",'Taabo goobada si aad u tiriso'],
    i:'<circle cx="12" cy="12" r="9" class="t"/><circle cx="12" cy="12" r="4.2" class="b"/>'}]})();
 const styOf=k=>STY.find(s=>s.k===k)||STY[0];
@@ -337,7 +359,7 @@ function Clicker(stage){
    a bead crosses the gap. Pulling it back in the same drag takes that count back (silently). */
 let beads=null;
 const clampN=(a,b,...v)=>Math.round(Math.max(a,Math.min(b,...v)));
-const DET=.22,disp=r=>r-DET*Math.sin(2*Math.PI*(r-.5))/(2*Math.PI);
+const DET=0,disp=r=>r-DET*Math.sin(2*Math.PI*(r-.5))/(2*Math.PI);
 function uncount(){const n=getN();if(n<=0)return;setN(n-1);dzAdd(-1);try{renderTab(curTab())}catch(e){}paintCount(n-1)}
 function Beads(stage,kind){
   stage.innerHTML=`<div class="tb-str k-${kind}" id="tbStr" tabindex="0" role="button"><svg class="tb-th" aria-hidden="true"><path/></svg><label class="tb-hl" aria-hidden="true">${HSW}</label></div>`;
@@ -346,7 +368,10 @@ function Beads(stage,kind){
   const dpr=Math.min(3,window.devicePixelRatio||2),RTL=document.documentElement.dir==='rtl';
   const tapDir=(kind==='h'||kind==='loop')&&RTL?-1:1;
   let SPC=false,SPP=[],W=0,H=0,D=0,E=0,S=0,GAP=0,N=0,LV=0,POOL=[],raw=.5,anim=null,alive=true,P=null,periodic=false,px=0,C=0,R=0,cx=0,cy=0;
-  const uOf=s=>s+(GAP/2)*Math.tanh(s/(S*.55));
+  const uOf=s=>{const o=s/S;return s+(GAP/2)*(o>=.5?1:o<=-.5?-1:2*o)};
+  // one bead at a time: the strand is anchored at P0, so only the bead crossing the gap moves while you pull.
+  // The gap itself travels by one bead; when you let go the strand gently re-centres.
+  let P0=.5,rc=null,rest=0,lastD=-1;  // rest = the bead position (integer) where the strand last settled
   function layout(){
     W=el.clientWidth||340;H=el.clientHeight||360;cx=W/2;cy=H/2;periodic=false;let d='';
     if(kind==='v'){D=clampN(46,74,H/6.6,W*.22);P=u=>[cx,cy+u,0,1];LV=H/2;d=`M${cx} -20V${H+20}`}
@@ -363,16 +388,16 @@ function Beads(stage,kind){
       d=`M${cx-a} -30V${cyE}A${a} ${b} 0 0 0 ${cx+a} ${cyE}V-30`}
     SPC=!!(MAT[st.mat]||{}).sp;S=D*(SPC?1.2:.97);GAP=D*(kind==='ring'?.9:.95);
     if(kind==='ring'){N=Math.max(12,Math.floor((C-GAP)/S));S=(C-GAP)/N;periodic=true}
-    const need=periodic?N:Math.ceil((LV+GAP)/S)*2+4;
+    const need=periodic?N:Math.ceil((LV+GAP)/S)*2+10;
     if(POOL.length!==need){POOL.forEach(b=>b.remove());POOL=[];for(let i=0;i<need;i++){const b=document.createElement('i');b.className='tb-bd';b.setAttribute('aria-hidden','true');el.appendChild(b);POOL.push(b)}}
     E=D/.8;px=Math.round(E*dpr);POOL.forEach(b=>{b.style.width=b.style.height=E+'px';b._k=''});
     SPP.forEach(b=>b.remove());SPP=[];
     if(SPC){const se=D*.36/.8,spx=Math.round(se*dpr),img=`url(${beadImg('gold',0,spx,'v')})`;
       for(let i=0;i<POOL.length;i++){const b=document.createElement('i');b.className='tb-bd tb-sp';b.setAttribute('aria-hidden','true');b.style.width=b.style.height=se+'px';b.style.backgroundImage=img;b._e=se;el.appendChild(b);SPP.push(b)}}
-    svg.setAttribute('width',W);svg.setAttribute('height',H);thp.setAttribute('d',d);draw()
+    svg.setAttribute('width',W);svg.setAttribute('height',H);thp.setAttribute('d',d);P0=disp(raw);el.dataset.step=String(Math.round(S+GAP));draw()
   }
   function place(b,s,vi){
-    const u=uOf(s);if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
+    const u=uOf(s)+Z;if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
     const p=P(u),ax=Math.abs(p[2])>Math.abs(p[3])?'h':'v',key=st.mat+vi+ax+px;
     if(b._k!==key){b.style.backgroundImage=`url(${beadImg(st.mat,vi,px,ax)})`;b._k=key}
     b.style.visibility='';b.style.transform=`translate3d(${(p[0]-E/2).toFixed(2)}px,${(p[1]-E/2).toFixed(2)}px,0)`;b.style.zIndex=String(1000+Math.round(p[1]))
@@ -380,18 +405,23 @@ function Beads(stage,kind){
   function spacer(k,s){const b=SPP[k];if(!b)return;const s2=s+S/2;
     // no spacer inside the gap (it fades out as its pair of beads separates)
     const op=sst(S*.3,S*.62,Math.abs(s2));if(op<.02){b.style.visibility='hidden';return}b.style.opacity=op.toFixed(2);
-    const u=uOf(s2);if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
+    const u=uOf(s2)+Z;if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
     const p=P(u);b.style.visibility='';b.style.transform=`translate3d(${(p[0]-b._e/2).toFixed(2)}px,${(p[1]-b._e/2).toFixed(2)}px,0)`;b.style.zIndex=String(999+Math.round(p[1]))}
+  let Z=0;
   function draw(){
-    const ph=disp(raw);
+    const ph=disp(raw);if(ph-P0>2)P0=ph-2;else if(P0-ph>2)P0=ph+2;Z=S*(ph-P0);
     if(periodic){const L2=N*S;for(let k=0;k<N;k++){let s=((k-ph)*S)%L2;if(s>L2/2)s-=L2;if(s<=-L2/2)s+=L2;place(POOL[k],s,k%5);spacer(k,s)}}
     else{const base=Math.floor(ph),half=Math.floor(POOL.length/2);for(let k=0;k<POOL.length;k++){const j=base-half+k;place(POOL[k],(j-ph)*S,((j%5)+5)%5);spacer(k,(j-ph)*S)}}
   }
   function animTo(target,ms){
     if(anim)cancelAnimationFrame(anim.id);const from=raw,t0=performance.now(),ease=t=>1-Math.pow(1-t,3);
-    anim={target,id:0};const f=now=>{const t=Math.min(1,(now-t0)/ms);raw=from+(target-from)*ease(t);draw();if(t<1&&alive)anim.id=requestAnimationFrame(f);else{raw=target;draw();anim=null}};
+    anim={target,id:0};const f=now=>{const t=Math.min(1,(now-t0)/ms);raw=from+(target-from)*ease(t);draw();if(t<1&&alive)anim.id=requestAnimationFrame(f);else{raw=target;draw();anim=null;if(!dn)recentre()}};
     anim.id=requestAnimationFrame(f)
   }
+  function recentre(){if(rc)cancelAnimationFrame(rc.id);const from=P0,to=disp(raw);if(Math.abs(to-from)<.001)return;
+    const t0=performance.now()+140,ease=t=>t*t*(3-2*t);rc={id:0};
+    const f=now=>{if(!alive||dn){rc=null;return}const t=Math.max(0,Math.min(1,(now-t0)/380));P0=from+(to-from)*ease(t);draw();if(t<1)rc.id=requestAnimationFrame(f);else rc=null};
+    rc.id=requestAnimationFrame(f)}
   function finish(){if(anim){cancelAnimationFrame(anim.id);raw=anim.target;anim=null;draw()}}
   // where on the thread did the finger land? (only matters for curved threads)
   function grabU(x,y){
@@ -400,29 +430,32 @@ function Beads(stage,kind){
     let best=0,bd=1e9;for(let u=-LV;u<=LV;u+=3){const p=P(u),dd=(p[0]-x)**2+(p[1]-y)**2;if(dd<bd){bd=dd;best=u}}return best
   }
   let dn=null;
-  el.addEventListener('pointerdown',e=>{if(dn)return;finish();const r=el.getBoundingClientRect(),now=performance.now();
-    dn={id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:now,lt:now,r0:raw,u:grabU(e.clientX-r.left,e.clientY-r.top),acc:0,v:0,c:0,pend:0,mx:0};
+  // a bead counts only when it reaches (touches) the beads on the other side; going back un-counts
+  function reach(d){if(!dn||dn.dir===0||dn.dir===d){dn&&(dn.dir=d,dn.c++,dn.pend=1);count()}else{dn.c--;uncount();if(dn.c===0)dn.dir=0}rest+=d;lastD=d}
+  function arrive(x){while(x<=rest-1)reach(-1);while(x>=rest+1)reach(1)}
+  el.addEventListener('pointerdown',e=>{if(dn)return;finish();if(rc){cancelAnimationFrame(rc.id);rc=null}const r=el.getBoundingClientRect(),now=performance.now();
+    dn={dir:0,id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:now,lt:now,r0:raw,u:grabU(e.clientX-r.left,e.clientY-r.top),acc:0,v:0,c:0,pend:0,mx:0};
     try{lab.setPointerCapture(e.pointerId)}catch(_){}});  // capture on the label so a tap's click still lands on it
   el.addEventListener('pointermove',e=>{if(!dn||e.pointerId!==dn.id)return;const now=performance.now(),dx=e.clientX-dn.lx,dy=e.clientY-dn.ly;dn.lx=e.clientX;dn.ly=e.clientY;
-    const p=P(dn.u),ds=dx*p[2]+dy*p[3];dn.u+=ds;if(!periodic)dn.u=Math.max(-LV,Math.min(LV,dn.u));dn.acc+=ds;dn.mx=Math.max(dn.mx,Math.hypot(e.clientX-dn.x0,e.clientY-dn.y0));
+    const p=P(dn.u),ds=kind==='loop'?(Math.abs(dx)>Math.abs(dy*p[3])?dx:dy*p[3]):dx*p[2]+dy*p[3];dn.u+=ds;if(!periodic)dn.u=Math.max(-LV,Math.min(LV,dn.u));dn.acc+=ds;dn.mx=Math.max(dn.mx,Math.hypot(e.clientX-dn.x0,e.clientY-dn.y0));
     if(now>dn.lt){dn.v=dn.v*.4+(ds/(now-dn.lt))*.6;dn.lt=now}
-    raw=dn.r0-dn.acc/S;
-    const c=Math.abs(Math.floor(raw)-Math.floor(dn.r0));
-    while(dn.c<c){dn.c++;count();dn.pend=1}
-    while(dn.c>c){dn.c--;uncount()}
-    draw()});
+    raw=dn.r0-dn.acc/(S+GAP);   // 1:1 with the finger across the gap
+    arrive(raw-.5);draw()});
   const up=e=>{if(!dn||e.pointerId!==dn.id)return;const g=dn;dn=null;
     const tot=Math.hypot(e.clientX-g.x0,e.clientY-g.y0),dt=performance.now()-g.t0;
     if(e.type!=='pointercancel'){
-      if(g.c===0&&g.mx<8&&dt<450){TAPH=true;count();TAPH=false;animTo(g.r0-tapDir,190);return}                     // tap = pull one bead
-      if(g.c===0&&Math.abs(g.v)>.3&&tot>8){count();animTo(g.r0-Math.sign(g.v),170);return}   // quick flick
-      if(g.c===0&&Math.abs(raw-g.r0)>.2){const dir=Math.sign(g.r0-raw);count();animTo(g.r0-dir,200);return}  // light nudge: bead slides over by itself
+      if(g.c===0&&g.mx<8&&dt<450){TAPH=true;count();TAPH=false;rest-=tapDir;lastD=-tapDir;animTo(rest+.5,220);return}   // tap = pull one bead
+      // let go just before it touches: it settles against the other beads (and counts) - otherwise it stays where you left it
+      const x=raw-.5,nr=Math.round(x);
+      if(Math.abs(x-nr)<.1&&nr!==rest){dn=g;arrive(nr+(nr>rest?.001:-.001));dn=null}
       if(g.pend&&IS_IOS)haptic(false)}  // iPhone only allows the tick inside a finger-up, so it lands here too
-    const tg=Math.floor(raw)+.5;animTo(tg,Math.max(110,Math.min(260,Math.abs(tg-raw)*420)))};
+    const x=raw-.5,nr=Math.round(x);
+    if(Math.abs(x-nr)<.1||e.type==='pointercancel'){const tg=(Math.abs(x-nr)<.1?nr:rest)+.5;animTo(tg,Math.max(90,Math.min(220,Math.abs(tg-raw)*400)))}
+    else recentre()};
   el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
   const ro=('ResizeObserver' in window)?new ResizeObserver(()=>{if(!dn)layout()}):null;if(ro)ro.observe(el);
   requestAnimationFrame(layout);
-  return{step(dir){finish();count();animTo(raw-dir,170)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){layout()}}
+  return{undo(){finish();uncount();rest-=lastD;animTo(rest+.5,220)},step(dir){finish();count();rest-=dir;lastD=-dir;animTo(rest+.5,200)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){layout()}}
 }
 
 /* ---------- bead settings sheet: materials (optional) + vibration + bead sound + volume ---------- */
@@ -438,18 +471,18 @@ function beadSettings(mats){
   </div>
   <p class="tb-sh">${esc(TX('Bead sound','صوت الحبّات','Sagalee callee','Codka kuusha'))}</p>
   <div class="tb-sw">
-   <label><span><b>${esc(TX('Bead click','طقطقة الحبّات','Sagalee callee','Shanqarta kuusha'))}</b><small>${esc(TX('A soft click only. No music, no voice.','طقطقة خفيفة فقط، بلا موسيقى ولا صوت بشري.','Sagalee laafaa qofa. Muuziqaa fi sagalee namaa hin qabu.','Cod jilicsan oo keliya. Muusig iyo cod qof midna ma leh.'))}</small></span><input type="checkbox" switch id="tbSnd" ${st.snd?'checked':''}></label>
+   <label><span><b>${esc(TX('Bead click','طقطقة الحبّات','Sagalee callee','Shanqarta kuusha'))}</b><small>${esc(TX('Recorded from real beads. No music, no voice.','مسجّل من حبّات حقيقية، بلا موسيقى ولا صوت بشري.','Callee dhugaa irraa waraabame. Muuziqaa fi sagalee namaa hin qabu.','Laga duubay kuul dhab ah. Muusig iyo cod qof midna ma leh.'))}</small></span><input type="checkbox" switch id="tbSnd" ${st.snd?'checked':''}></label>
    <div class="tb-vol${st.snd?'':' off'}" id="tbVolW"><i class="ph ph-speaker-low"></i><input type="range" id="tbVol" min="0" max="100" step="5" value="${st.vol}" aria-label="${esc(TX('Bead click volume','مستوى صوت الطقطقة','Sagalee callee hammam','Heerka codka kuusha'))}"><i class="ph ph-speaker-high"></i></div>
   </div>
   <p class="tb-note">${esc(TX('iPhone: you feel a tick each time you tap a bead or the button. Since iOS 26.5, Safari allows vibration only for taps, not swipes, so swipes give the click sound. iPad has no vibration motor. The click follows your silent switch.','آيفون: تشعر بنقرة مع كل لمسة على حبّة أو على الزرّ. منذ iOS 26.5 يسمح سفاري بالاهتزاز للّمس فقط وليس للسحب، فالسحب يعطي صوت الطقطقة. آيباد لا يحتوي على محرّك اهتزاز. الطقطقة تتبع زرّ الصامت.',"iPhone: yeroo callee ykn qabduu tuqxu raafama ni dhageessa. iOS 26.5 irraa kaasee Safari raafama tuqaaf qofa hayyama, harkisuuf miti. iPad motora raafamaa hin qabu.",'iPhone: waxaad dareemaysaa gariir mar kasta oo aad taabato kuul ama badhanka. Laga bilaabo iOS 26.5, Safari wuxuu gariir u oggol yahay taabashada oo keliya, ma aha jiidista. iPad ma laha matoor gariir.'))}</p>`);
   document.querySelectorAll('#sh [data-mat]').forEach(b=>b.onclick=()=>{st.mat=b.dataset.mat;saveSt();haptic(false);clack(false);
     document.querySelectorAll('#sh [data-mat]').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on))});if(document.getElementById('tbMatI'))paintMat();if(beads)beads.refresh()});
-  document.getElementById('tbVib').onchange=e=>{st.vib=e.target.checked;saveSt();hsw()};
+  document.getElementById('tbVib').onchange=e=>{st.vib=e.target.checked;saveSt();hsw();paintAV()};
   const tv=document.getElementById('tbTryV');tv.querySelector('.tb-hs').disabled=false;tv.querySelector('.tb-hs').addEventListener('click',e=>e.stopPropagation());
-  tv.addEventListener('click',()=>{if(!IS_IOS){const m=st.mute;st.mute=false;st.vib=true;haptic(false);st.mute=m}});
-  document.getElementById('tbSnd').onchange=e=>{st.snd=e.target.checked;saveSt();document.getElementById('tbVolW').classList.toggle('off',!st.snd);if(st.snd)clack(false)};
+  tv.addEventListener('click',()=>{if(!IS_IOS){const v=st.vib;st.vib=true;haptic(false);st.vib=v}});
+  document.getElementById('tbSnd').onchange=e=>{st.snd=e.target.checked;saveSt();paintAV();document.getElementById('tbVolW').classList.toggle('off',!st.snd);if(st.snd)clack(false)};
   let lt=0;const vr=document.getElementById('tbVol'),vp=()=>vr.style.setProperty('--p',vr.value+'%');vp();
-  vr.oninput=()=>{st.vol=+vr.value;saveSt();vp();const n=performance.now();if(n-lt>120&&st.snd){lt=n;const m=st.mute;st.mute=false;clack(false);st.mute=m}};
+  vr.oninput=()=>{st.vol=+vr.value;saveSt();vp();const n=performance.now();if(n-lt>120&&st.snd){lt=n;clack(false)}};
   vr.onchange=()=>{st.vol=+vr.value;saveSt()};
 }
 /* Settings row in More: "Tasbih beads" (separate from everything else) */

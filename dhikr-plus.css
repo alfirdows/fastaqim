@@ -5,7 +5,10 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 .tbw{height:100%;max-width:560px;margin:0 auto;display:flex;flex-direction:column;padding:calc(env(safe-area-inset-top) + 6px) 16px calc(env(safe-area-inset-bottom) + 14px);box-sizing:border-box}
 .tbx .hd{margin:0 0 10px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .tbx .hd h1{margin:0;flex:1;min-width:0;text-align:center;font-size:18px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tbx .tb-mu.off{background:var(--card2);color:var(--sub)}
+.tbx .tb-av{display:flex;gap:6px}.tbx .hd>#tbBack{margin-inline-end:50px}
+.tbx .tb-mu{position:relative;transition:background .15s,color .15s}
+.tbx .tb-mu.off{background:var(--card2);color:var(--sub);opacity:.75}
+.tbx #tbVibB.off::after{content:"";position:absolute;left:50%;top:50%;width:22px;height:2px;border-radius:2px;background:currentColor;transform:translate(-50%,-50%) rotate(-45deg);box-shadow:0 0 0 1.5px var(--card2)}
 .tb-seg{margin:0 auto 8px;width:100%;max-width:320px}
 .tb-seg button{height:36px;border:0;background:none;border-radius:11px;font:600 14.5px Inter,Plex,sans-serif;color:var(--sub)}
 .tb-ph{margin:2px 0 0;text-align:center;font:600 20px/1.6 Plex,serif;color:var(--ink)}
@@ -51,7 +54,9 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 .tb-mat i,.tb-rs i{font-size:18px;color:var(--sub)}
 .tb-mat[hidden]{display:none}
 .tb-rs{flex:none;color:var(--sub)}
-.tb-bar .tb-mat[hidden]+.tb-rs{flex:1;justify-content:center}
+.tb-bar .tb-mat[hidden]~.tb-rs{flex:1;justify-content:center}
+.tb-rs:disabled{opacity:.45}
+@media(max-width:380px){.tb-bar{gap:8px}.tb-mat,.tb-rs{padding:0 11px}}
 /* style sheet */
 .tb-mg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
 .tb-mg button{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font:600 12px/1.25 Inter,Plex,sans-serif;color:var(--ink);min-height:96px}
@@ -120,13 +125,16 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 .tb-hint b{font-weight:650;color:var(--ink)}
 /* counter device */
 .tb-clk{position:absolute;inset:0;display:grid;place-items:center;container-type:size}
-.tb-ck{height:min(92cqh,124cqw,340px);aspect-ratio:.72;border-radius:22% / 16%;background:linear-gradient(165deg,#ffffff 0%,#f1efea 60%,#e7e4dd 100%);
-  box-shadow:0 22px 44px -14px rgba(60,50,30,.28),0 2px 6px rgba(0,0,0,.06),inset 0 2px 0 #fff,inset 0 -6px 14px rgba(80,70,50,.08);
-  display:flex;flex-direction:column;align-items:center;justify-content:space-evenly;padding:6% 0;box-sizing:border-box;border:1px solid #e4e0d7}
-.tb-lcd{width:76%;aspect-ratio:2.35;border-radius:14px;background:linear-gradient(180deg,#d9e2d6,#cbd6c8);box-shadow:inset 0 2px 5px rgba(30,50,30,.22),0 1px 0 #fff;display:grid;place-items:center;padding:0 6%;box-sizing:border-box}
+.tb-ck{position:relative;height:min(90cqh,118cqw,330px);aspect-ratio:.8;border-radius:50% 50% 47% 47% / 56% 56% 44% 44%;background:radial-gradient(120% 90% at 35% 22%,#ffffff 0%,#f3f1ec 55%,#e4e1da 100%);
+  box-shadow:0 26px 40px -18px rgba(60,50,30,.32),0 2px 6px rgba(0,0,0,.06),inset 0 3px 0 #fff,inset 0 -10px 18px rgba(80,70,50,.10),inset 0 0 0 1px #e2ded5;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7%;padding:20% 0 0;box-sizing:border-box}
+/* lanyard eyelet on top and a small side key: details that make it read as a hand counter */
+.tb-ck::before{content:"";position:absolute;left:50%;top:-5.5%;width:15%;aspect-ratio:1.5;transform:translateX(-50%);border-radius:50% 50% 30% 30%;border:4px solid #e4e1da;border-bottom:0;box-sizing:border-box;z-index:-1}
+.tb-ck::after{content:"";position:absolute;right:-2.6%;top:32%;width:4%;height:11%;border-radius:4px;background:linear-gradient(90deg,#d9d5cc,#ece9e3);box-shadow:inset -1px 0 0 #fff;z-index:-1}
+.tb-lcd{width:60%;aspect-ratio:2.5;border-radius:10px;background:linear-gradient(180deg,#d9e2d6,#cbd6c8);box-shadow:inset 0 2px 5px rgba(30,50,30,.22),0 1px 0 #fff;display:grid;place-items:center;padding:0 6%;box-sizing:border-box}
 .tb-lcd svg{width:100%;height:auto;transform:skewX(-6deg)}
 .tb-lcd polygon{fill:#24302a;opacity:.07}.tb-lcd polygon.on{opacity:.9}
-.tb-ckb{width:50%;aspect-ratio:1;border-radius:50%;border:0;padding:0;background:#e9e6df;box-shadow:inset 0 3px 6px rgba(0,0,0,.14),0 1px 0 #fff;display:grid;place-items:center;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.tb-ckb{width:56%;aspect-ratio:1;border-radius:50%;border:0;padding:0;background:#e9e6df;box-shadow:inset 0 3px 6px rgba(0,0,0,.14),0 1px 0 #fff;display:grid;place-items:center;touch-action:manipulation;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 .tb-ckb span{width:84%;height:84%;border-radius:50%;background:radial-gradient(circle at 38% 30%,color-mix(in srgb,var(--acc) 55%,#fff),var(--acc) 62%);box-shadow:0 7px 0 color-mix(in srgb,var(--acc) 70%,#000),0 12px 18px rgba(0,0,0,.2);transform:translateY(-5px);transition:transform .06s,box-shadow .06s}
 .tb-ckb.dn span{transform:translateY(1px);box-shadow:0 1px 0 color-mix(in srgb,var(--acc) 70%,#000),0 3px 6px rgba(0,0,0,.18)}
 /* hidden switch inside every tap target (the iPhone tick comes from a real tap on its label) */
