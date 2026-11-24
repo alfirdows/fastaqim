@@ -16,6 +16,9 @@ const BK={bukhari:['Sahih al-Bukhari','صحيح البخاري'],muslim:['Sahih 
 const q=(s,a)=>({u:'https://quran.com/'+s+'/'+a,l:X("Qur'an, "+SUR[s][0]+' '+s+':'+a,'القرآن، '+SUR[s][1]+' '+N(s)+':'+N(a))});
 const h=(b,n,g)=>({u:'https://sunnah.com/'+b+':'+n,l:X(BK[b][0]+' '+n.replace(/[a-z]$/,''),BK[b][1]+' '+N(n.replace(/[a-z]$/,'')))+(g?X(' · Hasan',' · حسن'):'')});
 
+/* Sunnah for every month */
+const SUN=()=>[['Fast Mondays and Thursdays: "Deeds are presented on Monday and Thursday, and I love that my deeds are presented while I am fasting."','صيام الاثنين والخميس: «تُعْرَضُ الأَعْمَالُ يَوْمَ الاِثْنَيْنِ وَالْخَمِيسِ فَأُحِبُّ أَنْ يُعْرَضَ عَمَلِي وَأَنَا صَائِمٌ»',h('tirmidhi','747')],
+ ['Fast three days each month, best on the white days: the 13th, 14th and 15th.','صيام ثلاثة أيام من كل شهر، وأفضلها الأيام البيض: ١٣ و١٤ و١٥.',h('tirmidhi','761')]];
 /* ---------- the months ---------- */
 /* k: 1 sacred, 2 fasting month, 3 season. why/do/no: [en, ar, source] */
 const MO=()=>({
@@ -71,7 +74,15 @@ const MO=()=>({
   ['Offer a sacrifice for Allah after the Eid prayer, if you can.','ضحِّ لله بعد صلاة العيد إن استطعت.',q(108,2)],
   ['Days 11 to 13 are days of eating, drinking and remembering Allah.','أيام التشريق أيام أكل وشرب وذكر لله.',h('muslim','1141b')]],
  no:[['If you plan to sacrifice: no cutting hair or nails from the 1st until you sacrifice.','لمن أراد أن يضحّي: لا يأخذ من شعره ولا أظفاره من أول الشهر حتى يضحّي.',h('tirmidhi','1523')],
-  ['Fasting on the day of Eid al-Adha.','صيام يوم عيد الأضحى.',h('bukhari','1991')]]}
+  ['Fasting on the day of Eid al-Adha.','صيام يوم عيد الأضحى.',h('bukhari','1991')]]},
+2:{k:0,tag:X('No bad luck in Safar','لا تشاؤم بصفر'),
+ why:[],
+ do:SUN(),
+ no:[['Believing Safar brings bad luck. The Prophet ﷺ said: "There is no bad omen in Safar."','التشاؤم بشهر صفر؛ قال ﷺ: «لاَ عَدْوَى وَلاَ طِيَرَةَ وَلاَ هَامَةَ وَلاَ صَفَرَ»',h('bukhari','5707')]]},
+3:{k:0,tag:X('Every-month Sunnah','سنن كل شهر'),why:[],do:SUN(),no:[]},
+4:{k:0,tag:X('Every-month Sunnah','سنن كل شهر'),why:[],do:SUN(),no:[]},
+5:{k:0,tag:X('Every-month Sunnah','سنن كل شهر'),why:[],do:SUN(),no:[]},
+6:{k:0,tag:X('Every-month Sunnah','سنن كل شهر'),why:[],do:SUN(),no:[]}
 });
 const ORDER=[1,7,8,9,10,11,12];
 const SACRED=new Set([1,7,11,12]);
@@ -106,59 +117,75 @@ function season(){const f=today(),c=f.hn;
  return{f,mode:'cd'}}
 const ram=f=>findNext(9,1,f);
 
-/* ---------- the year line (the straight path, one step per month) ---------- */
-function yearLine(cur,big){const f=today(),len=monthLen(cur.m,cur.y,f);
- return `<div class="fqm-yl${big?' fqm-big':''}" aria-hidden="true">${[...Array(12)].map((_,i)=>{const m=i+1,k=m===9?'r':SACRED.has(m)?'s':(m===8||m===10)?'t':'';
-  return `<span class="${k} ${m<cur.m?'past':''} ${m===cur.m?'now':''}">${m===cur.m?`<i style="--p:${Math.min(100,Math.round((cur.d-.5)/len*100))}%"></i>`:''}${big?`<small>${N(m)}</small>`:''}</span>`}).join('')}</div>`}
+/* ---------- the straight path (Fastaqim's horizon line with stops) ---------- */
+/* stops: [{t:label, s:sub, at:0..1, on:bool, end:bool}] ; me: 0..1 where you are now */
+function path(stops,me){const n=stops.length,at=k=>n<2?0:k/(n-1);return `<div class="fqm-p n${n}" aria-hidden="true"><div class="fqm-pl"><i class="fqm-pf" style="--w:${Math.round(me*100)}%"></i>${stops.map((s,k)=>`<i class="fqm-ps${s.end?' e':''}${s.on?' on':''}" style="--x:${Math.round(at(k)*100)}%"></i>`).join('')}<b class="fqm-me" style="--x:${Math.round(me*100)}%"></b></div>
+ <div class="fqm-pt">${stops.map((s,k)=>`<span class="${k===0?'a':k===n-1?'z':'m'}"><b>${s.t}</b><small>${s.s}</small></span>`).join('')}</div></div>`}
+const shortD=d=>gFmt(d,{weekday:'short',day:'numeric',month:'short'});
+function homePath(s){const f=s.f;
+ if(s.mode==='ram'){const t10=Math.max(0,21-s.day),eid=s.left;
+  return path([{t:X('Day 1','اليوم ١'),s:hm(9),at:0,on:1},{t:X('Last ten','العشر الأواخر'),s:t10?inDays(t10):X('Now','الآن'),at:20/s.len,on:s.day>=21},{t:X('Eid al-Fitr','عيد الفطر'),s:inDays(eid),at:1,end:1}],s.day<21?.5*(s.day-1)/20:.5+.5*(s.day-21)/Math.max(1,s.len-20))}
+ const r=ram(f);if(!r)return'';const stops=[{t:X('Today','اليوم','Har\'a','Maanta'),s:N(f.hn.d)+' '+hms(f.hn.m),at:0,on:1}];
+ const nm=f.hn.m%12+1;if(nm!==9){const x=findNext(nm,1,f);if(x&&x.left<r.left)stops.push({t:hm(nm),s:shortD(x.g),at:x.left/r.left})}
+ if(nm!==8&&f.hn.m!==8){const x=findNext(8,1,f);if(x&&x.left<r.left&&x.left>0&&(stops.length<2||x.left>stops[1].at*r.left))stops.push({t:hm(8),s:shortD(x.g),at:x.left/r.left})}
+ stops.push({t:hm(9),s:shortD(r.g),at:1,end:1});
+ /* keep labels readable: at most 3 stops, middle one centred */
+ const st=stops.length>3?[stops[0],stops[1],stops[stops.length-1]]:stops;return path(st,0)}
 
-/* ---------- Home card ---------- */
-function nextEvent(f,skipRam){const c=f.hn;let best=null;EV().forEach(e=>{if(skipRam&&e[0]===9&&e[1]===1)return;if(e[0]===c.m&&e[1]===c.d)return;const r=findNext(e[0],e[1],f);if(r&&(!best||r.left<best.r.left))best={e,r}});return best}
+/* ---------- Home card (sits under the salah card) ---------- */
 const inDays=n=>n===0?X('today','اليوم','har\'a','maanta'):n===1?X('tomorrow','غدًا','boru','berri'):X('in '+n+' days','بعد '+N(n)+' يومًا','guyyaa '+n+' booda',n+' maalmood kadib');
 function homeCard(){if(S.fqmHide){const o=$('fqmH');if(o)o.remove();return}
- const g=$('greet');if(!g)return;let el=$('fqmH');if(!el){g.insertAdjacentHTML('afterend','<button class="fqm-h fq-leaf" id="fqmH"></button>');el=$('fqmH');el.onclick=()=>{vib(8);go('months')}}
- const s=season(),f=s.f;let big,unit,top,sub,line='';
- if(s.mode==='ram'){top=X('Ramadan','رمضان')+' '+N(f.hn.y);big=N(s.day);unit=X('of '+s.len,'من '+N(s.len),'/ '+s.len,'/ '+s.len);
-  sub=s.last10?X('Last ten nights · seek Laylat al-Qadr','العشر الأواخر · تحرَّ ليلة القدر'):X(s.left+' days left','بقي '+N(s.left)+' يومًا','Guyyoota '+s.left+' hafan',s.left+' maalmood ayaa haray')}
+ const anchor=$('hero')||$('greet');if(!anchor)return;let el=$('fqmH');
+ if(!el||el.previousElementSibling!==anchor){if(el)el.remove();anchor.insertAdjacentHTML('afterend','<button class="fqm-h fq-leaf" id="fqmH"></button>');el=$('fqmH');el.onclick=()=>{vib(8);go('months')}}
+ const s=season(),f=s.f;let head,sub;
+ if(s.mode==='ram'){head=X('Ramadan · day '+s.day,'رمضان · اليوم '+N(s.day),'Ramadaan · guyyaa '+s.day,'Ramadaan · maalinta '+s.day);
+  sub=s.last10?X('Last ten nights. Seek Laylat al-Qadr in the odd nights.','العشر الأواخر. تحرَّ ليلة القدر في الليالي الوتر.'):X(s.left+' days left','بقي '+N(s.left)+' يومًا','Guyyoota '+s.left+' hafan',s.left+' maalmood ayaa haray')}
  else{const r=ram(f);if(!r){el.remove();return}
-  top=X('Ramadan','رمضان','Ramadaan','Ramadaan')+' '+N(r.y);big=N(r.left);unit=r.left===1?X('day','يوم','guyyaa','maalin'):X('days','يومًا','guyyoota','maalmood');
-  sub=r.left===0?X('Ramadan begins tonight','يبدأ رمضان الليلة'):X('Expected ','متوقّع ','≈ ','≈ ')+gFmt(r.g,{weekday:'short',day:'numeric',month:'short'});
-  if(s.mode==='dh')sub=X('Best ten days · day '+Math.min(s.day,10),'العشر من ذي الحجة · اليوم '+N(Math.min(s.day,10)));
-  if(s.mode==='dh'&&s.day>10)sub=X('Days of eating, drinking and dhikr','أيام أكل وشرب وذكر لله')}
- const ne=nextEvent(f,s.mode!=='ram');if(ne)line=`<span class="fqm-nx"><b>${ne.e[2]}</b> · ${inDays(ne.r.left)}</span>`;
- const now=SACRED.has(f.hn.m)?`<em class="fqm-tag s">${X('Sacred month','شهر حرام','Ji\'a kabajamaa','Bil xurmeysan')}</em>`:'';
- el.setAttribute('aria-label',top+' '+big+' '+unit);
- el.innerHTML=`<span class="fqm-n"><b>${big}</b><small>${unit}</small></span><span class="fqm-t"><small class="fqm-k">${s.mode==='ram'?'':X('Until ','حتى ','','Ilaa ')}${top}</small><span class="fqm-s">${sub}</span>${yearLine(f.hn)}${line||now?`<span class="fqm-l">${now}${line}</span>`:''}</span><i class="ph ph-caret-right flip fqm-c"></i>`}
+  head=r.left===0?X('Ramadan begins tonight','يبدأ رمضان الليلة'):r.left===1?X('Ramadan begins tonight at Maghrib','يبدأ رمضان الليلة عند المغرب'):X('Ramadan in '+r.left+' days','رمضان بعد '+N(r.left)+' يومًا','Ramadaan guyyaa '+r.left+' booda','Ramadaan '+r.left+' maalmood kadib');
+  sub=X('Expected '+gFmt(r.g,{weekday:'short',day:'numeric',month:'short'})+' · moon sighting decides','متوقّع '+gFmt(r.g,{weekday:'short',day:'numeric',month:'short'})+' · العبرة برؤية الهلال','≈ '+gFmt(r.g,{weekday:'short',day:'numeric',month:'short'}),'≈ '+gFmt(r.g,{weekday:'short',day:'numeric',month:'short'}));
+  if(s.mode==='dh'&&s.day<=10)sub=X('Now: the best ten days, day '+s.day+' of 10','الآن: العشر من ذي الحجة، اليوم '+N(s.day)+' من ١٠');
+  if(s.mode==='dh'&&s.day>10)sub=X('Now: days of eating, drinking and remembering Allah','الآن: أيام أكل وشرب وذكر لله');
+  if(s.mode==='mu')sub=X("Now: Muharram, Allah's month. 'Ashura is the 10th.",'الآن: محرم شهر الله، وعاشوراء يوم العاشر.')}
+ const sac=SACRED.has(f.hn.m)?`<em class="fqm-tag">${X('Sacred month now','الآن شهر حرام','Ji\'a kabajamaa','Bil xurmeysan')}</em>`:'';
+ el.setAttribute('aria-label',head);
+ el.innerHTML=`<span class="fqm-hd"><b>${head}</b><i class="ph ph-caret-right flip"></i></span><small class="fqm-sub">${sub}</small>${sac}${homePath(s)}`}
 
-/* ---------- screen ---------- */
+/* ---------- screen: the year as one straight path, starting where you are ---------- */
 const BACK=`<button class="ib" data-back aria-label="${X('Back','رجوع')}"><i class="ph ph-caret-left flip"></i></button>`;
 if(!$('s-months')){const last=$$('.scr');last[last.length-1].insertAdjacentHTML('afterend',`<section class="scr" id="s-months"><div class="hd sub">${BACK}<h1>${X('Blessed months','الأشهر الفاضلة','Ji\'oota eebbifamoo','Bilaha barakaysan')}</h1><span style="width:44px"></span></div><div id="fqmB"></div></section>`);TABOF.months='home'}
+const KTAG={1:['Sacred','حرام'],2:['Fasting','الصيام'],3:['Blessed','فاضل'],0:['',''] };
 R.months=()=>{const s=season(),f=s.f,r=ram(f),M=MO();
- let hero;
- if(s.mode==='ram')hero=`<p class="fqm-hk">${X('Ramadan','رمضان')} ${N(f.hn.y)}</p><p class="fqm-hn"><b>${N(s.day)}</b><span>${X('of','من')} ${N(s.len)}</span></p><p class="fqm-hs">${s.last10?X('Last ten nights. Seek Laylat al-Qadr in the odd nights.','العشر الأواخر. تحرَّ ليلة القدر في الليالي الوتر.'):X(s.left+' days left','بقي '+N(s.left)+' يومًا')}</p>`;
- else hero=`<p class="fqm-hk">${X('Until Ramadan','حتى رمضان')} ${r?N(r.y):''}</p><p class="fqm-hn"><b>${r?N(r.left):'–'}</b><span>${r&&r.left===1?X('day','يوم'):X('days','يومًا')}</span></p><p class="fqm-hs">${r?(r.left===0?X('Ramadan begins tonight at Maghrib.','يبدأ رمضان الليلة عند المغرب.'):X('Expected ','متوقّع ')+gFmt(r.g,{weekday:'long',day:'numeric',month:'long',year:'numeric'})):''}</p>`;
- const evs=EV().map(e=>({e,r:findNext(e[0],e[1],f)})).filter(x=>x.r).sort((a,b)=>a.r.left-b.r.left).slice(0,6);
- $('fqmB').innerHTML=`<div class="fqm-hero fq-leaf">${hero}${yearLine(f.hn,1)}
-  <p class="fqm-lg"><span><i class="s"></i>${X('Sacred','حرام')}</span><span><i class="r"></i>${X('Ramadan','رمضان')}</span><span><i class="t"></i>${X("Sha'ban, Shawwal",'شعبان، شوال')}</span><span><i class="n"></i>${X('Now','الآن')}</span></p>
-  <p class="fqm-note">${X('Dates follow the Umm al-Qura calendar in your time zone, and the day changes at Maghrib. Follow your local moon sighting.','التواريخ حسب تقويم أم القرى بتوقيتك، ويبدأ اليوم عند المغرب. اتّبع رؤية الهلال في بلدك.')}</p></div>
-  <p class="glh">${X('Coming up','القادم','Dhufaa jira','Soo socda')}</p>
-  <div class="fqm-ev fq-leaf">${evs.map(({e,r})=>`<button data-m="${e[4]}"><span class="fqm-d"><b>${N(e[1])}</b><small>${hms(e[0])}</small></span><span class="tx"><b>${e[2]}</b><small>${gFmt(r.g,{weekday:'short',day:'numeric',month:'short'})} · ${e[3]}</small></span><em>${r.left===0?X('Today','اليوم'):N(r.left)+X(' d',' ي')}</em></button>`).join('')}</div>
-  <p class="glh">${X('The months','الأشهر')}</p>
-  <div class="fqm-ml">${ORDER.map(m=>{const o=M[m],cur=f.hn.m===m,nx=cur?null:findNext(m,1,f);return `<button class="fq-leaf ${cur?'cur':''}" data-m="${m}"><span class="fqm-mi k${o.k}">${N(m)}</span><span class="tx"><b>${hm(m)}</b><small>${o.tag}</small></span><em>${cur?X('Now','الآن'):nx?inDays(nx.left):''}</em><i class="ph ph-caret-right flip"></i></button>`}).join('')}</div>
-  <div class="fqm-set"><span class="tx"><b>${X('Show countdown on Home','إظهار العدّ التنازلي في الرئيسية')}</b></span><button class="sw ${S.fqmHide?'':'on'}" id="fqmTg" role="switch" aria-checked="${!S.fqmHide}" aria-label="${X('Show countdown on Home','إظهار العدّ التنازلي في الرئيسية')}"></button></div>
-  <p class="fqm-note c">${X('Hadith: sahih or hasan only. Tap a source to read it in full.','الأحاديث صحيحة أو حسنة فقط. اضغط المصدر لقراءته كاملًا.')}</p>`;
+ const head=s.mode==='ram'?X('Ramadan · day '+s.day+' of '+s.len,'رمضان · اليوم '+N(s.day)+' من '+N(s.len)):r?(r.left===0?X('Ramadan begins tonight','يبدأ رمضان الليلة'):X('Ramadan in '+r.left+' days','رمضان بعد '+N(r.left)+' يومًا')):'';
+ const months=[...Array(12)].map((_,i)=>{const m=(f.hn.m-1+i)%12+1;return{m,cur:i===0,nx:i===0?null:findNext(m,1,f)}});
+ const days=(m)=>EV().filter(e=>e[0]===m&&e[1]!==1);
+ $('fqmB').innerHTML=`<div class="fqm-top fq-leaf"><b>${head}</b>${homePath(s)}<p class="fqm-note">${X('Dates follow the Umm al-Qura calendar in your time zone. The Hijri day starts at Maghrib. Follow your local moon sighting.','التواريخ حسب تقويم أم القرى بتوقيتك، واليوم الهجري يبدأ عند المغرب. اتّبع رؤية الهلال في بلدك.')}</p></div>
+ <ol class="fqm-yr">${months.map(({m,cur,nx})=>{const o=M[m],bl=o.k>0;
+  const lead=o.why[0]||o.no[0];
+  return `<li class="${bl?'bl':'pl'} ${cur?'cur':''} k${o.k}"><span class="fqm-dot"></span><button class="fqm-mc${bl?' fq-leaf':''}" data-m="${m}">
+   <span class="fqm-mh"><b>${hm(m)}</b>${o.k?`<em class="fqm-k k${o.k}">${X(KTAG[o.k][0],KTAG[o.k][1])}</em>`:''}<small>${cur?X('You are here','أنت هنا'):nx?shortD(nx.g)+' · '+inDays(nx.left):''}</small></span>
+   ${bl&&lead?`<span class="fqm-q"${L==='ar'?' dir="rtl"':''}>${L==='ar'?lead[1]:lead[0]}</span>`:`<span class="fqm-q m">${o.tag}</span>`}
+   ${days(m).length?`<span class="fqm-days">${days(m).map(e=>`<i>${N(e[1])} · ${e[2]}</i>`).join('')}</span>`:''}
+   <span class="fqm-more">${bl?X('Virtues, what to do and avoid','الفضل وما يُستحب وما يُجتنب'):X('What to do this month','ما يُستحب في هذا الشهر')}<i class="ph ph-caret-right flip"></i></span></button></li>`}).join('')}</ol>
+ <div class="fqm-set fq-leaf"><span class="tx"><b>${X('Show on Home','إظهار في الرئيسية')}</b><small>${X('Ramadan countdown under the salah card','العدّ التنازلي لرمضان تحت بطاقة الصلاة')}</small></span><button class="sw ${S.fqmHide?'':'on'}" id="fqmTg" role="switch" aria-checked="${!S.fqmHide}" aria-label="${X('Show on Home','إظهار في الرئيسية')}"></button></div>
+ <p class="fqm-note c">${X("Qur'an from Quran.com. Hadith sahih or hasan only, from sunnah.com. Tap a source to read it in full.",'القرآن من Quran.com، والأحاديث صحيحة أو حسنة فقط من sunnah.com. اضغط المصدر لقراءته كاملًا.')}</p>`;
  $$('#fqmB [data-m]').forEach(b=>b.onclick=()=>{vib(6);sheet(+b.dataset.m)});
  $('fqmTg').onclick=()=>{S.fqmHide=S.fqmHide?0:1;save();vib(10);R.months()}};
 
 function sheet(m){const o=MO()[m];if(!o)return;const f=today(),cur=f.hn.m===m,nx=cur?null:findNext(m,1,f);
- const src=s=>s?`<a class="fqm-src" href="${s.u}" target="_blank" rel="noopener">${s.l}<i class="ph ph-arrow-up-right"></i></a>`:`<span class="fqm-src tip">${X('Tip','نصيحة')}</span>`;
- const it=(arr,ic,cls)=>arr.map(([en,ar,s])=>`<li class="${cls}"><i class="ph ${ic}"></i><span><p dir="auto"${L==='ar'&&/[ً-ْ]/.test(ar)?' class="ar"':''}>${L==='ar'?ar:en}</p>${src(s)}</span></li>`).join('');
- openSheet(`<div class="fqm-shh"><span class="fqm-mi k${o.k}">${N(m)}</span><span class="tx"><b>${hm(m)}</b><small>${o.tag}${cur?' · '+X('Now','الآن'):nx?' · '+inDays(nx.left):''}</small></span>${XB}</div>
-  <div class="fqm-sh">
-   <p class="glh">${X('Why it is special','فضله')}</p><ul class="fqm-li w fq-leaf">${it(o.why,'ph-sparkle','w')}</ul>
-   <p class="glh">${X('What to do','ما يُستحب')}</p><ul class="fqm-li d fq-leaf">${it(o.do,'ph-check-circle','d')}</ul>
-   <p class="glh">${X('What to avoid','ما يُجتنب')}</p><ul class="fqm-li n fq-leaf">${it(o.no,'ph-prohibit','n')}</ul>
-  </div>`);
- const sh=$('sh');sh.classList.add('fqm-shx');const cl=()=>sh.classList.remove('fqm-shx');$$('[data-x]',sh).forEach(b=>b.addEventListener('click',cl));$('scrim').addEventListener('click',cl,{once:true})}
+ const src=s=>s?`<a class="fqm-src" href="${s.u}" target="_blank" rel="noopener">${s.l}<i class="ph ph-arrow-up-right"></i></a>`:`<span class="fqm-src tip">${X('Advice','نصيحة')}</span>`;
+ const ar=t=>/[ً-ْ]/.test(t);
+ const it=(arr,cls)=>arr.map(([en,a,s])=>`<li class="${cls}"><span class="fqm-b"></span><span><p ${L==='ar'?`dir="rtl"${ar(a)?' class="ar"':''}`:''}>${L==='ar'?(ar(a)?esc(a).replace(/،/g,'<span class="fqm-cm">،</span>'):a):en}</p>${src(s)}</span></li>`).join('');
+ const sec=(t,arr,cls)=>arr.length?`<p class="glh">${t}</p><ul class="fqm-li ${cls} fq-leaf">${it(arr,cls)}</ul>`:'';
+ FQM_M=m;$('fqmMT').textContent=X('Blessed months','الأشهر الفاضلة','Ji\'oota eebbifamoo','Bilaha barakaysan');
+ $('fqmMB').innerHTML=`<div class="fqm-shh fq-leaf"><b>${hm(m)}</b><small>${o.tag}${cur?' · '+X('You are here','أنت هنا'):nx?' · '+shortD(nx.g)+' · '+inDays(nx.left):''}</small></div>
+  ${o.why.length?sec(X('Virtues','الفضل'),o.why,'w'):`<p class="fqm-none fq-leaf">${X('No sahih hadith gives this month a special virtue. These Sunnah acts are for every month:','لم يثبت في حديث صحيح فضل خاص لهذا الشهر. وهذه سنن لكل شهر:')}</p>`}
+  ${sec(X('What to do','ما يُستحب'),o.do,'d')}
+  ${sec(X('What to avoid','ما يُجتنب'),o.no,'n')}
+  <p class="fqm-note c">${X('Hadith sahih or hasan only. Tap a source to read it in full.','الأحاديث صحيحة أو حسنة فقط. اضغط المصدر لقراءته كاملًا.')}</p>`;
+ if(!$('s-month').classList.contains('on'))go('month');else scrollTo(0,0)}
+let FQM_M=9;
+if(!$('s-month')){$('s-months').insertAdjacentHTML('afterend',`<section class="scr" id="s-month"><div class="hd sub">${BACK}<h1 id="fqmMT"></h1><span style="width:44px"></span></div><div id="fqmMB"></div></section>`);TABOF.month='home'}
+R.month=()=>{if(!$('fqmMB').innerHTML)sheet(FQM_M)};
 
 /* ---------- Calendar link ---------- */
 function calLink(){const c=$('s-cal');if(!c||$('fqmCal'))return;const hd=c.querySelector('.hd');if(!hd)return;

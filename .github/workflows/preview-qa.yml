@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['claude/**']
-    paths: [index.html, sw.js, fq-auth.js, life*, dhikr-plus.*, q/**, ph/**, next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
+    paths: [index.html, sw.js, fq-auth.js, fq-months.*, life*, dhikr-plus.*, q/**, ph/**, next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
 permissions:
   contents: read
 concurrency:
@@ -46,6 +46,8 @@ jobs:
           for L in "" "?lang=ar" "?lang=om" "?lang=so"; do echo "== iPhone 13 $L"; LANGQ="$L" DEV="iPhone 13" node .github/qa/flow.js qa-flow; done
           echo "== iPad Pro 11"; DEV="iPad Pro 11" node .github/qa/flow.js qa-flow-ipad
           echo "== Family profiles and reminder card"; node .github/qa/fam.js qa-fam
+          echo "== Ramadan countdown + Blessed months (preview)"; node .github/qa/months.js qa-months
+          echo "== Ramadan countdown + Blessed months (main page)"; MBASE=/ node .github/qa/months.js qa-months-main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -55,4 +57,6 @@ jobs:
             qa-flow
             qa-flow-ipad
             qa-fam
+            qa-months
+            qa-months-main
           retention-days: 7
