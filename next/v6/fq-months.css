@@ -1,0 +1,99 @@
+/* Fastaqim "Blessed months" (c) Fastaqim, all rights reserved. Made only for Fastaqim.
+   One idea: the straight path (Hud 11:112) drawn as the horizon line. Today stands on it,
+   the coming months are stops along it, and the year runs down it as one line. */
+
+/* ---------- Home card (under the salah card) ---------- */
+.fqm-h{display:block;width:100%;margin:14px 0;padding:14px 16px 12px;background:#fff;border:1px solid var(--gl,#ece6da);
+ border-radius:18px;border-end-start-radius:6px;font:inherit;color:var(--ink);text-align:start;box-shadow:0 2px 10px rgba(120,96,40,.05);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.fqm-h:active{transform:scale(.99)}
+.fqm-hd{display:flex;align-items:center;gap:8px}
+.fqm-hd b{flex:1;font-size:19px;font-weight:780;letter-spacing:-.2px;line-height:1.25}
+.fqm-hd i{color:var(--sub);font-size:16px}
+.fqm-sub{display:block;margin-top:2px;font-size:13px;line-height:1.4;color:var(--sub)}
+.fqm-tag{display:inline-block;margin-top:6px;font-style:normal;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:8px;border-end-start-radius:3px;background:var(--goldT);color:var(--goldD,#86672e)}
+
+/* ---------- the path ---------- */
+.fqm-p{margin-top:14px}
+.fqm-pl{position:relative;height:14px;margin:0 7px}
+.fqm-pl:before{content:"";position:absolute;left:0;right:0;top:6px;height:2px;border-radius:2px;background:var(--hz,#e8e0cf)}
+.fqm-pf{position:absolute;top:6px;height:2px;inset-inline-start:0;width:var(--w);border-radius:2px;background:linear-gradient(90deg,var(--acc),#b8955a)}
+html[dir=rtl] .fqm-pf{background:linear-gradient(270deg,var(--acc),#b8955a)}
+.fqm-ps{position:absolute;top:2px;inset-inline-start:var(--x);width:2px;height:10px;margin-inline-start:-1px;border-radius:1px;background:var(--hz2,#d9ccb0)}
+.fqm-ps.on{background:var(--acc)}
+/* the last stop: a small sunrise standing on the line */
+.fqm-ps.e{top:-3px;width:16px;height:9px;margin-inline-start:-8px;border-radius:9px 9px 0 0;background:none;border:2px solid var(--acc);border-bottom:0}
+.fqm-me{position:absolute;top:2px;inset-inline-start:var(--x);width:10px;height:10px;margin-inline-start:-5px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 3px #fff,0 0 0 4px var(--accT)}
+.fqm-pt{display:flex;justify-content:space-between;gap:8px;margin-top:6px}
+.fqm-pt span{flex:1;min-width:0;display:flex;flex-direction:column}
+.fqm-pt span.m{text-align:center;align-items:center}
+.fqm-pt span.z{text-align:end;align-items:flex-end}
+.fqm-pt b{font-size:13px;font-weight:700;color:var(--ink);line-height:1.3}
+.fqm-pt small{font-size:11.5px;color:var(--sub);line-height:1.3}
+.fqm-pt span.z b{color:var(--acc)}
+
+/* ---------- Blessed months page ---------- */
+.fqm-top{background:#fff;border:1px solid var(--gl,#ece6da);border-radius:20px;border-end-start-radius:7px;padding:16px 16px 12px;margin-top:4px}
+.fqm-top>b{display:block;font-size:22px;font-weight:800;letter-spacing:-.3px}
+.fqm-note{margin:12px 0 0;font-size:12px;line-height:1.5;color:var(--sub)}
+.fqm-note.c{text-align:center;margin:18px 10px 28px}
+
+/* the year as one straight line, beginning where you are */
+.fqm-yr{list-style:none;margin:18px 0 0;padding:0;position:relative}
+.fqm-yr:before{content:"";position:absolute;top:14px;bottom:24px;inset-inline-start:11px;width:2px;background:linear-gradient(180deg,var(--acc),var(--hz2,#d9ccb0) 30%,var(--hz,#e8e0cf))}
+.fqm-yr li{position:relative;padding-inline-start:34px;margin-bottom:10px}
+.fqm-dot{position:absolute;inset-inline-start:6px;top:16px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--hz2,#d9ccb0)}
+.fqm-yr li.k1 .fqm-dot{border-color:#b8955a}
+.fqm-yr li.k2 .fqm-dot{border-color:var(--acc);background:var(--acc)}
+.fqm-yr li.k3 .fqm-dot{border-color:var(--acc)}
+.fqm-yr li.cur .fqm-dot{width:16px;height:16px;inset-inline-start:4px;top:14px;background:var(--acc);border-color:var(--acc);box-shadow:0 0 0 4px var(--accT)}
+.fqm-mc{display:block;width:100%;font:inherit;color:var(--ink);text-align:start;background:none;border:0;padding:10px 0 6px}
+.fqm-yr li.bl .fqm-mc{background:#fff;border:1px solid var(--gl,#ece6da);border-radius:18px;border-end-start-radius:6px;padding:12px 14px 10px}
+.fqm-yr li.cur .fqm-mc{border-color:var(--acc)}
+.fqm-yr li.pl .fqm-mc{padding:9px 2px 4px}
+.fqm-mh{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.fqm-mh b{font-size:17px;font-weight:760}
+.fqm-mh small{flex-basis:100%;font-size:12.5px;color:var(--sub)}
+.fqm-yr li.cur .fqm-mh small{color:var(--acc);font-weight:700}
+.fqm-k{font-style:normal;font-size:11px;font-weight:700;padding:1px 7px;border-radius:7px;border-end-start-radius:3px}
+.fqm-k.k1{background:var(--goldT);color:var(--goldD,#86672e)}
+.fqm-k.k2{background:var(--acc);color:#fff}
+.fqm-k.k3{background:var(--accT);color:var(--acc)}
+.fqm-q{display:block;margin-top:8px;font-size:14px;line-height:1.55;color:var(--ink)}
+.fqm-q[dir=rtl]{font-family:Plex,"FQ Quran",serif;font-size:15px;line-height:1.8}
+.fqm-q.m{margin-top:3px;font-size:13px;color:var(--sub)}
+.fqm-days{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.fqm-days i{font-style:normal;font-size:12px;font-weight:600;padding:3px 8px;border-radius:8px;border-end-start-radius:3px;background:var(--card2,#f5f2ea);color:var(--ink)}
+.fqm-more{display:flex;align-items:center;gap:4px;margin-top:8px;font-size:13px;font-weight:700;color:var(--acc)}
+.fqm-yr li.pl .fqm-more{margin-top:4px;font-weight:600}
+.fqm-more i{font-size:13px}
+
+.fqm-set{display:flex;align-items:center;gap:12px;margin-top:10px;padding:12px 14px;background:#fff;border:1px solid var(--gl,#ece6da);border-radius:18px;border-end-start-radius:6px}
+.fqm-set .tx{flex:1;display:flex;flex-direction:column}
+.fqm-set .tx b{font-size:15px;font-weight:600}
+.fqm-set .tx small{font-size:12.5px;color:var(--sub)}
+
+.fqm-cal{display:flex;align-items:center;gap:10px;width:100%;margin:2px 0 12px;padding:12px 14px;background:#fff;border:1px solid var(--gl,#ece6da);border-radius:16px;border-end-start-radius:6px;font:inherit;font-weight:600;color:var(--ink);text-align:start}
+.fqm-cal span{flex:1}
+.fqm-cal i:first-child{color:var(--goldD,#86672e);font-size:19px}
+.fqm-cal i:last-child{color:var(--sub)}
+
+/* ---------- one month (a normal page) ---------- */
+.fqm-shh{display:flex;flex-direction:column;background:#fff;border:1px solid var(--gl,#ece6da);border-radius:20px;border-end-start-radius:7px;padding:14px 16px;margin-top:4px}
+.fqm-shh b{font-size:22px;font-weight:800}
+.fqm-shh small{font-size:13px;color:var(--sub);margin-top:2px}
+.fqm-none{margin:14px 0 0;padding:12px 14px;font-size:14px;line-height:1.55;color:var(--ink);background:var(--card2,#f5f2ea);border-radius:16px;border-end-start-radius:6px}
+.fqm-li{list-style:none;margin:0;padding:2px 16px;background:#fff;border:1px solid var(--gl,#ece6da);border-radius:18px;border-end-start-radius:6px}
+.fqm-li li{display:flex;gap:12px;padding:13px 0;border-top:1px solid #f1ece2}
+.fqm-li li:first-child{border-top:0}
+/* bullet = a short piece of the horizon line */
+.fqm-b{flex:none;width:12px;height:2px;margin-top:11px;border-radius:2px;background:#b8955a}
+.fqm-li.d .fqm-b{background:var(--acc)}
+.fqm-li.n .fqm-b{background:#a8a296}
+.fqm-li li>span:last-child{flex:1;min-width:0}
+.fqm-li p{margin:0 0 6px;font-size:15px;line-height:1.6;color:var(--ink)}
+.fqm-li p[dir=rtl]{font-family:Plex,serif;font-size:16px;line-height:1.9}
+.fqm-li p.ar{font-family:"FQ Quran",serif;font-size:21px;line-height:2.05}
+.fqm-src{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:650;color:var(--acc);text-decoration:none;padding:2px 0}
+.fqm-src i{font-size:12px}
+.fqm-src.tip{color:var(--sub);font-weight:600}
+.fqm-cm{font-family:Plex,sans-serif;font-size:.8em}
