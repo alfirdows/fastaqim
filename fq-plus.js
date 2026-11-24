@@ -15,6 +15,9 @@ function addScreen(id,html,tab){if($('s-'+id))return;const last=$$('.scr');last[
 
 /* ================= What's new (everyone) + change log ================= */
 const NEWS=[
+ {id:'2026-11-24',d:'2026-11-24',items:[
+  ['new',X('Night mode: tap the moon on Home, or go to Settings, Appearance and pick Light, Night, or Auto to match your phone.','الوضع الليلي: اضغط القمر في الرئيسية، أو من الإعدادات، المظهر اختر فاتح أو ليلي أو تلقائي ليطابق هاتفك.')],
+  ['fix',X('Switches in Settings look and work like normal phone switches.','أزرار التبديل في الإعدادات تبدو وتعمل كأزرار الهاتف المعتادة.')]]},
  {id:'2026-11-21',d:'2026-11-21',items:[
   ['fix',X('Ayat al-Kursi now plays in Before-sleep and morning/evening adhkar, like the last ayat of Al-Baqarah.','آية الكرسي تُشغَّل الآن في أذكار النوم والصباح والمساء مثل خواتيم البقرة.')],
   ['fix',X('The red dot on the bell now goes away once you have seen what is new.','النقطة الحمراء على الجرس تختفي بعد رؤية الجديد.')],
