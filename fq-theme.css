@@ -1,0 +1,10 @@
+/* Settings > Appearance (Light / Night / Auto). Colours come from fq-night.css. */
+.fqt-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.fqt-seg button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:14px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:600;font-size:14px}
+.fqt-seg button i{font-size:22px;color:var(--sub)}
+.fqt-seg button.on{border-color:var(--acc);background:var(--accT)}.fqt-seg button.on i{color:var(--acc)}
+.fqt-n{display:block;margin-top:8px;color:var(--sub);font-size:13px}
+/* the Settings switches were drawn as tall rounded squares with a line through them */
+.gl .fqp-tg button.sw{width:52px!important;height:32px!important;min-height:0!important;border-radius:16px!important;border:0!important;box-shadow:none!important;align-self:center}
+.gl .fqp-tg button.sw::before{display:none!important}
+html.dark{--fqk:#f3f1ea;--fqk2:#cfd3cc}html.dark body .sw.on:after{background:var(--fqk)!important}html.dark body .sw:not(.on):after{background:var(--fqk2)!important}

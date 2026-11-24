@@ -100,6 +100,7 @@ html.gdk .sec{background:#1F2937!important;color:#F1F5F9!important;border-color:
 <div class="hint" id="hint" hidden></div>
 <div class="card" id="menu"><div class="sheet" id="menuS"></div></div>
 <script src="haptic.js?v=1"></script>
+<script>window.FQNEXT=true</script>
 <script src="game/three-lib.js?v=160"></script>
 <script>
 "use strict";
@@ -475,7 +476,7 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 showMenu();
 </script>
 <script src="game/gltf-lib.js?v=1"></script>
-<script src="game/r3d.js?v=7"></script>
+<script src="game/r3d.js?v=8"></script>
 <script>
 /* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
    Credit never expires. Dhikr and To-do runs are never limited. */
@@ -556,6 +557,8 @@ function ruleLine(){try{const go=$('goB');if(go&&!$('ruleL')){const left=Math.ma
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);ruleLine();return r}}ruleLine();
 addEventListener('pagehide',()=>brSet(BR));
 </script>
-<script src="game/minis.js?v=3"></script>
+<script src="game/minis.js?v=4"></script>
 <script src="game/coin.js?v=1"></script>
+<script src="game/fun.js?v=9"></script>
+<script src="game/minis2.js?v=2"></script>
 </body></html>
