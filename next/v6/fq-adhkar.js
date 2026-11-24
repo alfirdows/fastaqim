@@ -12,11 +12,13 @@ const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;',
 const $=id=>document.getElementById(id);
 const N=n=>AR(n);
 const STORE='fqz';                                   // reader settings on this phone (+ S.zs for the shared ones)
-const D={size:1,ar:1,tr:1,me:1,auto:1,rep:'n',rate:1,wbw:0};
+const D={size:1,ar:1,tr:1,me:1,auto:1,rep:'n',rate:1,tapw:0};
 const st=Object.assign({},D,store(STORE)||{});
+if(!st.m2){st.rep='n';delete st.wbw;st.m2=1;store(STORE,st)}   // 24 Nov: 'As many times as needed' is everyone's default; whole-page word mode replaced by tap-a-word card
 if(S.zs){['ar','tr','me','auto'].forEach(k=>{if(S.zs[k]!=null&&(store(STORE)||{})[k]==null)st[k]=S.zs[k]});if(S.zs.size&&!(store(STORE)||{}).size)st.size=S.zs.size}
 const saveSt=()=>{store(STORE,st);S.zs=Object.assign(S.zs||{},{ar:st.ar,tr:st.tr,me:st.me,auto:st.auto,size:st.size});save()};
 
+try{if((S.zkv||0)<2){Object.values(S.zk||{}).forEach(d=>['morning','evening'].forEach(k=>{const o=d&&d[k];if(!o)return;const n={};Object.keys(o).forEach(x=>{const m=/^(\d+)(\..+)?$/.exec(x);if(m)n[(+m[1]+1)+(m[2]||'')]=o[x];else n[x]=o[x]});d[k]=n}));S.zkv=2;save()}}catch(e){}
 /* ---------- data: words, timings, clips ---------- */
 let W=null,WP=null;
 function loadWords(){if(!WP)WP=fetch(ROOT+'data/adhkar/words.json').then(r=>r.json()).then(d=>{W=d;return d}).catch(()=>{W={q:{},h:{},c:{},g:{},dur:{}};return W});return WP}
@@ -27,8 +29,8 @@ const QULS=['112:1','112:2','112:3','112:4','|','113:1','113:2','113:3','113:4',
 const ISTI='أَعُوذُ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ';
 // set -> item -> clip file in hisn/clips (male reader of the site's Hisn al-Muslim recording, cut at the dhikr's own words)
 const CLIP={
- morning:{1:'m-asbahna',2:'m-bika-asbahna',3:'sayyid-istighfar',4:'bismillah-la-yadurr',5:'subhan-adada',6:'subhan-wabihamdih',7:'astaghfir-atub'},
- evening:{2:'e-bika-amsayna',3:'sayyid-istighfar',4:'bismillah-la-yadurr',5:'audhu-kalimat',6:'subhan-wabihamdih'},
+ morning:{2:'m-asbahna',3:'m-bika-asbahna',4:'sayyid-istighfar',5:'bismillah-la-yadurr',6:'subhan-adada',7:'subhan-wabihamdih',8:'astaghfir-atub'},
+ evening:{3:'e-bika-amsayna',4:'sayyid-istighfar',5:'bismillah-la-yadurr',6:'audhu-kalimat',7:'subhan-wabihamdih'},  // item 0 = Ayat al-Kursi (added 24 Nov)
  sleep:{3:'bismika-rabbi',4:'bismika-amutu',5:'subhanallah',6:'alhamdulillah',7:'allahu-akbar'},
  ruqyah:{5:'audhu-kalimat',8:'istiadha'}
 };
@@ -45,7 +47,7 @@ const NAME={
  'r-bism3':['In the name of Allah','بسم الله'],'r-qudrah':['Allah and His power','أعوذ بالله وقدرته'],'r-arqik':['Ruqyah of Jibril','بسم الله أرقيك'],
  'd-hamm':['Worry and grief','اللهم إني أعوذ بك من الهم والحزن']
 };
-const HNAME={'evening:1':'e-amsayna','ruqyah:4':'r-tammah','ruqyah:7':'r-arqik','dua:0':'d-hamm'};
+const HNAME={'evening:2':'e-amsayna','ruqyah:4':'r-tammah','ruqyah:7':'r-arqik','dua:0':'d-hamm'};
 
 const strip=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\(×\s*\d+\)/g,' ').replace(/۝/g,' ').replace(/\s+/g,' ').trim();
 const nkey=w=>w.replace(/[،,.؛:!?«»"]/g,'');
@@ -66,7 +68,7 @@ function steps(set){if(CACHE[set])return CACHE[set];const z=ZK[set],out=[];
   const clip=(CLIP[set]||{})[j];
   out.push({j,k:null,parts:1,n:it.n,q:false,ar:strip(it.ar),tr:it.tr,it,src:it.src,why:it.why,clip,name:clip||HNAME[set+':'+j]})});
  return CACHE[set]=out}
-function title(s){if(s.q){const su=+s.keys[0].split(':')[0],a=s.keys[0].split(':')[1],b=s.keys[s.keys.length-1].split(':')[1],nm=SUR[su]||['Surah '+su,'سورة '+su];
+function title(s){if(s.q){if(s.keys.length===1&&s.keys[0]==='2:255')return FT('Ayat al-Kursi','آية الكرسي','Aayaat al-Kursii','Aayatul Kursi');const su=+s.keys[0].split(':')[0],a=s.keys[0].split(':')[1],b=s.keys[s.keys.length-1].split(':')[1],nm=SUR[su]||['Surah '+su,'سورة '+su];
   const whole=su>=112||su===1;return whole?FT(nm[0],'سورة '+nm[1]):FT(nm[0]+' '+a+(b!==a?'–'+b:''),nm[1]+' '+N(a)+(b!==a?'–'+N(b):''))}
  const nm=NAME[s.name];return nm?FT(nm[0],nm[1]):''}
 
@@ -103,7 +105,7 @@ function roundEnd(){const s=cur();if(!s){stop();return}AU.round++;
  if(st.rep==='loop'){bump(s,'audio',true);AU.gap=setTimeout(()=>{if(AU.on){loadSeg(0,0);A.play().catch(()=>{})}},600);return}
  const done=bump(s,'audio');
  if(st.rep==='n'&&!done){AU.gap=setTimeout(()=>{if(AU.on&&cur()===s){loadSeg(0,0);A.play().catch(()=>{})}},600);return}
- if(done&&st.auto&&ZS.i<steps(ZS.set).length-1){AU.gap=setTimeout(()=>{if(!AU.on)return;go(ZS.i+1,true)},900);return}
+ const nx=nextOpen();if(done&&nx>=0){win();AU.gap=setTimeout(()=>{if(cur()!==s)return;const was=AU.on;go(nx,was&&st.auto)},1100);return}
  AU.on=false;loadSeg(0,0);paintPlayer()}
 // highlight the word being read
 let RAF=0;function tick(){cancelAnimationFrame(RAF);if(A.paused&&!AU.word){return}const x=AU.q[AU.qi];if(x&&!AU.word){hl(wordAt(x,A.currentTime))}paintTime();RAF=requestAnimationFrame(tick)}
@@ -137,25 +139,30 @@ function bump(s,how,loop){const p=P();const c=cnt(s,p);if(c>=s.n&&!loop)return t
  if(done){paintSteps();const all=steps(ZS.set).every(x=>isDone(x,p));if(all&&!loop){setTimeout(finish,700);return true}}
  return done}
 function tapCount(){const s=cur();if(!s)return;const p=zProg(ZS.set);
- if(isDone(s,p)){if(ZS.i<steps(ZS.set).length-1)go(ZS.i+1,false);return}
+ if(isDone(s,p)){const nx=nextOpen();if(nx>=0)go(nx,false);return}
  const done=bump(s,'tap');
- if(done){if(AU.on){clearTimeout(AU.gap);A.pause()}if(st.auto&&ZS.i<steps(ZS.set).length-1){const was=AU.on;setTimeout(()=>{if(cur()===s)go(ZS.i+1,was)},800)}else{AU.on=false;paintPlayer()}}}
+ if(done){const was=AU.on;if(AU.on){clearTimeout(AU.gap);A.pause()}const nx=nextOpen();if(nx>=0){win();setTimeout(()=>{if(cur()===s)go(nx,was&&st.auto)},1100)}else{AU.on=false;paintPlayer()}}}
+// the next one not yet finished: first after this one, then any skipped earlier
+function nextOpen(){const ss=steps(ZS.set),p=zProg(ZS.set);for(let k=1;k<ss.length;k++){const i=(ZS.i+k)%ss.length;if(!isDone(ss[i],p))return i}return -1}
+// a short moment that recognises the one just finished
+function win(){const c=$('zCard');if(!c)return;c.classList.remove('win');void c.offsetWidth;c.classList.add('win');const a=c.querySelector('.fz-arc');if(a&&!a.querySelector('.fz-burst')){let h='';for(let k=0;k<10;k++){const t=k/10*Math.PI*2;h+=`<i style="--x:${Math.cos(t)*34}px;--y:${Math.sin(t)*34}px;--d:${k%2?.05:0}s"></i>`}a.insertAdjacentHTML('beforeend',`<span class="fz-burst">${h}</span>`)}
+ const h=$('fzHint');if(h)h.innerHTML=`<span class="fz-ok"><i class="ph-bold ph-check"></i>${esc(FT('Done. Moving to the next one','تمّ. الانتقال إلى التالي','Xumurame. Gara itti aanutti','Waa la dhammeeyey. U gudbaya kan xiga'))}</span>`}
 function undo(){const s=cur();if(!s)return;const p=P();const c=cnt(s,p);if(!c)return;p[ck(s)]=c-1;if(s.k!=null)sync(s,p);else p[s.j]=c-1;save();hap(false);paintCount();paintSteps()}
-function finish(){stop();try{celebrate(ZS.set)}catch(e){}try{const h=document.querySelector('#cel h2');if(h&&ZS&&ZS.set!=='sleep')h.textContent=FT('All done. May Allah accept it.','تمّت كلها. تقبّل الله منك.','Hundi xumurameera. Rabbiin si irraa haa fudhatu.','Dhammaan waa la dhammeeyey. Alle ha kaa aqbalo.')}catch(e){}}
+function finish(){stop();try{const set=ZS.set;if(['morning','evening','sleep'].includes(set)){const dk=dkey(NOW());S.ci=S.ci||{};S.ci[dk]=S.ci[dk]||{};if(!S.ci[dk][set]){S.ci[dk][set]=true;const c=(typeof CI!=='undefined'?CI:[]).find(x=>x[0]===set);if(c)star('ci-'+set+'-'+dk,c[1]);save();if(typeof renderCI==='function'&&$('ci'))renderCI()}}}catch(e){}try{celebrate(ZS.set)}catch(e){}try{const h=document.querySelector('#cel h2');if(h&&ZS&&ZS.set!=='sleep')h.textContent=FT('All done. May Allah accept it.','تمّت كلها. تقبّل الله منك.','Hundi xumurameera. Rabbiin si irraa haa fudhatu.','Dhammaan waa la dhammeeyey. Alle ha kaa aqbalo.')}catch(e){}}
 
 /* ---------- drawing ---------- */
 const cur=()=>ZS&&steps(ZS.set)[ZS.i];
 function build(){const zr=$('zr');zr.classList.add('fz');
- zr.innerHTML=`<div class="fz-hd"><button class="fz-ib" id="fzX" aria-label="${esc(FT('Close','إغلاق','Cufi','Xir'))}"><i class="ph ph-x"></i></button><h1 id="fzTitle"></h1><button class="fz-ib" id="fzO" aria-label="${esc(FT('Reading and audio options','خيارات القراءة والصوت','Filannoo','Doorashooyin'))}"><i class="ph ph-sliders-horizontal"></i></button></div>
+ zr.innerHTML=`<div class="fz-hd"><button class="fz-ib" id="fzX" aria-label="${esc(FT('Close','إغلاق','Cufi','Xir'))}"><i class="ph ph-x"></i></button><button class="fz-tt" id="fzTi" aria-haspopup="true" aria-expanded="false"><span id="fzTitle"></span><i class="ph ph-caret-down"></i></button><button class="fz-ib" id="fzO" aria-label="${esc(FT('Reading and audio options','خيارات القراءة والصوت','Filannoo','Doorashooyin'))}"><i class="ph ph-sliders-horizontal"></i></button></div>
  <div class="fz-steps" id="fzS"></div>
  <div class="fz-body" id="fzB"><article class="fz-card" id="zCard"></article><p class="fz-hint" id="fzHint"></p></div>
  <div class="fz-dock" id="fzD"></div>`;
- $('fzX').onclick=()=>zClose();$('fzO').onclick=options;
+ $('fzX').onclick=()=>zClose();$('fzO').onclick=options;$('fzTi').onclick=e=>{e.stopPropagation();setMenu()};
  const B=$('fzB');
  // tap anywhere to count (not on buttons, links, words in Word by word, or the player)
- B.addEventListener('click',e=>{if(e.target.closest('a,button,input,label,.fz-dock'))return;if(st.wbw&&e.target.closest('.fzw'))return;if(PZ.moved){PZ.moved=false;return}tapCount()});
- B.addEventListener('click',e=>{const w=st.wbw&&e.target.closest('.fzw');if(w){e.stopPropagation();wordSheet(+w.dataset.s,+w.dataset.i)}},true);
- pinch(B)}
+ B.addEventListener('click',e=>{if(LP.fired){LP.fired=false;return}if(e.target.closest('a,button,input,label,.fz-dock'))return;if(PZ.moved){PZ.moved=false;return}
+  const w=st.tapw&&e.target.closest('.fzw');if(w){wordPop(+w.dataset.s,+w.dataset.i);return}tapCount()});
+ holdWords(B);pinch(B);B.addEventListener('scroll',()=>popClose(),{passive:true})}
 function paintSteps(){const ss=steps(ZS.set),p=zProg(ZS.set);$('fzS').innerHTML=`<div class="fz-path">${ss.map((s,i)=>`<button type="button" data-go="${i}" class="${isDone(s,p)?'dn':''} ${i===ZS.i?'cur':''}" aria-label="${esc(FT('Go to '+(i+1),'اذهب إلى '+N(i+1)))}"><i></i></button>`).join('')}</div>`;
  $('fzS').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go,false))}
 function qText(s){let h='',segs=qFor(s),si=0;
@@ -167,8 +174,7 @@ function qText(s){let h='',segs=qFor(s),si=0;
   if(st.me&&!isB&&L!=='ar')h+=`<p class="fz-me">${esc(qMean(key))}</p>`});
  return h}
 function qMean(k){try{if(LI>=0&&typeof QTR_ID!=='undefined'){const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');if(c[k])return c[k]}}catch(e){}return QD[k]?QD[k].en:''}
-function wcell(w,seg,i,q){if(!st.wbw)return `<span class="fzw" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`;
- return `<span class="fzw g" data-s="${seg}" data-i="${i}" role="button" tabindex="0"><b>${esc(w.ar)}</b>${w.tr?`<em dir="ltr">${esc(w.tr)}</em>`:''}${w.en&&L!=='ar'?`<small dir="ltr">${esc(w.en)}</small>`:''}</span>`}
+function wcell(w,seg,i,q){return `<span class="fzw" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`}
 function phrases(words,seg){// keep each phrase (up to a comma) together, so lines break at natural pauses
  const out=[];let cur=[];words.forEach((w,i)=>{cur.push(wcell(w,seg,i,false));if(/[،,]$/.test(w.ar)){out.push(cur);cur=[]}});if(cur.length)out.push(cur);
  return out.map(p=>`<span class="fz-ph">${p.join(' ')}</span>`).join(' ')}
@@ -195,8 +201,8 @@ function paintCount(pop){const s=cur();if(!s)return;const p=zProg(ZS.set),c=Math
  $('zCard').classList.toggle('done',done);
  const last=ZS.i>=steps(ZS.set).length-1;
  $('fzHint').innerHTML=done?(last?'':(st.auto?`<span class="fz-mv">${esc(FT('Moving to the next one','الانتقال إلى التالي','Gara itti aanutti','U gudbaya kan xiga'))}</span>`:`<button class="fz-next" id="fzN">${esc(FT('Next','التالي','Itti aanu','Xiga'))} <i class="ph ph-arrow-right flip"></i></button>`))
-  :`<span>${esc(s.n>1?FT('Tap anywhere to count · '+s.n+' times','اضغط في أي مكان للعدّ · '+N(s.n)+(s.n>2&&s.n<11?' مرات':' مرة'),'Lakkaa\'uuf bakka kamiyyuu tuqi · yeroo '+s.n,'Meel kasta taabo si aad u tiriso · '+s.n+' jeer'):FT('Tap anywhere when you have said it','اضغط في أي مكان بعد أن تقوله','Erga jettee booda bakka kamiyyuu tuqi','Meel kasta taabo markaad tiraahdo'))}</span>`;
- const n=$('fzN');if(n)n.onclick=e=>{e.stopPropagation();go(ZS.i+1,false)}}
+  :`<span>${esc(s.n>1?FT('Tap anywhere to count · '+s.n+' times','اضغط في أي مكان للعدّ · '+N(s.n)+(s.n>2&&s.n<11?' مرات':' مرة'),'Lakkaa\'uuf bakka kamiyyuu tuqi · yeroo '+s.n,'Meel kasta taabo si aad u tiriso · '+s.n+' jeer'):FT('Tap anywhere when you have said it','اضغط في أي مكان بعد أن تقوله','Erga jettee booda bakka kamiyyuu tuqi','Meel kasta taabo markaad tiraahdo'))}</span><small class="fz-lw"><i class="ph ph-hand-tap"></i>${esc(st.tapw?FT('Tap a word to hear it and see its meaning','اضغط على كلمة لتسمعها وترى معناها','Jecha tokko tuqii dhaggeeffadhu, hiika isaas argi','Eray taabo si aad u maqasho una aragto macnihiisa'):FT('Press and hold a word to hear it and see its meaning','اضغط مطوّلًا على كلمة لتسمعها وترى معناها','Jecha tokko qabadhuu dhaggeeffadhu, hiika isaas argi','Eray ku hay farta si aad u maqasho una aragto macnihiisa'))}</small>`;
+ const n=$('fzN');if(n)n.onclick=e=>{e.stopPropagation();const nx=nextOpen();go(nx>=0?nx:ZS.i+1,false)}}
 const fmt=t=>{t=Math.max(0,Math.round(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
 const RATES=[.75,1,1.25,1.5,2];
 const REPS={n:['As many times as needed','بعدد المرات المطلوبة','Hamma barbaachisu','Inta loo baahdo'],one:['Play once','مرة واحدة','Yeroo tokko','Hal mar'],loop:['Keep repeating','كرّر دائمًا','Irra deebi\'i','Ku celi']};
@@ -225,21 +231,54 @@ function paintTime(){const R=$('fzR');if(!R)return;const T=total(),e=elapsed();i
 function paint(){paintSteps();card();paintPlayer()}
 
 /* ---------- moving between steps ---------- */
-function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
+function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;popClose();menuClose();stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
 
 /* ---------- word sheet: hear it, read it, its meaning ---------- */
 function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd||[]).map((w,k)=>({seg:i,i:k,ar:w[0],tr:w[1],en:w[2]}))}).flat()}
  return hWords(s.ar).map((w,k)=>({seg:0,i:k,ar:w.ar,tr:w.tr,en:w.en}))}
-function wordSheet(seg,i){const all=wordList();let at=all.findIndex(w=>w.seg===seg&&w.i===i);if(at<0)return;stop();
- const draw=()=>{const w=all[at];const can=!!timesFor(AU.q[w.seg]||{})&&!!(timesFor(AU.q[w.seg])||[])[w.i];
-  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(FT('Word','الكلمة','Jecha','Erayga'))} ${N(at+1)} / ${N(all.length)}</h1>${XB}</div>
-  <div class="fz-ws"><div class="fz-wa" lang="ar" dir="rtl">${esc(w.ar.replace(/[،,]$/,''))}</div>
-  ${w.tr?`<div class="fz-wt">${esc(w.tr)}</div>`:''}${w.en&&L!=='ar'?`<div class="fz-wm">${esc(w.en)}</div>`:''}
-  <div class="fz-wb">${can?`<button class="fz-wp" id="fzWp"><i class="ph-fill ph-speaker-high"></i>${esc(FT('Hear it','استمع','Dhaggeeffadhu','Dhageyso'))}</button><button class="fz-wp lt" id="fzWs"><i class="ph ph-snail"></i>${esc(FT('Slowly','ببطء','Suuta','Si tartiib ah'))}</button>`:`<p class="fz-wn">${esc(FT('No recording of this word yet.','لا يوجد تسجيل لهذه الكلمة بعد.','Sagaleen jecha kanaa hin jiru.','Erayga cod uma laha weli.'))}</p>`}</div>
-  <div class="fz-wnav"><button id="fzWb" ${at?'':'disabled'} aria-label="${esc(FT('Previous word','الكلمة السابقة'))}"><i class="ph ph-caret-left flip"></i></button><button id="fzWn" ${at<all.length-1?'':'disabled'} aria-label="${esc(FT('Next word','الكلمة التالية'))}"><i class="ph ph-caret-right flip"></i></button></div></div>`);
-  const p=$('fzWp');if(p){p.onclick=()=>sayWord(w.seg,w.i,false);$('fzWs').onclick=()=>sayWord(w.seg,w.i,true);sayWord(w.seg,w.i,false)}
-  $('fzWb').onclick=()=>{if(at>0){at--;draw()}};$('fzWn').onclick=()=>{if(at<all.length-1){at++;draw()}}};
- if(!W)loadWords().then(draw);else draw()}
+const LP={t:0,fired:false,x:0,y:0};
+function holdWords(B){const clr=()=>{clearTimeout(LP.t);LP.t=0};
+ B.addEventListener('pointerdown',e=>{const w=e.target.closest('.fzw');if(!w||e.isPrimary===false)return;LP.x=e.clientX;LP.y=e.clientY;clr();LP.fired=false;
+  LP.t=setTimeout(()=>{LP.t=0;if(PZ.d)return;LP.fired=true;hap(false);wordPop(+w.dataset.s,+w.dataset.i)},380)});
+ B.addEventListener('pointermove',e=>{if(LP.t&&Math.hypot(e.clientX-LP.x,e.clientY-LP.y)>9)clr()});
+ ['pointerup','pointercancel','pointerleave'].forEach(t=>B.addEventListener(t,clr));
+ B.addEventListener('contextmenu',e=>{if(e.target.closest('.fzw'))e.preventDefault()})}
+let POP=null;
+function popClose(){if(!POP)return;POP.el.remove();document.removeEventListener('pointerdown',POP.out,true);document.querySelectorAll('.fzw.pk').forEach(x=>x.classList.remove('pk'));if(AU.word){AU.word=null;try{A.pause()}catch(e){}paintPlayer()}POP=null}
+// a small card next to the word: the word, how to say it, its meaning, hear it (normal or slow), previous / next word
+function wordPop(seg,i){const all=wordList();let at=all.findIndex(w=>w.seg===seg&&w.i===i);if(at<0)return;stop();popClose();
+ const el=document.createElement('div');el.className='fz-pop';el.setAttribute('role','dialog');$('zr').appendChild(el);
+ const out=e=>{if(!e.target.closest('.fz-pop')){e.stopPropagation();e.preventDefault();popClose();LP.fired=true;setTimeout(()=>LP.fired=false,450)}};
+ POP={el,out};setTimeout(()=>{if(POP&&POP.el===el)document.addEventListener('pointerdown',out,true)},0);
+ const draw=(say)=>{const w=all[at];const T=timesFor(AU.q[w.seg]||{});const can=!!(T&&T[w.i]);
+  document.querySelectorAll('.fzw.pk').forEach(x=>x.classList.remove('pk'));const we=document.querySelector(`#zCard .fzw[data-s="${w.seg}"][data-i="${w.i}"]`);if(we)we.classList.add('pk');
+  el.innerHTML=`<div class="fz-pt"><span>${N(at+1)} / ${N(all.length)}</span><button class="fz-px" aria-label="${esc(FT('Close','إغلاق','Cufi','Xir'))}"><i class="ph ph-x"></i></button></div>
+  <div class="fz-wa" lang="ar" dir="rtl">${esc(w.ar.replace(/[،,]$/,''))}</div>${w.tr?`<div class="fz-wt" dir="ltr">${esc(w.tr)}</div>`:''}${w.en&&L!=='ar'?`<div class="fz-wm" dir="ltr">${esc(w.en)}</div>`:''}
+  <div class="fz-pb"><button class="fz-pn" data-d="-1" ${at?'':'disabled'} aria-label="${esc(FT('Previous word','الكلمة السابقة'))}"><i class="ph ph-caret-left"></i></button>
+  ${can?`<button class="fz-wp" data-sl="0"><i class="ph-fill ph-speaker-high"></i>${esc(FT('Hear','استمع','Dhaggeeffadhu','Dhageyso'))}</button><button class="fz-wp lt" data-sl="1" aria-label="${esc(FT('Hear slowly','استمع ببطء','Suuta dhaggeeffadhu','Si tartiib ah u dhageyso'))}"><i class="ph ph-gauge"></i>${esc(FT('Slow','ببطء','Suuta','Tartiib'))}</button>`:`<span class="fz-wn">${esc(FT('No recording of this word yet','لا يوجد تسجيل لهذه الكلمة بعد','Sagaleen jecha kanaa hin jiru','Erayga cod uma laha weli'))}</span>`}
+  <button class="fz-pn" data-d="1" ${at<all.length-1?'':'disabled'} aria-label="${esc(FT('Next word','الكلمة التالية'))}"><i class="ph ph-caret-right"></i></button></div>`;
+  el.querySelector('.fz-px').onclick=popClose;el.querySelectorAll('[data-sl]').forEach(b=>b.onclick=()=>sayWord(w.seg,w.i,b.dataset.sl==='1'));
+  el.querySelectorAll('.fz-pn').forEach(b=>b.onclick=()=>{const rtlNext=b.dataset.d==='1';at=Math.max(0,Math.min(all.length-1,at+(rtlNext?1:-1)));draw(true)});
+  place(we);if(can&&say)sayWord(w.seg,w.i,false)};
+ const place=we=>{const vw=innerWidth,vh=innerHeight,pw=Math.min(320,vw-24);el.style.width=pw+'px';
+  const r=we?we.getBoundingClientRect():{left:vw/2,right:vw/2,top:vh/3,bottom:vh/3,width:0};const h=el.offsetHeight;
+  let x=Math.max(12,Math.min(vw-pw-12,r.left+r.width/2-pw/2));const dock=$('fzD')?$('fzD').getBoundingClientRect().top:vh;
+  let below=r.bottom+12+h<dock-8;let y=below?r.bottom+12:r.top-12-h;if(y<12){y=Math.max(12,Math.min(dock-h-8,r.bottom+12));}
+  el.style.left=x+'px';el.style.top=y+'px';el.classList.toggle('up',!below);el.style.setProperty('--ax',Math.max(18,Math.min(pw-18,r.left+r.width/2-x))+'px');
+  requestAnimationFrame(()=>el.classList.add('on'))};
+ if(!W)loadWords().then(()=>draw(true));else draw(true)}
+const wordSheet=wordPop;
+
+/* ---------- choose another set: a panel that unfolds under the title ---------- */
+const SETS=[['morning','ph-sun-horizon',['After Fajr','بعد الفجر','Fajrii booda','Fajarka kadib']],['evening','ph-sun-dim',['After Asr','بعد العصر','Asrii booda','Casarka kadib']],['sleep','ph-bed',['Before you sleep','قبل النوم','Hirriba dura','Hurdada ka hor']],['ruqyah','ph-shield-check',['Protection and healing','الحفظ والشفاء','Eegumsaa fi fayyina','Ilaalin iyo bogsiin']],['dua','ph-heart',['When worried','عند الهمّ','Yeroo yaaddoftu','Marka aad welwesho']]];
+function setMenu(){const zr=$('zr');let m=$('fzM');if(m){menuClose();return}
+ const rows=SETS.filter(x=>ZK[x[0]]).map(([k,ic,sub])=>{const ss=steps(k),p=zProg(k),d=ss.filter(s=>isDone(s,p)).length,f=d/ss.length;
+  return `<button class="fz-mr ${k===ZS.set?'cur':''}" data-set="${k}"><span class="fz-mi"><i class="ph ${ic}"></i></span><span class="fz-mt"><b>${esc(ZK[k].t)}</b><small>${esc(FT(...sub))}</small><em><u style="width:${Math.round(f*100)}%"></u></em></span><span class="fz-mc">${d===ss.length?`<i class="ph-bold ph-check"></i>`:`${N(d)}<i>/</i>${N(ss.length)}`}</span></button>`}).join('');
+ m=document.createElement('div');m.id='fzM';m.className='fz-menu';m.innerHTML=`<div class="fz-mp" role="menu">${rows}</div>`;zr.appendChild(m);
+ const hd=zr.querySelector('.fz-hd');m.style.top=(hd.getBoundingClientRect().bottom+4)+'px';$('fzTi').setAttribute('aria-expanded','true');$('fzTi').classList.add('open');
+ requestAnimationFrame(()=>m.classList.add('on'));
+ m.onclick=e=>{const b=e.target.closest('[data-set]');if(!b){menuClose();return}const k=b.dataset.set;menuClose();if(k!==ZS.set){stop();window.zOpen(k)}}}
+function menuClose(){const m=$('fzM');if(!m)return;m.classList.remove('on');const t=$('fzTi');if(t){t.setAttribute('aria-expanded','false');t.classList.remove('open')}setTimeout(()=>m.remove(),200)}
 
 /* ---------- options: text size slider, what to show, auto-next, audio ---------- */
 function options(){const sw=(k,l,sub)=>`<label class="fz-row"><span><b>${esc(l)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span><button class="sw ${st[k]?'on':''}" data-k="${k}" aria-label="${esc(l)}"></button></label>`;
@@ -250,7 +289,7 @@ function options(){const sw=(k,l,sub)=>`<label class="fz-row"><span><b>${esc(l)}
  <div class="fz-size"><span class="s">ع</span><input type="range" id="fzZ" min="80" max="220" step="5" value="${Math.round(st.size*100)}" aria-label="${esc(FT('Text size','حجم الخط'))}"><span class="l">ع</span></div>
  <p class="fz-sz" id="fzZv">${Math.round(st.size*100)}% · ${esc(FT('You can also pinch the text with two fingers','يمكنك أيضًا التكبير بإصبعين','Quba lamaan dabalchuu dandeessa','Labo farood ayaad ku weynayn kartaa'))}</p>
  <h3>${esc(FT('Show','إظهار','Agarsiisi','Tus'))}</h3><div class="fz-card2">
- ${sw('ar',FT('Arabic','العربية','Arabiffa','Carabi'))}${sw('tr',FT('How to say it','النطق بالحروف اللاتينية','Akkaataa itti jedhamu','Sida loo dhawaaqo'),FT('Transliteration','نطق','Qubee','Higgaad'))}${sw('me',FT('Meaning','المعنى','Hiika','Macnaha'))}${sw('wbw',FT('Word by word','كلمة كلمة','Jecha jechaan','Eray eray'),FT('Each word with how to say it and its meaning. Tap a word to hear it.','كل كلمة مع نطقها ومعناها. اضغط على الكلمة لتسمعها.','Jechi hundi akkaataa itti jedhamuu fi hiika isaa wajjin.','Eray kasta sida loo dhawaaqo iyo macnihiisa.'))}</div>
+ ${sw('ar',FT('Arabic','العربية','Arabiffa','Carabi'))}${sw('tr',FT('How to say it','النطق بالحروف اللاتينية','Akkaataa itti jedhamu','Sida loo dhawaaqo'),FT('Transliteration','نطق','Qubee','Higgaad'))}${sw('me',FT('Meaning','المعنى','Hiika','Macnaha'))}${sw('tapw',FT('Open words with one tap','فتح الكلمة بضغطة واحدة','Jecha tuqii bani','Eray ku fur hal taabasho'),FT('Off: press and hold a word, and a tap anywhere counts. On: one tap on a word opens it.','مغلق: اضغط مطوّلًا على الكلمة، والضغط في أي مكان يعدّ. مفعّل: ضغطة على الكلمة تفتحها.','Cufaa: jecha qabadhu. Banaa: tuqa tokkoon bana.','Dansan: eraygii ku hay farta. Shidan: hal taabasho ayaa furta.'))}</div>
  <h3>${esc(FT('Audio','الصوت','Sagalee','Codka'))}</h3><div class="fz-card2">
  ${sw('auto',FT('Move on by itself','الانتقال تلقائيًا','Ofumaan itti fufi','Si toos ah u gudub'),FT('When one is finished, the next one starts','عند الانتهاء يبدأ التالي','Yeroo tokko xumuramu kan itti aanu jalqaba','Marka mid dhammaado kan xiga ayaa bilaabma'))}
  <div class="fz-row col"><b>${esc(FT('Repeat','التكرار','Irra deebi\'uu','Ku celin'))}</b>${seg('rep',['n','one','loop'],v=>FT(...REPS[v]))}</div>
@@ -270,6 +309,15 @@ function pinch(el){const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clien
  el.addEventListener('touchend',e=>{if(PZ.d&&e.touches.length<2){PZ.d=0;saveSt();setTimeout(()=>PZ.moved=false,350)}});
  ['gesturestart','gesturechange'].forEach(t=>el.addEventListener(t,e=>e.preventDefault(),{passive:false}))}
 
+/* ---------- every sheet: swipe down to close, shadow under the sticky title row ---------- */
+(function(){const sh=$('sh');if(!sh||sh.dataset.sw)return;sh.dataset.sw=1;let y0=null,dy=0;
+ sh.addEventListener('scroll',()=>sh.classList.toggle('scr',sh.scrollTop>4),{passive:true});
+ sh.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest('input,textarea,select,.fz-seg'))return;if(sh.scrollTop>0&&!e.target.closest('.grab,.hd'))return;y0=e.touches[0].clientY;dy=0},{passive:true});
+ sh.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(dy>0){sh.classList.add('drag');sh.style.transform=`translateY(${dy}px)`;if(e.cancelable)e.preventDefault()}else if(dy<-6){y0=null;sh.classList.remove('drag');sh.style.transform=''}},{passive:false});
+ sh.addEventListener('touchend',()=>{if(y0==null)return;y0=null;sh.classList.remove('drag');sh.style.transform='';if(dy>90)closeSheet();dy=0});
+ let was=false;new MutationObserver(()=>{const on=sh.classList.contains('on');if(on===was)return;was=on;if(!on){sh.style.transform='';sh.classList.remove('scr')}}).observe(sh,{attributes:true,attributeFilter:['class']});
+})();
+
 /* ---------- take over the old reader ---------- */
 const oldClose=window.zClose;
 window.zOpen=function(set){const z=ZK[set];if(!z)return;delete CACHE[set];ZS={set,i:0};const ss=steps(set),p=zProg(set);let i=ss.findIndex(s=>!isDone(s,p));if(i<0)i=0;
@@ -279,7 +327,7 @@ function paint0(){ZS.i=ZS.i||0;AU.q=qFor(cur());paint()}
 window.zDraw=function(){if(!ZS)return;if(!$('fzB')){build();$('fzTitle').textContent=ZK[ZS.set].t}const ss=steps(ZS.set);if(ZS.i>=ss.length)ZS.i=ss.length-1;AU.q=qFor(cur());paint()};
 window.zNext=function(){if(ZS)go(ZS.i+1,false)};
 window.zTap=tapCount;window.zIndex=function(){};
-window.zClose=function(){stop();try{A.removeAttribute('src');A.load()}catch(e){}$('zr').classList.remove('fz');return oldClose.apply(this,arguments)};
+window.zClose=function(){popClose();menuClose();stop();try{A.removeAttribute('src');A.load()}catch(e){}$('zr').classList.remove('fz');return oldClose.apply(this,arguments)};
 window.FQZ={steps,go,st,A,AU,tapCount,wordSheet,options,cur};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ZS&&$('fzD'))paintPlayer()});
 // a reader already open (deep link) gets the new one
