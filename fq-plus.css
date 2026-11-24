@@ -113,7 +113,7 @@ body:has(#mp.on) .fqp-cmp{bottom:calc(64px + 74px + env(safe-area-inset-bottom))
 .fqp-av img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
 .fqp-av{overflow:hidden}
 .fqp-add{background:var(--card2);color:var(--acc);border:1.5px dashed var(--line)}
-.fqp-wpg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.fqp-wpg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .fqp-wpg button{border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:5px;font:inherit;color:var(--sub)}
 .fqp-wps{width:100%;aspect-ratio:3/4;border-radius:14px;border:1px solid var(--line);background:var(--bg) center/cover no-repeat;display:grid;place-items:center;font-size:22px;color:var(--sub);box-shadow:0 0 0 2px transparent;transition:box-shadow .15s}
 .fqp-wpg button.on .fqp-wps{box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--acc)}
@@ -131,3 +131,5 @@ html.fqp-haswp body:has(#s-home.on){background:transparent!important}
 .fqp-pn{margin:0;line-height:1.5}
 .fqp-sm{color:var(--sub);font-size:13.5px;margin-top:8px!important}
 .fqp-delacc{display:block;margin:2px auto 8px;border:0;background:none;color:#b5543c;font:inherit;font-weight:600;font-size:14.5px;padding:8px}
+
+.fqp-priv{display:flex;gap:10px;align-items:flex-start;margin:10px 4px 14px;padding:12px 14px;border-radius:14px;background:var(--card2);color:var(--sub);font-size:13px;line-height:1.55}.fqp-priv i{font-size:17px;color:var(--acc);margin-top:1px;flex:none}
