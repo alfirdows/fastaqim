@@ -25,7 +25,7 @@ const FAKE=()=>{const subs=[];let ses=null;
  const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(REAL)console.log('  [page]',m.text().slice(0,200))});
  const snap=n=>p.screenshot({path:path.join(OUT,n+'.png')});
  await p.goto('https://fq.test'+BASE+'?nosync=1'+(process.env.LANGQ?'&'+process.env.LANGQ:'')+'#home');await p.waitForTimeout(1200);
- await p.evaluate(()=>{S.qLast={su:67,ay:1,p:562,j:29};S.rcUi={hide:0,rec:0};save();go('quran')});await p.waitForTimeout(600);
+ await p.evaluate(()=>{S.qLast={su:67,ay:1,p:562,j:29};S.rcUi={hide:0,rec:0};save();go('quran')});if(process.env.NIGHT)await p.evaluate(()=>document.documentElement.classList.add('dark'));await p.waitForTimeout(600);
  ok('Recite button on the Qur\'an page',await p.isVisible('.qh .act .rc'));await snap('1_quran_tab');
  await p.evaluate(k=>qOpen(k),(process.env.RSU||'67')+':1');await p.waitForTimeout(1200);
  ok('Recite pill under the surah title',await p.isVisible('#rdB .rsh .rcp'));await snap('2_reader');

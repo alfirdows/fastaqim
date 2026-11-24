@@ -83,3 +83,16 @@ html[dir=rtl] .rcs select{padding:0 12px 0 30px;background-position:left 11px ce
 .rcbt button i{font-size:18px}.rcbt .w2{grid-column:1/-1}
 .rcau{width:100%;margin-top:10px}
 .rccr p{font-size:14px;line-height:1.6;margin:0 0 12px}.rccr a{color:var(--acc);font-weight:600}
+
+/* night mode */
+html.dark .rcp,html.dark .qh .act .rc,html.dark .rcb,html.dark .rcbt button:not(.p){background:var(--card);color:var(--ink);border-color:var(--line)}
+html.dark .rcp,html.dark .qh .act .rc{color:#8cc39a}
+html.dark .rcb{box-shadow:0 10px 30px rgba(0,0,0,.4)}
+html.dark .rw.x,html.dark .rcl .w,html.dark .rc-hide .ra.rc-in .rw.x:not(.dn),html.dark .rc-hide .ra.rc-in .rw.om:not(.dn){background:#3a3222;color:var(--ink)}
+html.dark .rw.om{background:repeating-linear-gradient(90deg,#3a3222 0 6px,transparent 6px 10px)}
+html.dark .rw.ad::before{background:#3a3222;color:#e2c48d}
+html.dark .rcb .tx small em{color:#e2c48d}
+html.dark .rcs .inf{color:var(--ink)}
+html.dark .rcs .err{background:#3a2a22}
+html.dark .rcb .st,html.dark .rcb .st i,.rcb .st i{color:#fff!important}
+.rcb .ey i{color:var(--ink)!important;font-size:20px!important}

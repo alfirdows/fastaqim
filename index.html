@@ -7,6 +7,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-title" content="Fastaqim">
+<script>try{if(localStorage.getItem('fq5.night')==='1')document.documentElement.classList.add('dark')}catch(e){}</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Fastaqim</title>
 <link rel="stylesheet" href="ph/ph-regular/style.css">
@@ -1354,10 +1355,15 @@ function salSheet(k){const s=SAL.find(x=>x[0]===k),dk=dkey(NOW()),cur=(S.salah[d
  ${cur?`<button class="ghost" style="border-color:var(--line);color:var(--sub)" data-v="">${T('Clear','مسح')}</button>`:''}`);aftBind(k,dk);
  $$('#sh [data-v]').forEach(b=>b.onclick=()=>{const v=b.dataset.v;S.salah[dk]=S.salah[dk]||{};if(v)S.salah[dk][k]=v;else delete S.salah[dk][k];
   if(v==='on')star('sal-'+dk+'-'+k,T(s[1]+' on time',s[2]+' في وقتها'));else if(!v&&S.starLog['sal-'+dk+'-'+k]){delete S.starLog['sal-'+dk+'-'+k];S.stars--}save();vib(15);closeSheet();renderSalah()})}
-const VA=[['13:28'],['94:5','94:6'],['2:286'],['2:285'],['112:1','112:2','112:3','112:4'],['2:255']];
+const VA=[["13:28"],["94:5","94:6"],["2:286"],["2:152"],["2:153"],["2:186"],["3:139"],["3:200"],["9:51"],["12:87"],["14:7"],["16:97"],["16:128"],["17:24"],["20:25","20:26","20:27","20:28"],["21:87"],["23:1","23:2"],["25:74"],["29:69"],["33:41","33:42"],["39:53"],["40:60"],["47:7"],["50:16"],["51:56"],["53:39","53:40"],["55:60"],["59:18"],["64:16"],["65:3"],["67:2"],["93:3","93:4","93:5"],["94:7","94:8"],["103:1","103:2","103:3"],["112:1","112:2","112:3","112:4"],["2:255"],["2:201"],["3:8"],["3:133"],["14:40","14:41"],["18:10"],["25:63"],["28:24"],["2:45"],["2:156"],["6:162"],["11:115"],["15:99"],["20:46"],["31:17"],["40:44"],["16:53"],["57:21"],["11:112"],["87:14","87:15"],["89:27","89:28","89:29","89:30"],["99:7","99:8"],["12:86"],["10:62"],["20:132"],["25:15"],["2:285"],["3:173"],["13:11"],["20:114"],["8:46"],["11:88"],["29:45"],["41:30"],["49:10"],["4:28"],["39:10"],["42:19"],["7:56"],["3:159"]];
+/* Ayah of the day: a new one every day (local date), same for everyone; "Another" only changes today's */
+const VA_DAY=()=>{const d=NOW();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)};
+const VAG=()=>{const dk=dkey(NOW()),o=(S.vaO&&S.vaO.d===dk)?S.vaO.n:0;return VA[(VA_DAY()+o)%VA.length]};
+const VAC={};const vaLoad=g=>Promise.all([...new Set(g.map(k=>+k.split(':')[0]))].map(n=>VAC[n]||(VAC[n]=fetch('q/'+n+'.json').then(r=>r.json()).then(j=>{j.v.forEach((x,i)=>{const k=n+':'+(i+1);if(!QD[k])QD[k]={a:x[0],en:x[1]}})}).catch(()=>{delete VAC[n]}))));
+const vaReady=g=>g.every(k=>QD[k]);
 const ARD=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const vaRef=g=>{const[su,a]=g[0].split(':').map(Number),b=+g[g.length-1].split(':')[1],S0=SU[su-1],r=su+':'+a+(g.length>1?'–'+b:'');return{su,a,b,r,u:'https://quran.com/'+su+'/'+a+(g.length>1?'-'+b:''),t:T("Qur'an, Surah "+S0[0]+' '+r,'القرآن، سورة '+S0[1]+' '+ARD(r))}};
-const DAILY=()=>{const g=VA[(S.vaI||0)%VA.length],rf=vaRef(g);return[
+const DAILY=()=>{let g=VAG();if(!vaReady(g)){const want=g;vaLoad(want).then(()=>{if(vaReady(want)){renderCar();if($('qVq'))vaQ()}});g=VA[0]}const rf=vaRef(g);return[
  {t:T('Ayah of the day','آية اليوم'),ic:'ph-book-open',ar:g.map(k=>QD[k].a+'\u00a0<span class="am">'+ARD(k.split(':')[1])+'</span>').join(' '),q:1,m:g.map(k=>QD[k].en).join(' '),s:`<a href="${rf.u}" target="_blank" rel="noopener">${rf.t} ↗</a>`,done:'vod',va:g},
  {t:T('Dhikr of the day','ذكر اليوم'),ic:'ph-heart',ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',m:T('There is no might nor power except with Allah. A treasure from the treasures of Paradise.','كنز من كنوز الجنة.'),s:`<a href="https://sunnah.com/bukhari:6384" target="_blank" rel="noopener">${T('Bukhari 6384, Muslim 2704','البخاري ٦٣٨٤، مسلم ٢٧٠٤')} ↗</a>`},
  {t:T('Sunnah of the day','سنة اليوم'),ic:'ph-sun-horizon',ar:'رَكْعَتَا الْفَجْرِ خَيْرٌ مِنَ الدُّنْيَا وَمَا فِيهَا',m:T('The two rak\'ahs before Fajr are better than this world and everything in it.','ركعتا سنة الفجر خير من الدنيا وما فيها.'),s:`<a href="https://sunnah.com/muslim:725a" target="_blank" rel="noopener">${T('Muslim 725','مسلم ٧٢٥')} ↗</a>`}]};
@@ -1370,7 +1376,7 @@ function renderCar(){const D=DAILY(),dk=dkey(NOW());
  $$('[data-cp]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(txt(D[b.dataset.cp]));toast(T('Copied','تم النسخ'))}catch(e){toast(T('Could not copy','تعذّر النسخ'))}});
  $$('[data-shr]').forEach(b=>b.onclick=async()=>{try{await navigator.share({text:txt(D[b.dataset.shr])})}catch(e){}});
  const vp=$('car').querySelector('[data-vap]');if(vp)vp.onclick=()=>playAyat(D[0].va,vaRef(D[0].va).t);
- const vn=$('car').querySelector('[data-van]');if(vn)vn.onclick=()=>{S.vaI=((S.vaI||0)+1)%VA.length;save();vib(10);renderCar()};
+ const vn=$('car').querySelector('[data-van]');if(vn)vn.onclick=()=>{const dk=dkey(NOW());S.vaO={d:dk,n:((S.vaO&&S.vaO.d===dk?S.vaO.n:0)+1)%VA.length};save();vib(10);renderCar();if($('qVq'))vaQ()};
  const vd=$('car').querySelector('[data-vd]');if(vd)vd.onclick=e=>{e.preventDefault();if(star('vod-'+dk,T('Ayah of the day read','قرأت آية اليوم'))){vib(20);renderCar()}}}
 function renderHj(){const d=NOW(),h=hParts(d);
  $('hj').innerHTML=`<span class="w">${d.toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en'),{weekday:'long'})}</span><span class="d">${AR(h.d)}</span><span class="mo">${hm(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</span><span class="g">${d.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':(LI>=0?LX:'en-GB'),{day:'numeric',month:'long',year:'numeric'})}</span>`}
@@ -1400,15 +1406,17 @@ function greet(){const h=NOW().getHours();return h<12?T('Good morning','صباح
 R.home=()=>{try{renderPins();renderQC()}catch(e){console.error(e)}try{renderCI()}catch(e){console.error(e)}{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en-US'),{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
  const k=S.kh[0];$('khMini').textContent=k?(k.name||T('My khatmah','ختمتي'))+' · '+AR(Math.round(k.done/604*100))+'%':T('Start a new khatmah','ابدأ ختمة جديدة');
  $('cont').innerHTML=S.noCont?'':`<span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b>${T('Continue reading','متابعة القراءة')}</b><small>${T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥')}</small></span><button class="go" data-read="2:255">${T('Open','افتح')}</button>`;$('cont').style.display=S.noCont?'none':''};
-setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);
+let _vaLast=VA_DAY();setInterval(()=>{if($('s-home').classList.contains('on'))renderHero();if(VA_DAY()!==_vaLast){_vaLast=VA_DAY();renderCar();if($('qVq'))vaQ()}},1000);
 
 /* ---------- quran ---------- */
 const TK30=(p,td)=>`<div class="tk30">${Array.from({length:30},(_,i)=>`<i class="${i<Math.floor(p*30)?'on':i===Math.floor(p*30)&&td?'td':''}"></i>`).join('')}</div>`;
+function vaQ(){let g=VAG();if(!vaReady(g)){const w=g;vaLoad(w).then(()=>{if(vaReady(w))vaQ()});g=VA[0]}const rf=vaRef(g);
+ $('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${g.map(k=>QD[k].a+'\u00a0<span class="am">'+ARD(k.split(':')[1])+'</span>').join(' ')}</div>${L==='ar'?'':`<p class="en2">${esc(g.map(k=>QD[k].en).join(' '))}</p>`}<a href="${rf.u}" target="_blank" rel="noopener">${rf.t} ↗</a>`;
+ $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(g,rf.t);$('qVod').textContent=rf.r}
 R.quran=()=>{$('qResume').textContent=T('Ayah 255 · Page 42 · Juz 3','الآية ٢٥٥ · الصفحة ٤٢ · الجزء ٣');$('qSu').textContent=T('Al-Baqarah','سورة البقرة');
  $('qJs').innerHTML=JUZ.map((k,i)=>`<button data-juz="${i+1}" class="${i===2?'on':''}">${AR(i+1)}<small>${T('juz','جزء')}</small></button>`).join('');
  $$('#qJs [data-juz]').forEach(b=>b.onclick=()=>{ixJ=+b.dataset.juz;go('index')});
- const v=QD['13:28'];$('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa="13:28" aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${v.a}</div>${L==='ar'?'':`<p class="en2">${esc(v.en)}</p>`}<a href="https://quran.com/13/28" target="_blank" rel="noopener">${T("Qur'an, Surah Ar-Ra'd 13:28 ↗",'القرآن، سورة الرعد ١٣:٢٨ ↗')}</a>`;
- $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(['13:28'],T("Ar-Ra'd 13:28",'الرعد ١٣:٢٨'));$('qVod').textContent=T("Ar-Ra'd 13:28 · tap Done for a star",'الرعد ١٣:٢٨ · اضغط تم لتحصل على نجمة');
+ vaQ();
  $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div>${TK30(k.done/604,k.last!==dkey(NOW()))}<small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<div class="khe">${TK30(0,0)}<p>${T('30 steps, one juz each. Pick your own pace.','٣٠ خطوة، جزء لكل خطوة. اختر وتيرتك.')}</p><button class="go2" data-khn><i class="ph ph-plus"></i>${T('Start a khatmah','ابدأ ختمة')}</button></div>`;
  $$('[data-khd]').forEach(b=>b.onclick=()=>{const k=S.kh[b.dataset.khd],per=Math.ceil(604/k.days),dk=dkey(NOW());if(k.last===dk){toast(T('Already marked today','سُجّل اليوم'));return}k.done=Math.min(604,k.done+per);k.last=dk;star('kh-'+dk,T("Today's khatmah portion",'ورد الختمة اليوم'));save();vib(20);R.quran()})};
 $('khNew').onclick=khSheet;document.addEventListener('click',e=>{if(e.target.closest('[data-khn]'))khSheet()});
@@ -2365,7 +2373,11 @@ if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.g
 <script src="fq-plus.js" defer></script>
 <link rel="stylesheet" href="fq-own.css">
 <script src="fq-own.js"></script>
+<link rel="stylesheet" href="fq-months.css">
+<script src="fq-months.js"></script>
 <link rel="stylesheet" href="fq-voice.css">
 <script src="fq-voice.js" defer></script>
+<link rel="stylesheet" href="fq-night.css">
+<script src="fq-night.js" defer></script>
 </body>
 </html>
