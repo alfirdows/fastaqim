@@ -233,10 +233,16 @@ async function quranCard(){const host=$('s-quran');if(!host)return;let c=$('fqwQ
  c.innerHTML=`<button class="fqw-open"><span class="fqw-l"><small>${X('Daily wird','الورد اليومي','Wirdii guyyaa','Wirdiga maalinta')}</small><b>${esc(bigTxt(po))}</b><span>${rangeHTML(po)}</span></span>${window.FQ&&FQ.arc?FQ.arc(po.day,po.total,{w:54,label:N(po.day)}):''}</button>
   <button class="fqw-sh" id="fqwQS" aria-label="${X("Share today's card",'شارك بطاقة اليوم')}"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qooddi','La wadaag')}</button>`;
  c.querySelector('.fqw-open').onclick=()=>go('wird');$('fqwQS').onclick=async()=>{const it=await wirdItem(p);if(it)shareSheet(it)};
- /* Ayah of the day: share button */
- const vt=$('qVq')&&$('qVq').querySelector('.t');if(vt&&!vt.querySelector('[data-fqvs]')){vt.insertAdjacentHTML('beforeend',`<button data-fqvs aria-label="${X('Share','مشاركة')}"><i class="ph ph-share-network"></i></button>`);
-  vt.querySelector('[data-fqvs]').onclick=()=>{const v=QD['13:28'],me=L==='ar'?'':v.en,ref=X("Qur'an, Surah Ar-Ra'd 13:28",'القرآن، سورة الرعد ١٣:٢٨');
-   shareSheet({kind:'ayah',card:{kick:X('AYAH OF THE DAY','آية اليوم'),blocks:[{ar:v.a+' '+ARD(28),q:1,me,src:ref}]},text:v.a+' ﴿٢٨﴾\n\n'+(me?me+'\n\n':'')+ref+'\nhttps://quran.com/13/28\n\n'+X('Shared from Fastaqim','من فاستقم')+': '+SITE,saveT:ref,saveN:v.a+'\n\n'+(me?me+'\n':'')+'https://quran.com/13/28'})}}}
+ qvqBtn()}
+/* Ayah of the day (Qur'an tab): share button for whichever ayah is shown today */
+function qvqBtn(){const vt=$('qVq')&&$('qVq').querySelector('.t');if(!vt||vt.querySelector('[data-fqvs]'))return;
+ vt.insertAdjacentHTML('beforeend',`<button data-fqvs aria-label="${X('Share','مشاركة','Qooddi','La wadaag')}"><i class="ph ph-share-network"></i></button>`);
+ vt.querySelector('[data-fqvs]').onclick=()=>{let g=['13:28'];try{if(typeof VAG==='function'){const x=VAG();if(x&&x.every(k=>QD[k]))g=x}}catch(e){}
+  const [su,a]=g[0].split(':').map(Number),b=+g[g.length-1].split(':')[1],rg=su+':'+a+(g.length>1?'–'+b:'');
+  const ar=g.map(k=>QD[k].a+' '+ARD(k.split(':')[1])).join(' '),arT=g.map(k=>QD[k].a+' ﴿'+ARD(k.split(':')[1])+'﴾').join(' ');
+  const me=L==='ar'?'':balQ(g.map(k=>QD[k].en).join(' ')),ref=X("Qur'an, Surah "+SU[su-1][0]+' '+rg,'القرآن، سورة '+SU[su-1][1]+' '+ARD(rg)),url='https://quran.com/'+su+'/'+a+(g.length>1?'-'+b:'');
+  shareSheet({kind:'ayah',card:{kick:X('AYAH OF THE DAY','آية اليوم',"AAYAA GUYYAA HAR'AA",'AAYADDA MAANTA'),blocks:[{ar,q:1,me,src:ref}]},text:arT+'\n\n'+(me?me+'\n\n':'')+ref+'\n'+url+'\n\n'+X('Shared from Fastaqim','من فاستقم')+': '+SITE,saveT:ref,saveN:arT+'\n\n'+(me?me+'\n':'')+url})}}
+{const ov=window.vaQ;if(typeof ov==='function')window.vaQ=function(){const r=ov.apply(this,arguments);try{qvqBtn()}catch(e){}return r}}
 {const rh=R.home;R.home=function(){const r=rh.apply(this,arguments);homeCard().catch(e=>console.warn(e));/* header fit is measured only when Home is visible; Home opened from another tab first was never measured */try{if(typeof fhFit==='function')fhFit()}catch(e){}return r}}
 {const rq=R.quran;R.quran=function(){const r=rq.apply(this,arguments);quranCard().catch(e=>console.warn(e));return r}}
 
