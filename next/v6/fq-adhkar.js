@@ -105,7 +105,7 @@ function roundEnd(){const s=cur();if(!s){stop();return}AU.round++;
  if(st.rep==='loop'){bump(s,'audio',true);AU.gap=setTimeout(()=>{if(AU.on){loadSeg(0,0);A.play().catch(()=>{})}},600);return}
  const done=bump(s,'audio');
  if(st.rep==='n'&&!done){AU.gap=setTimeout(()=>{if(AU.on&&cur()===s){loadSeg(0,0);A.play().catch(()=>{})}},600);return}
- if(done&&st.auto&&ZS.i<steps(ZS.set).length-1){AU.gap=setTimeout(()=>{if(!AU.on)return;go(ZS.i+1,true)},900);return}
+ const nx=nextOpen();if(done&&nx>=0){win();AU.gap=setTimeout(()=>{if(cur()!==s)return;const was=AU.on;go(nx,was&&st.auto)},1100);return}
  AU.on=false;loadSeg(0,0);paintPlayer()}
 // highlight the word being read
 let RAF=0;function tick(){cancelAnimationFrame(RAF);if(A.paused&&!AU.word){return}const x=AU.q[AU.qi];if(x&&!AU.word){hl(wordAt(x,A.currentTime))}paintTime();RAF=requestAnimationFrame(tick)}
@@ -139,11 +139,16 @@ function bump(s,how,loop){const p=P();const c=cnt(s,p);if(c>=s.n&&!loop)return t
  if(done){paintSteps();const all=steps(ZS.set).every(x=>isDone(x,p));if(all&&!loop){setTimeout(finish,700);return true}}
  return done}
 function tapCount(){const s=cur();if(!s)return;const p=zProg(ZS.set);
- if(isDone(s,p)){if(ZS.i<steps(ZS.set).length-1)go(ZS.i+1,false);return}
+ if(isDone(s,p)){const nx=nextOpen();if(nx>=0)go(nx,false);return}
  const done=bump(s,'tap');
- if(done){if(AU.on){clearTimeout(AU.gap);A.pause()}if(st.auto&&ZS.i<steps(ZS.set).length-1){const was=AU.on;setTimeout(()=>{if(cur()===s)go(ZS.i+1,was)},800)}else{AU.on=false;paintPlayer()}}}
+ if(done){const was=AU.on;if(AU.on){clearTimeout(AU.gap);A.pause()}const nx=nextOpen();if(nx>=0){win();setTimeout(()=>{if(cur()===s)go(nx,was&&st.auto)},1100)}else{AU.on=false;paintPlayer()}}}
+// the next one not yet finished: first after this one, then any skipped earlier
+function nextOpen(){const ss=steps(ZS.set),p=zProg(ZS.set);for(let k=1;k<ss.length;k++){const i=(ZS.i+k)%ss.length;if(!isDone(ss[i],p))return i}return -1}
+// a short moment that recognises the one just finished
+function win(){const c=$('zCard');if(!c)return;c.classList.remove('win');void c.offsetWidth;c.classList.add('win');const a=c.querySelector('.fz-arc');if(a&&!a.querySelector('.fz-burst')){let h='';for(let k=0;k<10;k++){const t=k/10*Math.PI*2;h+=`<i style="--x:${Math.cos(t)*34}px;--y:${Math.sin(t)*34}px;--d:${k%2?.05:0}s"></i>`}a.insertAdjacentHTML('beforeend',`<span class="fz-burst">${h}</span>`)}
+ const h=$('fzHint');if(h)h.innerHTML=`<span class="fz-ok"><i class="ph-bold ph-check"></i>${esc(FT('Done. Moving to the next one','تمّ. الانتقال إلى التالي','Xumurame. Gara itti aanutti','Waa la dhammeeyey. U gudbaya kan xiga'))}</span>`}
 function undo(){const s=cur();if(!s)return;const p=P();const c=cnt(s,p);if(!c)return;p[ck(s)]=c-1;if(s.k!=null)sync(s,p);else p[s.j]=c-1;save();hap(false);paintCount();paintSteps()}
-function finish(){stop();try{celebrate(ZS.set)}catch(e){}try{const h=document.querySelector('#cel h2');if(h&&ZS&&ZS.set!=='sleep')h.textContent=FT('All done. May Allah accept it.','تمّت كلها. تقبّل الله منك.','Hundi xumurameera. Rabbiin si irraa haa fudhatu.','Dhammaan waa la dhammeeyey. Alle ha kaa aqbalo.')}catch(e){}}
+function finish(){stop();try{const set=ZS.set;if(['morning','evening','sleep'].includes(set)){const dk=dkey(NOW());S.ci=S.ci||{};S.ci[dk]=S.ci[dk]||{};if(!S.ci[dk][set]){S.ci[dk][set]=true;const c=(typeof CI!=='undefined'?CI:[]).find(x=>x[0]===set);if(c)star('ci-'+set+'-'+dk,c[1]);save();if(typeof renderCI==='function'&&$('ci'))renderCI()}}}catch(e){}try{celebrate(ZS.set)}catch(e){}try{const h=document.querySelector('#cel h2');if(h&&ZS&&ZS.set!=='sleep')h.textContent=FT('All done. May Allah accept it.','تمّت كلها. تقبّل الله منك.','Hundi xumurameera. Rabbiin si irraa haa fudhatu.','Dhammaan waa la dhammeeyey. Alle ha kaa aqbalo.')}catch(e){}}
 
 /* ---------- drawing ---------- */
 const cur=()=>ZS&&steps(ZS.set)[ZS.i];
@@ -197,7 +202,7 @@ function paintCount(pop){const s=cur();if(!s)return;const p=zProg(ZS.set),c=Math
  const last=ZS.i>=steps(ZS.set).length-1;
  $('fzHint').innerHTML=done?(last?'':(st.auto?`<span class="fz-mv">${esc(FT('Moving to the next one','الانتقال إلى التالي','Gara itti aanutti','U gudbaya kan xiga'))}</span>`:`<button class="fz-next" id="fzN">${esc(FT('Next','التالي','Itti aanu','Xiga'))} <i class="ph ph-arrow-right flip"></i></button>`))
   :`<span>${esc(s.n>1?FT('Tap anywhere to count · '+s.n+' times','اضغط في أي مكان للعدّ · '+N(s.n)+(s.n>2&&s.n<11?' مرات':' مرة'),'Lakkaa\'uuf bakka kamiyyuu tuqi · yeroo '+s.n,'Meel kasta taabo si aad u tiriso · '+s.n+' jeer'):FT('Tap anywhere when you have said it','اضغط في أي مكان بعد أن تقوله','Erga jettee booda bakka kamiyyuu tuqi','Meel kasta taabo markaad tiraahdo'))}</span><small class="fz-lw"><i class="ph ph-hand-tap"></i>${esc(st.tapw?FT('Tap a word to hear it and see its meaning','اضغط على كلمة لتسمعها وترى معناها','Jecha tokko tuqii dhaggeeffadhu, hiika isaas argi','Eray taabo si aad u maqasho una aragto macnihiisa'):FT('Press and hold a word to hear it and see its meaning','اضغط مطوّلًا على كلمة لتسمعها وترى معناها','Jecha tokko qabadhuu dhaggeeffadhu, hiika isaas argi','Eray ku hay farta si aad u maqasho una aragto macnihiisa'))}</small>`;
- const n=$('fzN');if(n)n.onclick=e=>{e.stopPropagation();go(ZS.i+1,false)}}
+ const n=$('fzN');if(n)n.onclick=e=>{e.stopPropagation();const nx=nextOpen();go(nx>=0?nx:ZS.i+1,false)}}
 const fmt=t=>{t=Math.max(0,Math.round(t||0));return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')};
 const RATES=[.75,1,1.25,1.5,2];
 const REPS={n:['As many times as needed','بعدد المرات المطلوبة','Hamma barbaachisu','Inta loo baahdo'],one:['Play once','مرة واحدة','Yeroo tokko','Hal mar'],loop:['Keep repeating','كرّر دائمًا','Irra deebi\'i','Ku celi']};
