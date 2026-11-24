@@ -93,7 +93,7 @@ function setRate(){A.defaultPlaybackRate=st.rate;A.playbackRate=st.rate;try{A.pr
 function loadSeg(i,t){AU.qi=i;const x=AU.q[i];const url=ROOT+x.f;if(!A.src.endsWith(x.f)){A.src=url}setRate();if(t){const go=()=>{try{A.currentTime=t}catch(e){}};if(A.readyState>0)go();else A.addEventListener('loadedmetadata',go,{once:true})}}
 function play(){if(!AU.q.length)return;AU.word=null;AU.on=true;if(A.ended||!A.src)loadSeg(AU.qi||0);setRate();A.play().catch(()=>{AU.on=false;toast(FT('Audio could not play','تعذّر تشغيل الصوت','Sagaleen hin taphanne','Codka lama shidi karin'));paintPlayer()});paintPlayer();media()}
 function pause(){AU.on=false;clearTimeout(AU.gap);A.pause();paintPlayer()}
-function stop(){AU.on=false;clearTimeout(AU.gap);try{A.pause()}catch(e){}AU.word=null;paintPlayer()}
+function stop(){AU.on=false;clearTimeout(AU.gap);try{waStop()}catch(e){}try{A.pause()}catch(e){}AU.word=null;paintPlayer()}
 function restart(){clearTimeout(AU.gap);loadSeg(0,0);try{A.currentTime=0}catch(e){}play()}
 function seekTo(sec){let i=0;while(i<AU.q.length-1&&sec>segDur(AU.q[i])){sec-=segDur(AU.q[i]);i++}const was=AU.on;if(i!==AU.qi||!A.src.endsWith(AU.q[i].f))loadSeg(i,sec);else try{A.currentTime=Math.max(0,sec)}catch(e){}if(was)A.play().catch(()=>{});paint()}
 function skip(d){seekTo(Math.max(0,Math.min(total()-.2,elapsed()+d)))}
@@ -124,8 +124,18 @@ function timesFor(x){if(!W)return null;if(x.clip)return clipTimes(x.clip);const 
 function wordAt(x,t){const T=timesFor(x);if(!T)return -1;for(let i=0;i<T.length;i++){if(t>=T[i][0]-.03&&t<T[i][1]+.04)return (x.off||0)+i}return -2}
 let HL=-1;function hl(i){if(i===-2)return;if(i===HL)return;HL=i;const c=$('fzT');if(!c)return;c.querySelectorAll('.fzw.on').forEach(e=>e.classList.remove('on'));if(i<0)return;const seg=AU.qi;const e=c.querySelector(`.fzw[data-s="${seg}"][data-i="${i}"]`);if(e){e.classList.add('on');const r=e.getBoundingClientRect(),b=$('fzB').getBoundingClientRect();if(r.bottom>b.bottom-130||r.top<b.top+20)e.scrollIntoView({block:'center',behavior:'smooth'})}}
 // play one word
-function sayWord(seg,i,slow){const s=cur();if(!s)return;const x=AU.q[seg];const T=x&&timesFor(x);if(!T||!T[i])return false;clearTimeout(AU.gap);AU.on=false;
- AU.word={e:T[i][1]+.05};const st0=Math.max(0,T[i][0]-.04);loadSeg(seg,st0);A.playbackRate=slow?.7:1;const go=()=>{try{A.currentTime=st0}catch(e){}A.play().catch(()=>{})};if(A.readyState>0)go();else A.addEventListener('loadedmetadata',go,{once:true});hl(i);paintPlayer();tick();return true}
+// one word, cut exactly: the word is decoded once and played sample-accurately from its start to its end (no spill into the next word)
+const WA={ctx:null,buf:{},src:null};
+function waCtx(){if(!WA.ctx){const C=window.AudioContext||window.webkitAudioContext;if(!C)return null;try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}WA.ctx=new C()}if(WA.ctx.state!=='running')WA.ctx.resume().catch(()=>{});return WA.ctx}
+function waBuf(url){if(!WA.buf[url])WA.buf[url]=fetch(url).then(r=>r.arrayBuffer()).then(ab=>new Promise((ok,no)=>WA.ctx.decodeAudioData(ab,ok,no))).catch(e=>{delete WA.buf[url];throw e});return WA.buf[url]}
+function waStop(){if(WA.src){try{WA.src.onended=null;WA.src.stop()}catch(e){}WA.src=null}}
+function sayWord(seg,i,slow){const s=cur();if(!s)return;const x=AU.q[seg];const T=x&&timesFor(x);if(!T||!T[i])return false;
+ clearTimeout(AU.gap);AU.on=false;try{A.pause()}catch(e){}waStop();const ctx=waCtx();if(!ctx)return false;
+ const a=Math.max(0,T[i][0]),d=Math.max(.08,T[i][1]-a),rate=slow?.7:1;hl(i);paintPlayer();
+ waBuf(ROOT+x.f).then(b=>{waStop();const src=ctx.createBufferSource(),g=ctx.createGain();src.buffer=b;src.playbackRate.value=rate;src.connect(g);g.connect(ctx.destination);
+  const now=ctx.currentTime+.02,len=d/rate;g.gain.setValueAtTime(0,now);g.gain.linearRampToValueAtTime(1,now+.01);g.gain.setValueAtTime(1,Math.max(now+.01,now+len-.02));g.gain.linearRampToValueAtTime(0,now+len);
+  src.start(now,a,d);src.onended=()=>{if(WA.src===src){WA.src=null;hl(-1)}};WA.src=src}).catch(()=>{});
+ return true}
 function media(){try{if(!('mediaSession' in navigator))return;const s=cur();navigator.mediaSession.metadata=new MediaMetadata({title:title(s)||ZK[ZS.set].t,artist:'Fastaqim',album:ZK[ZS.set].t,artwork:[{src:ROOT+'icon-512.png',sizes:'512x512',type:'image/png'}]});
  navigator.mediaSession.setActionHandler('play',play);navigator.mediaSession.setActionHandler('pause',pause);
  navigator.mediaSession.setActionHandler('nexttrack',()=>go(ZS.i+1,AU.on));navigator.mediaSession.setActionHandler('previoustrack',()=>go(ZS.i-1,AU.on));
@@ -162,17 +172,22 @@ function build(){const zr=$('zr');zr.classList.add('fz');
  // tap anywhere to count (not on buttons, links, words in Word by word, or the player)
  B.addEventListener('click',e=>{if(LP.fired){LP.fired=false;return}if(e.target.closest('a,button,input,label,.fz-dock'))return;if(PZ.moved){PZ.moved=false;return}
   const w=st.tapw&&e.target.closest('.fzw');if(w){wordPop(+w.dataset.s,+w.dataset.i);return}tapCount()});
+ ['touchend','click'].forEach(t=>B.addEventListener(t,()=>{if(!WA.ctx)waCtx();else if(WA.ctx.state!=='running')WA.ctx.resume().catch(()=>{})},{passive:true}));
  holdWords(B);pinch(B);B.addEventListener('scroll',()=>popClose(),{passive:true})}
 function paintSteps(){const ss=steps(ZS.set),p=zProg(ZS.set);$('fzS').innerHTML=`<div class="fz-path">${ss.map((s,i)=>`<button type="button" data-go="${i}" class="${isDone(s,p)?'dn':''} ${i===ZS.i?'cur':''}" aria-label="${esc(FT('Go to '+(i+1),'اذهب إلى '+N(i+1)))}"><i></i></button>`).join('')}</div>`;
  $('fzS').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go,false))}
 function qText(s){let h='',segs=qFor(s),si=0;
  if(s.pre)h+=`<div class="fz-pre"><small>${esc(FT('First say','قل أولًا','Dura jedhi','Marka hore dheh'))}</small><span lang="ar" dir="rtl">${ISTI}</span></div>`;
  segs.forEach((x,i)=>{const isB=!!x.basm;const key=x.tm;const wd=(W&&W.q[key]&&W.q[key].w)||null;
-  const words=wd?wd.map(w=>({ar:w[0],tr:w[1],en:w[2]})):(QD[key]?QD[key].a.split(' ').map(a=>({ar:a,tr:'',en:''})):[]);
+  const words=wd?qWords(key):(QD[key]?QD[key].a.split(' ').map(a=>({ar:a,tr:'',en:''})):[]);
   h+=`<div class="fz-ay${isB?' b':''}" lang="ar" dir="rtl">${words.map((w,k)=>wcell(w,i,k,true)).join(' ')}</div>`;
   if(st.tr&&!isB&&wd)h+=`<p class="fz-tr">${esc(wd.map(w=>w[1]).join(' '))}</p>`;
   if(st.me&&!isB&&L!=='ar')h+=`<p class="fz-me">${esc(qMean(key))}</p>`});
  return h}
+// older Quran.com text: join a stop sign to its word and use the font's own tanween forms, so nothing shows as a dotted circle
+// words of an ayah, shown in the site's own Madinah-mushaf text (exactly what the Hafs font expects)
+function qWords(key){const wd=(W&&W.q[key]&&W.q[key].w)||[];const hq=QD[key]&&QD[key].a?QD[key].a.split(' '):null;return wd.map((w,k)=>({ar:(hq&&hq.length===wd.length)?hq[k]:fixQ(w[0]),tr:w[1],en:w[2]}))}
+function fixQ(t){return String(t).replace(/\s+([\u06D6-\u06DC])/g,'$1').replace(/\u064C\u06ED/g,'\u064C').replace(/\u064B\u06ED/g,'\u064B').replace(/\u064D\u06ED/g,'\u064D').replace(/\u0652/g,'\u06E1')}
 function qMean(k){try{if(LI>=0&&typeof QTR_ID!=='undefined'){const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');if(c[k])return c[k]}}catch(e){}return QD[k]?QD[k].en:''}
 function wcell(w,seg,i,q){return `<span class="fzw" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`}
 function phrases(words,seg){// keep each phrase (up to a comma) together, so lines break at natural pauses
@@ -234,7 +249,7 @@ function paint(){paintSteps();card();paintPlayer()}
 function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;popClose();menuClose();stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
 
 /* ---------- word sheet: hear it, read it, its meaning ---------- */
-function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd||[]).map((w,k)=>({seg:i,i:k,ar:w[0],tr:w[1],en:w[2]}))}).flat()}
+function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd?qWords(x.tm):[]).map((w,k)=>({seg:i,i:k,ar:w.ar,tr:w.tr,en:w.en}))}).flat()}
  return hWords(s.ar).map((w,k)=>({seg:0,i:k,ar:w.ar,tr:w.tr,en:w.en}))}
 const LP={t:0,fired:false,x:0,y:0};
 function holdWords(B){const clr=()=>{clearTimeout(LP.t);LP.t=0};
@@ -244,7 +259,7 @@ function holdWords(B){const clr=()=>{clearTimeout(LP.t);LP.t=0};
  ['pointerup','pointercancel','pointerleave'].forEach(t=>B.addEventListener(t,clr));
  B.addEventListener('contextmenu',e=>{if(e.target.closest('.fzw'))e.preventDefault()})}
 let POP=null;
-function popClose(){if(!POP)return;POP.el.remove();document.removeEventListener('pointerdown',POP.out,true);document.querySelectorAll('.fzw.pk').forEach(x=>x.classList.remove('pk'));if(AU.word){AU.word=null;try{A.pause()}catch(e){}paintPlayer()}POP=null}
+function popClose(){if(!POP)return;POP.el.remove();document.removeEventListener('pointerdown',POP.out,true);document.querySelectorAll('.fzw.pk').forEach(x=>x.classList.remove('pk'));waStop();if(AU.word){AU.word=null;try{A.pause()}catch(e){}paintPlayer()}POP=null}
 // a small card next to the word: the word, how to say it, its meaning, hear it (normal or slow), previous / next word
 function wordPop(seg,i){const all=wordList();let at=all.findIndex(w=>w.seg===seg&&w.i===i);if(at<0)return;stop();popClose();
  const el=document.createElement('div');el.className='fz-pop';el.setAttribute('role','dialog');$('zr').appendChild(el);
@@ -328,7 +343,7 @@ window.zDraw=function(){if(!ZS)return;if(!$('fzB')){build();$('fzTitle').textCon
 window.zNext=function(){if(ZS)go(ZS.i+1,false)};
 window.zTap=tapCount;window.zIndex=function(){};
 window.zClose=function(){popClose();menuClose();stop();try{A.removeAttribute('src');A.load()}catch(e){}$('zr').classList.remove('fz');return oldClose.apply(this,arguments)};
-window.FQZ={steps,go,st,A,AU,tapCount,wordSheet,options,cur};
+window.FQZ={steps,go,st,A,AU,tapCount,wordSheet,options,cur,WA,sayWord};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ZS&&$('fzD'))paintPlayer()});
 // a reader already open (deep link) gets the new one
 if(ZS&&$('zr').classList.contains('on')){const s=ZS.set;window.zOpen(s)}

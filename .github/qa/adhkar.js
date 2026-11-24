@@ -42,6 +42,8 @@ const ok=(n,v)=>{console.log((v?'PASS ':'FAIL ')+n);if(!v)fails++};
  const c0=num(await p.textContent('.fz-num'));
  await p.mouse.move(wb[0],wb[1]);await p.mouse.down();await p.waitForTimeout(550);await p.mouse.up();await p.waitForTimeout(400);await snap('5_word');
  ok('press and hold a word opens the small word card',await p.evaluate(()=>{const e=document.querySelector('.fz-pop.on');return !!e&&!!e.querySelector('.fz-wa')&&((e.querySelector('.fz-wm')||e.querySelector('.fz-wt')).textContent.length>0)}));
+ await p.evaluate(()=>document.querySelector('.fz-pop [data-sl="0"]').click());await p.waitForTimeout(250);
+ ok('word plays on its own, cut to the word',await p.evaluate(()=>!!FQZ.WA.src&&FQZ.A.paused));
  ok('word card fully on screen',await p.evaluate(()=>{const r=document.querySelector('.fz-pop').getBoundingClientRect();return r.left>=0&&r.right<=innerWidth&&r.top>=0}));
  ok('holding a word does not count',num(await p.textContent('.fz-num'))===c0);
  await p.mouse.click(195,120);await p.waitForTimeout(300);
