@@ -29,9 +29,9 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#toEd');await p.waitForTimeout(350);await p.fill('#lsN','Gifts');await p.click('#lsOk');await p.waitForTimeout(300);ok('rename',(await p.textContent('#toT'))==='Gifts');
  await p.click('[data-back]:visible');await p.waitForTimeout(300);ok('back to tools',await p.isVisible('#tlg'));
  // money
- await p.click('#tlg [data-tool="money"]');await p.waitForTimeout(300);await p.click('#mBud');await p.waitForTimeout(300);await p.fill('#bA','120');await p.click('#bOk');await p.waitForTimeout(300);
- await p.click('#toAdd');await p.waitForTimeout(300);await p.fill('#isT','Groceries');await p.fill('#isA','42.50');await p.click('#isOk');await p.waitForTimeout(300);
- ok('money left 77.5',(await p.textContent('.mcard')).includes('77.5'));await snap('6_money');
+ await p.click('#tlg [data-tool="money"]');await p.waitForTimeout(400);ok('money screen',await p.isVisible('#s-money'));await p.click('#mnB [data-add="in"]');await p.waitForTimeout(400);await p.fill('#maA','120');await p.click('#maGo');await p.waitForTimeout(500);
+ await p.click('#mnB [data-add="out"]');await p.waitForTimeout(400);await p.fill('#maA','42.50');await p.fill('#maT','Groceries');await p.click('#maGo');await p.waitForTimeout(500);
+ ok('money left 77.5',(await p.textContent('.mn-big')).includes('77.5'));await snap('6_money');
  await p.click('[data-back]:visible');await p.waitForTimeout(250);
  // habits
  // Habits opens its own screen (Life & family: build + leave)
