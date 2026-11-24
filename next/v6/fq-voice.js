@@ -329,5 +329,5 @@ if(typeof R!=='undefined'&&R.cal){const _c=R.cal;R.cal=function(){const r=_c.app
 
 /* open from a link: ?x=voice or #voice */
 if(/[?&]x=voice\b/.test(location.search)||location.hash==='#voice')setTimeout(()=>{try{go('todo')}catch(e){}openVoice()},500);
-window.FQV={plan,parse,split,openVoice,busy,salFor};
+window.FQV={plan,parse,split,openVoice,busy,salFor,catOf,due,CATN};
 })();
