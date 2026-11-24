@@ -8,7 +8,9 @@ on:
     paths: [tools/adhkar/**, .github/workflows/adhkar-data.yml]
 permissions:
   contents: write
-concurrency: {group: adhkar-data-${{ github.ref }}, cancel-in-progress: true}
+concurrency:
+  group: adhkar-data-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   data:
     runs-on: ubuntu-latest
@@ -16,7 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
-        with: {python-version: "3.11"}
+        with:
+          python-version: "3.11"
       - name: Install
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
@@ -32,7 +35,8 @@ jobs:
       - name: Cut clips
         run: python tools/adhkar/cut_more.py
       - name: Check every clip
-        env: {MODEL: large-v3}
+        env:
+          MODEL: large-v3
         run: python tools/adhkar/verify_clips.py
       - name: Commit
         run: |
