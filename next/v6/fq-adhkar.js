@@ -18,6 +18,7 @@ if(!st.m2){st.rep='n';delete st.wbw;st.m2=1;store(STORE,st)}   // 24 Nov: 'As ma
 if(S.zs){['ar','tr','me','auto'].forEach(k=>{if(S.zs[k]!=null&&(store(STORE)||{})[k]==null)st[k]=S.zs[k]});if(S.zs.size&&!(store(STORE)||{}).size)st.size=S.zs.size}
 const saveSt=()=>{store(STORE,st);S.zs=Object.assign(S.zs||{},{ar:st.ar,tr:st.tr,me:st.me,auto:st.auto,size:st.size});save()};
 
+try{if((S.zkv||0)<2){Object.values(S.zk||{}).forEach(d=>['morning','evening'].forEach(k=>{const o=d&&d[k];if(!o)return;const n={};Object.keys(o).forEach(x=>{const m=/^(\d+)(\..+)?$/.exec(x);if(m)n[(+m[1]+1)+(m[2]||'')]=o[x];else n[x]=o[x]});d[k]=n}));S.zkv=2;save()}}catch(e){}
 /* ---------- data: words, timings, clips ---------- */
 let W=null,WP=null;
 function loadWords(){if(!WP)WP=fetch(ROOT+'data/adhkar/words.json').then(r=>r.json()).then(d=>{W=d;return d}).catch(()=>{W={q:{},h:{},c:{},g:{},dur:{}};return W});return WP}
@@ -28,8 +29,8 @@ const QULS=['112:1','112:2','112:3','112:4','|','113:1','113:2','113:3','113:4',
 const ISTI='أَعُوذُ بِٱللَّهِ مِنَ ٱلشَّيۡطَٰنِ ٱلرَّجِيمِ';
 // set -> item -> clip file in hisn/clips (male reader of the site's Hisn al-Muslim recording, cut at the dhikr's own words)
 const CLIP={
- morning:{1:'m-asbahna',2:'m-bika-asbahna',3:'sayyid-istighfar',4:'bismillah-la-yadurr',5:'subhan-adada',6:'subhan-wabihamdih',7:'astaghfir-atub'},
- evening:{2:'e-bika-amsayna',3:'sayyid-istighfar',4:'bismillah-la-yadurr',5:'audhu-kalimat',6:'subhan-wabihamdih'},
+ morning:{2:'m-asbahna',3:'m-bika-asbahna',4:'sayyid-istighfar',5:'bismillah-la-yadurr',6:'subhan-adada',7:'subhan-wabihamdih',8:'astaghfir-atub'},
+ evening:{3:'e-bika-amsayna',4:'sayyid-istighfar',5:'bismillah-la-yadurr',6:'audhu-kalimat',7:'subhan-wabihamdih'},  // item 0 = Ayat al-Kursi (added 24 Nov)
  sleep:{3:'bismika-rabbi',4:'bismika-amutu',5:'subhanallah',6:'alhamdulillah',7:'allahu-akbar'},
  ruqyah:{5:'audhu-kalimat',8:'istiadha'}
 };
@@ -46,7 +47,7 @@ const NAME={
  'r-bism3':['In the name of Allah','بسم الله'],'r-qudrah':['Allah and His power','أعوذ بالله وقدرته'],'r-arqik':['Ruqyah of Jibril','بسم الله أرقيك'],
  'd-hamm':['Worry and grief','اللهم إني أعوذ بك من الهم والحزن']
 };
-const HNAME={'evening:1':'e-amsayna','ruqyah:4':'r-tammah','ruqyah:7':'r-arqik','dua:0':'d-hamm'};
+const HNAME={'evening:2':'e-amsayna','ruqyah:4':'r-tammah','ruqyah:7':'r-arqik','dua:0':'d-hamm'};
 
 const strip=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\(×\s*\d+\)/g,' ').replace(/۝/g,' ').replace(/\s+/g,' ').trim();
 const nkey=w=>w.replace(/[،,.؛:!?«»"]/g,'');
@@ -67,7 +68,7 @@ function steps(set){if(CACHE[set])return CACHE[set];const z=ZK[set],out=[];
   const clip=(CLIP[set]||{})[j];
   out.push({j,k:null,parts:1,n:it.n,q:false,ar:strip(it.ar),tr:it.tr,it,src:it.src,why:it.why,clip,name:clip||HNAME[set+':'+j]})});
  return CACHE[set]=out}
-function title(s){if(s.q){const su=+s.keys[0].split(':')[0],a=s.keys[0].split(':')[1],b=s.keys[s.keys.length-1].split(':')[1],nm=SUR[su]||['Surah '+su,'سورة '+su];
+function title(s){if(s.q){if(s.keys.length===1&&s.keys[0]==='2:255')return FT('Ayat al-Kursi','آية الكرسي','Aayaat al-Kursii','Aayatul Kursi');const su=+s.keys[0].split(':')[0],a=s.keys[0].split(':')[1],b=s.keys[s.keys.length-1].split(':')[1],nm=SUR[su]||['Surah '+su,'سورة '+su];
   const whole=su>=112||su===1;return whole?FT(nm[0],'سورة '+nm[1]):FT(nm[0]+' '+a+(b!==a?'–'+b:''),nm[1]+' '+N(a)+(b!==a?'–'+N(b):''))}
  const nm=NAME[s.name];return nm?FT(nm[0],nm[1]):''}
 

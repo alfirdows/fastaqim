@@ -1849,6 +1849,8 @@ function zkMake(o){const x=Object.assign({},o);
   if(o.why){const w=o.why;Object.defineProperty(x,'why',{get(){return w},enumerable:true})}return x}
 ZK.morning={t:T('Morning adhkar','أذكار الصباح'),items:ZK2.morning.map(zkMake)};
 ZK.evening={t:T('Evening adhkar','أذكار المساء'),items:ZK2.evening.map(zkMake)};
+// Ayat al-Kursi first in the morning and evening (Ubayy ibn Ka'b: whoever says it in the evening is protected until morning, and in the morning until evening. an-Nasa'i, al-Kubra 10731; al-Hakim 1/562; sahih, al-Albani, Sahih at-Targhib 662)
+{const K={qk:['2:255'],pre:'isti',n:1,mt:'q',src:["an-Nasa'i (al-Kubra) 10731, sahih",'https://quran.com/2/255'],why:"Whoever says it in the morning is protected until evening, and whoever says it in the evening is protected until morning."};ZK.morning.items.unshift(zkMake(K));ZK.evening.items.unshift(zkMake(K))}
 ZK.ruqyah={t:T('Ruqyah','الرقية'),items:ZK2.ruqyah.map(zkMake)};
 ZK.dua={t:T("Du'as for worry",'أدعية الهمّ'),items:ZK2.dua.map(zkMake)};
 ZK.sleep.items.forEach((x,i)=>{x.mt=i<2?'q':'h';if(i<2){const ks=i?['2:285','2:286']:['2:255'];x._qk=ks;Object.defineProperty(x,'me',{get(){return zkQ(ks)},configurable:true,enumerable:true})}});
