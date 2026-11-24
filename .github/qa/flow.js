@@ -44,7 +44,7 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('[data-tab="quran"]');await p.waitForTimeout(300);await p.click('#s-quran [data-ws="dhikr"]');await p.waitForTimeout(300);await p.click('#tsbBtn');await p.waitForTimeout(400);
  ok('tasbih page opens',await p.isVisible('#tbx'));await p.click('#tbx [data-m="tap"]');await p.waitForTimeout(200);
  for(let i=0;i<5;i++){await p.click('#tbTap');await p.waitForTimeout(40)}
- ok('dhikr tab badge',(await p.textContent('#tab .tbd'))==='5'||(await p.textContent('#tab .tbd'))==='٥');
+ ok('no number badge on Worship tab (removed on purpose)',!(await p.$('#tab .tbd')));
  await p.click('#tbReset');await p.waitForTimeout(250);await p.click('#utoast button');await p.waitForTimeout(250);ok('reset undo',['5','٥'].includes((await p.textContent('#tbTap')).trim()));await snap('9_tasbih');
  // bead mode: swipe down twice and up once = 3 more
  await p.click('#tbx [data-m="beads"]');await p.waitForTimeout(400);const bb=await (await p.$('#tbStr')).boundingBox();const cx=bb.x+bb.width/2,cy=bb.y+bb.height/2;
