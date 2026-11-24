@@ -7,14 +7,11 @@ const N=v=>+String(v).replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
 const A=n=>AR(n);
 const CHK='<path d="M15.5 20.2l3.6 3.4 7.6-8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>';
 
-/* ---------- the rising arc: count c of n, drawn on a horizon ---------- */
-function arc(c,n,o){o=o||{};c=Math.max(0,Math.min(+c||0,+n||0));n=+n||0;const done=n>0&&c>=n,seg=n>1&&n<=12,G=seg?(n>8?3:4):0;
- const P='M5 26A17 17 0 0 1 39 26';let tr='',pr='';
- if(seg){const s=(100-G*(n-1))/n;tr=`stroke-dasharray="${s.toFixed(2)} ${G}"`;
-  pr=c?`stroke-dasharray="${Array.from({length:c},()=>s.toFixed(2)+' '+G).join(' ')} 0 200"`:'stroke-dasharray="0 200"'}
- else pr=`stroke-dasharray="${n?(100*c/n).toFixed(2):0} 200"`;
+/* ---------- the count capsule: count c of n, the capsule fills from the start as you go ---------- */
+function arc(c,n,o){o=o||{};c=Math.max(0,Math.min(+c||0,+n||0));n=+n||0;const done=n>0&&c>=n,pct=n?Math.round(100*c/n):0;
  const lab=o.label!=null?o.label:done?'':(n>1||c?A(c):'');
- return `<span class="fq-arc${done?' done':''}${o.lt?' lt':''}" style="--w:${o.w||44}px" role="img" aria-label="${c} / ${n}"><svg viewBox="0 0 44 28" aria-hidden="true"><path class="f" d="${P}Z"/><path class="t" d="${P}" pathLength="100" ${tr}/><path class="p" d="${P}" pathLength="100" ${pr}/><path class="b" d="M1 26.5h42"/>${done&&!o.label?`<g style="color:${o.lt?'#fff':'var(--acc)'}" transform="translate(-0.6,-0.4) scale(.92)">${CHK}</g>`:''}</svg><b>${lab}</b></span>`}
+ const ticks=n>1&&n<=12?`<i class="fq-cp-t" style="--n:${n}"></i>`:'';
+ return `<span class="fq-arc fq-cap${done?' done':''}${o.lt?' lt':''}" style="--w:${o.w||44}px;--p:${pct}%" role="img" aria-label="${c} / ${n}"><i class="fq-cp-f"></i>${ticks}${done&&!o.label?`<svg viewBox="12 12 18 14" aria-hidden="true">${CHK}</svg>`:''}<b>${lab}</b></span>`}
 
 /* ---------- the path strip: one dash per step ---------- */
 function steps(n,isDone,cur){return `<div class="fq-steps" role="group">${Array.from({length:n},(_,j)=>`<button type="button" data-fqj="${j}" class="${isDone(j)?'dn':''} ${j===cur?'cur':''}" aria-label="${FT('Dhikr '+(j+1),'الذكر '+A(j+1),'Zikrii '+(j+1),'Dhikr '+(j+1))}"><i></i></button>`).join('')}</div>`}
