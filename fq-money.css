@@ -170,3 +170,37 @@ html[dir=rtl] .mn-sw input:checked+i:after{transform:translateX(-18px)}
 @keyframes mnB{from{transform:translateY(16px) scale(.6)}}
 @keyframes mnS{0%{opacity:1;transform:rotate(var(--a)) translateY(0)}100%{opacity:0;transform:rotate(var(--a)) translateY(-92px)}}
 @media (prefers-reduced-motion:reduce){.mn-cel *,.mn-cel{animation-duration:.01s!important}}
+/* receipts: obvious add + 1-year account backup (24 Nov) */
+.mn-snap{display:flex;align-items:center;gap:12px;background:#fff;border:1.5px dashed color-mix(in srgb,var(--acc) 45%,#e8e0cf);border-radius:16px;border-end-start-radius:6px;padding:12px 14px;margin:0 0 10px;cursor:pointer;color:var(--ink)}
+.mn-snap>i:first-child{width:40px;height:40px;flex:none;border-radius:13px;border-end-start-radius:4px;display:grid;place-items:center;background:color-mix(in srgb,var(--acc) 11%,#fff);color:var(--acc)}
+.mn-snap span{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
+.mn-snap b{font-size:15.5px}.mn-snap small{font-size:12.5px;color:var(--sub);line-height:1.35}
+.mn-snap>i:last-child{color:var(--sub)}
+.mn-snap:active,.mn-pl:active,.mn-signin:active,.mn-rhi:active,.mn-sqw:active{transform:scale(.985)}
+label.kc-big{display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;box-sizing:border-box}
+.mn-pl{display:flex;align-items:center;justify-content:center;gap:8px;border:1.5px dashed color-mix(in srgb,var(--acc) 45%,#e8e0cf);background:#fff;color:var(--acc);font-weight:700;font-size:15px;padding:14px;border-radius:15px;border-end-start-radius:5px;cursor:pointer}
+.mn-signin{display:flex;align-items:center;gap:10px;width:100%;text-align:start;border:1px solid color-mix(in srgb,var(--fqG,#b8955a) 40%,#fff);background:#fbf7ee;font:inherit;color:var(--ink);padding:11px 12px;border-radius:14px;border-end-start-radius:5px}
+.mn-signin>i{color:var(--fqGD,#86672e);flex:none}.mn-signin span{display:flex;flex-direction:column;gap:1px}.mn-signin b{font-size:14px}.mn-signin small{font-size:12.5px;color:var(--sub)}
+.mn-rh{display:grid;gap:6px;max-height:52vh;overflow:auto}
+.mn-rhi{display:flex;align-items:center;gap:11px;width:100%;text-align:start;background:#fff;border:1px solid var(--hz,#e8e0cf);border-radius:13px;border-end-start-radius:5px;padding:10px 12px;font:inherit;color:var(--ink)}
+.mn-rhi>i:first-child{color:var(--fqGD,#86672e);flex:none}.mn-rhi>i:last-child{color:var(--acc);flex:none}
+.mn-rhi span{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}.mn-rhi b{font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mn-rhi small{font-size:12.5px;color:var(--sub)}
+/* sadaqah habit */
+.mn-sq{background:#fff;border:1px solid var(--hz,#e8e0cf);border-radius:18px;border-end-start-radius:6px;padding:14px;display:grid;gap:12px;margin:0 0 14px}
+.mn-sqh{display:flex;align-items:center;gap:12px}
+.mn-sqi{width:42px;height:42px;flex:none;border-radius:14px;border-end-start-radius:5px;display:grid;place-items:center;background:linear-gradient(145deg,#f7efdc,#ecdcb6);color:#7a5a20}
+.mn-sqh>span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}.mn-sqh b{font-size:16px}.mn-sqh small{font-size:13px;color:var(--sub);line-height:1.4}
+.mn-sqe{border:0;background:#f4f1ea;color:var(--sub);width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none}
+.mn-sqw{display:flex;align-items:center;gap:9px;border:0;background:none;font:inherit;font-size:14.5px;font-weight:650;color:var(--acc);padding:4px 2px;text-align:start}
+.mn-sqw span{flex:1}.mn-sqw>i:last-child{color:var(--sub)}
+.mn-sq .kc-row2 .kc-big{min-height:48px;padding:12px;font-size:15.5px;display:flex;align-items:center;justify-content:center;gap:7px}
+.mn-vir{margin:0;padding:12px 4px 2px;border-top:1px solid var(--hz,#efe8da);text-align:center}
+.mn-vir .ar{font-family:"FQ Quran",serif;font-size:20px;line-height:1.95;margin:0 0 6px;color:var(--ink)}
+.mn-vir .en{font-size:14px;line-height:1.55;color:#55524b;margin:0 0 6px}
+.mn-vir figcaption{font-size:12.5px}.mn-vir a{color:var(--sub);text-decoration:none;display:inline-flex;align-items:center;gap:3px;padding:4px 0}
+.mn-virs{display:grid;gap:4px}.mn-virs .mn-vir{background:#fff;border:1px solid var(--hz,#e8e0cf);border-radius:16px;border-end-start-radius:6px;padding:14px 14px 6px}
+.mn-where{display:grid;gap:8px;margin:6px 0 10px}
+.mn-where>div{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--hz,#e8e0cf);border-radius:14px;border-end-start-radius:5px;padding:12px}
+.mn-where>div>i{color:var(--acc);flex:none;margin-top:1px}.mn-where span{display:flex;flex-direction:column;gap:2px}.mn-where b{font-size:14.5px}.mn-where small{font-size:13px;color:var(--sub);line-height:1.45}
+.mn-cel.give .mn-coin{background:linear-gradient(145deg,#eef5ee,#cfe3d1);color:var(--acc)}
+.mn-cel.give .mn-celc b{color:var(--acc)}
