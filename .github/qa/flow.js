@@ -48,7 +48,9 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#tbReset');await p.waitForTimeout(250);await p.click('#utoast button');await p.waitForTimeout(250);ok('reset undo',['5','٥'].includes((await p.textContent('#tbTap')).trim()));await snap('9_tasbih');
  // bead mode: swipe down twice and up once = 3 more
  await p.click('#tbx [data-m="beads"]');await p.waitForTimeout(400);const bb=await (await p.$('#tbStr')).boundingBox();const cx=bb.x+bb.width/2,cy=bb.y+bb.height/2;
- const stp=+(await p.getAttribute('#tbStr','data-step'))+4;for(const d of [stp,stp,-stp]){await p.mouse.move(cx,cy-d/2);await p.mouse.down();await p.mouse.move(cx,cy+d/2,{steps:12});await p.mouse.up();await p.waitForTimeout(260)}
+ const stp=+(await p.getAttribute('#tbStr','data-step'))+4;
+ for(let k=0;k<3;k++){const xs=await p.evaluate(()=>document.getElementById('tbStr')._bs());let gi=0,gb=-1;for(let i=0;i<xs.length-1;i++){const g=xs[i+1]-xs[i];if(g>gb&&Math.abs(xs[i])<bb.height/2){gb=g;gi=i}}
+  const y=cy+xs[gi];await p.mouse.move(cx,y);await p.mouse.down();await p.mouse.move(cx,y+stp,{steps:12});await p.mouse.up();await p.waitForTimeout(300)}
  ok('beads count 8',['8','٨'].includes((await p.textContent('#tbN')).trim()));await snap('10_beads');
  for(const m of ['side','ring','loop']){await p.click(`#tbx [data-m="${m}"]`);await p.waitForTimeout(450);ok('style '+m+' shows beads',(await p.$$('#tbStr .tb-bd')).length>8);await snap('10_'+m)}
  {const sb=await (await p.$('#tbStr')).boundingBox();await p.mouse.click(sb.x+sb.width/2,sb.y+sb.height-30);await p.waitForTimeout(300);ok('hanging tap counts 9',['9','٩'].includes((await p.textContent('#tbN')).trim()))}
