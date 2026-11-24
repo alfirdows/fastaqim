@@ -14,6 +14,7 @@ const N=n=>AR(n);
 const STORE='fqz';                                   // reader settings on this phone (+ S.zs for the shared ones)
 const D={size:1,ar:1,tr:1,me:1,auto:1,rep:'n',rate:1,wbw:0};
 const st=Object.assign({},D,store(STORE)||{});
+if(!st.m2){st.rep='n';st.wbw=0;st.m2=1;store(STORE,st)}   // 24 Nov: 'As many times as needed' is everyone's default; whole-page word mode replaced by tap-a-word card
 if(S.zs){['ar','tr','me','auto'].forEach(k=>{if(S.zs[k]!=null&&(store(STORE)||{})[k]==null)st[k]=S.zs[k]});if(S.zs.size&&!(store(STORE)||{}).size)st.size=S.zs.size}
 const saveSt=()=>{store(STORE,st);S.zs=Object.assign(S.zs||{},{ar:st.ar,tr:st.tr,me:st.me,auto:st.auto,size:st.size});save()};
 
@@ -269,6 +270,15 @@ function pinch(el){const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clien
  el.addEventListener('touchmove',e=>{if(e.touches.length===2&&PZ.d){e.preventDefault();st.size=Math.max(.8,Math.min(2.2,PZ.s*dist(e.touches)/PZ.d));const c=$('zCard');if(c)c.style.setProperty('--fz',st.size)}},{passive:false});
  el.addEventListener('touchend',e=>{if(PZ.d&&e.touches.length<2){PZ.d=0;saveSt();setTimeout(()=>PZ.moved=false,350)}});
  ['gesturestart','gesturechange'].forEach(t=>el.addEventListener(t,e=>e.preventDefault(),{passive:false}))}
+
+/* ---------- every sheet: swipe down to close, shadow under the sticky title row ---------- */
+(function(){const sh=$('sh');if(!sh||sh.dataset.sw)return;sh.dataset.sw=1;let y0=null,dy=0;
+ sh.addEventListener('scroll',()=>sh.classList.toggle('scr',sh.scrollTop>4),{passive:true});
+ sh.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest('input,textarea,select,.fz-seg'))return;if(sh.scrollTop>0&&!e.target.closest('.grab,.hd'))return;y0=e.touches[0].clientY;dy=0},{passive:true});
+ sh.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(dy>0){sh.classList.add('drag');sh.style.transform=`translateY(${dy}px)`;if(e.cancelable)e.preventDefault()}else if(dy<-6){y0=null;sh.classList.remove('drag');sh.style.transform=''}},{passive:false});
+ sh.addEventListener('touchend',()=>{if(y0==null)return;y0=null;sh.classList.remove('drag');sh.style.transform='';if(dy>90)closeSheet();dy=0});
+ let was=false;new MutationObserver(()=>{const on=sh.classList.contains('on');if(on===was)return;was=on;if(!on){sh.style.transform='';sh.classList.remove('scr')}}).observe(sh,{attributes:true,attributeFilter:['class']});
+})();
 
 /* ---------- take over the old reader ---------- */
 const oldClose=window.zClose;
