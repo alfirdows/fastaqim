@@ -85,7 +85,7 @@ R.settings=()=>{const p=prof(),B=$('fqpSet'),u=window.FQA&&FQA.user(),bak=ls.get
 
  <p class="glh">${X('Help','مساعدة','Gargaarsa','Caawimo')}</p>
  <div class="gl">${row('fqpNews2','ph-gift',X("What's new",'ما الجديد','Haaraa maal','Maxaa cusub'),null)}
-  ${row('fqpGuide','ph-question',X("Today's path guide",'دليل طريق اليوم','Qajeelfama karaa har’aa','Hagaha jidka maanta'),null)}
+  ${row('fqpGuide','ph-question',X('Daily checklist guide','دليل قائمة اليوم','Qajeelfama tarree guyyaa','Hagaha liiska maalinlaha'),null)}
   ${row('fqpRep','ph-bug',X('Report a problem','الإبلاغ عن مشكلة','Rakkoo gabaasi','Soo sheeg dhibaato'),null)}
   ${row('fqpIdea','ph-chat-circle-text',X('Feedback','ملاحظات','Yaada','Jawaab celin'),null)}</div>
 
@@ -226,7 +226,7 @@ async function snap(){await h2cLoad();const W=innerWidth,H=innerHeight;
   ignoreElements:el=>el.id==='toast'||el.id==='utoast'||el.id==='scrim'||el.id==='sh'||el.classList&&el.classList.contains('fqp-flash')});
  let cv=c;if(c.width>900){cv=document.createElement('canvas');cv.width=900;cv.height=Math.round(c.height*900/c.width);cv.getContext('2d').drawImage(c,0,0,cv.width,cv.height)}
  let q=.8,d=cv.toDataURL('image/jpeg',q);while(d.length>560000&&q>.3){q-=.1;d=cv.toDataURL('image/jpeg',q)}return d.length<=600000?d:null}
-const SCR_NAMES=()=>({home:X('Home','الرئيسية'),quran:X("Qur'an",'القرآن'),index:X('All surahs','كل السور'),read:X("Qur'an reader",'قارئ القرآن'),dhikr:X('Dhikr','الذكر'),todo:X('To-do','المهام'),more:X('More','المزيد'),notif:X('Notifications','الإشعارات'),cal:X('Calendar','التقويم'),tools:X('Tools','الأدوات'),tool:X('Tool','أداة'),stars:X('Stars','النجوم'),qibla:X('Qibla','القبلة'),settings:X('Settings','الإعدادات'),guide:X("Today's path guide",'دليل طريق اليوم'),news:X("What's new",'ما الجديد'),team:X('Team','الفريق'),apv:X('Approvals','الموافقات'),log:X('Change log','سجل التغييرات')});
+const SCR_NAMES=()=>({home:X('Home','الرئيسية'),quran:X("Qur'an",'القرآن'),index:X('All surahs','كل السور'),read:X("Qur'an reader",'قارئ القرآن'),dhikr:X('Dhikr','الذكر'),todo:X('To-do','المهام'),more:X('More','المزيد'),notif:X('Notifications','الإشعارات'),cal:X('Calendar','التقويم'),tools:X('Tools','الأدوات'),tool:X('Tool','أداة'),stars:X('Stars','النجوم'),qibla:X('Qibla','القبلة'),settings:X('Settings','الإعدادات'),guide:X('Daily checklist guide','دليل قائمة اليوم'),news:X("What's new",'ما الجديد'),team:X('Team','الفريق'),apv:X('Approvals','الموافقات'),log:X('Change log','سجل التغييرات')});
 const curScr=()=>{if($('zr')&&$('zr').classList.contains('on'))return 'adhkar';const c=$$('.scr.on')[0];return c?c.id.slice(2):'home'};
 let lastScr='home';{const g=window.go;window.go=go=function(s){const c=curScr();if(!['settings','more'].includes(c))lastScr=c;return g.apply(this,arguments)}}
 function flash(){const f=document.createElement('div');f.className='fqp-flash';document.body.appendChild(f);setTimeout(()=>f.remove(),450)}
@@ -268,7 +268,7 @@ if(needAsk&&shakeOn()&&!ls.get('fq5.shakeAsked',0)){const once=async()=>{removeE
 /* ================= Today's path guide ================= */
 const SN=(c,n)=>`https://sunnah.com/${c}:${n}`;
 const src=(label,url)=>`<a class="fqp-src" href="${url}" target="_blank" rel="noopener">${esc(label)} <i class="ph ph-arrow-square-out"></i></a>`;
-addScreen('guide',`<div class="hd sub">${BACK}<h1>${X("Today's path",'طريق اليوم','Karaa har’aa','Jidka maanta')}</h1><span style="width:44px"></span></div><div id="fqpGd"></div>`,'home');
+addScreen('guide',`<div class="hd sub">${BACK}<h1>${X('Daily checklist','قائمة اليوم','Tarree guyyaa','Liiska maalinlaha')}</h1><span style="width:44px"></span></div><div id="fqpGd"></div>`,'home');
 R.guide=()=>{const G=[
  ['f:fajr',X('5 salah','الصلوات الخمس'),X('Fajr, Dhuhr, Asr, Maghrib and Isha. Tap “I prayed” on the salah card, or the circle on the line, after you pray each one.','الفجر والظهر والعصر والمغرب والعشاء. اضغط «صلّيت» في بطاقة الصلاة بعد أداء كل صلاة.'),X('Each at its own time. The card on Home shows the next one.','كلٌّ في وقته، وبطاقة الرئيسية تُظهر الصلاة القادمة.'),
   src(X('The deed most loved by Allah: salah at its time · Bukhari 527','أحب الأعمال إلى الله: الصلاة على وقتها · البخاري ٥٢٧'),SN('bukhari',527))],

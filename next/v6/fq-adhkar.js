@@ -108,9 +108,19 @@ function roundEnd(){const s=cur();if(!s){stop();return}AU.round++;
 // highlight the word being read
 let RAF=0;function tick(){cancelAnimationFrame(RAF);if(A.paused&&!AU.word){return}const x=AU.q[AU.qi];if(x&&!AU.word){hl(wordAt(x,A.currentTime))}paintTime();RAF=requestAnimationFrame(tick)}
 A.addEventListener('playing',tick);A.addEventListener('seeked',()=>{const x=AU.q[AU.qi];if(x)hl(wordAt(x,A.currentTime));paintTime()});
-function timesFor(x){if(!W)return null;if(x.clip)return (W.c[x.clip]||null);const t=W.g[x.tm];return t?t.map(v=>[v[1]/1000,v[2]/1000]):null}
+// match the clip's aligned words to the words shown, so each shown word knows where it is in the audio
+const nrm=w=>String(w).replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0640،,.؛]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ة/g,'ه').replace(/ى/g,'ي').replace(/^و(?=..)/,'').replace(/^ال/,'');
+const MAPC={};
+function clipTimes(clip){if(MAPC[clip])return MAPC[clip];const cw=W.c[clip];if(!cw||!cw.length)return null;const s=cur();if(!s)return null;const dw=hWords(s.ar);
+ const sim=(a,b)=>{a=nrm(a);b=nrm(b);if(a===b)return 1;if(!a||!b)return 0;let m=0;for(const ch of a)if(b.includes(ch))m++;return m/Math.max(a.length,b.length)};
+ const T=new Array(dw.length).fill(null);let j=0;
+ dw.forEach((w,i)=>{let best=-1,bs=.55;for(let k=j;k<Math.min(cw.length,j+3);k++){const v=sim(w.ar,cw[k][2]);if(v>bs){bs=v;best=k}}if(best>=0){T[i]=[cw[best][0],cw[best][1]];j=best+1}});
+ // fill gaps by sharing the time between known neighbours
+ for(let i=0;i<T.length;i++){if(T[i])continue;let a=i;while(a<T.length&&!T[a])a++;const t0=i?T[i-1][1]:cw[0][0],t1=a<T.length?T[a][0]:cw[cw.length-1][1],n=a-i;for(let k=0;k<n;k++)T[i+k]=[t0+(t1-t0)*k/n,t0+(t1-t0)*(k+1)/n];i=a}
+ return MAPC[clip]=T}
+function timesFor(x){if(!W)return null;if(x.clip)return clipTimes(x.clip);const t=W.g[x.tm];return t?t.map(v=>[v[1]/1000,v[2]/1000]):null}
 function wordAt(x,t){const T=timesFor(x);if(!T)return -1;for(let i=0;i<T.length;i++){if(t>=T[i][0]-.03&&t<T[i][1]+.04)return (x.off||0)+i}return -2}
-let HL=-1;function hl(i){if(i===-2)return;if(i===HL)return;HL=i;const c=$('fzT');if(!c)return;c.querySelectorAll('.w.on').forEach(e=>e.classList.remove('on'));if(i<0)return;const seg=AU.qi;const e=c.querySelector(`.w[data-s="${seg}"][data-i="${i}"]`);if(e){e.classList.add('on');const r=e.getBoundingClientRect(),b=$('fzB').getBoundingClientRect();if(r.bottom>b.bottom-130||r.top<b.top+20)e.scrollIntoView({block:'center',behavior:'smooth'})}}
+let HL=-1;function hl(i){if(i===-2)return;if(i===HL)return;HL=i;const c=$('fzT');if(!c)return;c.querySelectorAll('.fzw.on').forEach(e=>e.classList.remove('on'));if(i<0)return;const seg=AU.qi;const e=c.querySelector(`.fzw[data-s="${seg}"][data-i="${i}"]`);if(e){e.classList.add('on');const r=e.getBoundingClientRect(),b=$('fzB').getBoundingClientRect();if(r.bottom>b.bottom-130||r.top<b.top+20)e.scrollIntoView({block:'center',behavior:'smooth'})}}
 // play one word
 function sayWord(seg,i,slow){const s=cur();if(!s)return;const x=AU.q[seg];const T=x&&timesFor(x);if(!T||!T[i])return false;clearTimeout(AU.gap);AU.on=false;
  AU.word={e:T[i][1]+.05};const st0=Math.max(0,T[i][0]-.04);loadSeg(seg,st0);A.playbackRate=slow?.7:1;const go=()=>{try{A.currentTime=st0}catch(e){}A.play().catch(()=>{})};if(A.readyState>0)go();else A.addEventListener('loadedmetadata',go,{once:true});hl(i);paintPlayer();tick();return true}
@@ -143,8 +153,8 @@ function build(){const zr=$('zr');zr.classList.add('fz');
  $('fzX').onclick=()=>zClose();$('fzO').onclick=options;
  const B=$('fzB');
  // tap anywhere to count (not on buttons, links, words in Word by word, or the player)
- B.addEventListener('click',e=>{if(e.target.closest('a,button,input,label,.fz-dock'))return;if(st.wbw&&e.target.closest('.w'))return;if(PZ.moved){PZ.moved=false;return}tapCount()});
- B.addEventListener('click',e=>{const w=st.wbw&&e.target.closest('.w');if(w){e.stopPropagation();wordSheet(+w.dataset.s,+w.dataset.i)}},true);
+ B.addEventListener('click',e=>{if(e.target.closest('a,button,input,label,.fz-dock'))return;if(st.wbw&&e.target.closest('.fzw'))return;if(PZ.moved){PZ.moved=false;return}tapCount()});
+ B.addEventListener('click',e=>{const w=st.wbw&&e.target.closest('.fzw');if(w){e.stopPropagation();wordSheet(+w.dataset.s,+w.dataset.i)}},true);
  pinch(B)}
 function paintSteps(){const ss=steps(ZS.set),p=zProg(ZS.set);$('fzS').innerHTML=`<div class="fz-path">${ss.map((s,i)=>`<button type="button" data-go="${i}" class="${isDone(s,p)?'dn':''} ${i===ZS.i?'cur':''}" aria-label="${esc(FT('Go to '+(i+1),'اذهب إلى '+N(i+1)))}"><i></i></button>`).join('')}</div>`;
  $('fzS').querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>go(+b.dataset.go,false))}
@@ -157,8 +167,8 @@ function qText(s){let h='',segs=qFor(s),si=0;
   if(st.me&&!isB&&L!=='ar')h+=`<p class="fz-me">${esc(qMean(key))}</p>`});
  return h}
 function qMean(k){try{if(LI>=0&&typeof QTR_ID!=='undefined'){const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');if(c[k])return c[k]}}catch(e){}return QD[k]?QD[k].en:''}
-function wcell(w,seg,i,q){if(!st.wbw)return `<span class="w${q?' q':''}" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`;
- return `<span class="w g${q?' q':''}" data-s="${seg}" data-i="${i}" role="button" tabindex="0"><b>${esc(w.ar)}</b>${w.tr?`<em dir="ltr">${esc(w.tr)}</em>`:''}${w.en&&L!=='ar'?`<small dir="ltr">${esc(w.en)}</small>`:''}</span>`}
+function wcell(w,seg,i,q){if(!st.wbw)return `<span class="fzw" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`;
+ return `<span class="fzw g" data-s="${seg}" data-i="${i}" role="button" tabindex="0"><b>${esc(w.ar)}</b>${w.tr?`<em dir="ltr">${esc(w.tr)}</em>`:''}${w.en&&L!=='ar'?`<small dir="ltr">${esc(w.en)}</small>`:''}</span>`}
 function phrases(words,seg){// keep each phrase (up to a comma) together, so lines break at natural pauses
  const out=[];let cur=[];words.forEach((w,i)=>{cur.push(wcell(w,seg,i,false));if(/[،,]$/.test(w.ar)){out.push(cur);cur=[]}});if(cur.length)out.push(cur);
  return out.map(p=>`<span class="fz-ph">${p.join(' ')}</span>`).join(' ')}
