@@ -13,4 +13,5 @@ for k in KEYS:
             print('retry',k,e);time.sleep(3)
     w=[[x['text_uthmani'],(x.get('transliteration') or {}).get('text') or '',(x.get('translation') or {}).get('text') or ''] for x in d['verse']['words'] if x['char_type_name']=='word']
     out[k]={'w':w};print(k,len(w),' '.join(x[1] for x in w)[:90])
+import os;os.makedirs('data/adhkar',exist_ok=True)
 json.dump(out,open('data/adhkar/qwords.json','w'),ensure_ascii=False,separators=(',',':'))
