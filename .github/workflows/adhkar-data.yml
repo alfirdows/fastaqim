@@ -35,9 +35,12 @@ jobs:
       - name: Cut clips
         run: python tools/adhkar/cut_more.py
       - name: Check every clip
+        continue-on-error: true
         env:
           MODEL: large-v3
         run: python tools/adhkar/verify_clips.py
+      - name: Bundle reader data
+        run: python tools/adhkar/build_words.py
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
