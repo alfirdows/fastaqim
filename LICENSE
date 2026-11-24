@@ -3,3 +3,6 @@ Copyright (c) 2026 alfirdows. All rights reserved.
 This code, text, design and audio are shared publicly only so the website can run.
 No permission is given to copy, modify, publish, distribute or sell any part of it
 without written permission from the owner.
+
+Third-party parts (for example the files in vendor/ and next/v6/vendor/) are not covered by this notice.
+They keep their own licences, listed in THIRD-PARTY-LICENSES.md.

@@ -29,9 +29,9 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  await p.click('#toEd');await p.waitForTimeout(350);await p.fill('#lsN','Gifts');await p.click('#lsOk');await p.waitForTimeout(300);ok('rename',(await p.textContent('#toT'))==='Gifts');
  await p.click('[data-back]:visible');await p.waitForTimeout(300);ok('back to tools',await p.isVisible('#tlg'));
  // money
- await p.click('#tlg [data-tool="money"]');await p.waitForTimeout(300);await p.click('#mBud');await p.waitForTimeout(300);await p.fill('#bA','120');await p.click('#bOk');await p.waitForTimeout(300);
- await p.click('#toAdd');await p.waitForTimeout(300);await p.fill('#isT','Groceries');await p.fill('#isA','42.50');await p.click('#isOk');await p.waitForTimeout(300);
- ok('money left 77.5',(await p.textContent('.mcard')).includes('77.5'));await snap('6_money');
+ await p.click('#tlg [data-tool="money"]');await p.waitForTimeout(400);ok('money screen',await p.isVisible('#s-money'));await p.click('#mnB [data-add="in"]');await p.waitForTimeout(400);await p.fill('#maA','120');await p.click('#maGo');await p.waitForTimeout(500);
+ await p.click('#mnB [data-add="out"]');await p.waitForTimeout(400);await p.fill('#maA','42.50');await p.fill('#maT','Groceries');await p.click('#maGo');await p.waitForTimeout(500);
+ ok('money left 77.5',(await p.textContent('.mn-big')).includes('77.5'));await snap('6_money');
  await p.click('[data-back]:visible');await p.waitForTimeout(250);
  // habits
  // Habits opens its own screen (Life & family: build + leave)
@@ -41,7 +41,7 @@ const OUT=process.argv[2]||'flow';fs.mkdirSync(OUT,{recursive:true});
  // persistence: reload
  await p.goto('http://fq.test'+(process.env.BASE||'/next/v6/')+L+'#home');await p.waitForTimeout(600);const pt=await p.textContent('#pins');ok('pins persist after reload',pt.includes('Habits')||pt.includes('العادات'));await snap('8_home_after');
  // tasbih badge + reset undo
- await p.click('[data-tab="dhikr"]');await p.waitForTimeout(300);await p.click('#tsbBtn');await p.waitForTimeout(400);
+ await p.click('[data-tab="quran"]');await p.waitForTimeout(300);await p.click('#s-quran [data-ws="dhikr"]');await p.waitForTimeout(300);await p.click('#tsbBtn');await p.waitForTimeout(400);
  ok('tasbih page opens',await p.isVisible('#tbx'));await p.click('#tbx [data-m="tap"]');await p.waitForTimeout(200);
  for(let i=0;i<5;i++){await p.click('#tbTap');await p.waitForTimeout(40)}
  ok('dhikr tab badge',(await p.textContent('#tab .tbd'))==='5'||(await p.textContent('#tab .tbd'))==='٥');

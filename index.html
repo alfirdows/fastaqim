@@ -7,6 +7,7 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-title" content="Fastaqim">
+<script>try{if(localStorage.getItem('fq5.night')==='1')document.documentElement.classList.add('dark')}catch(e){}</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>Fastaqim</title>
 <link rel="stylesheet" href="ph/ph-regular/style.css">
@@ -1058,8 +1059,8 @@ const DICT={
 'Ayat al-Kursi after salah':['Aayaat al-Kursii salaata booda','Aayatul Kursi salaadda kadib'],
 'Morning adhkar':['Zikrii ganamaa','Adkaarta subaxa'],'Evening adhkar':['Zikrii galgalaa','Adkaarta fiidka'],
 'Duha':['Duhaa','Duhaa'],'Witr':['Witrii','Witir'],'Before-sleep adhkar':['Zikrii hirriba dura','Adkaarta hurdada ka hor'],
-"Today's path":["Karaa har'aa",'Waddada maanta'],'5 salah':['Salaata 5','5 salaadood'],'days':['guyyaa','maalmood'],
-"Today's path complete!":["Karaan har'aa xumurame!",'Waddada maanta waa dhammaatay!'],
+"Daily checklist":["Tarree guyyaa",'Liiska maalinlaha'],'5 salah':['Salaata 5','5 salaadood'],'days':['guyyaa','maalmood'],
+"Daily checklist complete!":["Tarreen guyyaa xumurame!",'Liiska maalinlaha waa dhammaaday!'],
 'MashaAllah. Keep going.':["MaashaaAllaah. Itti fufi.",'MaashaaAllaah. Sii wad.'],
 'Close':['Cufi','Xir'],'Next':['Itti aanu','Xiga'],'left':['hafe','haray'],
 'All prayed salah are marked':['Salaanni sagadamte hundi galmaa\'eera','Salaadaha la tukaday dhammaan waa la calaamadeeyay'],
@@ -1295,7 +1296,7 @@ function ciStreak(){let n=0;const d=NOW();for(let i=0;i<400;i++){const x=new Dat
 let CIOPEN=false;
 function ciTrim(){const c=$('ci');c.classList.toggle('open',CIOPEN);if(CIOPEN)return;const rows=$$('#ci .cir2');const und=rows.filter(r=>!r.classList.contains('on')),dn=rows.filter(r=>r.classList.contains('on'));const show=[...dn.slice(-1),...und].slice(0,2);rows.forEach(r=>r.classList.toggle('hide',!show.includes(r)))}
 function renderCI(){S.ci=S.ci||{};const dk=dkey(NOW()),o=S.ci[dk]||{},sal=Object.keys(S.salah[dk]||{}).length,done=CI.filter(c=>o[c[0]]).length+sal,tot=CI.length+5,p=Math.round(done/tot*100),C=2*Math.PI*22;
- $('ci').innerHTML=`<button class="cih" id="ciH" aria-expanded="${CIOPEN}"><div class="cir"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" class="rb"/><circle cx="26" cy="26" r="22" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-done/tot)}"/></svg><b>${AR(p)}%</b></div><div class="cit"><b>${T("Today's path",'طريق اليوم')}</b><small>${T(done+' of '+tot+' done','تم '+AR(done)+' من '+AR(tot))}</small></div><i class="ph ph-caret-down cvd"></i></button>
+ $('ci').innerHTML=`<button class="cih" id="ciH" aria-expanded="${CIOPEN}"><div class="cir"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="22" class="rb"/><circle cx="26" cy="26" r="22" class="rf" style="stroke-dasharray:${C};stroke-dashoffset:${C*(1-done/tot)}"/></svg><b>${AR(p)}%</b></div><div class="cit"><b>${T('Daily checklist','قائمة اليوم')}</b><small>${T(done+' of '+tot+' done','تم '+AR(done)+' من '+AR(tot))}</small></div><i class="ph ph-caret-down cvd"></i></button>
  <button class="cis" data-go="home" onclick="document.getElementById('path').scrollIntoView({behavior:'smooth',block:'start'})">${FQI('fajr')}<span>${T('5 salah','الصلوات الخمس')}</span><em>${AR(sal)}/${AR(5)}</em></button>
  ${CI.map(([k,l,ic])=>`<button class="cir2 ${o[k]?'on':''}" data-ci="${k}" aria-pressed="${!!o[k]}"><span class="ck3">${o[k]?'<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':''}</span><span>${l}</span>${o[k]?`<em class="st">+1 ★</em>`:''}</button>`).join('')}`;
  ciTrim();$('ciH').onclick=()=>{CIOPEN=!CIOPEN;renderCI()};$$('#ci [data-ci]').forEach(b=>b.onclick=()=>{const k=b.dataset.ci;S.ci[dk]=S.ci[dk]||{};const on=!S.ci[dk][k];S.ci[dk][k]=on;
@@ -1303,7 +1304,7 @@ function renderCI(){S.ci=S.ci||{};const dk=dkey(NOW()),o=S.ci[dk]||{},sal=Object
   save();renderCI();renderStars();if(CI.every(c=>S.ci[dk][c[0]])&&on)setTimeout(ciAll,350)});renderStars()}
 function renderStars(){$('hStars').innerHTML=`${STAR_SVG()}<b>${AR(S.stars)}</b><span class="sk" aria-label="${T(ciStreak()+' days in a row',AR(ciStreak())+' أيام متتالية')}"><i class="ph ph-calendar-check"></i>${AR(ciStreak())}</span>`}
 function ciBurst(el){const r=el.getBoundingClientRect();for(let i=0;i<8;i++){const p=document.createElement('span');p.className='cib';p.innerHTML=STAR_SVG();const a=i/8*Math.PI*2;p.style.cssText=`left:${r.left+28}px;top:${r.top+r.height/2}px;--x:${Math.cos(a)*46}px;--y:${Math.sin(a)*46}px`;document.body.appendChild(p);setTimeout(()=>p.remove(),700)}}
-function ciAll(){$('cel').innerHTML=`<div class="bs"><span class="ring"></span><svg class="bstar" viewBox="0 0 100 100"><path d="M50 10 61.8 37.8 91.8 40.4 69 60.2 75.9 89.6 50 74 24.1 89.6 31 60.2 8.2 40.4 38.2 37.8Z" fill="#c9a96a" stroke="#c9a96a" stroke-width="9" stroke-linejoin="round"/></svg></div><h2>${T("Today's path complete!",'اكتمل طريق اليوم!')}</h2><p>${T('MashaAllah. Keep going.','ما شاء الله. واصل.')}</p><button id="celX">${T('Close','إغلاق')}</button>`;$('cel').classList.add('on');vib([30,50,30,50,60]);$('celX').onclick=()=>$('cel').classList.remove('on')}
+function ciAll(){$('cel').innerHTML=`<div class="bs"><span class="ring"></span><svg class="bstar" viewBox="0 0 100 100"><path d="M50 10 61.8 37.8 91.8 40.4 69 60.2 75.9 89.6 50 74 24.1 89.6 31 60.2 8.2 40.4 38.2 37.8Z" fill="#c9a96a" stroke="#c9a96a" stroke-width="9" stroke-linejoin="round"/></svg></div><h2>${T('Daily checklist complete!','اكتمل قائمة اليوم!')}</h2><p>${T('MashaAllah. Keep going.','ما شاء الله. واصل.')}</p><button id="celX">${T('Close','إغلاق')}</button>`;$('cel').classList.add('on');vib([30,50,30,50,60]);$('celX').onclick=()=>$('cel').classList.remove('on')}
 $('hStars').onclick=()=>toast(T(S.stars+' stars · '+ciStreak()+' days in a row',AR(S.stars)+' نجمة · '+AR(ciStreak())+' أيام متتالية'));
 function renderHero(){const now=NOW(),{next,prev}=salahState(now);$('hero').dataset.k=next.s[0];
  const ms=next.t-now,h=Math.floor(ms/36e5),m=Math.ceil(ms/6e4)%60||(ms>0&&h===0?1:0),pct=Math.max(0,Math.min(1,(now-prev.t)/(next.t-prev.t))),C=2*Math.PI*30;
@@ -1354,10 +1355,15 @@ function salSheet(k){const s=SAL.find(x=>x[0]===k),dk=dkey(NOW()),cur=(S.salah[d
  ${cur?`<button class="ghost" style="border-color:var(--line);color:var(--sub)" data-v="">${T('Clear','مسح')}</button>`:''}`);aftBind(k,dk);
  $$('#sh [data-v]').forEach(b=>b.onclick=()=>{const v=b.dataset.v;S.salah[dk]=S.salah[dk]||{};if(v)S.salah[dk][k]=v;else delete S.salah[dk][k];
   if(v==='on')star('sal-'+dk+'-'+k,T(s[1]+' on time',s[2]+' في وقتها'));else if(!v&&S.starLog['sal-'+dk+'-'+k]){delete S.starLog['sal-'+dk+'-'+k];S.stars--}save();vib(15);closeSheet();renderSalah()})}
-const VA=[['13:28'],['94:5','94:6'],['2:286'],['2:285'],['112:1','112:2','112:3','112:4'],['2:255']];
+const VA=[["13:28"],["94:5","94:6"],["2:286"],["2:152"],["2:153"],["2:186"],["3:139"],["3:200"],["9:51"],["12:87"],["14:7"],["16:97"],["16:128"],["17:24"],["20:25","20:26","20:27","20:28"],["21:87"],["23:1","23:2"],["25:74"],["29:69"],["33:41","33:42"],["39:53"],["40:60"],["47:7"],["50:16"],["51:56"],["53:39","53:40"],["55:60"],["59:18"],["64:16"],["65:3"],["67:2"],["93:3","93:4","93:5"],["94:7","94:8"],["103:1","103:2","103:3"],["112:1","112:2","112:3","112:4"],["2:255"],["2:201"],["3:8"],["3:133"],["14:40","14:41"],["18:10"],["25:63"],["28:24"],["2:45"],["2:156"],["6:162"],["11:115"],["15:99"],["20:46"],["31:17"],["40:44"],["16:53"],["57:21"],["11:112"],["87:14","87:15"],["89:27","89:28","89:29","89:30"],["99:7","99:8"],["12:86"],["10:62"],["20:132"],["25:15"],["2:285"],["3:173"],["13:11"],["20:114"],["8:46"],["11:88"],["29:45"],["41:30"],["49:10"],["4:28"],["39:10"],["42:19"],["7:56"],["3:159"]];
+/* Ayah of the day: a new one every day (local date), same for everyone; "Another" only changes today's */
+const VA_DAY=()=>{const d=NOW();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)};
+const VAG=()=>{const dk=dkey(NOW()),o=(S.vaO&&S.vaO.d===dk)?S.vaO.n:0;return VA[(VA_DAY()+o)%VA.length]};
+const VAC={};const vaLoad=g=>Promise.all([...new Set(g.map(k=>+k.split(':')[0]))].map(n=>VAC[n]||(VAC[n]=fetch('q/'+n+'.json').then(r=>r.json()).then(j=>{j.v.forEach((x,i)=>{const k=n+':'+(i+1);if(!QD[k])QD[k]={a:x[0],en:x[1]}})}).catch(()=>{delete VAC[n]}))));
+const vaReady=g=>g.every(k=>QD[k]);
 const ARD=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const vaRef=g=>{const[su,a]=g[0].split(':').map(Number),b=+g[g.length-1].split(':')[1],S0=SU[su-1],r=su+':'+a+(g.length>1?'–'+b:'');return{su,a,b,r,u:'https://quran.com/'+su+'/'+a+(g.length>1?'-'+b:''),t:T("Qur'an, Surah "+S0[0]+' '+r,'القرآن، سورة '+S0[1]+' '+ARD(r))}};
-const DAILY=()=>{const g=VA[(S.vaI||0)%VA.length],rf=vaRef(g);return[
+const DAILY=()=>{let g=VAG();if(!vaReady(g)){const want=g;vaLoad(want).then(()=>{if(vaReady(want)){renderCar();if($('qVq'))vaQ()}});g=VA[0]}const rf=vaRef(g);return[
  {t:T('Ayah of the day','آية اليوم'),ic:'ph-book-open',ar:g.map(k=>QD[k].a+'\u00a0<span class="am">'+ARD(k.split(':')[1])+'</span>').join(' '),q:1,m:g.map(k=>QD[k].en).join(' '),s:`<a href="${rf.u}" target="_blank" rel="noopener">${rf.t} ↗</a>`,done:'vod',va:g},
  {t:T('Dhikr of the day','ذكر اليوم'),ic:'ph-heart',ar:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',m:T('There is no might nor power except with Allah. A treasure from the treasures of Paradise.','كنز من كنوز الجنة.'),s:`<a href="https://sunnah.com/bukhari:6384" target="_blank" rel="noopener">${T('Bukhari 6384, Muslim 2704','البخاري ٦٣٨٤، مسلم ٢٧٠٤')} ↗</a>`},
  {t:T('Sunnah of the day','سنة اليوم'),ic:'ph-sun-horizon',ar:'رَكْعَتَا الْفَجْرِ خَيْرٌ مِنَ الدُّنْيَا وَمَا فِيهَا',m:T('The two rak\'ahs before Fajr are better than this world and everything in it.','ركعتا سنة الفجر خير من الدنيا وما فيها.'),s:`<a href="https://sunnah.com/muslim:725a" target="_blank" rel="noopener">${T('Muslim 725','مسلم ٧٢٥')} ↗</a>`}]};
@@ -1370,7 +1376,7 @@ function renderCar(){const D=DAILY(),dk=dkey(NOW());
  $$('[data-cp]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText(txt(D[b.dataset.cp]));toast(T('Copied','تم النسخ'))}catch(e){toast(T('Could not copy','تعذّر النسخ'))}});
  $$('[data-shr]').forEach(b=>b.onclick=async()=>{try{await navigator.share({text:txt(D[b.dataset.shr])})}catch(e){}});
  const vp=$('car').querySelector('[data-vap]');if(vp)vp.onclick=()=>playAyat(D[0].va,vaRef(D[0].va).t);
- const vn=$('car').querySelector('[data-van]');if(vn)vn.onclick=()=>{S.vaI=((S.vaI||0)+1)%VA.length;save();vib(10);renderCar()};
+ const vn=$('car').querySelector('[data-van]');if(vn)vn.onclick=()=>{const dk=dkey(NOW());S.vaO={d:dk,n:((S.vaO&&S.vaO.d===dk?S.vaO.n:0)+1)%VA.length};save();vib(10);renderCar();if($('qVq'))vaQ()};
  const vd=$('car').querySelector('[data-vd]');if(vd)vd.onclick=e=>{e.preventDefault();if(star('vod-'+dk,T('Ayah of the day read','قرأت آية اليوم'))){vib(20);renderCar()}}}
 function renderHj(){const d=NOW(),h=hParts(d);
  $('hj').innerHTML=`<span class="w">${d.toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en'),{weekday:'long'})}</span><span class="d">${AR(h.d)}</span><span class="mo">${hm(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</span><span class="g">${d.toLocaleDateString(L==='ar'?'ar-EG-u-nu-latn':(LI>=0?LX:'en-GB'),{day:'numeric',month:'long',year:'numeric'})}</span>`}
@@ -1400,15 +1406,17 @@ function greet(){const h=NOW().getHours();return h<12?T('Good morning','صباح
 R.home=()=>{try{renderPins();renderQC()}catch(e){console.error(e)}try{renderCI()}catch(e){console.error(e)}{const h=hParts(NOW());$('greet').innerHTML=`${greet()}<small>${NOW().toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en-US'),{weekday:'short',month:'short',day:'numeric'})} · ${AR(h.d)} ${hms(h.m)} ${AR(h.y)}${T(' AH',' هـ')}</small><span class="insp">${inspToday()}</span>`};renderHero();renderSalah();renderCar();renderHj();renderSc();renderTasksHome();renderTopics();
  const k=S.kh[0];$('khMini').textContent=k?(k.name||T('My khatmah','ختمتي'))+' · '+AR(Math.round(k.done/604*100))+'%':T('Start a new khatmah','ابدأ ختمة جديدة');
  $('cont').innerHTML=S.noCont?'':`<span class="ic c-g"><i class="ph ph-book-open-text"></i></span><span class="tx"><b>${T('Continue reading','متابعة القراءة')}</b><small>${T('Al-Baqarah · Ayah 255','البقرة · الآية ٢٥٥')}</small></span><button class="go" data-read="2:255">${T('Open','افتح')}</button>`;$('cont').style.display=S.noCont?'none':''};
-setInterval(()=>{if($('s-home').classList.contains('on'))renderHero()},1000);
+let _vaLast=VA_DAY();setInterval(()=>{if($('s-home').classList.contains('on'))renderHero();if(VA_DAY()!==_vaLast){_vaLast=VA_DAY();renderCar();if($('qVq'))vaQ()}},1000);
 
 /* ---------- quran ---------- */
 const TK30=(p,td)=>`<div class="tk30">${Array.from({length:30},(_,i)=>`<i class="${i<Math.floor(p*30)?'on':i===Math.floor(p*30)&&td?'td':''}"></i>`).join('')}</div>`;
+function vaQ(){let g=VAG();if(!vaReady(g)){const w=g;vaLoad(w).then(()=>{if(vaReady(w))vaQ()});g=VA[0]}const rf=vaRef(g);
+ $('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${g.map(k=>QD[k].a+'\u00a0<span class="am">'+ARD(k.split(':')[1])+'</span>').join(' ')}</div>${L==='ar'?'':`<p class="en2">${esc(g.map(k=>QD[k].en).join(' '))}</p>`}<a href="${rf.u}" target="_blank" rel="noopener">${rf.t} ↗</a>`;
+ $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(g,rf.t);$('qVod').textContent=rf.r}
 R.quran=()=>{$('qResume').textContent=T('Ayah 255 · Page 42 · Juz 3','الآية ٢٥٥ · الصفحة ٤٢ · الجزء ٣');$('qSu').textContent=T('Al-Baqarah','سورة البقرة');
  $('qJs').innerHTML=JUZ.map((k,i)=>`<button data-juz="${i+1}" class="${i===2?'on':''}">${AR(i+1)}<small>${T('juz','جزء')}</small></button>`).join('');
  $$('#qJs [data-juz]').forEach(b=>b.onclick=()=>{ixJ=+b.dataset.juz;go('index')});
- const v=QD['13:28'];$('qVq').innerHTML=`<div class="t"><span>${T('Ayah of the day','آية اليوم')}</span><button data-pa="13:28" aria-label="${T('Listen','استماع')}"><i class="ph-fill ph-play"></i></button></div><div class="ar">${v.a}</div>${L==='ar'?'':`<p class="en2">${esc(v.en)}</p>`}<a href="https://quran.com/13/28" target="_blank" rel="noopener">${T("Qur'an, Surah Ar-Ra'd 13:28 ↗",'القرآن، سورة الرعد ١٣:٢٨ ↗')}</a>`;
- $('qVq').querySelector('[data-pa]').onclick=()=>playAyat(['13:28'],T("Ar-Ra'd 13:28",'الرعد ١٣:٢٨'));$('qVod').textContent=T("Ar-Ra'd 13:28 · tap Done for a star",'الرعد ١٣:٢٨ · اضغط تم لتحصل على نجمة');
+ vaQ();
  $('khList').innerHTML=S.kh.length?S.kh.map((k,i)=>{const per=Math.ceil(604/k.days),from=k.done+1,to=Math.min(604,k.done+per);return `<div class="kh"><div class="r"><span><b>${esc(k.name||T('My khatmah','ختمتي'))}</b><br><small>${T('Today: pages '+from+'–'+to,'اليوم: الصفحات '+AR(from)+'–'+AR(to))}</small></span><button class="go" data-khd="${i}">${T('Read today','قرأت اليوم')}</button></div>${TK30(k.done/604,k.last!==dkey(NOW()))}<small>${AR(Math.round(k.done/604*100))}% · ${T(k.days+' days','خلال '+AR(k.days)+' يومًا')}</small></div>`}).join(''):`<div class="khe">${TK30(0,0)}<p>${T('30 steps, one juz each. Pick your own pace.','٣٠ خطوة، جزء لكل خطوة. اختر وتيرتك.')}</p><button class="go2" data-khn><i class="ph ph-plus"></i>${T('Start a khatmah','ابدأ ختمة')}</button></div>`;
  $$('[data-khd]').forEach(b=>b.onclick=()=>{const k=S.kh[b.dataset.khd],per=Math.ceil(604/k.days),dk=dkey(NOW());if(k.last===dk){toast(T('Already marked today','سُجّل اليوم'));return}k.done=Math.min(604,k.done+per);k.last=dk;star('kh-'+dk,T("Today's khatmah portion",'ورد الختمة اليوم'));save();vib(20);R.quran()})};
 $('khNew').onclick=khSheet;document.addEventListener('click',e=>{if(e.target.closest('[data-khn]'))khSheet()});
@@ -1489,8 +1497,8 @@ R.dhikr=()=>{$('zSleepP').textContent=zSum('sleep');$('tsbIc').innerHTML=TSB(fal
  const st=[['m','ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),T('After Fajr','بعد الفجر'),f12(SAL[0][3]),'data-z="morning"',zDoneAll('morning')],
   ['a','ph-check-circle',T('After each salah','بعد كل صلاة'),`<span class="dots5">${SAL.map(x=>`<i class="${AFT.every(a=>(aft[x[0]]||{})[a[0]])?'on':''}"></i>`).join('')}</span>`,'',`data-go="home"`,aN===5],
   ['e','ph-sun-dim',T('Evening adhkar','أذكار المساء'),T('After Asr','بعد العصر'),f12(SAL[2][3]),'data-z="evening"',zDoneAll('evening')],
-  ['s','ph-moon-stars',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
- $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':`<i class="ph ${ic==='ph-moon-stars'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
+  ['s','ph-bed',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
+ $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':`<i class="ph ${ic==='ph-bed'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
  $('zDayN').textContent=T((st.filter(x=>x[6]).length)+' of 4',AR(st.filter(x=>x[6]).length)+' من ٤')};
 
 /* ---------- todo ---------- */
@@ -1800,7 +1808,7 @@ Object.assign(DICT,{
 "Couldn't load this surah. Check your internet and try again.":["Suuraan kun hin feene. Interneetii kee mirkaneessii irra deebi'ii yaali.",'Suuraddan lama soo rari karin. Hubi internetkaaga oo isku day mar kale.'],
 'Stars & streaks':['Urjii fi walitti aansuu','Xiddigo iyo isku xigxig'],'Stars':['Urjii','Xiddigo'],'Days in a row':['Guyyoota walitti aansan','Maalmo isku xiga'],'This week':["Torban kana",'Toddobaadkan'],
 'Last 14 days':['Guyyoota 14 darban','14-kii maalmood ee la soo dhaafay'],'How to earn a star':['Urjii akkamitti argatta','Sida xiddig loo helo'],
-'Each salah prayed on time':['Salaata tokkoon tokkoon yeroo ishee','Salaad kasta oo waqtigeeda lagu tukado'],"Each step of Today's path":["Tarkaanfii karaa har'aa hundumaa",'Tallaabo kasta oo jidka maanta'],
+'Each salah prayed on time':['Salaata tokkoon tokkoon yeroo ishee','Salaad kasta oo waqtigeeda lagu tukado'],"Each item on the Daily checklist":["Wanta tarree guyyaa irra jiru hundumaa",'Shay kasta oo liiska maalinlaha ku jira'],
 'Finishing a set of adhkar':['Tuuta azkaaraa xumuruu','Dhammaystirka koox adkaar ah'],'Reading the ayah of the day':["Aayaa guyyaa dubbisuu",'Akhrinta aayadda maanta'],
 "Today's khatmah portion":["Qooda khatmii har'aa",'Qaybta khatmiga maanta'],'Finishing a task':['Hojii xumuruu','Dhammaystirka hawl'],
 'Undo takes the star back, so the count stays honest.':['Yoo haqxe urjiin ni deebi\'a, lakkoofsi dhugaa ta\'ee hafa.','Haddii aad ka noqoto xiddigga waa la celiyaa, si tiradu run u ahaato.'],
@@ -1844,6 +1852,8 @@ function zkMake(o){const x=Object.assign({},o);
   if(o.why){const w=o.why;Object.defineProperty(x,'why',{get(){return w},enumerable:true})}return x}
 ZK.morning={t:T('Morning adhkar','أذكار الصباح'),items:ZK2.morning.map(zkMake)};
 ZK.evening={t:T('Evening adhkar','أذكار المساء'),items:ZK2.evening.map(zkMake)};
+// Ayat al-Kursi first in the morning and evening (Ubayy ibn Ka'b: whoever says it in the evening is protected until morning, and in the morning until evening. an-Nasa'i, al-Kubra 10731; al-Hakim 1/562; sahih, al-Albani, Sahih at-Targhib 662)
+{const K={qk:['2:255'],pre:'isti',n:1,mt:'q',src:["an-Nasa'i (al-Kubra) 10731, sahih",'https://quran.com/2/255'],why:"Whoever says it in the morning is protected until evening, and whoever says it in the evening is protected until morning."};ZK.morning.items.unshift(zkMake(K));ZK.evening.items.unshift(zkMake(K))}
 ZK.ruqyah={t:T('Ruqyah','الرقية'),items:ZK2.ruqyah.map(zkMake)};
 ZK.dua={t:T("Du'as for worry",'أدعية الهمّ'),items:ZK2.dua.map(zkMake)};
 ZK.sleep.items.forEach((x,i)=>{x.mt=i<2?'q':'h';if(i<2){const ks=i?['2:285','2:286']:['2:255'];x._qk=ks;Object.defineProperty(x,'me',{get(){return zkQ(ks)},configurable:true,enumerable:true})}});
@@ -1946,7 +1956,7 @@ R.stars=()=>{$('stT').textContent=T('Stars & streaks','النجوم والسلا
   <b class="stn">${AR(S.stars)}</b><small>${T('Stars','النجوم')}</small></div>
  <div class="stg"><div><b>${AR(ciStreak())}</b><small>${T('Days in a row','أيام متتالية')}</small></div><div><b>${AR(wk)}</b><small>${T('This week','هذا الأسبوع')}</small></div></div>
  <div class="kh stc"><h3>${T('Last 14 days','آخر ١٤ يومًا')}</h3><div class="stbars">${d14.map(([d,v],i)=>`<div class="stb ${i===13?'td':''}"><span style="--h:${Math.round(v/mx*100)}%"><em>${v?AR(v):''}</em></span><small>${d.toLocaleDateString(loc,{weekday:'short'}).slice(0,2)}</small></div>`).join('')}</div></div>
- <div class="kh"><h3>${T('How to earn a star','كيف تكسب نجمة')}</h3>${[['ph-clock',T('Each salah prayed on time','كل صلاة في وقتها')],['ph-path',T("Each step of Today's path",'كل خطوة في طريق اليوم')],['ph-hands-clapping',T('Finishing a set of adhkar','إتمام مجموعة أذكار')],['ph-book-open-text',T('Reading the ayah of the day','قراءة آية اليوم')],['ph-book-bookmark',T("Today's khatmah portion",'ورد الختمة اليوم')],['ph-check-square',T('Finishing a task','إنجاز مهمة')]].map(([ic,t])=>`<div class="stw"><i class="ph ${ic}"></i><span>${t}</span><b>+${AR(1)}</b></div>`).join('')}
+ <div class="kh"><h3>${T('How to earn a star','كيف تكسب نجمة')}</h3>${[['ph-clock',T('Each salah prayed on time','كل صلاة في وقتها')],['ph-path',T('Each item on the Daily checklist','كل عنصر في قائمة اليوم')],['ph-hands-clapping',T('Finishing a set of adhkar','إتمام مجموعة أذكار')],['ph-book-open-text',T('Reading the ayah of the day','قراءة آية اليوم')],['ph-book-bookmark',T("Today's khatmah portion",'ورد الختمة اليوم')],['ph-check-square',T('Finishing a task','إنجاز مهمة')]].map(([ic,t])=>`<div class="stw"><i class="ph ${ic}"></i><span>${t}</span><b>+${AR(1)}</b></div>`).join('')}
  <p class="stnote">${T('Undo takes the star back, so the count stays honest.','التراجع يُرجع النجمة، ليبقى العدد صادقًا.')}</p></div>`};
 SCALL.stars[2]=()=>go('stars');
 
@@ -2365,5 +2375,21 @@ if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.g
 <script src="fq-plus.js" defer></script>
 <link rel="stylesheet" href="fq-own.css">
 <script src="fq-own.js"></script>
+<link rel="stylesheet" href="fq-months.css">
+<script src="fq-months.js"></script>
+<link rel="stylesheet" href="fq-voice.css">
+<script src="fq-voice.js" defer></script>
+<link rel="stylesheet" href="fq-night.css">
+<script src="fq-night.js" defer></script>
+<link rel="stylesheet" href="fq-why.css">
+<script src="fq-why.js" defer></script>
+<link rel="stylesheet" href="fq-adhkar.css">
+<script src="fq-adhkar.js" defer></script>
+<link rel="stylesheet" href="fq-recite.css">
+<script src="fq-recite.js" defer></script>
+<link rel="stylesheet" href="fq-cal.css">
+<script src="fq-cal.js" defer></script>
+<link rel="stylesheet" href="fq-money.css">
+<script src="fq-money.js" defer></script>
 </body>
 </html>
