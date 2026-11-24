@@ -32,13 +32,10 @@ print('items',len(nums))
 for n in nums:
     h=get(f'https://sunnah.com/hisn:{n}')
     if not h: sun[n]={'ok':0};continue
-    if n in (1,75,79):open(f'data/hisn/sample{n}.html','w').write(h)
     blk=h
-    en_=re.search(r'class="english_hadith_full"(.*?)</div>\s*</div>',blk,re.S)
-    ar_=re.search(r'class="arabic_hadith_full[^"]*"(.*?)</div>',blk,re.S)
-    ref=re.search(r'class="hadith_reference"(.*?)</table>',blk,re.S)
-    gr=re.search(r'class="gradetable"(.*?)</table>',blk,re.S)
-    sun[n]={'ok':1,'en':clean(en_.group(1)) if en_ else '','ar':clean(ar_.group(1)) if ar_ else '','ref':clean(ref.group(1)) if ref else '','grade':clean(gr.group(1)) if gr else '','raw':''}
+    sp=lambda c:[clean(x) for x in re.findall(r'<span class="'+c+r'">(.*?)</span>',blk,re.S)]
+    sun[n]={'ok':1,'tr':sp('transliteration'),'en':sp('translation'),'refs':sp('hisn_english_reference'),'ar':sp('arabic_text_details arabic')}
+    sun[n]['ref']=' | '.join(sun[n]['refs']);sun[n]['grade']=''
     if n%25==0:print(n,sun[n]['ref'][:120],'|',sun[n]['grade'][:80])
     time.sleep(.4)
 json.dump(sun,open('data/hisn/sunnah.json','w'),ensure_ascii=False,indent=0)
