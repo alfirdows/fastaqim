@@ -286,13 +286,18 @@ const wordSheet=wordPop;
 
 /* ---------- choose another set: a panel that unfolds under the title ---------- */
 const SETS=[['morning','ph-sun-horizon',['After Fajr','بعد الفجر','Fajrii booda','Fajarka kadib']],['evening','ph-sun-dim',['After Asr','بعد العصر','Asrii booda','Casarka kadib']],['sleep','ph-bed',['Before you sleep','قبل النوم','Hirriba dura','Hurdada ka hor']],['ruqyah','ph-shield-check',['Protection and healing','الحفظ والشفاء','Eegumsaa fi fayyina','Ilaalin iyo bogsiin']],['dua','ph-heart',['When worried','عند الهمّ','Yeroo yaaddoftu','Marka aad welwesho']]];
+function stepTitle(s){const t=title(s);if(t)return t;if(s.ti)return FT(s.ti[0],s.ti[1]||s.ti[0]);const w=strip(s.ar||'').split(' ');return w.slice(0,5).join(' ')+(w.length>5?' …':'')}
+function menuSets(){return SETS.filter(x=>ZK[x[0]]).concat(typeof HISN_SETS==='function'?HISN_SETS():[])}
 function setMenu(){const zr=$('zr');let m=$('fzM');if(m){menuClose();return}
- const rows=SETS.filter(x=>ZK[x[0]]).map(([k,ic,sub])=>{const ss=steps(k),p=zProg(k),d=ss.filter(s=>isDone(s,p)).length,f=d/ss.length;
-  return `<button class="fz-mr ${k===ZS.set?'cur':''}" data-set="${k}"><span class="fz-mi"><i class="ph ${ic}"></i></span><span class="fz-mt"><b>${esc(ZK[k].t)}</b><small>${esc(FT(...sub))}</small><em><u style="width:${Math.round(f*100)}%"></u></em></span><span class="fz-mc">${d===ss.length?`<i class="ph-bold ph-check"></i>`:`${N(d)}<i>/</i>${N(ss.length)}`}</span></button>`}).join('');
+ const rows=menuSets().map(([k,ic,sub])=>{const ss=steps(k),p=zProg(k),d=ss.filter(s=>isDone(s,p)).length,f=d/ss.length;
+  const list=ss.map((s,i)=>`<button class="fz-ms ${isDone(s,p)?'dn':''} ${k===ZS.set&&i===ZS.i?'cur':''}" data-set="${k}" data-i="${i}"><span class="fz-mn">${isDone(s,p)?'<i class="ph-bold ph-check"></i>':N(i+1)}</span><span class="fz-mtx" ${s.q||!title(s)?'':''}>${esc(stepTitle(s))}</span>${s.n>1?`<span class="fz-mx">×${N(s.n)}</span>`:''}</button>`).join('');
+  return `<div class="fz-mg ${k===ZS.set?'open':''}"><div class="fz-mrw"><button class="fz-mr ${k===ZS.set?'cur':''}" data-set="${k}"><span class="fz-mi"><i class="ph ${ic}"></i></span><span class="fz-mt"><b>${esc(ZK[k].t)}</b><small>${esc(Array.isArray(sub)?FT(...sub):sub)}</small><em><u style="width:${Math.round(f*100)}%"></u></em></span><span class="fz-mc">${d===ss.length?`<i class="ph-bold ph-check"></i>`:`${N(d)}<i>/</i>${N(ss.length)}`}</span></button><button class="fz-mo" data-open aria-label="${esc(FT('Show what is inside','عرض المحتوى','Keessa agarsiisi','Tus waxa ku jira'))}"><i class="ph ph-caret-down"></i></button></div><div class="fz-ml">${list}</div></div>`}).join('');
  m=document.createElement('div');m.id='fzM';m.className='fz-menu';m.innerHTML=`<div class="fz-mp" role="menu">${rows}</div>`;zr.appendChild(m);
- const hd=zr.querySelector('.fz-hd');m.style.top=(hd.getBoundingClientRect().bottom+4)+'px';$('fzTi').setAttribute('aria-expanded','true');$('fzTi').classList.add('open');
- requestAnimationFrame(()=>m.classList.add('on'));
- m.onclick=e=>{const b=e.target.closest('[data-set]');if(!b){menuClose();return}const k=b.dataset.set;menuClose();if(k!==ZS.set){stop();window.zOpen(k)}}}
+ const hd=zr.querySelector('.fz-hd'),top=hd.getBoundingClientRect().bottom+4;m.style.top=top+'px';m.querySelector('.fz-mp').style.maxHeight=`calc(100% - 16px)`;$('fzTi').setAttribute('aria-expanded','true');$('fzTi').classList.add('open');
+ requestAnimationFrame(()=>{m.classList.add('on');const c=m.querySelector('.fz-ms.cur');if(c)c.scrollIntoView({block:'center'})});
+ m.onclick=e=>{const o=e.target.closest('[data-open]');if(o){o.closest('.fz-mg').classList.toggle('open');return}
+  const b=e.target.closest('[data-set]');if(!b){if(!e.target.closest('.fz-mp'))menuClose();return}const k=b.dataset.set,i=b.dataset.i;menuClose();
+  if(k!==ZS.set){stop();window.zOpen(k,i!=null?+i:undefined)}else if(i!=null)go(+i,false)}}
 function menuClose(){const m=$('fzM');if(!m)return;m.classList.remove('on');const t=$('fzTi');if(t){t.setAttribute('aria-expanded','false');t.classList.remove('open')}setTimeout(()=>m.remove(),200)}
 
 /* ---------- options: text size slider, what to show, auto-next, audio ---------- */
@@ -335,7 +340,7 @@ function pinch(el){const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clien
 
 /* ---------- take over the old reader ---------- */
 const oldClose=window.zClose;
-window.zOpen=function(set){const z=ZK[set];if(!z)return;delete CACHE[set];ZS={set,i:0};const ss=steps(set),p=zProg(set);let i=ss.findIndex(s=>!isDone(s,p));if(i<0)i=0;
+window.zOpen=function(set,at){const z=ZK[set];if(!z)return;delete CACHE[set];ZS={set,i:0};const ss=steps(set),p=zProg(set);let i=ss.findIndex(s=>!isDone(s,p));if(i<0)i=0;if(at!=null&&at>=0&&at<ss.length)i=at;
  build();$('zr').classList.add('on');document.body.style.overflow='hidden';$('fzTitle').textContent=z.t;
  const start=()=>go(i,false);if(W)start();else{paint0();loadWords().then(()=>{if(ZS&&ZS.set===set)start()})}};
 function paint0(){ZS.i=ZS.i||0;AU.q=qFor(cur());paint()}
