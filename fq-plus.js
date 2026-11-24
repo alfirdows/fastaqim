@@ -15,6 +15,8 @@ function addScreen(id,html,tab){if($('s-'+id))return;const last=$$('.scr');last[
 
 /* ================= What's new (everyone) + change log ================= */
 const NEWS=[
+ {id:'2026-11-24-recite',d:'2026-11-24',items:[
+  ['new',X("Qur'an: Recite from memory. Recite out loud and Fastaqim follows word by word, then shows any missed, changed or extra words. Your voice stays on your phone.",'القرآن: تسميع الحفظ. اقرأ بصوتك ويتابعك فاستقم كلمة كلمة، ثم يُريك الكلمات المتروكة أو المختلفة أو الزائدة. صوتك يبقى على هاتفك.')]]},
  {id:'2026-11-21',d:'2026-11-21',items:[
   ['fix',X('Ayat al-Kursi now plays in Before-sleep and morning/evening adhkar, like the last ayat of Al-Baqarah.','آية الكرسي تُشغَّل الآن في أذكار النوم والصباح والمساء مثل خواتيم البقرة.')],
   ['fix',X('The red dot on the bell now goes away once you have seen what is new.','النقطة الحمراء على الجرس تختفي بعد رؤية الجديد.')],
