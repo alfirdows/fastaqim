@@ -244,7 +244,25 @@ function mkCar(kind,C){if(kind&&kind.startsWith('k:')){const n=kind.slice(2);if(
  const paint=phy(C[0],{metalness:.5,roughness:.32,clearcoat:1,clearcoatRoughness:.04}),paint2=phy(C[1],{metalness:.5,roughness:.35,clearcoat:1}),dark=std('#121418',.55,.3),glass=phy('#0d1622',{roughness:.04,metalness:.4,clearcoat:1}),
   tail=std('#ff2a2a',.3,0,{emissive:'#ff1f1f',emissiveIntensity:2.6}),chrome=std('#e3e7ec',.12,1),plate=new T.MeshStandardMaterial({map:plateTex(),roughness:.5});DISP.push(plate);
  const wh=[];let H0;
- if(kind==='sleek'){body.add(M(rbox(1.04,.32,1.98,.13,4),paint,0,.34,0));body.add(M(rbox(1.0,.12,1.86,.05),dark,0,.2,0));
+ if(kind==='super'){/* original mid-engine sports car: low wedge, cabin forward, wide rear, wing (no badges) */
+  body.add(M(rbox(1.14,.2,2.12,.09,3),paint,0,.27,0));body.add(M(rbox(1.1,.08,2.0,.04),dark,0,.15,0));
+  body.add(M(rbox(1.04,.1,.78,.05,3),paint,0,.38,-.64));body.add(M(rbox(1.12,.16,.72,.07,3),paint,0,.42,.66));
+  body.add(M(rbox(.8,.22,.84,.11,4),glass,0,.5,-.02));body.add(M(rbox(.66,.05,.46,.03),paint,0,.62,.02));
+  for(const sx of[-.575,.575]){body.add(M(box(.03,.12,.34),dark,sx,.36,.3));body.add(M(box(.02,.05,.9),paint2,sx,.27,-.1))}
+  for(const sx of[-.38,.38])body.add(M(box(.05,.16,.06),dark,sx,.56,.94));body.add(M(rbox(1.1,.035,.2,.015),paint2,0,.65,.96));
+  body.add(M(rbox(.96,.035,.03,.015),tail,0,.47,1.03));for(const sx of[-.4,.4])body.add(M(rbox(.16,.05,.03,.015),tail,sx,.44,1.035));
+  body.add(M(rbox(.9,.09,.12,.03),dark,0,.17,1.0));for(const sx of[-.1,-.03,.03,.1])body.add(M(cyl(.028,.028,.08,10).rotateX(Math.PI/2),chrome,sx,.2,1.06));
+  const pl=new T.Mesh(new T.PlaneGeometry(.28,.085),plate);pl.position.set(0,.31,1.05);body.add(pl);body.add(M(rbox(1.12,.035,.16,.015),dark,0,.15,-1.03));
+  for(const [sx,sz,r,w] of[[-.52,-.7,.2,.2],[.52,-.7,.2,.2],[-.54,.7,.22,.26],[.54,.7,.22,.26]]){const wl=wheel(r,w,'#2b2f36');wl.position.set(sx,r,sz);g0.add(wl);wh.push(wl)}H0=.68}
+ else if(kind==='gt'){/* original front-engine grand tourer: long hood, cabin back, short tail */
+  body.add(M(rbox(1.08,.26,2.14,.12,4),paint,0,.32,0));body.add(M(rbox(1.04,.1,2.0,.05),dark,0,.18,0));
+  body.add(M(rbox(.82,.26,.82,.12,4),glass,0,.55,.3));body.add(M(rbox(.7,.05,.52,.03),paint,0,.69,.32));
+  for(const sx of[-.18,.18])body.add(M(box(.06,.02,.9),paint2,sx,.46,-.55));body.add(M(rbox(1.06,.05,.16,.02),paint2,0,.5,.98));
+  for(const sx of[-.32,.32])body.add(M(rbox(.26,.07,.04,.02),tail,sx,.42,1.06));
+  body.add(M(rbox(.86,.08,.1,.03),dark,0,.18,1.04));for(const sx of[-.3,.3])body.add(M(cyl(.035,.035,.08,10).rotateX(Math.PI/2),chrome,sx,.19,1.09));
+  const pl=new T.Mesh(new T.PlaneGeometry(.28,.085),plate);pl.position.set(0,.3,1.075);body.add(pl);
+  for(const [sx,sz] of[[-.52,-.7],[.52,-.7],[-.53,.68],[.53,.68]]){const wl=wheel(.21,.22,'#d5dae0');wl.position.set(sx,.21,sz);g0.add(wl);wh.push(wl)}H0=.78}
+ else if(kind==='sleek'){body.add(M(rbox(1.04,.32,1.98,.13,4),paint,0,.34,0));body.add(M(rbox(1.0,.12,1.86,.05),dark,0,.2,0));
   body.add(M(rbox(.82,.3,1.02,.13,4),glass,0,.6,.12));body.add(M(rbox(.7,.06,.66,.03),paint,0,.765,.14));body.add(M(rbox(.86,.1,.5,.05),paint,0,.5,-.7));
   body.add(M(rbox(1.04,.05,.22,.02),paint2,0,.66,.92));for(const sx of[-.32,.32])body.add(M(box(.05,.14,.06),dark,sx,.58,.9));
   for(const sx of[-.3,.3])body.add(M(rbox(.3,.075,.04,.02),tail,sx,.42,.99));body.add(M(box(.36,.022,.02),tail,0,.43,.995));
