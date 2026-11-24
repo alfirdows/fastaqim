@@ -153,11 +153,11 @@ function finish(){stop();try{const set=ZS.set;if(['morning','evening','sleep'].i
 /* ---------- drawing ---------- */
 const cur=()=>ZS&&steps(ZS.set)[ZS.i];
 function build(){const zr=$('zr');zr.classList.add('fz');
- zr.innerHTML=`<div class="fz-hd"><button class="fz-ib" id="fzX" aria-label="${esc(FT('Close','إغلاق','Cufi','Xir'))}"><i class="ph ph-x"></i></button><h1 id="fzTitle"></h1><button class="fz-ib" id="fzO" aria-label="${esc(FT('Reading and audio options','خيارات القراءة والصوت','Filannoo','Doorashooyin'))}"><i class="ph ph-sliders-horizontal"></i></button></div>
+ zr.innerHTML=`<div class="fz-hd"><button class="fz-ib" id="fzX" aria-label="${esc(FT('Close','إغلاق','Cufi','Xir'))}"><i class="ph ph-x"></i></button><button class="fz-tt" id="fzTi" aria-haspopup="true" aria-expanded="false"><span id="fzTitle"></span><i class="ph ph-caret-down"></i></button><button class="fz-ib" id="fzO" aria-label="${esc(FT('Reading and audio options','خيارات القراءة والصوت','Filannoo','Doorashooyin'))}"><i class="ph ph-sliders-horizontal"></i></button></div>
  <div class="fz-steps" id="fzS"></div>
  <div class="fz-body" id="fzB"><article class="fz-card" id="zCard"></article><p class="fz-hint" id="fzHint"></p></div>
  <div class="fz-dock" id="fzD"></div>`;
- $('fzX').onclick=()=>zClose();$('fzO').onclick=options;
+ $('fzX').onclick=()=>zClose();$('fzO').onclick=options;$('fzTi').onclick=e=>{e.stopPropagation();setMenu()};
  const B=$('fzB');
  // tap anywhere to count (not on buttons, links, words in Word by word, or the player)
  B.addEventListener('click',e=>{if(LP.fired){LP.fired=false;return}if(e.target.closest('a,button,input,label,.fz-dock'))return;if(PZ.moved){PZ.moved=false;return}
@@ -231,7 +231,7 @@ function paintTime(){const R=$('fzR');if(!R)return;const T=total(),e=elapsed();i
 function paint(){paintSteps();card();paintPlayer()}
 
 /* ---------- moving between steps ---------- */
-function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;popClose();stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
+function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;popClose();menuClose();stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
 
 /* ---------- word sheet: hear it, read it, its meaning ---------- */
 function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd||[]).map((w,k)=>({seg:i,i:k,ar:w[0],tr:w[1],en:w[2]}))}).flat()}
@@ -268,6 +268,17 @@ function wordPop(seg,i){const all=wordList();let at=all.findIndex(w=>w.seg===seg
   requestAnimationFrame(()=>el.classList.add('on'))};
  if(!W)loadWords().then(()=>draw(true));else draw(true)}
 const wordSheet=wordPop;
+
+/* ---------- choose another set: a panel that unfolds under the title ---------- */
+const SETS=[['morning','ph-sun-horizon',['After Fajr','بعد الفجر','Fajrii booda','Fajarka kadib']],['evening','ph-sun-dim',['After Asr','بعد العصر','Asrii booda','Casarka kadib']],['sleep','ph-bed',['Before you sleep','قبل النوم','Hirriba dura','Hurdada ka hor']],['ruqyah','ph-shield-check',['Protection and healing','الحفظ والشفاء','Eegumsaa fi fayyina','Ilaalin iyo bogsiin']],['dua','ph-heart',['When worried','عند الهمّ','Yeroo yaaddoftu','Marka aad welwesho']]];
+function setMenu(){const zr=$('zr');let m=$('fzM');if(m){menuClose();return}
+ const rows=SETS.filter(x=>ZK[x[0]]).map(([k,ic,sub])=>{const ss=steps(k),p=zProg(k),d=ss.filter(s=>isDone(s,p)).length,f=d/ss.length;
+  return `<button class="fz-mr ${k===ZS.set?'cur':''}" data-set="${k}"><span class="fz-mi"><i class="ph ${ic}"></i></span><span class="fz-mt"><b>${esc(ZK[k].t)}</b><small>${esc(FT(...sub))}</small><em><u style="width:${Math.round(f*100)}%"></u></em></span><span class="fz-mc">${d===ss.length?`<i class="ph-bold ph-check"></i>`:`${N(d)}<i>/</i>${N(ss.length)}`}</span></button>`}).join('');
+ m=document.createElement('div');m.id='fzM';m.className='fz-menu';m.innerHTML=`<div class="fz-mp" role="menu">${rows}</div>`;zr.appendChild(m);
+ const hd=zr.querySelector('.fz-hd');m.style.top=(hd.getBoundingClientRect().bottom+4)+'px';$('fzTi').setAttribute('aria-expanded','true');$('fzTi').classList.add('open');
+ requestAnimationFrame(()=>m.classList.add('on'));
+ m.onclick=e=>{const b=e.target.closest('[data-set]');if(!b){menuClose();return}const k=b.dataset.set;menuClose();if(k!==ZS.set){stop();window.zOpen(k)}}}
+function menuClose(){const m=$('fzM');if(!m)return;m.classList.remove('on');const t=$('fzTi');if(t){t.setAttribute('aria-expanded','false');t.classList.remove('open')}setTimeout(()=>m.remove(),200)}
 
 /* ---------- options: text size slider, what to show, auto-next, audio ---------- */
 function options(){const sw=(k,l,sub)=>`<label class="fz-row"><span><b>${esc(l)}</b>${sub?`<small>${esc(sub)}</small>`:''}</span><button class="sw ${st[k]?'on':''}" data-k="${k}" aria-label="${esc(l)}"></button></label>`;
@@ -316,7 +327,7 @@ function paint0(){ZS.i=ZS.i||0;AU.q=qFor(cur());paint()}
 window.zDraw=function(){if(!ZS)return;if(!$('fzB')){build();$('fzTitle').textContent=ZK[ZS.set].t}const ss=steps(ZS.set);if(ZS.i>=ss.length)ZS.i=ss.length-1;AU.q=qFor(cur());paint()};
 window.zNext=function(){if(ZS)go(ZS.i+1,false)};
 window.zTap=tapCount;window.zIndex=function(){};
-window.zClose=function(){popClose();stop();try{A.removeAttribute('src');A.load()}catch(e){}$('zr').classList.remove('fz');return oldClose.apply(this,arguments)};
+window.zClose=function(){popClose();menuClose();stop();try{A.removeAttribute('src');A.load()}catch(e){}$('zr').classList.remove('fz');return oldClose.apply(this,arguments)};
 window.FQZ={steps,go,st,A,AU,tapCount,wordSheet,options,cur};
 document.addEventListener('visibilitychange',()=>{if(!document.hidden&&ZS&&$('fzD'))paintPlayer()});
 // a reader already open (deep link) gets the new one
