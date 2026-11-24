@@ -49,6 +49,7 @@ jobs:
           echo "== Adhkar reader"; node .github/qa/adhkar.js qa-adhkar; LANGQ="?lang=ar" node .github/qa/adhkar.js qa-adhkar-ar
           echo "== Ramadan countdown + Blessed months (preview)"; node .github/qa/months.js qa-months
           echo "== Ramadan countdown + Blessed months (main page)"; MBASE=/ node .github/qa/months.js qa-months-main
+          echo "== Recite from memory (preview, test engine)"; BASE=/next/v6/ node .github/qa/recite.js qa-recite; BASE=/next/v6/ LANGQ=lang=ar node .github/qa/recite.js qa-recite-ar
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -62,4 +63,6 @@ jobs:
             qa-adhkar-ar
             qa-months
             qa-months-main
+            qa-recite
+            qa-recite-ar
           retention-days: 7

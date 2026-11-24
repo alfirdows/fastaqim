@@ -1497,8 +1497,8 @@ R.dhikr=()=>{$('zSleepP').textContent=zSum('sleep');$('tsbIc').innerHTML=TSB(fal
  const st=[['m','ph-sun-horizon',T('Morning adhkar','أذكار الصباح'),T('After Fajr','بعد الفجر'),f12(SAL[0][3]),'data-z="morning"',zDoneAll('morning')],
   ['a','ph-check-circle',T('After each salah','بعد كل صلاة'),`<span class="dots5">${SAL.map(x=>`<i class="${AFT.every(a=>(aft[x[0]]||{})[a[0]])?'on':''}"></i>`).join('')}</span>`,'',`data-go="home"`,aN===5],
   ['e','ph-sun-dim',T('Evening adhkar','أذكار المساء'),T('After Asr','بعد العصر'),f12(SAL[2][3]),'data-z="evening"',zDoneAll('evening')],
-  ['s','ph-moon-stars',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
- $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':`<i class="ph ${ic==='ph-moon-stars'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
+  ['s','ph-bed',T('Before sleep','أذكار النوم'),zd===ZK.sleep.items.length?`<b>✓ ${T('Done today','تمّت اليوم')}</b>`:T(zd+' of '+ZK.sleep.items.length,AR(zd)+' من '+AR(ZK.sleep.items.length)),T('After Isha','بعد العشاء'),'data-z="sleep"',zd===ZK.sleep.items.length]];
+ $('zPath').innerHTML=st.map(([k,ic,t,sub,tme,at,dn])=>`<button class="pi ps ${dn?'dn':k===cur?'nw':''}" ${at}><span class="nd">${dn?'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>':`<i class="ph ${ic==='ph-bed'?'ph-bed':ic}"></i>`}</span><span class="tx"><b>${t}</b><small>${sub}</small></span><em>${k===cur&&!dn?T('Now','الآن'):tme}</em><i class="ph ph-caret-right cv flip"></i></button>`).join('');
  $('zDayN').textContent=T((st.filter(x=>x[6]).length)+' of 4',AR(st.filter(x=>x[6]).length)+' من ٤')};
 
 /* ---------- todo ---------- */
@@ -1852,6 +1852,8 @@ function zkMake(o){const x=Object.assign({},o);
   if(o.why){const w=o.why;Object.defineProperty(x,'why',{get(){return w},enumerable:true})}return x}
 ZK.morning={t:T('Morning adhkar','أذكار الصباح'),items:ZK2.morning.map(zkMake)};
 ZK.evening={t:T('Evening adhkar','أذكار المساء'),items:ZK2.evening.map(zkMake)};
+// Ayat al-Kursi first in the morning and evening (Ubayy ibn Ka'b: whoever says it in the evening is protected until morning, and in the morning until evening. an-Nasa'i, al-Kubra 10731; al-Hakim 1/562; sahih, al-Albani, Sahih at-Targhib 662)
+{const K={qk:['2:255'],pre:'isti',n:1,mt:'q',src:["an-Nasa'i (al-Kubra) 10731, sahih",'https://quran.com/2/255'],why:"Whoever says it in the morning is protected until evening, and whoever says it in the evening is protected until morning."};ZK.morning.items.unshift(zkMake(K));ZK.evening.items.unshift(zkMake(K))}
 ZK.ruqyah={t:T('Ruqyah','الرقية'),items:ZK2.ruqyah.map(zkMake)};
 ZK.dua={t:T("Du'as for worry",'أدعية الهمّ'),items:ZK2.dua.map(zkMake)};
 ZK.sleep.items.forEach((x,i)=>{x.mt=i<2?'q':'h';if(i<2){const ks=i?['2:285','2:286']:['2:255'];x._qk=ks;Object.defineProperty(x,'me',{get(){return zkQ(ks)},configurable:true,enumerable:true})}});
@@ -2379,8 +2381,12 @@ if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.g
 <script src="fq-voice.js" defer></script>
 <link rel="stylesheet" href="fq-night.css">
 <script src="fq-night.js" defer></script>
+<link rel="stylesheet" href="fq-why.css">
+<script src="fq-why.js" defer></script>
 <link rel="stylesheet" href="fq-adhkar.css">
 <script src="fq-adhkar.js" defer></script>
+<link rel="stylesheet" href="fq-recite.css">
+<script src="fq-recite.js" defer></script>
 <link rel="stylesheet" href="fq-cal.css">
 <script src="fq-cal.js" defer></script>
 <link rel="stylesheet" href="fq-money.css">

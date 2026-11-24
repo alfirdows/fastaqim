@@ -1,0 +1,58 @@
+name: Recite from memory, real engine check
+# Opens the preview reader in Chromium, downloads the real Tilawa engine from tilawa.dev (as a phone would),
+# and plays a recorded recitation of Al-Fatiha (Mahmoud Khalil Al-Husary, from everyayah.com) into a fake microphone:
+# once complete (expects no mistakes) and once with ayah 3 left out (expects a mistake).
+# Read-only: changes nothing in the repo and stores nothing anywhere.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['claude/**']
+    paths: [next/v6/fq-recite.*, next/v6/vendor/tilawa/**, .github/qa/recite.js, .github/workflows/recite-real.yml]
+permissions:
+  contents: read
+concurrency:
+  group: recite-real-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  real:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Playwright, Chromium and ffmpeg
+        run: |
+          npm init -y >/dev/null
+          npm install --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+          sudo apt-get install -y ffmpeg >/dev/null
+      - name: Make the test recitations (WAV)
+        run: |
+          mkdir -p rec && cd rec
+          for a in 1 2 3 4 5 6 7; do curl -fsSL -o 00$a.mp3 "https://everyayah.com/data/Husary_64kbps/00100$a.mp3"; done
+          ffmpeg -loglevel error -f lavfi -t 3 -i anullsrc=r=48000:cl=mono silence.wav
+          printf "file 'silence.wav'\n" > full.txt; printf "file 'silence.wav'\n" > skip.txt
+          for a in 1 2 3 4 5 6 7; do ffmpeg -loglevel error -i 00$a.mp3 -ar 48000 -ac 1 a$a.wav; echo "file 'a$a.wav'" >> full.txt; [ $a = 3 ] || echo "file 'a$a.wav'" >> skip.txt; done
+          printf "file 'silence.wav'\nfile 'silence.wav'\nfile 'silence.wav'\n" | tee -a full.txt >> skip.txt
+          ffmpeg -loglevel error -f concat -i full.txt -c pcm_s16le full.wav
+          ffmpeg -loglevel error -f concat -i skip.txt -c pcm_s16le skip.wav
+          ls -la *.wav
+          echo "FULL_MS=$(ffprobe -v error -show_entries format=duration -of csv=p=0 full.wav | awk '{printf "%d", $1*1000-2500}')" >> $GITHUB_ENV
+          echo "SKIP_MS=$(ffprobe -v error -show_entries format=duration -of csv=p=0 skip.wav | awk '{printf "%d", $1*1000-2500}')" >> $GITHUB_ENV
+      - name: Complete Al-Fatiha
+        env: {REAL: '1', ROOT: '${{ github.workspace }}', BASE: /next/v6/, RSU: '1', RA2: '7', EXPECT: clean}
+        run: WAV=$PWD/rec/full.wav LISTEN_MS=$FULL_MS node .github/qa/recite.js qa-real-full
+      - name: Al-Fatiha with ayah 3 left out
+        if: always()
+        env: {REAL: '1', ROOT: '${{ github.workspace }}', BASE: /next/v6/, RSU: '1', RA2: '7', EXPECT: mistake}
+        run: WAV=$PWD/rec/skip.wav LISTEN_MS=$SKIP_MS node .github/qa/recite.js qa-real-skip
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: recite-real
+          path: |
+            qa-real-full
+            qa-real-skip
+          retention-days: 7
