@@ -168,11 +168,15 @@ function paintSteps(){const ss=steps(ZS.set),p=zProg(ZS.set);$('fzS').innerHTML=
 function qText(s){let h='',segs=qFor(s),si=0;
  if(s.pre)h+=`<div class="fz-pre"><small>${esc(FT('First say','قل أولًا','Dura jedhi','Marka hore dheh'))}</small><span lang="ar" dir="rtl">${ISTI}</span></div>`;
  segs.forEach((x,i)=>{const isB=!!x.basm;const key=x.tm;const wd=(W&&W.q[key]&&W.q[key].w)||null;
-  const words=wd?wd.map(w=>({ar:w[0],tr:w[1],en:w[2]})):(QD[key]?QD[key].a.split(' ').map(a=>({ar:a,tr:'',en:''})):[]);
+  const words=wd?qWords(key):(QD[key]?QD[key].a.split(' ').map(a=>({ar:a,tr:'',en:''})):[]);
   h+=`<div class="fz-ay${isB?' b':''}" lang="ar" dir="rtl">${words.map((w,k)=>wcell(w,i,k,true)).join(' ')}</div>`;
   if(st.tr&&!isB&&wd)h+=`<p class="fz-tr">${esc(wd.map(w=>w[1]).join(' '))}</p>`;
   if(st.me&&!isB&&L!=='ar')h+=`<p class="fz-me">${esc(qMean(key))}</p>`});
  return h}
+// older Quran.com text: join a stop sign to its word and use the font's own tanween forms, so nothing shows as a dotted circle
+// words of an ayah, shown in the site's own Madinah-mushaf text (exactly what the Hafs font expects)
+function qWords(key){const wd=(W&&W.q[key]&&W.q[key].w)||[];const hq=QD[key]&&QD[key].a?QD[key].a.split(' '):null;return wd.map((w,k)=>({ar:(hq&&hq.length===wd.length)?hq[k]:fixQ(w[0]),tr:w[1],en:w[2]}))}
+function fixQ(t){return String(t).replace(/\s+([\u06D6-\u06DC])/g,'$1').replace(/\u064C\u06ED/g,'\u064C').replace(/\u064B\u06ED/g,'\u064B').replace(/\u064D\u06ED/g,'\u064D').replace(/\u0652/g,'\u06E1')}
 function qMean(k){try{if(LI>=0&&typeof QTR_ID!=='undefined'){const c=JSON.parse(localStorage.getItem('fq5.qtr.'+QTR_ID)||'{}');if(c[k])return c[k]}}catch(e){}return QD[k]?QD[k].en:''}
 function wcell(w,seg,i,q){return `<span class="fzw" data-s="${seg}" data-i="${i}">${esc(w.ar)}</span>`}
 function phrases(words,seg){// keep each phrase (up to a comma) together, so lines break at natural pauses
@@ -234,7 +238,7 @@ function paint(){paintSteps();card();paintPlayer()}
 function go(i,autoplay){const ss=steps(ZS.set);if(i<0||i>=ss.length)return;popClose();menuClose();stop();ZS.i=i;AU.q=qFor(ss[i]);AU.qi=0;AU.round=0;if(AU.q.length)loadSeg(0,0);HL=-1;paint();$('fzB').scrollTop=0;if(autoplay&&AU.q.length)play();else media()}
 
 /* ---------- word sheet: hear it, read it, its meaning ---------- */
-function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd||[]).map((w,k)=>({seg:i,i:k,ar:w[0],tr:w[1],en:w[2]}))}).flat()}
+function wordList(){const s=cur();if(s.q){const segs=qFor(s);return segs.map((x,i)=>{const wd=W&&W.q[x.tm]&&W.q[x.tm].w;return (wd?qWords(x.tm):[]).map((w,k)=>({seg:i,i:k,ar:w.ar,tr:w.tr,en:w.en}))}).flat()}
  return hWords(s.ar).map((w,k)=>({seg:0,i:k,ar:w.ar,tr:w.tr,en:w.en}))}
 const LP={t:0,fired:false,x:0,y:0};
 function holdWords(B){const clr=()=>{clearTimeout(LP.t);LP.t=0};
