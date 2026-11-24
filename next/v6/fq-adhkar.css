@@ -109,3 +109,4 @@ html[dir=rtl] .fz-me{direction:rtl}
 html.dark .zr.fz{background:var(--bg)}
 html.dark .fzw.on,html.dark .fzw.g.on{background:rgba(79,143,95,.22)}
 html.dark .fz-wp.lt{background:var(--accT)}
+.fz-pl{direction:ltr}

@@ -3,6 +3,7 @@
 const pw=require('playwright');const devices=pw.devices;const eng=pw[process.env.ENGINE||'chromium'];const fs=require('fs'),path=require('path');
 const ROOT=process.env.ROOT||'/home/user/fastaqim',BASE=process.env.BASE||'/';const MT={'.html':'text/html','.js':'application/javascript','.css':'text/css','.json':'application/json','.png':'image/png','.svg':'image/svg+xml','.woff2':'font/woff2','.woff':'font/woff','.ttf':'font/ttf','.otf':'font/otf','.mp3':'audio/mpeg','.m4a':'audio/mp4','.webmanifest':'application/manifest+json'};
 const OUT=process.argv[2]||'qa-adhkar';fs.mkdirSync(OUT,{recursive:true});let fails=0;
+const num=t=>t.replace(/\s/g,'').replace(/[٠-٩]/g,d=>'٠١٢٣٤٥٦٧٨٩'.indexOf(d));
 const ok=(n,v)=>{console.log((v?'PASS ':'FAIL ')+n);if(!v)fails++};
 (async()=>{const b=await eng.launch();const c=await b.newContext({...devices[process.env.DEV||'iPhone 13'],deviceScaleFactor:1});
  await c.route('**/*',r=>{const u0=new URL(r.request().url());if(u0.host!=='fq.test')return r.abort();let u=u0.pathname;if(u.endsWith('/'))u+='index.html';const f=path.join(ROOT,decodeURIComponent(u));
@@ -19,8 +20,8 @@ const ok=(n,v)=>{console.log((v?'PASS ':'FAIL ')+n);if(!v)fails++};
  const vw=await p.evaluate(()=>[document.documentElement.scrollWidth,innerWidth,document.getElementById('fzD').getBoundingClientRect().bottom,innerHeight]);
  ok('nothing wider than the screen',vw[0]<=vw[1]+1);ok('player fully on screen',vw[2]<=vw[3]+1);
  await p.mouse.click(195,330);await p.waitForTimeout(300);
- ok('tap on the text counts',(await p.textContent('.fz-num')).replace(/\s/g,'').startsWith('1/'));
- await p.click('#fzU');await p.waitForTimeout(200);ok('undo takes one off',(await p.textContent('.fz-num')).replace(/\s/g,'').startsWith('0/'));
+ ok('tap on the text counts',num(await p.textContent('.fz-num')).startsWith('1/'));
+ await p.click('#fzU');await p.waitForTimeout(200);ok('undo takes one off',num(await p.textContent('.fz-num')).startsWith('0/'));
  for(let i=0;i<3;i++){await p.mouse.click(195,300);await p.waitForTimeout(150)}
  await p.waitForTimeout(1200);ok('done after 3 taps and moved on by itself',await p.evaluate(()=>ZS.i===1));
  const tr=await p.evaluate(()=>!!document.querySelector('.fz-tr')&&document.querySelector('.fz-tr').textContent.length>5);ok('transliteration shown for the surah',tr);
