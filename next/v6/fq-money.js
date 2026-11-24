@@ -313,6 +313,11 @@ function moreBadge(){try{const n=alerts(today().slice(0,7)).length,b=$('mnMore')
 try{const yp=$('yp');const row=`<div class="gl" id="mnMoreG"><button id="mnMore" data-go="money"><span class="ic c-g"><i class="ph ph-wallet"></i></span><span>${X('Money','المال','Maallaqa','Lacagta')}</span><em></em><i class="ph ph-caret-right cv flip"></i></button></div>`;
  if(yp&&!$('mnMore'))yp.insertAdjacentHTML('afterend',row);moreBadge();
  if(R.more){const _m=R.more;R.more=function(){const r=_m.apply(this,arguments);moreBadge();return r}}}catch(e){console.error(e)}
+/* the older weekly Money tool (Tools / Home pin) now opens this Money screen; its spending is brought over once */
+try{const m=M();if(!m.impOld&&typeof tData==='function'){const d=tData('money')||{};(d.items||[]).forEach(x=>{const amt=Math.round((+x.amt||0)*100);if(!amt)return;const at=+x.at||Date.now();m.tx.push({id:'o'+(x.id||uid()),k:'out',amt,dt:dkey(new Date(at)),at,t:String(x.t||X('Spending','مصروف')).slice(0,200),cat:'other'})});m.impOld=1;save()}}catch(e){console.error(e)}
+if(typeof window.openTool==='function'){const _o=window.openTool;window.openTool=function(id){if(id==='money'){go('money');return}return _o.apply(this,arguments)}}
+if(typeof window.tSub==='function'){const _s=window.tSub;window.tSub=function(id){if(id==='money'){try{const mo=monthOf(today().slice(0,7));return mo.inn?X(money(mo.left)+' left this month','متبقٍ '+money(mo.left)+' هذا الشهر'):mo.out?X(money(mo.out)+' spent this month','أنفقت '+money(mo.out)+' هذا الشهر'):X('Savings first','الادخار أولًا')}catch(e){}}return _s.apply(this,arguments)}}
+try{if(R.home&&$('s-home').classList.contains('on'))R.home()}catch(e){}
 /* open from a link: #money */
 try{const h0=((performance.getEntriesByType('navigation')[0]||{}).name||'').split('#')[1];if(location.hash==='#money'||h0==='money')go('money',false)}catch(e){}
 })();
