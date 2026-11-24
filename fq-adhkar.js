@@ -197,6 +197,7 @@ function phrases(words,seg){// keep each phrase (up to a comma) together, so lin
  const out=[];let cur=[];words.forEach((w,i)=>{cur.push(wcell(w,seg,i,false));if(/[،,]$/.test(w.ar)){out.push(cur);cur=[]}});if(cur.length)out.push(cur);
  return out.map(p=>`<span class="fz-ph">${p.join(' ')}</span>`).join(' ')}
 function hText(s){const ws=hWords(s.ar);let h=`<div class="fz-h" lang="ar" dir="rtl">${phrases(ws,0)}</div>`;
+ if(ZS&&ZS.set==='ex'&&/اصبح/.test(nar(s.ar)))h=`<p class="fz-eve"><i class="ph ph-sun-dim"></i>${esc(FT('In the evening, say amsaynā / amsaytu (أَمْسَيْنا / أَمْسَيْتُ) where it says aṣbaḥnā / aṣbaḥtu.','في المساء قل: أَمْسَيْنا / أَمْسَيْتُ بدل أَصْبَحْنا / أَصْبَحْتُ.','Galgala: aṣbaḥnā bakka amsaynā jedhi.','Fiidkii: aṣbaḥnā meeshii amsaynā dheh.'))}</p>`+h;
  if(st.tr&&s.tr)h+=`<p class="fz-tr">${esc(s.tr)}</p>`;
  const me=s.me!=null?s.me:s.it.me;if(st.me&&me&&L!=='ar')h+=`<p class="fz-me">${esc(me)}</p>`;return h}
 function card(){const s=cur(),ss=steps(ZS.set),p=zProg(ZS.set),c=cnt(s,p);
