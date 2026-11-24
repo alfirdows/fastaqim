@@ -157,3 +157,4 @@ html.dark .fz-ok{background:var(--accT)}
 .fz-mc .ph-check{width:26px;height:26px;border-radius:50%;background:var(--acc);color:#fff;display:inline-grid;place-items:center;font-size:13px}
 html.dark .fz-menu.on{background:rgba(0,0,0,.35)}
 html.dark .fz-mi{background:var(--accT)}
+.cel{padding-left:20px;padding-right:20px;text-align:center}.cel h2{max-width:min(340px,88vw);font-size:26px;line-height:1.25;text-wrap:balance}
