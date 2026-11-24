@@ -63,7 +63,7 @@
 .kc-free.sm{font-size:13px;margin:0 2px}
 .kc-acts{display:flex;gap:8px;margin-top:6px}
 .kc-pl{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1.5px solid var(--hz,#e8e0cf);background:#fff;color:var(--acc);font:inherit;font-size:14px;font-weight:700;border-radius:13px;border-end-start-radius:5px;padding:10px 8px;min-height:44px}
-.kc-hj{display:flex;align-items:center;gap:12px;width:100%;border:1px solid var(--hz,#e8e0cf);background:#fff;font:inherit;text-align:start;border-radius:16px;border-end-start-radius:6px;padding:12px 14px;color:var(--ink)}
+.kc-hj{margin:0 0 10px;display:flex;align-items:center;gap:12px;width:100%;border:1px solid var(--hz,#e8e0cf);background:#fff;font:inherit;text-align:start;border-radius:16px;border-end-start-radius:6px;padding:12px 14px;color:var(--ink)}
 .kc-hj>i:first-child{color:var(--fqGD,#86672e)}
 .kc-hj span{flex:1;display:flex;flex-direction:column}
 .kc-hj small{color:var(--sub);font-size:12.5px}

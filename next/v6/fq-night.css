@@ -1,0 +1,8 @@
+/* Fastaqim night mode: calm deep green-grey, never pure black. Light stays the default. */
+html.dark{--bg:#161b18;--card:#1f2521;--card2:#262d28;--ink:#ecefe9;--sub:#a7afa8;--line:#323a34;--acc:#4f8f5f;--accT:#22322a;--gold:#d3b57c;--goldT:#332c20;--night1:#1a2330;--night2:#26344a;--ok:#4f8f5f;--gl:#323a34;--fqGD:#d3b57c;--goldD:#d3b57c;--fqG:#c9a86a;--hz:#3a362c;--hz2:#6f6752;color-scheme:dark}
+html.dark,html.dark body{background:var(--bg);color:var(--ink)}
+html.fqn-anim,html.fqn-anim *{transition:background-color .35s ease,color .35s ease,border-color .35s ease!important}
+.fqn-btn{flex:none}
+.fqn-btn i{font-size:19px}
+/* bottom bar: solid, so the page never shows through behind the labels */
+.tab{background:var(--card)!important}

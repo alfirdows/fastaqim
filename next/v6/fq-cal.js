@@ -101,7 +101,8 @@ function monthView(){const sel=KC.sel,s=dOf(sel),y=s.getFullYear(),m=s.getMonth(
  return `<div class="kc-card kc-mo"><div class="kc-wd">${wds.map(w=>`<span>${w}</span>`).join('')}</div><div class="kc-grid">${html}</div></div>
  <div class="kc-card kc-day"><div class="kc-dh"><b>${fmt(sel,{weekday:'long',day:'numeric',month:'long'})}</b><small>${hLabel(sel)}</small></div>${agenda(sel,{short:0})}
  <div class="kc-acts"><button class="kc-pl" data-kadd="${sel}">${IC('plus',17)}<span>${X('Add to this day','أضف لهذا اليوم','Guyyaa kanatti dabali','Ku dar maalintan')}</span></button><button class="kc-pl" data-kgo="day">${IC('clock',17)}<span>${X('Open day','افتح اليوم','Guyyaa bani','Fur maalinta')}</span></button></div></div>
- <button class="kc-hj" data-go="hcal">${IC('moon',18)}<span><b>${X('Hijri month','الشهر الهجري','Ji\'a Hijraa','Bisha Hijriga')}</b><small>${X('Salah you marked, white days, occasions','صلواتك المسجّلة، الأيام البيض، المناسبات')}</small></span>${IC('caret-right flip')}</button>`}
+ <button class="kc-hj" data-go="hcal">${IC('moon',18)}<span><b>${X('Hijri month','الشهر الهجري','Ji\'a Hijraa','Bisha Hijriga')}</b><small>${X('Salah you marked, white days, occasions','صلواتك المسجّلة، الأيام البيض، المناسبات')}</small></span>${IC('caret-right flip')}</button>
+ ${$('s-months')?`<button class="kc-hj" data-go="months">${IC('sun',18)}<span><b>${X('Blessed months and days','الأشهر والأيام الفاضلة')}</b><small>${X('Ramadan countdown, the best days of the year','العد التنازلي لرمضان، أفضل أيام السنة')}</small></span>${IC('caret-right flip')}</button>`:''}`}
 const hLabel=k=>{const h=hijri(k);return h?`${AR(h.d)} ${esc(hms(h.m))} ${AR(h.y)}`:''};
 
 /* ---- Week ---- */
