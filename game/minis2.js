@@ -20,6 +20,15 @@ const css=document.createElement('style');css.textContent=`#mini.lt{color:var(--
 #ruleL,.hwr span{text-wrap:balance}
 .pill{background:rgba(255,255,255,.9)!important;color:#0f172a!important;border-color:rgba(15,23,42,.08)!important;box-shadow:0 4px 14px -6px rgba(15,23,42,.35)}.pill svg{color:#0f172a}#hearts{color:#ef4444!important}.mult{background:rgba(255,255,255,.92)!important;color:#b45309!important;border-color:rgba(15,23,42,.08)!important;box-shadow:0 4px 14px -6px rgba(15,23,42,.35)}.mult i{background:#f59e0b!important}
 #mini .scn{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}#mini .scn svg{position:absolute;left:0;right:0;bottom:0;width:100%;height:34%}#mini>*:not(.scn):not(i):not(#hw):not(#mPo):not(.hint){position:relative;z-index:1}
+#mini canvas{min-height:0;flex:1 1 0}#mini .dzp{text-align:center;padding:0 12px 4px;position:relative;z-index:2}#mini .dzp .bar{margin:0 0 6px}
+.dza{font-family:"FQ","Scheherazade New",serif;font-size:24px;line-height:1.5;direction:rtl}#mini .dzp .dza{color:var(--ink,#0b5d4a)}
+.dztl{font:700 13px/1.3 Inter,system-ui;opacity:.85}.dzm{font:600 12.5px/1.35 Inter,system-ui;opacity:.7;text-wrap:balance;max-width:320px;margin:2px auto 0}
+.dzb{display:flex;gap:6px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:6px;pointer-events:auto}.dzb .dzn{font:800 13px Inter,system-ui;margin-inline-end:4px}
+.dzb button{display:inline-flex;align-items:center;gap:4px;height:30px;padding:0 10px;border-radius:15px;border:1px solid rgba(15,23,42,.1);background:rgba(255,255,255,.9);color:#0f172a;font:700 12px Inter,system-ui;cursor:pointer}
+.dzb button.on{background:#0f172a;color:#fff}.dzb [data-dz="x"].on{background:#e0f2fe;color:#0c4a6e;border-color:#bae6fd}
+.goal .dztl{color:#334155}.goal .dzm{color:#475569}.goal>div{pointer-events:auto}
+#mini .mb #mI{width:40px;padding:0;justify-content:center}.fqd2{margin-top:8px;font:600 .85rem Inter,system-ui;color:#475569}.fqd2 summary{cursor:pointer;padding:6px 0;text-align:center}
+.fq span{font:600 .85rem/1.35 Inter,system-ui}
 #hw{position:absolute;inset:0;z-index:6;background:rgba(15,23,42,.3);display:grid;place-items:center}#hw .sheet{max-width:340px;width:88%}
 .hwr{display:flex;gap:10px;align-items:flex-start;text-align:start;padding:8px 0;border-bottom:1px solid #f1f5f9;font:600 .92rem/1.35 Inter,system-ui;color:#0f172a}.hwr i{font-style:normal;flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:18px}
 .hwr b{display:block;font:800 .72rem Inter,system-ui;text-transform:uppercase;letter-spacing:.05em;color:#64748b}[dir=rtl] .hwr b{letter-spacing:0}
@@ -60,33 +69,34 @@ function fitBoards(){const d=$('mini');if(!d)return;const H=d.clientHeight;const
  const b=d.querySelector('.g2');if(b){const top=b.parentElement.getBoundingClientRect().top-d.getBoundingClientRect().top;b.style.width='min(100%,400px,'+Math.max(200,H-top-24)+'px)'}}
 addEventListener('resize',fitBoards);setInterval(fitBoards,600);
 function applyTheme(){const d=$('mini');if(!d)return;const pz=d.querySelector('#mPz');if(pz)pz.innerHTML=PZ;const bk=d.querySelector('#mX');if(bk)bk.innerHTML='<svg viewBox="0 0 24 24" width="18" height="18"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';const t=TH();d.classList.add('lt');d.style.background=t.bg;scenery(d);d.style.setProperty('--ink',t.ink);d.style.setProperty('--acc',t.acc)}
-MINI.onStart=()=>{setTimeout(()=>{applyTheme();howCard(cur()&&cur().kind,true)},0)};
+MINI.onStart=()=>{setTimeout(()=>{applyTheme();dzPanel();miniInfo();howCard(cur()&&cur().kind,true)},0)};
+let _lastS=0;MINI.onScore=n=>{const m=cur();if(!m){return}if(m.mode==='dhikr'&&(m.kind==='match'||m.kind==='merge')&&n>(m._ls||0)){m._ls=n;dhikrStep(m,1)}else m._ls=n};
 /* ---------- how to play: what to do / what scores / what loses ---------- */
 const HOW={
- run:[['Swipe left or right to change lane. Swipe up to jump, down to duck.','اسحب يمينًا أو يسارًا لتغيير المسار، للأعلى للقفز، وللأسفل للانخفاض.','Karaa jijjiiruuf bitaa ykn mirga harkisi. Utaaluuf ol, gadi jechuuf gadi.','U jiid bidix ama midig si aad waddada u beddesho. Kor u jiid si aad u booddo, hoos si aad u foorarato.'],
-  ['Every coin = 1 point (1 dhikr in a Dhikr run). Coins in the air count when you jump.','كل عملة = نقطة (ذكر واحد في سباق الذكر). العملات في الهواء تُحسب عند القفز.','Saantimni hundi = qabxii 1 (zikrii 1). Yeroo utaaltu saantimni qilleensa irraa ni lakkaa\'ama.','Qadaadiic kasta = 1 dhibic (1 dhikri). Qadaadiicda hawada waa la tiriyaa marka aad booddo.'],
-  ['Hitting a barrier or truck costs a heart in Free play (3 hearts). Dhikr and To-do runs never end from a hit.','الاصطدام بحاجز أو شاحنة يُفقدك قلبًا في اللعب الحر (٣ قلوب). سباق الذكر والمهام لا ينتهي بالاصطدام.','Daangaa ykn konkolaataa rukutuun tapha bilisaa keessatti onnee 1 si dhabsiisa (onnee 3).','Ku dhaca xayndaab ama gaari wuxuu kaa qaadaa wadne ciyaarta xorta ah (3 wadne).']],
+ run:[['Swipe to move. Up = jump. Down = duck.','اسحب للتحرك. للأعلى = قفز. للأسفل = انخفاض.','Sochuuf harkisi. Ol = utaali. Gadi = gadi jedhi.','Jiid si aad u dhaqaaqdo. Kor = bood. Hoos = foorarso.'],
+  ['Each coin = 1 point. In Dhikr: each coin = 1 dhikr.','كل عملة = نقطة. في الذكر: كل عملة = ذكر.','Saantima tokko = qabxii 1. Zikrii keessatti: saantima 1 = zikrii 1.','Qadaadiic kasta = 1 dhibic. Dhikriga: qadaadiic = 1 dhikri.'],
+  ['Free play: a crash takes a heart. 3 hearts.','اللعب الحر: الاصطدام يأخذ قلبًا. ٣ قلوب.','Tapha bilisaa: rukuttaan onnee 1 fudhata. Onnee 3.','Ciyaar xor ah: shilku wadne ayuu qaadaa. 3 wadne.']],
  catch:[['Drag to move the tray.','اسحب لتحريك الصينية.','Saanii sochoosuuf harkisi.','Jiid si aad u dhaqaajiso saxanka.'],
-  ['Coin = 1, gem = 5. 10 in a row raises the combo up to x5.','العملة = ١، الجوهرة = ٥. عشرة متتالية ترفع المضاعف حتى x5.','Saantima = 1, dhagaa gatii qabu = 5. 10 walitti aansee combo hanga x5.','Qadaadiic = 1, dhagax qaali = 5. 10 xiriir ah = combo ilaa x5.'],
-  ['Catching a grey rock costs a heart in Free play (3 hearts). In Dhikr it only resets the combo.','التقاط صخرة رمادية يُفقدك قلبًا في اللعب الحر. في الذكر يعيد المضاعف فقط.','Dhagaa daalachaa qabachuun onnee 1 si dhabsiisa. Zikrii keessatti combo qofa haqa.','Qabashada dhagax cawl ah wadne ayay kaa qaadaa. Dhikriga waxay kaliya tirtirtaa combo.']],
- match:[['Tap two cards to flip them. Find all matching pairs.','اقلب بطاقتين. اعثر على كل الأزواج المتطابقة.','Kaardii lama tuqi. Lameen walfakkaatan hunda barbaadi.','Taabo laba kaar. Hel dhammaan lammaanaha.'],
-  ['10 points per pair, bonus for fewer moves. 3 levels.','١٠ نقاط لكل زوج، ومكافأة لحركات أقل. ٣ مستويات.','Lameen tokkoof qabxii 10, sochii xiqqaaf badhaasa. Sadarkaa 3.','10 dhibic lammaane kasta, abaalmarin dhaqdhaqaaq yar. 3 heer.'],
-  ['You cannot lose. Only the free-play time ends the game.','لا تخسر أبدًا. ينتهي اللعب فقط بانتهاء وقت اللعب الحر.','Hin moo\'amtu. Yeroo tapha bilisaa qofatu xumura.','Ma guuldareysan kartid. Waqtiga ciyaarta xorta ah ayaa kaliya dhammeeya.']],
- merge:[['Swipe to slide all tiles. Two equal numbers join into one.','اسحب لتحريك المربعات. الرقمان المتساويان يندمجان.','Harkisi. Lakkoofsi lama walqixa walitti makama.','Jiid. Laba tiro oo isku mid ah way isku darmaan.'],
-  ['Each join adds its new number to your score.','كل دمج يضيف الرقم الجديد إلى نقاطك.','Makiinsi hundi lakkoofsa haaraa qabxii keetti dabala.','Isku-dar kasta tirada cusub ayuu ku daraa dhibcahaaga.'],
-  ['The game ends when the board is full and nothing can join.','تنتهي اللعبة عندما تمتلئ اللوحة ولا يمكن الدمج.','Yeroo gabateen guuttee wanti walitti makamu hin jirre xumurama.','Ciyaartu way dhammaataa marka looxu buuxsamo oo aan waxba isku darmi karin.']],
- stack:[['Tap to drop the moving block on the tower.','اضغط لإسقاط القطعة المتحركة على البرج.','Bulookii sochoo\'u masaraa irra buusuuf tuqi.','Taabo si aad u dhigto bulooga dhaqaaqaya.'],
-  ['1 point per floor. A perfect drop = +3 and the block grows back a little.','نقطة لكل طابق. الإسقاط المثالي = +٣ ويكبر الطوب قليلًا.','Darbii tokkoof qabxii 1. Buusuun guutuun = +3.','1 dhibic dabaq kasta. Dhig sax ah = +3.'],
-  ['The part that hangs over the edge falls off. Miss the tower completely and the game ends (in Dhikr you just try again).','الجزء الزائد يسقط. إذا أخطأت البرج كليًا تنتهي اللعبة (في الذكر تحاول مجددًا).','Kutaan qarqara darbu ni kufa. Masaraa guutummaan yoo dhabde taphni xumurama.','Qaybta dhaafta way dhacdaa. Haddii aad munaaradda gebi ahaanba seegto ciyaartu way dhammaataa.']],
- brick:[['Drag the paddle to bounce the ball and break the blocks.','اسحب المضرب لترتد الكرة وتكسر الطوب.','Kubbaan akka bulookii cabsituuf saanii harkisi.','Jiid usha si kubbadda u boodo una jabiso bulooga.'],
-  ['1 point per block (1 dhikr in a Dhikr run). Clear all blocks for the next level.','نقطة لكل طوبة (ذكر واحد في الذكر). امسح كل الطوب للمستوى التالي.','Bulookii tokkoof qabxii 1. Hunda cabsii sadarkaa itti aanutti ce\'i.','1 dhibic bulooq kasta. Jebi dhammaan si aad heerka xiga u gaarto.'],
-  ['If the ball falls past the paddle you lose a heart (3 hearts). In Dhikr the ball just comes back.','إذا سقطت الكرة تخسر قلبًا (٣ قلوب). في الذكر تعود الكرة فقط.','Kubbaan yoo gadi kufte onnee 1 dhabda. Zikrii keessatti ni deebi\'a.','Haddii kubbaddu dhacdo wadne ayaad lumisaa. Dhikriga way soo noqotaa.']],
- sort:[['Tap a tube, then another tube, to move the top ball.','اضغط أنبوبًا ثم آخر لنقل الكرة العلوية.','Ujummoo tokko, achii kan biraa tuqi.','Taabo tuubo, kadib mid kale si aad kubbadda sare u guurto.'],
-  ['A ball can go on the same color or into an empty tube. One color per tube wins the level.','الكرة توضع على نفس اللون أو في أنبوب فارغ. لون واحد لكل أنبوب يربح المستوى.','Kubbaan halluu walfakkaatu ykn ujummoo duwwaa irra taa\'a.','Kubbaddu waxay saarantaa midab isku mid ah ama tuubo madhan.'],
-  ['You cannot lose. Use Undo or Restart if you get stuck.','لا تخسر. استخدم التراجع أو الإعادة إذا علقت.','Hin moo\'amtu. Duubatti ykn Irra deebi\'i fayyadami.','Ma guuldareysan kartid. Isticmaal Ka noqo ama Dib u bilow.']],
- pop:[['Tap a group of 2 or more touching bubbles of the same color.','اضغط مجموعة من فقاعتين أو أكثر من نفس اللون.','Garee bubbulii 2 ykn isaa ol halluu tokko tuqi.','Taabo koox 2 ama ka badan oo midab isku mid ah.'],
-  ['Bigger groups score much more: points = size x (size - 1). Reach the target for the next level.','المجموعات الأكبر تعطي نقاطًا أكثر بكثير. صل للهدف لتنتقل.','Gareen guddaan qabxii baay\'ee kenna. Galma gahi.','Kooxaha waaweyn dhibco badan. Gaar hadafka.'],
-  ['When no group is left and you are below the target, the game ends.','عندما لا تبقى مجموعة وأنت تحت الهدف تنتهي اللعبة.','Yeroo gareen hin hafne fi galma gaditti jirtu taphni xumurama.','Marka koox ka harin oo aad ka hooseyso hadafka ciyaartu way dhammaataa.']]};
+  ['Coin = 1. Gem = 5. In Dhikr: each catch = 1 dhikr.','عملة = ١. جوهرة = ٥. في الذكر: كل التقاط = ذكر.','Saantima = 1. Dhagaa = 5. Zikrii keessatti: qabannaan 1 = zikrii 1.','Qadaadiic = 1. Dhagax = 5. Dhikriga: qabasho kasta = 1 dhikri.'],
+  ['Free play: a grey rock takes a heart. 3 hearts.','اللعب الحر: الصخرة الرمادية تأخذ قلبًا. ٣ قلوب.','Tapha bilisaa: dhagaan daalachaa onnee 1 fudhata.','Ciyaar xor ah: dhagaxa cawlka ah wadne ayuu qaadaa.']],
+ stack:[['Tap to drop the block on the tower.','اضغط لإسقاط القطعة على البرج.','Bulookii masaraa irra buusuuf tuqi.','Taabo si aad bulooga u dhigto.'],
+  ['Each floor = 1 point. Perfect drop = +3. In Dhikr: each floor = 1 dhikr.','كل طابق = نقطة. إسقاط مثالي = +٣. في الذكر: كل طابق = ذكر.','Darbii tokko = qabxii 1. Zikrii keessatti: darbii 1 = zikrii 1.','Dabaq kasta = 1 dhibic. Dhikriga: dabaq kasta = 1 dhikri.'],
+  ['Free play: miss the tower and the game ends.','اللعب الحر: إذا أخطأت البرج تنتهي اللعبة.','Tapha bilisaa: masaraa yoo dhabde xumurama.','Ciyaar xor ah: haddii aad seegto way dhammaataa.']],
+ brick:[['Drag the paddle. Bounce the ball into the blocks.','اسحب المضرب. ارتد الكرة إلى الطوب.','Saanii harkisi. Kubbaa bulookiitti darbi.','Jiid usha. Kubbadda ku tuur bulooga.'],
+  ['Each block = 1 point. In Dhikr: each block = 1 dhikr.','كل طوبة = نقطة. في الذكر: كل طوبة = ذكر.','Bulookii 1 = qabxii 1. Zikrii keessatti: bulookii 1 = zikrii 1.','Bulooq kasta = 1 dhibic. Dhikriga: bulooq = 1 dhikri.'],
+  ['Free play: a missed ball takes a heart. 3 hearts.','اللعب الحر: الكرة الضائعة تأخذ قلبًا. ٣ قلوب.','Tapha bilisaa: kubbaan bade onnee 1 fudhata.','Ciyaar xor ah: kubbad lumay wadne ayay qaadaa.']],
+ match:[['Flip two cards. Find the pairs.','اقلب بطاقتين. اعثر على الأزواج.','Kaardii lama garagalchi. Lameen barbaadi.','Rogo laba kaar. Hel lammaanaha.'],
+  ['Each pair = 10 points. In Dhikr: each pair = 1 dhikr.','كل زوج = ١٠ نقاط. في الذكر: كل زوج = ذكر.','Lameen 1 = qabxii 10. Zikrii keessatti: lameen 1 = zikrii 1.','Lammaane kasta = 10 dhibic. Dhikriga: lammaane = 1 dhikri.'],
+  ['You cannot lose.','لا تخسر أبدًا.','Hin moo\'amtu.','Ma guuldareysan kartid.']],
+ sort:[['Tap a tube, then another, to move the top ball.','اضغط أنبوبًا ثم آخر لنقل الكرة العلوية.','Ujummoo tokko, achii kan biraa tuqi.','Taabo tuubo, kadib mid kale.'],
+  ['One color per tube = level done. In Dhikr: each move = 1 dhikr.','لون واحد في كل أنبوب = مستوى. في الذكر: كل نقلة = ذكر.','Ujummoo 1 halluu 1 = sadarkaa. Zikrii: sochii 1 = zikrii 1.','Midab kasta tuubo = heer. Dhikriga: dhaqaaq = 1 dhikri.'],
+  ['You cannot lose. Stuck? Tap Undo.','لا تخسر. علقت؟ اضغط تراجع.','Hin moo\'amtu. Yoo dhaabatte Duubatti tuqi.','Ma guuldareysan. Haddii aad xanibanto taabo Ka noqo.']],
+ merge:[['Swipe. Same numbers join.','اسحب. الأرقام المتساوية تندمج.','Harkisi. Lakkoofsi walfakkaatu walitti makama.','Jiid. Tirooyinka isku midka ah way isku darmaan.'],
+  ['Each join adds points. In Dhikr: each join = 1 dhikr.','كل دمج يضيف نقاطًا. في الذكر: كل دمج = ذكر.','Makiinsi hundi qabxii dabala. Zikrii: makiinsa 1 = zikrii 1.','Isku-dar kasta dhibco ayuu daraa. Dhikriga: isku-dar = 1 dhikri.'],
+  ['Board full and no moves = game over.','امتلأت اللوحة ولا حركات = انتهت اللعبة.','Gabateen guuttee sochiin hin jiru = xumura.','Looxu buuxo oo dhaqdhaqaaq la\'aan = dhammaad.']],
+ pop:[['Tap 2 or more same-color bubbles that touch.','اضغط فقاعتين أو أكثر متلاصقة من نفس اللون.','Bubbulii 2+ halluu tokko walqunnaman tuqi.','Taabo 2+ xumbo oo isku midab ah oo taabanaya.'],
+  ['Bigger groups = more points. In Dhikr: each pop = 1 dhikr.','مجموعات أكبر = نقاط أكثر. في الذكر: كل فقعة = ذكر.','Gareen guddaan qabxii guddaa. Zikrii: dhoosa 1 = zikrii 1.','Koox weyn = dhibco badan. Dhikriga: qarxin = 1 dhikri.'],
+  ['Free play: no groups left under the target = game over.','اللعب الحر: لا مجموعات تحت الهدف = انتهت اللعبة.','Tapha bilisaa: gareen hin hafne galma gaditti = xumura.','Ciyaar xor ah: koox la\'aan hadafka hoostiisa = dhammaad.']]};
 function howHTML(k){const h=HOW[k]||HOW.run,ic=['<svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="4" fill="#0284c7"/><circle cx="12" cy="12" r="8.5" fill="none" stroke="#0284c7" stroke-width="2" opacity=".45"/></svg>','<svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="10" fill="#f5b301" stroke="#a35f00"/><path d="M12 6.8l1.5 3.2 3.5.4-2.6 2.4.7 3.5L12 14.6l-3.1 1.7.7-3.5L7 10.4l3.5-.4z" fill="#fff8d6"/></svg>','<svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 6l12 12M18 6L6 18" stroke="#dc2626" stroke-width="3" stroke-linecap="round"/></svg>'],bg=['#e0f2fe','#fef9c3','#fee2e2'],lab=['h_do','h_sc','h_lo'];
  return h.map((r,i)=>`<div class="hwr"><i style="background:${bg[i]}">${ic[i]}</i><div><b>${tl(lab[i])}</b>${L4(r).replace(/([.!؟])\s+/g,'$1\n').split('\n').map(q=>`<span style="display:block">${q}</span>`).join('')}</div></div>`).join('')}
 function howCard(k,auto){const seen=JSON.parse(localStorage.getItem('fastaqim.howseen')||'{}');if(auto&&seen[k])return;const d=$('mini');if(!d||!cur())return;cur().paused=true;
@@ -111,7 +121,7 @@ MINI.games.stack=function(){const m=cur(),dk=m.mode==='dhikr',t=TH(),d=A.shell(d
  function next(){const top=tower[tower.length-1],w=top.w;speed=Math.min(420,170+tower.length*7);dir=tower.length%2?1:-1;mv={x:dir>0?-w:c.W,w,c:t.pal[tower.length%t.pal.length]}}
  function drop(){if(!mv||over||m.paused)return;const top=tower[tower.length-1],l=Math.max(mv.x,top.x),r=Math.min(mv.x+mv.w,top.x+top.w),ov=r-l;const yTop=c.H-120-tower.length*BH+camY;
   if(ov<=0){vib([30,40,30]);fall.push({x:mv.x,w:mv.w,y:yTop,vy:0,c:mv.c});if(dk){F.push({t:'✕',x:c.W/2,y:yTop-20,l:1,c:'#ef4444'});perfect=0;next();return}over=true;m.coins=Math.round(m.score/2);setTimeout(()=>MINI.end(false),900);return}
-  let nb;if(Math.abs(mv.x-top.x)<5){nb={x:Math.max(4,top.x-3),w:Math.min(top.w+6,c.W*.7),c:mv.c};perfect++;m.score+=3;F.push({t:tl('nice2')+' +3',x:c.W/2,y:yTop-24,l:1.2,c:t.acc});sparks(P,c.W/2,yTop,t.acc,18);vib([10,20,10])}
+  let nb;if(dk){nb={x:top.x,w:top.w,c:mv.c};m.score+=1;sparks(P,c.W/2,yTop,t.acc,8);vib(8)}else if(Math.abs(mv.x-top.x)<5){nb={x:Math.max(4,top.x-3),w:Math.min(top.w+6,c.W*.7),c:mv.c};perfect++;m.score+=3;F.push({t:tl('nice2')+' +3',x:c.W/2,y:yTop-24,l:1.2,c:t.acc});sparks(P,c.W/2,yTop,t.acc,18);vib([10,20,10])}
   else{nb={x:l,w:ov,c:mv.c};const cut=mv.w-ov;fall.push({x:mv.x<top.x?mv.x:r,w:cut,y:yTop,vy:0,c:mv.c});perfect=0;m.score+=1;vib(8)}
   tower.push(nb);A.setScore(m.score);try{SFX.plip()}catch(e){}if(dk){F.push({t:DZ[ST.dz||0].ar,x:c.W/2,y:yTop-40,l:1,ar:1});if(dhikrStep(m,1))return}next()}
  c.cv.addEventListener('pointerdown',e=>{e.preventDefault();drop()});init();onKey(k=>{if(k===' '||k==='Enter'||k==='ArrowDown')drop();else return false});m._t={get gap(){return mv?mv.x-tower[tower.length-1].x:99},drop};A.hintBox(d,'mi_hint_s');
@@ -158,7 +168,7 @@ MINI.games.sort=function(lv){lv=lv||1;const m=cur(),t=TH(),d=A.shell(`<div style
   return tubes.map((_,i)=>{const r=Math.floor(i/per),k=i%per,inRow=Math.min(per,nt-r*per),gx=(c.W-inRow*tw)/(inRow+1);return {x:gx+k*(tw+gx),y:top+r*(th+40),w:tw,h:th,bh}})};
  function tap(e){if(won||cur().paused)return;const r=c.cv.getBoundingClientRect(),px=e.clientX-r.left,py=e.clientY-r.top,G2=geo();const i=G2.findIndex(g=>px>g.x-6&&px<g.x+g.w+6&&py>g.y-30&&py<g.y+g.h+10);if(i<0){sel=-1;return}
   if(sel<0){if(tubes[i].length){sel=i;lift=0;vib(4)}return}if(i===sel){sel=-1;return}
-  const a=tubes[sel],b=tubes[i],ball=a[a.length-1];if(b.length<cap&&(!b.length||b[b.length-1]===ball)){hist.push(JSON.stringify(tubes));b.push(a.pop());vib(6);try{SFX.plip()}catch(e){}
+  const a=tubes[sel],b=tubes[i],ball=a[a.length-1];if(b.length<cap&&(!b.length||b[b.length-1]===ball)){hist.push(JSON.stringify(tubes));b.push(a.pop());vib(6);try{SFX.plip()}catch(e){}if(m.mode==='dhikr'&&dhikrStep(m,1))return;
    if(b.length===cap&&b.every(v=>v===b[0])){const g=G2[i];sparks(P,g.x+g.w/2,g.y,t.pal[b[0]%t.pal.length],16);vib([10,20,10])}
    if(tubes.every(tb=>!tb.length||(tb.length===cap&&tb.every(v=>v===tb[0])))){won=true;m.score+=20+lv*5;m.coins=Math.round(m.score/2);A.setScore(m.score);A.MCONF(70);
     setTimeout(()=>{const mm=cur();if(!mm)return;const keep={score:mm.score,coins:mm.coins};cancelAnimationFrame(mm.raf);if(mm.off)mm.off();$('mini').remove();MINI.games.sort(lv+1);applyTheme();cur().score=keep.score;cur().coins=keep.coins;A.setScore(keep.score)},1100)}}
@@ -174,15 +184,15 @@ MINI.games.sort=function(lv){lv=lv||1;const m=cur(),t=TH(),d=A.shell(`<div style
 MINI.games.pop=function(){const m=cur(),t=TH(),d=A.shell(`<div class="bar"><i id="mP"></i></div><div style="text-align:center;margin-top:4px;font:800 13px Inter,system-ui;opacity:.85">${tl('lv')} <b id="pL">1</b> · ${tl('tgt2')}: <b id="pT"></b></div>`),c=canvasIn(d),x=c.x;let P=[],F=[];
  const C=8,R=10,PAL=['#f87171','#60a5fa','#facc15','#4ade80','#c084fc'];let lv=1,g=[],target=0,lvScore=0,pops=[],busy=false;
  function newBoard(){const nc=Math.min(5,3+Math.floor((lv+1)/2));g=[];for(let k=0;k<C;k++){g.push([]);for(let r=0;r<R;r++)g[k].push({v:Math.floor(Math.random()*nc),y:r,s:1})}target=500+lv*250;lvScore=0;$('pL').textContent=lv;$('pT').textContent=target;upd()}
- function upd(){const p=$('mP');if(p)p.style.width=Math.min(100,lvScore/target*100)+'%'}
+ function upd(){if(m.mode==='dhikr')return;const p=$('mP');if(p)p.style.width=Math.min(100,lvScore/target*100)+'%'}
  const cell=()=>{const s=Math.min(64,(c.W-16)/C,(c.H-20)/R);return {s,ox:(c.W-s*C)/2,oy:c.H-s*R-10}};
  function group(k,r){const v=g[k][r].v,seen=new Set([k+','+r]),st=[[k,r]];while(st.length){const [a,b]=st.pop();for(const [dx,dy] of [[1,0],[-1,0],[0,1],[0,-1]]){const A2=a+dx,B2=b+dy;if(A2<0||A2>=g.length||!g[A2]||B2<0||B2>=g[A2].length)continue;const key=A2+','+B2;if(seen.has(key)||g[A2][B2].v!==v)continue;seen.add(key);st.push([A2,B2])}}return [...seen].map(s=>s.split(',').map(Number))}
  function anyMove(){for(let k=0;k<g.length;k++)for(let r=0;r<g[k].length;r++)if(group(k,r).length>1)return true;return false}
  function tap(e){if(busy||cur().paused)return;const rc=c.cv.getBoundingClientRect(),px=e.clientX-rc.left,py=e.clientY-rc.top,q=cell();const k=Math.floor((px-q.ox)/q.s),r=Math.floor((q.oy+q.s*R-py)/q.s);if(k<0||k>=g.length||r<0||!g[k]||r>=g[k].length)return;
-  const grp=group(k,r);if(grp.length<2){vib([15,20]);return}const pts=grp.length*(grp.length-1);m.score+=pts;lvScore+=pts;A.setScore(m.score);upd();vib(grp.length>6?[10,20,10]:8);try{SFX.plip()}catch(e){}
+  const grp=group(k,r);if(grp.length<2){vib([15,20]);return}const pts=grp.length*(grp.length-1);m.score+=pts;lvScore+=pts;A.setScore(m.score);upd();if(m.mode==='dhikr'&&dhikrStep(m,1))return;vib(grp.length>6?[10,20,10]:8);try{SFX.plip()}catch(e){}
   for(const [a,b] of grp){const cx=q.ox+a*q.s+q.s/2,cy=q.oy+q.s*R-b*q.s-q.s/2;sparks(P,cx,cy,PAL[g[a][b].v],3)}F.push({t:'+'+pts,x:q.ox+k*q.s+q.s/2,y:q.oy+q.s*R-r*q.s-q.s,l:1.1,c:t.acc});
   const del=new Set(grp.map(p=>p.join(',')));for(let a=0;a<g.length;a++)g[a]=g[a].filter((_,b)=>!del.has(a+','+b));g=g.filter(col=>col.length);
-  if(!anyMove()){busy=true;setTimeout(()=>{busy=false;if(!cur())return;if(lvScore>=target){lv++;A.MCONF(60);F.push({t:tl('lv')+' '+lv,x:c.W/2,y:c.H/2,l:1.4,c:t.acc});newBoard()}else{m.coins=Math.round(m.score/20);MINI.end(false,tl('mi_over'))}},800)}}
+  if(!anyMove()){busy=true;setTimeout(()=>{busy=false;if(!cur())return;if(m.mode==='dhikr'){newBoard();return}if(lvScore>=target){lv++;A.MCONF(60);F.push({t:tl('lv')+' '+lv,x:c.W/2,y:c.H/2,l:1.4,c:t.acc});newBoard()}else{m.coins=Math.round(m.score/20);MINI.end(false,tl('mi_over'))}},800)}}
  c.cv.addEventListener('pointerdown',tap);newBoard();
  run(dt=>{const W=c.W,H=c.H,q=cell();x.clearRect(0,0,W,H);
   for(let k=0;k<g.length;k++)for(let r=0;r<g[k].length;r++){const b=g[k][r];b.y+=(r-b.y)*Math.min(1,dt*14);const cx=q.ox+k*q.s+q.s/2,cy=q.oy+q.s*R-b.y*q.s-q.s/2,r0=q.s*.44,col=PAL[b.v];
@@ -197,6 +207,57 @@ Object.assign(GIC,{stack:'<svg viewBox="0 0 48 48"><path d="M10 34h28v8H10z" fil
  brick:'<svg viewBox="0 0 48 48"><rect x="5" y="7" width="11" height="6" rx="2" fill="#f87171"/><rect x="18.5" y="7" width="11" height="6" rx="2" fill="#fbbf24"/><rect x="32" y="7" width="11" height="6" rx="2" fill="#60a5fa"/><rect x="5" y="15" width="11" height="6" rx="2" fill="#c084fc"/><rect x="32" y="15" width="11" height="6" rx="2" fill="#4ade80"/><circle cx="26" cy="30" r="4" fill="#0ea5e9"/><rect x="14" y="38" width="20" height="5" rx="2.5" fill="#6366f1"/></svg>',
  sort:'<svg viewBox="0 0 48 48"><rect x="8" y="6" width="12" height="36" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="2"/><rect x="28" y="6" width="12" height="36" rx="6" fill="#fff" stroke="#94a3b8" stroke-width="2"/><circle cx="14" cy="35" r="4.5" fill="#f87171"/><circle cx="14" cy="26" r="4.5" fill="#60a5fa"/><circle cx="34" cy="35" r="4.5" fill="#60a5fa"/><circle cx="34" cy="26" r="4.5" fill="#f87171"/><circle cx="14" cy="17" r="4.5" fill="#facc15"/></svg>',
  pop:'<svg viewBox="0 0 48 48"><circle cx="14" cy="33" r="8" fill="#60a5fa"/><circle cx="31" cy="33" r="8" fill="#60a5fa"/><circle cx="22.5" cy="18" r="8" fill="#f472b6"/><circle cx="38" cy="17" r="6" fill="#facc15"/><circle cx="11" cy="30" r="2" fill="#fff" opacity=".7"/><circle cx="28" cy="30" r="2" fill="#fff" opacity=".7"/><circle cx="20" cy="15" r="2" fill="#fff" opacity=".7"/></svg>'});
+/* ---------- dhikr: meaning + transliteration + listen + change, in every game (Tasnim 24 Nov) ---------- */
+const DZM=[['Glory be to Allah','Rabbiin hir\'ina hunda irraa qulqulluu dha','Ilaahay waa ka nasahan yahay ceeb kasta'],
+ ['All praise is for Allah','Galanni hundi kan Rabbii ti','Mahad oo dhan Ilaahay ayaa iska leh'],
+ ['Allah is the Greatest','Rabbiin waan hundaa caala guddaa dha','Ilaahay waa ka weyn yahay wax walba'],
+ ['None is worthy of worship but Allah','Dhugaan kan gabbaramu Allaah malee hin jiru','Ilaah xaq lagu caabudo ma jiro Allaah mooyee'],
+ ['Glory be to Allah, and praise is His','Rabbiin qulqulluu dha, galanni isaaf haa ta\'u','Ilaahay waa nasahan yahay, mahadna isagaa leh'],
+ ['I ask Allah for forgiveness','Rabbii dhiifama nan kadhadha','Ilaahay dambi dhaaf ayaan weydiisanayaa'],
+ ['There is no power or strength except with Allah','Humnii fi jijjiiramni Allaahiin malee hin jiru','Awood iyo xoog midna ma jiro Ilaahay mooyee'],
+ ['O Allah, send blessings upon Muhammad','Yaa Rabbii, Muhammad irratti rahmata buusi','Ilaahayow, naxariis ku naxariiso Muxammad']];
+const DZCLIP={0:'subhanallah.m4a',1:'alhamdulillah.m4a',2:'allahu-akbar.m4a',4:'subhan-wabihamdih.m4a'};
+Object.assign(T,{dz_l:['Listen','استمع','Dhaggeeffadhu','Dhageyso'],dz_c:['Change','تغيير','Jijjiiri','Beddel'],dz_m:['Meaning','المعنى','Hiika','Macnaha'],dz_pick:['Choose a dhikr','اختر ذكرًا','Zikrii filadhu','Dooro dhikri']});
+const dzMean=i=>LG==='ar'?'':DZM[i][{en:0,om:1,so:2}[LG]||0];
+const dzShow=()=>ST.dzx!==false;
+let dzA=null;function dzListen(b){const f=DZCLIP[ST.dz||0];if(!f)return;try{if(dzA&&!dzA.paused){dzA.pause();dzA=null;if(b)b.classList.remove('on');return}dzA=new Audio('hisn/clips/'+f);dzA.play();if(b){b.classList.add('on');dzA.onended=()=>b.classList.remove('on')}}catch(e){}}
+const ICL='<svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+const ICC='<svg viewBox="0 0 24 24" width="14" height="14"><path d="M4 8h13l-3-3M20 16H7l3 3" stroke="currentColor" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+function dzFill(root){const i=ST.dz||0,z=DZ[i];const q=s=>root.querySelector(s);if(q('.dza'))q('.dza').textContent=z.ar;
+ const tr=q('.dztl'),mn=q('.dzm');if(tr){tr.textContent=z.tr;tr.hidden=!dzShow()||LG==='ar'}if(mn){mn.textContent=dzMean(i);mn.hidden=!dzShow()||!dzMean(i)}
+ const L=q('[data-dz="l"]');if(L)L.hidden=!DZCLIP[i];const X=q('[data-dz="x"]');if(X){X.hidden=LG==='ar';X.classList.toggle('on',dzShow())}}
+function dzBtns(){return `<button data-dz="l">${ICL}<span>${tl('dz_l')}</span></button><button data-dz="c">${ICC}<span>${tl('dz_c')}</span></button><button data-dz="x"><span>${tl('dz_m')}</span></button>`}
+function dzList(onPick){return [`<div class="dk">${DZ.map((d,i)=>`<button data-z="${i}" class="${(ST.dz||0)===i?'on':''}"><span class="ar">${d.ar}</span>${LG==='ar'?'':`<small>${esc(d.tr)} · ${esc(dzMean(i))}</small>`}</button>`).join('')}</div>`,(c,cl)=>c.querySelectorAll('[data-z]').forEach(b=>b.onclick=()=>{ST.dz=+b.dataset.z;stSave();cl();onPick()})]}
+function dzBind(root,pause,resume){root.querySelectorAll('[data-dz]').forEach(b=>b.onclick=e=>{e.stopPropagation();const k=b.dataset.dz;
+  if(k==='l')dzListen(b);else if(k==='x'){ST.dzx=!dzShow();stSave();dzFill(root)}
+  else{pause();const [h,bd]=dzList(()=>{dzFill(root);resume()});pickSheet(tl('dz_pick'),h,bd);const pk=$('pk');if(pk){pk.style.zIndex=60;pk.querySelectorAll('.pkx,.pkb').forEach(x=>x.addEventListener('click',resume))}}})}
+/* panel inside the small games */
+function dzPanel(){const d=$('mini'),m=cur();if(!d||!m||m.mode!=='dhikr'||d.querySelector('.dzp'))return;
+ [...d.children].forEach(e=>{if(e.classList.contains('bar')||(e.classList.contains('ar')&&!e.closest('.mb')))e.remove()});
+ const p=document.createElement('div');p.className='dzp';p.innerHTML=`<div class="bar"><i id="mP"></i></div><div class="dza ar"></div><div class="dztl"></div><div class="dzm"></div><div class="dzb"><b class="dzn"></b>${dzBtns()}</div>`;
+ d.querySelector('.mb').after(p);dzFill(p);const pl=d.querySelector('#pL');if(pl&&pl.parentElement)pl.parentElement.style.display='none';requestAnimationFrame(()=>dispatchEvent(new Event('resize')));const tg=ST.tgt||33,bar=p.querySelector('#mP');bar.style.width=Math.min(100,(m.count||0)/tg*100)+'%';
+ dzBind(p,()=>{if(cur())cur().paused=true},()=>{if(cur())cur().paused=false});
+ const n=p.querySelector('.dzn'),iv=setInterval(()=>{const mm=cur();if(!mm||!document.body.contains(p)){clearInterval(iv);return}n.textContent=(mm.count||0)+' / '+tg},250)}
+/* Road Run: same lines under the Arabic in the dhikr card */
+(function(){const g=document.querySelector('.goal>div'),ar=$('gAr');if(!g||!ar||g.querySelector('.dztl'))return;
+ ar.classList.add('dza');ar.insertAdjacentHTML('afterend','<div class="dztl"></div><div class="dzm"></div>');
+ const b=document.createElement('div');b.className='dzb';b.innerHTML=dzBtns();g.appendChild(b);
+ let was=null;dzBind(g,()=>{if(state==='play'){was='play';state='pause';cancelAnimationFrame(raf)}},()=>{if(was==='play'&&state==='pause'){was=null;state='play';last=performance.now();loop()}});
+ const _h=hud;hud=function(){const r=_h.apply(this,arguments);try{const gg=G;g.querySelector('.dztl').hidden=true;g.querySelector('.dzm').hidden=true;b.hidden=!gg||gg.mode!=='dhikr';if(gg&&gg.mode==='dhikr'&&hud.k!==ST.dz+'|'+ST.dzx){hud.k=ST.dz+'|'+ST.dzx;}if(gg&&gg.mode==='dhikr')dzFill(g)}catch(e){}return r}})();
+/* ---------- small "i" in every game: how to play, points, losing ---------- */
+const ICI='<svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="7.6" r="1.4" fill="currentColor"/><path d="M12 11v6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>';
+function miniInfo(){const d=$('mini');if(!d||d.querySelector('#mI'))return;const pz=d.querySelector('#mPz');if(!pz)return;const b=document.createElement('button');b.id='mI';b.setAttribute('aria-label',tl('h_do'));b.innerHTML=ICI;b.onclick=()=>{const m=cur();if(m&&!m.paused)howCard(m.kind,false)};pz.before(b)}
+{const bar=document.querySelector('.bar'),pz=$('pz');if(bar&&pz&&!$('runI')){const b=document.createElement('button');b.className='pill ib';b.id='runI';b.hidden=true;b.setAttribute('aria-label',tl('h_do'));b.innerHTML=ICI;pz.before(b);
+  b.onclick=()=>{let was=false;if(state==='play'){was=true;state='pause';cancelAnimationFrame(raf)}pickSheet(tl('m_run'),howHTML('run')+`<button class="go" id="riOk" style="margin-top:12px">${tl('h_ok')}</button>`,(c,cl)=>{c.querySelector('#riOk').onclick=cl});
+   const res=()=>{if(was&&state==='pause'){was=false;state='play';last=performance.now();loop()}};const pk=$('pk');if(pk)pk.querySelectorAll('.pkx,.pkb,#riOk').forEach(x=>x.addEventListener('click',res))};
+  new MutationObserver(()=>{b.hidden=pz.hidden}).observe(pz,{attributes:true,attributeFilter:['hidden']})}}
+/* ---------- simpler start screen ---------- */
+const ORD=['run','catch','stack','brick','match','sort','merge','pop'];GAMES.sort((a,b)=>ORD.indexOf(a[0])-ORD.indexOf(b[0]));
+GAMES.forEach(([k])=>{if(k!=='run')GMODES[k]=['dhikr','free']});
+Object.assign(T,{fq_short:['Finish your tasks 3 days in a row: +20 min','أنجز مهامك ٣ أيام متتالية: +٢٠ دقيقة','Guyyaa 3 walitti hojii kee xumuri: +20 daq.','3 maalmood oo xiriir ah dhammee hawlahaaga: +20 daq.'],fq_det:['Details','التفاصيل','Bal\'ina','Faahfaahin']});
+const _fi=freeInfo;freeInfo=function(){const o=plGet(),l=fqLeftO(o);return `<div class="fq${l>0?'':' done'}"><b class="fq-big">${l>0?tl('fq_today').replace('{n}',Math.ceil(l/60)):tl('fq_done')}</b><span>${tl('fq_short')}</span></div><details class="fqd2"><summary>${tl('fq_det')}</summary>${_fi()}</details>`};
+{const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);try{const s=$('plS');if(s)s.remove();const rl=$('ruleL');if(rl)rl.textContent='⏱ '+tl('rule_n').replace('{n}',Math.max(0,Math.ceil((BR_MAX-BR.s)/60)));
+  const P=$('pills');if(P)P.querySelectorAll('.pl').forEach(q=>{const i=q.querySelector('i');if(i&&(i.textContent==='?'))i.innerHTML=ICI})}catch(e){}return r}}
 const _xp=window.FQExtraPills;window.FQExtraPills=(P,gk)=>{if(gk==='run'){if(_xp)_xp(P,gk)}
  else{const b=document.createElement('button');b.className='pl';const th=TH();b.innerHTML=`<i style="background:${th.bg}"></i><span>${tl('th_'+(ST.theme||'sky'))}</span><b>▾</b>`;
   b.onclick=()=>pickSheet(tl('th'),`<div class="thg">${Object.keys(THEMES).map(k=>`<button data-th2="${k}" class="${(ST.theme||'sky')===k?'on':''}"><i style="background:${THEMES[k].bg};border-bottom:4px solid ${THEMES[k].acc}"></i><span>${tl('th_'+k)}</span></button>`).join('')}</div>`,(c,cl)=>c.querySelectorAll('[data-th2]').forEach(q=>q.onclick=()=>{ST.theme=q.dataset.th2;stSave();cl();showMenu()}));P.appendChild(b)}

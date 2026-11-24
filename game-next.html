@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="robots" content="noindex"><meta name="theme-color" content="#0f172a"><title>Fastaqim · Games (new)</title>
+<meta name="robots" content="noindex"><meta name="theme-color" content="#0f172a"><title>Fastaqim · Games (preview)</title>
 <style>
 @font-face{font-family:"FQ";src:url(fonts/UthmanicHafs.otf) format("opentype");font-display:swap}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -476,7 +476,7 @@ const sndB=$('snd');const sndL=()=>{sndB.textContent=ST.snd?'🔈':'🔇'};sndL(
 showMenu();
 </script>
 <script src="game/gltf-lib.js?v=1"></script>
-<script src="game/r3d.js?v=7"></script>
+<script src="game/r3d.js?v=8"></script>
 <script>
 /* Free play: 10 free minutes every day. Saved credit (earned on Fastaqim, shared localStorage fastaqim.play) adds more, up to 30 minutes a day.
    Credit never expires. Dhikr and To-do runs are never limited. */
@@ -557,8 +557,8 @@ function ruleLine(){try{const go=$('goB');if(go&&!$('ruleL')){const left=Math.ma
 {const _sm=showMenu;showMenu=function(){const r=_sm.apply(this,arguments);ruleLine();return r}}ruleLine();
 addEventListener('pagehide',()=>brSet(BR));
 </script>
-<script src="game/minis.js?v=3"></script>
+<script src="game/minis.js?v=4"></script>
 <script src="game/coin.js?v=1"></script>
-<script src="game/fun.js?v=8"></script>
-<script src="game/minis2.js?v=1"></script>
+<script src="game/fun.js?v=9"></script>
+<script src="game/minis2.js?v=2"></script>
 </body></html>
