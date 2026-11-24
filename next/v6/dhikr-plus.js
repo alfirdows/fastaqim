@@ -82,10 +82,10 @@ function bead(a,t,gain,rate,lp){const src=a.createBufferSource();src.buffer=BEAD
   if(lp){const f=a.createBiquadFilter();f.type='lowpass';f.frequency.value=lp;f.Q.value=.5;n.connect(f);n=f}
   n.connect(g).connect(a.destination);src.start(t)}
 function clack(strong){
-  if(!st.snd)return;const a=ac();if(!a)return;const m=MAT[st.mat]||MAT.olive,t=a.currentTime+.005;
+  if(!st.snd)return;const a=ac();if(!a)return;const FQ={k:[4300,12,.07],s:[3200,7,.055],w:[1600,3,.033],m:[3600,9,.06]},fq=FQ[(MAT[st.mat]||{}).g]||FQ.w,m={f:fq[0],q:fq[1],dec:fq[2]},t=a.currentTime+.005;
   const V=Math.pow(Math.max(0,Math.min(100,st.vol))/100,1.6)*.22;if(V<.001)return; // volume slider (default 30 = soft)
   if(st.mode==='clicker'&&OPEN){knock(a,t,4300,9,.018,V*1.1);knock(a,t+.009,2100,4,.03,V*.6);if(strong){knock(a,t+.15,4300,9,.018,V);knock(a,t+.16,2100,4,.03,V*.5)}return}
-  if(BEADS){const p=SND[st.mat]||SND.olive,G=V*1.6*p[2];bead(a,t,G,p[0],p[1]);if(strong){bead(a,t+.14,G*.9,p[0]*.97,p[1]);bead(a,t+.2,G*.55,p[0]*1.02,p[1])}return}
+  if(BEADS){const p=SND[st.mat]||SND[(MAT[st.mat]||{}).snd]||SND.olive,G=V*1.6*p[2];bead(a,t,G,p[0],p[1]);if(strong){bead(a,t+.14,G*.9,p[0]*.97,p[1]);bead(a,t+.2,G*.55,p[0]*1.02,p[1])}return}
   loadBeads(a);
   knock(a,t,m.f,m.q,m.dec,V);knock(a,t+.022,m.f*1.08,m.q,m.dec*.8,V*.4);
   if(strong){knock(a,t+.16,m.f*.9,m.q,m.dec*1.3,V*.9);knock(a,t+.18,m.f,m.q,m.dec,V*.36)}
@@ -93,21 +93,41 @@ function clack(strong){
 
 /* ---------- bead materials, drawn per pixel (sphere + light + texture) ---------- */
 const MAT={
+ // crystal (faceted glass rondelles; gl = glass family, tint = glass colour)
+ crystal:    {g:'k',gl:'crystal',n:['Clear crystal','كريستال شفاف','Kiristaala ifaa','Kiristaal cad'],sp:'gold',sq:.84},
+ cr_aqua:    {g:'k',gl:'crystal',tint:[.60,.86,.95],n:['Aqua crystal','كريستال مائي','Kiristaala bishaanii','Kiristaal biyo'],sp:'gold',sq:.84,snd:'crystal'},
+ cr_emerald: {g:'k',gl:'crystal',tint:[.36,.80,.55],n:['Emerald crystal','كريستال زمردي','Kiristaala magariisa','Kiristaal cagaar'],sp:'gold',sq:.84,snd:'crystal'},
+ cr_sapphire:{g:'k',gl:'crystal',tint:[.40,.55,.95],n:['Sapphire crystal','كريستال ياقوتي','Kiristaala cuquliisa','Kiristaal buluug'],sp:'gold',sq:.84,snd:'crystal'},
+ cr_amethyst:{g:'k',gl:'crystal',tint:[.68,.52,.90],n:['Amethyst crystal','كريستال جمشت','Kiristaala burtukaanaa','Kiristaal guduud'],sp:'gold',sq:.84,snd:'crystal'},
+ cr_gold:    {g:'k',gl:'crystal',tint:[1,.84,.55],n:['Champagne crystal','كريستال شمباني','Kiristaala warqee','Kiristaal dahabi'],sp:'gold',sq:.84,snd:'crystal'},
+ cr_jet:     {g:'k',gl:'crystal',tint:[.30,.31,.34],n:['Black crystal','كريستال أسود','Kiristaala gurraacha','Kiristaal madow'],sp:'gold',sq:.84,snd:'crystal'},
+ smoky:      {g:'k',gl:'smoky',n:['Smoky quartz','كوارتز مدخّن','Kuwaartsii aaraa','Kuwaarts qiiq']},
+ frost:      {g:'k',gl:'frost',n:['Frosted glass','زجاج مُثلَّج','Burcuqqoo cabbii','Muraayad baraf']},
+ // stones and amber
+ onyx:    {g:'s',n:['Onyx','عقيق أسود','Oniksii','Oniks']},
+ aqeeq:   {g:'s',n:['Red agate (aqeeq)','عقيق أحمر','Aqiiqa diimaa','Cuqaal cas'],snd:'onyx'},
+ amber:   {g:'s',n:['Amber','كهرمان','Ambar','Cambar']},
+ tiger:   {g:'s',n:["Tiger's eye",'عين النمر','Ija qeerransaa','Isha shabeelka'],snd:'onyx'},
+ jade:    {g:'s',n:['Jade','يَشْم','Jeedii','Jeyd']},
+ malach:  {g:'s',n:['Malachite','ملكيت','Malaakaayitii','Malakaayt'],snd:'jade'},
+ turq:    {g:'s',n:['Turquoise','فيروز','Feyruuzii','Firuus'],snd:'jade'},
+ lapis:   {g:'s',n:['Lapis','لازورد','Laaziwardii','Laajward']},
+ marble:  {g:'s',n:['White marble','رخام أبيض','Marmaara adii','Marmar cad'],snd:'onyx'},
+ // woods
+ olive:   {g:'w',n:['Olive wood','خشب الزيتون','Muka ejersaa','Alwaax saytuun']},
+ sandal:  {g:'w',n:['Sandalwood','خشب الصندل','Muka sandal','Alwaax sandal']},
+ walnut:  {g:'w',n:['Walnut','خشب الجوز','Muka waalnatii','Alwaax laws'],snd:'olive'},
+ ebony:   {g:'w',n:['Ebony','أبنوس','Muka gurraacha','Alwaax madow'],snd:'sandal'},
+ kuka:    {g:'w',n:['Kuka (coconut shell)','كوكا','Kookaa','Kuka'],snd:'olive'},
  // modern
- crystal: {g:'m',n:['Crystal','كريستال','Kiristaala','Kiristaal'],f:4300,q:12,dec:.07,sq:.84,sp:'gold'},
- frost:   {g:'m',n:['Frosted glass','زجاج مُثلَّج','Burcuqqoo cabbii','Muraayad baraf'],f:3600,q:8,dec:.05},
- smoky:   {g:'m',n:['Smoky quartz','كوارتز مدخّن','Kuwaartsii aaraa','Kuwaarts qiiq'],f:3900,q:10,dec:.06},
- pearl:   {g:'m',n:['Pearl white','أبيض لؤلؤي',"Adii lu'lu'",'Luul cad'],f:3000,q:6,dec:.05},
- steel:   {g:'m',n:['Brushed steel','فولاذ مصقول','Sibiila','Bir la sifeeyay'],f:4500,q:12,dec:.08},
- ceramic: {g:'m',n:['White ceramic','سيراميك أبيض','Seeramikii adii','Dhoobo cad'],f:2900,q:6,dec:.04},
- // classic
- olive:   {g:'c',n:['Olive wood','خشب الزيتون','Muka ejersaa','Alwaax saytuun'],f:1500,q:3,dec:.035},
- sandal:  {g:'c',n:['Sandalwood','خشب الصندل','Muka sandal','Alwaax sandal'],f:1700,q:3,dec:.03},
- amber:   {g:'c',n:['Amber','كهرمان','Ambar','Cambar'],f:2600,q:5,dec:.045},
- onyx:    {g:'c',n:['Onyx','عقيق أسود','Oniksii','Oniks'],f:3300,q:7,dec:.055},
- jade:    {g:'c',n:['Jade','يَشْم','Jeedii','Jeyd'],f:3100,q:7,dec:.055},
- lapis:   {g:'c',n:['Lapis','لازورد','Laaziwardii','Laajward'],f:3200,q:7,dec:.05}
+ pearl:   {g:'m',n:['Pearl white','أبيض لؤلؤي',"Adii lu'lu'",'Luul cad']},
+ ceramic: {g:'m',n:['White ceramic','سيراميك أبيض','Seeramikii adii','Dhoobo cad']},
+ matte:   {g:'m',n:['Matte black','أسود مطفي','Gurraacha qullaa','Madow aan dhalaalin'],snd:'ceramic'},
+ steel:   {g:'m',n:['Brushed steel','فولاذ مصقول','Sibiila','Bir la sifeeyay']},
+ silver:  {g:'m',n:['Silver','فضّي','Meetii','Lacag'],snd:'steel'},
+ goldm:   {g:'m',n:['Gold','ذهبي','Warqee','Dahab'],snd:'steel'}
 };
+const MGROUPS=[['k',['Crystal','كريستال','Kiristaala','Kiristaal']],['s',['Stone','أحجار','Dhagaa','Dhagax']],['w',['Wood','خشب','Muka','Alwaax']],['m',['Modern','عصري','Ammayyaa','Casri']]];
 if(st.mat==='hematite')st.mat='steel';if(!MAT[st.mat])st.mat='olive';
 const matName=k=>{const n=(MAT[k]||MAT.olive).n;return TX(n[0],n[1],n[2],n[3])};
 
@@ -140,14 +160,25 @@ function surface(k,P){
     c=mix(c,[.80,.82,.86],sst(.05,0,wv)*.45);if(fl>.42)c=mix(c,[.86,.70,.36],sst(.42,.6,fl));return{c,spec:.6,pow:60}}
   case 'steel':{const br=noise(x*1.5,y*46,z*1.5)*.07+noise(x*3,y*90,z*3)*.04;return{c:[.60+br,.62+br,.65+br],spec:.9,pow:50,metal:1,env:.85}}
   case 'ceramic':{const n=fbm(x*3,y*3,z*3,2)*.012;return{c:[.94+n,.935+n,.92+n],spec:.55,pow:46}}
-  case 'gold':return{c:[.80,.60,.24],spec:1.1,pow:80,metal:1,env:.9,et:[1,.82,.48]};
+  case 'gold':case 'goldm':return{c:[.80,.60,.24],spec:1.1,pow:80,metal:1,env:.9,et:[1,.82,.48]};
+  case 'silver':return{c:[.80,.81,.83],spec:1.15,pow:95,metal:1,env:.95};
+  case 'matte':{const n=fbm(x*4,y*4,z*4,2)*.01;return{c:[.075+n,.075+n,.08+n],spec:.22,pow:14}}
+  case 'walnut':{const w=fbm(x*.9,y*.9,z*.9,3),d=Math.sqrt(x*x+z*z)*4.6+w*1.3,ring=Math.pow(.5+.5*Math.sin(d*6.2832),3);
+    const pore=fbm(x*3,y*28,z*3,3)*.5+.5;let c=mix([.47,.32,.21],[.36,.23,.14],pore);c=mix(c,[.22,.13,.08],ring*.6);return{c,spec:.4,pow:30}}
+  case 'ebony':{const st2=fbm(x*1.5,y*14,z*1.5,3)*.5+.5;let c=mix([.06,.05,.045],[.16,.12,.09],sst(.55,.85,st2)*.7);return{c,spec:.8,pow:70,env:.2}}
+  case 'kuka':{const f=noise(x*5,y*55,z*5)*.5+.5,n=fbm(x*2,y*2,z*2,3)*.5+.5;let c=mix([.24,.15,.10],[.16,.10,.07],n);c=mix(c,[.30,.20,.13],sst(.6,.9,f)*.4);return{c,spec:.38,pow:24}}
+  case 'aqeeq':{const b=Math.sin((y*2.3+fbm(x*1.2,y*1.2,z*1.2,3)*1.1)*6.5)*.5+.5;let c=mix([.55,.08,.05],[.86,.34,.16],b*.7+.15);c=mix(c,[.93,.70,.55],sst(.92,1,b)*.25);return{c,spec:1.05,pow:110,trans:[1,.4,.22]}}
+  case 'tiger':{const w=fbm(x*1.1,y*1.1,z*1.1,3),b=Math.sin((y*2.2+w*1.2)*4.2)*.5+.5;let c=mix([.42,.25,.08],[.78,.55,.21],sst(.15,.9,b));c=mix(c,[.92,.74,.36],sst(.9,1,b)*.5);return{c,spec:1,pow:90,env:.15}}
+  case 'malach':{const r=Math.hypot(x+.6,z+.3)*5+fbm(x,y,z,3)*1.2,b=Math.pow(.5+.5*Math.sin(r*6.2832),2);let c=mix([.06,.40,.24],[.20,.62,.42],b);c=mix(c,[.02,.20,.12],sst(.85,1,1-b)*.5);return{c,spec:.9,pow:85}}
+  case 'turq':{const n=fbm(x*1.6,y*1.6,z*1.6,4)*.5+.5,v=Math.abs(fbm(x*3.2+4,y*3.2,z*3.2,3));let c=mix([.24,.64,.62],[.46,.80,.76],sst(.25,.8,n));c=mix(c,[.36,.28,.20],sst(.05,0,v)*.7);return{c,spec:.45,pow:30}}
+  case 'marble':{const v=Math.abs(fbm(x*1.4+2,y*1.4,z*1.4,5)),n=fbm(x*3,y*3,z*3,2)*.02;let c=[.93+n,.93+n,.915+n];c=mix(c,[.55,.56,.58],sst(.07,0,v)*.55);return{c,spec:.75,pow:75}}
   }
   return{c:[.5,.5,.5],spec:.3,pow:20}
 }
 /* glass family: faceted crystal with a soft rainbow (AB) shimmer, frosted glass, smoky quartz.
    Returns [r,g,b,alpha]; alpha < 1 so the thread shows through, like real glass. */
 const fr=x=>x-Math.floor(x);
-function glass(k,nx,ny,nz,HZ,seed){
+function glass(k,nx,ny,nz,HZ,seed,tint){
   const ndh=Math.max(0,nx*H3[0]+ny*H3[1]+nz*H3[2]),ndl=nx*L3[0]+ny*L3[1]+nz*L3[2],rim=Math.pow(1-nz,2.2);
   if(k==='crystal'){
     // faceted rondelle with diamond-shaped facets. Mostly clear and bright, a few facets catch the darker
@@ -160,19 +191,19 @@ function glass(k,nx,ny,nz,HZ,seed){
     const vx=HZ?fy:fx,vy=HZ?fx:fy,vz=fz,h=fr(Math.sin(pi*12.99+qi*78.23+seed*37.7)*43758.5);
     const ry=-vy*.8+vx*.3;let env=.93+.07*sst(-.5,.6,ry)+.04*nz;
     if(h<.13)env=.66+h*1.2;else if(h<.25)env=.86;                                          // darker facets = depth
-    let c=[env*.97,env*.982,env];
+    let c=tint?tint.map(t=>env*(t*.82+.08)+(1-env)*.02):[env*.97,env*.982,env];   // coloured crystal: the colour deepens in the darker facets
     if(h>.76){const hu=fr(h*5.3+seed*.37),t=(h-.76)/.24*.5,rb=[.5+.5*Math.cos(6.283*hu),.5+.5*Math.cos(6.283*(hu+.33)),.5+.5*Math.cos(6.283*(hu+.67))].map(v=>.66+.34*v);c=mix(c,rb,t)}
     const edge=1-sst(0,.05,de);c=c.map(v=>v*(1-.11*edge));
     const fdh=Math.max(0,vx*H3[0]+vy*H3[1]+vz*H3[2]),sp=Math.pow(fdh,60)*1.1+Math.pow(ndh,300)*.8;
     c=c.map(v=>v*(1-.28*rim)+sp);
-    return[c[0],c[1],c[2],.90+.10*rim]}
+    return[c[0],c[1],c[2],(tint?.93:.90)+(tint?.07:.10)*rim]}
   if(k==='frost'){
     const gr=noise(nx*40+seed,ny*40,nz*40)*.02,b=.86+.08*sst(-.3,.9,ny)+.06*Math.max(0,ndl)+gr;
     let c=[b*.985,b*.99,b];c=c.map(v=>v*(1-.10*rim)+Math.pow(ndh,14)*.22);
     return[c[0],c[1],c[2],.92]}
   // smoky quartz
-  const tint=[.50,.43,.37],caus=Math.pow(Math.max(0,-ndl*.7+.35),2)*1.1;
-  let c=tint.map((v,ix)=>v*(.55+.45*sst(-.4,.9,ny))+[.95,.78,.6][ix]*caus*.35);
+  const sq=[.50,.43,.37],caus=Math.pow(Math.max(0,-ndl*.7+.35),2)*1.1;
+  let c=sq.map((v,ix)=>v*(.55+.45*sst(-.4,.9,ny))+[.95,.78,.6][ix]*caus*.35);
   c=c.map(v=>v*(1-.45*rim)+Math.pow(ndh,130)*1.4+Math.pow(ndh,18)*.08);
   return[c[0],c[1],c[2],.86+.14*rim]
 }
@@ -187,11 +218,11 @@ function drawBead(k,seed,px,ax){
   g.fillStyle=sh;g.beginPath();g.arc(cx+r*.12,cy+r*.22,r*1.12,0,7);g.fill();
   const img=g.getImageData(0,0,px,px),d=img.data;
   const ca=Math.cos(seed*2.1),sa=Math.sin(seed*2.1),cb=Math.cos(seed*1.3),sb=Math.sin(seed*1.3);
-  const SQ=(MAT[k]&&MAT[k].sq)||1,GL=k==='crystal'||k==='frost'||k==='smoky';
+  const SQ=(MAT[k]&&MAT[k].sq)||1,GL=!!(MAT[k]&&MAT[k].gl);
   for(let j=0;j<px;j++)for(let i=0;i<px;i++){
     const ex=(i+.5-cx)/r,ey=(j+.5-cy)/r,nx=HZ?ex/SQ:ex,ny=HZ?ey:ey/SQ,q=nx*nx+ny*ny;if(q>1.02)continue;
     const nz=Math.sqrt(Math.max(0,1-q)),aa=Math.min(1,Math.max(0,(1-Math.sqrt(q))*r*SQ+.5));
-    if(GL){const o=(j*px+i)*4,gc=glass(k,nx,ny,nz,HZ,seed),A=aa*gc[3];
+    if(GL){const o=(j*px+i)*4,gc=glass(MAT[k].gl,nx,ny,nz,HZ,seed,MAT[k].tint),A=aa*gc[3];
       d[o]=d[o]*(1-A)+Math.min(255,gc[0]*255)*A;d[o+1]=d[o+1]*(1-A)+Math.min(255,gc[1]*255)*A;d[o+2]=d[o+2]*(1-A)+Math.min(255,gc[2]*255)*A;d[o+3]=Math.max(d[o+3],A*255);continue}
     // object-space point (rotated per seed so beads differ)
     const ox=HZ?ny:nx,oy=HZ?nx:ny;let px1=ox*ca-nz*sa,pz1=ox*sa+nz*ca,py1=oy*cb-pz1*sb,pz2=oy*sb+pz1*cb;
@@ -521,9 +552,24 @@ function Beads(stage,kind){
 }
 
 /* ---------- bead settings sheet: materials (optional) + vibration + bead sound + volume ---------- */
-function styleSheet(){beadSettings(true)}
+/* bead style picker: one short page with four tabs (Crystal, Stone, Wood, Modern) so ✕ and every bead fit on screen */
+function styleSheet(){
+  let tab=(MAT[st.mat]||{}).g||'k';
+  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(TX('Bead style','شكل الحبّات','Akkaataa callee','Qaabka kuusha'))}</h1>${XB}</div>
+  <div class="tb-tabs nosw" role="tablist">${MGROUPS.map(([g,n])=>`<button role="tab" data-tg="${g}">${esc(TX(...n))}</button>`).join('')}</div>
+  <div class="tb-mg nosw" id="tbMG"></div>`);
+  const sh=document.getElementById('sh');sh.classList.add('nosw');
+  const paint=()=>{sh.querySelectorAll('[data-tg]').forEach(b=>{const on=b.dataset.tg===tab;b.classList.toggle('on',on);b.setAttribute('aria-selected',String(on))});
+    const mg=document.getElementById('tbMG');mg.innerHTML=Object.keys(MAT).filter(k=>MAT[k].g===tab).map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('');
+    mg.querySelectorAll('[data-mat]').forEach(b=>b.onclick=()=>{st.mat=b.dataset.mat;saveSt();haptic(false);clack(false);
+      mg.querySelectorAll('[data-mat]').forEach(x=>{const on=x===b;x.classList.toggle('on',on);x.setAttribute('aria-pressed',String(on))});if(document.getElementById('tbMatI'))paintMat();if(beads)beads.refresh()})};
+  sh.querySelectorAll('[data-tg]').forEach(b=>b.onclick=()=>{tab=b.dataset.tg;paint()});paint();
+  // the sheet closes only from ✕, the dimmed area, or a pull on its top bar (never by scrolling the beads)
+  const off=new MutationObserver(()=>{if(!sh.classList.contains('on')){sh.classList.remove('nosw');off.disconnect()}});off.observe(sh,{attributes:true,attributeFilter:['class']});
+}
 function beadSettings(mats){
-  const keys=Object.keys(MAT);
+  if(mats){styleSheet();return}const keys=Object.keys(MAT);mats=false;
+  setTimeout(()=>{const sh=document.getElementById('sh');sh.classList.add('nosw');const off=new MutationObserver(()=>{if(!sh.classList.contains('on')){sh.classList.remove('nosw');off.disconnect()}});off.observe(sh,{attributes:true,attributeFilter:['class']})});
   openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${esc(mats?TX('Bead style','شكل الحبّات','Akkaataa callee','Qaabka kuusha'):TX('Tasbih beads','حبّات التسبيح','Callee tasbiihaa','Kuusha tasbiixda'))}</h1>${XB}</div>
   ${mats?[['m',TX('Modern','عصري','Ammayyaa','Casri')],['c',TX('Classic','كلاسيكي','Durii','Caadi')]].map(([gk,gt])=>`<p class="tb-sh">${esc(gt)}</p><div class="tb-mg">${keys.filter(k=>MAT[k].g===gk).map(k=>`<button data-mat="${k}" class="${k===st.mat?'on':''}" aria-pressed="${k===st.mat}"><img alt="" src="${beadImg(k,1,96)}"><span>${esc(matName(k))}</span></button>`).join('')}</div>`).join(''):''}
   <p class="tb-sh">${esc(TX('Vibration','الاهتزاز','Raafama','Gariir'))}</p>

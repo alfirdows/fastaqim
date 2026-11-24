@@ -204,7 +204,7 @@ html[dir=rtl] .cm .tt{text-align:start}
 /* sheet */
 .scrim{position:fixed;inset:0;background:rgba(15,12,8,.32);z-index:40;opacity:0;pointer-events:none;transition:opacity .25s}
 .scrim.on{opacity:1;pointer-events:auto}
-.sh{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:90vh;overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:8px 16px calc(env(safe-area-inset-bottom) + 24px);transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.8,.2,1);overscroll-behavior:contain}
+.sh{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:90vh;max-height:calc(100dvh - 40px);overflow:auto;background:var(--bg);border-radius:28px 28px 0 0;padding:8px 16px calc(env(safe-area-inset-bottom) + 24px);transform:translateY(105%);transition:transform .32s cubic-bezier(.2,.8,.2,1);overscroll-behavior:contain}
 .sh.on{transform:none}
 .grab{width:38px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 4px}
 .sh .hd{margin:4px 0 10px}
@@ -884,7 +884,7 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .g6h{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.g6h b{display:flex;align-items:center;gap:8px;font-size:16px}.g6h b i{color:var(--acc);font-size:20px}.g6h span{color:var(--sub);font-size:13px;font-variant-numeric:tabular-nums}
 .g6svg{display:block;width:100%;height:auto;border-radius:14px;background:linear-gradient(#fbf9f4,#f2f6f2)}
 .g6new{animation:g6n .9s cubic-bezier(.2,.9,.3,1.2) both;transform-box:fill-box;transform-origin:50% 100%}@keyframes g6n{from{opacity:0;transform:scale(.6) translateY(6px)}to{opacity:1;transform:none}}
-.g6rv{stroke-dasharray:6 10;animation:g6f 3s linear infinite}@keyframes g6f{to{stroke-dashoffset:-32}}
+.g6sh{animation:g6s 4s ease-in-out infinite}@keyframes g6s{0%,100%{opacity:.25}50%{opacity:.8}}@media (prefers-reduced-motion:reduce){.g6sh{animation:none}}@keyframes g6f{to{stroke-dashoffset:-32}}
 @media (prefers-reduced-motion:reduce){.g6rv,.g6new{animation:none}}
 .g6e{display:flex;align-items:center;gap:12px;padding:14px;border-radius:14px;background:var(--card2);color:var(--sub);font-size:14px}.g6e i{font-size:28px;color:var(--acc)}.g6e p{margin:0}
 .g6n{margin:10px 2px 2px;font-size:14px;color:var(--ink);text-align:center}
@@ -1359,7 +1359,7 @@ const VA=[["13:28"],["94:5","94:6"],["2:286"],["2:152"],["2:153"],["2:186"],["3:
 /* Ayah of the day: a new one every day (local date), same for everyone; "Another" only changes today's */
 const VA_DAY=()=>{const d=NOW();return Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/864e5)};
 const VAG=()=>{const dk=dkey(NOW()),o=(S.vaO&&S.vaO.d===dk)?S.vaO.n:0;return VA[(VA_DAY()+o)%VA.length]};
-const VAC={};const vaLoad=g=>Promise.all([...new Set(g.map(k=>+k.split(':')[0]))].map(n=>VAC[n]||(VAC[n]=fetch('q/'+n+'.json').then(r=>r.json()).then(j=>{j.v.forEach((x,i)=>{const k=n+':'+(i+1);if(!QD[k])QD[k]={a:x[0],en:x[1]}})}).catch(()=>{delete VAC[n]}))));
+const VAC={};const vaLoad=g=>Promise.all([...new Set(g.map(k=>+k.split(':')[0]))].map(n=>VAC[n]||(VAC[n]=fetch('q/'+n+'.json').then(r=>r.json()).then(j=>{j.v.forEach((x,i)=>{const k=n+':'+(i+1);if(!QD[k])QD[k]={a:x[0].replace(/\u06DE\s*/g,''),en:x[1]}})}).catch(()=>{delete VAC[n]}))));
 const vaReady=g=>g.every(k=>QD[k]);
 const ARD=n=>String(n).replace(/\d/g,d=>'٠١٢٣٤٥٦٧٨٩'[d]);
 const vaRef=g=>{const[su,a]=g[0].split(':').map(Number),b=+g[g.length-1].split(':')[1],S0=SU[su-1],r=su+':'+a+(g.length>1?'–'+b:'');return{su,a,b,r,u:'https://quran.com/'+su+'/'+a+(g.length>1?'-'+b:''),t:T("Qur'an, Surah "+S0[0]+' '+r,'القرآن، سورة '+S0[1]+' '+ARD(r))}};
@@ -2239,29 +2239,48 @@ if(!ACT6){const _as=acctSheet;acctSheet=function(){const r=_as.apply(this,argume
 /* ===== Jannah garden (kept from the old main page, redrawn in the v6 palette): every dhikr counted today adds to a calm garden
    (grass, flowers, rivers of water, milk and honey, trees, fruit, a palace, light). It grows through the day and starts fresh tomorrow.
    No beings with souls, no star shapes. ===== */
-const ZG6=[[1,'Grass','عشب'],[4,'Flowers','زهور'],[8,'River of water','نهر من ماء'],[12,'A tree','شجرة'],[18,'Another tree','شجرة أخرى'],[25,'Fruit','ثمار'],[33,'A palace','قصر'],[45,'Palms','نخيل'],[60,'More flowers','زهور أكثر'],[80,'River of milk','نهر من لبن'],[100,'River of honey','نهر من عسل'],[130,'Light','نور'],[170,'Soft light','ضياء'],[220,'More trees','أشجار أكثر'],[300,'Full light','نور تام']];
-function g6Tree(x,s,c,fr){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-2 0 Q-1 -14 -3 -26 L3 -26 Q1 -14 2 0z" fill="#8a6a4a"/><circle cx="0" cy="-34" r="13" fill="${c}"/><circle cx="-10" cy="-27" r="9" fill="${c}"/><circle cx="10" cy="-27" r="9" fill="${c}"/><circle cx="0" cy="-42" r="9" fill="${c}" opacity=".92"/>${fr?`<g><circle cx="-6" cy="-32" r="2.5" fill="#c9a96a"/><circle cx="7" cy="-36" r="2.5" fill="#b8955a"/><circle cx="2" cy="-26" r="2.5" fill="#c9a96a"/><circle cx="-11" cy="-24" r="2.2" fill="#b8955a"/><circle cx="11" cy="-25" r="2.2" fill="#c9a96a"/></g>`:''}</g>`}
-function g6Palm(x,s){return `<g transform="translate(${x} 104) scale(${s})"><path d="M-1.5 0 Q2 -18 0 -34 L3 -34 Q5 -18 1.5 0z" fill="#9a7650"/><g transform="translate(1.5 -34)" fill="none" stroke="#2e6b32" stroke-width="3" stroke-linecap="round"><path d="M0 0 q-10 -6 -20 2"/><path d="M0 0 q10 -6 20 2"/><path d="M0 0 q-6 -10 -15 -10"/><path d="M0 0 q6 -10 15 -10"/><path d="M0 0 q0 -8 1 -14"/></g><circle cx="0" cy="-31" r="2.1" fill="#b8955a"/><circle cx="3.5" cy="-31" r="2.1" fill="#b8955a"/></g>`}
-function g6Flowers(xs){return xs.map((x,j)=>{const c=['#ffffff','#e8d3a5','#f5eedf','#d8c08e'][j%4];return `<g transform="translate(${x} ${103+(j%2)})"><path d="M0 0 V-7" stroke="#4d8a52" stroke-width="1.3"/><circle cy="-9" r="2.1" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="-2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cx="2.2" cy="-7.5" r="1.7" fill="${c}" stroke="#d8c9a8" stroke-width=".5"/><circle cy="-8.3" r="1" fill="#b8955a"/></g>`}).join('')}
-function g6River(y,c,edge){const d=`M-4 ${y} C40 ${y-4} 80 ${y+4} 120 ${y} S200 ${y-4} 240 ${y} S300 ${y+3} 324 ${y}`;return `<path d="${d}" stroke="${edge}" stroke-width="5.4" fill="none" stroke-linecap="round"/><path class="g6rv" d="${d}" stroke="${c}" stroke-width="3.6" fill="none" stroke-linecap="round"/>`}
+const ZG6=[[1,'Grass','عشب'],[4,'Flowers','زهور'],[8,'River of water','نهر من ماء'],[12,'A tree','شجرة'],[18,'Another tree','شجرة أخرى'],[25,'Fruit','ثمار'],[33,'Wide shade','ظل ممدود'],[45,'Palms','نخيل'],[60,'More flowers','زهور أكثر'],[80,'River of milk','نهر من لبن'],[100,'River of honey','نهر من عسل'],[130,'Light','نور'],[170,'Soft light','ضياء'],[220,'More trees','أشجار أكثر'],[300,'Full light','نور تام']];
+/* Garden (24 Nov redesign): calm landscape with depth (soft gradients, far elements paler), no outlines, no buildings */
+function g6Tree(x,y,s,far,fr){const c=far?'url(#g6CF)':'url(#g6C)';
+ return `<g transform="translate(${x} ${y}) scale(${s})"><path d="M-1.6 0 C-1.2 -8 -2.2 -16 -1 -24 L1 -24 C2.2 -16 1.2 -8 1.6 0z" fill="${far?'#a3907a':'#6b5641'}"/><path d="M0 -17 L-6 -24 M0 -14 L5 -21" stroke="${far?'#a3907a':'#6b5641'}" stroke-width="1" stroke-linecap="round"/>`
+ +`<ellipse cx="-8" cy="-27" rx="10" ry="8.5" fill="${c}"/><ellipse cx="8" cy="-28" rx="10.5" ry="9" fill="${c}"/><ellipse cx="0" cy="-36" rx="12" ry="10" fill="${c}"/><ellipse cx="-3" cy="-24" rx="9" ry="6.5" fill="${c}"/>`
+ +`<ellipse cx="-3" cy="-39" rx="6" ry="3.4" fill="#fff" opacity="${far?.08:.10}"/>`
+ +(fr?[[-9,-27],[6,-31],[1,-22],[10,-24],[-4,-35]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="1.5" fill="#d4ab5a"/><circle cx="${a-.4}" cy="${b-.5}" r=".5" fill="#fff" opacity=".55"/>`).join(''):'')+`</g>`}
+function g6Palm(x,y,s,flip){const L=a=>`<path transform="rotate(${a})" d="M0 0 C6 -2 14 -1 21 4 C14 2 7 2 0 1.6z" fill="url(#g6P)"/>`;
+ return `<g transform="translate(${x} ${y}) scale(${flip?-s:s} ${s})"><path d="M-1.8 0 C0 -12 1 -24 4.4 -36 L6.2 -35.6 C3.2 -23 2.2 -12 1.8 0z" fill="url(#g6T)"/>`
+ +`<g transform="translate(5.3 -36)">${[-160,-128,-96,-62,-28,6,30].map(L).join('')}<circle r="1.6" fill="#5a4a38"/></g></g>`}
+function g6Blooms(pts){return pts.map(([x,y],j)=>`<g transform="translate(${x} ${y})" opacity=".95">${[0,72,144,216,288].map(a=>`<circle transform="rotate(${a})" cy="-1.5" r="1.05" fill="${j%3?'#fbf6ea':'#f1e3c2'}"/>`).join('')}<circle r=".7" fill="#c9a55e"/></g>`).join('')}
+function g6Band(y,id,hl){const d=`M-6 ${y} C60 ${y-3.5} 120 ${y+3} 170 ${y} S270 ${y-3} 326 ${y+1}`;
+ return `<path d="${d}" stroke="url(#${id})" stroke-width="6.5" fill="none" stroke-linecap="round"/><path class="g6sh" d="${d}" stroke="${hl}" stroke-width="1.1" fill="none" opacity=".7" transform="translate(0 -1.6)"/>`}
 function g6Svg(tot,fresh){const on=k=>tot>=ZG6[k][0],nw=k=>fresh===k?' g6new':'';let g='';
- g+=`<defs><radialGradient id="g6L" cx="50%" cy="60%" r="55%"><stop offset="0" stop-color="#f6e7bf" stop-opacity=".95"/><stop offset="1" stop-color="#f6e7bf" stop-opacity="0"/></radialGradient></defs>`;
- if(on(14))g+=`<rect class="${nw(14)}" x="0" y="0" width="320" height="130" fill="url(#g6L)" opacity=".6"/>`;
- if(on(12))g+=`<g class="g6glow${nw(12)}">${[[24,20],[70,12],[118,26],[200,14],[250,28],[298,16],[160,8],[140,40],[226,44]].map(([a,b],i)=>`<circle cx="${a}" cy="${b}" r="${1.6+(i%3)*.7}" fill="#e3c98e" opacity=".85"/>`).join('')}</g>`;
- if(on(11))g+=`<g class="${nw(11)}"><ellipse cx="160" cy="74" rx="80" ry="46" fill="url(#g6L)"/></g>`;
- if(on(6)){const lit=on(11);g+=`<g class="${nw(6)}" opacity="${lit?1:.6}"><rect x="128" y="74" width="64" height="30" rx="2" fill="#fbf8f1" stroke="#d8c9a8"/><path d="M146 74 Q160 46 174 74z" fill="${lit?'#d8c08e':'#ece6da'}" stroke="#d8c9a8"/><rect x="122" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M120.5 62 L125.5 52 L130.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/><rect x="191" y="62" width="7" height="42" fill="#f5f2ea" stroke="#d8c9a8"/><path d="M189.5 62 L194.5 52 L199.5 62z" fill="${lit?'#d8c08e':'#ece6da'}"/>${[136,148,160,172,184].map(x=>`<path d="M${x-3.5} 104 V91 Q${x} 85 ${x+3.5} 91 V104z" fill="${lit?'#e8d3a5':'#e3ded3'}"/>`).join('')}</g>`}
- if(on(13))g+=`<g class="${nw(13)}">${g6Tree(98,.62,'#6f9e72',on(5))}${g6Tree(222,.62,'#6f9e72',on(5))}</g>`;
- g+=`<path d="M0 104 Q80 94 160 102 T320 100 V130 H0z" fill="#dfe9dc"/><path d="M0 108 Q90 100 170 106 T320 104 V130 H0z" fill="#c9dcc6"/>`;
- if(on(0))g+=`<g class="${nw(0)}">${[...Array(16)].map((_,j)=>{const x=8+j*20;return `<path d="M${x} 108 q1 -6 3 -8 M${x+3} 108 q0 -7 -2 -9 M${x+6} 108 q-1 -5 2 -7" stroke="#4d8a52" stroke-width="1.2" fill="none"/>`}).join('')}</g>`;
- if(on(2))g+=`<g class="${nw(2)}">${g6River(113,'#a9d3e6','#6fa9c4')}</g>`;
- if(on(9))g+=`<g class="${nw(9)}">${g6River(119,'#fdfbf5','#d8d0bc')}</g>`;
- if(on(10))g+=`<g class="${nw(10)}">${g6River(125,'#e3c17a','#b8955a')}</g>`;
- if(on(3))g+=`<g class="${nw(3)}">${g6Tree(56,1,'#2e6b32',on(5))}</g>`;
- if(on(4))g+=`<g class="${nw(4)}">${g6Tree(266,1,'#2e6b32',on(5))}</g>`;
- if(on(7))g+=`<g class="${nw(7)}">${g6Palm(18,1)}${g6Palm(304,1)}</g>`;
- if(on(1))g+=`<g class="${nw(1)}">${g6Flowers([84,94,104,112])}</g>`;
- if(on(8))g+=`<g class="${nw(8)}">${g6Flowers([208,218,228,238,246])}</g>`;
- const top=on(11)||on(12)||on(14)?0:on(6)?38:on(3)?52:70;return `<svg viewBox="0 ${top} 320 ${130-top}" class="g6svg" aria-hidden="true">${g}</svg>`}
+ g+=`<defs><linearGradient id="g6S" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${on(14)?'#f8efd9':'#f8f6ef'}"/><stop offset="1" stop-color="#edf2ea"/></linearGradient>
+ <radialGradient id="g6L" cx="50%" cy="58%" r="55%"><stop offset="0" stop-color="#f4e2b4" stop-opacity=".9"/><stop offset="1" stop-color="#f4e2b4" stop-opacity="0"/></radialGradient>
+ <linearGradient id="g6H" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dde7da"/><stop offset="1" stop-color="#cfdccb"/></linearGradient>
+ <linearGradient id="g6M" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${on(0)?'#b9d0b2':'#cbdbc6'}"/><stop offset="1" stop-color="${on(0)?'#9dbb97':'#bccfb7'}"/></linearGradient>
+ <radialGradient id="g6C" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#5a9462"/><stop offset="1" stop-color="#2d5c38"/></radialGradient>
+ <radialGradient id="g6CF" cx="40%" cy="30%" r="80%"><stop offset="0" stop-color="#a9c6a8"/><stop offset="1" stop-color="#86a888"/></radialGradient>
+ <linearGradient id="g6P" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2f6139"/><stop offset="1" stop-color="#4f8a58"/></linearGradient>
+ <linearGradient id="g6T" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#6b5641"/><stop offset="1" stop-color="#9a8062"/></linearGradient>
+ <linearGradient id="g6W" x1="0" x2="1"><stop offset="0" stop-color="#a9cfdd"/><stop offset=".5" stop-color="#c7e1ea"/><stop offset="1" stop-color="#a2c9d8"/></linearGradient>
+ <linearGradient id="g6K" x1="0" x2="1"><stop offset="0" stop-color="#efe9da"/><stop offset=".5" stop-color="#fdfbf5"/><stop offset="1" stop-color="#ebe4d3"/></linearGradient>
+ <linearGradient id="g6Y" x1="0" x2="1"><stop offset="0" stop-color="#d2a85c"/><stop offset=".5" stop-color="#ecd096"/><stop offset="1" stop-color="#cba05a"/></linearGradient></defs>`;
+ g+=`<rect width="320" height="150" fill="url(#g6S)"/>`;
+ if(on(11))g+=`<ellipse class="${nw(11)}" cx="160" cy="78" rx="130" ry="62" fill="url(#g6L)"/>`;
+ if(on(14))g+=`<rect class="${nw(14)}" width="320" height="150" fill="url(#g6L)" opacity=".55"/>`;
+ if(on(12))g+=`<g class="g6glow${nw(12)}">${[[38,30],[92,18],[136,40],[196,22],[244,36],[286,20],[166,12]].map(([a,b],i)=>`<circle cx="${a}" cy="${b}" r="${1+(i%3)*.5}" fill="#e2c48a" opacity=".6"/>`).join('')}</g>`;
+ g+=`<path d="M0 94 C50 82 100 88 150 83 S250 76 320 88 V150 H0z" fill="url(#g6H)"/>`;
+ if(on(13))g+=`<g class="${nw(13)}">${g6Tree(112,96,.62,1,0)}${g6Tree(214,94,.58,1,0)}${g6Tree(244,97,.5,1,0)}</g>`;
+ if(on(6))g+=`<g class="${nw(6)}">${g6Tree(160,99,1.25,1,on(5))}</g>`;
+ g+=`<path d="M0 106 C70 98 120 104 170 101 S270 97 320 104 V150 H0z" fill="url(#g6M)"/>`;
+ if(on(1))g+=`<g class="${nw(1)}">${g6Blooms([[86,108],[96,110],[104,107],[112,110]])}</g>`;
+ if(on(8))g+=`<g class="${nw(8)}">${g6Blooms([[200,107],[210,109],[219,106],[228,109],[238,107]])}</g>`;
+ if(on(2))g+=`<g class="${nw(2)}">${g6Band(117,'g6W','#eef7fa')}</g>`;
+ if(on(9))g+=`<g class="${nw(9)}">${g6Band(127,'g6K','#ffffff')}</g>`;
+ if(on(10))g+=`<g class="${nw(10)}">${g6Band(137,'g6Y','#f7e6bb')}</g>`;
+ if(on(3))g+=`<g class="${nw(3)}">${g6Tree(60,108,1.05,0,on(5))}</g>`;
+ if(on(4))g+=`<g class="${nw(4)}">${g6Tree(262,107,1,0,on(5))}</g>`;
+ if(on(7))g+=`<g class="${nw(7)}">${g6Palm(22,112,1.1,0)}${g6Palm(298,112,1.1,1)}</g>`;
+ const top=on(11)||on(12)||on(14)?0:on(6)||on(13)?40:on(3)||on(7)?48:68;return `<svg viewBox="0 ${top} 320 ${150-top}" class="g6svg" aria-hidden="true">${g}</svg>`}
 function gardenDraw(){const box=$('g6');if(!box)return;const tot=dzCount(),k=ZG6.filter(x=>tot>=x[0]).length-1,dk=dkey(NOW());
  let seen=null;try{seen=JSON.parse(localStorage.getItem('fq5.g6')||'null')}catch(e){}const last=seen&&seen.d===dk?seen.k:-1,fresh=k>last?k:-1;localStorage.setItem('fq5.g6',JSON.stringify({d:dk,k}));
  const nx=ZG6[k+1],lbl=x=>T(x[1],x[2]);

@@ -64,3 +64,5 @@
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',mount);else mount();
  window.addEventListener('load',function(){mount();setTimeout(function(){if(isOn())convert()},1500)});
 })();
+/* hairline under the sticky title bar once the page is scrolled */
+(function(){var on=false;addEventListener('scroll',function(){var s=scrollY>8;if(s!==on){on=s;document.documentElement.classList.toggle('fq-scrolled',s)}},{passive:true})})();

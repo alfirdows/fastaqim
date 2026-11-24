@@ -338,7 +338,7 @@ function pinch(el){const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clien
 /* ---------- every sheet: swipe down to close, shadow under the sticky title row ---------- */
 (function(){const sh=$('sh');if(!sh||sh.dataset.sw)return;sh.dataset.sw=1;let y0=null,dy=0;
  sh.addEventListener('scroll',()=>sh.classList.toggle('scr',sh.scrollTop>4),{passive:true});
- sh.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest('input,textarea,select,.fz-seg'))return;if(sh.scrollTop>0&&!e.target.closest('.grab,.hd'))return;y0=e.touches[0].clientY;dy=0},{passive:true});
+ sh.addEventListener('touchstart',e=>{if(e.touches.length!==1||e.target.closest('input,textarea,select,.fz-seg'))return;if(sh.classList.contains('nosw')&&!e.target.closest('.grab,.hd'))return;if(sh.scrollTop>0&&!e.target.closest('.grab,.hd'))return;y0=e.touches[0].clientY;dy=0},{passive:true});
  sh.addEventListener('touchmove',e=>{if(y0==null)return;dy=e.touches[0].clientY-y0;if(dy>0){sh.classList.add('drag');sh.style.transform=`translateY(${dy}px)`;if(e.cancelable)e.preventDefault()}else if(dy<-6){y0=null;sh.classList.remove('drag');sh.style.transform=''}},{passive:false});
  sh.addEventListener('touchend',()=>{if(y0==null)return;y0=null;sh.classList.remove('drag');sh.style.transform='';if(dy>90)closeSheet();dy=0});
  let was=false;new MutationObserver(()=>{const on=sh.classList.contains('on');if(on===was)return;was=on;if(!on){sh.style.transform='';sh.classList.remove('scr')}}).observe(sh,{attributes:true,attributeFilter:['class']});
