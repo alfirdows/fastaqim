@@ -32,21 +32,22 @@ print('items',len(nums))
 for n in nums:
     h=get(f'https://sunnah.com/hisn:{n}')
     if not h: sun[n]={'ok':0};continue
-    m=re.search(r'<div class="actualHadithContainer.*?(?=<div class="bottomItems|<div id="footer)',h,re.S)
-    blk=m.group(0) if m else ''
+    if n in (1,75,79):open(f'data/hisn/sample{n}.html','w').write(h)
+    blk=h
     en_=re.search(r'class="english_hadith_full"(.*?)</div>\s*</div>',blk,re.S)
     ar_=re.search(r'class="arabic_hadith_full[^"]*"(.*?)</div>',blk,re.S)
     ref=re.search(r'class="hadith_reference"(.*?)</table>',blk,re.S)
     gr=re.search(r'class="gradetable"(.*?)</table>',blk,re.S)
-    sun[n]={'ok':1,'en':clean(en_.group(1)) if en_ else '','ar':clean(ar_.group(1)) if ar_ else '','ref':clean(ref.group(1)) if ref else '','grade':clean(gr.group(1)) if gr else '','raw':clean(blk)[:3000]}
+    sun[n]={'ok':1,'en':clean(en_.group(1)) if en_ else '','ar':clean(ar_.group(1)) if ar_ else '','ref':clean(ref.group(1)) if ref else '','grade':clean(gr.group(1)) if gr else '','raw':''}
     if n%25==0:print(n,sun[n]['ref'][:120],'|',sun[n]['grade'][:80])
     time.sleep(.4)
 json.dump(sun,open('data/hisn/sunnah.json','w'),ensure_ascii=False,indent=0)
 for n in nums:
     out=f'hisn/a/{n}.m4a'
     if os.path.exists(out) and os.path.getsize(out)>1000: continue
+    if os.path.exists(out): os.remove(out)
     b=get(B+f'audio/{n}.mp3',bin=True)
     if not b: print('no audio',n);continue
     open('/tmp/a.mp3','wb').write(b)
-    subprocess.run(['ffmpeg','-v','error','-y','-i','/tmp/a.mp3','-ac','1','-ar','32000','-c:a','aac','-b:a','40k','-movflags','+faststart',out],check=False)
+    subprocess.run(['ffmpeg','-v','error','-y','-i','/tmp/a.mp3','-vn','-map','0:a:0','-ac','1','-ar','32000','-c:a','aac','-b:a','40k','-movflags','+faststart',out],check=False)
 print('done')
