@@ -59,7 +59,11 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 @media(max-width:380px){.tb-bar{gap:8px}.tb-mat,.tb-rs{padding:0 11px}}
 /* style sheet */
 .tb-mg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 14px}
-.tb-mg button{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:8px 2px 9px;display:flex;flex-direction:column;align-items:center;gap:2px;font:600 12px/1.25 Inter,Plex,sans-serif;color:var(--ink);min-height:96px}
+.tb-tabs{display:flex;gap:4px;padding:4px;margin:0 0 12px;background:var(--card2);border-radius:14px}
+.tb-tabs button{flex:1;min-width:0;height:36px;border:0;border-radius:10px;background:transparent;font:600 13.5px Inter,Plex,sans-serif;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-tabs button.on{background:var(--card);color:var(--acc);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+#tbMG{min-height:300px;align-content:start}
+.tb-mg button{border:1.5px solid var(--line);background:var(--card);border-radius:16px;padding:7px 2px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;font:600 12px/1.25 Inter,Plex,sans-serif;color:var(--ink);min-height:92px}
 .tb-mg button img{width:56px;height:56px}
 .tb-mg button span{text-align:center;padding:0 2px}
 .tb-mg button.on{border-color:var(--acc);box-shadow:0 0 0 3px var(--accT)}
