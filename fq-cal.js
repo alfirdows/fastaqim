@@ -44,7 +44,8 @@ const calIc=on=>`<svg class="fq-ti fqi${on?' on':''}" viewBox="0 0 24 24" aria-h
 {const _rt=window.renderTab;window.renderTab=function(on){_rt.apply(this,arguments);try{
   const c=document.querySelector('#tab a[data-tab="cal"]');if(c){const o=c.querySelector('svg,i');if(o)o.outerHTML=calIc(c.classList.contains('on'))}
   const q=document.querySelector('#tab a[data-tab="quran"]'),zn=typeof dzCount==='function'?dzCount():0;
-  if(q&&zn&&!q.querySelector('.tbd'))q.insertAdjacentHTML('afterbegin',`<span class="tbd">${AR(zn>999?'999+':zn)}</span>`)}catch(e){}}}
+  /* no number badge on the tab: a badge reads as "unread"; today's dhikr total is shown on the Dhikr page */
+  if(q){const o=q.querySelector('.tbd');if(o)o.remove()}}catch(e){}}}
 
 /* =============== 2. Calendar screen =============== */
 /* the older Hijri month view stays, as "Hijri month" */

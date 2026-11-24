@@ -17,3 +17,5 @@
 .fqy-add{display:flex;flex-direction:column;gap:8px}
 .fqy-add .inp{resize:none}
 .fqy-l{display:block}
+.fqy-ar.fqy-hd,.fqy-rt b.fqy-hd{font-family:Plex,system-ui,sans-serif;font-weight:400;font-size:20px;line-height:1.85}
+.fqy-rt b.fqy-hd{font-size:17px}
