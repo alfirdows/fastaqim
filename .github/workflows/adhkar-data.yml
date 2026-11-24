@@ -23,7 +23,7 @@ jobs:
       - name: Install
         run: |
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
-          pip install -q "faster-whisper==1.1.1" numpy uroman
+          pip install -q "faster-whisper==1.1.1" numpy uroman requests
           pip install -q torch==2.5.1 torchaudio==2.5.1 --index-url https://download.pytorch.org/whl/cpu
       - name: Word meanings from Quran.com
         run: python tools/adhkar/fetch_words.py
