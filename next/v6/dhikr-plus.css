@@ -138,7 +138,7 @@ html.tbx-open,html.tbx-open body{overflow:hidden}
 .tb-ckb span{width:84%;height:84%;border-radius:50%;background:radial-gradient(circle at 38% 30%,color-mix(in srgb,var(--acc) 55%,#fff),var(--acc) 62%);box-shadow:0 7px 0 color-mix(in srgb,var(--acc) 70%,#000),0 12px 18px rgba(0,0,0,.2);transform:translateY(-5px);transition:transform .06s,box-shadow .06s}
 .tb-ckb.dn span{transform:translateY(1px);box-shadow:0 1px 0 color-mix(in srgb,var(--acc) 70%,#000),0 3px 6px rgba(0,0,0,.18)}
 /* hidden switch inside every tap target (the iPhone tick comes from a real tap on its label) */
-.tb-hs{position:absolute;left:0;top:0;width:1px;height:1px;margin:0;visibility:hidden;pointer-events:none}
+.tb-hs{position:absolute;left:0;top:0;width:1px;height:1px;margin:0;opacity:0;pointer-events:none;-webkit-appearance:auto}  /* kept rendered (not hidden), like a real switch */
 .tb-hl{position:absolute;inset:0;display:block;cursor:grab;-webkit-tap-highlight-color:transparent}
 label.tb-tap{display:grid;place-items:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
 label.tb-try{cursor:pointer;position:relative}

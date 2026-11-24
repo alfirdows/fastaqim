@@ -354,24 +354,33 @@ function Clicker(stage){
 }
 
 /* ---------- bead strands: v (up-down), h (side), ring (round), loop (hanging) ----------
-   The bead under the finger follows it 1:1 along the thread, with a soft detent: it resists a little
-   near rest, then slips through the gap. The count, haptic tick and click happen at the exact moment
-   a bead crosses the gap. Pulling it back in the same drag takes that count back (silently). */
+   Real-bead physics: every bead sits on the thread on its own. The bead under the finger follows it
+   1:1 and pushes any beads it runs into; nothing else moves. A bead counts the moment it is moved
+   across open space and touches the bead on the other side (the click and tick land right then).
+   Flick it and it glides on by itself and clicks into place. The space can be anywhere: pull any
+   bead away from its neighbour and a new space opens there. Pulling a bead back in the same
+   gesture takes that count back. */
 let beads=null;
 const clampN=(a,b,...v)=>Math.round(Math.max(a,Math.min(b,...v)));
-const DET=0,disp=r=>r-DET*Math.sin(2*Math.PI*(r-.5))/(2*Math.PI);
 function uncount(){const n=getN();if(n<=0)return;setN(n-1);dzAdd(-1);try{renderTab(curTab())}catch(e){}paintCount(n-1)}
 function Beads(stage,kind){
   stage.innerHTML=`<div class="tb-str k-${kind}" id="tbStr" tabindex="0" role="button"><svg class="tb-th" aria-hidden="true"><path/></svg><label class="tb-hl" aria-hidden="true">${HSW}</label></div>`;
   const el=stage.firstChild,svg=el.firstChild,thp=svg.firstChild,lab=el.querySelector('.tb-hl');hsw(el);
-  el.setAttribute('aria-label',TX('Bead counter. Drag a bead across the gap, or press the arrow keys.','عدّاد المسبحة. اسحب حبّة عبر الفراغ أو استخدم الأسهم.',"Lakkaa'aa callee. Callee tokko harkisi.",'Tiriyaha kuusha. Kuul jiid.'));
+  el.setAttribute('aria-label',TX('Bead counter. Slide a bead across the space, or press the arrow keys.','عدّاد المسبحة. حرّك حبّة عبر الفراغ أو استخدم الأسهم.',"Lakkaa'aa callee. Callee tokko harkisi.",'Tiriyaha kuusha. Kuul jiid.'));
   const dpr=Math.min(3,window.devicePixelRatio||2),RTL=document.documentElement.dir==='rtl';
   const tapDir=(kind==='h'||kind==='loop')&&RTL?-1:1;
-  let SPC=false,SPP=[],W=0,H=0,D=0,E=0,S=0,GAP=0,N=0,LV=0,POOL=[],raw=.5,anim=null,alive=true,P=null,periodic=false,px=0,C=0,R=0,cx=0,cy=0;
-  const uOf=s=>{const o=s/S;return s+(GAP/2)*(o>=.5?1:o<=-.5?-1:2*o)};
-  // one bead at a time: the strand is anchored at P0, so only the bead crossing the gap moves while you pull.
-  // The gap itself travels by one bead; when you let go the strand gently re-centres.
-  let P0=.5,rc=null,rest=0,lastD=-1;  // rest = the bead position (integer) where the strand last settled
+  let SPC=false,W=0,H=0,D=0,E=0,S=0,GAP=0,N=0,LV=0,C=0,R=0,cx=0,cy=0,px=0,P=null,periodic=false,alive=true;
+  let BS=[],FREE=[],gid=0,raf=0,dn=null,last=null,idle=0;
+  const EPS=.6;                                   // px: closer than this = touching
+  const ease=t=>1-Math.pow(1-t,3);
+  const mk=()=>{const b=FREE.pop()||(()=>{const e=document.createElement('i');e.className='tb-bd';e.setAttribute('aria-hidden','true');el.appendChild(e);
+      let s=null;if(SPC){s=document.createElement('i');s.className='tb-bd tb-sp';s.setAttribute('aria-hidden','true');el.appendChild(s)}return{el:e,sp:s}})();
+    b.el.style.visibility='';b.tw=null;b.v=0;return b};
+  const drop=b=>{b.el.style.visibility='hidden';if(b.sp)b.sp.style.visibility='hidden';FREE.push(b)};
+  // signed distance from bead a to the next bead in direction d (periodic aware); Infinity if none
+  const idx=b=>BS.indexOf(b);
+  function nb(i,d){if(periodic)return BS[(i+d+N)%N];return BS[i+d]}
+  function sep(i,d){const o=nb(i,d);if(!o)return Infinity;let g=(o.x-BS[i].x)*d;if(periodic){g=((g%C)+C)%C}return g-S}
   function layout(){
     W=el.clientWidth||340;H=el.clientHeight||360;cx=W/2;cy=H/2;periodic=false;let d='';
     if(kind==='v'){D=clampN(46,74,H/6.6,W*.22);P=u=>[cx,cy+u,0,1];LV=H/2;d=`M${cx} -20V${H+20}`}
@@ -386,76 +395,129 @@ function Beads(stage,kind){
         const A=pts[lo],B=pts[hi],k=(t-A[0])/((B[0]-A[0])||1),f=A[3]+(B[3]-A[3])*k,tx=a*Math.cos(f),ty=-b*Math.sin(f),m=Math.hypot(tx,ty)||1;
         return[A[1]+(B[1]-A[1])*k,A[2]+(B[2]-A[2])*k,tx/m,ty/m]};
       d=`M${cx-a} -30V${cyE}A${a} ${b} 0 0 0 ${cx+a} ${cyE}V-30`}
-    SPC=!!(MAT[st.mat]||{}).sp;S=D*(SPC?1.2:.97);GAP=D*(kind==='ring'?.9:.95);
-    if(kind==='ring'){N=Math.max(12,Math.floor((C-GAP)/S));S=(C-GAP)/N;periodic=true}
-    const need=periodic?N:Math.ceil((LV+GAP)/S)*2+10;
-    if(POOL.length!==need){POOL.forEach(b=>b.remove());POOL=[];for(let i=0;i<need;i++){const b=document.createElement('i');b.className='tb-bd';b.setAttribute('aria-hidden','true');el.appendChild(b);POOL.push(b)}}
-    E=D/.8;px=Math.round(E*dpr);POOL.forEach(b=>{b.style.width=b.style.height=E+'px';b._k=''});
-    SPP.forEach(b=>b.remove());SPP=[];
-    if(SPC){const se=D*.36/.8,spx=Math.round(se*dpr),img=`url(${beadImg('gold',0,spx,'v')})`;
-      for(let i=0;i<POOL.length;i++){const b=document.createElement('i');b.className='tb-bd tb-sp';b.setAttribute('aria-hidden','true');b.style.width=b.style.height=se+'px';b.style.backgroundImage=img;b._e=se;el.appendChild(b);SPP.push(b)}}
-    svg.setAttribute('width',W);svg.setAttribute('height',H);thp.setAttribute('d',d);P0=disp(raw);el.dataset.step=String(Math.round(S+GAP));draw()
+    const spc=!!(MAT[st.mat]||{}).sp;
+    if(spc!==SPC||!BS.length){BS.concat(FREE).forEach(b=>{b.el.remove();if(b.sp)b.sp.remove()});BS=[];FREE=[]}
+    SPC=spc;S=D*(SPC?1.2:.97);GAP=D*(kind==='ring'?.9:.95);E=D/.8;px=Math.round(E*dpr);
+    // keep the beads where they are on a resize; start fresh only the first time (one space in the middle)
+    BS.forEach(drop);BS=[];
+    if(kind==='ring'){N=Math.max(12,Math.floor((C-GAP)/S));periodic=true;
+      for(let i=0;i<N;i++){const b=mk();b.x=GAP/2+S/2+i*S;b.vi=i%5;BS.push(b)}}
+    else{const n=Math.ceil(LV/S)+3;for(let i=-n;i<n;i++){const b=mk();b.x=(i+.5)*S+(i<0?-GAP/2:GAP/2);b.vi=((i%5)+5)%5;b.g=i;BS.push(b)}}
+    BS.forEach(b=>{b.el.style.width=b.el.style.height=E+'px';b.el._k='';if(b.sp){const se=D*.36/.8;b.sp.style.width=b.sp.style.height=se+'px';b.sp._e=se;b.sp.style.backgroundImage=`url(${beadImg('gold',0,Math.round(se*dpr),'v')})`}});
+    svg.setAttribute('width',W);svg.setAttribute('height',H);thp.setAttribute('d',d);el.dataset.step=String(Math.round(GAP));draw()
   }
-  function place(b,s,vi){
-    const u=uOf(s)+Z;if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
-    const p=P(u),ax=Math.abs(p[2])>Math.abs(p[3])?'h':'v',key=st.mat+vi+ax+px;
-    if(b._k!==key){b.style.backgroundImage=`url(${beadImg(st.mat,vi,px,ax)})`;b._k=key}
-    b.style.visibility='';b.style.transform=`translate3d(${(p[0]-E/2).toFixed(2)}px,${(p[1]-E/2).toFixed(2)}px,0)`;b.style.zIndex=String(1000+Math.round(p[1]))
+  // endless thread: add packed beads at an open end, drop beads far out of view
+  function recycle(){if(periodic)return;
+    while(BS[0].x>-LV-E-S){const f=BS[0],b=mk();b.x=f.x-S;b.g=f.g-1;b.vi=((b.g%5)+5)%5;b.el.style.width=b.el.style.height=E+'px';b.el._k='';if(b.sp){b.sp.style.width=b.sp.style.height=(D*.36/.8)+'px';b.sp._e=D*.36/.8;b.sp.style.backgroundImage=`url(${beadImg('gold',0,Math.round(D*.36/.8*dpr),'v')})`}BS.unshift(b)}
+    while(BS[BS.length-1].x<LV+E+S){const f=BS[BS.length-1],b=mk();b.x=f.x+S;b.g=f.g+1;b.vi=((b.g%5)+5)%5;b.el.style.width=b.el.style.height=E+'px';b.el._k='';if(b.sp){b.sp.style.width=b.sp.style.height=(D*.36/.8)+'px';b.sp._e=D*.36/.8;b.sp.style.backgroundImage=`url(${beadImg('gold',0,Math.round(D*.36/.8*dpr),'v')})`}BS.push(b)}
+    while(BS.length>4&&BS[1].x<-LV-E-3*S&&!(dn&&dn.b===BS[0]))drop(BS.shift());
+    while(BS.length>4&&BS[BS.length-2].x>LV+E+3*S&&!(dn&&dn.b===BS[BS.length-1]))drop(BS.pop())}
+  function draw(){recycle();
+    for(let i=0;i<BS.length;i++){const b=BS[i],u=periodic?((b.x%C)+C)%C-C/2*0:b.x;
+      if(!periodic&&Math.abs(u)>LV+E){b.el.style.visibility='hidden';if(b.sp)b.sp.style.visibility='hidden';continue}
+      const p=P(u),ax=Math.abs(p[2])>Math.abs(p[3])?'h':'v',key=st.mat+b.vi+ax+px;
+      if(b.el._k!==key){b.el.style.backgroundImage=`url(${beadImg(st.mat,b.vi,px,ax)})`;b.el._k=key}
+      b.el.style.visibility='';b.el.style.transform=`translate3d(${(p[0]-E/2).toFixed(2)}px,${(p[1]-E/2).toFixed(2)}px,0)`;b.el.style.zIndex=String(1000+Math.round(p[1]));
+      if(b.sp){const g=sep(i,1),op=1-sst(0,S*.3,g);if(op<.03){b.sp.style.visibility='hidden'}else{const q=P(u+S/2),e=b.sp._e;b.sp.style.visibility='';b.sp.style.opacity=op.toFixed(2);
+        b.sp.style.transform=`translate3d(${(q[0]-e/2).toFixed(2)}px,${(q[1]-e/2).toFixed(2)}px,0)`;b.sp.style.zIndex=String(999+Math.round(q[1]))}}}
   }
-  function spacer(k,s){const b=SPP[k];if(!b)return;const s2=s+S/2;
-    // no spacer inside the gap (it fades out as its pair of beads separates)
-    const op=sst(S*.3,S*.62,Math.abs(s2));if(op<.02){b.style.visibility='hidden';return}b.style.opacity=op.toFixed(2);
-    const u=uOf(s2)+Z;if(!periodic&&Math.abs(u)>LV+E){b.style.visibility='hidden';return}
-    const p=P(u);b.style.visibility='';b.style.transform=`translate3d(${(p[0]-b._e/2).toFixed(2)}px,${(p[1]-b._e/2).toFixed(2)}px,0)`;b.style.zIndex=String(999+Math.round(p[1]))}
-  let Z=0;
-  function draw(){
-    const ph=disp(raw);if(ph-P0>2)P0=ph-2;else if(P0-ph>2)P0=ph+2;Z=S*(ph-P0);
-    if(periodic){const L2=N*S;for(let k=0;k<N;k++){let s=((k-ph)*S)%L2;if(s>L2/2)s-=L2;if(s<=-L2/2)s+=L2;place(POOL[k],s,k%5);spacer(k,s)}}
-    else{const base=Math.floor(ph),half=Math.floor(POOL.length/2);for(let k=0;k<POOL.length;k++){const j=base-half+k;place(POOL[k],(j-ph)*S,((j%5)+5)%5);spacer(k,(j-ph)*S)}}
-  }
-  function animTo(target,ms){
-    if(anim)cancelAnimationFrame(anim.id);const from=raw,t0=performance.now(),ease=t=>1-Math.pow(1-t,3);
-    anim={target,id:0};const f=now=>{const t=Math.min(1,(now-t0)/ms);raw=from+(target-from)*ease(t);draw();if(t<1&&alive)anim.id=requestAnimationFrame(f);else{raw=target;draw();anim=null;if(!dn)recentre()}};
-    anim.id=requestAnimationFrame(f)
-  }
-  function recentre(){if(rc)cancelAnimationFrame(rc.id);const from=P0,to=disp(raw);if(Math.abs(to-from)<.001)return;
-    const t0=performance.now()+140,ease=t=>t*t*(3-2*t);rc={id:0};
-    const f=now=>{if(!alive||dn){rc=null;return}const t=Math.max(0,Math.min(1,(now-t0)/380));P0=from+(to-from)*ease(t);draw();if(t<1)rc.id=requestAnimationFrame(f);else rc=null};
-    rc.id=requestAnimationFrame(f)}
-  function finish(){if(anim){cancelAnimationFrame(anim.id);raw=anim.target;anim=null;draw()}}
-  // where on the thread did the finger land? (only matters for curved threads)
-  function grabU(x,y){
-    if(kind==='v'||kind==='h')return 0;
-    if(kind==='ring'){let a=Math.atan2(y-cy,x-cx)+Math.PI/2;if(a>Math.PI)a-=2*Math.PI;return a*R}
-    let best=0,bd=1e9;for(let u=-LV;u<=LV;u+=3){const p=P(u),dd=(p[0]-x)**2+(p[1]-y)**2;if(dd<bd){bd=dd;best=u}}return best
-  }
-  let dn=null;
-  // a bead counts only when it reaches (touches) the beads on the other side; going back un-counts
-  function reach(d){if(!dn||dn.dir===0||dn.dir===d){dn&&(dn.dir=d,dn.c++,dn.pend=1);count()}else{dn.c--;uncount();if(dn.c===0)dn.dir=0}rest+=d;lastD=d}
-  function arrive(x){while(x<=rest-1)reach(-1);while(x>=rest+1)reach(1)}
-  el.addEventListener('pointerdown',e=>{if(dn)return;finish();if(rc){cancelAnimationFrame(rc.id);rc=null}const r=el.getBoundingClientRect(),now=performance.now();
-    dn={dir:0,id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:now,lt:now,r0:raw,u:grabU(e.clientX-r.left,e.clientY-r.top),acc:0,v:0,c:0,pend:0,mx:0};
+  /* move bead i to x. push=true: it pushes the beads it runs into (finger). push=false: it stops on contact (gliding). */
+  function moveTo(i,x,push){const b=BS[i];let dx=x-b.x;if(!dx)return 0;const d=dx>0?1:-1;
+    if(!push){const g=sep(i,d);if(Math.abs(dx)>g){dx=d*Math.max(0,g)}}
+    b.x+=dx;
+    if(push){let j=i,k=i+d;for(let n=0;n<(periodic?N-1:BS.length);n++){const o=nb(j,d);if(!o||o===b)break;const g=sep(j,d);if(g>=0)break;o.x+=-g*d;j=periodic?(j+d+N)%N:j+d}}
+    return dx}
+  /* counting: track the side the bead last left; a new contact on the other side, after moving
+     across at least half a bead of open space, is one count. Contact back on the side it left = nothing. */
+  function contacts(g){const i=idx(g.b);if(i<0)return;
+    for(const d of[1,-1]){const t=sep(i,d)<=EPS;
+      if(!t&&g.t[d]){g.t[d]=false;g.side=g.b.ls=d;g.ax=g.b.lax=g.px}
+      else if(t&&!g.t[d]){g.t[d]=true;if(g.side!==d&&g.side!==0&&Math.abs(g.b.x-g.ax)>=D*.45){reach(g,d)}g.side=g.b.ls=d;g.ax=g.b.lax=g.b.x}}g.px=g.b.x}
+  function reach(g,d){
+    if(g.dir===0||g.dir===d){g.dir=d;g.c++;g.pend=1;count();last={b:g.b,from:g.ax,d}}
+    else{g.c--;uncount();if(g.c===0)g.dir=0;last=null}}
+  const state=b=>{const i=idx(b),t1=sep(i,1)<=EPS,t0=sep(i,-1)<=EPS,fl=!t1&&!t0&&b.ls;   // a bead left half-way remembers where it came from
+    return{b,px:b.x,dir:0,c:0,pend:0,side:fl?b.ls:0,ax:fl?b.lax:b.x,t:{'1':t1,'-1':t0}}};
+  // ---- animation: gliding beads (momentum + soft friction), short tweens, gentle re-centre
+  let glides=[];
+  function loop(now){raf=0;if(!alive)return;let busy=false;
+    for(const gl of glides){const i=idx(gl.g.b);if(i<0){gl.done=true;continue}
+      if(gl.tw){const t=Math.min(1,(now-gl.t0)/gl.ms);moveTo(i,gl.x0+(gl.x1-gl.x0)*ease(t),false);contacts(gl.g);if(t>=1)gl.done=true}
+      else{const dt=Math.min(32,now-(gl.lt||now));gl.lt=now;const d=gl.v>0?1:-1;const mv=moveTo(i,gl.g.b.x+gl.v*dt,false);contacts(gl.g);
+        gl.v*=Math.exp(-dt/150);
+        if(Math.abs(gl.v)<.03){const g=sep(i,d);if(g>EPS&&g<D*.22){gl.tw=1;gl.t0=now;gl.ms=120;gl.x0=gl.g.b.x;gl.x1=gl.g.b.x+d*g}else gl.done=true}
+        else if(dt>0&&Math.abs(mv)<Math.abs(gl.v*dt)*.5)gl.done=true}   // hit the next bead
+      if(gl.done&&gl.g.pend&&IS_IOS){}busy=busy||!gl.done}
+    glides=glides.filter(g=>!g.done);
+    if(rc){const t=Math.min(1,(now-rc.t0)/rc.ms),dv=(ease(Math.max(0,t))-rc.p)*rc.dx;rc.p=ease(Math.max(0,t));BS.forEach(b=>b.x+=dv);if(t>=1)rc=null;busy=true}
+    draw();if(busy||rc)raf=requestAnimationFrame(loop);else idle=setTimeout(centre,260)}
+  const kick=()=>{clearTimeout(idle);if(!raf)raf=requestAnimationFrame(loop)};
+  function glide(g,v){glides=glides.filter(x=>x.g.b!==g.b);glides.push({g,v,lt:0});kick()}
+  function tweenTo(g,x,ms){glides=glides.filter(x=>x.g.b!==g.b);glides.push({g,tw:1,t0:performance.now(),ms,x0:g.b.x,x1:x});kick()}
+  // only when the open space has drifted near the edge: the hand slides the strand so a space is in view again
+  let rc=null;
+  function centre(){if(periodic||dn||!alive)return;let best=null;
+    for(let i=0;i<BS.length-1;i++){const g=sep(i,1);if(g>D*.6){const c=BS[i].x+S/2+g/2;if(!best||Math.abs(c)<Math.abs(best.c))best={c,g}}}
+    const lim=LV*.62;
+    if(best&&Math.abs(best.c)<lim)return;
+    if(!best){ // no space anywhere: open one in the middle
+      let k=BS.findIndex(b=>b.x>0);if(k<1)return;for(let i=0;i<BS.length;i++)BS[i]._to=i<k?-GAP/2:GAP/2;
+      const t0=performance.now();const f=now=>{const t=Math.min(1,(now-t0)/320),e=ease(t);BS.forEach(b=>{b.x+=(b._to*e-(b._d||0));b._d=b._to*e});draw();if(t<1&&alive&&!dn)requestAnimationFrame(f);else BS.forEach(b=>{b._d=0})};requestAnimationFrame(f);return}
+    rc={t0:performance.now(),ms:420,dx:-best.c,p:0};kick()}
+  // where on the thread is the finger?
+  function grabU(x,y){   // [position along the thread, distance from it]
+    if(kind==='v')return[y-cy,Math.abs(x-cx)];if(kind==='h')return[x-cx,Math.abs(y-cy)];
+    if(kind==='ring'){let a=Math.atan2(y-cy,x-cx)+Math.PI/2;if(a<0)a+=2*Math.PI;return[a*R,Math.abs(Math.hypot(x-cx,y-cy)-R)]}
+    let best=0,bd=1e9;for(let u=-LV;u<=LV;u+=3){const p=P(u),dd=(p[0]-x)**2+(p[1]-y)**2;if(dd<bd){bd=dd;best=u}}return[best,Math.sqrt(bd)]}
+  const wrapD=(a,b)=>{let d=a-b;if(periodic){d=((d%C)+C+C/2)%C-C/2}return d};
+  // which bead does a gesture move? the one under the finger; in open space, the bead that moves into it
+  function pick(u,d,far){
+    if(far){   // finger away from the thread: move the bead next to the nearest open space
+      let best=null;for(let i=0;i<BS.length;i++){const g=sep(i,d);if(g>D*.45&&g<1e8){const c=BS[i].x+d*(S/2+g/2),dd=Math.abs(wrapD(c,u));if(!best||dd<best.dd)best={i,dd}}}
+      if(best)return BS[best.i]}
+    let bi=-1,bd=1e9;BS.forEach((b,i)=>{const dd=Math.abs(wrapD(b.x,u));if(dd<bd){bd=dd;bi=i}});
+    if(bi<0)return null;
+    if(bd<S*.55){   // on a bead: swiping toward an open space moves the front bead of that group across it
+      let j=bi;for(let n=0;n<BS.length&&sep(j,d)<=EPS;n++){const o=nb(j,d);if(!o)break;j=idx(o)}
+      const g=sep(j,d),f=BS[j];if(j!==bi&&g>D*.45&&g<1e8&&(periodic||Math.abs(f.x)<LV))return f;return BS[bi]}
+    const side=wrapD(BS[bi].x,u)>0?1:-1;   // nearest bead is after (+1) or before (-1) the finger
+    if(side===d)return nb(bi,-d)||BS[bi];  // moving toward it: take the bead behind the space
+    return BS[bi]}
+  // tap / arrow key: the bead before the nearest space glides across it
+  function pull(u,d){let best=null;for(let i=0;i<BS.length;i++){const g=sep(i,d);if(g>D*.45&&g<1e8){const c=BS[i].x+d*(S/2+g/2),dd=Math.abs(wrapD(c,u));if(!best||dd<best.dd)best={i,dd,g}}}
+    if(!best){count();return}
+    const b=BS[best.i],g=state(b);g.side=-d;g.ax=b.x;g.t[-d]=false;if(g.t[d])g.t[d]=false;tweenTo(g,b.x+d*best.g,Math.max(150,Math.min(260,best.g*1.6)))}
+  const ds2=(dx,dy,p)=>{if(kind==='loop')return Math.abs(dx)>Math.abs(dy*p[3])?dx:dy*p[3];
+    const al=dx*p[2]+dy*p[3],pe=dx*p[3]-dy*p[2];return Math.abs(pe)>Math.abs(al)*1.4?pe:al};
+  el.addEventListener('pointerdown',e=>{if(dn)return;const r=el.getBoundingClientRect(),now=performance.now();if(rc)rc=null;
+    const gu=grabU(e.clientX-r.left,e.clientY-r.top);dn={id:e.pointerId,x0:e.clientX,y0:e.clientY,lx:e.clientX,ly:e.clientY,t0:now,lt:now,u:gu[0],far:gu[1]>D*.9,v:0,mx:0,g:null,pre:0,b:null};
     try{lab.setPointerCapture(e.pointerId)}catch(_){}});  // capture on the label so a tap's click still lands on it
   el.addEventListener('pointermove',e=>{if(!dn||e.pointerId!==dn.id)return;const now=performance.now(),dx=e.clientX-dn.lx,dy=e.clientY-dn.ly;dn.lx=e.clientX;dn.ly=e.clientY;
-    const p=P(dn.u),ds=kind==='loop'?(Math.abs(dx)>Math.abs(dy*p[3])?dx:dy*p[3]):dx*p[2]+dy*p[3];dn.u+=ds;if(!periodic)dn.u=Math.max(-LV,Math.min(LV,dn.u));dn.acc+=ds;dn.mx=Math.max(dn.mx,Math.hypot(e.clientX-dn.x0,e.clientY-dn.y0));
-    if(now>dn.lt){dn.v=dn.v*.4+(ds/(now-dn.lt))*.6;dn.lt=now}
-    raw=dn.r0-dn.acc/(S+GAP);   // 1:1 with the finger across the gap
-    arrive(raw-.5);draw()});
-  const up=e=>{if(!dn||e.pointerId!==dn.id)return;const g=dn;dn=null;
-    const tot=Math.hypot(e.clientX-g.x0,e.clientY-g.y0),dt=performance.now()-g.t0;
+    dn.mx=Math.max(dn.mx,Math.hypot(e.clientX-dn.x0,e.clientY-dn.y0));
+    if(!dn.g){dn.pre+=1;if(dn.mx<5)return;
+      const tx=e.clientX-dn.x0,ty=e.clientY-dn.y0,p0=P(periodic?dn.u:Math.max(-LV,Math.min(LV,dn.u))),s0=ds2(tx,ty,p0);
+      const b=pick(dn.u,s0>0?1:-1,dn.far);if(!b)return;glides=glides.filter(x=>x.g.b!==b);dn.b=b;dn.g=state(b);dn.u+=s0;moveTo(idx(b),b.x+s0,true);contacts(dn.g);draw();return}
+    const i=idx(dn.b);if(i<0)return;const p=P(periodic?dn.u:Math.max(-LV,Math.min(LV,dn.u))),s=ds2(dx,dy,p);dn.u+=s;   // the gesture follows the thread under the finger
+    if(now>dn.lt){dn.v=dn.v*.35+(s/(now-dn.lt))*.65;dn.lt=now}
+    moveTo(i,dn.b.x+s,true);contacts(dn.g);draw()});
+  const up=e=>{if(!dn||e.pointerId!==dn.id)return;const g=dn;dn=null;const dt=performance.now()-g.t0;
     if(e.type!=='pointercancel'){
-      if(g.c===0&&g.mx<8&&dt<450){TAPH=true;count();TAPH=false;rest-=tapDir;lastD=-tapDir;animTo(rest+.5,220);return}   // tap = pull one bead
-      // let go just before it touches: it settles against the other beads (and counts) - otherwise it stays where you left it
-      const x=raw-.5,nr=Math.round(x);
-      if(Math.abs(x-nr)<.1&&nr!==rest){dn=g;arrive(nr+(nr>rest?.001:-.001));dn=null}
-      if(g.pend&&IS_IOS)haptic(false)}  // iPhone only allows the tick inside a finger-up, so it lands here too
-    const x=raw-.5,nr=Math.round(x);
-    if(Math.abs(x-nr)<.1||e.type==='pointercancel'){const tg=(Math.abs(x-nr)<.1?nr:rest)+.5;animTo(tg,Math.max(90,Math.min(220,Math.abs(tg-raw)*400)))}
-    else recentre()};
+      if(!g.g&&g.mx<8&&dt<450){TAPH=true;pull(g.u,tapDir);TAPH=false;kick();return}   // tap = one bead glides across
+      if(g.g){if(g.g.pend&&IS_IOS)haptic(false);   // older iPhones only tick inside a finger-up
+        const v=(performance.now()-g.lt>80)?0:g.v;
+        if(Math.abs(v)>.12)glide(g.g,Math.max(-2.2,Math.min(2.2,v)));
+        else{const i=idx(g.b),d=g.g.side===1?-1:1;const ga=sep(i,d),gb=sep(i,-d);   // let go just short of a bead: it settles against it
+          if(ga>EPS&&ga<D*.2)tweenTo(g.g,g.b.x+d*ga,110);else if(gb>EPS&&gb<D*.2)tweenTo(g.g,g.b.x-d*gb,110)}}}
+    kick()};
+  el._bs=()=>BS.map(b=>Math.round(b.x));   // for the automatic checks
   el.addEventListener('pointerup',up);el.addEventListener('pointercancel',up);
   const ro=('ResizeObserver' in window)?new ResizeObserver(()=>{if(!dn)layout()}):null;if(ro)ro.observe(el);
   requestAnimationFrame(layout);
-  return{undo(){finish();uncount();rest-=lastD;animTo(rest+.5,220)},step(dir){finish();count();rest-=dir;lastD=-dir;animTo(rest+.5,200)},stop(){alive=false;if(ro)ro.disconnect();if(anim)cancelAnimationFrame(anim.id)},refresh(){layout()}}
+  return{
+    undo(){uncount();if(last){const i=idx(last.b);if(i>=0){const g=state(last.b);g.side=0;tweenTo(g,last.from,200)}last=null}},
+    step(dir){pull(0,dir>0?1:-1)},
+    stop(){alive=false;clearTimeout(idle);if(raf)cancelAnimationFrame(raf);if(ro)ro.disconnect()},
+    refresh(){layout()}}
 }
 
 /* ---------- bead settings sheet: materials (optional) + vibration + bead sound + volume ---------- */
