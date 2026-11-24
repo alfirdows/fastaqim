@@ -158,3 +158,18 @@ html.fqp-haswp body:has(#s-home.on){background:transparent!important}
 #s-team .fqp-seg button{font-size:14px}
 .fqp-mr .fqp-av{width:38px!important;height:38px!important;flex:none!important}
 .fqp-cmpr[hidden]{display:none!important}
+
+/* team voice calls */
+.fqp-call{display:flex;flex-direction:column;align-items:center;text-align:center;padding:18px 0 8px}
+.fqp-call h2{margin:14px 0 2px;font-size:22px;font-weight:650}
+.fqp-call #fqpClS{color:var(--sub);font-variant-numeric:tabular-nums;margin:0 0 26px}
+.fqp-call .fqp-av.pu{animation:fqpPu 1.6s ease-out infinite}
+@keyframes fqpPu{0%{box-shadow:0 0 0 0 rgba(46,107,50,.35)}100%{box-shadow:0 0 0 22px rgba(46,107,50,0)}}
+.fqp-clr{display:flex;gap:46px;justify-content:center}
+.fqp-clx{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:7px;font:inherit;color:var(--ink)}
+.fqp-clx i{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;font-size:28px}
+.fqp-clx small{font-size:13px;color:var(--sub)}
+.fqp-clx.no i{background:#c4553c;color:#fff}.fqp-clx.yes i{background:var(--acc);color:#fff}
+.fqp-clx.mu i{background:var(--card2);color:var(--ink);border:1px solid var(--line)}.fqp-clx.mu.on i{background:var(--ink);color:#fff}
+.fqp-clbar{display:flex;align-items:center;gap:10px;width:100%;border:0;border-radius:14px;background:var(--acc);color:#fff;padding:10px 14px;margin:0 0 10px;font:inherit;font-weight:600}
+.fqp-clbar span{flex:1;text-align:start}.fqp-clbar b{font-variant-numeric:tabular-nums}

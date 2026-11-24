@@ -150,6 +150,44 @@ function homeCard(){if(S.fqmHide){const o=$('fqmH');if(o)o.remove();return}
  el.setAttribute('aria-label',head);
  el.innerHTML=`<span class="fqm-hd"><b>${head}</b><i class="ph ph-caret-right flip"></i></span><small class="fqm-sub">${sub}</small>${sac}${homePath(s)}`}
 
+
+/* ---------- make-up fasts (qada) before Ramadan ----------
+   The question starts on 1 Rajab. A simple count, one dash per fast on the straight line, ticked off one
+   per day. Saved per Ramadan year in S.qada = {y, n, total, log:[dates], none}. */
+let QSTEP=null;
+function qadaY(f){const r=ram(f);return r?r.y:f.hn.y}
+function qadaState(f){const y=qadaY(f);if(!S.qada||S.qada.y!==y)return{y,fresh:1};return S.qada}
+function qadaShow(f){const m=f.hn.m,q=qadaState(f);if(m===9||q.none)return false;
+ if(!q.fresh&&q.n>0)return true;
+ if(!q.fresh&&q.n===0&&q.log&&q.log.length&&q.log[q.log.length-1]===dkey(NOW()))return true;
+ return !!q.fresh&&(m===7||m===8)}
+function qadaCard(){const f=today(),old=$('fqmQ');if(S.fqmHide||!qadaShow(f)){if(old)old.remove();return}
+ const card=$('fqmH');if(!card)return;let el=old;if(!el||el.previousElementSibling!==card){if(el)el.remove();card.insertAdjacentHTML('afterend','<div class="fqm-qd fq-leaf" id="fqmQ"></div>');el=$('fqmQ')}
+ const q=qadaState(f),r=ram(f),left=r?r.left:0;
+ const lk=(u,l)=>`<a class="fqm-src" href="${u}" target="_blank" rel="noopener">${l}<i class="ph ph-arrow-up-right"></i></a>`;
+ if(q.fresh){
+  const act=QSTEP==null
+   ?`<button class="fqm-qb" data-qy="1">${X('Yes, count them','نعم، أحسبها')}</button><button class="fqm-ql" data-qno="1">${X('No missed fasts','لم يفتني شيء')}</button>`
+   :`<span class="fqm-st"><button data-qs="-1" aria-label="${X('Less','أقل')}"><i class="ph ph-minus"></i></button><b>${N(QSTEP)}</b><button data-qs="1" aria-label="${X('More','أكثر')}"><i class="ph ph-plus"></i></button></span><button class="fqm-qb" data-qok="1">${X('Save','حفظ')}</button>`;
+  el.innerHTML=`<b>${X('Any missed fasts from last Ramadan?','هل فاتك صيام أيام من رمضان الماضي؟')}</b>
+  <p>${X('Make them up before Ramadan, '+left+' days from now. Allah says: "then an equal number of other days."','اقضِها قبل رمضان، بعد '+N(left)+' يومًا. قال تعالى: ﴿فَعِدَّةٌ مِّنْ أَيَّامٍ أُخَرَ﴾')} ${lk('https://quran.com/2/184',X("Qur'an, Al-Baqarah 2:184",'القرآن، البقرة ٢:١٨٤'))}</p>
+  <div class="fqm-qa">${act}</div>`}
+ else if(q.n>0){const wk=Math.max(1,Math.floor(left/7)),per=Math.ceil(q.n/wk);
+  el.innerHTML=`<b>${X('Make-up fasts: '+q.n+' left','صيام القضاء: بقي '+N(q.n))}</b>
+  <span class="fqm-qs" aria-hidden="true">${[...Array(q.total)].map((_,i)=>`<i class="${i<q.total-q.n?'on':''}"></i>`).join('')}</span>
+  <p>${left>0?X('Ramadan in '+left+' days. About '+per+' a week is enough. ','رمضان بعد '+N(left)+' يومًا. يكفي نحو '+N(per)+' في الأسبوع. '):''}${X("Aisha would make up her missed Ramadan fasts in Sha'ban.",'كانت عائشة تقضي ما عليها من رمضان في شعبان.')} ${lk('https://sunnah.com/bukhari:1950',X('Sahih al-Bukhari 1950','صحيح البخاري ١٩٥٠'))}</p>
+  <div class="fqm-qa"><button class="fqm-qb" data-qd="1"><i class="ph ph-check"></i>${X('I made one up today','قضيت يومًا اليوم')}</button><button class="fqm-ql" data-qe="1">${X('Change','تعديل')}</button></div>`}
+ else el.innerHTML=`<b>${X('All your make-up fasts are done. Alhamdulillah.','أتممت قضاء ما عليك. الحمد لله.')}</b><p>${X('May Allah accept them from you.','تقبّل الله منك.')}</p>`;
+ const set=n=>{QSTEP=null;S.qada={y:q.y,n,total:n,log:[],none:n===0?1:0};save();vib(10);qadaCard()};
+ const on=(sel,fn)=>{el.querySelectorAll(sel).forEach(b=>b.onclick=()=>fn(b))};
+ on('[data-qno]',()=>{set(0);toast(X('Noted. May Allah accept your fasts.','تم. تقبّل الله صيامك.'))});
+ on('[data-qy]',()=>{QSTEP=1;vib(6);qadaCard()});
+ on('[data-qs]',b=>{QSTEP=Math.min(30,Math.max(1,QSTEP+Number(b.dataset.qs)));vib(6);qadaCard()});
+ on('[data-qok]',()=>set(QSTEP));
+ on('[data-qd]',()=>{const k=dkey(NOW());if(q.log.includes(k)){toast(X('Already marked for today.','سُجّل اليوم مسبقًا.'));return}
+  q.n=Math.max(0,q.n-1);q.log.push(k);S.qada=q;save();vib([10,40,10]);toast(X('Marked. May Allah accept it.','سُجّل. تقبّل الله منك.'));qadaCard()});
+ on('[data-qe]',()=>{QSTEP=q.n||1;delete S.qada;save();qadaCard()})}
+
 /* ---------- screen: the year as one straight path, starting where you are ---------- */
 const BACK=`<button class="ib" data-back aria-label="${X('Back','رجوع')}"><i class="ph ph-caret-left flip"></i></button>`;
 if(!$('s-months')){const last=$$('.scr');last[last.length-1].insertAdjacentHTML('afterend',`<section class="scr" id="s-months"><div class="hd sub">${BACK}<h1>${X('Blessed months','الأشهر الفاضلة','Ji\'oota eebbifamoo','Bilaha barakaysan')}</h1><span style="width:44px"></span></div><div id="fqmB"></div></section>`);TABOF.months='home'}
@@ -192,11 +230,11 @@ function calLink(){const c=$('s-cal');if(!c||$('fqmCal'))return;const hd=c.query
  hd.insertAdjacentHTML('afterend',`<button class="fqm-cal fq-leaf" id="fqmCal"><i class="ph ph-sparkle"></i><span>${X('Blessed months and days','الأشهر والأيام الفاضلة')}</span><i class="ph ph-caret-right flip"></i></button>`);$('fqmCal').onclick=()=>go('months')}
 
 /* ---------- hooks ---------- */
-const _h=R.home;R.home=function(){_h.apply(this,arguments);try{homeCard()}catch(e){console.error(e)}};
+const _h=R.home;R.home=function(){_h.apply(this,arguments);try{homeCard();qadaCard()}catch(e){console.error(e)}};
 calLink();
-try{if($('s-home').classList.contains('on'))homeCard()}catch(e){}
+try{if($('s-home').classList.contains('on')){homeCard();qadaCard()}}catch(e){}
 if(location.hash==='#months')go('months',false);
 /* the Hijri day can change at Maghrib while the page is open */
-let lastKey='';setInterval(()=>{const f=today(),k=f.hn.y+'.'+f.hn.m+'.'+f.hn.d;if(k!==lastKey){const first=!lastKey;lastKey=k;if(!first){try{if($('s-home').classList.contains('on'))homeCard();if($('s-months').classList.contains('on'))R.months()}catch(e){}}}},30000);
+let lastKey='';setInterval(()=>{const f=today(),k=f.hn.y+'.'+f.hn.m+'.'+f.hn.d;if(k!==lastKey){const first=!lastKey;lastKey=k;if(!first){try{if($('s-home').classList.contains('on')){homeCard();qadaCard()}if($('s-months').classList.contains('on'))R.months()}catch(e){}}}},30000);
 window.FQM={season,findNext,today,MO,EV};
 })();

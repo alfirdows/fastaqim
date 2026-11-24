@@ -1,0 +1,19 @@
+/* My reasons card: reading style, centered, calm */
+.fqy{margin-top:12px;padding:14px 16px 16px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-align:center}
+.fqy-h{display:flex;align-items:center;gap:6px;margin-bottom:6px;text-align:start}
+.fqy-e{flex:1;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--goldD,var(--gold))}
+.fqy-c{font-size:12px;color:var(--sub);margin-inline-end:2px}
+.fqy-b{width:34px;height:34px;border-radius:17px;border:1px solid var(--line);background:var(--card);color:var(--sub);display:grid;place-items:center;font-size:16px;padding:0}
+.fqy-ar{font-family:'FQ Quran',serif;font-size:23px;line-height:2;color:var(--ink);margin:4px 6px 6px;text-wrap:balance}
+.fqy-t{font-size:17px;line-height:1.6;color:var(--ink);font-weight:600;margin:6px 4px 4px;text-wrap:balance}
+.fqy-m{margin:0 6px 10px;color:var(--sub);font-size:14px;line-height:1.55;text-wrap:balance}
+.fqy-s{display:inline-block;padding-top:8px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gold);text-decoration:none}
+.fqy-list{display:flex;flex-direction:column;gap:8px;margin:6px 0 14px}
+.fqy-row{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 14px;background:var(--card);border:1px solid var(--line);border-radius:16px}
+.fqy-rt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.fqy-rt b{font-weight:600;font-size:15px;line-height:1.5;overflow-wrap:anywhere}
+.fqy-rt b.fqy-rar{font-family:'FQ Quran',serif;font-weight:400;font-size:19px;line-height:1.9;text-align:right}
+.fqy-rt small{color:var(--sub);font-size:12.5px}
+.fqy-add{display:flex;flex-direction:column;gap:8px}
+.fqy-add .inp{resize:none}
+.fqy-l{display:block}
