@@ -46,6 +46,7 @@ jobs:
           for L in "" "?lang=ar" "?lang=om" "?lang=so"; do echo "== iPhone 13 $L"; LANGQ="$L" DEV="iPhone 13" node .github/qa/flow.js qa-flow; done
           echo "== iPad Pro 11"; DEV="iPad Pro 11" node .github/qa/flow.js qa-flow-ipad
           echo "== Family profiles and reminder card"; node .github/qa/fam.js qa-fam
+          echo "== Adhkar reader"; node .github/qa/adhkar.js qa-adhkar; LANGQ="?lang=ar" node .github/qa/adhkar.js qa-adhkar-ar
           echo "== Ramadan countdown + Blessed months (preview)"; node .github/qa/months.js qa-months
           echo "== Ramadan countdown + Blessed months (main page)"; MBASE=/ node .github/qa/months.js qa-months-main
       - uses: actions/upload-artifact@v4
@@ -57,6 +58,8 @@ jobs:
             qa-flow
             qa-flow-ipad
             qa-fam
+            qa-adhkar
+            qa-adhkar-ar
             qa-months
             qa-months-main
           retention-days: 7
