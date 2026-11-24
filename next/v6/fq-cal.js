@@ -210,7 +210,7 @@ function taskSheet(id){const open=S.tasks.find(t=>t.id===id),dn=(S.done||[]).fin
   undoToast(X('Deleted','حُذف','Haqame','La tirtiray'),()=>{arr.splice(i,0,t);save();R.cal()})}}
 
 /* first paint: if the page opened on #cal before this file loaded, show the new calendar */
-try{const on=document.querySelector('.scr.on');if(on&&on.id==='s-hcal'&&location.hash==='#cal'){on.classList.remove('on');$('s-cal').classList.add('on');R.cal()}
+try{const on=document.querySelector('.scr.on');const h0=((performance.getEntriesByType('navigation')[0]||{}).name||'').split('#')[1];if(on&&on.id==='s-hcal'&&location.hash==='#cal'){on.classList.remove('on');$('s-cal').classList.add('on');R.cal()}else if(h0==='cal'&&location.hash!=='#cal')go('cal',false)
  const sc=document.querySelector('.scr.on'),sk=sc?sc.id.slice(2):'home';window.renderTab(TABOF[sk]||'home')}catch(e){console.error(e)}
 /* More: the Calendar row now lives on the tab bar */
 try{const r=document.querySelector('#s-more [data-go="cal"]');if(r)r.remove()}catch(e){}

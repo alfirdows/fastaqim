@@ -17,7 +17,7 @@ assert '../design' not in s
 # Home Screen icon + app name, like the old main page
 rep('<meta name="theme-color" content="#fbf9f4">','<meta name="theme-color" content="#fbf9f4">\n<link rel="manifest" href="manifest.webmanifest">\n<link rel="apple-touch-icon" href="icon-180.png">\n<meta name="apple-mobile-web-app-title" content="Fastaqim">')
 open(R+'index.html','w',encoding='utf8').write(s)
-for f in ['fq-auth.js','life-data.js','life.css','life.js','dhikr-plus.css','sources.html','fq-own.css','fq-own.js','fq-plus.css','fq-plus.js','fq-voice.css','fq-voice.js']:
+for f in ['fq-auth.js','life-data.js','life.css','life.js','dhikr-plus.css','sources.html','fq-own.css','fq-own.js','fq-plus.css','fq-plus.js','fq-voice.css','fq-voice.js','fq-cal.css','fq-cal.js','fq-money.css','fq-money.js']:
     if os.path.exists(V+f):shutil.copy(V+f,R+f)
 d=open(V+'dhikr-plus.js',encoding='utf8').read().replace('../../hisn/clips/','hisn/clips/');open(R+'dhikr-plus.js','w',encoding='utf8').write(d)
 if os.path.exists(R+'vendor'):shutil.rmtree(R+'vendor')

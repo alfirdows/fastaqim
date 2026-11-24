@@ -132,8 +132,8 @@ const lastScr=$$('.scr');lastScr[lastScr.length-1].insertAdjacentHTML('afterend'
 let MK=today().slice(0,7),FIL='all';
 const KIND={out:['arrow-up-right',X('Spent','صرفت','Baasii','Kharash')],in:['arrow-down-left',X('Money in','دخل','Galii','Dakhli')],save:['vault',X('Put aside','ادّخرت','Kuusi','Kayd')],take:['arrow-circle-up',X('Used savings','من المدّخرات','Kuusaa fayyadame','Kaydka laga qaatay')]};
 function monthTitle(mk){const d=dOf(mk+'-15');return d.toLocaleDateString(loc(),{month:'long',year:'numeric'})}
-R.money=function(){const m=M(),mo=monthOf(MK),isNow=MK===today().slice(0,7),dl=daysLeft(MK),up=isNow?upcoming(31).filter(u=>mkey(u.k)===MK&&!u.late&&u.r.k==='out').reduce((s,u)=>s+u.r.amt,0):0;
- const per=isNow&&dl&&mo.inn?Math.max(0,Math.floor((mo.left-up)/dl)):null,al=alerts(MK),tips=advice(MK);
+R.money=function(){const m=M(),mo=monthOf(MK),isNow=MK===today().slice(0,7),dl=daysLeft(MK),upL=isNow?upcoming(31).filter(u=>mkey(u.k)===MK&&!u.late):[],up=upL.filter(u=>u.r.k==='out').reduce((s,u)=>s+u.r.amt,0),upIn=upL.filter(u=>u.r.k==='in').reduce((s,u)=>s+u.r.amt,0);
+ const per=isNow&&dl&&mo.inn?Math.max(0,Math.floor((mo.left-up+upIn)/dl)):null,al=alerts(MK),tips=advice(MK);
  const W=Math.max(mo.inn,mo.sv+mo.out,1),pc=v=>Math.max(0,Math.min(100,v/W*100)).toFixed(1)+'%';
  const list=mo.tx.filter(t=>FIL==='all'||(FIL==='rc'?t.rc:FIL==='tax'?t.tax:FIL==='save'?(t.k==='save'||t.k==='take'):t.k===FIL)).sort((a,b)=>a.dt<b.dt?1:a.dt>b.dt?-1:b.at-a.at);
  const days=[...new Set(list.map(t=>t.dt))];
@@ -144,11 +144,11 @@ R.money=function(){const m=M(),mo=monthOf(MK),isNow=MK===today().slice(0,7),dl=d
  <div class="mn-hero">
   <small>${mo.inn?X('Left to spend','المتبقي للإنفاق','Kan baasii hafe','Inta harsan'):X('Spent this month','أنفقت هذا الشهر','Ji\'a kana baasame','Bishan la kharashay')}</small>
   <b class="mn-big ${mo.inn&&mo.left<0?'neg':''}">${mo.inn?money(mo.left):money(mo.out)}</b>
-  ${per!=null?`<p class="mn-per">${X(`About <strong>${money(per,{whole:1})}</strong> a day for the ${dl} day${dl===1?'':'s'} left`,`تقريبًا <strong>${money(per,{whole:1})}</strong> يوميًا للأيام الـ${AR(dl)} الباقية`)}${up?`<em>${X('after bills still coming','بعد الفواتير القادمة')} (${money(up,{whole:1})})</em>`:''}</p>`:!mo.inn&&isNow?`<p class="mn-per">${X('Add your money in to see what is left and a safe amount per day.','أضف دخلك لترى المتبقي ومقدارًا آمنًا لكل يوم.')}</p>`:''}
-  <div class="mn-hz" aria-hidden="true"><i class="sv" style="width:${pc(Math.max(0,mo.sv))}"></i><i class="sp" style="width:${pc(mo.out)}"></i></div>
-  <div class="mn-3"><span><small>${KIND.in[1]}</small><b>${money(mo.inn)}</b></span><span class="sv"><small>${X('Saved first','ادّخرت أولًا','Dursa kuufame','Marka hore la kaydiyay')}</small><b>${money(Math.max(0,mo.sv))}</b></span><span class="sp"><small>${KIND.out[1]}</small><b>${money(mo.out)}</b></span></div>
+  ${per!=null?`<p class="mn-per">${X(`About <strong>${money(per,{whole:1})}</strong> a day for the ${dl} day${dl===1?'':'s'} left`,`تقريبًا <strong>${money(per,{whole:1})}</strong> يوميًا للأيام الـ${AR(dl)} الباقية`)}${up||upIn?`<em>${X('counting what is still coming this month','مع حساب ما هو قادم هذا الشهر')}: ${up?'−'+money(up,{whole:1}):''}${up&&upIn?', ':''}${upIn?'+'+money(upIn,{whole:1}):''}</em>`:''}</p>`:!mo.inn&&isNow?`<p class="mn-per">${X('Add your money in to see what is left and a safe amount per day.','أضف دخلك لترى المتبقي ومقدارًا آمنًا لكل يوم.')}</p>`:''}
+  <div class="mn-hz" aria-hidden="true"><i class="hzs" style="width:${pc(Math.max(0,mo.sv))}"></i><i class="hzp" style="width:${pc(mo.out)}"></i></div>
+  <div class="mn-3"><span><small>${KIND.in[1]}</small><b>${money(mo.inn)}</b></span><span class="m3s"><small>${X('Saved first','ادّخرت أولًا','Dursa kuufame','Marka hore la kaydiyay')}</small><b>${money(Math.max(0,mo.sv))}</b></span><span class="m3p"><small>${KIND.out[1]}</small><b>${money(mo.out)}</b></span></div>
  </div>
- <div class="mn-act"><button data-add="save">${IC('vault',22)}<span>${X('Put aside','ادّخر','Kuusi','Kaydi')}</span></button><button data-add="out" class="pri">${IC('minus',22)}<span>${X('Spent','صرفت','Baasii','Kharash')}</span></button><button data-add="in">${IC('plus',22)}<span>${X('Money in','دخل','Galii','Dakhli')}</span></button></div>
+ <div class="mn-act"><button data-add="save">${IC('vault',22)}<span>${X('Put aside','ادّخر','Kuusi','Kaydi')}</span></button><button data-add="out" class="mn-pri">${IC('minus',22)}<span>${X('Spent','صرفت','Baasii','Kharash')}</span></button><button data-add="in">${IC('plus',22)}<span>${X('Money in','دخل','Galii','Dakhli')}</span></button></div>
  ${al.length?`<div class="mn-al">${al.map(a=>`<div class="mn-ai ${a.lv||''}">${IC(a.ic,18)}<span>${a.tx}</span>${a.due?`<button data-due="${esc(a.key)}">${X('Done','تم')}</button>`:''}</div>`).join('')}</div>`:''}
  <div class="sec"><h2>${X('Savings first','الادخار أولًا','Dursa kuusuu','Kaydka marka hore')}</h2><button class="lk" id="mnGoalAdd">${IC('plus')}<span>${X('New goal','هدف جديد')}</span></button></div>
  ${m.goals.length?`<div class="mn-goals">${m.goals.map(g=>{const h=goalSaved(g),gi=GOALS.find(x=>x[0]===g.kind)||GOALS[8],p=g.target?Math.min(1,h/g.target):0,C=2*Math.PI*19;
@@ -314,5 +314,5 @@ try{const yp=$('yp');const row=`<div class="gl" id="mnMoreG"><button id="mnMore"
  if(yp&&!$('mnMore'))yp.insertAdjacentHTML('afterend',row);moreBadge();
  if(R.more){const _m=R.more;R.more=function(){const r=_m.apply(this,arguments);moreBadge();return r}}}catch(e){console.error(e)}
 /* open from a link: #money */
-try{if(location.hash==='#money')go('money',false)}catch(e){}
+try{const h0=((performance.getEntriesByType('navigation')[0]||{}).name||'').split('#')[1];if(location.hash==='#money'||h0==='money')go('money',false)}catch(e){}
 })();
