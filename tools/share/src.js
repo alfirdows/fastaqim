@@ -43,7 +43,7 @@ const rangeTxt=po=>{const [s1,a1]=po.st,[s2,a2]=po.en;
 const pagesTxt=po=>po.a===po.b?X('Page '+po.a,'الصفحة '+ARD(po.a),'Fuula '+po.a,'Bogga '+po.a):X('Pages '+po.a+'–'+po.b,'الصفحات '+ARD(po.a)+'–'+ARD(po.b),'Fuula '+po.a+'–'+po.b,'Bogagga '+po.a+'–'+po.b);
 const bigTxt=po=>po.juz?X('Juz '+po.juz,'الجزء '+ARD(po.juz),'Juz '+po.juz,'Juz '+po.juz):pagesTxt(po);
 const qcUrl=po=>po.st[0]===po.en[0]?'https://quran.com/'+po.st[0]+'/'+po.st[1]+'-'+po.en[1]:'https://quran.com/page/'+po.a;
-const dateLine=()=>{const d=NOW();let g;try{g=d.toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en-US'),{weekday:'long',day:'numeric',month:'long'})}catch(e){g=d.toDateString()}
+const dateLine=()=>{const d=NOW();let g;try{g=d.toLocaleDateString(L==='ar'?'ar':(LI>=0?LX:'en-US'),{weekday:'long',day:'numeric',month:'long'})}catch(e){g=d.toDateString()}if(L==='ar')g=ARD(g);
  let h='';try{const p=hParts(d);h=(L==='ar'?ARD(p.d):p.d)+' '+hms(p.m)+' '+(L==='ar'?ARD(p.y):p.y)}catch(e){h=hijri(d,{day:'numeric',month:'long',year:'numeric'})}return g+(h?' · '+h:'')};
 
 /* du'as: library + the adhkar sets already on the site + the owner's own */
@@ -54,7 +54,8 @@ function zkLib(){const out=[];const sets=[['dua',X("Du'as for worry",'أدعية
   out.push({id,ar,en:it._en||it.me||'',src:it.src,g})})});return out}
 function libAll(){return LIB.concat(zkLib())}
 function duaOf(id,p){if(/^c\d+$/.test(id)){const c=(p.c||[])[+id.slice(1)];return c?{id,ar:c.ar||'',en:c.me||'',own:1}:null}return libAll().find(x=>x.id===id)||null}
-const duaMe=d=>L==='ar'?'':(d.en||'');
+const balQ=t=>{t=String(t||'');return (t.match(/"/g)||[]).length%2?t.replace(/[\s.]*$/,'')+'."':t};
+const duaMe=d=>L==='ar'?'':balQ(d.en||'');
 const isQ=d=>!!d.qk;
 const srcOf=d=>d.src?(L==='ar'&&d.sa?d.sa:d.src[0]):'';
 
@@ -113,11 +114,11 @@ async function cardBlob(o){await fontsReady(JSON.stringify(o).slice(0,400));cons
 /* it: {kind:'ayah'|'dhikr'|'wird', card:{...}, text:'', saveT, saveN, link} */
 let LASTURL=null;
 async function shareSheet(it){vib(8);
- openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Share','مشاركة','Qooduu','La wadaag')}</h1>${XB}</div>
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Share','مشاركة','Qooddi','La wadaag')}</h1>${XB}</div>
   <div class="fqs-prev" id="fqsPrev"><div class="fqs-ld"><i class="ph ph-circle-notch"></i></div></div>
   <button class="fqs-main" id="fqsPic"><i class="ph ph-image"></i>${X('Share picture','مشاركة الصورة','Suuraa qoodi','La wadaag sawirka')}</button>
   <div class="fqs-row"><button id="fqsTxt"><i class="ph ph-chat-text"></i>${X('Send as text','إرسال كنص','Akka barreeffamaatti ergi','U dir qoraal ahaan')}</button><button id="fqsCp"><i class="ph ph-copy"></i>${X('Copy text','نسخ النص','Barreeffama garagalchi','Koobiyee qoraalka')}</button></div>
-  <div class="fqs-row">${it.link?`<button id="fqsLk"><i class="ph ph-link-simple"></i>${X('Copy family link','نسخ رابط العائلة','Liinkii maatii garagalchi','Koobiyee xiriirka qoyska')}</button>`:''}${it.saveT?`<button id="fqsSv"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ','Kan olkaa’e keessa kaa’i','Ku dar La kaydiyay')}</button>`:''}<button id="fqsDl"><i class="ph ph-download-simple"></i>${X('Save picture','حفظ الصورة','Suuraa olkaa’i','Kaydi sawirka')}</button></div>
+  <div class="fqs-row">${it.link?`<button id="fqsLk"><i class="ph ph-link-simple"></i>${X('Copy family link','نسخ رابط العائلة','Liinkii maatii garagalchi','Koobiyee xiriirka qoyska')}</button>`:''}${it.saveT?`<button id="fqsSv"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ',"Kan olkaa'e keessa kaa'i",'Ku dar La kaydiyay')}</button>`:''}<button id="fqsDl"><i class="ph ph-download-simple"></i>${X('Save picture','حفظ الصورة',"Suuraa olkaa'i",'Kaydi sawirka')}</button></div>
   <p class="fqs-tip">${X('On iPhone: Share picture, then Save Image puts it in Photos.','على الآيفون: مشاركة الصورة ثم «حفظ الصورة» تضعها في الصور.','iPhone irratti: Suuraa qoodi, achiis Save Image.','iPhone-ka: La wadaag sawirka, kadibna Save Image.')}</p>`);
  const sh=$('sh');sh.classList.add('fqs-sh');
  let blob=null;const fname='fastaqim-'+(it.kind||'card')+'-'+dkey(NOW())+'.png';
@@ -133,13 +134,13 @@ async function shareSheet(it){vib(8);
 function addSaved(t,n){const items=tItems('saved');if(items.some(x=>x.t===t&&x.n===n)){toast(X('Already in Saved','موجود في المحفوظ'));return}
  const x={id:Date.now(),t,n};items.unshift(x);save();vib([10,30,10]);
  const undo=()=>{const i=items.indexOf(x);if(i>=0){items.splice(i,1);save()}};
- if(typeof undoToast==='function')undoToast(X('Added to Saved','أُضيف إلى المحفوظ','Kan olkaa’e keessa kaa’ame','Waa lagu daray La kaydiyay'),undo);else toast(X('Added to Saved','أُضيف إلى المحفوظ'))}
+ if(typeof undoToast==='function')undoToast(X('Added to Saved','أُضيف إلى المحفوظ',"Kan olkaa'e keessa kaa'ameera",'Waa lagu daray La kaydiyay'),undo);else toast(X('Added to Saved','أُضيف إلى المحفوظ'))}
 window.FQS={shareSheet,cardBlob,addSaved};
 
 /* ---------------- builders ---------------- */
 const srcLine=s=>s?s[0]+' · '+s[1]:'';
 async function ayahItem(su,n){const d=RQ.c[su];if(!d)return null;const [a,en]=d.v[n-1];let me=en;
- if(L==='ar')me='';else if(LI>=0){try{const mt=await qTrCh(su);if(mt&&mt[n-1])me=mt[n-1]}catch(e){}}
+ if(L==='ar')me='';else if(LI>=0){try{const mt=await qTrCh(su);if(mt&&mt[n-1])me=mt[n-1]}catch(e){}}me=balQ(me);
  const ref=X("Qur'an, Surah "+SU[su-1][0]+' '+su+':'+n,'القرآن، سورة '+SU[su-1][1]+' '+ARD(su)+':'+ARD(n)),url='https://quran.com/'+su+'/'+n;
  return{kind:'ayah',card:{kick:X('AYAH','آية','AAYAA','AAYAD'),blocks:[{ar:a+' '+ARD(n),q:1,me,src:ref}]},
   text:a+' ﴿'+ARD(n)+'﴾\n\n'+(me?me+'\n\n':'')+ref+'\n'+url+'\n\n'+X('Shared from Fastaqim','من فاستقم')+': '+SITE,
@@ -185,7 +186,7 @@ R.wird=async()=>{const B=$('fqwB');if(!B)return;const own=await isOwner(),p=plan
    <a class="fqw-qc" href="${qcUrl(po)}" target="_blank" rel="noopener">${X('Open on Quran.com','افتح في Quran.com','Quran.com irratti bani','Ka fur Quran.com')} ↗</a></div>
   ${p.n?`<p class="glh">${X('A note','تذكير','Yaadachiisa','Xusuusin')}</p><div class="kh fqw-note" dir="auto">${esc(p.n)}</div>`:''}
   ${it.ds.length?`<p class="glh">${X("Du'as for today",'أدعية اليوم',"Kadhannaa har'aa",'Ducooyinka maanta')}</p>`+it.ds.map((d,k)=>`<div class="fqw-dua">
-    <div class="za ${isQ(d)?'':'h'}" lang="ar" dir="rtl">${esc(d.ar)}</div>${duaMe(d)?`<p class="zm">${esc(duaMe(d))}</p>`:''}
+    <div class="za ${isQ(d)?'':'h'}" lang="ar" dir="rtl">${esc(d.ar)}</div>${duaMe(d)?`<p class="zm" data-fmt="1">${esc(duaMe(d))}</p>`:''}
     <div class="fqw-src">${d.src?`<a href="${d.src[1]}" target="_blank" rel="noopener">${esc(srcOf(d))} ↗</a>`:`<span>${X("Personal du'a",'دعاء شخصي','Kadhannaa dhuunfaa','Duco shakhsi ah')}</span>`}<button class="fqw-one" data-fqd="${k}" aria-label="${X('Share this du\'a','شارك هذا الدعاء')}"><i class="ph ph-share-network"></i></button></div></div>`).join(''):''}
   <button class="fqs-main fqw-share" id="fqwShare"><i class="ph ph-share-network"></i>${X("Share today's card",'شارك بطاقة اليوم',"Kaardii har'aa qoodi",'La wadaag kaarka maanta')}</button>
   <p class="note fqp-c">${own?X('Only you can change the plan and du\'as. Your family gets the same card from your link, and it updates by itself each day.','أنت فقط من يغيّر الخطة والأدعية. تصل عائلتك نفس البطاقة من رابطك، وتتجدد تلقائيًا كل يوم.'):fromLink()?X("This plan came from your family's link. It moves to the next portion by itself each day.",'هذه الخطة من رابط عائلتك، وتنتقل إلى الورد التالي تلقائيًا كل يوم.'):X('Read along with everyone using Fastaqim. It moves to the next portion by itself each day.','اقرأ مع مستخدمي فاستقم، وينتقل الورد تلقائيًا كل يوم.')}</p>`;
@@ -225,12 +226,12 @@ function editSheet(){const p=JSON.parse(JSON.stringify(S.wird||DEF));p.c=p.c||[]
 async function homeCard(){const host=$('s-home');if(!host)return;let c=$('fqwHome');if(!c){c=document.createElement('div');c.id='fqwHome';c.className='fqw-card';const qc=$('qc');(qc&&qc.parentNode===host?qc:host.lastElementChild).insertAdjacentElement('afterend',c)}
  const own=await isOwner(),p=plan(own),po=await portion(p);if(!po){c.hidden=true;return}c.hidden=false;const done=!!(S.wirdDone||{})[dkey(NOW())];
  c.innerHTML=`<button class="fqw-open"><span class="fqw-l"><small>${X('Daily wird','الورد اليومي','Wirdii guyyaa','Wirdiga maalinta')}${done?' · ✓':''}</small><b>${esc(bigTxt(po))}</b><span>${rangeHTML(po)}</span></span>${window.FQ&&FQ.arc?FQ.arc(po.day,po.total,{w:54,label:N(po.day)}):''}</button>
-  <button class="fqw-sh" id="fqwHS" aria-label="${X("Share today's card",'شارك بطاقة اليوم')}"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qoodi','La wadaag')}</button>`;
+  <button class="fqw-sh" id="fqwHS" aria-label="${X("Share today's card",'شارك بطاقة اليوم')}"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qooddi','La wadaag')}</button>`;
  c.querySelector('.fqw-open').onclick=()=>go('wird');$('fqwHS').onclick=async()=>{const it=await wirdItem(p);if(it)shareSheet(it)}}
 async function quranCard(){const host=$('s-quran');if(!host)return;let c=$('fqwQ');if(!c){c=document.createElement('div');c.id='fqwQ';c.className='fqw-card';const qh=host.querySelector('.qh');(qh||host.firstElementChild).insertAdjacentElement('afterend',c)}
  const own=await isOwner(),p=plan(own),po=await portion(p);if(!po){c.hidden=true;return}c.hidden=false;
  c.innerHTML=`<button class="fqw-open"><span class="fqw-l"><small>${X('Daily wird','الورد اليومي','Wirdii guyyaa','Wirdiga maalinta')}</small><b>${esc(bigTxt(po))}</b><span>${rangeHTML(po)}</span></span>${window.FQ&&FQ.arc?FQ.arc(po.day,po.total,{w:54,label:N(po.day)}):''}</button>
-  <button class="fqw-sh" id="fqwQS" aria-label="${X("Share today's card",'شارك بطاقة اليوم')}"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qoodi','La wadaag')}</button>`;
+  <button class="fqw-sh" id="fqwQS" aria-label="${X("Share today's card",'شارك بطاقة اليوم')}"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qooddi','La wadaag')}</button>`;
  c.querySelector('.fqw-open').onclick=()=>go('wird');$('fqwQS').onclick=async()=>{const it=await wirdItem(p);if(it)shareSheet(it)};
  /* Ayah of the day: share button */
  const vt=$('qVq')&&$('qVq').querySelector('.t');if(vt&&!vt.querySelector('[data-fqvs]')){vt.insertAdjacentHTML('beforeend',`<button data-fqvs aria-label="${X('Share','مشاركة')}"><i class="ph ph-share-network"></i></button>`);
@@ -241,7 +242,7 @@ async function quranCard(){const host=$('s-quran');if(!host)return;let c=$('fqwQ
 
 /* ---------------- Qur'an reader: Share + Add to Saved on the ayah you tap ---------------- */
 function racAdd(rac){if(rac.querySelector('[data-fqs]'))return;const a=rac.querySelector('a');
- const h=`<button data-fqs="share"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qoodi','La wadaag')}</button><button data-fqs="save"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ','Kaa’i','Kaydi')}</button>`;
+ const h=`<button data-fqs="share"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qooddi','La wadaag')}</button><button data-fqs="save"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ',"Olkaa'i",'Kaydi')}</button>`;
  if(a)a.insertAdjacentHTML('beforebegin',h);else rac.insertAdjacentHTML('beforeend',h)}
 {const B=$('rdB');if(B){new MutationObserver(()=>{const r=B.querySelector('.ra.sel .rac');if(r)racAdd(r)}).observe(B,{childList:true,subtree:true});
  B.addEventListener('click',async e=>{const b=e.target.closest('[data-fqs]');if(!b)return;e.stopPropagation();e.preventDefault();const n=+b.closest('.ra').dataset.n,it=await ayahItem(RD.su,n);if(!it)return;
@@ -249,7 +250,7 @@ function racAdd(rac){if(rac.querySelector('[data-fqs]'))return;const a=rac.query
 
 /* ---------------- adhkar reader: Share + Add to Saved on each dhikr ---------------- */
 function zBar(){const card=$('zCard');if(!card||!ZS||card.querySelector('.fqs-bar'))return;
- card.insertAdjacentHTML('beforeend',`<div class="fqs-bar"><button data-fqz="share"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qoodi','La wadaag')}</button><button data-fqz="save"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ','Kaa’i','Kaydi')}</button></div>`)}
+ card.insertAdjacentHTML('beforeend',`<div class="fqs-bar"><button data-fqz="share"><i class="ph ph-share-network"></i>${X('Share','مشاركة','Qooddi','La wadaag')}</button><button data-fqz="save"><i class="ph ph-bookmarks-simple"></i>${X('Add to Saved','أضف إلى المحفوظ',"Olkaa'i",'Kaydi')}</button></div>`)}
 {const oz=window.zDraw;if(typeof oz==='function')window.zDraw=function(){const r=oz.apply(this,arguments);try{zBar()}catch(e){}return r}}
 document.addEventListener('click',e=>{const b=e.target.closest('[data-fqz]');if(!b)return;e.stopPropagation();e.preventDefault();if(!ZS)return;const it=dhikrItem(ZS.set,ZS.i);if(!it)return;
  if(b.dataset.fqz==='share')shareSheet(it);else addSaved(it.saveT,it.saveN)},true);

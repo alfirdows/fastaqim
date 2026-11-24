@@ -1,0 +1,97 @@
+/* Fastaqim share + daily wird (23 Nov 2026). Own file; (c) Fastaqim, all rights reserved. */
+/* share sheet */
+#sh.fqs-sh{max-height:92vh;max-height:92dvh;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.fqs-prev{display:flex;justify-content:center;align-items:center;min-height:200px;margin:4px 0 14px}
+.fqs-prev img{display:block;max-width:100%;max-height:44vh;max-height:44dvh;border-radius:14px;box-shadow:0 10px 30px rgba(60,50,20,.12),0 0 0 1px var(--line)}
+.fqs-ld i{font-size:30px;color:var(--gold);animation:fqsSpin 1s linear infinite}
+@keyframes fqsSpin{to{transform:rotate(360deg)}}
+.fqs-main{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;height:52px;border:0;border-radius:16px;background:var(--acc);color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer;box-shadow:0 6px 16px rgba(46,107,50,.22)}
+.fqs-main i{font-size:20px}
+.fqs-main:active{transform:scale(.985)}
+.fqs-row{display:flex;gap:8px;margin-top:8px}
+.fqs-row button{flex:1 1 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:6px 8px;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);font:inherit;font-size:13.5px;font-weight:600;line-height:1.2;text-align:center;cursor:pointer}
+.fqs-row button i{font-size:18px;color:var(--acc);flex:none}
+.fqs-tip{margin:12px 4px 4px;font-size:12.5px;color:var(--sub);text-align:center;line-height:1.45}
+
+/* share bar inside a dhikr card */
+.fqs-bar{display:flex;justify-content:center;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+.fqs-bar button{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 13px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:13.5px;font-weight:600}
+.fqs-bar i{font-size:16px;color:var(--acc)}
+
+/* Ayah of the day share icon */
+.vq .t [data-fqvs]{border:0;background:transparent;color:var(--acc);font-size:19px;width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%}
+
+/* entry cards (Home + Qur'an tab) */
+.fqw-card{display:flex;align-items:stretch;gap:0;margin:12px 0;background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;box-shadow:0 1px 2px rgba(60,50,20,.04)}
+.fqw-open{flex:1;min-width:0;display:flex;align-items:center;gap:12px;padding:14px 12px 14px 16px;border:0;background:transparent;font:inherit;color:var(--ink);text-align:start;cursor:pointer}
+.fqw-l{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.fqw-l small{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--goldD,#86672e)}
+html[dir=rtl] .fqw-l small{letter-spacing:0}
+.fqw-l b{font-size:18px;font-weight:700}
+.fqw-l span{font-size:13.5px;color:var(--sub);line-height:1.35}
+.fqw-sh{flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:74px;border:0;border-inline-start:1px solid var(--line);background:var(--accT);color:var(--acc);font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.fqw-sh i{font-size:21px}
+
+/* the Daily wird page */
+.fqw-ed{display:inline-flex;min-width:44px;justify-content:flex-end}
+.fqw-hero{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:20px 18px 16px;text-align:center;margin-bottom:6px;position:relative;overflow:hidden}
+.fqw-hero::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:var(--dawn)}
+.fqw-date{margin:0 0 8px;font-size:13px;color:var(--sub)}
+.fqw-arc{display:flex;flex-direction:column;align-items:center;gap:2px;margin:4px 0 8px}
+.fqw-arc .fq-arc b{font-size:24px}
+.fqw-arc small{font-size:12.5px;color:var(--sub)}
+.fqw-k{margin:6px 0 0;font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--goldD,#86672e)}
+html[dir=rtl] .fqw-k{letter-spacing:0}
+.fqw-big{margin:2px 0 2px;font-size:30px;font-weight:800;letter-spacing:-.01em}
+.fqw-rg{margin:0 0 12px;font-size:15px;color:var(--sub);line-height:1.45}
+.fqw-early{margin:-4px 0 12px;font-size:13.5px;color:var(--goldD,#86672e)}
+.fqw-act{display:flex;flex-direction:column;gap:8px}
+.fqw-done{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;border-radius:14px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.fqw-done i{font-size:20px;color:var(--sub)}
+.fqw-done.on{background:var(--accT);border-color:transparent;color:var(--acc)}
+.fqw-done.on i{color:var(--acc)}
+.fqw-qc{display:inline-block;margin-top:12px;font-size:13.5px;font-weight:600;color:var(--acc);text-decoration:none}
+.fqw-note{padding:14px 16px;font-size:15px;line-height:1.55;white-space:pre-wrap}
+.fqw-dua{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:22px 18px 12px;margin:0 0 10px;text-align:center}
+.fqw-dua .za{font-family:"FQ Quran";font-size:24px;line-height:2;direction:rtl;margin:0 0 6px}
+.fqw-dua .za.h{font-family:Plex,"FQ Quran";font-weight:600;font-size:21px;line-height:1.95}
+.fqw-dua .zm{margin:6px 0 4px;font-size:15px;line-height:1.6;color:var(--ink);opacity:.86}
+.fqw-src{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;padding-top:8px;border-top:1px solid var(--line);font-size:12.5px;color:var(--sub)}
+.fqw-src a{color:var(--sub);text-decoration:none}
+.fqw-one{border:0;background:transparent;color:var(--acc);width:36px;height:36px;border-radius:50%;font-size:18px;display:inline-flex;align-items:center;justify-content:center}
+.fqw-share{margin:16px 0 8px}
+
+/* owner sheet */
+.fqw-sz{display:flex;flex-wrap:wrap;gap:8px;padding:12px}
+.fqw-sz button{height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:#fff;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink)}
+.fqw-sz button.on{background:var(--acc);border-color:var(--acc);color:#fff}
+.fqw-in{display:block;width:100%;box-sizing:border-box;margin:0 0 8px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:#fff;font:inherit;font-size:16px;color:var(--ink)}
+.kh>.fqw-in:first-child{margin-top:12px}
+.kh .note{display:block;padding:0 2px 10px}
+.fqw-ch{padding:4px 12px}
+.fqw-cr{display:flex;align-items:center;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}
+.fqw-cr:last-child{border-bottom:0}
+.fqw-cr .za{flex:1;min-width:0;font-family:Plex,"FQ Quran";font-size:16px;line-height:1.7;text-align:right}
+.fqw-cr .za:not(.h){font-family:"FQ Quran";font-size:18px}
+.fqw-cb{display:flex;gap:4px;flex:none}
+.fqw-cb button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);display:inline-flex;align-items:center;justify-content:center}
+.fqw-lib{padding:4px 8px}
+.fqw-li{display:grid;grid-template-columns:1fr 28px;gap:2px 10px;width:100%;padding:12px 6px;border:0;border-bottom:1px solid var(--line);background:transparent;font:inherit;color:var(--ink);text-align:start}
+.fqw-li:last-child{border-bottom:0}
+.fqw-li .za{grid-column:1;font-family:"FQ Quran";font-size:19px;line-height:1.9;text-align:center;direction:rtl}
+.fqw-li .za.h{font-family:Plex,"FQ Quran";font-weight:600;font-size:17px}
+.fqw-li small{grid-column:1;font-size:13px;color:var(--sub);line-height:1.45;text-align:center}
+.fqw-li em{grid-column:1;font-style:normal;font-size:12px;font-weight:600;color:var(--acc);text-align:center}
+.fqw-li i{grid-column:2;grid-row:1/span 3;align-self:center;font-size:24px;color:var(--sub)}
+.fqw-li.on{background:var(--accT);border-radius:14px}
+.fqw-li.on i{color:var(--acc)}
+.kh .chip{margin:0 0 12px}
+.fqw-sv{position:sticky;bottom:0;padding:12px 0 6px;background:linear-gradient(180deg,rgba(255,255,255,0),var(--card) 30%)}
+.fqw-nw{white-space:nowrap}
+/* reading-text sizes win over the global .za rule */
+.fqw-dua .za{font-size:22px!important;line-height:2.05!important;text-wrap:balance}
+.fqw-dua .za.h{font-size:20px!important;line-height:1.95!important}
+.fqw-dua .zm{text-wrap:balance}
+.fqw-li .za{font-size:18px!important;line-height:1.9!important;text-wrap:balance}
+.fqw-li .za.h{font-size:16.5px!important}
+.fqw-cr .za{font-size:16px!important;line-height:1.7!important}

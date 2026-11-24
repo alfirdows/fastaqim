@@ -46,12 +46,14 @@ jobs:
           for L in "" "?lang=ar" "?lang=om" "?lang=so"; do echo "== iPhone 13 $L"; LANGQ="$L" DEV="iPhone 13" node .github/qa/flow.js qa-flow; done
           echo "== iPad Pro 11"; DEV="iPad Pro 11" node .github/qa/flow.js qa-flow-ipad
           echo "== Family profiles and reminder card"; node .github/qa/fam.js qa-fam
-      - name: Daily wird and share (preview, iPhone SE and 13, all languages)
+      - name: Daily wird and share (preview + main page, iPhone SE and 13, all languages)
         if: matrix.engine == 'webkit'
         env:
           ENGINE: webkit
           ROOT: ${{ github.workspace }}
-        run: node .github/qa/share.js qa-share
+        run: |
+          echo "== preview"; node .github/qa/share.js qa-share
+          echo "== main page"; SBASE=/ node .github/qa/share.js qa-share-main
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -62,4 +64,5 @@ jobs:
             qa-flow-ipad
             qa-fam
             qa-share
+            qa-share-main
           retention-days: 7

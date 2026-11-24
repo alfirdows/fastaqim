@@ -17,8 +17,9 @@ const wide=p=>p.evaluate(()=>{const W=document.documentElement.clientWidth,o=[];
   if(!(await p.$('#fqsPrev img')))fail(tag+': share picture was not made');
   w=await wide(p);if(w.length)fail(tag+': share sheet too wide '+w.join(' '));
   await p.screenshot({path:`${OUT}/${dev.replace(/ /g,'')}_${L}_share.png`});
-  await p.evaluate(()=>closeSheet());await p.click('#fqwEdit');await p.waitForTimeout(400);
-  w=await wide(p);if(w.length)fail(tag+': owner sheet too wide '+w.join(' '));
+  await p.evaluate(()=>closeSheet());
+  if(BASE==='/'){if(await p.$('#fqwEdit'))fail(tag+': owner pencil shows to a visitor on the main page')}
+  else{await p.click('#fqwEdit');await p.waitForTimeout(400);w=await wide(p);if(w.length)fail(tag+': owner sheet too wide '+w.join(' '))}
   const lk=await p.evaluate(async()=>{closeSheet();S.wird={s:'2026-11-20',z:'j',d:['m2697','c0'],c:[{ar:'اللهم اشف جدتي',me:'O Allah, heal grandmother'}],n:'Test note'};save();return (await FQS.wirdItem(FQS.plan(true))).link});
   // family member: a new phone opens the link
   const c2=await b.newContext({...pw.devices[dev]});await route(c2);const q=await c2.newPage();q.on('pageerror',e=>errs.push('family: '+e.message));
