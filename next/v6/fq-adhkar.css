@@ -46,13 +46,6 @@
 /* words */
 .fzw{border-radius:8px;transition:background .15s,color .15s;padding:0 1px}
 .fzw.on{background:rgba(46,107,50,.12);color:var(--acc)}
-.fzw.g{display:inline-flex;flex-direction:column;align-items:center;vertical-align:top;margin:4px 3px 8px;padding:4px 6px 5px;background:var(--card2);border-radius:12px;cursor:pointer;line-height:1.5;max-width:46%}
-.fzw.g b{font-weight:inherit;font-size:1em;line-height:1.7}
-.fzw.g em{font-family:Inter,-apple-system,sans-serif;font-style:normal;font-size:calc(var(--fz)*12.5px);color:var(--sub);font-weight:500;line-height:1.3;direction:ltr}
-.fzw.g small{font-family:Inter,-apple-system,sans-serif;font-size:calc(var(--fz)*11.5px);color:var(--sub);font-weight:400;line-height:1.3;text-align:center;direction:ltr;margin-top:1px}
-.fzw.g.on{background:rgba(46,107,50,.13)}
-.fzw.g:active{transform:scale(.97)}
-.fz-ay .fzw.g{font-size:.86em}
 .fz-hint{text-align:center;margin:16px 0 0;font-size:13.5px;color:#8f8e88;min-height:40px}
 .fz-hint .fz-mv{color:var(--acc);font-weight:600}
 .fz-next{border:0;background:var(--acc);color:#fff;font-weight:650;font-size:15px;height:44px;padding:0 20px;border-radius:22px;display:inline-flex;align-items:center;gap:6px}
@@ -76,18 +69,27 @@
 .fz-ctl .fz-rp.on{color:var(--acc)}
 .fz-ctl .fz-rp.on small{color:var(--acc)}
 .fz-ctl button:active{background:var(--card2)}.fz-ctl .fz-pp:active{background:var(--acc);transform:scale(.96)}
-/* word sheet */
-.fz-ws{text-align:center;padding:6px 4px 8px}
-.fz-wa{font-family:Plex,"FQ Quran";font-weight:600;font-size:46px;line-height:1.7;color:var(--ink)}
-.fz-wt{font-size:20px;font-weight:600;color:var(--acc);margin-top:2px}
-.fz-wm{font-size:16px;color:var(--sub);margin-top:6px;line-height:1.5}
-.fz-wb{display:flex;gap:10px;justify-content:center;margin:18px 0 6px}
-.fz-wp{height:46px;padding:0 18px;border-radius:23px;border:0;background:var(--acc);color:#fff;font-weight:650;font-size:15px;display:inline-flex;align-items:center;gap:8px}
+/* word card: opens next to the word */
+.fzw.pk{background:rgba(46,107,50,.14);color:var(--acc);box-shadow:0 0 0 2px rgba(46,107,50,.18)}
+.fz-lw{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;font-size:12.5px;color:#a3a29c}
+.fz-lw i{font-size:15px}
+.fz-pop{position:fixed;z-index:30;background:var(--card);border-radius:20px;padding:10px 14px 12px;text-align:center;box-shadow:0 0 0 1px var(--line),0 18px 40px -14px rgba(20,30,20,.35);opacity:0;transform:translateY(6px) scale(.97);transition:opacity .16s,transform .2s cubic-bezier(.2,.8,.2,1)}
+.fz-pop.up{transform:translateY(-6px) scale(.97)}
+.fz-pop.on{opacity:1;transform:none}
+.fz-pop::before{content:"";position:absolute;left:calc(var(--ax) - 7px);top:-7px;width:14px;height:14px;background:var(--card);transform:rotate(45deg);border-radius:3px 0 0 0;box-shadow:-1px -1px 0 var(--line)}
+.fz-pop.up::before{top:auto;bottom:-7px;border-radius:0 0 3px 0;box-shadow:1px 1px 0 var(--line)}
+.fz-pt{display:flex;align-items:center;justify-content:space-between;font-size:11.5px;font-weight:600;color:#a3a29c;letter-spacing:.03em;position:relative}
+.fz-px{width:32px;height:32px;margin:-4px -6px -4px 0;border:0;border-radius:50%;background:var(--card2);color:var(--sub);font-size:15px;display:grid;place-items:center}
+.fz-wa{font-family:Plex,"FQ Quran";font-weight:600;font-size:34px;line-height:1.6;color:var(--ink);margin-top:-2px}
+.fz-wt{font-size:17px;font-weight:650;color:var(--acc);line-height:1.3}
+.fz-wm{font-size:14.5px;color:var(--sub);margin-top:4px;line-height:1.45}
+.fz-pb{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:12px;direction:ltr}
+.fz-wp{height:40px;padding:0 15px;border-radius:20px;border:0;background:var(--acc);color:#fff;font-weight:650;font-size:14px;display:inline-flex;align-items:center;gap:6px}
 .fz-wp.lt{background:#eef3ee;color:var(--acc)}
-.fz-wn{color:var(--sub);font-size:14px}
-.fz-wnav{display:flex;justify-content:space-between;margin-top:10px}
-.fz-wnav button{width:46px;height:46px;border-radius:50%;border:0;background:var(--card2);font-size:20px;color:var(--ink);display:grid;place-items:center}
-.fz-wnav button:disabled{opacity:.35}
+.fz-wn{flex:1;color:var(--sub);font-size:13px}
+.fz-pn{width:40px;height:40px;border-radius:50%;border:0;background:var(--card2);font-size:17px;color:var(--ink);display:grid;place-items:center;flex:none}
+.fz-pn:first-child{margin-right:auto}.fz-pn:last-child{margin-left:auto}
+.fz-pn:disabled{opacity:.3}
 /* options */
 .fz-opt h3{font-size:13px;font-weight:650;color:var(--sub);margin:16px 4px 8px;letter-spacing:.02em}
 .fz-opt h3:first-child{margin-top:4px}
@@ -107,7 +109,7 @@
 html[dir=rtl] .fz-tr,html[dir=rtl] .fz-me{direction:ltr}
 html[dir=rtl] .fz-me{direction:rtl}
 html.dark .zr.fz{background:var(--bg)}
-html.dark .fzw.on,html.dark .fzw.g.on{background:rgba(79,143,95,.22)}
+html.dark .fzw.on,html.dark .fzw.pk{background:rgba(79,143,95,.22)}
 html.dark .fz-wp.lt{background:var(--accT)}
 .fz-pl{direction:ltr}
 /* every sheet: the title row with its close button stays at the top while you scroll */
@@ -115,3 +117,4 @@ html.dark .fz-wp.lt{background:var(--accT)}
 .sh.scr>.hd{box-shadow:0 1px 0 var(--line)}
 .sh .grab{touch-action:none}
 .sh.drag{transition:none}
+html.dark .fz-pop{box-shadow:0 0 0 1px var(--line),0 18px 40px -14px rgba(0,0,0,.6)}
