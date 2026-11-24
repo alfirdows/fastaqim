@@ -3,6 +3,8 @@ Source: Quran.com API v4 (the same data Quran.com shows). Writes data/adhkar/qwo
 {"2:255": {"w": [["ٱللَّهُ","Allahu","Allah"], ...]}, ...}"""
 import json,urllib.request,time
 KEYS=['1:%d'%i for i in range(1,8)]+['2:255','2:285','2:286','3:173','21:87']+['112:%d'%i for i in range(1,5)]+['113:%d'%i for i in range(1,6)]+['114:%d'%i for i in range(1,7)]
+import os as _os,json as _js
+if _os.path.exists('data/hisn/qkeys.json'):KEYS+=[k for k in _js.load(open('data/hisn/qkeys.json')) if k not in KEYS]  # ayat used by the Hisn al-Muslim library
 out={}
 for k in KEYS:
     u=f'https://api.quran.com/api/v4/verses/by_key/{k}?words=true&word_fields=text_uthmani,text_qpc_hafs&language=en'

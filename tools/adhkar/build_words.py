@@ -11,6 +11,8 @@ for l in open(R+'tools/adhkar/hwords.txt',encoding='utf8'):
     a,t,m=l.rstrip('\n').split('|');out['h'][a]=[t,m]
 if os.path.exists(R+'data/adhkar/cutwords.json'):out['c']=json.load(open(R+'data/adhkar/cutwords.json'))
 KEYS=['1:%d'%i for i in range(1,8)]+['2:255','2:285','2:286','3:173','21:87']+['112:%d'%i for i in range(1,5)]+['113:%d'%i for i in range(1,6)]+['114:%d'%i for i in range(1,7)]
+import os as _os,json as _js
+if _os.path.exists('data/hisn/qkeys.json'):KEYS+=[k for k in _js.load(open('data/hisn/qkeys.json')) if k not in KEYS]  # ayat used by the Hisn al-Muslim library
 for k in KEYS:
     s,a=k.split(':');d=json.load(open(R+'data/wbw/ghamdi/%03d.json'%int(s)))
     if a in d:out['g'][k]=d[a]

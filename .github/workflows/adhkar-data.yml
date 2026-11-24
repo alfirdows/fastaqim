@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['claude/**']
-    paths: [tools/adhkar/**, .github/workflows/adhkar-data.yml]
+    paths: [tools/adhkar/**, data/hisn/qkeys.json, .github/workflows/adhkar-data.yml]
 permissions:
   contents: write
 concurrency:
@@ -29,7 +29,8 @@ jobs:
         run: python tools/adhkar/fetch_words.py
       - name: Saad al-Ghamdi ayat not yet in audio/g
         run: |
-          for c in 001001 001002 001003 001004 001005 001006 001007 003173 021087; do
+          EXTRA=$(python -c "import json,os;print(' '.join('%03d%03d'%tuple(map(int,k.split(':'))) for k in (json.load(open('data/hisn/qkeys.json')) if os.path.exists('data/hisn/qkeys.json') else [])))")
+          for c in 001001 001002 001003 001004 001005 001006 001007 003173 021087 $EXTRA; do
             [ -s audio/g/$c.mp3 ] || curl -fsSL --retry 4 -o audio/g/$c.mp3 "https://everyayah.com/data/Ghamadi_40kbps/$c.mp3"
           done
       - name: Cut clips

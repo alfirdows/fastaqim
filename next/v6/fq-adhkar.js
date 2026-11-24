@@ -71,7 +71,7 @@ function steps(set){if(CACHE[set])return CACHE[set];const z=ZK[set],out=[];
  return CACHE[set]=out}
 function title(s){if(s.q){if(s.keys.length===1&&s.keys[0]==='2:255')return FT('Ayat al-Kursi','آية الكرسي','Aayaat al-Kursii','Aayatul Kursi');const su=+s.keys[0].split(':')[0],a=s.keys[0].split(':')[1],b=s.keys[s.keys.length-1].split(':')[1],nm=SUR[su]||['Surah '+su,'سورة '+su];
   const whole=su>=112||su===1;return whole?FT(nm[0],'سورة '+nm[1]):FT(nm[0]+' '+a+(b!==a?'–'+b:''),nm[1]+' '+N(a)+(b!==a?'–'+N(b):''))}
- const nm=NAME[s.name];return nm?FT(nm[0],nm[1]):''}
+ const nm=NAME[s.name];if(nm)return FT(nm[0],nm[1]);if(s.ti)return FT(s.ti[0],s.ti[1]||s.ti[0]);return ''}
 
 /* ---------- progress (kept in S.zk like before, so Home and Today's list stay right) ---------- */
 function P(){const dk=dkey(NOW());S.zk[dk]=S.zk[dk]||{};return S.zk[dk][ZS.set]=S.zk[dk][ZS.set]||{}}
@@ -182,6 +182,7 @@ function qText(s){let h='',segs=qFor(s),si=0;
  if(s.pre)h+=`<div class="fz-pre"><small>${esc(FT('First say','قل أولًا','Dura jedhi','Marka hore dheh'))}</small><span lang="ar" dir="rtl">${ISTI}</span></div>`;
  segs.forEach((x,i)=>{const isB=!!x.basm;const key=x.tm;const wd=(W&&W.q[key]&&W.q[key].w)||null;
   const words=wd?qWords(key):(QD[key]?QD[key].a.split(' ').map(a=>({ar:a,tr:'',en:''})):[]);
+  if(!words.length&&!isB){if(i===segs.findIndex(y=>!y.basm))h+=`<div class="fz-h" lang="ar" dir="rtl">${esc(strip(s.it.ar))}</div>`;return}
   h+=`<div class="fz-ay${isB?' b':''}" lang="ar" dir="rtl">${words.map((w,k)=>wcell(w,i,k,true)).join(' ')}</div>`;
   if(st.tr&&!isB&&wd)h+=`<p class="fz-tr">${esc(wd.map(w=>w[1]).join(' '))}</p>`;
   if(st.me&&!isB&&L!=='ar')h+=`<p class="fz-me">${esc(qMean(key))}</p>`});
@@ -346,13 +347,16 @@ function pinch(el){const dist=t=>Math.hypot(t[0].clientX-t[1].clientX,t[0].clien
 // data/hisn/lib.json: chapters of Hisn al-Muslim with only sahih/hasan adhkar (each with its sunnah.com/hisn page) and a male recording per dhikr
 let LIB=null;const XS={morning:'mx',evening:'ex',sleep:'sx'};
 const nar=t=>String(t||'').replace(/<[^>]+>/g,' ').replace(/[ً-ٰٟۖ-ۭـ]/g,'').replace(/[ٱأإآ]/g,'ا').replace(/[^ء-ي ]/g,' ').replace(/\s+/g,' ').trim();
-function hItem(x){const o={ar:x.ar,n:x.c||1,mt:'h',au:'hisn/a/'+x.n+'.m4a',hn:x.n,_en:x.en,ti:x.ti||null,src:[(x.ref||('Hisn al-Muslim '+x.n)),'https://sunnah.com/hisn:'+x.n]};return o}
+function hItem(x){const src=['Hisn al-Muslim '+x.n,'https://sunnah.com/hisn:'+x.n];
+ if(x.qk&&x.qk.length){const o={ar:x.ar,n:x.c||1,mt:'q',_qk:x.qk,hn:x.n,src,ti:x.ti||null,pre:/^\(?\s*أعوذ/.test(x.ar)?'isti':''};Object.defineProperty(o,'me',{get(){return x.en},enumerable:true});return o}
+ return {ar:x.ar,tr:x.tr||'',n:x.c||1,mt:'h',au:'hisn/a/'+x.n+'.m4a',hn:x.n,_en:x.en,ti:x.ti||null,src,why:x.ref?x.ref.replace(/\s*\|\s*/g,' '):''}}
 function libSets(){if(!LIB)return;LIB.cats.forEach(c=>{const k='h'+c.id;if(!ZK[k])ZK[k]={t:FT(c.en,c.ar),items:c.items.map(hItem),hisn:c.id}});
  // "keep going": the rest of that chapter, without the ones already in the daily set
- [['morning',1],['evening',1],['sleep',2]].forEach(([set,cid])=>{const c=LIB.cats.find(x=>x.id===cid);if(!c||!ZK[set])return;
-  const have=ZK[set].items.map(it=>nar(it.ar).split(' ').slice(0,4).join(' ')).filter(Boolean);
-  const qk=ZK[set].items.flatMap(it=>it._qk||[]);
-  const rest=c.items.filter(x=>{const h=nar(x.ar).split(' ').slice(0,4).join(' ');if(have.some(a=>a&&(h.startsWith(a)||a.startsWith(h))))return false;
+ [['morning',27],['evening',27],['sleep',28]].forEach(([set,cid])=>{const c=LIB.cats.find(x=>x.id===cid);if(!c||!ZK[set])return;
+  const base=set==='sleep'?['sleep']:['morning','evening'];const its=base.flatMap(b=>ZK[b]?ZK[b].items:[]);
+  const have=its.map(it=>nar(it.ar).split(' ').slice(0,4).join(' ')).filter(Boolean);
+  const qk=its.flatMap(it=>it._qk||[]).concat(set==='sleep'?['112:1','2:285','2:255']:[]);
+  const rest=c.items.filter(x=>{if(x.qk&&x.qk.filter(k=>k!=='|').every(k=>qk.includes(k)||/^11[234]:/.test(k)&&qk.includes('112:1')))return false;const h=nar(x.ar).split(' ').slice(0,4).join(' ');if(have.some(a=>a&&(h.startsWith(a)||a.startsWith(h))))return false;
    if(qk.includes('2:255')&&/الحي القيوم/.test(nar(x.ar)))return false;if(qk.some(k=>/^11[234]:/.test(k))&&/قل هو الله احد/.test(nar(x.ar)))return false;return true});
   ZK[XS[set]]={t:FT('More for the '+({morning:'morning',evening:'evening',sleep:'night'}[set]),{morning:'المزيد من أذكار الصباح',evening:'المزيد من أذكار المساء',sleep:'المزيد من أذكار النوم'}[set]),items:rest.map(hItem),extra:set}})}
 function loadLib(){return fetch(ROOT+'data/hisn/lib.json').then(r=>r.ok?r.json():null).then(d=>{if(d&&d.cats){LIB=d;libSets()}return LIB}).catch(()=>null)}
