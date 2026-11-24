@@ -352,11 +352,11 @@ dotSync();
 window.pushTest=pushTest=async function(){try{const sb=await FQA.sb(),u=FQA.user();const {error}=await sb.from('push_queue').insert({user_id:u.id,at:new Date(Date.now()+5000).toISOString(),title:X('Reminders are on','التذكيرات مفعّلة'),body:X('This is how your reminders will look.','هكذا ستظهر تذكيراتك.'),tag:'test',url:location.pathname.replace(/index\.html$/,'')});if(error)throw error;toast(T('A test reminder will arrive in about a minute.','سيصل تذكير تجريبي خلال دقيقة تقريبًا.'))}catch(e){toast(T("Couldn't send. Check your internet and try again.",'تعذّر الإرسال. تحقق من الإنترنت وحاول مجددًا.'))}};
 
 /* ================= Team (owner + admin only) ================= */
-addScreen('team',`<div class="hd sub">${BACK}<h1>${X('Team','الفريق')}</h1><button class="ib" id="fqpTmR" aria-label="${esc(X('Refresh','تحديث'))}"><i class="ph ph-arrows-clockwise"></i></button></div><div id="fqpTm"></div>`);
+addScreen('team',`<div class="hd sub">${BACK}<h1>${X('Team','الفريق')}</h1><button class="ib fqp-callb" id="fqpTmR" aria-label="${esc(X('Voice call','مكالمة صوتية'))}"><i class="ph ph-phone"></i></button></div><div id="fqpClBar"></div><div id="fqpTm"></div>`);
 const TM={msgs:[],mem:{},me:null,poll:0,about:null,shot:null,items:null,tab:'chat',lastRead:0};
 R.team=async()=>{const B=$('fqpTm');const r=await roles();if(!r.team){B.innerHTML=`<div class="qbe"><i class="ph ph-lock-simple"></i><p>${T('Only the team can open this.','هذه الصفحة للفريق فقط.')}</p></div>`;return}
  TM.me=FQA.user().id;TM.own=r.own;B.innerHTML=`<div class="seg fqp-seg" id="fqpTmT"><button data-tt="chat">${X('Chat','المحادثة')}</button><button data-tt="prev">${X('Previews','المعاينات')}</button>${r.own?`<button data-tt="mem">${X('Members','الأعضاء')}</button>`:''}</div><div id="fqpTmB"></div>`;
- $$('#fqpTmT [data-tt]').forEach(b=>b.onclick=()=>{TM.tab=b.dataset.tt;tmTab()});$('fqpTmR').onclick=()=>{vib(8);tmLoad(true)};
+ $$('#fqpTmT [data-tt]').forEach(b=>b.onclick=()=>{TM.tab=b.dataset.tt;tmTab()});$('fqpTmR').onclick=()=>clStart();clListen().catch(()=>{});clBar();
  try{const sb=await FQA.sb();const {data}=await sb.rpc('team_members');(data||[]).forEach(m=>TM.mem[m.user_id]=m)}catch(e){}tmTab()};
 function tmTab(){$$('#fqpTmT [data-tt]').forEach(b=>b.classList.toggle('on',b.dataset.tt===TM.tab));if(TM.tab==='prev')return tmPrev();if(TM.tab==='mem')return tmMem();
  $('fqpTmB').innerHTML=`<div class="fqp-chat" id="fqpCh"><p class="rload">${T('Loading…','جارٍ التحميل…')}</p></div>
@@ -443,7 +443,60 @@ async function tmPrev(){const B=$('fqpTmB');B.innerHTML=`<p class="rload">${T('L
  (TM.items.length?TM.items.map((x,k)=>`<div class="kh fqp-pv2"><div class="appics">${(x.pics||[]).slice(0,3).map(p=>`<img src="${esc(link(p))}" alt="" loading="lazy">`).join('')}</div><h3 dir="auto">${esc(L==='ar'&&x.ar?x.ar:x.t)}</h3>${x.s?`<p dir="auto">${esc(x.s)}</p>`:''}
   <div class="fqp-pvb">${x.link?`<a class="khop" href="${esc(link(x.link))}" target="_blank" rel="noopener"><i class="ph ph-arrow-square-out"></i>${X('Open it live','افتحه مباشرة')}</a>`:''}<button class="khop" data-cm="${k}"><i class="ph ph-chat-circle-text"></i>${X('Comment','تعليق')}</button>${own&&ans[x.id]?`<span class="fqp-st">${ans[x.id].a==='approve'?'✓ '+X('Approved','موافق'):'✎ '+X('Change','تغيير')}</span>`:''}</div></div>`).join(''):`<p class="note fqp-c">${X('Nothing waiting right now.','لا شيء ينتظر الآن.')}</p>`);
  $$('#fqpTmB [data-cm]').forEach(b=>b.onclick=()=>{const x=TM.items[+b.dataset.cm];TM.about={id:x.id,t:x.t};TM.tab='chat';tmTab();setTimeout(()=>$('fqpMsg').focus(),100)})}
-async function teamBadge(){const em=$('fqpTeamEm');if(!em)return;try{const sb=await FQA.sb(),me=FQA.user().id;const r=await sb.from('fastaqim_team_reads').select('last_read_id').eq('user_id',me).maybeSingle();const lr=(r.data&&r.data.last_read_id)||0;
+/* team voice calls: free, person to person, inside the site only (no extra accounts) */
+const CL={pc:null,id:null,st:'idle',stream:null,seen:new Set(),t0:0,tick:0,ch:null,offer:null,peer:null,names:{},ring:0,muted:false};
+const ICE=[{urls:['stun:stun.cloudflare.com:3478','stun:stun.l.google.com:19302']}];
+const clName=id=>CL.names[id]||X('Team','الفريق');
+async function clSig(kind,data,id=CL.id){const sb=await FQA.sb();const {error}=await sb.from('fastaqim_team_signal').insert({call_id:id,kind,data:data||null});if(error)throw error}
+async function clListen(){if(CL.ch||!window.FQA||!FQA.user())return;const r=await roles();if(!r.team)return;const sb=await FQA.sb();CL.ch=1;
+ try{const {data}=await sb.rpc('team_members');(data||[]).forEach(m=>CL.names[m.user_id]=m.name||'')}catch(e){}
+ CL.ch=sb.channel('fq-team-signal').on('postgres_changes',{event:'INSERT',schema:'public',table:'fastaqim_team_signal'},p=>clOn(p.new)).subscribe();
+ const {data}=await sb.from('fastaqim_team_signal').select('id,sender,call_id,kind,data,created_at').gt('created_at',new Date(Date.now()-45000).toISOString()).order('id');
+ const done=new Set((data||[]).filter(x=>x.kind!=='offer').map(x=>x.call_id));(data||[]).forEach(x=>{if(!done.has(x.call_id))clOn(x)})}
+function clOn(x){if(!x||CL.seen.has(x.id))return;CL.seen.add(x.id);if(x.sender===FQA.user().id)return;
+ if(x.kind==='offer'){if(CL.st!=='idle'||Date.now()-new Date(x.created_at)>60000)return;CL.id=x.call_id;CL.offer=x.data;CL.peer=x.sender;CL.st='ringing';clUI();
+  vib([200,100,200]);clearTimeout(CL.ring);CL.ring=setTimeout(()=>{if(CL.st==='ringing')clEnd(X('Missed call','مكالمة فائتة'))},45000);return}
+ if(x.call_id!==CL.id)return;
+ if(x.kind==='answer'&&CL.pc&&CL.st==='calling'){CL.st='connecting';clUI();CL.pc.setRemoteDescription(x.data).catch(()=>clEnd(X("Couldn't connect. Please try again.",'تعذّر الاتصال. حاول مرة أخرى.')))}
+ else if(x.kind==='end')clEnd(CL.st==='ringing'?X('Missed call','مكالمة فائتة'):X('Call ended','انتهت المكالمة'))}
+function clPc(){const pc=new RTCPeerConnection({iceServers:ICE});CL.pc=pc;
+ pc.ontrack=e=>{let a=$('fqpClA');if(!a){a=document.createElement('audio');a.id='fqpClA';a.autoplay=true;a.setAttribute('playsinline','');document.body.appendChild(a)}a.srcObject=e.streams[0];a.play().catch(()=>{})};
+ pc.onconnectionstatechange=()=>{const s=pc.connectionState;if(s==='connected'&&CL.st!=='live'){CL.st='live';CL.t0=Date.now();clearTimeout(CL.ring);vib(20);clUI();clearInterval(CL.tick);CL.tick=setInterval(clTime,1000)}
+  if(s==='disconnected'){clearTimeout(CL.dc);CL.dc=setTimeout(()=>{if(CL.pc===pc&&pc.connectionState!=='connected')clEnd(X('Call ended','انتهت المكالمة'))},10000)}
+  if(s==='failed')clEnd(X("Couldn't connect. Try again, or both use Wi-Fi.",'تعذّر الاتصال. حاول مرة أخرى أو استخدما شبكة Wi-Fi.'))};return pc}
+const clGather=pc=>new Promise(ok=>{if(pc.iceGatheringState==='complete')return ok();const t=setTimeout(ok,3500);pc.addEventListener('icegatheringstatechange',()=>{if(pc.iceGatheringState==='complete'){clearTimeout(t);ok()}})});
+async function clMic(){if(!navigator.mediaDevices||!window.RTCPeerConnection){toast(X('Calls are not supported on this browser.','المكالمات غير مدعومة في هذا المتصفح.'));return false}
+ try{CL.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});return true}catch(e){toast(X('Microphone was not allowed. You can allow it in your phone settings.','لم يُسمح بالميكروفون. يمكنك السماح به من إعدادات الهاتف.'));return false}}
+async function clStart(){if(CL.st!=='idle'){clUI();return}await clListen().catch(()=>{});const others=Object.keys(CL.names).filter(k=>k!==FQA.user().id);CL.peer=others[0]||null;
+ CL.st='calling';CL.id=(crypto.randomUUID?crypto.randomUUID():String(Date.now())+Math.random().toString(36).slice(2));clUI();
+ if(!(await clMic())){clEnd();return}if(CL.st!=='calling')return;
+ try{const pc=clPc();CL.stream.getTracks().forEach(t=>pc.addTrack(t,CL.stream));await pc.setLocalDescription(await pc.createOffer());await clGather(pc);if(CL.st!=='calling')return;
+  await clSig('offer',{type:'offer',sdp:pc.localDescription.sdp});
+  const sb=await FQA.sb();sb.from('fastaqim_team_chat').insert({body:X('Started a voice call. Open Team to answer.','بدأ مكالمة صوتية. افتح الفريق للرد.'),kind:'msg'}).then(()=>{if(TM.me)tmLoad(false)});
+  clearTimeout(CL.ring);CL.ring=setTimeout(()=>{if(CL.st==='calling'){clSig('end').catch(()=>{});clEnd(X('No answer','لا يوجد رد'))}},60000)}
+ catch(e){clEnd(X("Couldn't start the call. Check your internet and try again.",'تعذّر بدء المكالمة. تحقق من الإنترنت وحاول مجددًا.'))}}
+async function clAccept(){if(CL.st!=='ringing')return;CL.st='connecting';clUI();if(!(await clMic())){clSig('end').catch(()=>{});clEnd();return}
+ try{const pc=clPc();CL.stream.getTracks().forEach(t=>pc.addTrack(t,CL.stream));await pc.setRemoteDescription(CL.offer);await pc.setLocalDescription(await pc.createAnswer());await clGather(pc);
+  await clSig('answer',{type:'answer',sdp:pc.localDescription.sdp});clearTimeout(CL.ring);CL.ring=setTimeout(()=>{if(CL.st!=='live'){clSig('end').catch(()=>{});clEnd(X("Couldn't connect. Try again, or both use Wi-Fi.",'تعذّر الاتصال. حاول مرة أخرى أو استخدما شبكة Wi-Fi.'))}},25000)}
+ catch(e){clEnd(X("Couldn't connect. Please try again.",'تعذّر الاتصال. حاول مرة أخرى.'))}}
+function clHang(){if(CL.st==='idle')return;if(CL.id)clSig('end').catch(()=>{});clEnd(CL.st==='ringing'?'':X('Call ended','انتهت المكالمة'))}
+function clEnd(msg){const was=CL.st;clearTimeout(CL.ring);clearInterval(CL.tick);try{CL.stream&&CL.stream.getTracks().forEach(t=>t.stop())}catch(e){}try{CL.pc&&CL.pc.close()}catch(e){}
+ const a=$('fqpClA');if(a)a.srcObject=null;Object.assign(CL,{pc:null,stream:null,id:null,offer:null,st:'idle',muted:false});
+ if($('fqpCall'))closeSheet();clBar();if(msg&&was!=='idle')toast(msg)}
+const clTime=()=>{const e=$('fqpClS');if(e&&CL.st==='live')e.textContent=fmtS(Math.floor((Date.now()-CL.t0)/1000));clBar()};
+function clUI(){const nm=clName(CL.peer),st=CL.st;
+ const sub={calling:X('Calling…','جارٍ الاتصال…'),ringing:X('Voice call','مكالمة صوتية'),connecting:X('Connecting…','جارٍ الربط…'),live:fmtS(Math.floor((Date.now()-CL.t0)/1000))}[st]||'';
+ const btns=st==='ringing'?`<button class="fqp-clx no" id="fqpClNo" aria-label="${esc(X('Decline','رفض'))}"><i class="ph-fill ph-phone-x"></i><small>${X('Decline','رفض')}</small></button><button class="fqp-clx yes" id="fqpClYes" aria-label="${esc(X('Answer','رد'))}"><i class="ph-fill ph-phone"></i><small>${X('Answer','رد')}</small></button>`
+  :`<button class="fqp-clx mu ${CL.muted?'on':''}" id="fqpClMu" aria-pressed="${CL.muted}"><i class="ph${CL.muted?'-fill':''} ph-microphone${CL.muted?'-slash':''}"></i><small>${CL.muted?X('Unmute','إلغاء الكتم'):X('Mute','كتم')}</small></button><button class="fqp-clx no" id="fqpClEnd" aria-label="${esc(X('End call','إنهاء المكالمة'))}"><i class="ph-fill ph-phone-x"></i><small>${X('End','إنهاء')}</small></button>`;
+ openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${X('Voice call','مكالمة صوتية')}</h1>${XB}</div><div class="fqp-call" id="fqpCall"><span class="fqp-av ${st==='ringing'||st==='calling'?'pu':''}" style="--s:88px;background:var(--accT);color:var(--acc)"><b>${esc((nm[0]||'?').toUpperCase())}</b></span><h2>${esc(nm)}</h2><p id="fqpClS">${sub}</p><div class="fqp-clr">${btns}</div></div>`);
+ if($('fqpClYes'))$('fqpClYes').onclick=clAccept;if($('fqpClNo'))$('fqpClNo').onclick=clHang;if($('fqpClEnd'))$('fqpClEnd').onclick=clHang;
+ if($('fqpClMu'))$('fqpClMu').onclick=()=>{CL.muted=!CL.muted;try{CL.stream.getAudioTracks().forEach(t=>t.enabled=!CL.muted)}catch(e){}vib(8);clUI()};
+ $$('#sh [data-x]').forEach(b=>b.addEventListener('click',()=>setTimeout(clBar,50)));clBar()}
+function clBar(){const b=$('fqpClBar');if(!b)return;if(CL.st==='idle'||$('fqpCall')&&$('sh').classList.contains('on')){b.innerHTML='';return}
+ b.innerHTML=`<button class="fqp-clbar" id="fqpClBk"><i class="ph-fill ph-phone"></i><span>${CL.st==='ringing'?X('Incoming call','مكالمة واردة'):X('Back to the call','العودة إلى المكالمة')}</span><b>${CL.st==='live'?fmtS(Math.floor((Date.now()-CL.t0)/1000)):''}</b></button>`;$('fqpClBk').onclick=clUI}
+setTimeout(()=>clListen().catch(()=>{}),4000);setInterval(()=>{if(!CL.ch)clListen().catch(()=>{})},20000);
+window.addEventListener('pagehide',()=>{if(CL.st!=='idle'&&CL.id)clSig('end').catch(()=>{})});
+async function teamBadge(){clListen().catch(()=>{});const em=$('fqpTeamEm');if(!em)return;try{const sb=await FQA.sb(),me=FQA.user().id;const r=await sb.from('fastaqim_team_reads').select('last_read_id').eq('user_id',me).maybeSingle();const lr=(r.data&&r.data.last_read_id)||0;
  const {count}=await sb.from('fastaqim_team_chat').select('id',{count:'exact',head:true}).gt('id',lr).neq('author',me);em.innerHTML=count?`<span class="fqp-nd">${AR(count)}</span>`:''}catch(e){}}
 
 /* ================= More screen: Settings, What's new, owner rows ================= */
@@ -462,5 +515,5 @@ moreRows();
 homeAv();pathQ();applyWp();
 /* open the screen in the address (#settings, #guide, #news, #team, #log) once these screens exist */
 {const h=(window.__fqHash||location.hash||'').slice(1);if(['settings','guide','news','team','log'].includes(h))go(h,false)}
-const QP=new URLSearchParams(location.search);if(QP.get('x')==='report2')setTimeout(()=>reportSheet(null),300);if(QP.get('x')==='reset')setTimeout(resetSheet,300);window.__fqp={undoReset,changeRestore,doRestore,combine,mSub,mAdd,pickPhoto,applyWp,delSheet};
+const QP=new URLSearchParams(location.search);if(QP.get('x')==='report2')setTimeout(()=>reportSheet(null),300);if(QP.get('x')==='reset')setTimeout(resetSheet,300);window.__fqp={undoReset,changeRestore,doRestore,combine,mSub,mAdd,pickPhoto,applyWp,delSheet,CL,clListen,clBar};
 })();
