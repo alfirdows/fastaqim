@@ -899,7 +899,7 @@ html.lx-long .any b{font-size:14px}html.lx-long .any button{padding:11px 10px;ga
 .adbw textarea{height:auto;padding:12px 14px;min-height:110px}
 .vrc{background:var(--card);border:1.5px solid var(--gold);border-radius:20px;padding:14px;margin-bottom:16px}.vrc p{margin:0 0 10px;line-height:1.5;font-size:14.5px}.vrc div{display:flex;gap:8px}.vrc .chip.ok{background:var(--acc);border-color:var(--acc);color:#fff}
 .gl .adfr .chip,.adfr .chip{width:auto;flex:none;display:inline-flex;align-items:center;height:34px;padding:0 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;font-weight:600;color:var(--ink)}
-.swk span{font-size:.55em;font-weight:600;color:var(--sub);margin-inline-start:4px}.swx{display:block;font-style:normal;font-size:11px;color:var(--sub);margin-top:2px}
+.swk span{font-size:.55em;font-weight:600;color:var(--sub);margin-inline-start:4px}.swx{display:flex;align-items:center;justify-content:center;gap:2px;font-style:normal;font-size:11px;color:var(--sub);margin-top:2px;white-space:nowrap}
 </style>
 <link rel="stylesheet" href="life.css">
 </head>
@@ -1352,6 +1352,7 @@ function salSheet(k){const s=SAL.find(x=>x[0]===k),dk=dkey(NOW()),cur=(S.salah[d
  openSheet(`<div class="hd sub"><span style="width:44px"></span><h1>${T(s[1],s[2])}</h1>${XB}</div>
  <p class="note" style="text-align:center">${T('How did you pray it?','كيف صلّيتها؟')}</p>
  ${[['on',T('On time','في وقتها'),T('Prayed in its time','صُلّيت في وقتها'),'ph-check-circle'],['late',T('Made up','قضاء'),T('Prayed after its time','صُلّيت بعد وقتها'),'ph-clock'],['exc',T('Excused','بعذر'),T('Not counted against you','لا تُحسب عليك'),'ph-shield-check']].map(([v,a,b,ic])=>`<button class="opt ${cur===v?'on':''}" data-v="${v}"><i class="ph ${ic}"></i><span><b>${a}</b><small>${b}</small></span><span class="rd">✓</span></button>`).join('')}
+ ${window.fqExcBtn?`<button class="fsi-lk" type="button" data-fsi><i class="ph ph-info"></i>${T('What counts as an excuse?','ما الأعذار في الصلاة؟')}</button>`:''}
  ${aftHtml(k,dk)}
  ${cur?`<button class="ghost" style="border-color:var(--line);color:var(--sub)" data-v="">${T('Clear','مسح')}</button>`:''}`);aftBind(k,dk);
  $$('#sh [data-v]').forEach(b=>b.onclick=()=>{const v=b.dataset.v;S.salah[dk]=S.salah[dk]||{};if(v)S.salah[dk][k]=v;else delete S.salah[dk][k];
@@ -1519,7 +1520,7 @@ function salWeek(){const now=NOW(),nm=now.getHours()*60+now.getMinutes();let p=0
   SAL.forEach(z=>{const v=day[z[0]],[h,m]=z[3].split(':').map(Number);if(v==='exc'){ex++;return}if(v==='on'||v==='late')p++;if(v||i>0||h*60+m<=nm)due++})}
  return{p,due,ex}}
 R.more=()=>{const SW=salWeek(),kp=S.kh[0]?Math.round(S.kh[0].done/604*100):0;
- $('yp').innerHTML=`<div><b class="g">${AR(S.stars)}★</b><small>${T('Stars','نجوم')}</small></div><div><b class="swk">${AR(SW.p)}<span>/ ${AR(SW.due)}</span></b><small>${T('Salah this week','صلوات الأسبوع')}${SW.ex?`<em class="swx">${AR(SW.ex)} ${T('excused, not counted','بعذر، لا تُحسب')}</em>`:''}</small></div><div><b>${AR(kp)}%</b><small>${T('Khatmah','الختمة')}</small></div>`;$('mStars').innerHTML=AR(S.stars)+' ★';$('mNot').textContent=nOn()+' '+T('on','مفعّل')};
+ $('yp').innerHTML=`<div><b class="g">${AR(S.stars)}★</b><small>${T('Stars','نجوم')}</small></div><div><b class="swk">${AR(SW.p)}<span>/ ${AR(SW.due)}</span></b><small>${T('Salah this week','صلوات الأسبوع')}${SW.ex?`<em class="swx"><span>${AR(SW.ex)} ${T('excused, not counted','بعذر، لا تُحسب')}</span>${window.fqExcBtn?fqExcBtn():''}</em>`:''}</small></div><div><b>${AR(kp)}%</b><small>${T('Khatmah','الختمة')}</small></div>`;$('mStars').innerHTML=AR(S.stars)+' ★';$('mNot').textContent=nOn()+' '+T('on','مفعّل')};
 
 const LGS=[['en','English'],['ar','العربية'],['om','Afaan Oromoo'],['so','Soomaali'],['ur','اردو'],['fr','Français'],['tr','Türkçe'],['id','Bahasa Indonesia']];
 function lgSet(n){if(n!=='en'&&n!=='ar'){toast(T('This preview has English and Arabic. All languages are in the full app.','هذه المعاينة بالإنجليزية والعربية. كل اللغات في التطبيق الكامل.'));return}localStorage.setItem('fq5.lang',n);const u=new URL(location.href);u.searchParams.set('lang',n);location.href=u.href}
@@ -2408,6 +2409,8 @@ if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.g
 <script src="fq-night.js" defer></script>
 <link rel="stylesheet" href="fq-why.css">
 <script src="fq-why.js" defer></script>
+<link rel="stylesheet" href="fq-salinfo.css">
+<script src="fq-salinfo.js" defer></script>
 <link rel="stylesheet" href="fq-adhkar.css">
 <script src="fq-adhkar.js" defer></script>
 <link rel="stylesheet" href="fq-recite.css">
