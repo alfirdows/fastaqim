@@ -158,3 +158,29 @@ html.dark .fz-ok{background:var(--accT)}
 html.dark .fz-menu.on{background:rgba(0,0,0,.35)}
 html.dark .fz-mi{background:var(--accT)}
 .cel{padding-left:20px;padding-right:20px;text-align:center}.cel h2{max-width:min(340px,88vw);font-size:26px;line-height:1.25;text-wrap:balance}
+/* set menu: each set can unfold to list what is inside */
+.fz-mp{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.fz-menu{display:flex;flex-direction:column;padding-bottom:16px}
+.fz-mg+.fz-mg{margin-top:2px}
+.fz-mrw{display:flex;align-items:center}
+.fz-mrw .fz-mr{flex:1;min-width:0}
+.fz-mo{flex:none;width:40px;height:40px;margin-inline-start:2px;border:0;border-radius:50%;background:none;color:var(--sub);font-size:16px;display:grid;place-items:center;transition:transform .25s}
+.fz-mg.open .fz-mo{transform:rotate(180deg)}
+.fz-mo:active{background:var(--card2)}
+.fz-ml{display:none;margin:2px 6px 8px 62px;border-inline-start:2px solid var(--line);padding-inline-start:8px}
+html[dir=rtl] .fz-ml{margin:2px 62px 8px 6px}
+.fz-mg.open .fz-ml{display:block;animation:fzUp .25s cubic-bezier(.2,.8,.2,1)}
+.fz-ms{width:100%;border:0;background:none;display:flex;align-items:center;gap:10px;padding:8px 8px;border-radius:12px;text-align:start;color:var(--ink);font-size:14px;line-height:1.35}
+.fz-ms:active,.fz-ms.cur{background:var(--card2)}
+.fz-mn{flex:none;width:24px;height:24px;border-radius:50%;background:var(--card2);color:var(--sub);font-size:11.5px;font-weight:700;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.fz-ms.dn .fz-mn{background:var(--acc);color:#fff}
+.fz-ms.cur .fz-mn{box-shadow:0 0 0 2px var(--acc)}
+.fz-mtx{flex:1;min-width:0}
+.fz-mx{flex:none;font-size:12px;font-weight:700;color:var(--sub)}
+/* keep going after the daily essentials */
+.fz-more{max-width:min(340px,88vw);margin:0 auto 14px;animation:fi .5s .6s both}
+.fz-more p{font-size:15px;line-height:1.5;opacity:.9;margin:0 0 10px}
+.fz-bon{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:650;color:#d8c08e;margin-bottom:14px}
+.fz-keep{display:flex!important;align-items:center;justify-content:center;gap:8px;width:100%;margin:0 auto}
+.cel button.fz-lt{background:transparent;color:inherit;box-shadow:inset 0 0 0 1.5px currentColor;opacity:.85;height:46px;margin-top:4px}
+.fz-eve{display:flex;gap:8px;align-items:flex-start;margin:0 0 10px;padding:8px 12px;border-radius:12px;background:var(--card2);color:var(--sub);font-size:13px;line-height:1.5;text-align:start}.fz-eve i{font-size:16px;color:var(--acc);margin-top:1px}

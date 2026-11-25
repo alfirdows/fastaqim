@@ -1,6 +1,6 @@
 /* Fastaqim offline support: the page is fetched fresh when online (so updates reach everyone) and kept for offline use.
    Your to-dos and calendar live on your phone, so they open without WiFi and sync when you are back online. */
-const CACHE="fastaqim-v182";
+const CACHE="fastaqim-v190";
 const CORE=["./","index.html","manifest.webmanifest","icon-180.png","icon-192.png","icon-512.png","fonts/UthmanicHafs.otf","haptic.js"];
 const LIBS=["fonts.googleapis.com","fonts.gstatic.com","cdn.jsdelivr.net","unpkg.com"];
 self.addEventListener("install",e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});
