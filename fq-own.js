@@ -78,7 +78,7 @@ try{fqCI()}catch(e){}
 
 /* ---------- More: numbers on arcs, no fractions ---------- */
 {const _rm=R.more;R.more=function(){_rm.apply(this,arguments);try{const y=$('yp');if(!y)return;const b=y.querySelectorAll('div>b');
- if(b[1]){const m=b[1].textContent.match(/([0-9٠-٩]+)\s*\/\s*([0-9٠-٩]+)/);if(m)b[1].outerHTML=arc(N(m[1]),N(m[2]),{w:58,label:A(N(m[1]))})}
+ if(b[1]){const m=b[1].textContent.match(/([0-9٠-٩]+)\s*\/\s*([0-9٠-٩]+)/);if(m)b[1].outerHTML=arc(N(m[1]),N(m[2]),{w:80,label:A(N(m[1]))+'<small class="fq-of">/'+A(N(m[2]))+'</small>'})}
  if(b[2]){const m=b[2].textContent.match(/[0-9٠-٩]+/);const v=m?N(m[0]):0;b[2].outerHTML=arc(v,100,{w:58,label:A(v)+'%'})}}catch(e){}}}
 
 /* ---------- any leftover "3/5" style fraction becomes a small arc ---------- */
