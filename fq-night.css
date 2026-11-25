@@ -7,3 +7,4 @@ html.fqn-anim,html.fqn-anim *{transition:background-color .35s ease,color .35s e
 /* bottom bar: solid, so the page never shows through behind the labels */
 .tab{background:var(--card)!important}
 html.dark .qh .pr,html.dark .qh .pr *{color:#fff!important}
+@media (max-width:340px){.fh{gap:3px}}
