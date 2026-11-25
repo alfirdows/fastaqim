@@ -31,3 +31,9 @@ html[dir=rtl] .fsi-w small{letter-spacing:0;font-size:12px}
 html[dir=rtl] .fsi-tr>span i{transform:scaleX(-1)}
 .fsi-tr small{grid-column:1/-1;font-size:12.5px;color:var(--sub);line-height:1.45}
 .fsi-n{margin:10px 4px 0;font-size:12.5px;color:var(--sub);text-align:center;line-height:1.6}
+.fsi-lks{display:flex;justify-content:center;gap:4px 18px;flex-wrap:wrap;margin:2px 0 10px}
+.fsi-lks .fsi-lk{width:auto;margin:0;padding:8px 4px}
+.fsi-ex{margin-top:10px;padding:9px 11px;border-radius:12px;background:var(--bg);font-size:13.5px;line-height:1.5;color:var(--ink)}
+.fsi-ex small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:2px}
+html[dir=rtl] .fsi-ex small{letter-spacing:0;font-size:12px}
+.fsi-it b{text-wrap:balance}.fsi-it p,.fsi-ex{text-wrap:pretty}
