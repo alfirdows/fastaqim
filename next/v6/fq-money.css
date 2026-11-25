@@ -204,3 +204,6 @@ label.kc-big{display:flex;align-items:center;justify-content:center;gap:8px;curs
 .mn-where>div>i{color:var(--acc);flex:none;margin-top:1px}.mn-where span{display:flex;flex-direction:column;gap:2px}.mn-where b{font-size:14.5px}.mn-where small{font-size:13px;color:var(--sub);line-height:1.45}
 .mn-cel.give .mn-coin{background:linear-gradient(145deg,#eef5ee,#cfe3d1);color:var(--acc)}
 .mn-cel.give .mn-celc b{color:var(--acc)}
+.mn-rco{display:grid;gap:8px;background:#fbf7ee;border:1px solid color-mix(in srgb,var(--fqG,#b8955a) 35%,#fff);border-radius:14px;border-end-start-radius:5px;padding:10px 12px}
+.mn-rco p{margin:0;font-size:13px;color:#5d5546;line-height:1.4}.mn-rco p i{color:var(--fqGD,#86672e);vertical-align:-2px}
+.mn-rco>div{display:flex;flex-wrap:wrap;gap:8px}.mn-rco button{border:0;padding:0;cursor:pointer}
