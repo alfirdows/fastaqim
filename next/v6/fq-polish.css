@@ -1,0 +1,63 @@
+/* Fastaqim finishing layer (25 Nov 2026). Loaded last. Small, safe fixes that make every screen feel finished.
+   Each rule says what it fixes. Never put layout-moving JS here. */
+
+/* 1. Nothing may make the page slide sideways on a phone */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{overflow-x:clip}
+/* The reader header already bleeds to the edges; its background layer bled 16px further and made the page scroll sideways */
+.scr>.hd.rdh:before{left:0;right:0}
+
+/* 2. Calm text: no lonely last word, balanced headings */
+h1,h2,h3,.sht,.hd h1{text-wrap:balance}
+p,.note,.empty,small{text-wrap:pretty}
+/* Arabic in cards: lines of similar length, so a single word never sits alone on the last line */
+.ar,.fz-ar,[lang=ar].ayah,.qd-ar{text-wrap:balance}
+#rdB .ar{text-wrap:pretty}
+
+/* 3. Touch: feels like a native app, never selects text by accident when tapping fast */
+button,.pchip,.tile,.tab a,[role=button]{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+::selection{background:rgba(46,107,50,.18)}
+input,textarea{caret-color:var(--acc,#2e6b32)}
+/* iPhone Safari zooms the whole page into any text box under 16px; keep the page still */
+@supports (-webkit-touch-callout:none){
+ input[type=text],input[type=search],input[type=email],input[type=number],input[type=tel],input[type=password],input[type=url],input:not([type]),textarea,select{font-size:max(16px,1em)!important}
+}
+/* Keyboard users see where they are; finger taps never show a ring */
+:focus-visible{outline:2px solid var(--acc,#2e6b32);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+/* Numbers that change (counters, countdowns, times) keep their width so nothing jiggles */
+time,.cnt,.num,.stp b,#hStars b{font-variant-numeric:tabular-nums}
+
+/* 4. Gentle press feedback on cards and tiles (buttons already have it) */
+@media (prefers-reduced-motion:no-preference){
+ .pchip,.tile .tmain,.gl>button,.gl>a{transition:transform .12s ease,background-color .12s ease}
+ .pchip:active,.tile .tmain:active,.gl>button:active,.gl>a:active{transform:scale(.985)}
+}
+
+/* 5. Sideways rows (juz numbers): soft fade at the edge instead of a hard cut, no scrollbar */
+#qJs{scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+html[dir=rtl] #qJs{-webkit-mask-image:linear-gradient(270deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(270deg,#000 calc(100% - 28px),transparent)}
+#qJs::-webkit-scrollbar{display:none}
+
+/* 6. Home pinned tools: same height, text never squeezed into 3 lines (icon on top, words below) */
+@media (max-width:699px){
+ #s-home .pchip:not(.add){flex-direction:column;align-items:flex-start;gap:5px;padding:10px 11px}
+ #s-home .pchip:not(.add) span{width:100%}
+ #s-home .pchip small{white-space:normal;line-height:1.25}
+}
+
+/* 7. Small phones (iPhone SE): the top bar fits in every language */
+@media (max-width:360px){
+ .fh{gap:4px!important}
+ .fh .ib{width:40px;height:40px}
+ .fh .lgb .ph-caret-down{display:none}
+ .fh .lgb{padding-inline:9px}
+}
+
+/* 8. Icons: nothing drawn with a soul (people, insects) and no hands; same meaning, clean symbols */
+.ph.ph-bug:before{content:"\e244"}            /* Report a problem: flag */
+.ph.ph-hands-clapping:before{content:"\e6a2"} /* Finishing adhkar: sparkle */
+.ph.ph-user:before,.ph.ph-user-circle:before{content:"\e0ac"} /* account: @ (rows with a name get a letter instead) */
+.ph.ph-users:before,.ph.ph-users-three:before{content:"\e2c4"} /* family: home */
+.fqx-mono{display:inline-grid;place-items:center;width:1.25em;height:1.25em;border-radius:50%;background:var(--acc,#2e6b32);color:#fff;font:700 .78em/1 inherit;font-family:inherit;letter-spacing:0;text-transform:uppercase}
+html.fqn .fqx-mono{background:#e7efe8;color:#1f4a22}
