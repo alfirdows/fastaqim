@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
   push:
     branches: ['claude/**']
-    paths: [index.html, sw.js, fq-auth.js, fq-months.*, life*, dhikr-plus.*, q/**, ph/**, next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
+    paths: [index.html, sw.js, fq-auth.js, fq-months.*, fq-nudge.*, life*, dhikr-plus.*, q/**, ph/**, next/v6/**, next/compare/**, .github/qa/**, .github/workflows/preview-qa.yml]
 permissions:
   contents: read
 concurrency:
@@ -49,6 +49,7 @@ jobs:
           echo "== Adhkar reader"; node .github/qa/adhkar.js qa-adhkar; LANGQ="?lang=ar" node .github/qa/adhkar.js qa-adhkar-ar
           echo "== Ramadan countdown + Blessed months (preview)"; node .github/qa/months.js qa-months
           echo "== Ramadan countdown + Blessed months (main page)"; MBASE=/ node .github/qa/months.js qa-months-main
+          echo "== Salah reminders (main page)"; MBASE=/ node .github/qa/nudge.js qa-nudge
           echo "== Recite from memory (preview, test engine)"; BASE=/next/v6/ node .github/qa/recite.js qa-recite; BASE=/next/v6/ LANGQ=lang=ar node .github/qa/recite.js qa-recite-ar
       - uses: actions/upload-artifact@v4
         if: always()
@@ -58,6 +59,7 @@ jobs:
             qa-shots
             qa-flow
             qa-flow-ipad
+            qa-nudge
             qa-fam
             qa-adhkar
             qa-adhkar-ar

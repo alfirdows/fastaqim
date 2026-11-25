@@ -1,0 +1,28 @@
+/* "A word for your heart": calm reading card in the salah reminder sheet */
+#sh.fqk-on .note.fqk-sub{text-align:center;margin:-2px 8px 12px;color:var(--sub)}
+.fqk-card{padding:16px 16px 14px;background:var(--card);border:1px solid var(--line);border-radius:20px;text-align:center;transition:opacity .16s ease,transform .16s ease}
+.fqk-card.out{opacity:0;transform:translateY(6px)}
+.fqk-card.in{animation:fqkIn .32s ease}
+@keyframes fqkIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.fqk-e{display:block;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--goldD,var(--gold));margin-bottom:6px}
+.fqk-ar{font-family:'FQ Quran',serif;font-size:22px;line-height:2.05;color:var(--ink);margin:2px 4px 8px;text-wrap:balance}
+.fqk-ar.fqk-hd{font-family:Plex,system-ui,sans-serif;font-size:19px;line-height:1.9}
+.fqk-l{display:block}
+.fqk-n{display:inline-grid;place-items:center;min-width:1.5em;height:1.5em;padding:0 .2em;border:1px solid var(--line);border-radius:1em;font-family:Plex,system-ui,sans-serif;font-size:.5em;line-height:1;color:var(--sub);vertical-align:.35em}
+.fqk-t{font-size:17px;line-height:1.65;color:var(--ink);font-weight:600;margin:4px 4px 8px;text-wrap:balance}
+.fqk-m{margin:0 4px 10px;color:var(--sub);font-size:14px;line-height:1.6;text-wrap:pretty}
+.fqk-s{display:inline-block;padding-top:8px;border-top:1px solid var(--line);font-size:12.5px;color:var(--gold);text-decoration:none}
+.fqk-s.fqk-own{color:var(--sub);letter-spacing:.04em}
+.fqk-ask{display:flex;gap:10px;align-items:flex-start;margin:12px 0 4px;padding:12px 14px;background:var(--card2,#f5f2ea);border-radius:16px;text-align:start}
+.fqk-ask i{font-size:18px;color:var(--acc);margin-top:2px}
+.fqk-ask span{display:flex;flex-direction:column;gap:2px;font-size:15px;line-height:1.5;color:var(--ink)}
+.fqk-ask small{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
+.fqk-nx{width:100%;height:48px;margin-top:10px;border-radius:16px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:600;font-size:15px;display:flex;align-items:center;justify-content:center;gap:8px}
+.fqk-nx i{color:var(--acc);font-size:17px}
+.fqk-lk{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin:10px 0 0;padding:8px;border:0;background:none;color:var(--acc);font-size:14px;font-weight:600}
+.fqk-heavy{margin-top:14px;color:var(--sub);font-weight:500}
+.fqk-heavy i{color:var(--acc)}
+.fqk-ft{display:flex;justify-content:center;align-items:center;gap:8px;margin:12px 0 4px;color:var(--sub);font-size:13px}
+.fqk-ft button{border:0;background:none;color:var(--sub);font-size:13px;padding:6px 4px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line)}
+.fqk-hl{display:flex;align-items:center;justify-content:center;gap:6px;margin:6px auto 0;border:0;background:none;color:var(--sub);font-size:13px;padding:4px 8px}
+.fqk-hl i{color:var(--acc)}
