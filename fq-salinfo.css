@@ -1,0 +1,33 @@
+/* Excused-from-salah sheet: calm reading style, one accent */
+.fsi-i{display:inline-grid;place-items:center;width:26px;height:26px;margin:-6px -4px -6px 0;padding:0;border:0;background:none;color:var(--gold);font-size:14px;flex:none;cursor:pointer}
+.swx>span{overflow:hidden;text-overflow:clip}
+.fsi-lk{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin:2px 0 10px;padding:8px;border:0;background:none;color:var(--gold);font:inherit;font-size:13.5px}
+.fsi-lk i{font-size:16px}
+.fsi{padding:0 2px 18px}
+.fsi-ay{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 14px 12px;margin-bottom:12px}
+.fsi-ar{font-family:'FQ Quran',serif;font-size:22px;line-height:2;margin:0;color:var(--ink);text-wrap:balance}
+.fsi-en{margin:2px 6px 8px;color:var(--sub);font-size:14px;line-height:1.55;text-wrap:balance}
+.fsi-lead{margin:0 4px 16px;font-size:14.5px;line-height:1.6;color:var(--ink);text-align:center;text-wrap:pretty}
+.fsi-h{margin:18px 4px 8px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--goldD,var(--gold))}
+html[dir=rtl] .fsi-h{letter-spacing:0;font-size:13px}
+.fsi-it{display:flex;gap:12px;padding:13px 14px;margin-bottom:8px;background:var(--card);border:1px solid var(--line);border-radius:18px}
+.fsi-ic{flex:none;width:34px;height:34px;border-radius:17px;display:grid;place-items:center;background:var(--bg);color:var(--acc);font-size:17px}
+.fsi-it>div{flex:1;min-width:0}
+.fsi-it b{display:block;font-size:15px;font-weight:600;line-height:1.45;color:var(--ink)}
+.fsi-it p{margin:3px 0 0;font-size:14px;line-height:1.55;color:var(--sub)}
+.fsi-w{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin-top:10px}
+.fsi-w span{padding:8px 10px;border-radius:12px;background:var(--bg);font-size:13px;line-height:1.45;color:var(--ink)}
+.fsi-w small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sub);margin-bottom:2px}
+html[dir=rtl] .fsi-w small{letter-spacing:0;font-size:12px}
+.fsi-ss{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:8px}
+.fsi-src{font-size:12.5px;color:var(--gold);text-decoration:none}
+.fsi-t{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:4px 14px}
+.fsi-tr{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:2px 10px;padding:10px 0;border-top:1px solid var(--line)}
+.fsi-tr:first-child{border-top:0}
+.fsi-tr b{font-size:15px;font-weight:600}
+.fsi-tr>span{display:flex;align-items:center;justify-content:flex-end;gap:6px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.fsi-tr em{font-style:normal;font-size:14px;color:var(--ink)}
+.fsi-tr>span i{font-size:12px;color:var(--sub)}
+html[dir=rtl] .fsi-tr>span i{transform:scaleX(-1)}
+.fsi-tr small{grid-column:1/-1;font-size:12.5px;color:var(--sub);line-height:1.45}
+.fsi-n{margin:10px 4px 0;font-size:12.5px;color:var(--sub);text-align:center;line-height:1.6}
