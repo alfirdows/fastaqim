@@ -1130,7 +1130,7 @@ const DICT={'Cleared':['Haqame','Waa la tirtiray'],'What do these mean?':['Kunne
 'Energy right now':['Humna amma qabdu','Tamarta hadda'],'Low':['Gadi aanaa','Hoose'],'Okay':['Tole','Hagaag'],'High':['Ol aanaa','Sare'],
 'Add a task… e.g. "Call the clinic 3pm"':['Hojii dabali… fkn. "Kilinikii bilbili 3 WB"','Ku dar hawl… tusaale "Wac rugta 3 GD"'],
 'Quick ones first.':['Kan saffisaa dura.','Kuwa degdegga ah marka hore.'],'Big ones first, while you have the energy.':['Kan gurguddaa dura, osoo humna qabduu.','Kuwa waaweyn marka hore, inta aad tamar leedahay.'],
-'Nothing left. Well done!':['Wanti hafe hin jiru. Baay\'ee gaarii!','Waxba ma harin. Mahadsanid, si fiican!'],'Finished tasks show here':['Hojiiwwan xumuraman asitti mul\'atu','Hawlaha la dhammeeyay halkan ayay ka muuqdaan'],
+'No tasks yet. Type one above or tap the mic.':['Ammaaf hojiin hin jiru. Olitti barreessi ykn maaykiraafoonii tuqi.','Weli hawl ma jirto. Kor ku qor ama taabo makarafoonka.'],'Add a task…':['Hojii dabali…','Ku dar hawl…'],'Nothing left. Well done!':['Wanti hafe hin jiru. Baay\'ee gaarii!','Waxba ma harin. Mahadsanid, si fiican!'],'Finished tasks show here':['Hojiiwwan xumuraman asitti mul\'atu','Hawlaha la dhammeeyay halkan ayay ka muuqdaan'],
 'Salah this week':['Salaata torban kanaa','Salaadda toddobaadkan'],'on':['banaa','shidan'],'Language':['Afaan','Luqad'],
 'Fajr':['Fajrii','Fajar'],'Dhuhr':['Zuhrii','Duhur'],'Asr':['Asrii','Casar'],'Maghrib':['Magribii','Maqrib'],'Isha':["Ishaa'ii",'Cishe'],'Adhkar':['Azkaara','Adkaar'],
 '15 min after Isha':["Ishaa'ii booda daq 15",'15 daq Cishe kadib'],'Khatmah portion':['Qooda khatmii','Qaybta khatmiga'],'Tasks':['Hojiiwwan','Hawlo'],'When a task is due':['Yeroo hojiin ga\'u','Marka hawsha waqtigeedu yimaado'],
@@ -1508,8 +1508,8 @@ const SZ={s:T('5 min','٥ د'),m:T('15 min','١٥ د'),l:T('1 hr+','ساعة+')}
 function renderEn(){const e=S.energy||'';$('en').innerHTML=`<b>${T('Energy right now','طاقتك الآن')}</b>${[['low',T('Low','منخفضة')],['ok',T('Okay','متوسطة')],['high',T('High','عالية')]].map(([v,l])=>`<button data-en="${v}" class="${e===v?'on':''}">${l}</button>`).join('')}`;
  $$('#en [data-en]').forEach(b=>b.onclick=()=>{S.energy=S.energy===b.dataset.en?'':b.dataset.en;save();vib(8);R.todo()})}
 const enSort=L0=>{const e=S.energy,o={s:0,m:1,l:2};if(!e)return L0;return L0.slice().sort((a,b)=>e==='low'?o[a.sz||'m']-o[b.sz||'m']:e==='high'?o[b.sz||'m']-o[a.sz||'m']:0)};
-R.todo=()=>{renderEn();$('qaIn').placeholder=T('Add a task… e.g. "Call the clinic 3pm"','أضف مهمة… مثل "الاتصال بالعيادة ٣م"');
- $('tList').innerHTML=S.tasks.length?(S.energy==='low'?`<p class="note" style="margin:0 0 8px">${T('Quick ones first.','السريعة أولًا.')}</p>`:S.energy==='high'?`<p class="note" style="margin:0 0 8px">${T('Big ones first, while you have the energy.','الكبيرة أولًا ما دامت طاقتك عالية.')}</p>`:'')+enSort(S.tasks).map(t=>taskRow(t)).join(''):`<p class="empty">${T('Nothing left. Well done!','لا شيء متبقٍ. أحسنت!')}</p>`;
+R.todo=()=>{renderEn();$('qaIn').placeholder=T('Add a task…','أضف مهمة…');
+ $('tList').innerHTML=S.tasks.length?(S.energy==='low'?`<p class="note" style="margin:0 0 8px">${T('Quick ones first.','السريعة أولًا.')}</p>`:S.energy==='high'?`<p class="note" style="margin:0 0 8px">${T('Big ones first, while you have the energy.','الكبيرة أولًا ما دامت طاقتك عالية.')}</p>`:'')+enSort(S.tasks).map(t=>taskRow(t)).join(''):`<p class="empty">${S.done.length?T('Nothing left. Well done!','لا شيء متبقٍ. أحسنت!'):T('No tasks yet. Type one above or tap the mic.','لا مهام بعد. اكتب مهمة أعلاه أو اضغط على الميكروفون.')}</p>`;
  $('tDone').innerHTML=S.done.length?S.done.map(t=>taskRow(t,1)).join(''):`<p class="empty">${T('Finished tasks show here','تظهر هنا المهام المنجزة')}</p>`;bindTasks($('tList'));bindTasks($('tDone'))};
 $('qa').onsubmit=e=>{e.preventDefault();const v=$('qaIn').value.trim();if(!v)return;const m=v.match(/\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b/i);S.tasks.unshift({id:Date.now(),t:m?v.replace(m[0],'').trim():v,due:m?T('Today, '+m[1]+':'+(m[2]||'00')+' '+m[3].toUpperCase(),'اليوم'):T('Today','اليوم'),p:'m'});save();$('qaIn').value='';vib(10);R.todo()};
 
@@ -2423,6 +2423,8 @@ if(P.get('open'))setTimeout(()=>{const b=document.querySelector('[data-ng="'+P.g
 <script src="fq-money.js" defer></script>
 <link rel="stylesheet" href="fq-nudge.css">
 <script src="fq-nudge.js" defer></script>
+<link rel="stylesheet" href="fq-polish.css">
+<script src="fq-polish.js" defer></script>
 <script src="haptic.js" defer></script>
 <link rel="stylesheet" href="fq-cup.css">
 <script src="fq-cup.js" defer></script>

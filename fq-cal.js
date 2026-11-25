@@ -106,6 +106,8 @@ function monthView(){const sel=KC.sel,s=dOf(sel),y=s.getFullYear(),m=s.getMonth(
  <div class="kc-acts"><button class="kc-pl" data-kadd="${sel}">${IC('plus',17)}<span>${X('Add to this day','أضف لهذا اليوم','Guyyaa kanatti dabali','Ku dar maalintan')}</span></button><button class="kc-pl" data-kgo="day">${IC('clock',17)}<span>${X('Open day','افتح اليوم','Guyyaa bani','Fur maalinta')}</span></button></div></div>
  <button class="kc-hj" data-go="hcal">${IC('moon',18)}<span><b>${X('Hijri month','الشهر الهجري','Ji\'a Hijraa','Bisha Hijriga')}</b><small>${X('Salah you marked, white days, occasions','صلواتك المسجّلة، الأيام البيض، المناسبات')}</small></span>${IC('caret-right flip')}</button>
  ${$('s-months')?`<button class="kc-hj" data-go="months">${IC('sun',18)}<span><b>${X('Blessed months and days','الأشهر والأيام الفاضلة')}</b><small>${X('Ramadan countdown, the best days of the year','العد التنازلي لرمضان، أفضل أيام السنة')}</small></span>${IC('caret-right flip')}</button>`:''}`}
+/* after Maghrib the Hijri day has already moved on (Home shows the new date); say so on today's row */
+const hEve=k=>{try{const h=hijri(k),n=hParts(new Date());if(!h||n.d===h.d)return '';return ' · '+X('from Maghrib','من المغرب','Maghrib irraa','laga bilaabo Maqrib')+': '+AR(n.d)+' '+esc(hms(n.m))}catch(e){return ''}};
 const hLabel=k=>{const h=hijri(k);return h?`${AR(h.d)} ${esc(hms(h.m))} ${AR(h.y)}`:''};
 
 /* ---- Week ---- */
@@ -114,7 +116,7 @@ function strip(k,mode){const ws=weekStart(k),tk=today();return `<div class="kc-s
  return `<button class="${d===k?'sel':''}${d===tk?' td':''}" data-kd="${d}"><small>${fmt(d,{weekday:'short'})}</small><b>${AR(dOf(d).getDate())}</b>${hasPlan(d)?'<i></i>':'<i class="no"></i>'}</button>`}).join('')}</div>`}
 function weekView(){const ws=weekStart(KC.sel),tk=today();
  return strip(KC.sel)+[...Array(7)].map((_,i)=>{const d=addD(ws,i),l=itemsOn(d).filter(x=>!x.sal),isl=islamic(d).filter(x=>!x.soft);
-  return `<div class="kc-card kc-wk${d===tk?' td':''}${d===KC.sel?' sel':''}" id="kw-${d}"><div class="kc-dh"><button class="kc-dn" data-kday="${d}"><b>${fmt(d,{weekday:'long'})}</b><small>${fmt(d,{day:'numeric',month:'short'})} · ${hLabel(d)}${d===tk?' · '+X('Today','اليوم'):''}</small></button><button class="ib kc-mini" data-kadd="${d}" aria-label="${X('Add','إضافة')}">${IC('plus',18)}</button></div>
+  return `<div class="kc-card kc-wk${d===tk?' td':''}${d===KC.sel?' sel':''}" id="kw-${d}"><div class="kc-dh"><button class="kc-dn" data-kday="${d}"><b>${fmt(d,{weekday:'long'})}</b><small>${fmt(d,{day:'numeric',month:'short'})} · ${hLabel(d)}${d===tk?' · '+X('Today','اليوم')+hEve(d):''}</small></button><button class="ib kc-mini" data-kadd="${d}" aria-label="${X('Add','إضافة')}">${IC('plus',18)}</button></div>
   ${isl.length?`<div class="kc-isl">${isl.map(x=>`<p class="${x.big?'big':''}">${IC(x.big?'sun':'sun-dim',15)}<span>${x.t}</span></p>`).join('')}</div>`:''}
   ${l.length?`<div class="kc-l">${l.sort((a,b)=>(a.any?-1:a.a)-(b.any?-1:b.a)).map(row).join('')}</div>`:`<p class="kc-free sm">${X('Free','فارغ','Bilisa','Bannaan')}</p>`}</div>`}).join('')}
 
