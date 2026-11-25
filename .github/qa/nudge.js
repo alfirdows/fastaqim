@@ -50,7 +50,7 @@ const LOC={lat:44.98,lng:-93.27,name:'Minneapolis'};const TZ='America/Chicago';
   await c.close()}
  // 8. every reminder renders, with a real source
  {const{c,p,errs}=await ctx({date:t(T.asr,30),state:{loc:LOC}});const n=await p.evaluate(()=>fqNudge.all.length);let bad=[],srcs=new Set();
-  for(const g of ['n','l','h']){await p.evaluate(g=>fqNudge.open(g),g);await p.waitForTimeout(700);const cnt=await p.evaluate(g=>fqNudge.all.filter(a=>a.g.includes(g)).length,g);
+  for(const g of ['n','l','h','g']){await p.evaluate(g=>fqNudge.open(g),g);await p.waitForTimeout(700);const cnt=await p.evaluate(g=>fqNudge.all.filter(a=>g==='g'||a.g.includes(g)||(g==='h'&&a.g.includes('g'))).length,g);
    for(let i=0;i<cnt;i++){const r=await p.evaluate(()=>{const c=document.getElementById('fqkCard');const a=c.querySelector('a.fqk-s');return{t:c.innerText,u:a?a.href:'',own:!!c.querySelector('.fqk-own,span.fqk-s')}});
     if(r.t.length<20||/…|\.\.\./.test(r.t))bad.push(r.t.slice(0,40));if(!r.u&&!r.own)bad.push('no source: '+r.t.slice(0,30));if(r.u){srcs.add(r.u);if(!/^https:\/\/(quran\.com|sunnah\.com)\//.test(r.u))bad.push(r.u)}
     await p.click('#fqkNx');await p.waitForTimeout(450)}
