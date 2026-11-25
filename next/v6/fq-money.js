@@ -19,7 +19,7 @@ const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 const mkey=k=>k.slice(0,7);
 
 /* ---------------- data ---------------- */
-const M=()=>{S.money=S.money||{};const m=S.money;m.cur=m.cur||guessCur();m.tx=m.tx||[];m.rec=m.rec||[];m.goals=m.goals||[];m.bud=m.bud||{};m.pct=m.pct==null?null:m.pct;m.seen=m.seen||{};return m};
+const M=()=>{S.money=S.money||{};const m=S.money;m.cur=m.cur||guessCur();m.tx=m.tx||[];m.rec=m.rec||[];m.goals=m.goals||[];m.bud=m.bud||{};m.pct=m.pct==null?null:m.pct;m.seen=m.seen||{};m.rco=m.rco||[];return m};
 function guessCur(){try{const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'';const r={'Africa/Addis_Ababa':'ETB','Africa/Nairobi':'KES','Africa/Mogadishu':'SOS','Asia/Riyadh':'SAR','Asia/Dubai':'AED','Africa/Cairo':'EGP','Europe/London':'GBP','America/Toronto':'CAD','Asia/Karachi':'PKR','Asia/Kolkata':'INR','Asia/Kuala_Lumpur':'MYR','Asia/Jakarta':'IDR','Europe/Istanbul':'TRY','Australia/Sydney':'AUD'};if(r[tz])return r[tz];if(/^Europe\//.test(tz)&&!/London|Istanbul|Moscow/.test(tz))return 'EUR'}catch(e){}return 'USD'}
 const CURS=['USD','CAD','GBP','EUR','AUD','SAR','AED','QAR','KWD','EGP','ETB','KES','SOS','DJF','NGN','ZAR','TRY','PKR','INR','BDT','MYR','IDR'];
 function money(c,o){o=o||{};const cur=M().cur,v=c/100;let s;try{s=new Intl.NumberFormat(loc(),{style:'currency',currency:cur,minimumFractionDigits:o.whole||Number.isInteger(v)?0:2,maximumFractionDigits:o.whole?0:2}).format(v)}catch(e){s=cur+' '+v.toFixed(2)}return o.sign&&c>0?'+'+s:s}
@@ -60,19 +60,22 @@ function daysLeft(mk){const t=today();if(mkey(t)!==mk)return 0;const d=dOf(t),la
 const DB={p:null,open(){if(this.p)return this.p;this.p=new Promise((ok,no)=>{try{const r=indexedDB.open('fq-money',1);r.onupgradeneeded=()=>{r.result.createObjectStore('rc')};r.onsuccess=()=>ok(r.result);r.onerror=()=>no(r.error)}catch(e){no(e)}});return this.p},
  async put(id,v){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction('rc','readwrite');t.objectStore('rc').put(v,id);t.oncomplete=()=>ok();t.onerror=()=>no(t.error)})},
  async get(id){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction('rc');const q=t.objectStore('rc').get(id);q.onsuccess=()=>ok(q.result);q.onerror=()=>no(q.error)})},
+ async keys(){const d=await this.open();return new Promise((ok,no)=>{const t=d.transaction('rc');const q=t.objectStore('rc').getAllKeys();q.onsuccess=()=>ok(q.result||[]);q.onerror=()=>no(q.error)})},
  async del(id){const d=await this.open();return new Promise(ok=>{const t=d.transaction('rc','readwrite');t.objectStore('rc').delete(id);t.oncomplete=()=>ok();t.onerror=()=>ok()})}};
 function shrink(file,max,q){return new Promise((ok,no)=>{const u=URL.createObjectURL(file),im=new Image();im.onload=()=>{let w=im.naturalWidth,h=im.naturalHeight;const s=Math.min(1,max/Math.max(w,h));w=Math.round(w*s);h=Math.round(h*s);
   const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(im,0,0,w,h);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):no(new Error('blob')),'image/jpeg',q)};im.onerror=()=>{URL.revokeObjectURL(u);no(new Error('img'))};im.src=u})}
-async function saveReceipt(file){const big=await shrink(file,1800,.82),th=await shrink(file,220,.7),id='r'+uid();await DB.put(id,{img:big,th,at:Date.now(),name:file.name||''});
+async function saveReceipt(file){const big=await shrink(file,1800,.82),th=await shrink(file,220,.7),id='r'+uid();await DB.put(id,{img:big,th,at:Date.now(),name:file.name||''});M().rco.push({rc:id,dt:today(),at:Date.now()});save();setTimeout(syncReceipts,150);
  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(e){}return id}
 /* receipts kept in the person's own private cloud folder for at least 1 year (no delete allowed), when signed in */
+const skey=v=>String(v||'').normalize('NFKD').replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,30)||'receipt';
 const CL={u:()=>window.FQA&&FQA.user&&FQA.user(),
- async up(t){const u=this.u();if(!u||!t.rc||t.rcp)return false;const v=await DB.get(t.rc);if(!v)return false;const sb=await FQA.sb(),path=`${u.id}/${t.dt}_${safe(t.src||t.t)}_${t.rc}.jpg`;
+ async up(t){const u=this.u();if(!u||!t.rc||t.rcp)return false;const v=await DB.get(t.rc);if(!v)return false;const sb=await FQA.sb(),path=`${u.id}/${t.dt}_${skey(t.src||t.t)}_${t.rc}.jpg`;
   const {error}=await sb.storage.from('receipts').upload(path,v.img,{contentType:'image/jpeg',upsert:false});if(error&&!/exist|duplicate/i.test(error.message||''))throw error;t.rcp=path;save();return true},
  async get(path){const sb=await FQA.sb();const {data,error}=await sb.storage.from('receipts').download(path);if(error)throw error;return data},
  async list(){const u=this.u();if(!u)return [];const sb=await FQA.sb();const {data,error}=await sb.storage.from('receipts').list(u.id,{limit:1000,sortBy:{column:'name',order:'desc'}});if(error)throw error;return (data||[]).filter(x=>/\.jpg$/i.test(x.name)).map(x=>({path:u.id+'/'+x.name,name:x.name,at:x.created_at}))}};
 let SYNCING=false;
-async function syncReceipts(){if(SYNCING||!CL.u())return;SYNCING=true;let n=0;try{for(const t of M().tx.filter(x=>x.rc&&!x.rcp)){try{if(await CL.up(t))n++}catch(e){console.warn('receipt upload',e);break}}}finally{SYNCING=false}if(n)refresh()}
+function tidyRco(){const m=M();let ch=0;m.rco=m.rco.filter(o=>{const t=m.tx.find(x=>x.rc===o.rc);if(!t)return true;if(o.rcp&&!t.rcp)t.rcp=o.rcp;ch=1;return false});if(ch)save()}
+async function syncReceipts(){tidyRco();if(SYNCING||!CL.u())return;SYNCING=true;let n=0;const m=M();try{for(const t of [...m.tx.filter(x=>x.rc&&!x.rcp),...m.rco.filter(x=>!x.rcp)]){try{if(await CL.up(t))n++}catch(e){console.warn('receipt upload',e);break}}}finally{SYNCING=false}if(n)refresh()}
 async function rcImg(t){let v=null;try{v=await DB.get(t.rc)}catch(e){}if(v)return v.img;if(t.rcp&&CL.u()){try{const b=await CL.get(t.rcp);try{await DB.put(t.rc,{img:b,th:b,at:Date.now()})}catch(e){}return b}catch(e){}}return null}
 const thumbs={};
 async function paintThumbs(root){for(const el of $$('[data-rth]',root||document)){const id=el.dataset.rth;try{if(!thumbs[id]){let v=await DB.get(id);if(!v&&el.dataset.rcp&&CL.u()){try{const b=await CL.get(el.dataset.rcp);await DB.put(id,{img:b,th:b,at:Date.now()});v={img:b}}catch(e){}}if(!v){el.classList.add('gone');continue}thumbs[id]=URL.createObjectURL(v.th||v.img)}el.style.backgroundImage=`url("${thumbs[id]}")`}catch(e){}}}
@@ -146,7 +149,7 @@ R.money=function(){const m=M(),mo=monthOf(MK),isNow=MK===today().slice(0,7),dl=d
  const W=Math.max(mo.inn,mo.sv+mo.out,1),pc=v=>Math.max(0,Math.min(100,v/W*100)).toFixed(1)+'%';
  const list=mo.tx.filter(t=>FIL==='all'||(FIL==='rc'?t.rc:FIL==='tax'?t.tax:FIL==='save'?(t.k==='save'||t.k==='take'):t.k===FIL)).sort((a,b)=>a.dt<b.dt?1:a.dt>b.dt?-1:b.at-a.at);
  const days=[...new Set(list.map(t=>t.dt))];
- const yr=MK.slice(0,4),yTx=m.tx.filter(t=>t.dt.slice(0,4)===yr),yR=yTx.filter(t=>t.rc).length,yTax=yTx.filter(t=>t.tax&&t.k==='out').reduce((s,t)=>s+t.amt,0);
+ const yr=MK.slice(0,4),yTx=m.tx.filter(t=>t.dt.slice(0,4)===yr),yR=yTx.filter(t=>t.rc).length+m.rco.filter(o=>o.dt.slice(0,4)===String(yr)).length,yTax=yTx.filter(t=>t.tax&&t.k==='out').reduce((s,t)=>s+t.amt,0);
  $('mnB').innerHTML=`
  <div class="mn-mo"><button class="ib" id="mnPrev" aria-label="${X('Previous month','الشهر السابق')}">${IC('caret-left flip')}</button><b>${monthTitle(MK)}</b><button class="ib" id="mnNext" aria-label="${X('Next month','الشهر التالي')}" ${isNow?'disabled':''}>${IC('caret-right flip')}</button></div>
  ${!m.goals.length&&!m.tx.length?startCard():''}
@@ -176,6 +179,7 @@ R.money=function(){const m=M(),mo=monthOf(MK),isNow=MK===today().slice(0,7),dl=d
  ${FIL==='rc'&&days.length?`<label class="mn-pl" for="mnCam">${IC('camera',18)}<span>${X('Add a receipt','أضف إيصالًا','Nagahee dabali','Ku dar rasiid')}</span></label>`:''}
  ${days.length?days.map(d=>`<p class="mn-dh">${d===today()?X('Today','اليوم'):fmt(d,{weekday:'long',day:'numeric',month:'short'})}</p><div class="mn-list">${list.filter(t=>t.dt===d).map(txRow).join('')}</div>`).join(''):(FIL==='rc'?`<label class="mn-pl" for="mnCam">${IC('camera',18)}<span>${X('Add a receipt','أضف إيصالًا','Nagahee dabali','Ku dar rasiid')}</span></label>`:`<p class="mn-none">${X('Nothing here yet. Tap Spent or Money in above.','لا شيء هنا بعد. اضغط صرفت أو دخل في الأعلى.')}</p>`)}
  <div class="mn-tax"><div>${IC('folder-simple',22)}<span><b>${X('Receipts & taxes','الإيصالات والضرائب')} ${AR(yr)}</b><small>${X(`${yR} receipt photo${yR===1?'':'s'} · ${money(yTax)} marked for taxes`,`${AR(yR)} صورة إيصال · ${money(yTax)} للضرائب`,`Suuraa nagahee ${yR} · ${money(yTax)} gibiraaf mallatteeffame`,`${yR} sawir rasiid · ${money(yTax)} loo calaamadiyay canshuurta`)}</small></span></div>
+  ${m.rco.length?`<div class="mn-rco"><p>${IC('info',15)} ${X('Saved, but not added to your spending yet. Tap one to add what it was for.','محفوظ، لكن لم يُضف إلى مصروفك بعد. اضغط عليه لتضيف ما كان له.','Olkaa\'ameera, garuu baasii keetti hin dabalamne. Maaliif akka ta\'e dabaluuf tuqi.','Waa la kaydiyay, laakiin weli laguma darin kharashkaaga. Taabo si aad ugu darto waxa uu ahaa.')}</p><div>${m.rco.map(o=>`<button class="mn-th big" data-rth="${o.rc}" data-rcp="${esc(o.rcp||'')}" data-rco="${o.rc}" aria-label="${X('Add details','أضف التفاصيل')}"></button>`).join('')}</div></div>`:''}
   <label class="kc-big" for="mnCam">${IC('camera',19)} ${X('Add a receipt','أضف إيصالًا','Nagahee dabali','Ku dar rasiid')}</label>
   <div class="kc-row2"><button class="kc-alt" id="mnPack">${IC('download-simple',18)}<span>${X('Tax pack','ملف الضرائب')}</span></button><button class="kc-alt" id="mnHist">${IC('clock-counter-clockwise',18)}<span>${X('All receipts','كل الإيصالات','Nagahee hunda','Dhammaan rasiidhada')}</span></button></div>
   ${CL.u()?`<p class="mn-fine">${IC('lock-simple',14)} ${X('Each receipt is also saved in your own private account folder and kept for at least 1 year, even if you delete it here or clear the app.','كل إيصال يُحفظ أيضًا في مجلد خاص بحسابك ويبقى سنة على الأقل، حتى لو حذفته هنا أو مسحت التطبيق.','Nagaheen hundi kuusaa dhuunfaa herrega kee keessattis olkaa\'amee yoo xiqqaate waggaa 1 tura, asii haqxus ykn appii qulqulleessitus.','Rasiid kasta waxaa sidoo kale lagu kaydiyaa gal gaar ah oo akoonkaaga ah, waxaana la hayaa ugu yaraan 1 sano, xitaa haddii aad halkan ka tirtirto ama aad nadiifiso app-ka.')}</p>`
@@ -252,14 +256,14 @@ async function histSheet(){const m=M(),signed=!!CL.u();
  ${signed?'':`<button class="kc-alt" id="rhSign">${IC('cloud-arrow-up',18)}<span>${X('Sign in','سجّل الدخول','Seeni','Gal')}</span></button>`}</div>`);
  if(!signed)$('rhSign').onclick=()=>{try{acctSheet()}catch(e){go('more')}};
  let items=[];
- try{if(signed){await syncReceipts();const cl=await CL.list();const byP={};m.tx.forEach(t=>{if(t.rcp)byP[t.rcp]=t});items=cl.map(c=>({path:c.path,name:c.name,t:byP[c.path],dt:c.name.slice(0,10)}))}}catch(e){console.warn(e)}
- const inCl=new Set(items.map(i=>i.path));m.tx.filter(t=>t.rc&&!inCl.has(t.rcp)).forEach(t=>items.push({t,dt:t.dt,local:1}));
+ try{if(signed){await syncReceipts();const cl=await CL.list();const byP={};m.tx.forEach(t=>{if(t.rcp)byP[t.rcp]=t});const byR={};m.rco.forEach(o=>{if(o.rcp)byR[o.rcp]=o});items=cl.map(c=>({path:c.path,name:c.name,t:byP[c.path],r:byR[c.path],dt:c.name.slice(0,10)}))}}catch(e){console.warn(e)}
+ const inCl=new Set(items.map(i=>i.path));m.tx.filter(t=>t.rc&&!inCl.has(t.rcp)).forEach(t=>items.push({t,dt:t.dt,local:1}));m.rco.filter(o=>!inCl.has(o.rcp)).forEach(o=>items.push({r:o,dt:o.dt,local:1}));
  items.sort((a,b)=>(b.dt||'').localeCompare(a.dt||''));
  const box=$('rhL');if(!box)return;
  if(!items.length){box.innerHTML=`<p class="mn-none">${X('No receipts yet. Tap Add a receipt on the Money page.','لا إيصالات بعد. اضغط «أضف إيصالًا» في صفحة المال.','Ammaaf nagaheen hin jiru. Fuula Maallaqaa irratti Nagahee dabali tuqi.','Weli rasiid ma jiro. Taabo Ku dar rasiid bogga Lacagta.')}</p>`;return}
- const nm=i=>i.t?esc(i.t.src||i.t.t||''):esc(i.name.replace(/^\d{4}-\d\d-\d\d_/,'').replace(/_r[a-z0-9]+\.jpg$/i,'').replace(/-/g,' '));
- box.innerHTML=items.map((i,n)=>`<button class="mn-rhi" data-rh="${n}">${IC('receipt',20)}<span><b dir="auto">${nm(i)||X('Receipt','إيصال')}</b><small>${i.dt?fmt(i.dt,{day:'numeric',month:'short',year:'numeric'}):''}${i.t?' · '+money(i.t.amt):' · '+X('deleted entry, kept','قيد محذوف، محفوظ','galmee haqame, olkaa\'ame','diiwaan la tirtiray, waa la hayaa')}${i.local?' · '+X('this phone only','هذا الهاتف فقط','bilbila kana qofa','taleefankan oo keliya'):''}</small></span>${IC(i.local?'device-mobile':'cloud-check',18)}</button>`).join('');
- const getImg=async i=>i.t&&i.t.rc?await rcImg(i.t):await CL.get(i.path);
+ const nm=i=>i.t?esc(i.t.src||i.t.t||''):i.r?X('Receipt','إيصال','Nagahee','Rasiid'):esc(i.name.replace(/^\d{4}-\d\d-\d\d_/,'').replace(/_r[a-z0-9]+\.jpg$/i,'').replace(/-/g,' '));
+ box.innerHTML=items.map((i,n)=>`<button class="mn-rhi" data-rh="${n}">${IC('receipt',20)}<span><b dir="auto">${nm(i)||X('Receipt','إيصال')}</b><small>${i.dt?fmt(i.dt,{day:'numeric',month:'short',year:'numeric'}):''}${i.t?' · '+money(i.t.amt):i.r?' · '+X('not added to spending yet','لم يُضف إلى المصروف بعد','baasiitti hin dabalamne','weli laguma darin kharashka'):' · '+X('deleted entry, kept','قيد محذوف، محفوظ','galmee haqame, olkaa\'ame','diiwaan la tirtiray, waa la hayaa')}${i.local?' · '+X('this phone only','هذا الهاتف فقط','bilbila kana qofa','taleefankan oo keliya'):''}</small></span>${IC(i.local?'device-mobile':'cloud-check',18)}</button>`).join('');
+ const getImg=async i=>i.t&&i.t.rc?await rcImg(i.t):i.r?await rcImg(i.r):await CL.get(i.path);
  $$('[data-rh]',box).forEach(b=>b.onclick=async()=>{const i=items[+b.dataset.rh];try{const img=await getImg(i);if(!img)throw 0;const u=URL.createObjectURL(img);
   openSheet(head(nm(i)||X('Receipt','إيصال'))+`<img class="mn-rimg" src="${u}" alt="${X('Receipt photo','صورة الإيصال')}"><button class="kc-big" id="rvS">${IC('download-simple',19)} ${X('Save or share','احفظ أو شارك','Olkaa\'i ykn qoodi','Kaydi ama wadaag')}</button>`);
   $('rvS').onclick=()=>deliver(img,`receipt_${i.dt||''}_${(nm(i)||'').replace(/[^\w-]+/g,'-').slice(0,30)}.jpg`)}catch(e){toast(X("Couldn't open it. Check your internet and try again.",'تعذّر الفتح. تحقق من الإنترنت وحاول مجددًا.'))}});
@@ -280,7 +284,7 @@ function bind(){const b=$('mnB');
  $$('[data-tgo]',b).forEach(x=>x.onclick=()=>x.dataset.tgo==='goal'?newGoal():pctSheet());
  if($('mnStart'))$('mnStart').onclick=()=>newGoal(true);if($('mnGoal0'))$('mnGoal0').onclick=()=>newGoal();
  $('mnGoalAdd').onclick=()=>newGoal();$('mnPct').onclick=()=>pctSheet();$('mnBud').onclick=budSheet;$('mnSrc').onclick=srcSheet;
- $('mnPack').onclick=packSheet;$('mnSet').onclick=setSheet;$('mnHist').onclick=histSheet;if($('mnSign'))$('mnSign').onclick=()=>{try{acctSheet()}catch(e){go('more')}};
+ $('mnPack').onclick=packSheet;$('mnSet').onclick=setSheet;$('mnHist').onclick=histSheet;$$('[data-rco]',b).forEach(x=>x.onclick=()=>addSheet('out',{rc:x.dataset.rco}));if($('mnSign'))$('mnSign').onclick=()=>{try{acctSheet()}catch(e){go('more')}};
  $('mnCam').onchange=async e=>{const f=e.target.files&&e.target.files[0];e.target.value='';if(!f)return;toast(X('Saving photo…','جارٍ حفظ الصورة…'));try{const rc=await saveReceipt(f);vib(10);addSheet('out',{rc})}catch(x){toast(X("Couldn't read that photo. Try another.",'تعذّرت قراءة الصورة. جرّب أخرى.'))}};
  $$('[data-sq]',b).forEach(x=>x.onclick=()=>sqAct(x.dataset.sq))}
 
@@ -306,7 +310,7 @@ function addSheet(k,pre){pre=pre||{};const m=M();let cat=pre.cat||(k==='in'?'pay
   <button class="kc-big" id="maGo">${X('Save','احفظ','Olkaa\'i','Kaydi')}</button></div>`);
  const rcPaint=()=>{const box=$('maRc');if(!box)return;box.innerHTML=rc?`<span class="mn-th big" data-rth="${rc}"></span><span class="mn-rct"><b>${X('Receipt saved on this phone','الإيصال محفوظ على هذا الهاتف')}</b><button type="button" id="maRx">${X('Remove','إزالة')}</button></span>`
   :`<label class="mn-rcb">${IC('camera',20)}<span>${X('Add receipt photo','أضف صورة الإيصال')}</span><input type="file" accept="image/*" id="maF" hidden></label>`;
-  if(rc){paintThumbs(box);$('maRx').onclick=()=>{rc=null;rcPaint()}}else $('maF').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;box.innerHTML=`<p class="mn-wait">${X('Saving photo…','جارٍ حفظ الصورة…')}</p>`;
+  if(rc){paintThumbs(box);$('maRx').onclick=()=>{const m=M(),o=m.rco.find(x=>x.rc===rc);if(o&&!m.tx.some(x=>x.rc===rc)){m.rco.splice(m.rco.indexOf(o),1);save();const id=rc;setTimeout(()=>{if(!M().tx.some(x=>x.rc===id)&&!M().rco.some(x=>x.rc===id))DB.del(id)},500)}rc=null;rcPaint()}}else $('maF').onchange=async e=>{const f=e.target.files&&e.target.files[0];if(!f)return;box.innerHTML=`<p class="mn-wait">${X('Saving photo…','جارٍ حفظ الصورة…')}</p>`;
    try{rc=await saveReceipt(f);vib(10)}catch(x){toast(X("Couldn't read that photo. Try another.",'تعذّرت قراءة الصورة. جرّب أخرى.'))}rcPaint()}};
  rcPaint();
  pick('#sh .mn-chips:not(#maG)','data-c',v=>{cat=v;if($('maX')&&TAXC.includes(v))$('maX').checked=true});pick('#maG','data-g',v=>goal=v);
@@ -413,6 +417,7 @@ try{const m=M();if(!m.impOld&&typeof tData==='function'){const d=tData('money')|
 if(typeof window.openTool==='function'){const _o=window.openTool;window.openTool=function(id){if(id==='money'){go('money');return}return _o.apply(this,arguments)}}
 if(typeof window.tSub==='function'){const _s=window.tSub;window.tSub=function(id){if(id==='money'){try{const mo=monthOf(today().slice(0,7));return mo.inn?X(money(mo.left)+' left this month','متبقٍ '+money(mo.left)+' هذا الشهر',money(mo.left)+' ji\'a kana hafe',money(mo.left)+' ayaa haray bishan'):mo.out?X(money(mo.out)+' spent this month','أنفقت '+money(mo.out)+' هذا الشهر',money(mo.out)+' ji\'a kana baasame',money(mo.out)+' ayaa la bixiyay bishan'):X('Savings first','الادخار أولًا')}catch(e){}}return _s.apply(this,arguments)}}
 try{if(R.home&&$('s-home').classList.contains('on'))R.home()}catch(e){}
+(async()=>{try{const m=M(),known=new Set([...m.tx.map(t=>t.rc),...m.rco.map(o=>o.rc)].filter(Boolean)),ks=await DB.keys();let add=0;for(const k of ks){if(known.has(k))continue;const v=await DB.get(k);const at=(v&&v.at)||Date.now();m.rco.push({rc:k,dt:dkey(new Date(at)),at});add++}if(add){save();refresh();setTimeout(syncReceipts,500)}}catch(e){}})();
 /* receipts waiting to be backed up go up when signed in (and again on every sign-in) */
 setTimeout(syncReceipts,2500);try{if(window.FQA&&FQA.on)FQA.on(()=>{setTimeout(()=>{syncReceipts();refresh()},800)})}catch(e){}
 window.addEventListener('online',()=>setTimeout(syncReceipts,1000));
