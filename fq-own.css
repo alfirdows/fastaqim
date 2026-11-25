@@ -210,3 +210,4 @@ html.dark .g6svg{filter:brightness(.84) saturate(.92)}
 .scr>.hd{position:sticky;top:0;z-index:25;isolation:isolate}
 .scr>.hd:before{content:"";position:absolute;inset:-80px -16px -6px;background:var(--bg);z-index:-1;box-shadow:0 1px 0 transparent;transition:box-shadow .2s}
 html.fq-scrolled .scr>.hd:before{box-shadow:0 1px 0 var(--hz)}
+.fq-cap b .fq-of{font-size:.62em;font-weight:600;color:var(--sub);margin-inline-start:1px}
